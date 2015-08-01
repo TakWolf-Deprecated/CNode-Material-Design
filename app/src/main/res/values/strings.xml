@@ -15,7 +15,10 @@
     <string name="notification">消息</string>
     <string name="setting">设置</string>
     <string name="about">关于</string>
-    
+
+    <string name="click_avatar_to_login">点击头像登录</string>
+    <string name="press_back_again_to_exit">再按一次退出</string>
+
     <string name="login">登录</string>
 
 </resources>
