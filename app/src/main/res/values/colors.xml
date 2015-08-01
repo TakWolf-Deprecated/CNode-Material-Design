@@ -7,5 +7,10 @@
 
     <color name="text_color_primary">#ff212121</color>
     <color name="text_color_secondary">#ff757575</color>
+    <color name="text_color_light">#ccffffff</color>
+
+    <color name="rect_btn_background_normal">@android:color/transparent</color>
+    <color name="rect_btn_background_pressed">#ffeeeeee</color>
+    <color name="rect_btn_background_accent">#ffcccccc</color>
 
 </resources>

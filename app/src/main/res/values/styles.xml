@@ -18,4 +18,50 @@
     <!-- App Theme Logo Page -->
     <style name="AppTheme.LogoPage" />
 
+    <!-- Deep Line -->
+    <style name="AppTheme.DeepLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#ffdddddd</item>
+    </style>
+
+    <!-- Gap -->
+    <style name="AppTheme.ItemGap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">8dp</item>
+    </style>
+
+    <!-- Shadow Gap -->
+    <style name="AppTheme.ShadowGap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:background">@drawable/gap_shadow</item>
+    </style>
+
+    <!-- Navigation Item -->
+    <style name="AppTheme.NavigationItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:drawablePadding">32dp</item>
+        <item name="android:textColor">@drawable/main_nav_item_text_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/rect_btn_background</item>
+    </style>
+
+    <!-- Navigation Item Badger -->
+    <style name="AppTheme.NavigationItemBadger">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_gravity">end</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textColor">@color/text_color_secondary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
 </resources>
