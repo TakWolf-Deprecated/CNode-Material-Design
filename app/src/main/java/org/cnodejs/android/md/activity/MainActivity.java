@@ -19,7 +19,10 @@ import com.melnykov.fab.FloatingActionButton;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.adapter.MainAdapter;
 import org.cnodejs.android.md.listener.NavigationOpenClickListener;
+import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
+import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.util.HandlerUtils;
 
 import java.util.List;
@@ -27,6 +30,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -93,7 +99,32 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         recyclerView.setAdapter(new MainAdapter(this));
 
         fabNewTopic.attachToRecyclerView(recyclerView);
+
+
+        ApiClient.service.getTopics(TabType.job, 1, 5, false, new Callback<Result<List<Topic>>>() {
+
+            @Override
+            public void success(Result<List<Topic>> result, Response response) {
+                Toast.makeText(MainActivity.this, result.getData().get(0).getAuthor().getLoginName(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+
+        });
+
     }
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onRefresh() {

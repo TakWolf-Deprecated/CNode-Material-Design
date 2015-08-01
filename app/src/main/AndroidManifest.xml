@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.cnodejs.android.md">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="org.cnodejs.android.md.app.AppController"
         android:allowBackup="true"
