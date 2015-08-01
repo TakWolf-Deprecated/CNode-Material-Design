@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CNode MD</string>
+
+    <string name="app_name">CNode社区</string>
+
+    <string name="login">登录</string>
+
 </resources>

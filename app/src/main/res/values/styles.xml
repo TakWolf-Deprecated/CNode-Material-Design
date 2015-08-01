@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!-- Base App Theme -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
+
+    <!-- App Theme -->
+    <style name="AppTheme" parent="BaseAppTheme" />
+
+    <!-- App Theme FitsStatusBar -->
+    <style name="AppTheme.FitsStatusBar" />
+
+    <!-- App Theme Logo Page -->
+    <style name="AppTheme.LogoPage" />
 
 </resources>
