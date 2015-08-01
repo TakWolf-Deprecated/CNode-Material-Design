@@ -9,6 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.activity.MainActivity;
+import org.cnodejs.android.md.model.entity.Topic;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,6 +27,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public MainAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
+    }
+
+    public MainAdapter(Context context, List<Topic> topicList) {
     }
 
     public void setUnread(int unread) {
@@ -46,17 +53,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.main_item_img_avatar)
-        protected ImageView imgAvatar;
 
-        @Bind(R.id.main_item_tv_from)
-        protected TextView tvFrom;
-
-        @Bind(R.id.main_item_tv_time)
-        protected TextView tvTime;
-
-        @Bind(R.id.main_item_tv_content)
-        protected TextView tvContent;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -64,14 +61,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         }
 
         public void update(int position) {
-            tvTime.setText(position + "天前");
-            tvTime.setTextColor(context.getResources().getColor(position < unread ? R.color.color_primary : R.color.text_color_secondary));
-            tvFrom.setText("昵称");
-            tvFrom.getPaint().setFakeBoldText(position < unread);
-            tvFrom.setTextColor(context.getResources().getColor(position < unread ? R.color.text_color_primary : R.color.text_color_secondary));
-            tvContent.setText("内容");
-            tvContent.getPaint().setFakeBoldText(position < unread);
-            tvContent.setTextColor(context.getResources().getColor(position < unread ? R.color.text_color_primary : R.color.text_color_secondary));
+
         }
 
     }

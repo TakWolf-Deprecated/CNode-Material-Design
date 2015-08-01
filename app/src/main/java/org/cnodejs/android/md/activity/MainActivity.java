@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.util.HandlerUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -33,6 +35,7 @@ import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.http.Query;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -76,8 +79,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Bind(R.id.main_fab_new_topic)
     protected FloatingActionButton fabNewTopic;
 
+    @Bind(R.id.main_layout_no_data)
+    protected ViewGroup layoutNoData;
+
     // 当前版块，默认为all
     private TabType currentTab = TabType.all;
+    private List<Topic> topicList = new ArrayList<>();
+    private MainAdapter adapter;
 
     // 首次按下返回键时间戳
     private long firstBackPressedTime = 0;
@@ -89,53 +97,27 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         ButterKnife.bind(this);
 
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
-
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new MainAdapter(this, topicList);
+        recyclerView.setAdapter(adapter);
+        fabNewTopic.attachToRecyclerView(recyclerView);
 
         refreshLayout.setColorSchemeResources(R.color.red_light, R.color.green_light, R.color.blue_light, R.color.orange_light);
         refreshLayout.setOnRefreshListener(this);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MainAdapter(this));
-
-        fabNewTopic.attachToRecyclerView(recyclerView);
-
-
-        ApiClient.service.getTopics(TabType.job, 1, 5, false, new Callback<Result<List<Topic>>>() {
-
-            @Override
-            public void success(Result<List<Topic>> result, Response response) {
-                Toast.makeText(MainActivity.this, result.getData().get(0).getAuthor().getLoginName(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-
-        });
-
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
-
-
-
-
-
-
-
-
-
 
     @Override
     public void onRefresh() {
-        HandlerUtils.postDelayed(new Runnable() {
+        
 
-            @Override
-            public void run() {
-                refreshLayout.setRefreshing(false);
-            }
+    }
 
-        }, 3000);
+    private void getTopicsAsyncTask(TabType tab) {
+
     }
 
     /**
@@ -188,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             if (tabType != currentTab) {
                 currentTab = tabType;
                 toolbar.setTitle(currentTab.getNameId());
+
 
                 // TODO
                 refreshLayout.setRefreshing(true);

@@ -18,6 +18,7 @@
 
     <string name="click_avatar_to_login">点击头像登录</string>
     <string name="press_back_again_to_exit">再按一次退出</string>
+    <string name="no_data">暂无数据</string>
 
     <string name="login">登录</string>
 
