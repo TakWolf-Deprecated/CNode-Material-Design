@@ -1,8 +1,40 @@
-# CNode Material #
+# CNode Material Design #
 
 CNode社区第三方Android客户端
 
 原生App，Material Design风格
+
+![](/psd/screenshot_01.png) ![](/psd/screenshot_02.png)
+
+## Libraries used ##
+
+- [Butter Knife](https://github.com/JakeWharton/butterknife)
+
+- [Gson](https://github.com/google/gson)
+
+- [Joda-Time](http://www.joda.org/joda-time)
+
+- [Retrofit](http://square.github.io/retrofit)
+
+- [OkHttp](http://square.github.io/okhttp)
+
+- [Picasso](http://square.github.io/picasso)
+
+- [Shape Image View](https://github.com/siyamed/android-shape-imageview)
+
+- [Material](http://rey5137.com/material)
+
+- [MaterialEditText](https://github.com/rengwuxian/MaterialEditText)
+
+- [Material Dialogs](https://github.com/afollestad/material-dialogs)
+
+- [materialish-progress](https://github.com/pnikosis/materialish-progress)
+
+- [FloatingActionButton](https://github.com/makovkastar/FloatingActionButton)
+
+- [QRCodeReaderView](https://github.com/dlazaro66/QRCodeReaderView)
+
+- [material-design-icons](https://github.com/google/material-design-icons)
 
 ## Author ##
 
