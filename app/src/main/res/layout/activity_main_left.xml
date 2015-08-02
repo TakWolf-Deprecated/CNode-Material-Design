@@ -37,7 +37,7 @@
                 android:layout_height="72dp"
                 android:src="@drawable/image_default"
                 android:scaleType="fitCenter"
-                app:siBorderWidth="1dp"
+                app:siBorderWidth="2dp"
                 app:siBorderColor="@color/color_accent" />
 
             <TextView
