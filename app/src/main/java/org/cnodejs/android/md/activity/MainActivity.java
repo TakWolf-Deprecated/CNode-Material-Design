@@ -46,6 +46,8 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
+    private static final int REQUEST_LOGIN = 1024;
+
     // 抽屉导航布局
     @Bind(R.id.main_drawer_layout)
     protected DrawerLayout drawerLayout;
@@ -348,6 +350,20 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     /**
+     * 用户信息按钮
+     */
+    @OnClick(R.id.main_left_layout_info)
+    protected void onBtnInfoClick() {
+        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+            startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
+        } else {
+            Intent intent = new Intent(this, UserDetailActivity.class);
+            intent.putExtra("loginName", LoginShared.getLoginName(this));
+            startActivity(intent);
+        }
+    }
+
+    /**
      * 发帖按钮
      */
     @OnClick(R.id.main_fab_new_topic)
@@ -371,11 +387,23 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                     @Override
                     public void onPositive(MaterialDialog dialog) {
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), REQUEST_LOGIN);
                     }
 
                 })
                 .show();
+    }
+
+    /**
+     * 判断登录是否成功
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
+            updateUserInfoViews();
+            getUserAsycnTask();
+        }
     }
 
     /**

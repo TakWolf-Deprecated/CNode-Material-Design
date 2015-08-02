@@ -23,7 +23,7 @@
 
         <LinearLayout
             android:id="@+id/main_left_layout_info"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/main_left_nav_padding_top"
             android:paddingBottom="8dp"
@@ -60,7 +60,6 @@
 
         </LinearLayout>
 
-        <!-- 注销按钮 -->
         <TextView
             android:id="@+id/main_left_btn_logout"
             android:layout_width="wrap_content"
