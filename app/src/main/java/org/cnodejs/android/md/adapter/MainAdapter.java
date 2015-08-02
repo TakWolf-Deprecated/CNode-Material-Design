@@ -21,24 +21,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     private Context context;
     private LayoutInflater inflater;
-
-    private int unread = 5;
-
-    public MainAdapter(Context context) {
-        this.context = context;
-        inflater = LayoutInflater.from(context);
-    }
+    private List<Topic> topicList;
 
     public MainAdapter(Context context, List<Topic> topicList) {
-    }
-
-    public void setUnread(int unread) {
-        this.unread = unread;
+        this.context = context;
+        inflater = LayoutInflater.from(context);
+        this.topicList = topicList;
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return topicList == null ? 0 : topicList.size();
     }
 
     @Override
@@ -53,7 +46,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @Bind(R.id.main_item_tv_tab)
+        protected TextView tvTab;
 
+        @Bind(R.id.main_item_tv_title)
+        protected TextView tvTitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -61,7 +58,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         }
 
         public void update(int position) {
-
+            Topic topic = topicList.get(position);
+            tvTitle.setText(topic.getTitle());
+            tvTab.setText(topic.isTop() ? "置顶" : context.getString(topic.getTab().getNameId()));
+            tvTab.setBackgroundResource(topic.isTop() ? R.drawable.topic_tab_top_background : R.drawable.topic_tab_normal_background);
+            tvTab.setTextColor(context.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
         }
 
     }

@@ -11,6 +11,7 @@
     <string name="tab_share">分享</string>
     <string name="tab_ask">问答</string>
     <string name="tab_job">招聘</string>
+    <string name="tab_unkonw">未知</string>
 
     <string name="notification">消息</string>
     <string name="setting">设置</string>

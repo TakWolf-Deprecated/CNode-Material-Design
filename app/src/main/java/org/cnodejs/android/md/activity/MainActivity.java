@@ -106,18 +106,50 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         refreshLayout.setColorSchemeResources(R.color.red_light, R.color.green_light, R.color.blue_light, R.color.orange_light);
         refreshLayout.setOnRefreshListener(this);
-        refreshLayout.setRefreshing(true);
-        onRefresh();
+
+        HandlerUtils.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(true);
+                onRefresh();
+            }
+
+        }, 100); // TODO refreshLayout无法直接在onCreate中设置刷新状态
     }
 
     @Override
     public void onRefresh() {
-        
+        final TabType tab = currentTab;
+        ApiClient.service.getTopics(tab, 1, 20, false, new Callback<Result<List<Topic>>>() {
 
+            @Override
+            public void success(Result<List<Topic>> result, Response response) {
+                if (currentTab == tab && result.getData() != null) {
+                    topicList.clear();
+                    topicList.addAll(result.getData());
+                    notifyDataSetChanged();
+                    refreshLayout.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                if (currentTab == tab) {
+                    Toast.makeText(MainActivity.this, "数据加载失败，请重试", Toast.LENGTH_SHORT).show();
+                    refreshLayout.setRefreshing(false);
+                }
+            }
+
+        });
     }
 
-    private void getTopicsAsyncTask(TabType tab) {
-
+    /**
+     * 更新列表
+     */
+    private void notifyDataSetChanged() {
+        adapter.notifyDataSetChanged();
+        layoutNoData.setVisibility(topicList.size() == 0 ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -170,12 +202,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             if (tabType != currentTab) {
                 currentTab = tabType;
                 toolbar.setTitle(currentTab.getNameId());
-
-
-                // TODO
+                topicList.clear();
+                notifyDataSetChanged();
                 refreshLayout.setRefreshing(true);
                 onRefresh();
-
             }
             drawerLayout.setDrawerListener(null);
         }

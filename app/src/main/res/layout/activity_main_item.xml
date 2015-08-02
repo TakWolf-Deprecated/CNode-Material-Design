@@ -31,7 +31,7 @@
                 android:paddingRight="4dp"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
-                android:background="@drawable/topic_tab_background"
+                android:background="@drawable/topic_tab_top_background"
                 tools:text="置顶" />
 
             <TextView
@@ -41,6 +41,7 @@
                 android:layout_margin="4dp"
                 android:textColor="@color/text_color_primary"
                 android:textSize="16sp"
+                android:singleLine="true"
                 tools:text="话题的标题" />
 
         </LinearLayout>

@@ -62,7 +62,7 @@ public class Topic {
     }
 
     public TabType getTab() {
-        return tab;
+        return tab == null ? TabType.all : tab; // TODO 接口中有些话题没有Tab属性，这里保证Tab不为空
     }
 
     public void setTab(TabType tab) {

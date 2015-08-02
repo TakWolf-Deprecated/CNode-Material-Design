@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.model.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.cnodejs.android.md.R;
 
 public enum TabType {
