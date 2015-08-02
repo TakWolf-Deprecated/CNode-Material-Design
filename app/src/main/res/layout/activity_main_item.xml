@@ -7,16 +7,6 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/main_item_icon_good"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="end"
-        android:layout_margin="16dp"
-        android:src="@drawable/tab_ic_good"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true" />
-
     <LinearLayout
         android:id="@+id/main_item_btn_item"
         android:layout_width="match_parent"
@@ -161,6 +151,16 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/main_item_icon_good"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        android:src="@drawable/tab_ic_good"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true" />
 
     <View style="@style/AppTheme.DeepLine"
         android:layout_gravity="bottom" />

@@ -35,7 +35,6 @@ import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.http.Query;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -206,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 notifyDataSetChanged();
                 refreshLayout.setRefreshing(true);
                 onRefresh();
+                fabNewTopic.show(true);
             }
             drawerLayout.setDrawerListener(null);
         }
