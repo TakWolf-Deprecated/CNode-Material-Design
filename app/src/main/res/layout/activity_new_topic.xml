@@ -12,7 +12,7 @@
         android:background="@color/color_primary"
         android:elevation="4dp"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-        app:title="@string/login"
+        app:title="@string/new_topic"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 

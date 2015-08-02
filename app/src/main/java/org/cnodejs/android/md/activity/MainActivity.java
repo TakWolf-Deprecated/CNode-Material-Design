@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
@@ -271,6 +273,30 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
      */
 
     // TODO
+
+    /**
+     * 发帖按钮
+     */
+    @OnClick(R.id.main_fab_new_topic)
+    protected void onBtnNewTopicClick() {
+        if (true) {
+            new MaterialDialog.Builder(this)
+                    .content("发布话题需要登录账户。是否现在登录？")
+                    .positiveText(R.string.login)
+                    .negativeText(R.string.cancel)
+                    .callback(new MaterialDialog.ButtonCallback() {
+
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        }
+
+                    })
+                    .show();
+        } else {
+            startActivity(new Intent(this, NewTopicActivity.class));
+        }
+    }
 
     /**
      * 返回键关闭导航
