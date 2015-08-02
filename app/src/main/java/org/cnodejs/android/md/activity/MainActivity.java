@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,16 +20,24 @@ import com.melnykov.fab.FloatingActionButton;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.adapter.MainAdapter;
 import org.cnodejs.android.md.listener.NavigationOpenClickListener;
+import org.cnodejs.android.md.listener.RecyclerViewLoadMoreListener;
+import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
+import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.util.HandlerUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
     // 抽屉导航布局
     @Bind(R.id.main_drawer_layout)
@@ -70,8 +79,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Bind(R.id.main_fab_new_topic)
     protected FloatingActionButton fabNewTopic;
 
+    @Bind(R.id.main_layout_no_data)
+    protected ViewGroup layoutNoData;
+
     // 当前版块，默认为all
     private TabType currentTab = TabType.all;
+    private int currentPage = 1;
+    private List<Topic> topicList = new ArrayList<>();
+    private MainAdapter adapter;
 
     // 首次按下返回键时间戳
     private long firstBackPressedTime = 0;
@@ -83,28 +98,104 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         ButterKnife.bind(this);
 
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
-
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new MainAdapter(this, topicList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, 20));
+        fabNewTopic.attachToRecyclerView(recyclerView);
 
         refreshLayout.setColorSchemeResources(R.color.red_light, R.color.green_light, R.color.blue_light, R.color.orange_light);
         refreshLayout.setOnRefreshListener(this);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MainAdapter(this));
-
-        fabNewTopic.attachToRecyclerView(recyclerView);
-    }
-
-    @Override
-    public void onRefresh() {
         HandlerUtils.postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                refreshLayout.setRefreshing(false);
+                refreshLayout.setRefreshing(true);
+                onRefresh();
             }
 
-        }, 3000);
+        }, 100); // TODO refreshLayout无法直接在onCreate中设置刷新状态
+    }
+
+    @Override
+    public void onRefresh() {
+        final TabType tab = currentTab;
+        ApiClient.service.getTopics(tab, 1, 20, false, new Callback<Result<List<Topic>>>() {
+
+            @Override
+            public void success(Result<List<Topic>> result, Response response) {
+                if (currentTab == tab && result.getData() != null) {
+                    topicList.clear();
+                    topicList.addAll(result.getData());
+                    notifyDataSetChanged();
+                    refreshLayout.setRefreshing(false);
+                    currentPage ++;
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                if (currentTab == tab) {
+                    Toast.makeText(MainActivity.this, "数据加载失败，请重试", Toast.LENGTH_SHORT).show();
+                    refreshLayout.setRefreshing(false);
+                }
+            }
+
+        });
+    }
+
+    @Override
+    public void onLoadMore() {
+        if (adapter.canLoadMore()) {
+            adapter.setLoading(true);
+            adapter.notifyItemChanged(adapter.getItemCount() - 1);
+
+            final TabType tab = currentTab;
+            final int page = currentPage;
+            ApiClient.service.getTopics(tab, page, 20, false, new Callback<Result<List<Topic>>>() {
+
+                @Override
+                public void success(Result<List<Topic>> result, Response response) {
+                    if (currentTab == tab && currentPage == page) {
+                        if (result.getData() != null) {
+                            topicList.addAll(result.getData());
+                            adapter.setLoading(false);
+                            adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
+                            currentPage ++;
+                        } else {
+                            Toast.makeText(MainActivity.this, "已没有更多数据", Toast.LENGTH_SHORT).show();
+                            adapter.setLoading(false);
+                            adapter.notifyItemChanged(adapter.getItemCount() - 1);
+                        }
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if (currentTab == tab && currentPage == page) {
+                        Toast.makeText(MainActivity.this, "数据加载失败，请重试", Toast.LENGTH_SHORT).show();
+                        adapter.setLoading(false);
+                        adapter.notifyItemChanged(adapter.getItemCount() - 1);
+                    }
+                }
+
+            });
+        }
+    }
+
+    /**
+     * 更新列表
+     */
+    private void notifyDataSetChanged() {
+        if (topicList.size() < 20) {
+            adapter.setLoading(false);
+        }
+        adapter.notifyDataSetChanged();
+        layoutNoData.setVisibility(topicList.size() == 0 ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -156,12 +247,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         public void onDrawerClosed(View drawerView) {
             if (tabType != currentTab) {
                 currentTab = tabType;
+                currentPage = 1;
                 toolbar.setTitle(currentTab.getNameId());
-
-                // TODO
+                topicList.clear();
+                notifyDataSetChanged();
                 refreshLayout.setRefreshing(true);
                 onRefresh();
-
+                fabNewTopic.show(true);
             }
             drawerLayout.setDrawerListener(null);
         }

@@ -11,6 +11,7 @@
     <string name="tab_share">分享</string>
     <string name="tab_ask">问答</string>
     <string name="tab_job">招聘</string>
+    <string name="tab_unkonw">未知</string>
 
     <string name="notification">消息</string>
     <string name="setting">设置</string>
@@ -18,7 +19,14 @@
 
     <string name="click_avatar_to_login">点击头像登录</string>
     <string name="press_back_again_to_exit">再按一次退出</string>
+    <string name="no_data">暂无数据</string>
 
     <string name="login">登录</string>
+
+    <string name="topic">话题</string>
+
+    <string name="load_more">加载更多</string>
+
+    <string name="$slash">/</string>
 
 </resources>

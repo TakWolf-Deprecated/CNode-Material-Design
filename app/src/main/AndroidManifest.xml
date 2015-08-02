@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.cnodejs.android.md">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="org.cnodejs.android.md.app.AppController"
         android:allowBackup="true"
@@ -31,6 +33,12 @@
         <activity
             android:name="org.cnodejs.android.md.activity.LoginActivity"
             android:label="@string/login"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
+        <activity
+            android:name="org.cnodejs.android.md.activity.TopicActivity"
+            android:label="@string/topic"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
