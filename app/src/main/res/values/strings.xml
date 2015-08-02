@@ -34,4 +34,6 @@
 
     <string name="$slash">/</string>
 
+    <string name="access_token_$">Access Token :</string>
+
 </resources>

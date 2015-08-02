@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     // 当前版块，默认为all
     private TabType currentTab = TabType.all;
-    private int currentPage = 1;
+    private int currentPage = 0; // 从未加载
     private List<Topic> topicList = new ArrayList<>();
     private MainAdapter adapter;
 
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     topicList.addAll(result.getData());
                     notifyDataSetChanged();
                     refreshLayout.setRefreshing(false);
-                    currentPage ++;
+                    currentPage = 1;
                 }
             }
 
@@ -158,12 +158,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
             final TabType tab = currentTab;
             final int page = currentPage;
-            ApiClient.service.getTopics(tab, page, 20, false, new Callback<Result<List<Topic>>>() {
+            ApiClient.service.getTopics(tab, page + 1, 20, false, new Callback<Result<List<Topic>>>() {
 
                 @Override
                 public void success(Result<List<Topic>> result, Response response) {
                     if (currentTab == tab && currentPage == page) {
-                        if (result.getData() != null) {
+                        if (result.getData().size() > 0) {
                             topicList.addAll(result.getData());
                             adapter.setLoading(false);
                             adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         public void onDrawerClosed(View drawerView) {
             if (tabType != currentTab) {
                 currentTab = tabType;
-                currentPage = 1;
+                currentPage = 0;
                 toolbar.setTitle(currentTab.getNameId());
                 topicList.clear();
                 notifyDataSetChanged();
