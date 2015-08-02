@@ -6,13 +6,13 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/user_detail_toolbar"
+        android:id="@+id/about_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_primary"
         android:elevation="4dp"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-        app:title="@string/user_detail"
+        app:title="@string/about"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 

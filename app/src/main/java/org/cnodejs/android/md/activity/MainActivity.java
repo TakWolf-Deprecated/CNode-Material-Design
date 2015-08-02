@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -326,7 +327,55 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
      * 次要菜单导航
      */
 
-    // TODO
+    @OnClick({
+            R.id.main_left_btn_notification,
+            R.id.main_left_btn_setting,
+            R.id.main_left_btn_about
+    })
+    public void onNavigationItemOtherClick(View itemView) {
+        switch (itemView.getId()) {
+            case R.id.main_left_btn_notification:
+                if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+                    showNeedLoginDialog();
+                } else {
+                    drawerLayout.setDrawerListener(notificationDrawerListener);
+                    drawerLayout.closeDrawers();
+                }
+                break;
+            case R.id.main_left_btn_setting:
+                drawerLayout.setDrawerListener(settingDrawerListener);
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.main_left_btn_about:
+                drawerLayout.setDrawerListener(aboutDrawerListener);
+                drawerLayout.closeDrawers();
+                break;
+            default:
+                drawerLayout.setDrawerListener(openDrawerListener);
+                drawerLayout.closeDrawers();
+                break;
+        }
+    }
+
+    private class OtherItemDrawerListener extends DrawerLayout.SimpleDrawerListener {
+
+        private Class gotoClz;
+
+        protected OtherItemDrawerListener(Class gotoClz) {
+            this.gotoClz = gotoClz;
+        }
+
+        @Override
+        public void onDrawerClosed(View drawerView) {
+            startActivity(new Intent(MainActivity.this, gotoClz));
+            drawerLayout.setDrawerListener(openDrawerListener);
+        }
+
+    }
+
+    private DrawerLayout.DrawerListener notificationDrawerListener = new OtherItemDrawerListener(NotificationActivity.class);
+    private DrawerLayout.DrawerListener settingDrawerListener = new OtherItemDrawerListener(SettingActivity.class);
+    private DrawerLayout.DrawerListener aboutDrawerListener = new OtherItemDrawerListener(AboutActivity.class);
 
     /**
      * 注销按钮
