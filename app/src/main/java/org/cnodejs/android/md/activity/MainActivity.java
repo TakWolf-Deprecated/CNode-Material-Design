@@ -127,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
 
         }, 100); // refreshLayout无法直接在onCreate中设置刷新状态
+
+        updateUserInfoViews();
     }
 
     /**
