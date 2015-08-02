@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 onRefresh();
             }
 
-        }, 100); // TODO refreshLayout无法直接在onCreate中设置刷新状态
+        }, 100); // refreshLayout无法直接在onCreate中设置刷新状态
     }
 
     @Override

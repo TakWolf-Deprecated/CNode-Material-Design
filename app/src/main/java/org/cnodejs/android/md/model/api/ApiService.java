@@ -5,6 +5,7 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
+import org.cnodejs.android.md.model.entity.User;
 
 import java.util.List;
 
@@ -47,6 +48,12 @@ public interface ApiService {
     void accessToken(
             @Field("accesstoken") String accessToken,
             Callback<LoginInfo> callback
+    );
+
+    @GET("/v1/user/{loginName}")
+    void getUser(
+            @Path("loginName") String loginName,
+            Callback<Result<User>> callback
     );
 
 }
