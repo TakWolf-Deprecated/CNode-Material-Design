@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/topic_toolbar"
+        android:id="@+id/login_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_primary"
@@ -20,16 +20,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp"
         android:paddingLeft="48dp"
         android:paddingRight="48dp"
         android:src="@drawable/logo"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:background="#ff555555" />
+        android:background="#ff666666" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:text="@string/logo_url"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:background="#ff666666"/>
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/login_edt_phone"
+        android:id="@+id/login_edt_access_token"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -39,5 +48,34 @@
         android:singleLine="true"
         app:met_floatingLabel="highlight"
         app:met_primaryColor="@color/color_accent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button style="@style/AppTheme.Button.Stroke"
+            android:id="@+id/login_btn_qrcode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/open_qrcode" />
+
+        <Button style="@style/AppTheme.Button"
+            android:id="@+id/login_btn_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/login" />
+
+    </LinearLayout>
 
 </LinearLayout>

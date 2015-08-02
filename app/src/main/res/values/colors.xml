@@ -22,4 +22,8 @@
     <color name="blue_light">#ff33b5e5</color>
     <color name="orange_light">#ffffbb33</color>
 
+    <color name="button_stroke_solid_normal">#ffffffff</color>
+    <color name="button_stroke_solid_pressed">#ffeeeeee</color>
+    <color name="button_stroke_solid_accent">#3301ee15</color>
+
 </resources>

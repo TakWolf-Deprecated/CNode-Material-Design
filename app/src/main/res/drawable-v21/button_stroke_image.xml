@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/button_stroke_solid_accent">
+    <item>
+        <selector>
+            <item android:state_pressed="true" android:drawable="@drawable/button_stroke_pressed" />
+            <item android:drawable="@drawable/button_stroke_normal" />
+        </selector>
+    </item>
+</ripple>
