@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/main_item_icon_good"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        android:src="@drawable/tab_ic_good"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true" />
 
     <LinearLayout
         android:id="@+id/main_item_btn_item"
@@ -152,6 +162,7 @@
 
     </LinearLayout>
 
-    <View style="@style/AppTheme.DeepLine" />
+    <View style="@style/AppTheme.DeepLine"
+        android:layout_gravity="bottom" />
 
-</LinearLayout>
+</FrameLayout>

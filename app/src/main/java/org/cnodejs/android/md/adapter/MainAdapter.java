@@ -75,6 +75,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         @Bind(R.id.main_item_tv_last_reply_time)
         protected TextView tvLastReplyTime;
 
+        @Bind(R.id.main_item_icon_good)
+        protected View iconGood;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -92,7 +95,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             tvReplyCount.setText(String.valueOf(topic.getReplyCount()));
             tvVisitCount.setText(String.valueOf(topic.getVisitCount()));
             tvLastReplyTime.setText(FormatUtils.getRecentlyTimeFormatText(topic.getLastReplyAt()));
-
+            iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
         }
 
     }
