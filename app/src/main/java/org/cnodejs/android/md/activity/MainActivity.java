@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.adapter.MainAdapter;
@@ -51,11 +52,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Bind(R.id.main_left_img_avatar)
     protected ImageView imgAvatar;
 
-    @Bind(R.id.main_left_tv_nickname)
-    protected TextView tvNickname;
+    @Bind(R.id.main_left_tv_login_name)
+    protected TextView tvLoginName;
 
-    @Bind(R.id.main_left_tv_score)
-    protected TextView tvScore;
+    @Bind(R.id.main_left_tv_summary)
+    protected TextView tvSummary;
 
     @Bind(R.id.main_left_tv_badger_notification)
     protected TextView tvBadgerNotification;
@@ -123,6 +124,23 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
 
         }, 100); // TODO refreshLayout无法直接在onCreate中设置刷新状态
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUserInfoViews();
+    }
+
+    private void updateUserInfoViews() {
+        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+            Picasso.with(this).load(R.drawable.image_default).into(imgAvatar);
+            tvLoginName.setText("点击头像登录");
+            tvSummary.setText(null);
+        } else {
+            Picasso.with(this).load(ApiClient.ROOT_HOST + LoginShared.getAvatarUrl(this)).error(R.drawable.image_default).into(imgAvatar);
+            tvLoginName.setText(LoginShared.getLoginName(this));
+        }
     }
 
     @Override
