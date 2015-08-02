@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
@@ -27,6 +28,7 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
+import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.HandlerUtils;
 
 import java.util.ArrayList;
@@ -279,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
      */
     @OnClick(R.id.main_fab_new_topic)
     protected void onBtnNewTopicClick() {
-        if (true) {
+        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             new MaterialDialog.Builder(this)
                     .content("发布话题需要登录账户。是否现在登录？")
                     .positiveText(R.string.login)

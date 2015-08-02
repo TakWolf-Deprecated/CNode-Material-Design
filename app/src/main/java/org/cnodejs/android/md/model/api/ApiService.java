@@ -46,7 +46,7 @@ public interface ApiService {
     @POST("/v1/accesstoken")
     void accessToken(
             @Field("accesstoken") String accessToken,
-            Callback<Result<LoginInfo>> callback
+            Callback<LoginInfo> callback
     );
 
 }

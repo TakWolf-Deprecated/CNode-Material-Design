@@ -4,17 +4,20 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginInfo {
 
-    private boolean success;
+    private String id;
 
     @SerializedName("loginname")
     private String loginName;
 
-    public boolean isSuccess() {
-        return success;
+    @SerializedName("avatar_url")
+    private String avatarUrl;
+
+    public String getId() {
+        return id;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getLoginName() {
@@ -23,6 +26,14 @@ public class LoginInfo {
 
     public void setLoginName(String loginName) {
         this.loginName = loginName;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
 }

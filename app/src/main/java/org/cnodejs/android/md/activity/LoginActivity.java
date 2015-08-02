@@ -4,15 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.entity.LoginInfo;
+import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.storage.LoginShared;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,7 +47,41 @@ public class LoginActivity extends AppCompatActivity {
         if (edtAccessToken.getText().length() < 36) {
             edtAccessToken.setError("令牌格式错误，应为32位UUID（四段分割）字符串");
         } else {
-            // TOOD 访问网络
+
+            final MaterialDialog dialog = new MaterialDialog.Builder(this)
+                    .content("正在登录中...")
+                    .progress(true, 0)
+                    .build();
+            dialog.show();
+
+            final String accessToken = edtAccessToken.getText().toString();
+
+            ApiClient.service.accessToken(accessToken, new Callback<LoginInfo>() {
+
+                @Override
+                public void success(LoginInfo loginInfo, Response response) {
+                    if (dialog.isShowing()) {
+                        dialog.dismiss();
+                        LoginShared.login(LoginActivity.this, accessToken, loginInfo);
+                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if (dialog.isShowing()) {
+                        dialog.dismiss();
+                        if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
+                            edtAccessToken.setError("令牌验证失败");
+                        } else {
+                            Toast.makeText(LoginActivity.this, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+            });
+
         }
     }
 
