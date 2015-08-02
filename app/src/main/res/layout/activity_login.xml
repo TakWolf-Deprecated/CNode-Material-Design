@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/access_token_$"
-        android:digits="0123456789abcdefghigklmnopqrstuvwxyz-"
+        android:inputType="text"
         android:maxLength="36"
         android:singleLine="true"
         app:met_floatingLabel="highlight"

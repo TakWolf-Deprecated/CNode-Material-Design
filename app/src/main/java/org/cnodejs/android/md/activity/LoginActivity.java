@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.login_btn_login)
     protected void onBtnLoginClick() {
         if (edtAccessToken.getText().length() < 36) {
-            edtAccessToken.setError("令牌格式错误，应该为36位");
+            edtAccessToken.setError("令牌格式错误，应为32位UUID（四段分割）字符串");
         } else {
             // TOOD 访问网络
         }
