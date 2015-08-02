@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
@@ -15,7 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.adapter.MainAdapter;
@@ -25,6 +29,7 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
+import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.HandlerUtils;
 
 import java.util.ArrayList;
@@ -47,11 +52,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Bind(R.id.main_left_img_avatar)
     protected ImageView imgAvatar;
 
-    @Bind(R.id.main_left_tv_nickname)
-    protected TextView tvNickname;
+    @Bind(R.id.main_left_tv_login_name)
+    protected TextView tvLoginName;
 
-    @Bind(R.id.main_left_tv_score)
-    protected TextView tvScore;
+    @Bind(R.id.main_left_tv_summary)
+    protected TextView tvSummary;
 
     @Bind(R.id.main_left_tv_badger_notification)
     protected TextView tvBadgerNotification;
@@ -84,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     // 当前版块，默认为all
     private TabType currentTab = TabType.all;
-    private int currentPage = 1;
+    private int currentPage = 0; // 从未加载
     private List<Topic> topicList = new ArrayList<>();
     private MainAdapter adapter;
 
@@ -118,7 +123,24 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 onRefresh();
             }
 
-        }, 100); // TODO refreshLayout无法直接在onCreate中设置刷新状态
+        }, 100); // refreshLayout无法直接在onCreate中设置刷新状态
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUserInfoViews();
+    }
+
+    private void updateUserInfoViews() {
+        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+            Picasso.with(this).load(R.drawable.image_default).into(imgAvatar);
+            tvLoginName.setText("点击头像登录");
+            tvSummary.setText(null);
+        } else {
+            Picasso.with(this).load(ApiClient.ROOT_HOST + LoginShared.getAvatarUrl(this)).error(R.drawable.image_default).into(imgAvatar);
+            tvLoginName.setText(LoginShared.getLoginName(this));
+        }
     }
 
     @Override
@@ -133,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     topicList.addAll(result.getData());
                     notifyDataSetChanged();
                     refreshLayout.setRefreshing(false);
-                    currentPage ++;
+                    currentPage = 1;
                 }
             }
 
@@ -156,12 +178,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
             final TabType tab = currentTab;
             final int page = currentPage;
-            ApiClient.service.getTopics(tab, page, 20, false, new Callback<Result<List<Topic>>>() {
+            ApiClient.service.getTopics(tab, page + 1, 20, false, new Callback<Result<List<Topic>>>() {
 
                 @Override
                 public void success(Result<List<Topic>> result, Response response) {
                     if (currentTab == tab && currentPage == page) {
-                        if (result.getData() != null) {
+                        if (result.getData().size() > 0) {
                             topicList.addAll(result.getData());
                             adapter.setLoading(false);
                             adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
@@ -247,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         public void onDrawerClosed(View drawerView) {
             if (tabType != currentTab) {
                 currentTab = tabType;
-                currentPage = 1;
+                currentPage = 0;
                 toolbar.setTitle(currentTab.getNameId());
                 topicList.clear();
                 notifyDataSetChanged();
@@ -271,6 +293,30 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
      */
 
     // TODO
+
+    /**
+     * 发帖按钮
+     */
+    @OnClick(R.id.main_fab_new_topic)
+    protected void onBtnNewTopicClick() {
+        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+            new MaterialDialog.Builder(this)
+                    .content("发布话题需要登录账户。是否现在登录？")
+                    .positiveText(R.string.login)
+                    .negativeText(R.string.cancel)
+                    .callback(new MaterialDialog.ButtonCallback() {
+
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        }
+
+                    })
+                    .show();
+        } else {
+            startActivity(new Intent(this, NewTopicActivity.class));
+        }
+    }
 
     /**
      * 返回键关闭导航

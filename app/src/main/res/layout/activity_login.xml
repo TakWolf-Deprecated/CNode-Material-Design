@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/login_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_primary"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        app:title="@string/login"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        android:background="#ff666666">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingLeft="48dp"
+            android:paddingRight="48dp"
+            android:src="@drawable/logo"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:text="@string/logo_url"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/login_edt_access_token"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/access_token_$"
+        android:inputType="text"
+        android:maxLength="36"
+        android:singleLine="true"
+        app:met_floatingLabel="highlight"
+        app:met_primaryColor="@color/color_accent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button style="@style/AppTheme.Button.Stroke"
+            android:id="@+id/login_btn_qrcode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/open_qrcode" />
+
+        <Button style="@style/AppTheme.Button"
+            android:id="@+id/login_btn_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/login" />
+
+    </LinearLayout>
 
 </LinearLayout>
