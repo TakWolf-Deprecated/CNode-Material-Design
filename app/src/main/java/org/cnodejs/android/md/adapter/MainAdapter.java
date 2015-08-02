@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,8 +12,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.activity.MainActivity;
 import org.cnodejs.android.md.activity.TopicActivity;
+import org.cnodejs.android.md.activity.UserDetailActivity;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.util.FormatUtils;
@@ -28,15 +29,15 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private static final int TYPE_NORMAL = 0;
     private static final int TYPE_LOAD_MORE = 1;
 
-    private MainActivity activity;
+    private Context context;
     private LayoutInflater inflater;
     private List<Topic> topicList;
 
     private boolean loading = false;
 
-    public MainAdapter(MainActivity activity, List<Topic> topicList) {
-        this.activity = activity;
-        inflater = LayoutInflater.from(activity);
+    public MainAdapter(Context context, List<Topic> topicList) {
+        this.context = context;
+        inflater = LayoutInflater.from(context);
         this.topicList = topicList;
     }
 
@@ -149,10 +150,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             topic = topicList.get(position);
 
             tvTitle.setText(topic.getTitle());
-            tvTab.setText(topic.isTop() ? "置顶" : activity.getString(topic.getTab().getNameId()));
+            tvTab.setText(topic.isTop() ? "置顶" : context.getString(topic.getTab().getNameId()));
             tvTab.setBackgroundResource(topic.isTop() ? R.drawable.topic_tab_top_background : R.drawable.topic_tab_normal_background);
-            tvTab.setTextColor(activity.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
-            Picasso.with(activity).load(ApiClient.ROOT_HOST + topic.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
+            tvTab.setTextColor(context.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
+            Picasso.with(context).load(ApiClient.ROOT_HOST + topic.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
             tvAuthor.setText(topic.getAuthor().getLoginName());
             tvCreateTime.setText("创建于：" + topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss"));
             tvReplyCount.setText(String.valueOf(topic.getReplyCount()));
@@ -161,11 +162,18 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
         }
 
+        @OnClick(R.id.main_item_img_avatar)
+        protected void onBtnAvatarClick() {
+            Intent intent = new Intent(context, UserDetailActivity.class);
+            intent.putExtra("loginName", topic.getAuthor().getLoginName());
+            context.startActivity(intent);
+        }
+
         @OnClick(R.id.main_item_btn_item)
         protected void onBtnItemClick() {
-            Intent intent = new Intent(activity, TopicActivity.class);
+            Intent intent = new Intent(context, TopicActivity.class);
             intent.putExtra("topicId", topic.getId());
-            activity.startActivity(intent);
+            context.startActivity(intent);
         }
 
     }

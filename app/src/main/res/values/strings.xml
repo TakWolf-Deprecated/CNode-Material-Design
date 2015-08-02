@@ -26,6 +26,8 @@
     <string name="topic">话题</string>
     <string name="new_topic">发布话题</string>
 
+    <string name="user_detail">用户资料</string>
+    
     <string name="load_more">加载更多</string>
 
     <string name="confirm">确定</string>

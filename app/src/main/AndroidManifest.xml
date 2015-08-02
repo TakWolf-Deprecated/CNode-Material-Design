@@ -50,6 +50,12 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
+            android:name="org.cnodejs.android.md.activity.UserDetailActivity"
+            android:label="@string/user_detail"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
+        <activity
             android:name="org.cnodejs.android.md.activity.NewTopicActivity"
             android:label="@string/new_topic"
             android:screenOrientation="portrait"
