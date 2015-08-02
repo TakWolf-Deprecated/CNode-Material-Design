@@ -23,7 +23,7 @@
 
         <LinearLayout
             android:id="@+id/main_left_layout_info"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/main_left_nav_padding_top"
             android:paddingBottom="8dp"
@@ -50,7 +50,7 @@
                 tools:text="TakWolf" />
 
             <TextView
-                android:id="@+id/main_left_tv_summary"
+                android:id="@+id/main_left_tv_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -59,6 +59,23 @@
                 tools:text="积分：0" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/main_left_btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/main_left_layout_info"
+            android:layout_margin="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/logout"
+            android:textColor="@color/text_color_light"
+            android:textSize="14sp"
+            android:background="@drawable/button_transparent_image" />
 
     </RelativeLayout>
 

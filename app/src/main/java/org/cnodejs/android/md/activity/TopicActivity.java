@@ -22,10 +22,6 @@ public class TopicActivity  extends AppCompatActivity {
         ButterKnife.bind(this);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
-
     }
-
-
-
 
 }

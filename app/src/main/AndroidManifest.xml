@@ -50,17 +50,34 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
+            android:name="org.cnodejs.android.md.activity.NewTopicActivity"
+            android:label="@string/new_topic"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
+        <activity
             android:name="org.cnodejs.android.md.activity.UserDetailActivity"
             android:label="@string/user_detail"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.NewTopicActivity"
-            android:label="@string/new_topic"
+            android:name="org.cnodejs.android.md.activity.NotificationActivity"
+            android:label="@string/notification"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
+        <activity
+            android:name="org.cnodejs.android.md.activity.SettingActivity"
+            android:label="@string/setting"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
+        <activity
+            android:name="org.cnodejs.android.md.activity.AboutActivity"
+            android:label="@string/about"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
 
     </application>
 

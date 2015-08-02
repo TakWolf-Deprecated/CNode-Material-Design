@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -26,9 +27,11 @@ import org.cnodejs.android.md.adapter.MainAdapter;
 import org.cnodejs.android.md.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.api.CallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
+import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.HandlerUtils;
 
@@ -44,6 +47,8 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
+    private static final int REQUEST_LOGIN = 1024;
+
     // 抽屉导航布局
     @Bind(R.id.main_drawer_layout)
     protected DrawerLayout drawerLayout;
@@ -55,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Bind(R.id.main_left_tv_login_name)
     protected TextView tvLoginName;
 
-    @Bind(R.id.main_left_tv_summary)
-    protected TextView tvSummary;
+    @Bind(R.id.main_left_tv_score)
+    protected TextView tvScore;
 
     @Bind(R.id.main_left_tv_badger_notification)
     protected TextView tvBadgerNotification;
@@ -103,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         ButterKnife.bind(this);
 
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
+        drawerLayout.setDrawerListener(openDrawerListener);
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -124,24 +130,53 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
 
         }, 100); // refreshLayout无法直接在onCreate中设置刷新状态
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
         updateUserInfoViews();
     }
+
+    /**
+     * 用户信息更新逻辑
+     */
+
+    private DrawerLayout.DrawerListener openDrawerListener = new DrawerLayout.SimpleDrawerListener() {
+
+        @Override
+        public void onDrawerOpened(View drawerView) {
+            updateUserInfoViews();
+            getUserAsycnTask();
+        }
+
+    };
 
     private void updateUserInfoViews() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             Picasso.with(this).load(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText("点击头像登录");
-            tvSummary.setText(null);
+            tvScore.setText(null);
         } else {
             Picasso.with(this).load(ApiClient.ROOT_HOST + LoginShared.getAvatarUrl(this)).error(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
+            tvScore.setText("积分：" + LoginShared.getScore(this));
         }
     }
+
+    private void getUserAsycnTask() {
+        if (!TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+            ApiClient.service.getUser(LoginShared.getLoginName(this), new CallbackAdapter<Result<User>>() {
+
+                @Override
+                public void success(Result<User> result, Response response) {
+                    LoginShared.update(MainActivity.this, result.getData());
+                    updateUserInfoViews();
+                }
+
+            });
+        }
+    }
+
+    /**
+     * 刷新和加载逻辑
+     */
 
     @Override
     public void onRefresh() {
@@ -187,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             topicList.addAll(result.getData());
                             adapter.setLoading(false);
                             adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
-                            currentPage ++;
+                            currentPage++;
                         } else {
                             Toast.makeText(MainActivity.this, "已没有更多数据", Toast.LENGTH_SHORT).show();
                             adapter.setLoading(false);
@@ -248,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 drawerLayout.setDrawerListener(tabJobDrawerListener);
                 break;
             default:
-                drawerLayout.setDrawerListener(null);
+                drawerLayout.setDrawerListener(openDrawerListener);
                 break;
         }
         for (CheckedTextView navItem : navMainItemList) {
@@ -277,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 onRefresh();
                 fabNewTopic.show(true);
             }
-            drawerLayout.setDrawerListener(null);
+            drawerLayout.setDrawerListener(openDrawerListener);
         }
 
     }
@@ -292,7 +327,90 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
      * 次要菜单导航
      */
 
-    // TODO
+    @OnClick({
+            R.id.main_left_btn_notification,
+            R.id.main_left_btn_setting,
+            R.id.main_left_btn_about
+    })
+    public void onNavigationItemOtherClick(View itemView) {
+        switch (itemView.getId()) {
+            case R.id.main_left_btn_notification:
+                if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+                    showNeedLoginDialog();
+                } else {
+                    drawerLayout.setDrawerListener(notificationDrawerListener);
+                    drawerLayout.closeDrawers();
+                }
+                break;
+            case R.id.main_left_btn_setting:
+                drawerLayout.setDrawerListener(settingDrawerListener);
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.main_left_btn_about:
+                drawerLayout.setDrawerListener(aboutDrawerListener);
+                drawerLayout.closeDrawers();
+                break;
+            default:
+                drawerLayout.setDrawerListener(openDrawerListener);
+                drawerLayout.closeDrawers();
+                break;
+        }
+    }
+
+    private class OtherItemDrawerListener extends DrawerLayout.SimpleDrawerListener {
+
+        private Class gotoClz;
+
+        protected OtherItemDrawerListener(Class gotoClz) {
+            this.gotoClz = gotoClz;
+        }
+
+        @Override
+        public void onDrawerClosed(View drawerView) {
+            startActivity(new Intent(MainActivity.this, gotoClz));
+            drawerLayout.setDrawerListener(openDrawerListener);
+        }
+
+    }
+
+    private DrawerLayout.DrawerListener notificationDrawerListener = new OtherItemDrawerListener(NotificationActivity.class);
+    private DrawerLayout.DrawerListener settingDrawerListener = new OtherItemDrawerListener(SettingActivity.class);
+    private DrawerLayout.DrawerListener aboutDrawerListener = new OtherItemDrawerListener(AboutActivity.class);
+
+    /**
+     * 注销按钮
+     */
+    @OnClick(R.id.main_left_btn_logout)
+    protected void onBtnLogoutClick() {
+        new MaterialDialog.Builder(this)
+                .content(R.string.logout_tip)
+                .positiveText(R.string.logout)
+                .negativeText(R.string.cancel)
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        LoginShared.logout(MainActivity.this);
+                        updateUserInfoViews();
+                    }
+
+                })
+                .show();
+    }
+
+    /**
+     * 用户信息按钮
+     */
+    @OnClick(R.id.main_left_layout_info)
+    protected void onBtnInfoClick() {
+        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+            startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
+        } else {
+            Intent intent = new Intent(this, UserDetailActivity.class);
+            intent.putExtra("loginName", LoginShared.getLoginName(this));
+            startActivity(intent);
+        }
+    }
 
     /**
      * 发帖按钮
@@ -300,21 +418,40 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @OnClick(R.id.main_fab_new_topic)
     protected void onBtnNewTopicClick() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            new MaterialDialog.Builder(this)
-                    .content("发布话题需要登录账户。是否现在登录？")
-                    .positiveText(R.string.login)
-                    .negativeText(R.string.cancel)
-                    .callback(new MaterialDialog.ButtonCallback() {
-
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                        }
-
-                    })
-                    .show();
+            showNeedLoginDialog();
         } else {
             startActivity(new Intent(this, NewTopicActivity.class));
+        }
+    }
+
+    /**
+     * 显示需要登录对话框
+     */
+    private void showNeedLoginDialog() {
+        new MaterialDialog.Builder(this)
+                .content("该操作需要登录账户。是否现在登录？")
+                .positiveText(R.string.login)
+                .negativeText(R.string.cancel)
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), REQUEST_LOGIN);
+                    }
+
+                })
+                .show();
+    }
+
+    /**
+     * 判断登录是否成功
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
+            updateUserInfoViews();
+            getUserAsycnTask();
         }
     }
 

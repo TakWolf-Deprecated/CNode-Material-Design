@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#44000000">
+    <item>
+        <selector>
+            <item android:state_pressed="true" android:drawable="@drawable/button_transparent_pressed" />
+            <item android:drawable="@color/rect_btn_background_normal" />
+        </selector>
+    </item>
+</ripple>

@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                         dialog.dismiss();
                         LoginShared.login(LoginActivity.this, accessToken, loginInfo);
                         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
                         finish();
                     }
                 }
