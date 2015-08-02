@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         public void onDrawerOpened(View drawerView) {
             updateUserInfoViews();
             getUserAsycnTask();
+            getMessageCountAsyncTask();
         }
 
     };
