@@ -22,5 +22,7 @@
     <string name="no_data">暂无数据</string>
 
     <string name="login">登录</string>
+    
+    <string name="$slash">/</string>
 
 </resources>
