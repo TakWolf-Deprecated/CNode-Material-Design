@@ -134,6 +134,34 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         updateUserInfoViews();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getMessageCountAsyncTask();
+    }
+
+    /**
+     * 未读消息数目
+     */
+    private void getMessageCountAsyncTask() {
+        if (!TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+            ApiClient.service.getMessageCount(LoginShared.getAccessToken(this), new CallbackAdapter<Result<Integer>>() {
+
+                @Override
+                public void success(Result<Integer> result, Response response) {
+                    if (result.getData() <= 0) {
+                        tvBadgerNotification.setText(null);
+                    } else if (result.getData() > 99) {
+                        tvBadgerNotification.setText("99+");
+                    } else {
+                        tvBadgerNotification.setText(String.valueOf(result.getData()));
+                    }
+                }
+
+            });
+        }
+    }
+
     /**
      * 用户信息更新逻辑
      */
