@@ -37,8 +37,8 @@
                 android:layout_height="72dp"
                 android:src="@drawable/image_default"
                 android:scaleType="fitCenter"
-                app:siBorderWidth="2dp"
-                app:siBorderColor="@android:color/white" />
+                app:siBorderWidth="1dp"
+                app:siBorderColor="@color/color_accent" />
 
             <TextView
                 android:id="@+id/main_left_tv_login_name"
