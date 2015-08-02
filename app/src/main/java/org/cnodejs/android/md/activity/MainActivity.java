@@ -327,27 +327,55 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     // TODO
 
     /**
+     * 注销按钮
+     */
+    @OnClick(R.id.main_left_btn_logout)
+    protected void onBtnLogoutClick() {
+        new MaterialDialog.Builder(this)
+                .content(R.string.logout_tip)
+                .positiveText(R.string.logout)
+                .negativeText(R.string.cancel)
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        LoginShared.logout(MainActivity.this);
+                        updateUserInfoViews();
+                    }
+
+                })
+                .show();
+    }
+
+    /**
      * 发帖按钮
      */
     @OnClick(R.id.main_fab_new_topic)
     protected void onBtnNewTopicClick() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            new MaterialDialog.Builder(this)
-                    .content("发布话题需要登录账户。是否现在登录？")
-                    .positiveText(R.string.login)
-                    .negativeText(R.string.cancel)
-                    .callback(new MaterialDialog.ButtonCallback() {
-
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                        }
-
-                    })
-                    .show();
+            showNeedLoginDialog();
         } else {
             startActivity(new Intent(this, NewTopicActivity.class));
         }
+    }
+
+    /**
+     * 显示需要登录对话框
+     */
+    private void showNeedLoginDialog() {
+        new MaterialDialog.Builder(this)
+                .content("该操作需要登录账户。是否现在登录？")
+                .positiveText(R.string.login)
+                .negativeText(R.string.cancel)
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
+
+                })
+                .show();
     }
 
     /**
