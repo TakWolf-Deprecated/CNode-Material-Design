@@ -26,9 +26,11 @@ import org.cnodejs.android.md.adapter.MainAdapter;
 import org.cnodejs.android.md.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.api.CallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
+import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.HandlerUtils;
 
@@ -55,8 +57,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Bind(R.id.main_left_tv_login_name)
     protected TextView tvLoginName;
 
-    @Bind(R.id.main_left_tv_summary)
-    protected TextView tvSummary;
+    @Bind(R.id.main_left_tv_score)
+    protected TextView tvScore;
 
     @Bind(R.id.main_left_tv_badger_notification)
     protected TextView tvBadgerNotification;
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         ButterKnife.bind(this);
 
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
+        drawerLayout.setDrawerListener(openDrawerListener);
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -126,22 +129,49 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }, 100); // refreshLayout无法直接在onCreate中设置刷新状态
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateUserInfoViews();
-    }
+    /**
+     * 用户信息更新逻辑
+     */
+
+    private DrawerLayout.DrawerListener openDrawerListener = new DrawerLayout.SimpleDrawerListener() {
+
+        @Override
+        public void onDrawerOpened(View drawerView) {
+            updateUserInfoViews();
+            getUserAsycnTask();
+        }
+
+    };
 
     private void updateUserInfoViews() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             Picasso.with(this).load(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText("点击头像登录");
-            tvSummary.setText(null);
+            tvScore.setText(null);
         } else {
             Picasso.with(this).load(ApiClient.ROOT_HOST + LoginShared.getAvatarUrl(this)).error(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
+            tvScore.setText("积分：" + LoginShared.getScore(this));
         }
     }
+
+    private void getUserAsycnTask() {
+        if (!TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+            ApiClient.service.getUser(LoginShared.getLoginName(this), new CallbackAdapter<Result<User>>() {
+
+                @Override
+                public void success(Result<User> result, Response response) {
+                    LoginShared.update(MainActivity.this, result.getData());
+                    updateUserInfoViews();
+                }
+
+            });
+        }
+    }
+
+    /**
+     * 刷新和加载逻辑
+     */
 
     @Override
     public void onRefresh() {
@@ -187,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             topicList.addAll(result.getData());
                             adapter.setLoading(false);
                             adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
-                            currentPage ++;
+                            currentPage++;
                         } else {
                             Toast.makeText(MainActivity.this, "已没有更多数据", Toast.LENGTH_SHORT).show();
                             adapter.setLoading(false);
@@ -248,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 drawerLayout.setDrawerListener(tabJobDrawerListener);
                 break;
             default:
-                drawerLayout.setDrawerListener(null);
+                drawerLayout.setDrawerListener(openDrawerListener);
                 break;
         }
         for (CheckedTextView navItem : navMainItemList) {
@@ -277,7 +307,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 onRefresh();
                 fabNewTopic.show(true);
             }
-            drawerLayout.setDrawerListener(null);
+            drawerLayout.setDrawerListener(openDrawerListener);
         }
 
     }

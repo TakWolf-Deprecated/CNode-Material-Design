@@ -50,7 +50,7 @@
                 tools:text="TakWolf" />
 
             <TextView
-                android:id="@+id/main_left_tv_summary"
+                android:id="@+id/main_left_tv_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
