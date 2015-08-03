@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Bind(R.id.main_left_tv_badger_notification)
     protected TextView tvBadgerNotification;
 
+    @Bind(R.id.main_left_btn_logout)
+    protected View btnLogout;
+
     // 主要导航项
     @Bind({
             R.id.main_left_btn_all,
@@ -188,10 +191,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             Picasso.with(this).load(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(R.string.click_avatar_to_login);
             tvScore.setText(null);
+            btnLogout.setVisibility(View.GONE);
         } else {
             Picasso.with(this).load(ApiClient.ROOT_HOST + LoginShared.getAvatarUrl(this)).error(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
             tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
+            btnLogout.setVisibility(View.VISIBLE);
         }
     }
 
