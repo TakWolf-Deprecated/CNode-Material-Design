@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (dialog.isShowing()) {
                         dialog.dismiss();
                         if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
-                            edtAccessToken.setError("令牌验证失败");
+                            edtAccessToken.setError(getString(R.string.access_token_error));
                         } else {
                             Toast.makeText(LoginActivity.this, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
                         }

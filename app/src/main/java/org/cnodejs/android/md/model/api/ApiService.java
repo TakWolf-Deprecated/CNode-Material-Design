@@ -73,4 +73,11 @@ public interface ApiService {
             Callback<Result<Notification>> callback
     );
 
+    @FormUrlEncoded
+    @POST("/v1/message/mark_all")
+    void markAllMessageRead(
+            @Field("accesstoken") String accessToken,
+            Callback<Void> callback
+    );
+
 }

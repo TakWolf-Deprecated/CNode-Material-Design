@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.adapter.NotificationAdapter;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
@@ -24,8 +26,8 @@ import org.cnodejs.android.md.util.HandlerUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -85,8 +87,7 @@ public class NotificationActivity extends AppCompatActivity implements Toolbar.O
                     messageList.clear();
                     messageList.addAll(result.getData().getHasNotReadMessages());
                     messageList.addAll(result.getData().getHasReadMessages());
-                    adapter.notifyDataSetChanged();
-                    layoutNoData.setVisibility(messageList.size() == 0 ? View.VISIBLE : View.GONE);
+                    notifyDataSetChanged();
                     refreshLayout.setRefreshing(false);
                 }
             }
@@ -94,7 +95,11 @@ public class NotificationActivity extends AppCompatActivity implements Toolbar.O
             @Override
             public void failure(RetrofitError error) {
                 if (!isFinishing()) {
-                    Toast.makeText(NotificationActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                    if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
+                        showAccessTokenErrorDialog();
+                    } else {
+                        Toast.makeText(NotificationActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                    }
                     refreshLayout.setRefreshing(false);
                 }
             }
@@ -102,17 +107,54 @@ public class NotificationActivity extends AppCompatActivity implements Toolbar.O
         });
     }
 
+    private void notifyDataSetChanged() {
+        adapter.notifyDataSetChanged();
+        layoutNoData.setVisibility(messageList.size() == 0 ? View.VISIBLE : View.GONE);
+    }
+
+    private void showAccessTokenErrorDialog() {
+        new MaterialDialog.Builder(this)
+                .content(R.string.access_token_error_tip)
+                .positiveText(R.string.confirm)
+                .show();
+    }
+
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_done_all:
-
-                // TODO
-
+                markAllMessageReadAsyncTask();
                 return true;
             default:
                 return false;
         }
+    }
+
+    private void markAllMessageReadAsyncTask() {
+        ApiClient.service.markAllMessageRead(LoginShared.getAccessToken(this), new Callback<Void>() {
+
+            @Override
+            public void success(Void nothing, Response response) {
+                if (!isFinishing()) {
+                    for (Message message : messageList) {
+                        message.setRead(true);
+                    }
+                    notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                if (!isFinishing()) {
+                    if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
+                        showAccessTokenErrorDialog();
+                    } else {
+                        Toast.makeText(NotificationActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+        });
     }
 
 }

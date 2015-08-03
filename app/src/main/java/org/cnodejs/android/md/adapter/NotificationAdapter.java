@@ -87,21 +87,17 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tvFrom.setText(message.getAuthor().getLoginName());
             tvAction.setText(message.getType() == MessageType.at ? "在回复中@了您" : "回复了您的话题");
             tvTime.setText(FormatUtils.getRecentlyTimeFormatText(message.getReply().getCreateAt()));
-
-            // TODO 需要渲染
-            tvReplyContent.setText(message.getReply().getContent());
-
+            tvReplyContent.setText(message.getReply().getContent()); // 这里没有渲染
             tvTopicTitle.setText("原话题：" + message.getTopic().getTitle());
-
-
-
-
+            
             // 已读未读状态
             tvTime.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));
             tvFrom.getPaint().setFakeBoldText(!message.isRead());
-            tvFrom.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_primary : R.color.color_accent));
+            tvFrom.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_primary : R.color.text_color_primary));
             tvAction.getPaint().setFakeBoldText(!message.isRead());
             tvAction.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.text_color_primary));
+            tvReplyContent.getPaint().setFakeBoldText(!message.isRead());
+            tvTopicTitle.getPaint().setFakeBoldText(!message.isRead());
         }
 
         @OnClick(R.id.notification_item_img_avatar)
