@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         @Override
         public void onDrawerOpened(View drawerView) {
             updateUserInfoViews();
-            getUserAsycnTask();
+            getUserAsyncTask();
             getMessageCountAsyncTask();
         }
 
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
     }
 
-    private void getUserAsycnTask() {
+    private void getUserAsyncTask() {
         if (!TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             ApiClient.service.getUser(LoginShared.getLoginName(this), new CallbackAdapter<Result<User>>() {
 
@@ -479,7 +479,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
             updateUserInfoViews();
-            getUserAsycnTask();
+            getUserAsyncTask();
         }
     }
 

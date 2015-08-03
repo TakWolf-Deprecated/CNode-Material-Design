@@ -2,6 +2,7 @@ package org.cnodejs.android.md.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     private boolean loading = false;
 
-    public MainAdapter(Context context, List<Topic> topicList) {
+    public MainAdapter(Context context, @NonNull List<Topic> topicList) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.topicList = topicList;
@@ -138,7 +139,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         @Bind(R.id.main_item_icon_good)
         protected View iconGood;
 
-        protected Topic topic;
+        private Topic topic;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
