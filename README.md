@@ -4,7 +4,11 @@ CNode社区第三方Android客户端
 
 原生App，Material Design风格
 
-![](/psd/screenshot_01.png) ![](/psd/screenshot_02.png)
+![](/psd/screenshot_01.png)
+
+![](/psd/screenshot_02.png)
+
+![](/psd/screenshot_03.png)
 
 ## Libraries used ##
 
