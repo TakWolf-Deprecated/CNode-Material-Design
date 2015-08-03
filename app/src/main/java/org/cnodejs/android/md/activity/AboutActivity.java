@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -62,7 +63,7 @@ public class AboutActivity extends AppCompatActivity {
 
     @OnClick(R.id.about_btn_open_source_license)
     protected void onBtnOpenSourceLicenseClick() {
-
+        startActivity(new Intent(this, LicenseActivity.class));
     }
 
 }
