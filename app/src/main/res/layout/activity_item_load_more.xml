@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:matProg_barColor="@color/color_accent"
-        app:matProg_progressIndeterminate="true" />
+        app:matProg_progressIndeterminate="true"
+        app:matProg_barWidth="3dp" />
 
     <TextView
         android:id="@+id/item_load_more_icon_finish"

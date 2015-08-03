@@ -2,6 +2,7 @@ package org.cnodejs.android.md.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     private boolean loading = false;
 
-    public MainAdapter(Context context, List<Topic> topicList) {
+    public MainAdapter(Context context, @NonNull List<Topic> topicList) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.topicList = topicList;
@@ -138,7 +139,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         @Bind(R.id.main_item_icon_good)
         protected View iconGood;
 
-        protected Topic topic;
+        private Topic topic;
 
         public NormalViewHolder(View itemView) {
             super(itemView);
@@ -150,12 +151,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             topic = topicList.get(position);
 
             tvTitle.setText(topic.getTitle());
-            tvTab.setText(topic.isTop() ? "置顶" : context.getString(topic.getTab().getNameId()));
+            tvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
             tvTab.setBackgroundResource(topic.isTop() ? R.drawable.topic_tab_top_background : R.drawable.topic_tab_normal_background);
             tvTab.setTextColor(context.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
             Picasso.with(context).load(ApiClient.ROOT_HOST + topic.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
             tvAuthor.setText(topic.getAuthor().getLoginName());
-            tvCreateTime.setText("创建于：" + topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss"));
+            tvCreateTime.setText(context.getString(R.string.create_at_$) + topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss"));
             tvReplyCount.setText(String.valueOf(topic.getReplyCount()));
             tvVisitCount.setText(String.valueOf(topic.getVisitCount()));
             tvLastReplyTime.setText(FormatUtils.getRecentlyTimeFormatText(topic.getLastReplyAt()));

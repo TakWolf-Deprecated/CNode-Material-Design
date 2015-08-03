@@ -6,6 +6,7 @@
     <string name="logo_url">cnodejs.org</string>
     <string name="logo_slogan">Node.js专业中文社区</string>
 
+    <string name="tab_top">置顶</string>
     <string name="tab_all">全部</string>
     <string name="tab_good">精华</string>
     <string name="tab_share">分享</string>
@@ -19,11 +20,15 @@
 
     <string name="click_avatar_to_login">点击头像登录</string>
     <string name="press_back_again_to_exit">再按一次退出</string>
-    <string name="no_data">暂无数据</string>
 
     <string name="login">登录</string>
     <string name="logout">注销</string>
+    <string name="need_login_tip">该操作需要登录账户。是否现在登录？</string>
     <string name="logout_tip">确定要注销吗？</string>
+    <string name="no_data">暂无数据</string>
+    <string name="data_load_faild">数据加载失败，请重试</string>
+    <string name="data_load_faild_and_click_avatar_to_reload">数据加载失败，点击头像重试</string>
+    <string name="have_no_more_data">已没有更多数据</string>
 
     <string name="topic">话题</string>
     <string name="new_topic">发布话题</string>
@@ -36,9 +41,13 @@
     <string name="cancel">取消</string>
     <string name="ok">好的</string>
 
+    <string name="create_at_$">创建于：</string>
+    <string name="score_$">积分：</string>
+    <string name="register_time_$">注册时间：</string>
     <string name="$slash">/</string>
 
     <string name="access_token_$">Access Token :</string>
     <string name="open_qrcode">扫描二维码</string>
+    <string name="can_not_open_camera">无法打开相机</string>
 
 </resources>

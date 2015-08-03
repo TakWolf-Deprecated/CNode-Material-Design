@@ -58,7 +58,7 @@ public class QrCodeActivity  extends AppCompatActivity implements QRCodeReaderVi
     @Override
     public void cameraNotFound() {
         new MaterialDialog.Builder(this)
-                .content("无法打开相机")
+                .content(R.string.can_not_open_camera)
                 .positiveText(R.string.confirm)
                 .cancelListener(new DialogInterface.OnCancelListener() {
 
@@ -74,7 +74,6 @@ public class QrCodeActivity  extends AppCompatActivity implements QRCodeReaderVi
 
     @Override
     public void QRCodeNotFoundOnCamImage() {
-
     }
 
 }

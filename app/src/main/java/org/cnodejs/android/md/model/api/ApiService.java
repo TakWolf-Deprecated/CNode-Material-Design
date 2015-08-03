@@ -56,4 +56,14 @@ public interface ApiService {
             Callback<Result<User>> callback
     );
 
+    //=========
+    // 消息通知
+    //=========
+
+    @GET("/v1/message/count")
+    void getMessageCount(
+            @Query("accesstoken") String accessToken,
+            Callback<Result<Integer>> callback
+    );
+
 }
