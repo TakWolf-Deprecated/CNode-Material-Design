@@ -10,13 +10,22 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_primary"
             app:layout_scrollFlags="scroll|enterAlways">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/user_detail_layout_info"
+                android:src="@drawable/user_detail_header_bg"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true" />
+
             <LinearLayout
+                android:id="@+id/user_detail_layout_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -30,7 +39,7 @@
                     android:src="@drawable/image_default"
                     android:scaleType="fitCenter"
                     app:siBorderWidth="0dp"
-                    app:siBorderColor="@color/color_primary" />
+                    app:siBorderColor="#ffeeeeee" />
 
                 <TextView
                     android:id="@+id/user_detail_tv_login_name"
@@ -91,13 +100,13 @@
                 android:layout_width="108dp"
                 android:layout_height="108dp"
                 android:layout_marginTop="18dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
                 app:matProg_barColor="@color/color_accent"
                 app:matProg_progressIndeterminate="true"
                 app:matProg_barWidth="4dp"
                 app:matProg_fillRadius="true" />
 
-        </FrameLayout>
+        </RelativeLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/user_detail_tab_layout"
