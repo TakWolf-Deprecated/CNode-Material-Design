@@ -89,7 +89,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tvTime.setText(FormatUtils.getRecentlyTimeFormatText(message.getReply().getCreateAt()));
             tvReplyContent.setText(message.getReply().getContent()); // 这里没有渲染
             tvTopicTitle.setText("原话题：" + message.getTopic().getTitle());
-            
+
             // 已读未读状态
             tvTime.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));
             tvFrom.getPaint().setFakeBoldText(!message.isRead());
