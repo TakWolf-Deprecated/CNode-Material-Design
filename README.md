@@ -1,5 +1,7 @@
 # CNode Material Design #
 
+![](/psd/ic_launcher.png)
+
 CNode社区第三方Android客户端
 
 原生App，Material Design风格
