@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.model.api;
 
 import org.cnodejs.android.md.model.entity.LoginInfo;
+import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
@@ -64,6 +65,19 @@ public interface ApiService {
     void getMessageCount(
             @Query("accesstoken") String accessToken,
             Callback<Result<Integer>> callback
+    );
+
+    @GET("/v1/messages")
+    void getMessages(
+            @Query("accesstoken") String accessToken,
+            Callback<Result<Notification>> callback
+    );
+
+    @FormUrlEncoded
+    @POST("/v1/message/mark_all")
+    void markAllMessageRead(
+            @Field("accesstoken") String accessToken,
+            Callback<Void> callback
     );
 
 }

@@ -13,7 +13,6 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.LoginInfo;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.storage.LoginShared;
 
 import butterknife.Bind;
@@ -74,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (dialog.isShowing()) {
                         dialog.dismiss();
                         if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
-                            edtAccessToken.setError("令牌验证失败");
+                            edtAccessToken.setError(getString(R.string.access_token_error));
                         } else {
                             Toast.makeText(LoginActivity.this, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
                         }
