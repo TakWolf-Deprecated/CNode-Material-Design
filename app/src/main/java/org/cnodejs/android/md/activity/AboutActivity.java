@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,8 @@ public class AboutActivity extends AppCompatActivity {
     @Bind(R.id.about_tv_version)
     protected TextView tvVersion;
 
+    private static final String version = "v" + BuildConfig.VERSION_NAME + " (build-" + BuildConfig.VERSION_CODE + ")";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +33,7 @@ public class AboutActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        tvVersion.setText("v" + BuildConfig.VERSION_NAME + " (build-" + BuildConfig.VERSION_CODE + ")");
+        tvVersion.setText(version);
     }
 
     @OnClick(R.id.about_btn_open_source_url)
@@ -50,12 +53,16 @@ public class AboutActivity extends AppCompatActivity {
 
     @OnClick(R.id.about_btn_advice_feedback)
     protected void onBtnAdviceFeedbackClick() {
-
+        ShipUtils.sendEmail(
+                this,
+                "takwolf@foxmail.com",
+                "来自 CNodeMD-" + version + " 的客户端反馈",
+                "设备信息：Android " + Build.VERSION.RELEASE + " - " + Build.MANUFACTURER + " - " + Build.MODEL + "\n（如果涉及隐私请手动删除这个内容）\n\n");
     }
 
     @OnClick(R.id.about_btn_open_source_license)
     protected void onBtnOpenSourceLicenseClick() {
-        
+
     }
 
 }

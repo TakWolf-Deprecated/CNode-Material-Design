@@ -29,4 +29,16 @@ public final class ShipUtils {
         }
     }
 
+    public static void sendEmail(Context context, String email, String subject, String text) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:" + email));
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+            intent.putExtra(Intent.EXTRA_TEXT, text);
+            context.startActivity(intent);
+        } else {
+            Toast.makeText(context, "您的系统中没有安装邮件客户端", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
