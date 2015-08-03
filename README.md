@@ -14,6 +14,10 @@ CNode社区第三方Android客户端
 
 ![](/psd/screenshot_04.png)
 
+![](/psd/screenshot_05.png)
+
+![](/psd/screenshot_06.png)
+
 ## Libraries used ##
 
 - [Butter Knife](https://github.com/JakeWharton/butterknife)

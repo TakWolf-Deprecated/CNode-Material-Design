@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
      */
     private void getMessageCountAsyncTask() {
         if (!TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            ApiClient.service.getMessageCount(LoginShared.getAccessToken(this), new CallbackAdapter<Result<Integer>>() {
+            ApiClient.service.getMessageCount(LoginShared.getAccessToken(this), new Callback<Result<Integer>>() {
 
                 @Override
                 public void success(Result<Integer> result, Response response) {
@@ -154,6 +154,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         tvBadgerNotification.setText("99+");
                     } else {
                         tvBadgerNotification.setText(String.valueOf(result.getData()));
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
+                        tvBadgerNotification.setText(null);
                     }
                 }
 
@@ -419,6 +426,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         LoginShared.logout(MainActivity.this);
+                        tvBadgerNotification.setText(null); // 未读消息清空
                         updateUserInfoViews();
                     }
 
