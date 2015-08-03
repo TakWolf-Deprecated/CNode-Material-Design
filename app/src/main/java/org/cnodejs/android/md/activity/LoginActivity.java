@@ -13,7 +13,6 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.LoginInfo;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.storage.LoginShared;
 
 import butterknife.Bind;
