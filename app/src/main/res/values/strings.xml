@@ -6,6 +6,7 @@
     <string name="logo_url">cnodejs.org</string>
     <string name="logo_slogan">Node.js专业中文社区</string>
 
+    <string name="tab_top">置顶</string>
     <string name="tab_all">全部</string>
     <string name="tab_good">精华</string>
     <string name="tab_share">分享</string>
@@ -39,7 +40,9 @@
     <string name="cancel">取消</string>
     <string name="ok">好的</string>
 
+    <string name="create_at_$">创建于：</string>
     <string name="score_$">积分：</string>
+    <string name="register_time_$">注册时间：</string>
     <string name="$slash">/</string>
 
     <string name="access_token_$">Access Token :</string>

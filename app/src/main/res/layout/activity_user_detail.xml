@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,16 +10,83 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/user_detail_toolbar"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_primary"
-            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-            app:title="@string/user_detail"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.github.siyamed.shapeimageview.CircularImageView
+                    android:id="@+id/user_detail_img_avatar"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginTop="24dp"
+                    android:src="@drawable/image_default"
+                    android:scaleType="fitCenter"
+                    app:siBorderWidth="2dp"
+                    app:siBorderColor="@color/color_accent" />
+
+                <TextView
+                    android:id="@+id/user_detail_tv_login_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    tools:text="TakWolf" />
+
+                <TextView
+                    android:id="@+id/user_detail_tv_github_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:textColor="@color/text_color_light"
+                    android:textSize="16sp"
+                    tools:text="TakWolf@github.com" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/user_detail_tv_create_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        tools:text="注册时间：2015-1-1 10:10:10" />
+
+                    <TextView
+                        android:id="@+id/user_detail_tv_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:textColor="@color/color_accent"
+                        android:textSize="12sp"
+                        tools:text="积分：20" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/user_detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </FrameLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/user_detail_tab_layout"
