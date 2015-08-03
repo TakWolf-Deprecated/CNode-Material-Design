@@ -179,12 +179,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private void updateUserInfoViews() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             Picasso.with(this).load(R.drawable.image_default).into(imgAvatar);
-            tvLoginName.setText("点击头像登录");
+            tvLoginName.setText(R.string.click_avatar_to_login);
             tvScore.setText(null);
         } else {
             Picasso.with(this).load(ApiClient.ROOT_HOST + LoginShared.getAvatarUrl(this)).error(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
-            tvScore.setText("积分：" + LoginShared.getScore(this));
+            tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
         }
     }
 
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void failure(RetrofitError error) {
                 if (currentTab == tab) {
-                    Toast.makeText(MainActivity.this, "数据加载失败，请重试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
                     refreshLayout.setRefreshing(false);
                 }
             }
@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                             adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
                             currentPage++;
                         } else {
-                            Toast.makeText(MainActivity.this, "已没有更多数据", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, R.string.have_no_more_data, Toast.LENGTH_SHORT).show();
                             adapter.setLoading(false);
                             adapter.notifyItemChanged(adapter.getItemCount() - 1);
                         }
@@ -262,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 @Override
                 public void failure(RetrofitError error) {
                     if (currentTab == tab && currentPage == page) {
-                        Toast.makeText(MainActivity.this, "数据加载失败，请重试", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
                         adapter.setLoading(false);
                         adapter.notifyItemChanged(adapter.getItemCount() - 1);
                     }
@@ -457,7 +457,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
      */
     private void showNeedLoginDialog() {
         new MaterialDialog.Builder(this)
-                .content("该操作需要登录账户。是否现在登录？")
+                .content(R.string.need_login_tip)
                 .positiveText(R.string.login)
                 .negativeText(R.string.cancel)
                 .callback(new MaterialDialog.ButtonCallback() {
