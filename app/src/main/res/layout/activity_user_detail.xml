@@ -29,8 +29,8 @@
                     android:layout_marginTop="24dp"
                     android:src="@drawable/image_default"
                     android:scaleType="fitCenter"
-                    app:siBorderWidth="2dp"
-                    app:siBorderColor="@color/color_accent" />
+                    app:siBorderWidth="0dp"
+                    app:siBorderColor="@color/color_primary" />
 
                 <TextView
                     android:id="@+id/user_detail_tv_login_name"
@@ -85,6 +85,17 @@
                 app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <com.pnikosis.materialishprogress.ProgressWheel
+                android:id="@+id/user_detail_progress_wheel"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:layout_marginTop="18dp"
+                android:layout_gravity="center_horizontal"
+                app:matProg_barColor="@color/color_accent"
+                app:matProg_progressIndeterminate="true"
+                app:matProg_barWidth="4dp"
+                app:matProg_fillRadius="true" />
 
         </FrameLayout>
 

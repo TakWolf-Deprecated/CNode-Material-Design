@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
@@ -62,10 +63,15 @@ public class UserDetailActivity extends AppCompatActivity {
     @Bind(R.id.user_detail_tv_score)
     protected TextView tvScore;
 
+    @Bind(R.id.user_detail_progress_wheel)
+    protected ProgressWheel progressWheel;
+
     private ViewPagerAdapter adapter;
 
     private String loginName;
     private String githubUsername;
+
+    private boolean loading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +91,16 @@ public class UserDetailActivity extends AppCompatActivity {
         getUserAsyncTask();
     }
 
+    @OnClick(R.id.user_detail_img_avatar)
+    protected void onBtnAvatarClick() {
+        if (!loading) {
+            getUserAsyncTask();
+        }
+    }
+
     private void getUserAsyncTask() {
+        loading = true;
+        progressWheel.spin();
         ApiClient.service.getUser(loginName, new Callback<Result<User>>() {
 
             @Override
@@ -94,13 +109,17 @@ public class UserDetailActivity extends AppCompatActivity {
                     updateUserInfoViews(result.getData());
                     adapter.update(result.getData());
                     githubUsername = result.getData().getGithubUsername();
+                    progressWheel.setProgress(0);
+                    loading = false;
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 if (!isFinishing()) {
-                    Toast.makeText(UserDetailActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserDetailActivity.this, R.string.data_load_faild_and_click_avatar_to_reload, Toast.LENGTH_SHORT).show();
+                    progressWheel.setProgress(0);
+                    loading = false;
                 }
             }
 

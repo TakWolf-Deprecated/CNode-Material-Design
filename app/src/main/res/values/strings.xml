@@ -27,6 +27,7 @@
     <string name="logout_tip">确定要注销吗？</string>
     <string name="no_data">暂无数据</string>
     <string name="data_load_faild">数据加载失败，请重试</string>
+    <string name="data_load_faild_and_click_avatar_to_reload">数据加载失败，点击头像重试</string>
     <string name="have_no_more_data">已没有更多数据</string>
 
     <string name="topic">话题</string>
