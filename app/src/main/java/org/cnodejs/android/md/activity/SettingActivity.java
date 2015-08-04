@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -70,7 +71,7 @@ public class SettingActivity extends AppCompatActivity implements Switch.OnCheck
 
     @OnClick(R.id.setting_btn_modify_topic_sign)
     protected void onBtnModifyTopicSignClick() {
-
+        startActivity(new Intent(this, ModifyTopicSignActivity.class));
     }
 
 }

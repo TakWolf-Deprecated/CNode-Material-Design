@@ -74,5 +74,7 @@
     <string name="topic_sign">话题小尾巴</string>
     <string name="topic_sign_summary">开启后可以自定义</string>
     <string name="modify_topic_sign">设置小尾巴</string>
+    <string name="modify_topic_sign_hint">来点炫酷的，不要写太多字喔&#8230;</string>
+    <string name="default_topic_sign">默认尾巴</string>
 
 </resources>
