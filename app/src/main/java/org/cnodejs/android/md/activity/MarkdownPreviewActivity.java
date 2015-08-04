@@ -30,4 +30,13 @@ public class MarkdownPreviewActivity extends AppCompatActivity {
         markdownView.loadMarkdown(getIntent().getStringExtra("markdownText"));
     }
 
+    @Override
+    public void onBackPressed() {
+        if (markdownView.canGoBack()) {
+            markdownView.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 }
