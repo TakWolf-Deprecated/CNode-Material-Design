@@ -83,6 +83,7 @@
                 android:background="@android:color/white">
 
                 <ImageView
+                    android:id="@+id/new_topic_btn_tool_format_bold"
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/ic_format_bold_grey600_24dp"
@@ -91,6 +92,7 @@
                     android:clickable="true" />
 
                 <ImageView
+                    android:id="@+id/new_topic_btn_tool_format_italic"
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/ic_format_italic_grey600_24dp"
@@ -98,23 +100,28 @@
                     android:background="@drawable/rect_btn_transparent_background"
                     android:clickable="true" />
 
-                <ImageView
+                <CheckedTextView
+                    android:id="@+id/new_topic_btn_tool_format_list_bulleted"
                     android:layout_width="54dp"
                     android:layout_height="54dp"
-                    android:src="@drawable/ic_format_list_bulleted_grey600_24dp"
-                    android:scaleType="center"
+                    android:drawableTop="@drawable/ic_format_list_bulleted_grey600_24dp"
+                    android:paddingTop="15dp"
+                    android:gravity="center"
+                    android:background="@drawable/rect_btn_transparent_background"
+                    android:clickable="true" />
+
+                <CheckedTextView
+                    android:id="@+id/new_topic_btn_tool_format_list_numbered"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:drawableTop="@drawable/ic_format_list_numbered_grey600_24dp"
+                    android:paddingTop="15dp"
+                    android:gravity="center"
                     android:background="@drawable/rect_btn_transparent_background"
                     android:clickable="true" />
 
                 <ImageView
-                    android:layout_width="54dp"
-                    android:layout_height="54dp"
-                    android:src="@drawable/ic_format_list_numbered_grey600_24dp"
-                    android:scaleType="center"
-                    android:background="@drawable/rect_btn_transparent_background"
-                    android:clickable="true" />
-
-                <ImageView
+                    android:id="@+id/new_topic_btn_tool_insert_link"
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/ic_insert_link_grey600_24dp"
@@ -123,6 +130,7 @@
                     android:clickable="true" />
 
                 <ImageView
+                    android:id="@+id/new_topic_btn_tool_insert_photo"
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/ic_insert_photo_grey600_24dp"
@@ -131,6 +139,7 @@
                     android:clickable="true" />
 
                 <ImageView
+                    android:id="@+id/new_topic_btn_tool_preview"
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/ic_visibility_grey600_24dp"
