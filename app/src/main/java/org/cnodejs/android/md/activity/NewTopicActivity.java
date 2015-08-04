@@ -1,13 +1,17 @@
 package org.cnodejs.android.md.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
@@ -91,15 +95,36 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
 
 
 
+
+
+
+
+
     /**
      * 插入链接
      */
     @OnClick(R.id.new_topic_btn_tool_insert_link)
     protected void onBtnToolInsertLinkClick() {
+        new MaterialDialog.Builder(this)
+                .title("添加链接")
+                .customView(R.layout.dialog_tool_insert_link, false)
+                .positiveText(R.string.confirm)
+                .negativeText(R.string.cancel)
+                .callback(new MaterialDialog.ButtonCallback() {
 
-        // TODO
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        View view = dialog.getCustomView();
+                        EditText edtTitle = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_title);
+                        EditText edtLink = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_link);
 
+                        String insertText = " [" + edtTitle.getText() + "](" + edtLink.getText() + ") ";
+                        edtContent.requestFocus();
+                        edtContent.getText().insert(edtContent.getSelectionEnd(), insertText);
+                    }
 
+                })
+                .show();
     }
 
     /**
