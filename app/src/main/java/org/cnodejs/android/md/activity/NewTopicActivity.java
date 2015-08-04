@@ -16,6 +16,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.storage.LoginShared;
+import org.cnodejs.android.md.storage.SettingShared;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,11 +47,13 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
         toolbar.setOnMenuItemClickListener(this);
 
         // 载入草稿
-        spnTab.setSelection(LoginShared.getNewTopicTabPosition(this));
-        edtContent.setText(LoginShared.getNewTopicContent(this));
-        edtContent.setSelection(edtContent.length());
-        edtTitle.setText(LoginShared.getNewTopicTitle(this));
-        edtTitle.setSelection(edtTitle.length()); // 这个必须最后调用
+        if (SettingShared.isEnableNewTopicDraft(this)) {
+            spnTab.setSelection(LoginShared.getNewTopicTabPosition(this));
+            edtContent.setText(LoginShared.getNewTopicContent(this));
+            edtContent.setSelection(edtContent.length());
+            edtTitle.setText(LoginShared.getNewTopicTitle(this));
+            edtTitle.setSelection(edtTitle.length()); // 这个必须最后调用
+        }
     }
 
     /**
@@ -59,9 +62,11 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
     @Override
     protected void onPause() {
         super.onPause();
-        LoginShared.setNewTopicTabPosition(this, spnTab.getSelectedItemPosition());
-        LoginShared.setNewTopicTitle(this, edtTitle.getText().toString());
-        LoginShared.setNewTopicContent(this, edtContent.getText().toString());
+        if (SettingShared.isEnableNewTopicDraft(this)) {
+            LoginShared.setNewTopicTabPosition(this, spnTab.getSelectedItemPosition());
+            LoginShared.setNewTopicTitle(this, edtTitle.getText().toString());
+            LoginShared.setNewTopicContent(this, edtContent.getText().toString());
+        }
     }
 
     //===========
