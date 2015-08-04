@@ -16,6 +16,7 @@ import org.cnodejs.android.md.storage.LoginShared;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
 
@@ -64,25 +65,65 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
         LoginShared.setNewTopicContent(this, edtContent.getText().toString());
     }
 
+    //===========
+    // 工具条逻辑
+    //===========
+
+    /**
+     * 加粗
+     */
+    @OnClick(R.id.new_topic_btn_tool_format_bold)
+    protected void onBtnToolFormatBoldClick() {
+        edtContent.requestFocus();
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "****");
+        edtContent.setSelection(edtContent.getSelectionEnd() - 2);
+    }
+
+    /**
+     * 倾斜
+     */
+    @OnClick(R.id.new_topic_btn_tool_format_italic)
+    protected void onBtnToolFormatItalicClick() {
+        edtContent.requestFocus();
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "**");
+        edtContent.setSelection(edtContent.getSelectionEnd() - 1);
+    }
 
 
 
+    /**
+     * 插入链接
+     */
+    @OnClick(R.id.new_topic_btn_tool_insert_link)
+    protected void onBtnToolInsertLinkClick() {
+
+        // TODO
 
 
+    }
 
+    /**
+     * 插入图片 TODO 目前没有图片上传接口
+     */
+    @OnClick(R.id.new_topic_btn_tool_insert_photo)
+    protected void onBtnToolInsertPhotoClick() {
+        edtContent.requestFocus();
+        edtContent.getText().insert(edtContent.getSelectionEnd(), " ![](http://) ");
+        edtContent.setSelection(edtContent.getSelectionEnd() - 11);
+        Toast.makeText(this, "暂时不支持图片上传", Toast.LENGTH_SHORT).show();
+    }
 
+    /**
+     * 预览 TODO
+     */
+    @OnClick(R.id.new_topic_btn_tool_preview)
+    protected void onBtnToolPreviewClick() {
+        Toast.makeText(this, "暂时不支持预览", Toast.LENGTH_SHORT).show();
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    //================
+    // 工具条逻辑-END-
+    //================
 
     /**
      * 发送逻辑
