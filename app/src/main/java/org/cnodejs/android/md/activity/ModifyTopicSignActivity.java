@@ -40,6 +40,7 @@ public class ModifyTopicSignActivity extends AppCompatActivity implements Toolba
         switch (item.getItemId()) {
             case R.id.action_default:
                 edtContent.setText(SettingShared.DEFAULT_TOPIC_SIGN_CONTENT);
+                edtContent.setSelection(edtContent.length());
                 return true;
             default:
                 return false;
