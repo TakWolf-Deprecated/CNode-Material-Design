@@ -15,6 +15,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
@@ -22,6 +23,9 @@ import org.cnodejs.android.md.storage.SettingShared;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
 
@@ -37,6 +41,8 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
     @Bind(R.id.new_topic_edt_content)
     protected EditText edtContent;
 
+    private MaterialDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +52,12 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.new_topic);
         toolbar.setOnMenuItemClickListener(this);
+
+        dialog = new MaterialDialog.Builder(this)
+                .content("正在发布中...")
+                .progress(true, 0)
+                .cancelable(false)
+                .build();
 
         // 载入草稿
         if (SettingShared.isEnableNewTopicDraft(this)) {
@@ -229,11 +241,39 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
     }
 
     private void newTipicAsyncTask(TabType tab, String title, String content) {
+        dialog.show();
+        ApiClient.service.newTopic(tab, title, content, new Callback<Void>() {
 
-        // TODO
+            @Override
+            public void success(Void nothing, Response response) {
+                dialog.dismiss();
+                // 清除草稿
+                LoginShared.setNewTopicTabPosition(NewTopicActivity.this, 0);
+                LoginShared.setNewTopicTitle(NewTopicActivity.this, null);
+                LoginShared.setNewTopicContent(NewTopicActivity.this, null);
+                // 结束当前并提示
+                finish();
+                Toast.makeText(NewTopicActivity.this, "话题发布成功", Toast.LENGTH_SHORT).show();
+            }
 
-        System.out.println(content);
+            @Override
+            public void failure(RetrofitError error) {
+                dialog.dismiss();
+                if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
+                    showAccessTokenErrorDialog();
+                } else {
+                    Toast.makeText(NewTopicActivity.this, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+        });
+    }
+
+    private void showAccessTokenErrorDialog() {
+        new MaterialDialog.Builder(this)
+                .content(R.string.access_token_error_tip)
+                .positiveText(R.string.confirm)
+                .show();
     }
 
 }

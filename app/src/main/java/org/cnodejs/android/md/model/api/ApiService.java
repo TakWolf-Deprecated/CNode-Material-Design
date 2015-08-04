@@ -41,9 +41,12 @@ public interface ApiService {
     );
 
     @FormUrlEncoded
-    @POST("/")
+    @POST("/v1/topics")
     void newTopic(
-
+            @Field("tab") TabType tab,
+            @Field("title") String title,
+            @Field("content") String content,
+            Callback<Void> callback
     );
 
     //=====
