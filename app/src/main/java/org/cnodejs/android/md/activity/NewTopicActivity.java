@@ -172,8 +172,13 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
      */
     @OnClick(R.id.new_topic_btn_tool_preview)
     protected void onBtnToolPreviewClick() {
+        String content = edtContent.getText().toString();
+        if (SettingShared.isEnableTopicSign(this)) { // 添加小尾巴
+            content += "\n\n" + SettingShared.getTopicSignContent(this);
+        }
+
         Intent intent = new Intent(this, MarkdownPreviewActivity.class);
-        intent.putExtra("markdownText", edtContent.getText().toString());
+        intent.putExtra("markdownText", content);
         startActivity(intent);
     }
 
