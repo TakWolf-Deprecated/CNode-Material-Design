@@ -50,7 +50,9 @@ CNode社区第三方Android客户端
 
 - [QRCodeReaderView](https://github.com/dlazaro66/QRCodeReaderView)
 
-- [material-design-icons](https://github.com/google/material-design-icons)
+- [MarkdownView](https://github.com/falnatsheh/MarkdownView)
+
+- [Material design icons](https://github.com/google/material-design-icons)
 
 ## Author ##
 
