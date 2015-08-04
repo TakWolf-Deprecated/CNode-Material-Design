@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="tabs">
+        <item>@string/tab_share</item>
+        <item>@string/tab_ask</item>
+        <item>@string/tab_job</item>
+    </string-array>
+
+</resources>
