@@ -44,7 +44,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:text="@string/send_to_tab_$"
-                    android:textColor="@color/text_color_primary"
+                    android:textColor="@color/color_accent"
                     android:textSize="16sp" />
 
                 <Spinner
@@ -77,9 +77,61 @@
             android:orientation="horizontal"
             android:background="@android:color/white">
 
+            <ImageView
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:src="@drawable/ic_format_bold_grey600_24dp"
+                android:scaleType="center"
+                android:background="@drawable/rect_btn_transparent_background"
+                android:clickable="true" />
 
+            <ImageView
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:src="@drawable/ic_format_italic_grey600_24dp"
+                android:scaleType="center"
+                android:background="@drawable/rect_btn_transparent_background"
+                android:clickable="true" />
 
+            <ImageView
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:src="@drawable/ic_format_list_bulleted_grey600_24dp"
+                android:scaleType="center"
+                android:background="@drawable/rect_btn_transparent_background"
+                android:clickable="true" />
 
+            <ImageView
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:src="@drawable/ic_format_list_numbered_grey600_24dp"
+                android:scaleType="center"
+                android:background="@drawable/rect_btn_transparent_background"
+                android:clickable="true" />
+
+            <ImageView
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:src="@drawable/ic_insert_link_grey600_24dp"
+                android:scaleType="center"
+                android:background="@drawable/rect_btn_transparent_background"
+                android:clickable="true" />
+
+            <ImageView
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:src="@drawable/ic_insert_photo_grey600_24dp"
+                android:scaleType="center"
+                android:background="@drawable/rect_btn_transparent_background"
+                android:clickable="true" />
+
+            <ImageView
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:src="@drawable/ic_visibility_grey600_24dp"
+                android:scaleType="center"
+                android:background="@drawable/rect_btn_transparent_background"
+                android:clickable="true" />
 
         </LinearLayout>
 
