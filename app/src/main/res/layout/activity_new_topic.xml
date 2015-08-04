@@ -98,22 +98,20 @@
                     android:scaleType="center"
                     android:background="@drawable/rect_btn_transparent_background" />
 
-                <CheckedTextView
+                <ImageView
                     android:id="@+id/new_topic_btn_tool_format_list_bulleted"
                     android:layout_width="54dp"
                     android:layout_height="54dp"
-                    android:drawableTop="@drawable/ic_format_list_bulleted_grey600_24dp"
-                    android:paddingTop="15dp"
-                    android:gravity="center"
+                    android:src="@drawable/ic_format_list_bulleted_grey600_24dp"
+                    android:scaleType="center"
                     android:background="@drawable/rect_btn_transparent_background" />
 
-                <CheckedTextView
+                <ImageView
                     android:id="@+id/new_topic_btn_tool_format_list_numbered"
                     android:layout_width="54dp"
                     android:layout_height="54dp"
-                    android:drawableTop="@drawable/ic_format_list_numbered_grey600_24dp"
-                    android:paddingTop="15dp"
-                    android:gravity="center"
+                    android:src="@drawable/ic_format_list_numbered_grey600_24dp"
+                    android:scaleType="center"
                     android:background="@drawable/rect_btn_transparent_background" />
 
                 <ImageView

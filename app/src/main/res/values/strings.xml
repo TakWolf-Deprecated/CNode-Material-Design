@@ -78,7 +78,7 @@
     <string name="default_topic_sign">默认尾巴</string>
 
     <string name="send">发送</string>
-    <string name="send_to_tab_$">发布到板块：</string>
+    <string name="send_to_tab_$">发布到分类：</string>
 
     <string name="new_topic_title_hint">标题，字数10字以上</string>
     <string name="new_topic_content_hint">说点什么吧&#8230;</string>

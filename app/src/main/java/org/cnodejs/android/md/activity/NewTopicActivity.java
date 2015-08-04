@@ -1,14 +1,22 @@
 package org.cnodejs.android.md.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -20,6 +28,7 @@ import org.cnodejs.android.md.storage.LoginShared;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
@@ -36,12 +45,6 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
     @Bind(R.id.new_topic_edt_content)
     protected EditText edtContent;
 
-    @Bind(R.id.new_topic_btn_tool_format_list_bulleted)
-    protected CheckedTextView ctvToolFormatListBulleted;
-
-    @Bind(R.id.new_topic_btn_tool_format_list_numbered)
-    protected CheckedTextView ctvToolFormatListNumbered;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +57,10 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
 
         // 载入草稿
         spnTab.setSelection(LoginShared.getNewTopicTabPosition(this));
-        edtTitle.setText(LoginShared.getNewTopicTitle(this));
         edtContent.setText(LoginShared.getNewTopicContent(this));
+        edtContent.setSelection(edtContent.length());
+        edtTitle.setText(LoginShared.getNewTopicTitle(this));
+        edtTitle.setSelection(edtTitle.length()); // 这个必须最后调用
     }
 
     /**
@@ -93,12 +98,39 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
         edtContent.setSelection(edtContent.getSelectionEnd() - 1);
     }
 
+    /**
+     * 无序列表
+     */
+    @OnClick(R.id.new_topic_btn_tool_format_list_bulleted)
+    protected void onBtnToolFormatListBulletedClick() {
+        edtContent.requestFocus();
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n* ");
+    }
 
-
-
-
-
-
+    /**
+     * 有序列表 TODO 这里算法需要优化
+     */
+    @OnClick(R.id.new_topic_btn_tool_format_list_numbered)
+    protected void onBtnToolFormatListNumberedClick() {
+        edtContent.requestFocus();
+        // 查找向上最近一个\n
+        for (int n = edtContent.getSelectionEnd() - 1; n >= 0; n--) {
+            char c = edtContent.getText().charAt(n);
+            if (c == '\n') {
+                try {
+                    int index = Integer.parseInt(edtContent.getText().charAt(n + 1) + "");
+                    if (edtContent.getText().charAt(n + 2) == '.' && edtContent.getText().charAt(n + 3) == ' ') {
+                        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n" + (index + 1) + ". ");
+                        return;
+                    }
+                } catch (Exception e) {
+                    // TODO 这里有问题是如果数字超过9，则无法检测，未来逐渐优化
+                }
+            }
+        }
+        // 没找到
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n1. ");
+    }
 
     /**
      * 插入链接
@@ -166,7 +198,7 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
                     edtContent.requestFocus();
                     Toast.makeText(this, "内容不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    newTipicAsyncTask(getTabByPosition(spnTab.getSelectedItemPosition()), edtTitle.getText().toString(), edtContent.getText().toString());
+                    newTipicAsyncTask(getTabByPosition(spnTab.getSelectedItemPosition()), edtTitle.getText().toString().replace("\n", "").trim(), edtContent.getText().toString());
                 }
                 return true;
             default:
