@@ -9,12 +9,13 @@ import com.rey.material.widget.Switch;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.storage.SettingShared;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity implements Switch.OnCheckedChangeListener {
 
     @Bind(R.id.setting_toolbar)
     protected Toolbar toolbar;
@@ -35,6 +36,13 @@ public class SettingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
+
+        switchNotification.setChecked(SettingShared.isEnableNotification(this));
+        switchTopicSign.setChecked(SettingShared.isEnableTopicSign(this));
+        btnModifyTopicSign.setEnabled(SettingShared.isEnableTopicSign(this));
+
+        switchNotification.setOnCheckedChangeListener(this);
+        switchTopicSign.setOnCheckedChangeListener(this);
     }
 
     @OnClick(R.id.setting_btn_notification)
@@ -45,7 +53,19 @@ public class SettingActivity extends AppCompatActivity {
     @OnClick(R.id.setting_btn_topic_sign)
     protected void onBtnTopicSignClick() {
         switchTopicSign.toggle();
-        btnModifyTopicSign.setEnabled(switchTopicSign.isChecked());
+    }
+
+    @Override
+    public void onCheckedChanged(Switch switchView, boolean b) {
+        switch (switchView.getId()) {
+            case R.id.setting_switch_notification:
+                SettingShared.setEnableNotification(this, b);
+                break;
+            case R.id.setting_switch_topic_sign:
+                SettingShared.setEnableTopicSign(this, b);
+                btnModifyTopicSign.setEnabled(b);
+                break;
+        }
     }
 
     @OnClick(R.id.setting_btn_modify_topic_sign)
