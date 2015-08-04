@@ -39,4 +39,6 @@ dependencies {
     compile 'com.melnykov:floatingactionbutton:1.3.0'
 
     compile 'com.dlazaro66.qrcodereaderview:qrcodereaderview:1.0.0'
+
+    compile project(':markdown-view')
 }

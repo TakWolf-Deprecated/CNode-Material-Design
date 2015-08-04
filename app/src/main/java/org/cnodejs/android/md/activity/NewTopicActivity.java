@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -104,7 +105,7 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
     @OnClick(R.id.new_topic_btn_tool_format_list_bulleted)
     protected void onBtnToolFormatListBulletedClick() {
         edtContent.requestFocus();
-        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n* ");
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n* ");
     }
 
     /**
@@ -120,7 +121,7 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
                 try {
                     int index = Integer.parseInt(edtContent.getText().charAt(n + 1) + "");
                     if (edtContent.getText().charAt(n + 2) == '.' && edtContent.getText().charAt(n + 3) == ' ') {
-                        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n" + (index + 1) + ". ");
+                        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n" + (index + 1) + ". ");
                         return;
                     }
                 } catch (Exception e) {
@@ -129,7 +130,7 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
             }
         }
         // 没找到
-        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n1. ");
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n1. ");
     }
 
     /**
@@ -172,11 +173,13 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
     }
 
     /**
-     * 预览 TODO
+     * 预览
      */
     @OnClick(R.id.new_topic_btn_tool_preview)
     protected void onBtnToolPreviewClick() {
-        Toast.makeText(this, "暂时不支持预览", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MarkdownPreviewActivity.class);
+        intent.putExtra("markdownText", edtContent.getText().toString());
+        startActivity(intent);
     }
 
     //================
@@ -198,7 +201,7 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
                     edtContent.requestFocus();
                     Toast.makeText(this, "内容不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    newTipicAsyncTask(getTabByPosition(spnTab.getSelectedItemPosition()), edtTitle.getText().toString().replace("\n", "").trim(), edtContent.getText().toString());
+                    newTipicAsyncTask(getTabByPosition(spnTab.getSelectedItemPosition()), edtTitle.getText().toString().trim(), edtContent.getText().toString());
                 }
                 return true;
             default:

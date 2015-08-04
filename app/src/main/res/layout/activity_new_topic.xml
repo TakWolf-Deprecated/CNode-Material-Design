@@ -64,6 +64,7 @@
                 android:padding="16dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:singleLine="true"
                 android:hint="@string/new_topic_title_hint"
                 android:background="@android:color/white" />
 

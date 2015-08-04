@@ -88,4 +88,6 @@
     <string name="link">连接</string>
     <string name="http_$">http://</string>
 
+    <string name="markdown_preview">Markdown预览</string>
+
 </resources>
