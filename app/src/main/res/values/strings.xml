@@ -71,6 +71,8 @@
     <string name="notice">通知</string>
     <string name="receive_notification">接收消息通知</string>
     <string name="receive_notification_summary">开启也没用，这功能压根没做</string>
+    <string name="new_topic_draft">保存草稿</string>
+    <string name="new_topic_draft_summary">没有发布的话题内容会被保存</string>
     <string name="topic_sign">话题小尾巴</string>
     <string name="topic_sign_summary">开启后可以自定义</string>
     <string name="modify_topic_sign">设置小尾巴</string>

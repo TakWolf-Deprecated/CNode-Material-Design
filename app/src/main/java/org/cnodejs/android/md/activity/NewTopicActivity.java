@@ -114,7 +114,7 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
                         return;
                     }
                 } catch (Exception e) {
-                    // TODO 这里有问题是如果数字超过9，则无法检测，未来逐渐优化
+                    // TODO 这里有问题是如果数字超过10，则无法检测，未来逐渐优化
                 }
             }
         }

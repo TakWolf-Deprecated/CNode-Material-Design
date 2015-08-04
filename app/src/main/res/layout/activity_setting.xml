@@ -88,6 +88,49 @@
                 android:textSize="14sp" />
 
             <RelativeLayout
+                android:id="@+id/setting_btn_new_topic_draft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:background="@drawable/rect_btn_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/setting_switch_topic_sign"
+                    android:layout_toLeftOf="@+id/setting_switch_topic_sign"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/new_topic_draft"
+                        android:textColor="@color/text_color_primary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/new_topic_draft_summary"
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <com.rey.material.widget.Switch style="@style/Material.Widget.Switch"
+                    android:id="@+id/setting_switch_new_topic_draft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+
+            </RelativeLayout>
+
+            <View style="@style/AppTheme.DeepLine" />
+
+            <RelativeLayout
                 android:id="@+id/setting_btn_topic_sign"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

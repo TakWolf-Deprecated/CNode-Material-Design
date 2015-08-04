@@ -40,6 +40,12 @@ public interface ApiService {
             Callback<Result<TopicWithReply>> callback
     );
 
+    @FormUrlEncoded
+    @POST("/")
+    void newTopic(
+
+    );
+
     //=====
     // 用户
     //=====
