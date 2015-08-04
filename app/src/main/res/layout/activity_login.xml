@@ -50,6 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
         android:hint="@string/access_token_$"
         android:inputType="text"
         android:maxLength="36"

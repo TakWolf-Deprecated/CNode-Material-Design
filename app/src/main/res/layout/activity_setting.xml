@@ -16,5 +16,132 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/notice"
+                android:textColor="@color/color_accent"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:id="@+id/setting_btn_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:background="@drawable/rect_btn_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/setting_switch_notification"
+                    android:layout_toLeftOf="@+id/setting_switch_notification"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/receive_notification"
+                        android:textColor="@color/text_color_primary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/receive_notification_summary"
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <com.rey.material.widget.Switch style="@style/Material.Widget.Switch"
+                    android:id="@+id/setting_switch_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/topic"
+                android:textColor="@color/color_accent"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:id="@+id/setting_btn_topic_sign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:background="@drawable/rect_btn_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/setting_switch_topic_sign"
+                    android:layout_toLeftOf="@+id/setting_switch_topic_sign"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/topic_sign"
+                        android:textColor="@color/text_color_primary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/topic_sign_summary"
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <com.rey.material.widget.Switch style="@style/Material.Widget.Switch"
+                    android:id="@+id/setting_switch_topic_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+
+            </RelativeLayout>
+
+            <View style="@style/AppTheme.DeepLine" />
+
+            <TextView
+                android:id="@+id/setting_btn_modify_topic_sign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/modify_topic_sign"
+                android:textColor="@drawable/setting_item_title_text_color"
+                android:textSize="16sp"
+                android:background="@drawable/rect_btn_background" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

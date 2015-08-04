@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_QRCODE && resultCode == RESULT_OK) {
             edtAccessToken.setText(data.getStringExtra("qrcode"));
-            edtAccessToken.setSelection(edtAccessToken.getText().length());
+            edtAccessToken.setSelection(edtAccessToken.length());
         }
     }
 
