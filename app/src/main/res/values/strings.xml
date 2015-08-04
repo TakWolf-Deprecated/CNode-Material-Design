@@ -68,4 +68,11 @@
 
     <string name="mark_all_read">全部标记为已读</string>
 
+    <string name="notice">通知</string>
+    <string name="receive_notification">接收消息通知</string>
+    <string name="receive_notification_summary">开启也没用，这功能压根没做</string>
+    <string name="topic_sign">话题小尾巴</string>
+    <string name="topic_sign_summary">开启后可以自定义</string>
+    <string name="modify_topic_sign">修改小尾巴</string>
+
 </resources>
