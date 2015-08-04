@@ -106,7 +106,8 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
     @OnClick(R.id.new_topic_btn_tool_insert_link)
     protected void onBtnToolInsertLinkClick() {
         new MaterialDialog.Builder(this)
-                .title("添加链接")
+                .iconRes(R.drawable.ic_insert_link_grey600_24dp)
+                .title(R.string.add_link)
                 .customView(R.layout.dialog_tool_insert_link, false)
                 .positiveText(R.string.confirm)
                 .negativeText(R.string.cancel)

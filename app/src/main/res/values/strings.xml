@@ -84,6 +84,7 @@
     <string name="new_topic_content_hint">说点什么吧&#8230;</string>
 
     <string name="title">标题</string>
+    <string name="add_link">添加连接</string>
     <string name="link">连接</string>
     <string name="http_$">http://</string>
 
