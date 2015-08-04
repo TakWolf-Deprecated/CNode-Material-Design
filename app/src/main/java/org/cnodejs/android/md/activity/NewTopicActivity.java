@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -195,7 +196,13 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
                     edtContent.requestFocus();
                     Toast.makeText(this, "内容不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    newTipicAsyncTask(getTabByPosition(spnTab.getSelectedItemPosition()), edtTitle.getText().toString().trim(), edtContent.getText().toString());
+                    TabType tab = getTabByPosition(spnTab.getSelectedItemPosition());
+                    String title = edtTitle.getText().toString().trim();
+                    String content = edtContent.getText().toString();
+                    if (SettingShared.isEnableTopicSign(this)) { // 添加小尾巴
+                        content += "\n\n" + SettingShared.getTopicSignContent(this);
+                    }
+                    newTipicAsyncTask(tab, title, content);
                 }
                 return true;
             default:
@@ -219,6 +226,8 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
     private void newTipicAsyncTask(TabType tab, String title, String content) {
 
         // TODO
+
+        System.out.println(content);
 
     }
 
