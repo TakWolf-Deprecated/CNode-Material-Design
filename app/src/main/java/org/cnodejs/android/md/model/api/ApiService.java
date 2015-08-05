@@ -54,17 +54,17 @@ public interface ApiService {
     // 用户
     //=====
 
+    @GET("/v1/user/{loginName}")
+    void getUser(
+            @Path("loginName") String loginName,
+            Callback<Result<User>> callback
+    );
+
     @FormUrlEncoded
     @POST("/v1/accesstoken")
     void accessToken(
             @Field("accesstoken") String accessToken,
             Callback<LoginInfo> callback
-    );
-
-    @GET("/v1/user/{loginName}")
-    void getUser(
-            @Path("loginName") String loginName,
-            Callback<Result<User>> callback
     );
 
     //=========

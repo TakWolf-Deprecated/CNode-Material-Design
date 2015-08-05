@@ -68,7 +68,7 @@ public class Reply {
 
     public Spanned makeSureRenderAndGetSpannedContent() {
         if (spannedContent == null) { // 需要渲染
-            spannedContent = Html.fromHtml(MarkdownUtils.markdown(getContent()));
+            spannedContent = MarkdownUtils.spanned(getContent());
         }
         return spannedContent;
     }
