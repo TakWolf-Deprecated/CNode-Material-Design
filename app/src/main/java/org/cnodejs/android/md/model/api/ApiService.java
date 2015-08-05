@@ -43,6 +43,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/v1/topics")
     void newTopic(
+            @Field("accesstoken") String accessToken,
             @Field("tab") TabType tab,
             @Field("title") String title,
             @Field("content") String content,

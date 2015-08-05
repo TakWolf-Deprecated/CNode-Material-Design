@@ -243,7 +243,7 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
 
     private void newTipicAsyncTask(TabType tab, String title, String content) {
         dialog.show();
-        ApiClient.service.newTopic(tab, title, content, new Callback<Void>() {
+        ApiClient.service.newTopic(LoginShared.getAccessToken(this), tab, title, content, new Callback<Void>() {
 
             @Override
             public void success(Void nothing, Response response) {
