@@ -24,11 +24,13 @@ import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.util.FormatUtils;
 
+import java.lang.reflect.GenericArrayType;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.internal.DebouncingOnClickListener;
 import us.feras.mdv.MarkdownView;
 
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> {
@@ -39,6 +41,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     private Context context;
     private LayoutInflater inflater;
     private TopicWithReply topic;
+
+    private boolean isHeaderShow = false; // TODO 当false时，渲染header，其他时间不渲染
 
     private WebViewClient webViewClient;
 
@@ -51,6 +55,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     public void setTopic(TopicWithReply topic) {
         this.topic = topic;
+        isHeaderShow = false;
     }
 
     @Override
@@ -139,11 +144,25 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         }
 
         public void update(int position) {
+            if (!isHeaderShow) {
+                tvTitle.setText(topic.getTitle());
+                tvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
+                tvTab.setBackgroundResource(topic.isTop() ? R.drawable.topic_tab_top_background : R.drawable.topic_tab_normal_background);
+                tvTab.setTextColor(context.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
+                tvVisitCount.setText(topic.getVisitCount() + "次浏览");
+                Picasso.with(context).load(ApiClient.ROOT_HOST + topic.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
+                tvLoginName.setText(topic.getAuthor().getLoginName());
+                tvCreateTime.setText(context.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeFormatText(topic.getCreateAt()));
+                iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
+                layoutNoReply.setVisibility(topic.getReplies().size() > 0 ? View.GONE : View.VISIBLE);
 
+                // TODO 是否收藏标记
 
+                // TODO 这里直接使用WebView，有性能问题
+                webReplyContent.loadMarkdown(topic.makeSureAndGetFilterContent());
 
-
-
+                isHeaderShow = true;
+            }
         }
 
         @OnClick(R.id.topic_item_header_img_avatar)
@@ -151,6 +170,13 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             Intent intent = new Intent(context, UserDetailActivity.class);
             intent.putExtra("loginName", topic.getAuthor().getLoginName());
             context.startActivity(intent);
+        }
+
+        @OnClick(R.id.topic_item_header_btn_collect)
+        protected void onBtnCollectClick() {
+
+            // TODO 收藏按钮
+
         }
 
     }
@@ -187,6 +213,16 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         public void update(int position) {
             reply = topic.getReplies().get(position);
 
+            Picasso.with(context).load(ApiClient.ROOT_HOST + reply.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
+            tvLoginName.setText(reply.getAuthor().getLoginName());
+            tvIndex.setText(position + "楼");
+            tvCreateTime.setText(FormatUtils.getRecentlyTimeFormatText(reply.getCreateAt()));
+            btnUps.setText(String.valueOf(reply.getUps().size()));
+
+            // TODO ups变颜色
+
+            // TODO 这里直接使用WebView，有性能问题
+            webReplyContent.loadMarkdown(reply.makeSureAndGetFilterContent());
         }
 
         @OnClick(R.id.topic_item_reply_img_avatar)
@@ -194,6 +230,16 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             Intent intent = new Intent(context, UserDetailActivity.class);
             intent.putExtra("loginName", reply.getAuthor().getLoginName());
             context.startActivity(intent);
+        }
+
+        @OnClick(R.id.topic_item_reply_btn_ups)
+        protected void onBtnUpsClick() {
+            // TODO
+        }
+
+        @OnClick(R.id.topic_item_reply_btn_at)
+        protected void onBtnAtClick() {
+            // TODO
         }
 
     }
