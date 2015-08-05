@@ -1,6 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/topic_item_header_layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/topic_item_header_tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/text_color_primary"
+            android:textSize="18sp"
+            tools:text="话题的标题" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <TextView
+                android:id="@+id/topic_item_header_tv_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:background="@drawable/topic_tab_top_background"
+                tools:text="置顶" />
+
+            <TextView
+                android:id="@+id/topic_item_header_tv_visit_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/color_accent"
+                android:textSize="14sp"
+                tools:text="115次浏览" />
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <com.github.siyamed.shapeimageview.CircularImageView
+                android:id="@+id/topic_item_header_img_avatar"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/image_default"
+                android:scaleType="fitCenter"
+                app:siBorderAlpha="0" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/topic_item_header_img_avatar"
+                android:layout_toRightOf="@+id/topic_item_header_img_avatar"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/topic_item_header_tv_login_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_primary"
+                    android:textSize="16sp"
+                    tools:text="TakWolf" />
+
+                    <TextView
+                        android:id="@+id/topic_item_header_tv_create_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="14sp"
+                        android:singleLine="true"
+                        tools:text="发布于：2天前" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/topic_item_header_btn_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_favorite_outline_grey600_18dp"
+                android:scaleType="center"
+                android:background="@drawable/rect_btn_transparent_background" />
+
+        </RelativeLayout>
+
+        <us.feras.mdv.MarkdownView
+            android:id="@+id/topic_item_header_web_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp" />
+
+    </LinearLayout>
+
+    <View style="@style/AppTheme.ShadowGap"
+        android:id="@+id/topic_item_header_icon_first_gap"
+        android:layout_below="@+id/topic_item_header_layout_main" />
+
+    <LinearLayout
+        android:id="@+id/topic_item_header_layout_no_reply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topic_item_header_icon_first_gap"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:text="@string/no_reply"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:background="@android:color/white" />
+
+        <View style="@style/AppTheme.ShadowGap" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/topic_item_header_icon_good"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/tab_ic_good"
+        android:scaleType="fitEnd"
+        android:adjustViewBounds="true" />
+
+</RelativeLayout>

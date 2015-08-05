@@ -106,7 +106,7 @@
     </LinearLayout>
 
     <us.feras.mdv.MarkdownView
-        android:id="@+id/topic_item_reply_btn_ups_web_content"
+        android:id="@+id/topic_item_reply_web_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
