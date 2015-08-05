@@ -2,7 +2,6 @@ package org.cnodejs.android.md.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,23 +14,21 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.activity.TopicActivity;
 import org.cnodejs.android.md.activity.UserDetailActivity;
 import org.cnodejs.android.md.listener.WebViewContentClient;
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.entity.Message;
-import org.cnodejs.android.md.model.entity.MessageType;
 import org.cnodejs.android.md.model.entity.Reply;
+import org.cnodejs.android.md.model.entity.TopicUpInfo;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
+import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.FormatUtils;
-
-import java.lang.reflect.GenericArrayType;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.internal.DebouncingOnClickListener;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import us.feras.mdv.MarkdownView;
 
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> {
@@ -159,6 +156,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
                 // TODO 是否收藏标记
 
+
                 // TODO 这里直接使用WebView，有性能问题
                 webReplyContent.loadMarkdown(topic.makeSureAndGetFilterContent());
 
@@ -209,6 +207,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         protected View iconShadowGap;
 
         private Reply reply;
+        private int position = -1;
 
         public ReplyViewHolder(View itemView) {
             super(itemView);
@@ -218,6 +217,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         }
 
         public void update(int position) {
+            this.position = position;
             reply = topic.getReplies().get(position);
 
             Picasso.with(context).load(ApiClient.ROOT_HOST + reply.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
@@ -225,9 +225,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             tvIndex.setText(position + 1 + "楼");
             tvCreateTime.setText(FormatUtils.getRecentlyTimeFormatText(reply.getCreateAt()));
             btnUps.setText(String.valueOf(reply.getUps().size()));
-
-            // TODO ups变颜色
-
+            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUps().contains(LoginShared.getId(context)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
             iconDeepLine.setVisibility(position == topic.getReplies().size() - 1 ? View.GONE : View.VISIBLE);
             iconShadowGap.setVisibility(position == topic.getReplies().size() - 1 ? View.VISIBLE : View.GONE);
 
@@ -244,7 +242,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_reply_btn_ups)
         protected void onBtnUpsClick() {
-            // TODO
+            upTopicAsyncTask(this);
         }
 
         @OnClick(R.id.topic_item_reply_btn_at)
@@ -252,6 +250,31 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             // TODO
         }
 
+    }
+
+    private void upTopicAsyncTask(final ReplyViewHolder holder) {
+        final int position = holder.position; // 标记当时的位置信息
+        ApiClient.service.upTopic(LoginShared.getAccessToken(context), holder.reply.getId(), new Callback<TopicUpInfo>() {
+
+            @Override
+            public void success(TopicUpInfo info, Response response) {
+                if (position == holder.position) { // 位置没有变
+                    if (info.getAction() == TopicUpInfo.Action.up) {
+                        holder.reply.getUps().add(LoginShared.getId(context));
+                    } else if (info.getAction() == TopicUpInfo.Action.down) {
+                        holder.reply.getUps().remove(LoginShared.getId(context));
+                    }
+                    holder.btnUps.setText(String.valueOf(holder.reply.getUps().size()));
+                    holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUps().contains(LoginShared.getId(context)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(context, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 
 }

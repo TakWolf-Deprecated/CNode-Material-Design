@@ -5,6 +5,7 @@ import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
+import org.cnodejs.android.md.model.entity.TopicUpInfo;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.entity.User;
 
@@ -48,6 +49,17 @@ public interface ApiService {
             @Field("title") String title,
             @Field("content") String content,
             Callback<Void> callback
+    );
+
+
+
+
+    @FormUrlEncoded
+    @POST("/v1/reply/{replyId}/ups")
+    void upTopic(
+            @Field("accesstoken") String accessToken,
+            @Path("replyId") String replyId,
+            Callback<TopicUpInfo> callback
     );
 
     //=====

@@ -19,7 +19,6 @@ import org.cnodejs.android.md.activity.UserDetailActivity;
 import org.cnodejs.android.md.listener.WebViewContentClient;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Message;
-import org.cnodejs.android.md.model.entity.MessageType;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;
@@ -94,7 +93,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             Picasso.with(context).load(ApiClient.ROOT_HOST + message.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
-            tvAction.setText(message.getType() == MessageType.at ? "在回复中@了您" : "回复了您的话题");
+            tvAction.setText(message.getType() == Message.Type.at ? "在回复中@了您" : "回复了您的话题");
             tvTime.setText(FormatUtils.getRecentlyTimeFormatText(message.getReply().getCreateAt()));
             tvTopicTitle.setText("原话题：" + message.getTopic().getTitle());
 
