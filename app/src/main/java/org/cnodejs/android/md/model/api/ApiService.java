@@ -40,6 +40,16 @@ public interface ApiService {
             Callback<Result<TopicWithReply>> callback
     );
 
+    @FormUrlEncoded
+    @POST("/v1/topics")
+    void newTopic(
+            @Field("accesstoken") String accessToken,
+            @Field("tab") TabType tab,
+            @Field("title") String title,
+            @Field("content") String content,
+            Callback<Void> callback
+    );
+
     //=====
     // 用户
     //=====

@@ -2,6 +2,8 @@
 
 ![](/psd/ic_launcher.png)
 
+[![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
+
 CNode社区第三方Android客户端
 
 原生App，Material Design风格
@@ -21,6 +23,12 @@ CNode社区第三方Android客户端
 ![](/psd/screenshot_07.png)
 
 ![](/psd/screenshot_08.png)
+
+![](/psd/screenshot_09.png)
+
+![](/psd/screenshot_10.png)
+
+![](/psd/screenshot_11.png)
 
 ## Libraries used ##
 
@@ -50,7 +58,9 @@ CNode社区第三方Android客户端
 
 - [QRCodeReaderView](https://github.com/dlazaro66/QRCodeReaderView)
 
-- [material-design-icons](https://github.com/google/material-design-icons)
+- [MarkdownView](https://github.com/falnatsheh/MarkdownView)
+
+- [Material design icons](https://github.com/google/material-design-icons)
 
 ## Author ##
 

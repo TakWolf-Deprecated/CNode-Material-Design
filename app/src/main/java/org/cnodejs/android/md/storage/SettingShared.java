@@ -9,6 +9,7 @@ public final class SettingShared {
     private static final String TAG = SettingShared.class.getSimpleName();
 
     private static final String KEY_ENABLE_NOTIFICATION = "notification";
+    private static final String KEY_NEW_TOPIC_DRAFT = "new_topic_draft";
     private static final String KEY_ENABLE_TOPIC_SIGN = "topic_sign";
     private static final String KEY_TOPIC_SIGN_CONTENT = "topic_sign_content";
 
@@ -20,6 +21,14 @@ public final class SettingShared {
 
     public static void setEnableNotification(Context context, boolean enable) {
         SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_NOTIFICATION, enable);
+    }
+
+    public static boolean isEnableNewTopicDraft(Context context) {
+        return SharedWrapper.with(context, TAG).getBoolean(KEY_NEW_TOPIC_DRAFT, true);
+    }
+
+    public static void setEnableNewTopicDraft(Context context, boolean enable) {
+        SharedWrapper.with(context, TAG).setBoolean(KEY_NEW_TOPIC_DRAFT, enable);
     }
 
     public static boolean isEnableTopicSign(Context context) {

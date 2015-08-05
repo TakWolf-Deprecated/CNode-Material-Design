@@ -1,7 +1,11 @@
 package org.cnodejs.android.md.model.entity;
 
+import android.text.Html;
+import android.text.Spanned;
+
 import com.google.gson.annotations.SerializedName;
 
+import org.cnodejs.android.md.util.MarkdownUtils;
 import org.joda.time.DateTime;
 
 import java.util.List;
@@ -57,6 +61,16 @@ public class Reply {
 
     public void setCreateAt(DateTime createAt) {
         this.createAt = createAt;
+    }
+
+    // TODO 默认消息回复是不渲染的，这里提供一个方法检测是否渲染并渲染
+    private Spanned spannedContent = null;
+
+    public Spanned makeSureRenderAndGetSpannedContent() {
+        if (spannedContent == null) { // 需要渲染
+            spannedContent = Html.fromHtml(MarkdownUtils.markdown(getContent()));
+        }
+        return spannedContent;
     }
 
 }

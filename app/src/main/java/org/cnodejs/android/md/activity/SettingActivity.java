@@ -24,6 +24,9 @@ public class SettingActivity extends AppCompatActivity implements Switch.OnCheck
     @Bind(R.id.setting_switch_notification)
     protected Switch switchNotification;
 
+    @Bind(R.id.setting_switch_new_topic_draft)
+    protected Switch switchNewTopicDraft;
+
     @Bind(R.id.setting_switch_topic_sign)
     protected Switch switchTopicSign;
 
@@ -39,16 +42,23 @@ public class SettingActivity extends AppCompatActivity implements Switch.OnCheck
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
         switchNotification.setChecked(SettingShared.isEnableNotification(this));
+        switchNewTopicDraft.setChecked(SettingShared.isEnableNewTopicDraft(this));
         switchTopicSign.setChecked(SettingShared.isEnableTopicSign(this));
         btnModifyTopicSign.setEnabled(SettingShared.isEnableTopicSign(this));
 
         switchNotification.setOnCheckedChangeListener(this);
+        switchNewTopicDraft.setOnCheckedChangeListener(this);
         switchTopicSign.setOnCheckedChangeListener(this);
     }
 
     @OnClick(R.id.setting_btn_notification)
     protected void onBtnNotificationClick() {
         switchNotification.toggle();
+    }
+
+    @OnClick(R.id.setting_btn_new_topic_draft)
+    protected void onBtnNewTopicDraftClick() {
+        switchNewTopicDraft.toggle();
     }
 
     @OnClick(R.id.setting_btn_topic_sign)
@@ -61,6 +71,9 @@ public class SettingActivity extends AppCompatActivity implements Switch.OnCheck
         switch (switchView.getId()) {
             case R.id.setting_switch_notification:
                 SettingShared.setEnableNotification(this, b);
+                break;
+            case R.id.setting_switch_new_topic_draft:
+                SettingShared.setEnableNewTopicDraft(this, b);
                 break;
             case R.id.setting_switch_topic_sign:
                 SettingShared.setEnableTopicSign(this, b);

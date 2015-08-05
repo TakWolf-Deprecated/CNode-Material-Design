@@ -2,6 +2,7 @@ package org.cnodejs.android.md.model.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.cnodejs.android.md.util.MarkdownUtils;
 import org.joda.time.DateTime;
 
 import java.util.List;
@@ -131,6 +132,16 @@ public class Topic {
 
     public void setCreateAt(DateTime createAt) {
         this.createAt = createAt;
+    }
+
+    // TODO 默认消息回复是不渲染的，这里提供一个方法检测是否渲染并渲染
+    private boolean mdrender = false;
+
+    public void makeSureRender() {
+        if (!mdrender) {
+            setContent(MarkdownUtils.markdown(getContent()));
+            mdrender = true;
+        }
     }
 
 }
