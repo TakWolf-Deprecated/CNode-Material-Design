@@ -22,6 +22,11 @@
         <item name="android:background">#ffdddddd</item>
     </style>
 
+    <style name="AppTheme.DeepLine.Vertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
     <!-- Gap -->
     <style name="AppTheme.ItemGap">
         <item name="android:layout_width">match_parent</item>
@@ -34,6 +39,13 @@
         <item name="android:layout_height">4dp</item>
         <item name="android:layout_marginBottom">4dp</item>
         <item name="android:background">@drawable/gap_shadow</item>
+    </style>
+
+    <!-- Shadow Gap Opposite -->
+    <style name="AppTheme.ShadowGap.Opposite">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:background">@drawable/gap_shadow_opposite</item>
     </style>
 
     <!-- Navigation Item -->
@@ -72,6 +84,12 @@
     <style name="AppTheme.Button.Stroke">
         <item name="android:textColor">@drawable/button_stroke_text_color</item>
         <item name="android:background">@drawable/button_stroke_image</item>
+    </style>
+
+    <!-- Reply Window Anim -->
+    <style name="AppTheme.ReplyWindowAnim">
+        <item name="android:windowEnterAnimation">@anim/reply_window_popup_in</item>
+        <item name="android:windowExitAnimation">@anim/reply_window_popup_out</item>
     </style>
 
 </resources>

@@ -199,7 +199,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     }
 
-    private void showNeedLoginDialog() {
+    public void showNeedLoginDialog() {
         new MaterialDialog.Builder(context)
                 .content(R.string.need_login_tip)
                 .positiveText(R.string.login)
@@ -215,7 +215,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 .show();
     }
 
-    private void showAccessTokenErrorDialog() {
+    public void showAccessTokenErrorDialog() {
         new MaterialDialog.Builder(context)
                 .content(R.string.access_token_error_tip)
                 .positiveText(R.string.confirm)

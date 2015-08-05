@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View style="@style/AppTheme.ShadowGap.Opposite" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@android:color/white"
+        android:elevation="2dp">
+
+        <ImageView
+            android:id="@+id/reply_window_btn_tool_close"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:src="@drawable/ic_close_grey600_24dp"
+            android:scaleType="center"
+            android:background="@drawable/rect_btn_transparent_background" />
+
+        <View style="@style/AppTheme.DeepLine.Vertical"
+            android:layout_toEndOf="@+id/reply_window_btn_tool_close"
+            android:layout_toRightOf="@+id/reply_window_btn_tool_close" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/reply_window_btn_tool_close"
+            android:layout_toRightOf="@+id/reply_window_btn_tool_close"
+            android:layout_toStartOf="@+id/reply_window_btn_tool_send"
+            android:layout_toLeftOf="@+id/reply_window_btn_tool_send"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/new_topic_btn_tool_format_bold"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_format_bold_grey600_24dp"
+                    android:scaleType="center"
+                    android:background="@drawable/rect_btn_transparent_background" />
+
+                <ImageView
+                    android:id="@+id/new_topic_btn_tool_format_italic"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_format_italic_grey600_24dp"
+                    android:scaleType="center"
+                    android:background="@drawable/rect_btn_transparent_background" />
+
+                <ImageView
+                    android:id="@+id/new_topic_btn_tool_format_list_bulleted"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_format_list_bulleted_grey600_24dp"
+                    android:scaleType="center"
+                    android:background="@drawable/rect_btn_transparent_background" />
+
+                <ImageView
+                    android:id="@+id/new_topic_btn_tool_format_list_numbered"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_format_list_numbered_grey600_24dp"
+                    android:scaleType="center"
+                    android:background="@drawable/rect_btn_transparent_background" />
+
+                <ImageView
+                    android:id="@+id/new_topic_btn_tool_insert_link"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_insert_link_grey600_24dp"
+                    android:scaleType="center"
+                    android:background="@drawable/rect_btn_transparent_background" />
+
+                <ImageView
+                    android:id="@+id/new_topic_btn_tool_insert_photo"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_insert_photo_grey600_24dp"
+                    android:scaleType="center"
+                    android:background="@drawable/rect_btn_transparent_background" />
+
+                <ImageView
+                    android:id="@+id/new_topic_btn_tool_preview"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_visibility_grey600_24dp"
+                    android:scaleType="center"
+                    android:background="@drawable/rect_btn_transparent_background" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <View style="@style/AppTheme.DeepLine.Vertical"
+            android:layout_toStartOf="@+id/reply_window_btn_tool_send"
+            android:layout_toLeftOf="@+id/reply_window_btn_tool_send" />
+
+        <ImageView
+            android:id="@+id/reply_window_btn_tool_send"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_send_grey600_24dp"
+            android:scaleType="center"
+            android:background="@drawable/rect_btn_transparent_background" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="305dp">
+
+        <EditText
+            android:id="@+id/reply_window_edt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="96dp"
+            android:gravity="start"
+            android:hint="@string/new_topic_content_hint"
+            android:textSize="16sp"
+            android:minLines="20"
+            android:background="#ffeeeeee" />
+
+    </ScrollView>
+
+</LinearLayout>
