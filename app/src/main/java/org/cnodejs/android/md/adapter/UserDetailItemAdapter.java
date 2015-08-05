@@ -68,12 +68,12 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
 
         private TopicSimple topic;
 
-        public ViewHolder(View itemView) {
+        protected ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void update(int position) {
+        protected void update(int position) {
             topic = topicList.get(position);
 
             tvTitle.setText(topic.getTitle());

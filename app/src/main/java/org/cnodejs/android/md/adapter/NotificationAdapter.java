@@ -82,14 +82,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         private Message message;
 
-        public ViewHolder(View itemView) {
+        protected ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
             webReplyContent.setWebViewClient(webViewClient); // TODO 对内连接做分发
         }
 
-        public void update(int position) {
+        protected void update(int position) {
             message = messageList.get(position);
 
             Picasso.with(context).load(ApiClient.ROOT_HOST + message.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
