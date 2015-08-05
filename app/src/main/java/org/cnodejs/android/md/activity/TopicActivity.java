@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,10 +13,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
@@ -25,6 +28,7 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
+import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.util.HandlerUtils;
 
 import butterknife.Bind;
@@ -55,6 +59,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
     protected ViewGroup layoutNoData;
 
     private PopupWindow replyWindow;
+    private ReplyHandler replyHandler;
 
     private String topicId;
     private TopicWithReply topic;
@@ -80,14 +85,14 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         // 创建回复窗口
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.activity_reply_window, layoutRoot, false);
-
+        replyHandler = new ReplyHandler(view);
 
         replyWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         replyWindow.setBackgroundDrawable(new ColorDrawable(0x01000000));
         replyWindow.setFocusable(true);
         replyWindow.setOutsideTouchable(true);
         replyWindow.setAnimationStyle(R.style.AppTheme_ReplyWindowAnim);
-
+        // - END -
 
         refreshLayout.setColorSchemeResources(R.color.red_light, R.color.green_light, R.color.blue_light, R.color.orange_light);
         refreshLayout.setOnRefreshListener(this);
@@ -138,9 +143,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
 
     @Override
     public void onAt(String loginName) {
-
-
-
+        replyHandler.edtContent.getText().insert(replyHandler.edtContent.getSelectionEnd(), " @" + loginName + " ");
         replyWindow.showAtLocation(layoutRoot, Gravity.BOTTOM, 0, 0);
     }
 
@@ -153,6 +156,137 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
                 replyWindow.showAtLocation(layoutRoot, Gravity.BOTTOM, 0, 0);
             }
         }
+    }
+
+    //==============
+    // 回复框逻辑处理
+    //==============
+    
+    protected class ReplyHandler {
+
+        @Bind(R.id.reply_window_edt_content)
+        protected EditText edtContent;
+
+        protected ReplyHandler(View view) {
+            ButterKnife.bind(this, view);
+        }
+
+        /**
+         * 关闭
+         */
+        @OnClick(R.id.reply_window_btn_tool_close)
+        protected void onBtnToolCloseClick() {
+            replyWindow.dismiss();
+        }
+        
+        /**
+         * 加粗
+         */
+        @OnClick(R.id.reply_window_btn_tool_format_bold)
+        protected void onBtnToolFormatBoldClick() {
+            edtContent.requestFocus();
+            edtContent.getText().insert(edtContent.getSelectionEnd(), "****");
+            edtContent.setSelection(edtContent.getSelectionEnd() - 2);
+        }
+
+        /**
+         * 倾斜
+         */
+        @OnClick(R.id.reply_window_btn_tool_format_italic)
+        protected void onBtnToolFormatItalicClick() {
+            edtContent.requestFocus();
+            edtContent.getText().insert(edtContent.getSelectionEnd(), "**");
+            edtContent.setSelection(edtContent.getSelectionEnd() - 1);
+        }
+
+        /**
+         * 无序列表
+         */
+        @OnClick(R.id.reply_window_btn_tool_format_list_bulleted)
+        protected void onBtnToolFormatListBulletedClick() {
+            edtContent.requestFocus();
+            edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n* ");
+        }
+
+        /**
+         * 有序列表 TODO 这里算法需要优化
+         */
+        @OnClick(R.id.reply_window_btn_tool_format_list_numbered)
+        protected void onBtnToolFormatListNumberedClick() {
+            edtContent.requestFocus();
+            // 查找向上最近一个\n
+            for (int n = edtContent.getSelectionEnd() - 1; n >= 0; n--) {
+                char c = edtContent.getText().charAt(n);
+                if (c == '\n') {
+                    try {
+                        int index = Integer.parseInt(edtContent.getText().charAt(n + 1) + "");
+                        if (edtContent.getText().charAt(n + 2) == '.' && edtContent.getText().charAt(n + 3) == ' ') {
+                            edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n" + (index + 1) + ". ");
+                            return;
+                        }
+                    } catch (Exception e) {
+                        // TODO 这里有问题是如果数字超过10，则无法检测，未来逐渐优化
+                    }
+                }
+            }
+            // 没找到
+            edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n1. ");
+        }
+
+        /**
+         * 插入链接
+         */
+        @OnClick(R.id.reply_window_btn_tool_insert_link)
+        protected void onBtnToolInsertLinkClick() {
+            new MaterialDialog.Builder(TopicActivity.this)
+                    .iconRes(R.drawable.ic_insert_link_grey600_24dp)
+                    .title(R.string.add_link)
+                    .customView(R.layout.dialog_tool_insert_link, false)
+                    .positiveText(R.string.confirm)
+                    .negativeText(R.string.cancel)
+                    .callback(new MaterialDialog.ButtonCallback() {
+
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            View view = dialog.getCustomView();
+                            EditText edtTitle = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_title);
+                            EditText edtLink = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_link);
+
+                            String insertText = " [" + edtTitle.getText() + "](" + edtLink.getText() + ") ";
+                            edtContent.requestFocus();
+                            edtContent.getText().insert(edtContent.getSelectionEnd(), insertText);
+                        }
+
+                    })
+                    .show();
+        }
+
+        /**
+         * 插入图片 TODO 目前没有图片上传接口
+         */
+        @OnClick(R.id.reply_window_btn_tool_insert_photo)
+        protected void onBtnToolInsertPhotoClick() {
+            edtContent.requestFocus();
+            edtContent.getText().insert(edtContent.getSelectionEnd(), " ![](http://) ");
+            edtContent.setSelection(edtContent.getSelectionEnd() - 11);
+            Toast.makeText(TopicActivity.this, "暂时不支持图片上传", Toast.LENGTH_SHORT).show();
+        }
+
+        /**
+         * 预览
+         */
+        @OnClick(R.id.reply_window_btn_tool_preview)
+        protected void onBtnToolPreviewClick() {
+            String content = edtContent.getText().toString();
+            if (SettingShared.isEnableTopicSign(TopicActivity.this)) { // 添加小尾巴
+                content += "\n\n" + SettingShared.getTopicSignContent(TopicActivity.this);
+            }
+
+            Intent intent = new Intent(TopicActivity.this, MarkdownPreviewActivity.class);
+            intent.putExtra("markdownText", content);
+            startActivity(intent);
+        }
+        
     }
 
 }
