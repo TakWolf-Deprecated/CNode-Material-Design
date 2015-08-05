@@ -55,7 +55,7 @@ public interface ApiService {
     @POST("/v1/topic/collect")
     void collectTopic(
             @Field("accesstoken") String accessToken,
-            @Field("topic_id ") String topicId ,
+            @Field("topic_id") String topicId ,
             Callback<Void> callback
     );
 
@@ -63,7 +63,7 @@ public interface ApiService {
     @POST("/v1/topic/de_collect")
     void decollectTopic(
             @Field("accesstoken") String accessToken,
-            @Field("topic_id ") String topicId ,
+            @Field("topic_id") String topicId ,
             Callback<Void> callback
     );
 
