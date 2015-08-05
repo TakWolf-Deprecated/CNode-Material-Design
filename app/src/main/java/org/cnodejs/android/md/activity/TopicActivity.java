@@ -28,7 +28,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, TopicAdapter.OnAtClickListener {
 
     @Bind(R.id.topic_toolbar)
     protected Toolbar toolbar;
@@ -61,7 +61,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TopicAdapter(this);
+        adapter = new TopicAdapter(this, this);
         recyclerView.setAdapter(adapter);
 
         fabReply.attachToRecyclerView(recyclerView);
@@ -111,6 +111,14 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
             }
 
         });
+    }
+
+    @Override
+    public void onAt(String loginName) {
+
+        // TODO 这里处理at逻辑
+        Toast.makeText(this, loginName, Toast.LENGTH_SHORT).show();
+
     }
 
 }

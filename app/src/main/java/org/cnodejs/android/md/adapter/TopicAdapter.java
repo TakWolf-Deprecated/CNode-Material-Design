@@ -2,6 +2,7 @@ package org.cnodejs.android.md.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +45,18 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     private WebViewClient webViewClient;
 
-    public TopicAdapter(Context context) {
+    public interface OnAtClickListener {
+
+        void onAt(String loginName);
+
+    }
+
+    private OnAtClickListener onAtClickListener;
+
+    public TopicAdapter(Context context, @NonNull OnAtClickListener onAtClickListener) {
         this.context = context;
         inflater = LayoutInflater.from(context);
+        this.onAtClickListener = onAtClickListener;
 
         this.webViewClient = new WebViewContentClient(context);
     }
@@ -247,7 +257,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_reply_btn_at)
         protected void onBtnAtClick() {
-            // TODO
+            onAtClickListener.onAt(reply.getAuthor().getLoginName());
         }
 
     }
