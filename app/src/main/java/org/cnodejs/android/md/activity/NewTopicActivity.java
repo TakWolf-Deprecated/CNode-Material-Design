@@ -74,13 +74,13 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
      * 实时保存草稿
      */
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
         if (SettingShared.isEnableNewTopicDraft(this)) {
             TopicShared.setNewTopicTabPosition(this, spnTab.getSelectedItemPosition());
             TopicShared.setNewTopicTitle(this, edtTitle.getText().toString());
             TopicShared.setNewTopicContent(this, edtContent.getText().toString());
         }
+        super.onDestroy();
     }
 
     //===========
@@ -249,9 +249,7 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
             public void success(Void nothing, Response response) {
                 dialog.dismiss();
                 // 清除草稿
-                TopicShared.setNewTopicTabPosition(NewTopicActivity.this, 0);
-                TopicShared.setNewTopicTitle(NewTopicActivity.this, null);
-                TopicShared.setNewTopicContent(NewTopicActivity.this, null);
+                TopicShared.clear(NewTopicActivity.this);
                 // 结束当前并提示
                 finish();
                 Toast.makeText(NewTopicActivity.this, "话题发布成功", Toast.LENGTH_SHORT).show();

@@ -31,7 +31,7 @@ public class Message {
 
     @NonNull
     public MessageType getType() {
-        return type == null ? MessageType.normal : type; // TODO 保证返回不为空
+        return type == null ? MessageType.reply : type; // TODO 保证返回不为空
     }
 
     public void setType(MessageType type) {
