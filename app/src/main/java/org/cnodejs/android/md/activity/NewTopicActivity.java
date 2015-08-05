@@ -19,6 +19,7 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
+import org.cnodejs.android.md.storage.TopicShared;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -61,10 +62,10 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
 
         // 载入草稿
         if (SettingShared.isEnableNewTopicDraft(this)) {
-            spnTab.setSelection(LoginShared.getNewTopicTabPosition(this));
-            edtContent.setText(LoginShared.getNewTopicContent(this));
+            spnTab.setSelection(TopicShared.getNewTopicTabPosition(this));
+            edtContent.setText(TopicShared.getNewTopicContent(this));
             edtContent.setSelection(edtContent.length());
-            edtTitle.setText(LoginShared.getNewTopicTitle(this));
+            edtTitle.setText(TopicShared.getNewTopicTitle(this));
             edtTitle.setSelection(edtTitle.length()); // 这个必须最后调用
         }
     }
@@ -76,9 +77,9 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
     protected void onPause() {
         super.onPause();
         if (SettingShared.isEnableNewTopicDraft(this)) {
-            LoginShared.setNewTopicTabPosition(this, spnTab.getSelectedItemPosition());
-            LoginShared.setNewTopicTitle(this, edtTitle.getText().toString());
-            LoginShared.setNewTopicContent(this, edtContent.getText().toString());
+            TopicShared.setNewTopicTabPosition(this, spnTab.getSelectedItemPosition());
+            TopicShared.setNewTopicTitle(this, edtTitle.getText().toString());
+            TopicShared.setNewTopicContent(this, edtContent.getText().toString());
         }
     }
 
@@ -248,9 +249,9 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
             public void success(Void nothing, Response response) {
                 dialog.dismiss();
                 // 清除草稿
-                LoginShared.setNewTopicTabPosition(NewTopicActivity.this, 0);
-                LoginShared.setNewTopicTitle(NewTopicActivity.this, null);
-                LoginShared.setNewTopicContent(NewTopicActivity.this, null);
+                TopicShared.setNewTopicTabPosition(NewTopicActivity.this, 0);
+                TopicShared.setNewTopicTitle(NewTopicActivity.this, null);
+                TopicShared.setNewTopicContent(NewTopicActivity.this, null);
                 // 结束当前并提示
                 finish();
                 Toast.makeText(NewTopicActivity.this, "话题发布成功", Toast.LENGTH_SHORT).show();

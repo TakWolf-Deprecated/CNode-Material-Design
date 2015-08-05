@@ -74,35 +74,4 @@ public final class LoginShared {
         return SharedWrapper.with(context, TAG).getInt(KEY_SCORE, 0);
     }
 
-    /**
-     * 以下是新建话题草稿
-     */
-    private static final String KEY_NEW_TOPIC_TAB_POSITION = "new_topic_tab_position";
-    private static final String KEY_NEW_TOPIC_TITLE = "new_topic_title";
-    private static final String KEY_NEW_TOPIC_CONTENT = "new_topic_content";
-
-    public static int getNewTopicTabPosition(Context context) {
-        return SharedWrapper.with(context, TAG).getInt(KEY_NEW_TOPIC_TAB_POSITION, 0);
-    }
-
-    public static void setNewTopicTabPosition(Context context, int position) {
-        SharedWrapper.with(context, TAG).setInt(KEY_NEW_TOPIC_TAB_POSITION, position);
-    }
-
-    public static String getNewTopicTitle(Context context) {
-        return SharedWrapper.with(context, TAG).getString(KEY_NEW_TOPIC_TITLE, null);
-    }
-
-    public static void setNewTopicTitle(Context context, String title) {
-        SharedWrapper.with(context, TAG).setString(KEY_NEW_TOPIC_TITLE, title);
-    }
-
-    public static String getNewTopicContent(Context context) {
-        return SharedWrapper.with(context, TAG).getString(KEY_NEW_TOPIC_CONTENT, null);
-    }
-
-    public static void setNewTopicContent(Context context, String content) {
-        SharedWrapper.with(context, TAG).setString(KEY_NEW_TOPIC_CONTENT, content);
-    }
-
 }
