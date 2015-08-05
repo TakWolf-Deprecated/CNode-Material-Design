@@ -8,9 +8,14 @@ import org.cnodejs.android.md.util.MarkdownUtils;
 
 public class Message {
 
+    public enum Type {
+        reply,
+        at
+    }
+
     private String id;
 
-    private MessageType type;
+    private Type type;
 
     @SerializedName("has_read")
     private boolean read;
@@ -30,11 +35,11 @@ public class Message {
     }
 
     @NonNull
-    public MessageType getType() {
-        return type == null ? MessageType.reply : type; // TODO 保证返回不为空
+    public Type getType() {
+        return type == null ? Type.reply : type; // TODO 保证返回不为空
     }
 
-    public void setType(MessageType type) {
+    public void setType(Type type) {
         this.type = type;
     }
 

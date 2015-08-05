@@ -81,11 +81,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ViewHolder(View itemView) {
+        protected ViewHolder(View itemView) {
             super(itemView);
         }
 
-        public void update(int position) {}
+        protected void update(int position) {}
 
     }
 
@@ -97,13 +97,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         @Bind(R.id.item_load_more_icon_finish)
         protected View iconFinish;
 
-        public LoadMoreViewHolder(View itemView) {
+        protected LoadMoreViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
         @Override
-        public void update(int position) {
+        protected void update(int position) {
             iconLoading.setVisibility(loading ? View.VISIBLE : View.GONE);
             iconFinish.setVisibility(loading ? View.GONE : View.VISIBLE);
         }
@@ -141,13 +141,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         private Topic topic;
 
-        public NormalViewHolder(View itemView) {
+        protected NormalViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
         @Override
-        public void update(int position) {
+        protected void update(int position) {
             topic = topicList.get(position);
 
             tvTitle.setText(topic.getTitle());

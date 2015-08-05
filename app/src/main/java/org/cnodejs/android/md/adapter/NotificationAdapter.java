@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +16,9 @@ import com.squareup.picasso.Picasso;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.activity.TopicActivity;
 import org.cnodejs.android.md.activity.UserDetailActivity;
+import org.cnodejs.android.md.listener.WebViewContentClient;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Message;
-import org.cnodejs.android.md.model.entity.MessageType;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import us.feras.mdv.util.HttpHelper;
+import us.feras.mdv.MarkdownView;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
 
@@ -34,10 +34,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     private LayoutInflater inflater;
     private List<Message> messageList;
 
+    private WebViewClient webViewClient;
+
     public NotificationAdapter(Context context, @NonNull List<Message> messageList) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.messageList = messageList;
+
+        this.webViewClient = new WebViewContentClient(context);
     }
 
     @Override
@@ -69,30 +73,32 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         @Bind(R.id.notification_item_tv_action)
         protected TextView tvAction;
 
-        @Bind(R.id.notification_item_tv_reply_content)
-        protected TextView tvReplyContent;
+        @Bind(R.id.notification_item_web_reply_content)
+        protected MarkdownView webReplyContent;
 
         @Bind(R.id.notification_item_tv_topic_title)
         protected TextView tvTopicTitle;
 
         private Message message;
 
-        public ViewHolder(View itemView) {
+        protected ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            webReplyContent.setWebViewClient(webViewClient); // TODO 对内连接做分发
         }
 
-        public void update(int position) {
+        protected void update(int position) {
             message = messageList.get(position);
 
             Picasso.with(context).load(ApiClient.ROOT_HOST + message.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
-            tvAction.setText(message.getType() == MessageType.at ? "在回复中@了您" : "回复了您的话题");
+            tvAction.setText(message.getType() == Message.Type.at ? "在回复中@了您" : "回复了您的话题");
             tvTime.setText(FormatUtils.getRecentlyTimeFormatText(message.getReply().getCreateAt()));
             tvTopicTitle.setText("原话题：" + message.getTopic().getTitle());
 
-            // TODO 这里显示html文本
-            tvReplyContent.setText(message.getReply().makeSureRenderAndGetSpannedContent());
+            // TODO 这里直接使用WebView，有性能问题
+            webReplyContent.loadMarkdown(message.getReply().makeSureAndGetFilterContent());
 
             // 已读未读状态
             tvTime.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));
@@ -100,7 +106,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tvFrom.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_primary : R.color.text_color_primary));
             tvAction.getPaint().setFakeBoldText(!message.isRead());
             tvAction.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.text_color_primary));
-            tvReplyContent.getPaint().setFakeBoldText(!message.isRead());
             tvTopicTitle.getPaint().setFakeBoldText(!message.isRead());
         }
 

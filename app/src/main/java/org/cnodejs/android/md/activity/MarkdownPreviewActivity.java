@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.listener.WebViewContentClient;
+import org.cnodejs.android.md.util.MarkdownUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,7 +29,8 @@ public class MarkdownPreviewActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        markdownView.loadMarkdown(getIntent().getStringExtra("markdownText"));
+        markdownView.loadMarkdown(MarkdownUtils.cnodeFilter(getIntent().getStringExtra("markdownText")));
+        markdownView.setWebViewClient(new WebViewContentClient(this));
     }
 
     @Override

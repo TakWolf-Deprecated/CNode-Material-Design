@@ -134,14 +134,14 @@ public class Topic {
         this.createAt = createAt;
     }
 
-    // TODO 默认消息回复是不渲染的，这里提供一个方法检测是否渲染并渲染
-    private boolean mdrender = false;
+    // TODO 对markdown做参数过滤
+    private String filterContent = null;
 
-    public void makeSureRender() {
-        if (!mdrender) {
-            setContent(MarkdownUtils.markdown(getContent()));
-            mdrender = true;
+    public String makeSureAndGetFilterContent() {
+        if (filterContent == null) { // 需要渲染
+            filterContent = MarkdownUtils.cnodeFilter(getContent());
         }
+        return filterContent;
     }
 
 }

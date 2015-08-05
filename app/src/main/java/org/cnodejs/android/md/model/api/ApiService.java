@@ -5,6 +5,7 @@ import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
+import org.cnodejs.android.md.model.entity.TopicUpInfo;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.entity.User;
 
@@ -50,21 +51,51 @@ public interface ApiService {
             Callback<Void> callback
     );
 
+    @FormUrlEncoded
+    @POST("/v1/topic/collect")
+    void collectTopic(
+            @Field("accesstoken") String accessToken,
+            @Field("topic_id") String topicId ,
+            Callback<Void> callback
+    );
+
+    @FormUrlEncoded
+    @POST("/v1/topic/de_collect")
+    void decollectTopic(
+            @Field("accesstoken") String accessToken,
+            @Field("topic_id") String topicId ,
+            Callback<Void> callback
+    );
+
+
+
+
+
+
+
+    @FormUrlEncoded
+    @POST("/v1/reply/{replyId}/ups")
+    void upTopic(
+            @Field("accesstoken") String accessToken,
+            @Path("replyId") String replyId,
+            Callback<TopicUpInfo> callback
+    );
+
     //=====
     // 用户
     //=====
+
+    @GET("/v1/user/{loginName}")
+    void getUser(
+            @Path("loginName") String loginName,
+            Callback<Result<User>> callback
+    );
 
     @FormUrlEncoded
     @POST("/v1/accesstoken")
     void accessToken(
             @Field("accesstoken") String accessToken,
             Callback<LoginInfo> callback
-    );
-
-    @GET("/v1/user/{loginName}")
-    void getUser(
-            @Path("loginName") String loginName,
-            Callback<Result<User>> callback
     );
 
     //=========

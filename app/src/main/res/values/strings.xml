@@ -30,6 +30,7 @@
     <string name="logout_tip">确定要注销吗？</string>
     <string name="no_data">暂无数据</string>
     <string name="no_message">暂无消息</string>
+    <string name="no_reply">暂无回复</string>
     <string name="data_load_faild">数据加载失败，请重试</string>
     <string name="data_load_faild_and_click_avatar_to_reload">数据加载失败，点击头像重试</string>
     <string name="have_no_more_data">已没有更多数据</string>
@@ -46,9 +47,11 @@
     <string name="ok">好的</string>
 
     <string name="create_at_$">创建于：</string>
+    <string name="post_at_$">发布于：</string>
     <string name="score_$">积分：</string>
     <string name="register_time_$">注册时间：</string>
     <string name="$slash">/</string>
+    <string name="$dot">•</string>
 
     <string name="access_token_$">Access Token :</string>
     <string name="open_qrcode">扫描二维码</string>
