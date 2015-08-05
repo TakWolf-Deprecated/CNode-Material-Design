@@ -49,6 +49,7 @@
     <string name="score_$">积分：</string>
     <string name="register_time_$">注册时间：</string>
     <string name="$slash">/</string>
+    <string name="$dot">•</string>
 
     <string name="access_token_$">Access Token :</string>
     <string name="open_qrcode">扫描二维码</string>
