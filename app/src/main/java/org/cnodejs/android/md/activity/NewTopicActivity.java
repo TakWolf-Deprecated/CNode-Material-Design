@@ -74,13 +74,13 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
      * 实时保存草稿
      */
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
+        super.onPause();
         if (SettingShared.isEnableNewTopicDraft(this)) {
             TopicShared.setNewTopicTabPosition(this, spnTab.getSelectedItemPosition());
             TopicShared.setNewTopicTitle(this, edtTitle.getText().toString());
             TopicShared.setNewTopicContent(this, edtContent.getText().toString());
         }
-        super.onDestroy();
     }
 
     //===========
@@ -248,7 +248,10 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
             @Override
             public void success(Void nothing, Response response) {
                 dialog.dismiss();
-                // 清除草稿
+                // 清除草稿 TODO 由于保存草稿的动作在onPause中，并且保存过程是异步的，因此保险起见，优先清除控件数据
+                spnTab.setSelection(0);
+                edtTitle.setText(null);
+                edtContent.setText(null);
                 TopicShared.clear(NewTopicActivity.this);
                 // 结束当前并提示
                 finish();
