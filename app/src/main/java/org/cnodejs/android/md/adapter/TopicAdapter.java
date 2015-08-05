@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -215,7 +216,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
             Picasso.with(context).load(ApiClient.ROOT_HOST + reply.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
-            tvIndex.setText(position + "楼");
+            tvIndex.setText(position + 1 + "楼");
             tvCreateTime.setText(FormatUtils.getRecentlyTimeFormatText(reply.getCreateAt()));
             btnUps.setText(String.valueOf(reply.getUps().size()));
 
