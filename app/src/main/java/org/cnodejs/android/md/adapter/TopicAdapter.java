@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.activity.LoginActivity;
 import org.cnodejs.android.md.activity.UserDetailActivity;
 import org.cnodejs.android.md.listener.WebViewContentClient;
 import org.cnodejs.android.md.model.api.ApiClient;
@@ -183,13 +186,40 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_header_btn_collect)
         protected void onBtnCollectClick() {
-            if (LoginShared.getCollectTopicIdList(context).contains(topic.getId())) {
-                decollectTopicAsyncTask(btnCollect);
+            if (TextUtils.isEmpty(LoginShared.getAccessToken(context))) {
+                showNeedLoginDialog();
             } else {
-                collectTopicAsyncTask(btnCollect);
+                if (LoginShared.getCollectTopicIdList(context).contains(topic.getId())) {
+                    decollectTopicAsyncTask(btnCollect);
+                } else {
+                    collectTopicAsyncTask(btnCollect);
+                }
             }
         }
 
+    }
+
+    private void showNeedLoginDialog() {
+        new MaterialDialog.Builder(context)
+                .content(R.string.need_login_tip)
+                .positiveText(R.string.login)
+                .negativeText(R.string.cancel)
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        context.startActivity(new Intent(context, LoginActivity.class));
+                    }
+
+                })
+                .show();
+    }
+
+    private void showAccessTokenErrorDialog() {
+        new MaterialDialog.Builder(context)
+                .content(R.string.access_token_error_tip)
+                .positiveText(R.string.confirm)
+                .show();
     }
 
     private void decollectTopicAsyncTask(final ImageView btnCollect) {
@@ -205,7 +235,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(context, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
+                    showAccessTokenErrorDialog();
+                } else {
+                    Toast.makeText(context, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });
@@ -224,7 +258,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(context, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
+                    showAccessTokenErrorDialog();
+                } else {
+                    Toast.makeText(context, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });
@@ -292,12 +330,20 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_reply_btn_ups)
         protected void onBtnUpsClick() {
-            upTopicAsyncTask(this);
+            if (TextUtils.isEmpty(LoginShared.getAccessToken(context))) {
+                showNeedLoginDialog();
+            } else {
+                upTopicAsyncTask(this);
+            }
         }
 
         @OnClick(R.id.topic_item_reply_btn_at)
         protected void onBtnAtClick() {
-            onAtClickListener.onAt(reply.getAuthor().getLoginName());
+            if (TextUtils.isEmpty(LoginShared.getAccessToken(context))) {
+                showNeedLoginDialog();
+            } else {
+                onAtClickListener.onAt(reply.getAuthor().getLoginName());
+            }
         }
 
     }
@@ -321,7 +367,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(context, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
+                    showAccessTokenErrorDialog();
+                } else {
+                    Toast.makeText(context, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });
