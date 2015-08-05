@@ -8,12 +8,15 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.activity.MarkdownPreviewActivity;
 import org.cnodejs.android.md.activity.TopicActivity;
 import org.cnodejs.android.md.activity.UserDetailActivity;
 import org.cnodejs.android.md.model.api.ApiClient;
@@ -26,6 +29,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import us.feras.mdv.util.HttpHelper;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
@@ -116,6 +120,26 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             Intent intent = new Intent(context, TopicActivity.class);
             intent.putExtra("topicId", message.getTopic().getId());
             context.startActivity(intent);
+        }
+
+        @OnLongClick(R.id.notification_item_btn_item)
+        protected boolean onBtnItemLongClick() {
+            final MaterialDialog dialog = new MaterialDialog.Builder(context)
+                    .customView(R.layout.dialog_markdown_preview, false)
+                    .build();
+            ButterKnife.findById(dialog.getCustomView(), R.id.dialog_markdown_preview_btn).setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    Intent intent = new Intent(context, MarkdownPreviewActivity.class);
+                    intent.putExtra("markdownText", message.getReply().getContent());
+                    context.startActivity(intent);
+                }
+
+            });
+            dialog.show();
+            return true;
         }
 
     }

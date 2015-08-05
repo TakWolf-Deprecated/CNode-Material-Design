@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_markdown_preview_btn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:text="@string/markdown_preview"
+    android:textColor="@color/text_color_primary"
+    android:textSize="16sp"
+    android:gravity="center"
+    android:background="@drawable/rect_btn_transparent_background" />
+
