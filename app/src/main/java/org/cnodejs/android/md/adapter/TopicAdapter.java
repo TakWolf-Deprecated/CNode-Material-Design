@@ -202,6 +202,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         @Bind(R.id.topic_item_reply_web_content)
         protected MarkdownView webReplyContent;
 
+        @Bind(R.id.topic_item_reply_icon_deep_line)
+        protected View iconDeepLine;
+
+        @Bind(R.id.topic_item_reply_icon_shadow_gap)
+        protected View iconShadowGap;
+
         private Reply reply;
 
         public ReplyViewHolder(View itemView) {
@@ -221,6 +227,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             btnUps.setText(String.valueOf(reply.getUps().size()));
 
             // TODO ups变颜色
+
+            iconDeepLine.setVisibility(position == topic.getReplies().size() - 1 ? View.GONE : View.VISIBLE);
+            iconShadowGap.setVisibility(position == topic.getReplies().size() - 1 ? View.VISIBLE : View.GONE);
 
             // TODO 这里直接使用WebView，有性能问题
             webReplyContent.loadMarkdown(reply.makeSureAndGetFilterContent());
