@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import us.feras.mdv.util.HttpHelper;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
 
@@ -87,8 +89,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tvFrom.setText(message.getAuthor().getLoginName());
             tvAction.setText(message.getType() == MessageType.at ? "在回复中@了您" : "回复了您的话题");
             tvTime.setText(FormatUtils.getRecentlyTimeFormatText(message.getReply().getCreateAt()));
-            tvReplyContent.setText(message.getReply().getContent()); // 这里没有渲染
             tvTopicTitle.setText("原话题：" + message.getTopic().getTitle());
+
+            // TODO 这里显示html文本
+            tvReplyContent.setText(message.getReply().makeSureRenderAndGetSpannedContent());
 
             // 已读未读状态
             tvTime.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));

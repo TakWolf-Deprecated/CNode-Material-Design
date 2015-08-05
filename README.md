@@ -2,6 +2,8 @@
 
 ![](/psd/ic_launcher.png)
 
+[![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
+
 CNode社区第三方Android客户端
 
 原生App，Material Design风格
