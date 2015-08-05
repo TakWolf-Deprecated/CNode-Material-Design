@@ -4,21 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.activity.MarkdownPreviewActivity;
 import org.cnodejs.android.md.activity.TopicActivity;
 import org.cnodejs.android.md.activity.UserDetailActivity;
+import org.cnodejs.android.md.listener.WebViewContentClient;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.model.entity.MessageType;
@@ -29,8 +27,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnLongClick;
-import us.feras.mdv.util.HttpHelper;
+import us.feras.mdv.MarkdownView;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
 
@@ -38,10 +35,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     private LayoutInflater inflater;
     private List<Message> messageList;
 
+    private WebViewClient webViewClient;
+
     public NotificationAdapter(Context context, @NonNull List<Message> messageList) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.messageList = messageList;
+
+        this.webViewClient = new WebViewContentClient(context);
     }
 
     @Override
@@ -73,8 +74,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         @Bind(R.id.notification_item_tv_action)
         protected TextView tvAction;
 
-        @Bind(R.id.notification_item_tv_reply_content)
-        protected TextView tvReplyContent;
+        @Bind(R.id.notification_item_web_reply_content)
+        protected MarkdownView webReplyContent;
 
         @Bind(R.id.notification_item_tv_topic_title)
         protected TextView tvTopicTitle;
@@ -84,6 +85,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            webReplyContent.setWebViewClient(webViewClient); // TODO 对内连接做分发
         }
 
         public void update(int position) {
@@ -95,8 +98,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tvTime.setText(FormatUtils.getRecentlyTimeFormatText(message.getReply().getCreateAt()));
             tvTopicTitle.setText("原话题：" + message.getTopic().getTitle());
 
-            // TODO 这里显示html文本
-            tvReplyContent.setText(message.getReply().makeSureRenderAndGetSpannedContent());
+            // TODO 这里直接使用WebView，有性能问题
+            webReplyContent.loadMarkdown(message.getReply().makeSureAndGetFilterContent());
 
             // 已读未读状态
             tvTime.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));
@@ -104,7 +107,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tvFrom.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_primary : R.color.text_color_primary));
             tvAction.getPaint().setFakeBoldText(!message.isRead());
             tvAction.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.text_color_primary));
-            tvReplyContent.getPaint().setFakeBoldText(!message.isRead());
             tvTopicTitle.getPaint().setFakeBoldText(!message.isRead());
         }
 
@@ -120,26 +122,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             Intent intent = new Intent(context, TopicActivity.class);
             intent.putExtra("topicId", message.getTopic().getId());
             context.startActivity(intent);
-        }
-
-        @OnLongClick(R.id.notification_item_btn_item)
-        protected boolean onBtnItemLongClick() {
-            final MaterialDialog dialog = new MaterialDialog.Builder(context)
-                    .customView(R.layout.dialog_markdown_preview, false)
-                    .build();
-            ButterKnife.findById(dialog.getCustomView(), R.id.dialog_markdown_preview_btn).setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    Intent intent = new Intent(context, MarkdownPreviewActivity.class);
-                    intent.putExtra("markdownText", message.getReply().getContent());
-                    context.startActivity(intent);
-                }
-
-            });
-            dialog.show();
-            return true;
         }
 
     }

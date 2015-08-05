@@ -1,8 +1,5 @@
 package org.cnodejs.android.md.util;
 
-import android.text.Html;
-import android.text.Spanned;
-
 import com.petebevin.markdown.MarkdownProcessor;
 
 public final class MarkdownUtils {
@@ -19,10 +16,6 @@ public final class MarkdownUtils {
 
     public static String markdown(String text) {
         return mp.markdown(cnodeFilter(text));
-    }
-
-    public static Spanned spanned(String text) {
-        return Html.fromHtml(markdown(text));
     }
 
 }
