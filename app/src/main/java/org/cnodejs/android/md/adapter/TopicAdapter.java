@@ -24,6 +24,8 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.FormatUtils;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -163,9 +165,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 tvCreateTime.setText(context.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeFormatText(topic.getCreateAt()));
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
                 layoutNoReply.setVisibility(topic.getReplies().size() > 0 ? View.GONE : View.VISIBLE);
-
-                // TODO 是否收藏标记
-
+                btnCollect.setImageResource(LoginShared.getCollectTopicIdList(context).contains(topic.getId()) ? R.drawable.ic_favorite_theme_24dp : R.drawable.ic_favorite_outline_grey600_24dp);
 
                 // TODO 这里直接使用WebView，有性能问题
                 webReplyContent.loadMarkdown(topic.makeSureAndGetFilterContent());
@@ -183,11 +183,51 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_header_btn_collect)
         protected void onBtnCollectClick() {
-
-            // TODO 收藏按钮
-
+            if (LoginShared.getCollectTopicIdList(context).contains(topic.getId())) {
+                decollectTopicAsyncTask(btnCollect);
+            } else {
+                collectTopicAsyncTask(btnCollect);
+            }
         }
 
+    }
+
+    private void decollectTopicAsyncTask(final ImageView btnCollect) {
+        ApiClient.service.decollectTopic(LoginShared.getAccessToken(context), topic.getId(), new Callback<Void>() {
+
+            @Override
+            public void success(Void nothing, Response response) {
+                List<String> collectTopicIdList = LoginShared.getCollectTopicIdList(context);
+                collectTopicIdList.remove(topic.getId());
+                LoginShared.setCollectTopicIdList(context, collectTopicIdList);
+                btnCollect.setImageResource(R.drawable.ic_favorite_outline_grey600_24dp);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(context, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
+
+    private void collectTopicAsyncTask(final ImageView btnCollect) {
+        ApiClient.service.collectTopic(LoginShared.getAccessToken(context), topic.getId(), new Callback<Void>() {
+
+            @Override
+            public void success(Void nothing, Response response) {
+                List<String> collectTopicIdList = LoginShared.getCollectTopicIdList(context);
+                collectTopicIdList.add(topic.getId());
+                LoginShared.setCollectTopicIdList(context, collectTopicIdList);
+                btnCollect.setImageResource(R.drawable.ic_favorite_theme_24dp);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(context, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 
     public class ReplyViewHolder extends ViewHolder {
