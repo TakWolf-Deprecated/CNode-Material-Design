@@ -6,7 +6,7 @@ public final class MarkdownUtils {
 
     private MarkdownUtils() {}
 
-    public static final String THEME_CSS = "file:///android_asset/markdown_css_themes/classic.css";
+    public static final String THEME_CSS = "file:///android_asset/cnode.css";
 
     private static final MarkdownProcessor mp = new MarkdownProcessor();
 
