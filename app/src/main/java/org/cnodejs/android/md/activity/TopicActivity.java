@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,11 +26,18 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.adapter.TopicAdapter;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.entity.Author;
+import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.util.HandlerUtils;
+import org.joda.time.DateTime;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -60,6 +68,8 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
 
     private PopupWindow replyWindow;
     private ReplyHandler replyHandler;
+
+    private MaterialDialog dialog;
 
     private String topicId;
     private TopicWithReply topic;
@@ -94,6 +104,12 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         replyWindow.setAnimationStyle(R.style.AppTheme_ReplyWindowAnim);
         // - END -
 
+        dialog = new MaterialDialog.Builder(this)
+                .content("正在发布中...")
+                .progress(true, 0)
+                .cancelable(false)
+                .build();
+
         refreshLayout.setColorSchemeResources(R.color.red_light, R.color.green_light, R.color.blue_light, R.color.orange_light);
         refreshLayout.setOnRefreshListener(this);
 
@@ -110,10 +126,10 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
 
     @Override
     public void onRefresh() {
-        getTopicAsyncTask(false);
+        getTopicAsyncTask();
     }
 
-    private void getTopicAsyncTask(boolean gotoBottom) {
+    private void getTopicAsyncTask() {
         ApiClient.service.getTopic(topicId, false, new Callback<Result<TopicWithReply>>() {
 
             @Override
@@ -123,9 +139,6 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
                     adapter.setTopic(result.getData());
                     adapter.notifyDataSetChanged();
                     layoutNoData.setVisibility(View.GONE);
-
-                    // TODO 移动到最底部
-
                     refreshLayout.setRefreshing(false);
                 }
             }
@@ -161,7 +174,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
     //==============
     // 回复框逻辑处理
     //==============
-    
+
     protected class ReplyHandler {
 
         @Bind(R.id.reply_window_edt_content)
@@ -285,6 +298,60 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
             Intent intent = new Intent(TopicActivity.this, MarkdownPreviewActivity.class);
             intent.putExtra("markdownText", content);
             startActivity(intent);
+        }
+
+        /**
+         * 发送
+         */
+        @OnClick(R.id.reply_window_btn_tool_send)
+        protected void onBtnToolSendClick() {
+            String content = edtContent.getText().toString();
+            if (SettingShared.isEnableTopicSign(TopicActivity.this)) { // 添加小尾巴
+                content += "\n\n" + SettingShared.getTopicSignContent(TopicActivity.this);
+            }
+            replyTopicAsyncTask(content);
+        }
+
+        private void replyTopicAsyncTask(final String content) {
+            dialog.show();
+            ApiClient.service.replyTopic(LoginShared.getAccessToken(TopicActivity.this), topicId, content, null, new Callback<Map<String, String>>() {
+
+                @Override
+                public void success(Map<String, String> result, Response response) {
+                    dialog.dismiss();
+                    // 本地创建一个回复对象
+                    Reply reply = new Reply();
+                    reply.setId(result.get("reply_id"));
+                    Author author = new Author();
+                    author.setLoginName(LoginShared.getLoginName(TopicActivity.this));
+                    author.setAvatarUrl(LoginShared.getAvatarUrl(TopicActivity.this));
+                    reply.setAuthor(author);
+                    reply.setContent(content);
+                    reply.setCreateAt(new DateTime());
+                    reply.setUps(new ArrayList<String>());
+                    topic.getReplies().add(reply);
+                    // 更新adapter并让recyclerView滑动到最底部
+                    replyWindow.dismiss();
+                    adapter.notifyItemChanged(topic.getReplies().size() - 1);
+                    adapter.notifyItemInserted(topic.getReplies().size());
+                    recyclerView.smoothScrollToPosition(topic.getReplies().size());
+                    // 清空回复框内容
+                    edtContent.setText(null);
+                    // 提示
+                    Toast.makeText(TopicActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    dialog.dismiss();
+                    if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
+                        adapter.showAccessTokenErrorDialog();
+                    } else {
+                        Toast.makeText(TopicActivity.this, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            });
         }
         
     }
