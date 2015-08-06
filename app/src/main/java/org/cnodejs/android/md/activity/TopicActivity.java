@@ -305,11 +305,15 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
          */
         @OnClick(R.id.reply_window_btn_tool_send)
         protected void onBtnToolSendClick() {
-            String content = edtContent.getText().toString();
-            if (SettingShared.isEnableTopicSign(TopicActivity.this)) { // 添加小尾巴
-                content += "\n\n" + SettingShared.getTopicSignContent(TopicActivity.this);
+            if (edtContent.length() == 0) {
+                Toast.makeText(TopicActivity.this, "内容不能为空", Toast.LENGTH_SHORT).show();
+            } else {
+                String content = edtContent.getText().toString();
+                if (SettingShared.isEnableTopicSign(TopicActivity.this)) { // 添加小尾巴
+                    content += "\n\n" + SettingShared.getTopicSignContent(TopicActivity.this);
+                }
+                replyTopicAsyncTask(content);
             }
-            replyTopicAsyncTask(content);
         }
 
         private void replyTopicAsyncTask(final String content) {

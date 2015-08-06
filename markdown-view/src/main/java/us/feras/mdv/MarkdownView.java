@@ -129,9 +129,13 @@ public class MarkdownView extends WebView {
 		MarkdownProcessor m = new MarkdownProcessor();
 		String html = m.markdown(txt);
 		if (cssFileUrl != null) {
+			/*
 			html = String.format(
 					"<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />"
 							+ html, cssFileUrl);
+							*/
+			// TODO 原来的实现如果html中包含正则会报错
+			html = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + cssFileUrl + "\" />" + html;
 		}
 		loadDataWithBaseURL("fake://", html, "text/html", "UTF-8", null);
 	}
