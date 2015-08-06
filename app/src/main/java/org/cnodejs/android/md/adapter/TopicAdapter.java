@@ -353,16 +353,18 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     private void upTopicAsyncTask(final ReplyViewHolder holder) {
         final int position = holder.position; // 标记当时的位置信息
+        final Reply reply = holder.reply; // 保存当时的回复对象
         ApiClient.service.upTopic(LoginShared.getAccessToken(context), holder.reply.getId(), new Callback<TopicUpInfo>() {
 
             @Override
             public void success(TopicUpInfo info, Response response) {
-                if (position == holder.position) { // 位置没有变
-                    if (info.getAction() == TopicUpInfo.Action.up) {
-                        holder.reply.getUps().add(LoginShared.getId(context));
-                    } else if (info.getAction() == TopicUpInfo.Action.down) {
-                        holder.reply.getUps().remove(LoginShared.getId(context));
-                    }
+                if (info.getAction() == TopicUpInfo.Action.up) {
+                    reply.getUps().add(LoginShared.getId(context));
+                } else if (info.getAction() == TopicUpInfo.Action.down) {
+                    reply.getUps().remove(LoginShared.getId(context));
+                }
+                // 如果位置没有变，则更新界面
+                if (position == holder.position) {
                     holder.btnUps.setText(String.valueOf(holder.reply.getUps().size()));
                     holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUps().contains(LoginShared.getId(context)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
                 }
