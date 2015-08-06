@@ -1,5 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="main_left_nav_padding_top">16dp</dimen>
+
+    <dimen name="card_view_container_padding">5dp</dimen>
+    <dimen name="card_view_margin">0dp</dimen>
+
+    <dimen name="button_corner_radius">4dp</dimen>
+
 </resources>

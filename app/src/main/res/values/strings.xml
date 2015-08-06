@@ -1,6 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CNode-Material</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">CNode社区</string>
+
+    <string name="logo_url">cnodejs.org</string>
+    <string name="logo_slogan">Node.js专业中文社区</string>
+
+    <string name="tab_top">置顶</string>
+    <string name="tab_all">全部</string>
+    <string name="tab_good">精华</string>
+    <string name="tab_share">分享</string>
+    <string name="tab_ask">问答</string>
+    <string name="tab_job">招聘</string>
+    <string name="tab_unkonw">未知</string>
+
+    <string name="notification">消息</string>
+    <string name="setting">设置</string>
+    <string name="about">关于</string>
+
+    <string name="click_avatar_to_login">点击头像登录</string>
+    <string name="press_back_again_to_exit">再按一次退出</string>
+
+    <string name="access_token_error">令牌验证错误</string>
+    <string name="access_token_error_tip">您的用户令牌已经失效，您可能需要重新登录账户。</string>
+
+    <string name="login">登录</string>
+    <string name="logout">注销</string>
+    <string name="need_login_tip">该操作需要登录账户。是否现在登录？</string>
+    <string name="logout_tip">确定要注销吗？</string>
+    <string name="no_data">暂无数据</string>
+    <string name="no_message">暂无消息</string>
+    <string name="no_reply">暂无回复</string>
+    <string name="data_load_faild">数据加载失败，请重试</string>
+    <string name="data_load_faild_and_click_avatar_to_reload">数据加载失败，点击头像重试</string>
+    <string name="have_no_more_data">已没有更多数据</string>
+
+    <string name="topic">话题</string>
+    <string name="new_topic">发布话题</string>
+
+    <string name="user_detail">用户资料</string>
+    
+    <string name="load_more">加载更多</string>
+
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="ok">好的</string>
+
+    <string name="create_at_$">创建于：</string>
+    <string name="post_at_$">发布于：</string>
+    <string name="score_$">积分：</string>
+    <string name="register_time_$">注册时间：</string>
+    <string name="$slash">/</string>
+    <string name="$dot">•</string>
+
+    <string name="access_token_$">Access Token :</string>
+    <string name="open_qrcode">扫描二维码</string>
+    <string name="can_not_open_camera">无法打开相机</string>
+
+    <string name="current_version">当前版本</string>
+    <string name="open_source_url">项目开源主页</string>
+    <string name="open_source_url_content">https://github.com/TakWolf/CNode-Material-Design</string>
+    <string name="about_cnode">关于CNode社区</string>
+    <string name="about_cnode_content">https://cnodejs.org/about</string>
+    <string name="about_author">关于作者</string>
+    <string name="about_author_content">http://blog.takwolf.com/about</string>
+    <string name="advice_feedback">意见反馈</string>
+    <string name="advice_feedback_content">向作者发送电子邮件</string>
+    <string name="open_source_license">开放源代码许可</string>
+    <string name="about_copyright">Copyright © 2015&#8211;2016 TakWolf</string>
+
+    <string name="mark_all_read">全部标记为已读</string>
+
+    <string name="notice">通知</string>
+    <string name="receive_notification">接收消息通知</string>
+    <string name="receive_notification_summary">开启也没用，这功能压根没做</string>
+    <string name="new_topic_draft">保存草稿</string>
+    <string name="new_topic_draft_summary">没有发布的话题内容会被保存</string>
+    <string name="topic_sign">话题小尾巴</string>
+    <string name="topic_sign_summary">开启后可以自定义</string>
+    <string name="modify_topic_sign">设置小尾巴</string>
+    <string name="modify_topic_sign_hint">来点炫酷的，不要写太多字喔&#8230;</string>
+    <string name="default_topic_sign">默认尾巴</string>
+
+    <string name="send">发送</string>
+    <string name="send_to_tab_$">发布到分类：</string>
+
+    <string name="new_topic_title_hint">标题，字数10字以上</string>
+    <string name="new_topic_content_hint">说点什么吧&#8230;</string>
+
+    <string name="title">标题</string>
+    <string name="add_link">添加连接</string>
+    <string name="link">连接</string>
+    <string name="http_$">http://</string>
+
+    <string name="markdown_preview">Markdown预览</string>
+
 </resources>

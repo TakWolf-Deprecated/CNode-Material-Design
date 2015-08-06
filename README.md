@@ -1,8 +1,78 @@
-# CNode Material #
+# CNode Material Design #
+
+![](/art/ic_launcher.png)
+
+[![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
 
 CNode社区第三方Android客户端
 
 原生App，Material Design风格
+
+## Download ##
+
+[![Google Play Store](/art/git_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
+
+[CNodeMD-v1.0.0-build-10](http://takwolf.com/download/CNodeMD-v1.0.0-build-10.apk)
+
+## Screenshot ##
+
+![](/art/screenshot_01.png)
+
+![](/art/screenshot_02.png)
+
+![](/art/screenshot_03.png)
+
+![](/art/screenshot_04.png)
+
+![](/art/screenshot_05.png)
+
+![](/art/screenshot_06.png)
+
+![](/art/screenshot_07.png)
+
+![](/art/screenshot_08.png)
+
+![](/art/screenshot_09.png)
+
+![](/art/screenshot_10.png)
+
+![](/art/screenshot_11.png)
+
+![](/art/screenshot_12.png)
+
+![](/art/screenshot_13.png)
+
+## Libraries used ##
+
+- [Butter Knife](https://github.com/JakeWharton/butterknife)
+
+- [Gson](https://github.com/google/gson)
+
+- [Joda-Time](http://www.joda.org/joda-time)
+
+- [Retrofit](http://square.github.io/retrofit)
+
+- [OkHttp](http://square.github.io/okhttp)
+
+- [Picasso](http://square.github.io/picasso)
+
+- [CircleImageView](https://github.com/hdodenhof/CircleImageView)
+
+- [Material](http://rey5137.com/material)
+
+- [MaterialEditText](https://github.com/rengwuxian/MaterialEditText)
+
+- [Material Dialogs](https://github.com/afollestad/material-dialogs)
+
+- [materialish-progress](https://github.com/pnikosis/materialish-progress)
+
+- [FloatingActionButton](https://github.com/makovkastar/FloatingActionButton)
+
+- [QRCodeReaderView](https://github.com/dlazaro66/QRCodeReaderView)
+
+- [MarkdownView](https://github.com/falnatsheh/MarkdownView)
+
+- [Material design icons](https://github.com/google/material-design-icons)
 
 ## Author ##
 

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_primary"
+        android:clickable="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/main_left_layout_info"
+            android:src="@drawable/main_left_header_bg"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true" />
+
+        <LinearLayout
+            android:id="@+id/main_left_layout_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/main_left_nav_padding_top"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/main_left_img_avatar"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/image_default" />
+
+            <TextView
+                android:id="@+id/main_left_tv_login_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                tools:text="TakWolf" />
+
+            <TextView
+                android:id="@+id/main_left_tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/text_color_light"
+                android:textSize="14sp"
+                tools:text="积分：0" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/main_left_btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/main_left_layout_info"
+            android:layout_margin="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/logout"
+            android:textColor="@color/text_color_light"
+            android:textSize="14sp"
+            android:background="@drawable/button_transparent_image" />
+
+    </RelativeLayout>
+
+    <View style="@style/AppTheme.ItemGap"
+        android:clickable="true" />
+
+    <CheckedTextView style="@style/AppTheme.NavigationItem"
+        android:id="@+id/main_left_btn_all"
+        android:drawableStart="@drawable/main_nav_ic_all"
+        android:drawableLeft="@drawable/main_nav_ic_all"
+        android:text="@string/tab_all"
+        android:checked="true" />
+
+    <CheckedTextView style="@style/AppTheme.NavigationItem"
+        android:id="@+id/main_left_btn_good"
+        android:drawableStart="@drawable/main_nav_ic_good"
+        android:drawableLeft="@drawable/main_nav_ic_good"
+        android:text="@string/tab_good" />
+
+    <CheckedTextView style="@style/AppTheme.NavigationItem"
+        android:id="@+id/main_left_btn_share"
+        android:drawableStart="@drawable/main_nav_ic_share"
+        android:drawableLeft="@drawable/main_nav_ic_share"
+        android:text="@string/tab_share" />
+
+    <CheckedTextView style="@style/AppTheme.NavigationItem"
+        android:id="@+id/main_left_btn_ask"
+        android:drawableStart="@drawable/main_nav_ic_ask"
+        android:drawableLeft="@drawable/main_nav_ic_ask"
+        android:text="@string/tab_ask" />
+
+    <CheckedTextView style="@style/AppTheme.NavigationItem"
+        android:id="@+id/main_left_btn_job"
+        android:drawableStart="@drawable/main_nav_ic_job"
+        android:drawableLeft="@drawable/main_nav_ic_job"
+        android:text="@string/tab_job" />
+
+    <View style="@style/AppTheme.ItemGap"
+        android:clickable="true" />
+    <View style="@style/AppTheme.DeepLine"
+        android:clickable="true" />
+    <View style="@style/AppTheme.ItemGap"
+        android:clickable="true" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView style="@style/AppTheme.NavigationItem"
+            android:id="@+id/main_left_btn_notification"
+            android:drawableStart="@drawable/main_nav_ic_notification_grey_24dp"
+            android:drawableLeft="@drawable/main_nav_ic_notification_grey_24dp"
+            android:text="@string/notification" />
+
+        <TextView style="@style/AppTheme.NavigationItemBadger"
+            android:id="@+id/main_left_tv_badger_notification"
+            tools:text="99+" />
+
+    </FrameLayout>
+
+    <TextView style="@style/AppTheme.NavigationItem"
+        android:id="@+id/main_left_btn_setting"
+        android:drawableStart="@drawable/main_nav_ic_setting_grey_24dp"
+        android:drawableLeft="@drawable/main_nav_ic_setting_grey_24dp"
+        android:text="@string/setting" />
+
+    <TextView style="@style/AppTheme.NavigationItem"
+        android:id="@+id/main_left_btn_about"
+        android:drawableStart="@drawable/main_nav_ic_about_grey_24dp"
+        android:drawableLeft="@drawable/main_nav_ic_about_grey_24dp"
+        android:text="@string/about" />
+
+</LinearLayout>

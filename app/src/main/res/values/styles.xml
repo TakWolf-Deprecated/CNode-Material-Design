@@ -1,8 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!-- Base App Theme -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <!-- App Theme -->
+    <style name="AppTheme" parent="BaseAppTheme" />
+
+    <!-- App Theme FitsStatusBar -->
+    <style name="AppTheme.FitsStatusBar" />
+
+    <!-- Deep Line -->
+    <style name="AppTheme.DeepLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#ffdddddd</item>
+    </style>
+
+    <style name="AppTheme.DeepLine.Vertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <!-- Gap -->
+    <style name="AppTheme.ItemGap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">8dp</item>
+    </style>
+
+    <!-- Shadow Gap -->
+    <style name="AppTheme.ShadowGap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:background">@drawable/gap_shadow</item>
+    </style>
+
+    <!-- Shadow Gap Opposite -->
+    <style name="AppTheme.ShadowGap.Opposite">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:background">@drawable/gap_shadow_opposite</item>
+    </style>
+
+    <!-- Navigation Item -->
+    <style name="AppTheme.NavigationItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:drawablePadding">32dp</item>
+        <item name="android:textColor">@drawable/main_nav_item_text_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/rect_btn_transparent_background</item>
+    </style>
+
+    <!-- Navigation Item Badger -->
+    <style name="AppTheme.NavigationItemBadger">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_gravity">end</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textColor">@color/text_color_secondary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <!-- Button -->
+    <style name="AppTheme.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_image</item>
+    </style>
+
+    <!-- Button -->
+    <style name="AppTheme.Button.Stroke">
+        <item name="android:textColor">@drawable/button_stroke_text_color</item>
+        <item name="android:background">@drawable/button_stroke_image</item>
+    </style>
+
+    <!-- Reply Window Anim -->
+    <style name="AppTheme.ReplyWindowAnim">
+        <item name="android:windowEnterAnimation">@anim/reply_window_popup_in</item>
+        <item name="android:windowExitAnimation">@anim/reply_window_popup_out</item>
     </style>
 
 </resources>
