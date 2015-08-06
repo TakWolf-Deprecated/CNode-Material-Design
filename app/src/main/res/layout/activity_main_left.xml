@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -31,14 +30,11 @@
             android:paddingRight="16dp"
             android:orientation="vertical">
 
-            <com.github.siyamed.shapeimageview.CircularImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/main_left_img_avatar"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                android:src="@drawable/image_default"
-                android:scaleType="fitCenter"
-                app:siBorderWidth="0dp"
-                app:siBorderColor="#ffdb5259" />
+                android:src="@drawable/image_default" />
 
             <TextView
                 android:id="@+id/main_left_tv_login_name"
