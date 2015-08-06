@@ -332,6 +332,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         protected void onBtnUpsClick() {
             if (TextUtils.isEmpty(LoginShared.getAccessToken(context))) {
                 showNeedLoginDialog();
+            } else if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(context))) {
+                Toast.makeText(context, "不能帮自己点赞", Toast.LENGTH_SHORT).show();
             } else {
                 upTopicAsyncTask(this);
             }
