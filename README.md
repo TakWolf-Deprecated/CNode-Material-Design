@@ -12,7 +12,7 @@ CNode社区第三方Android客户端
 
 [![Google Play Store](/art/git_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
-[CNodeMD-v1.0.0-build-10](http://takwolf.com/download/CNodeMD-v1.0.0-build-10.apk)
+[CNodeMD-v1.0.1-build-11](http://takwolf.com/download/CNodeMD-v1.0.1-build-11.apk)
 
 ## Screenshot ##
 
