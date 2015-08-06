@@ -10,6 +10,7 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.http.Field;
@@ -55,7 +56,7 @@ public interface ApiService {
     @POST("/v1/topic/collect")
     void collectTopic(
             @Field("accesstoken") String accessToken,
-            @Field("topic_id") String topicId ,
+            @Field("topic_id") String topicId,
             Callback<Void> callback
     );
 
@@ -63,15 +64,19 @@ public interface ApiService {
     @POST("/v1/topic/de_collect")
     void decollectTopic(
             @Field("accesstoken") String accessToken,
-            @Field("topic_id") String topicId ,
+            @Field("topic_id") String topicId,
             Callback<Void> callback
     );
 
-
-
-
-
-
+    @FormUrlEncoded
+    @POST("/v1/topic/{topicId}/replies")
+    void replyTopic(
+            @Field("accesstoken") String accessToken,
+            @Path("topicId") String topicId,
+            @Field("content") String content,
+            @Field("reply_id") String replyId,
+            Callback<Map<String, String>> callback
+    );
 
     @FormUrlEncoded
     @POST("/v1/reply/{replyId}/ups")

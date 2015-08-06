@@ -199,7 +199,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     }
 
-    private void showNeedLoginDialog() {
+    public void showNeedLoginDialog() {
         new MaterialDialog.Builder(context)
                 .content(R.string.need_login_tip)
                 .positiveText(R.string.login)
@@ -215,7 +215,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 .show();
     }
 
-    private void showAccessTokenErrorDialog() {
+    public void showAccessTokenErrorDialog() {
         new MaterialDialog.Builder(context)
                 .content(R.string.access_token_error_tip)
                 .positiveText(R.string.confirm)
@@ -332,6 +332,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         protected void onBtnUpsClick() {
             if (TextUtils.isEmpty(LoginShared.getAccessToken(context))) {
                 showNeedLoginDialog();
+            } else if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(context))) {
+                Toast.makeText(context, "不能帮自己点赞", Toast.LENGTH_SHORT).show();
             } else {
                 upTopicAsyncTask(this);
             }
