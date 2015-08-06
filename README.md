@@ -44,7 +44,7 @@ CNode社区第三方Android客户端
 
 - [Picasso](http://square.github.io/picasso)
 
-- [Shape Image View](https://github.com/siyamed/android-shape-imageview)
+- [CircleImageView](https://github.com/hdodenhof/CircleImageView)
 
 - [Material](http://rey5137.com/material)
 
