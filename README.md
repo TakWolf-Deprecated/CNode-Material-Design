@@ -8,6 +8,12 @@ CNode社区第三方Android客户端
 
 原生App，Material Design风格
 
+## Download ##
+
+[CNodeMD-v1.0.0-build-10](http://takwolf.com/download/CNodeMD-v1.0.0-build-10.apk)
+
+## Screenshot ##
+
 ![](/art/screenshot_01.png)
 
 ![](/art/screenshot_02.png)
