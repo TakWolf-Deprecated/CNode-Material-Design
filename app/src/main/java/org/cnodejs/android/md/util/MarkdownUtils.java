@@ -6,6 +6,8 @@ public final class MarkdownUtils {
 
     private MarkdownUtils() {}
 
+    public static final String THEME_CSS = "file:///android_asset/cnode.css";
+
     private static final MarkdownProcessor mp = new MarkdownProcessor();
 
     public static String cnodeFilter(String text) {

@@ -29,7 +29,7 @@ public class MarkdownPreviewActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        markdownView.loadMarkdown(MarkdownUtils.cnodeFilter(getIntent().getStringExtra("markdownText")));
+        markdownView.loadMarkdown(MarkdownUtils.cnodeFilter(getIntent().getStringExtra("markdownText")), MarkdownUtils.THEME_CSS);
         markdownView.setWebViewClient(new WebViewContentClient(this));
     }
 

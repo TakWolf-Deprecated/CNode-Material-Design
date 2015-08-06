@@ -20,6 +20,7 @@ import org.cnodejs.android.md.listener.WebViewContentClient;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.util.FormatUtils;
+import org.cnodejs.android.md.util.MarkdownUtils;
 
 import java.util.List;
 
@@ -98,7 +99,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tvTopicTitle.setText("原话题：" + message.getTopic().getTitle());
 
             // TODO 这里直接使用WebView，有性能问题
-            webReplyContent.loadMarkdown(message.getReply().makeSureAndGetFilterContent());
+            webReplyContent.loadMarkdown(message.getReply().makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);
 
             // 已读未读状态
             tvTime.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));

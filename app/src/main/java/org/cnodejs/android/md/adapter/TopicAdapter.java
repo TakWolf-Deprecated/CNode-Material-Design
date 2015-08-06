@@ -26,6 +26,7 @@ import org.cnodejs.android.md.model.entity.TopicUpInfo;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.FormatUtils;
+import org.cnodejs.android.md.util.MarkdownUtils;
 
 import java.util.List;
 
@@ -171,7 +172,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 btnCollect.setImageResource(LoginShared.getCollectTopicIdList(context).contains(topic.getId()) ? R.drawable.ic_favorite_theme_24dp : R.drawable.ic_favorite_outline_grey600_24dp);
 
                 // TODO 这里直接使用WebView，有性能问题
-                webReplyContent.loadMarkdown(topic.makeSureAndGetFilterContent());
+                webReplyContent.loadMarkdown(topic.makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);
 
                 isHeaderShow = true;
             }
@@ -318,7 +319,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             iconShadowGap.setVisibility(position == topic.getReplies().size() - 1 ? View.VISIBLE : View.GONE);
 
             // TODO 这里直接使用WebView，有性能问题
-            webReplyContent.loadMarkdown(reply.makeSureAndGetFilterContent());
+            webReplyContent.loadMarkdown(reply.makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);
         }
 
         @OnClick(R.id.topic_item_reply_img_avatar)
