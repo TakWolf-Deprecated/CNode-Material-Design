@@ -52,7 +52,7 @@ public class EditorBarHandler {
     @OnClick(R.id.editor_bar_btn_format_quote)
     protected void onBtnFormatQuoteClick() {
         edtContent.requestFocus();
-        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n> ");
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n> ");
     }
 
     /**
@@ -87,6 +87,16 @@ public class EditorBarHandler {
         }
         // 没找到
         edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n1. ");
+    }
+
+    /**
+     * 插入代码
+     */
+    @OnClick(R.id.editor_bar_btn_insert_code)
+    protected void onBtnInsertCodeClick() {
+        edtContent.requestFocus();
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n```\n\n\n\n```\n ");
+        edtContent.setSelection(edtContent.getSelectionEnd() - 7);
     }
 
     /**
@@ -125,7 +135,6 @@ public class EditorBarHandler {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), " ![](http://) ");
         edtContent.setSelection(edtContent.getSelectionEnd() - 11);
-        Toast.makeText(context, "暂时不支持图片上传", Toast.LENGTH_SHORT).show();
     }
 
     /**
