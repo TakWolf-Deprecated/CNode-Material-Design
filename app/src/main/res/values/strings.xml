@@ -85,6 +85,7 @@
     <string name="modify_topic_sign_hint">来点炫酷的，不要写太多字喔&#8230;</string>
     <string name="default_topic_sign">默认尾巴</string>
 
+    <string name="open_in_browser">在浏览器中打开</string>
     <string name="send">发送</string>
     <string name="send_to_tab_$">发布到分类：</string>
 

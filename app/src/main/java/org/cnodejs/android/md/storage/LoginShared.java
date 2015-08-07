@@ -4,15 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.google.gson.reflect.TypeToken;
-
 import org.cnodejs.android.md.model.entity.LoginInfo;
-import org.cnodejs.android.md.model.entity.TopicSimple;
 import org.cnodejs.android.md.model.entity.User;
 import org.joda.time.DateTime;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public final class LoginShared {
 
@@ -27,7 +21,6 @@ public final class LoginShared {
     private static final String KEY_GITHUB_USERNAME = "github_username";
     private static final String KEY_CREATE_AT = "create_at";
     private static final String KEY_SCORE = "score";
-    private static final String KEY_COLLECT_TOPIC_ID_LIST = "collect_topic_id_list";
 
     public static void login(Context context, String accessToken, @NonNull LoginInfo loginInfo) {
         SharedWrapper.with(context, TAG).setString(KEY_ACCESS_TOKEN, accessToken);
@@ -42,13 +35,6 @@ public final class LoginShared {
         SharedWrapper.with(context, TAG).setString(KEY_GITHUB_USERNAME, user.getGithubUsername());
         SharedWrapper.with(context, TAG).setString(KEY_CREATE_AT, user.getCreateAt().toString());
         SharedWrapper.with(context, TAG).setInt(KEY_SCORE, user.getScore());
-
-        //保存收藏的话题
-        List<String> collectTopicIdList = new ArrayList<>();
-        for (TopicSimple topic : user.getCollectTopics()) {
-            collectTopicIdList.add(topic.getId());
-        }
-        setCollectTopicIdList(context, collectTopicIdList);
     }
 
     public static void logout(Context context) {
@@ -86,15 +72,6 @@ public final class LoginShared {
 
     public static int getScore(Context context) {
         return SharedWrapper.with(context, TAG).getInt(KEY_SCORE, 0);
-    }
-
-    public static List<String> getCollectTopicIdList(Context context) {
-        List<String> collectTopicIdList = SharedWrapper.with(context, TAG).getObject(KEY_COLLECT_TOPIC_ID_LIST, new TypeToken<List<String>>() {}.getType());
-        return collectTopicIdList == null ? new ArrayList<String>() : collectTopicIdList;
-    }
-
-    public static void setCollectTopicIdList(Context context, List<String> collectTopicIdList) {
-        SharedWrapper.with(context, TAG).setObject(KEY_COLLECT_TOPIC_ID_LIST, collectTopicIdList);
     }
 
 }
