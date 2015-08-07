@@ -30,7 +30,7 @@ public class EditorBarHandler {
      * 加粗
      */
     @OnClick(R.id.editor_bar_btn_format_bold)
-    protected void onBtnToolFormatBoldClick() {
+    protected void onBtnFormatBoldClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "****");
         edtContent.setSelection(edtContent.getSelectionEnd() - 2);
@@ -40,26 +40,35 @@ public class EditorBarHandler {
      * 倾斜
      */
     @OnClick(R.id.editor_bar_btn_format_italic)
-    protected void onBtnToolFormatItalicClick() {
+    protected void onBtnFormatItalicClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "**");
         edtContent.setSelection(edtContent.getSelectionEnd() - 1);
     }
 
     /**
+     * 引用
+     */
+    @OnClick(R.id.editor_bar_btn_format_quote)
+    protected void onBtnFormatQuoteClick() {
+        edtContent.requestFocus();
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n> ");
+    }
+
+    /**
      * 无序列表
      */
     @OnClick(R.id.editor_bar_btn_format_list_bulleted)
-    protected void onBtnToolFormatListBulletedClick() {
+    protected void onBtnFormatListBulletedClick() {
         edtContent.requestFocus();
-        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n* ");
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n- ");
     }
 
     /**
      * 有序列表 TODO 这里算法需要优化
      */
     @OnClick(R.id.editor_bar_btn_format_list_numbered)
-    protected void onBtnToolFormatListNumberedClick() {
+    protected void onBtnFormatListNumberedClick() {
         edtContent.requestFocus();
         // 查找向上最近一个\n
         for (int n = edtContent.getSelectionEnd() - 1; n >= 0; n--) {
@@ -84,7 +93,7 @@ public class EditorBarHandler {
      * 插入链接
      */
     @OnClick(R.id.editor_bar_btn_insert_link)
-    protected void onBtnToolInsertLinkClick() {
+    protected void onBtnInsertLinkClick() {
         new MaterialDialog.Builder(context)
                 .iconRes(R.drawable.ic_insert_link_grey600_24dp)
                 .title(R.string.add_link)
@@ -112,7 +121,7 @@ public class EditorBarHandler {
      * 插入图片 TODO 目前没有图片上传接口
      */
     @OnClick(R.id.editor_bar_btn_insert_photo)
-    protected void onBtnToolInsertPhotoClick() {
+    protected void onBtnInsertPhotoClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), " ![](http://) ");
         edtContent.setSelection(edtContent.getSelectionEnd() - 11);
@@ -123,7 +132,7 @@ public class EditorBarHandler {
      * 预览
      */
     @OnClick(R.id.editor_bar_btn_preview)
-    protected void onBtnToolPreviewClick() {
+    protected void onBtnPreviewClick() {
         String content = edtContent.getText().toString();
         if (SettingShared.isEnableTopicSign(context)) { // 添加小尾巴
             content += "\n\n" + SettingShared.getTopicSignContent(context);

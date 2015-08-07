@@ -22,6 +22,14 @@
         android:background="@drawable/rect_btn_transparent_background" />
 
     <ImageView
+        android:id="@+id/editor_bar_btn_format_quote"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:src="@drawable/ic_format_quote_grey600_24dp"
+        android:scaleType="center"
+        android:background="@drawable/rect_btn_transparent_background" />
+
+    <ImageView
         android:id="@+id/editor_bar_btn_format_list_bulleted"
         android:layout_width="54dp"
         android:layout_height="54dp"

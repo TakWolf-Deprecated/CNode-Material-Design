@@ -193,7 +193,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         protected void onBtnToolCloseClick() {
             replyWindow.dismiss();
         }
-        
+
         /**
          * 发送
          */
