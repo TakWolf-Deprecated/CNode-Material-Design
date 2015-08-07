@@ -32,8 +32,8 @@ public class EditorBarHandler {
     @OnClick(R.id.editor_bar_btn_format_bold)
     protected void onBtnFormatBoldClick() {
         edtContent.requestFocus();
-        edtContent.getText().insert(edtContent.getSelectionEnd(), "****");
-        edtContent.setSelection(edtContent.getSelectionEnd() - 2);
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "**string**");
+        edtContent.setSelection(edtContent.getSelectionEnd() - 8, edtContent.getSelectionEnd() - 2);
     }
 
     /**
@@ -42,8 +42,8 @@ public class EditorBarHandler {
     @OnClick(R.id.editor_bar_btn_format_italic)
     protected void onBtnFormatItalicClick() {
         edtContent.requestFocus();
-        edtContent.getText().insert(edtContent.getSelectionEnd(), "**");
-        edtContent.setSelection(edtContent.getSelectionEnd() - 1);
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "*string*");
+        edtContent.setSelection(edtContent.getSelectionEnd() - 7, edtContent.getSelectionEnd() - 1);
     }
 
     /**
