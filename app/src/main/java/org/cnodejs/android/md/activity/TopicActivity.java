@@ -142,7 +142,11 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
             @Override
             public void failure(RetrofitError error) {
                 if (!isFinishing()) {
-                    Toast.makeText(TopicActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                    if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
+                        Toast.makeText(TopicActivity.this, "话题不存在", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(TopicActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                    }
                     refreshLayout.setRefreshing(false);
                 }
             }
