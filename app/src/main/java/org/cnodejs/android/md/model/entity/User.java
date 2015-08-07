@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -71,7 +72,7 @@ public class User {
     }
 
     public List<TopicSimple> getRecentTopics() {
-        return recentTopics;
+        return recentTopics == null ? new ArrayList<TopicSimple>() : recentTopics; // TODO 防止为空
     }
 
     public void setRecentTopics(List<TopicSimple> recentTopics) {
@@ -79,7 +80,7 @@ public class User {
     }
 
     public List<TopicSimple> getRecentReplies() {
-        return recentReplies;
+        return recentReplies == null ? new ArrayList<TopicSimple>() : recentReplies; // TODO 防止为空
     }
 
     public void setRecentReplies(List<TopicSimple> recentReplies) {
@@ -87,7 +88,7 @@ public class User {
     }
 
     public List<TopicSimple> getCollectTopics() {
-        return collectTopics;
+        return collectTopics == null ? new ArrayList<TopicSimple>() : collectTopics; // TODO 防止为空
     }
 
     public void setCollectTopics(List<TopicSimple> collectTopics) {
