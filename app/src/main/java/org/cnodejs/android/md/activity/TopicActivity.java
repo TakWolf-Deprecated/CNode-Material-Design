@@ -126,10 +126,6 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
 
     @Override
     public void onRefresh() {
-        getTopicAsyncTask();
-    }
-
-    private void getTopicAsyncTask() {
         ApiClient.service.getTopic(topicId, false, new Callback<Result<TopicWithReply>>() {
 
             @Override
