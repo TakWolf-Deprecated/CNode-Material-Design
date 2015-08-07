@@ -9,14 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -29,11 +27,11 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Author;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
-import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.util.HandlerUtils;
+import org.cnodejs.android.md.widget.EditorBarHandler;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -177,11 +175,15 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
 
     protected class ReplyHandler {
 
+        @Bind(R.id.editor_bar_layout_root)
+        protected ViewGroup editorBar;
+
         @Bind(R.id.reply_window_edt_content)
         protected EditText edtContent;
 
         protected ReplyHandler(View view) {
             ButterKnife.bind(this, view);
+            new EditorBarHandler(TopicActivity.this, editorBar, edtContent); // 创建editorBar
         }
 
         /**
@@ -190,114 +192,6 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         @OnClick(R.id.reply_window_btn_tool_close)
         protected void onBtnToolCloseClick() {
             replyWindow.dismiss();
-        }
-        
-        /**
-         * 加粗
-         */
-        @OnClick(R.id.reply_window_btn_tool_format_bold)
-        protected void onBtnToolFormatBoldClick() {
-            edtContent.requestFocus();
-            edtContent.getText().insert(edtContent.getSelectionEnd(), "****");
-            edtContent.setSelection(edtContent.getSelectionEnd() - 2);
-        }
-
-        /**
-         * 倾斜
-         */
-        @OnClick(R.id.reply_window_btn_tool_format_italic)
-        protected void onBtnToolFormatItalicClick() {
-            edtContent.requestFocus();
-            edtContent.getText().insert(edtContent.getSelectionEnd(), "**");
-            edtContent.setSelection(edtContent.getSelectionEnd() - 1);
-        }
-
-        /**
-         * 无序列表
-         */
-        @OnClick(R.id.reply_window_btn_tool_format_list_bulleted)
-        protected void onBtnToolFormatListBulletedClick() {
-            edtContent.requestFocus();
-            edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n* ");
-        }
-
-        /**
-         * 有序列表 TODO 这里算法需要优化
-         */
-        @OnClick(R.id.reply_window_btn_tool_format_list_numbered)
-        protected void onBtnToolFormatListNumberedClick() {
-            edtContent.requestFocus();
-            // 查找向上最近一个\n
-            for (int n = edtContent.getSelectionEnd() - 1; n >= 0; n--) {
-                char c = edtContent.getText().charAt(n);
-                if (c == '\n') {
-                    try {
-                        int index = Integer.parseInt(edtContent.getText().charAt(n + 1) + "");
-                        if (edtContent.getText().charAt(n + 2) == '.' && edtContent.getText().charAt(n + 3) == ' ') {
-                            edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n" + (index + 1) + ". ");
-                            return;
-                        }
-                    } catch (Exception e) {
-                        // TODO 这里有问题是如果数字超过10，则无法检测，未来逐渐优化
-                    }
-                }
-            }
-            // 没找到
-            edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n1. ");
-        }
-
-        /**
-         * 插入链接
-         */
-        @OnClick(R.id.reply_window_btn_tool_insert_link)
-        protected void onBtnToolInsertLinkClick() {
-            new MaterialDialog.Builder(TopicActivity.this)
-                    .iconRes(R.drawable.ic_insert_link_grey600_24dp)
-                    .title(R.string.add_link)
-                    .customView(R.layout.dialog_tool_insert_link, false)
-                    .positiveText(R.string.confirm)
-                    .negativeText(R.string.cancel)
-                    .callback(new MaterialDialog.ButtonCallback() {
-
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            View view = dialog.getCustomView();
-                            EditText edtTitle = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_title);
-                            EditText edtLink = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_link);
-
-                            String insertText = " [" + edtTitle.getText() + "](" + edtLink.getText() + ") ";
-                            edtContent.requestFocus();
-                            edtContent.getText().insert(edtContent.getSelectionEnd(), insertText);
-                        }
-
-                    })
-                    .show();
-        }
-
-        /**
-         * 插入图片 TODO 目前没有图片上传接口
-         */
-        @OnClick(R.id.reply_window_btn_tool_insert_photo)
-        protected void onBtnToolInsertPhotoClick() {
-            edtContent.requestFocus();
-            edtContent.getText().insert(edtContent.getSelectionEnd(), " ![](http://) ");
-            edtContent.setSelection(edtContent.getSelectionEnd() - 11);
-            Toast.makeText(TopicActivity.this, "暂时不支持图片上传", Toast.LENGTH_SHORT).show();
-        }
-
-        /**
-         * 预览
-         */
-        @OnClick(R.id.reply_window_btn_tool_preview)
-        protected void onBtnToolPreviewClick() {
-            String content = edtContent.getText().toString();
-            if (SettingShared.isEnableTopicSign(TopicActivity.this)) { // 添加小尾巴
-                content += "\n\n" + SettingShared.getTopicSignContent(TopicActivity.this);
-            }
-
-            Intent intent = new Intent(TopicActivity.this, MarkdownPreviewActivity.class);
-            intent.putExtra("markdownText", content);
-            startActivity(intent);
         }
 
         /**
