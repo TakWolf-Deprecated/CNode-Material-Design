@@ -58,6 +58,7 @@ public class EditorBarHandler {
     protected void onBtnFormatQuoteClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n> ");
+        edtContent.setSelection(edtContent.getSelectionEnd());
     }
 
     /**
@@ -67,6 +68,7 @@ public class EditorBarHandler {
     protected void onBtnFormatListBulletedClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n- ");
+        edtContent.setSelection(edtContent.getSelectionEnd());
     }
 
     /**
@@ -92,6 +94,7 @@ public class EditorBarHandler {
         }
         // 没找到
         edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n1. ");
+        edtContent.setSelection(edtContent.getSelectionEnd());
     }
 
     /**
