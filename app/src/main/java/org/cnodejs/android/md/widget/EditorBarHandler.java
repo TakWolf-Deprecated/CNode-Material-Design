@@ -95,8 +95,8 @@ public class EditorBarHandler {
     @OnClick(R.id.editor_bar_btn_insert_code)
     protected void onBtnInsertCodeClick() {
         edtContent.requestFocus();
-        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n```\n\n\n\n```\n ");
-        edtContent.setSelection(edtContent.getSelectionEnd() - 7);
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n```\n\n```\n ");
+        edtContent.setSelection(edtContent.getSelectionEnd() - 6);
     }
 
     /**
