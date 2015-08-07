@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -27,9 +26,6 @@ public class User {
 
     @SerializedName("recent_replies")
     private List<TopicSimple> recentReplies;
-
-    @SerializedName("collect_topics")
-    private List<TopicSimple> collectTopics;
 
     public String getLoginName() {
         return loginName;
@@ -72,7 +68,7 @@ public class User {
     }
 
     public List<TopicSimple> getRecentTopics() {
-        return recentTopics == null ? new ArrayList<TopicSimple>() : recentTopics; // TODO 防止为空
+        return recentTopics;
     }
 
     public void setRecentTopics(List<TopicSimple> recentTopics) {
@@ -80,19 +76,11 @@ public class User {
     }
 
     public List<TopicSimple> getRecentReplies() {
-        return recentReplies == null ? new ArrayList<TopicSimple>() : recentReplies; // TODO 防止为空
+        return recentReplies;
     }
 
     public void setRecentReplies(List<TopicSimple> recentReplies) {
         this.recentReplies = recentReplies;
-    }
-
-    public List<TopicSimple> getCollectTopics() {
-        return collectTopics == null ? new ArrayList<TopicSimple>() : collectTopics; // TODO 防止为空，正常不应该为空，CNode可能出问题了
-    }
-
-    public void setCollectTopics(List<TopicSimple> collectTopics) {
-        this.collectTopics = collectTopics;
     }
 
 }

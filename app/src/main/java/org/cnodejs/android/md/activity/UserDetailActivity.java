@@ -25,7 +25,6 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.util.ShipUtils;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,13 +142,11 @@ public class UserDetailActivity extends AppCompatActivity {
         private List<UserDetailItemFragment> fmList = new ArrayList<>();
         private String[] titles = {
                 "最近回复",
-                "最新发布",
-                "收藏话题"
+                "最新发布"
         };
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
-            fmList.add(new UserDetailItemFragment());
             fmList.add(new UserDetailItemFragment());
             fmList.add(new UserDetailItemFragment());
         }
@@ -157,7 +154,6 @@ public class UserDetailActivity extends AppCompatActivity {
         public void update(@NonNull User user) {
             fmList.get(0).notifyDataSetChanged(user.getRecentReplies());
             fmList.get(1).notifyDataSetChanged(user.getRecentTopics());
-            fmList.get(2).notifyDataSetChanged(user.getCollectTopics());
         }
 
         @Override
