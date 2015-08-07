@@ -1,5 +1,7 @@
 # CNode Material Design #
 
+[https://github.com/TakWolf/CNode-Material-Design](https://github.com/TakWolf/CNode-Material-Design)
+
 ![](/art/ic_launcher.png)
 
 [![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
@@ -12,7 +14,9 @@ CNode社区第三方Android客户端
 
 [![Google Play Store](/art/git_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
-[CNodeMD-v1.0.1-build-11](http://takwolf.com/download/CNodeMD-v1.0.1-build-11.apk)
+[CNodeMD-v1.0.2-build-12](http://takwolf.com/download/CNodeMD-v1.0.2-build-12.apk)
+
+[豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
 ## Screenshot ##
 
