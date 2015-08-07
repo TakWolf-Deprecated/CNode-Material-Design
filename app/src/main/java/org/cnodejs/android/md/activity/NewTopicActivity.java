@@ -264,7 +264,7 @@ public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMen
                 if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                     showAccessTokenErrorDialog();
                 } else {
-                    Toast.makeText(NewTopicActivity.this, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewTopicActivity.this, R.string.network_faild, Toast.LENGTH_SHORT).show();
                 }
             }
 

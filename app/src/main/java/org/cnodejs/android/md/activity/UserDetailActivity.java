@@ -118,7 +118,7 @@ public class UserDetailActivity extends AppCompatActivity {
             public void failure(RetrofitError error) {
                 if (!isFinishing()) {
                     if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
-                        Toast.makeText(UserDetailActivity.this, "用户不存在", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserDetailActivity.this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(UserDetailActivity.this, R.string.data_load_faild_and_click_avatar_to_reload, Toast.LENGTH_SHORT).show();
                     }

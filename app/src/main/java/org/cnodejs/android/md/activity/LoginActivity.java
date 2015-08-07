@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                             edtAccessToken.setError(getString(R.string.access_token_error));
                         } else {
-                            Toast.makeText(LoginActivity.this, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, R.string.network_faild, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
