@@ -195,7 +195,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         /**
          * 加粗
          */
-        @OnClick(R.id.reply_window_btn_tool_format_bold)
+        @OnClick(R.id.editor_bar_btn_format_bold)
         protected void onBtnToolFormatBoldClick() {
             edtContent.requestFocus();
             edtContent.getText().insert(edtContent.getSelectionEnd(), "****");
@@ -205,7 +205,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         /**
          * 倾斜
          */
-        @OnClick(R.id.reply_window_btn_tool_format_italic)
+        @OnClick(R.id.editor_bar_btn_format_italic)
         protected void onBtnToolFormatItalicClick() {
             edtContent.requestFocus();
             edtContent.getText().insert(edtContent.getSelectionEnd(), "**");
@@ -215,7 +215,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         /**
          * 无序列表
          */
-        @OnClick(R.id.reply_window_btn_tool_format_list_bulleted)
+        @OnClick(R.id.editor_bar_btn_format_list_bulleted)
         protected void onBtnToolFormatListBulletedClick() {
             edtContent.requestFocus();
             edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n* ");
@@ -224,7 +224,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         /**
          * 有序列表 TODO 这里算法需要优化
          */
-        @OnClick(R.id.reply_window_btn_tool_format_list_numbered)
+        @OnClick(R.id.editor_bar_btn_format_list_numbered)
         protected void onBtnToolFormatListNumberedClick() {
             edtContent.requestFocus();
             // 查找向上最近一个\n
@@ -249,7 +249,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         /**
          * 插入链接
          */
-        @OnClick(R.id.reply_window_btn_tool_insert_link)
+        @OnClick(R.id.editor_bar_btn_insert_link)
         protected void onBtnToolInsertLinkClick() {
             new MaterialDialog.Builder(TopicActivity.this)
                     .iconRes(R.drawable.ic_insert_link_grey600_24dp)
@@ -277,7 +277,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         /**
          * 插入图片 TODO 目前没有图片上传接口
          */
-        @OnClick(R.id.reply_window_btn_tool_insert_photo)
+        @OnClick(R.id.editor_bar_btn_insert_photo)
         protected void onBtnToolInsertPhotoClick() {
             edtContent.requestFocus();
             edtContent.getText().insert(edtContent.getSelectionEnd(), " ![](http://) ");
@@ -288,7 +288,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         /**
          * 预览
          */
-        @OnClick(R.id.reply_window_btn_tool_preview)
+        @OnClick(R.id.editor_bar_btn_preview)
         protected void onBtnToolPreviewClick() {
             String content = edtContent.getText().toString();
             if (SettingShared.isEnableTopicSign(TopicActivity.this)) { // 添加小尾巴
