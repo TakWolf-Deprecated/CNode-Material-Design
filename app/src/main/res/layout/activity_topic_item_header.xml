@@ -21,6 +21,7 @@
             android:layout_marginBottom="8dp"
             android:textColor="@color/text_color_primary"
             android:textSize="18sp"
+            android:textStyle="bold"
             tools:text="话题的标题" />
 
         <RelativeLayout
