@@ -3,6 +3,7 @@ package org.cnodejs.android.md.widget;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,10 +20,12 @@ public class EditorBarHandler {
 
     private Context context;
     private EditText edtContent;
+    private InputMethodManager imm;
 
     public EditorBarHandler(Context context, View editorBar, EditText edtContent) {
         this.context = context;
         this.edtContent = edtContent;
+        imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         ButterKnife.bind(this, editorBar);
     }
 
@@ -34,6 +37,7 @@ public class EditorBarHandler {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "**string**");
         edtContent.setSelection(edtContent.getSelectionEnd() - 8, edtContent.getSelectionEnd() - 2);
+        imm.showSoftInput(edtContent, 0);
     }
 
     /**
@@ -44,6 +48,7 @@ public class EditorBarHandler {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "*string*");
         edtContent.setSelection(edtContent.getSelectionEnd() - 7, edtContent.getSelectionEnd() - 1);
+        imm.showSoftInput(edtContent, 0);
     }
 
     /**
@@ -135,6 +140,7 @@ public class EditorBarHandler {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), " ![Image](http://resource) ");
         edtContent.setSelection(edtContent.getSelectionEnd() - 10, edtContent.getSelectionEnd() - 2);
+        imm.showSoftInput(edtContent, 0);
     }
 
     /**
