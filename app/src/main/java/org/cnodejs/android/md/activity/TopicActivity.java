@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.util.HandlerUtils;
+import org.cnodejs.android.md.util.ShipUtils;
 import org.cnodejs.android.md.widget.EditorBarHandler;
 import org.joda.time.DateTime;
 
@@ -44,7 +46,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, TopicAdapter.OnAtClickListener {
+public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, TopicAdapter.OnAtClickListener, Toolbar.OnMenuItemClickListener {
 
     @Bind(R.id.topic_layout_root)
     protected ViewGroup layoutRoot;
@@ -83,6 +85,8 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
         topicId = getIntent().getStringExtra("topicId");
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
+        toolbar.inflateMenu(R.menu.topic);
+        toolbar.setOnMenuItemClickListener(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TopicAdapter(this, this);
@@ -120,6 +124,17 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
             }
 
         }, 100); // refreshLayout无法直接在onCreate中设置刷新状态
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_open_in_browser:
+                ShipUtils.openUrlByBrowser(this, "https://cnodejs.org/topic/" + topicId);
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override

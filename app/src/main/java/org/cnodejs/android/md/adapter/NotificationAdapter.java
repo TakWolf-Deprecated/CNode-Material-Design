@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,12 +95,24 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             Picasso.with(context).load(ApiClient.ROOT_HOST + message.getAuthor().getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
-            tvAction.setText(message.getType() == Message.Type.at ? "在回复中@了您" : "回复了您的话题");
             tvTime.setText(FormatUtils.getRecentlyTimeFormatText(message.getReply().getCreateAt()));
-            tvTopicTitle.setText("原话题：" + message.getTopic().getTitle());
+            tvTopicTitle.setText("话题：" + message.getTopic().getTitle());
 
-            // TODO 这里直接使用WebView，有性能问题
-            webReplyContent.loadMarkdown(message.getReply().makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);
+            // 判断通知类型
+            if (message.getType() == Message.Type.at) {
+                if (message.getReply() == null || TextUtils.isEmpty(message.getReply().getContent())) {
+                    tvAction.setText("在话题中@了您");
+                    webReplyContent.setVisibility(View.GONE);
+                } else {
+                    tvAction.setText("在回复中@了您");
+                    webReplyContent.setVisibility(View.VISIBLE);
+                    webReplyContent.loadMarkdown(message.getReply().makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);  // TODO 这里直接使用WebView，有性能问题
+                }
+            } else {
+                tvAction.setText("回复了您的话题");
+                webReplyContent.setVisibility(View.VISIBLE);
+                webReplyContent.loadMarkdown(message.getReply().makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);  // TODO 这里直接使用WebView，有性能问题
+            }
 
             // 已读未读状态
             tvTime.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));

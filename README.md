@@ -6,7 +6,7 @@
 
 [![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
 
-CNode社区第三方Android客户端
+[CNode社区](https://cnodejs.org)第三方Android客户端
 
 原生App，Material Design风格
 
@@ -14,7 +14,13 @@ CNode社区第三方Android客户端
 
 [![Google Play Store](/art/git_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
-[CNodeMD-v1.0.2-build-12](http://takwolf.com/download/CNodeMD-v1.0.2-build-12.apk)
+[CNodeMD-v1.0.3-build-13](http://takwolf.com/download/CNodeMD-v1.0.3-build-13.apk)
+
+[Google Play](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
+
+[FIR.im](http://fir.im/CNodeMD)
+
+[360手机助手](http://zhushou.360.cn/detail/index/soft_id/3060683)
 
 [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 

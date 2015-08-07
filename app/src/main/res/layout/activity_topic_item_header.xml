@@ -21,36 +21,8 @@
             android:layout_marginBottom="8dp"
             android:textColor="@color/text_color_primary"
             android:textSize="18sp"
+            android:textStyle="bold"
             tools:text="话题的标题" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-
-            <TextView
-                android:id="@+id/topic_item_header_tv_tab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                android:background="@drawable/topic_tab_top_background"
-                tools:text="置顶" />
-
-            <TextView
-                android:id="@+id/topic_item_header_tv_visit_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/color_accent"
-                android:textSize="14sp"
-                tools:text="115次浏览" />
-
-        </FrameLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -96,17 +68,36 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/topic_item_header_btn_collect"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:padding="8dp"
-                android:src="@drawable/ic_favorite_outline_grey600_24dp"
-                android:scaleType="center"
-                android:background="@drawable/rect_btn_transparent_background" />
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/topic_item_header_tv_tab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:background="@drawable/topic_tab_top_background"
+                    tools:text="置顶" />
+
+                <TextView
+                    android:id="@+id/topic_item_header_tv_visit_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/color_accent"
+                    android:textSize="14sp"
+                    tools:text="115次浏览" />
+
+            </LinearLayout>
 
         </RelativeLayout>
 

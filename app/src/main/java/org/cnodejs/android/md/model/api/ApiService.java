@@ -53,22 +53,6 @@ public interface ApiService {
     );
 
     @FormUrlEncoded
-    @POST("/v1/topic/collect")
-    void collectTopic(
-            @Field("accesstoken") String accessToken,
-            @Field("topic_id") String topicId,
-            Callback<Void> callback
-    );
-
-    @FormUrlEncoded
-    @POST("/v1/topic/de_collect")
-    void decollectTopic(
-            @Field("accesstoken") String accessToken,
-            @Field("topic_id") String topicId,
-            Callback<Void> callback
-    );
-
-    @FormUrlEncoded
     @POST("/v1/topic/{topicId}/replies")
     void replyTopic(
             @Field("accesstoken") String accessToken,

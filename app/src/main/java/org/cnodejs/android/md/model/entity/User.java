@@ -27,9 +27,6 @@ public class User {
     @SerializedName("recent_replies")
     private List<TopicSimple> recentReplies;
 
-    @SerializedName("collect_topics")
-    private List<TopicSimple> collectTopics;
-
     public String getLoginName() {
         return loginName;
     }
@@ -84,14 +81,6 @@ public class User {
 
     public void setRecentReplies(List<TopicSimple> recentReplies) {
         this.recentReplies = recentReplies;
-    }
-
-    public List<TopicSimple> getCollectTopics() {
-        return collectTopics;
-    }
-
-    public void setCollectTopics(List<TopicSimple> collectTopics) {
-        this.collectTopics = collectTopics;
     }
 
 }
