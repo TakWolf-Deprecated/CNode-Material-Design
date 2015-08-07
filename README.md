@@ -20,6 +20,8 @@
 
 [FIR.im](http://fir.im/CNodeMD)
 
+[360手机助手](http://zhushou.360.cn/detail/index/soft_id/3060683)
+
 [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
 ## Screenshot ##
