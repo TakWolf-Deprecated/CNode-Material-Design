@@ -96,18 +96,6 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/topic_item_header_btn_collect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:padding="8dp"
-                android:src="@drawable/ic_favorite_outline_grey600_24dp"
-                android:scaleType="center"
-                android:background="@drawable/rect_btn_transparent_background" />
-
         </RelativeLayout>
 
         <us.feras.mdv.MarkdownView
