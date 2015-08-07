@@ -126,10 +126,6 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
 
     @Override
     public void onRefresh() {
-        getTopicAsyncTask();
-    }
-
-    private void getTopicAsyncTask() {
         ApiClient.service.getTopic(topicId, false, new Callback<Result<TopicWithReply>>() {
 
             @Override
@@ -146,7 +142,11 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
             @Override
             public void failure(RetrofitError error) {
                 if (!isFinishing()) {
-                    Toast.makeText(TopicActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                    if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
+                        Toast.makeText(TopicActivity.this, R.string.topic_not_found, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(TopicActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                    }
                     refreshLayout.setRefreshing(false);
                 }
             }
@@ -351,7 +351,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
                     if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                         adapter.showAccessTokenErrorDialog();
                     } else {
-                        Toast.makeText(TopicActivity.this, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TopicActivity.this, R.string.network_faild, Toast.LENGTH_SHORT).show();
                     }
                 }
 
