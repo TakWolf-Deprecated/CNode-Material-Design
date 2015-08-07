@@ -16,6 +16,10 @@ CNode社区第三方Android客户端
 
 [CNodeMD-v1.0.2-build-12](http://takwolf.com/download/CNodeMD-v1.0.2-build-12.apk)
 
+[Google Play](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
+
+[fir.im](http://fir.im/CNodeMD)
+
 [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
 ## Screenshot ##
