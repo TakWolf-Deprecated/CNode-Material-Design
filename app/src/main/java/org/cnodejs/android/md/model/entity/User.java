@@ -88,7 +88,7 @@ public class User {
     }
 
     public List<TopicSimple> getCollectTopics() {
-        return collectTopics == null ? new ArrayList<TopicSimple>() : collectTopics; // TODO 防止为空
+        return collectTopics == null ? new ArrayList<TopicSimple>() : collectTopics; // TODO 防止为空，正常不应该为空，CNode可能出问题了
     }
 
     public void setCollectTopics(List<TopicSimple> collectTopics) {
