@@ -133,8 +133,8 @@ public class EditorBarHandler {
     @OnClick(R.id.editor_bar_btn_insert_photo)
     protected void onBtnInsertPhotoClick() {
         edtContent.requestFocus();
-        edtContent.getText().insert(edtContent.getSelectionEnd(), " ![Image](http://) ");
-        edtContent.setSelection(edtContent.getSelectionEnd() - 2);
+        edtContent.getText().insert(edtContent.getSelectionEnd(), " ![Image](http://resource) ");
+        edtContent.setSelection(edtContent.getSelectionEnd() - 10, edtContent.getSelectionEnd() - 2);
     }
 
     /**
