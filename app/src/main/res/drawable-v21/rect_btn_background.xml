@@ -5,7 +5,7 @@
         <selector>
             <item android:state_checked="true" android:drawable="@color/rect_btn_background_pressed" />
             <item android:state_pressed="true" android:drawable="@color/rect_btn_background_pressed" />
-            <item android:drawable="@android:color/white" />
+            <item android:drawable="@color/rect_btn_background_normal" />
         </selector>
     </item>
 </ripple>
