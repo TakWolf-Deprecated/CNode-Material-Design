@@ -245,8 +245,12 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
                     topic.getReplies().add(reply);
                     // 更新adapter并让recyclerView滑动到最底部
                     replyWindow.dismiss();
-                    adapter.notifyItemChanged(topic.getReplies().size() - 1);
-                    adapter.notifyItemInserted(topic.getReplies().size());
+                    if (topic.getReplies().size() == 1) { // 需要全刷新
+                        adapter.notifyDataSetChanged();
+                    } else { // 插入刷新
+                        adapter.notifyItemChanged(topic.getReplies().size() - 1);
+                        adapter.notifyItemInserted(topic.getReplies().size());
+                    }
                     recyclerView.smoothScrollToPosition(topic.getReplies().size());
                     // 清空回复框内容
                     edtContent.setText(null);

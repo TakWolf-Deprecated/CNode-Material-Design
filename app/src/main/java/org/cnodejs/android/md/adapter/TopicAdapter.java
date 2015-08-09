@@ -163,13 +163,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 tvLoginName.setText(topic.getAuthor().getLoginName());
                 tvCreateTime.setText(context.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeFormatText(topic.getCreateAt()));
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
-                layoutNoReply.setVisibility(topic.getReplies().size() > 0 ? View.GONE : View.VISIBLE);
 
                 // TODO 这里直接使用WebView，有性能问题
                 webReplyContent.loadMarkdown(topic.makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);
 
                 isHeaderShow = true;
             }
+
+            layoutNoReply.setVisibility(topic.getReplies().size() > 0 ? View.GONE : View.VISIBLE);
         }
 
         @OnClick(R.id.topic_item_header_img_avatar)

@@ -4,7 +4,7 @@
     <item>
         <selector>
             <item android:state_pressed="true" android:drawable="@drawable/button_transparent_pressed" />
-            <item android:drawable="@color/rect_btn_background_normal" />
+            <item android:drawable="@android:color/transparent" />
         </selector>
     </item>
 </ripple>

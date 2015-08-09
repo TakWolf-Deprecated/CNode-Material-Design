@@ -24,7 +24,7 @@ public class AboutActivity extends AppCompatActivity {
     @Bind(R.id.about_tv_version)
     protected TextView tvVersion;
 
-    private static final String version = "v" + BuildConfig.VERSION_NAME + " (build-" + BuildConfig.VERSION_CODE + ")";
+    public static final String version = "v" + BuildConfig.VERSION_NAME + " (build-" + BuildConfig.VERSION_CODE + ")";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
