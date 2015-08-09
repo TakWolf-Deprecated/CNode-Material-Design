@@ -99,4 +99,7 @@
 
     <string name="markdown_preview">Markdown预览</string>
 
+    <string name="app_crash">程序崩溃</string>
+    <string name="crash_log_tip">非常抱歉，程序运行过程中出现了一个无法避免的错误。您可以将该问题发送给开发者，此举将有助于改善应用体验。由此给您带来的诸多不便，我们深表歉意，敬请谅解。</string>
+
 </resources>
