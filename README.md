@@ -28,6 +28,8 @@
 
 [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
+[安智市场](http://www.anzhi.com/soft_2315984.html)
+
 ## Screenshot ##
 
 ![](/art/screenshot_01.png)
