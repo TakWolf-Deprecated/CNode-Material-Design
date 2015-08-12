@@ -8,8 +8,7 @@ import retrofit.converter.GsonConverter;
 
 public final class ApiClient {
 
-    public static final String ROOT_HOST = "https://cnodejs.org";
-    public static final String API_HOST = ROOT_HOST + "/api";
+    private static final String API_HOST = "https://cnodejs.org/api";
 
     public static final ApiService service = new RestAdapter.Builder()
             .setEndpoint(API_HOST)
