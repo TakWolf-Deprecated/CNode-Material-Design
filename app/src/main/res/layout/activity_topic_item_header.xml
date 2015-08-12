@@ -39,13 +39,17 @@
                 android:src="@drawable/image_default" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/topic_item_header_img_avatar"
                 android:layout_toRightOf="@+id/topic_item_header_img_avatar"
+                android:layout_toStartOf="@+id/topic_item_header_layout_topic_info"
+                android:layout_toLeftOf="@+id/topic_item_header_layout_topic_info"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -56,19 +60,20 @@
                     android:textSize="16sp"
                     tools:text="TakWolf" />
 
-                    <TextView
-                        android:id="@+id/topic_item_header_tv_create_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/text_color_secondary"
-                        android:textSize="14sp"
-                        android:singleLine="true"
-                        tools:text="发布于：2天前" />
+                <TextView
+                    android:id="@+id/topic_item_header_tv_create_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/text_color_secondary"
+                    android:textSize="14sp"
+                    android:singleLine="true"
+                    tools:text="发布于：2天前" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/topic_item_header_layout_topic_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
