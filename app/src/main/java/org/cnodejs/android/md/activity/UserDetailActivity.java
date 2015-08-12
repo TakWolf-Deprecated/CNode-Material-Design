@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -132,7 +133,13 @@ public class UserDetailActivity extends AppCompatActivity {
     private void updateUserInfoViews(User user) {
         Picasso.with(this).load(user.getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
         tvLoginName.setText(user.getLoginName());
-        tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
+        if (TextUtils.isEmpty(user.getGithubUsername())) {
+            tvGithubUsername.setVisibility(View.INVISIBLE);
+            tvGithubUsername.setText(null);
+        } else {
+            tvGithubUsername.setVisibility(View.VISIBLE);
+            tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
+        }
         tvCreateTime.setText(getString(R.string.register_time_$) + user.getCreateAt().toString("yyyy-MM-dd"));
         tvScore.setText(getString(R.string.score_$) + user.getScore());
     }
