@@ -130,7 +130,7 @@ public class UserDetailActivity extends AppCompatActivity {
     }
 
     private void updateUserInfoViews(User user) {
-        Picasso.with(this).load(ApiClient.ROOT_HOST + user.getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
+        Picasso.with(this).load(user.getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
         tvLoginName.setText(user.getLoginName());
         tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
         tvCreateTime.setText(getString(R.string.register_time_$) + user.getCreateAt().toString("yyyy-MM-dd"));
