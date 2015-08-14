@@ -66,6 +66,11 @@ public class AboutActivity extends AppCompatActivity {
                 "设备信息：Android " + Build.VERSION.RELEASE + " - " + Build.MANUFACTURER + " - " + Build.MODEL + "\n（如果涉及隐私请手动删除这个内容）\n\n");
     }
 
+    @OnClick(R.id.about_btn_open_in_app_store)
+    protected void onBtnOpenInAppStoreClick() {
+        ShipUtils.openInAppStore(this);
+    }
+
     @OnClick(R.id.about_btn_open_source_license)
     protected void onBtnOpenSourceLicenseClick() {
         startActivity(new Intent(this, LicenseActivity.class));
