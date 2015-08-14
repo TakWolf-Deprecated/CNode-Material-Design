@@ -82,6 +82,7 @@
                     android:layout_marginTop="4dp"
                     android:textColor="@color/text_color_secondary"
                     android:textSize="14sp"
+                    android:singleLine="true"
                     tools:text="v0.0.0-build-0" />
 
             </LinearLayout>
@@ -109,7 +110,36 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/open_source_url_content"
                     android:textColor="@color/text_color_secondary"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+            <View style="@style/AppTheme.DeepLine" />
+
+            <LinearLayout
+                android:id="@+id/about_btn_about_third_party_image_upload_api"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:background="@drawable/rect_btn_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_third_party_image_upload_api"
+                    android:textColor="@color/text_color_primary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/about_third_party_image_upload_api_content"
+                    android:textColor="@color/text_color_secondary"
+                    android:textSize="14sp"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -136,7 +166,8 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/about_cnode_content"
                     android:textColor="@color/text_color_secondary"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -163,7 +194,8 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/about_author_content"
                     android:textColor="@color/text_color_secondary"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -190,7 +222,37 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/advice_feedback_content"
                     android:textColor="@color/text_color_secondary"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+
+            <View style="@style/AppTheme.DeepLine" />
+
+            <LinearLayout
+                android:id="@+id/about_btn_open_in_app_store"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:background="@drawable/rect_btn_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/open_in_app_store"
+                    android:textColor="@color/text_color_primary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/open_in_app_store_content"
+                    android:textColor="@color/text_color_secondary"
+                    android:textSize="14sp"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
