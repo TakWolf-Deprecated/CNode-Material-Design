@@ -84,6 +84,8 @@
     <string name="modify_topic_sign">设置小尾巴</string>
     <string name="modify_topic_sign_hint">来点炫酷的，不要写太多字喔&#8230;</string>
     <string name="default_topic_sign">默认尾巴</string>
+    <string name="third_party_image_upload_api">第三方图片上传接口</string>
+    <string name="third_party_image_upload_api_summary">更多信息，请参考关于页面的相关连接</string>
 
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="send">发送</string>
