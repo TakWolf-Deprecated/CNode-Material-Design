@@ -42,6 +42,11 @@ public class AboutActivity extends AppCompatActivity {
         ShipUtils.openUrlByBrowser(this, getString(R.string.open_source_url_content));
     }
 
+    @OnClick(R.id.about_btn_about_third_party_image_upload_api)
+    protected void onBtnAboutThirdPartyImageUploadApiClick() {
+        ShipUtils.openUrlByBrowser(this, getString(R.string.about_third_party_image_upload_api_content));
+    }
+
     @OnClick(R.id.about_btn_about_cnode)
     protected void onBtnAboutCNodeClick() {
         ShipUtils.openUrlByBrowser(this, getString(R.string.about_cnode_content));
