@@ -22,6 +22,8 @@ public final class LoginShared {
     private static final String KEY_CREATE_AT = "create_at";
     private static final String KEY_SCORE = "score";
 
+    private static final String KEY_PERMIT_USE_THIRD_PARTY_IMAGE_UPLOAD_API = "permit_use_third_party_image_upload_api";
+
     public static void login(Context context, String accessToken, @NonNull LoginInfo loginInfo) {
         SharedWrapper.with(context, TAG).setString(KEY_ACCESS_TOKEN, accessToken);
         SharedWrapper.with(context, TAG).setString(KEY_ID, loginInfo.getId());
@@ -72,6 +74,14 @@ public final class LoginShared {
 
     public static int getScore(Context context) {
         return SharedWrapper.with(context, TAG).getInt(KEY_SCORE, 0);
+    }
+
+    public static boolean isPermitUseThirdPartyImageUploadApi(Context context) {
+        return SharedWrapper.with(context, TAG).getBoolean(KEY_PERMIT_USE_THIRD_PARTY_IMAGE_UPLOAD_API, false);
+    }
+
+    public static void setPermitUseThirdPartyImageUploadApi(Context context, boolean enable) {
+        SharedWrapper.with(context, TAG).setBoolean(KEY_PERMIT_USE_THIRD_PARTY_IMAGE_UPLOAD_API, enable);
     }
 
 }
