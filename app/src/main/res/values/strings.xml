@@ -72,7 +72,8 @@
     <string name="advice_feedback">意见反馈</string>
     <string name="advice_feedback_content">向作者发送电子邮件</string>
     <string name="open_in_app_store">为应用评分</string>
-    <string name="open_in_app_store_content">觉得赞就给个好评吧</string>
+    <string name="open_in_app_store_content">觉得赞就给个好评吧！</string>
+    <string name="go_to_app_store">去评分</string>
     <string name="open_source_license">开放源代码许可</string>
     <string name="about_copyright">Copyright © 2015&#8211;2016 TakWolf</string>
 
