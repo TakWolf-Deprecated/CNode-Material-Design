@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.listener.NavigationFinishClickListener;
@@ -66,9 +68,22 @@ public class AboutActivity extends AppCompatActivity {
                 "设备信息：Android " + Build.VERSION.RELEASE + " - " + Build.MANUFACTURER + " - " + Build.MODEL + "\n（如果涉及隐私请手动删除这个内容）\n\n");
     }
 
-    @OnClick(R.id.about_btn_open_in_app_store)
+    @OnClick(R.id.about_fab_open_in_app_store)
     protected void onBtnOpenInAppStoreClick() {
-        ShipUtils.openInAppStore(this);
+        new MaterialDialog.Builder(this)
+                .title(R.string.open_in_app_store)
+                .content(R.string.open_in_app_store_content)
+                .positiveText(R.string.go_to_app_store)
+                .negativeText(R.string.cancel)
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        ShipUtils.openInAppStore(AboutActivity.this);
+                    }
+
+                })
+                .show();
     }
 
     @OnClick(R.id.about_btn_open_source_license)
