@@ -24,10 +24,11 @@
             android:id="@+id/main_left_layout_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/main_left_nav_padding_top"
-            android:paddingBottom="8dp"
+            android:layout_marginTop="@dimen/nav_status_bar_adapt_height"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
