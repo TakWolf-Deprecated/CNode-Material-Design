@@ -15,8 +15,8 @@
     <!-- App Theme FitsStatusBar -->
     <style name="AppTheme.FitsStatusBar" />
 
-    <!-- App Theme Logo Page -->
-    <style name="AppTheme.LogoPage" />
+    <!-- App Theme FitsStatusBar TranslucentNavigation -->
+    <style name="AppTheme.FitsStatusBar.TranslucentNavigation" />
 
     <!-- Deep Line -->
     <style name="AppTheme.DeepLine">
