@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:background="@drawable/rect_btn_background"
+        android:background="@drawable/selectable_item_background"
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView

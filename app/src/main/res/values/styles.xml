@@ -61,7 +61,7 @@
         <item name="android:textColor">@drawable/main_nav_item_text_color</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:background">@drawable/rect_btn_background</item>
+        <item name="android:background">@drawable/selectable_item_background</item>
     </style>
 
     <!-- Navigation Item Badger -->
