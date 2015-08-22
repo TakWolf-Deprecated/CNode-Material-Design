@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             tvScore.setText(null);
             btnLogout.setVisibility(View.GONE);
         } else {
-            Picasso.with(this).load(LoginShared.getAvatarUrl(this)).error(R.drawable.image_default).into(imgAvatar);
+            Picasso.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
             tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
             btnLogout.setVisibility(View.VISIBLE);
