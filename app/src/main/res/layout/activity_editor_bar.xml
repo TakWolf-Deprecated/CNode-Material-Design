@@ -11,7 +11,7 @@
         android:layout_height="54dp"
         android:src="@drawable/ic_format_bold_grey600_24dp"
         android:scaleType="center"
-        android:background="@drawable/rect_btn_background" />
+        android:background="@drawable/selectable_item_background" />
 
     <ImageView
         android:id="@+id/editor_bar_btn_format_italic"
@@ -19,7 +19,7 @@
         android:layout_height="54dp"
         android:src="@drawable/ic_format_italic_grey600_24dp"
         android:scaleType="center"
-        android:background="@drawable/rect_btn_background" />
+        android:background="@drawable/selectable_item_background" />
 
     <ImageView
         android:id="@+id/editor_bar_btn_format_quote"
@@ -27,7 +27,7 @@
         android:layout_height="54dp"
         android:src="@drawable/ic_format_quote_grey600_24dp"
         android:scaleType="center"
-        android:background="@drawable/rect_btn_background" />
+        android:background="@drawable/selectable_item_background" />
 
     <ImageView
         android:id="@+id/editor_bar_btn_format_list_bulleted"
@@ -35,7 +35,7 @@
         android:layout_height="54dp"
         android:src="@drawable/ic_format_list_bulleted_grey600_24dp"
         android:scaleType="center"
-        android:background="@drawable/rect_btn_background" />
+        android:background="@drawable/selectable_item_background" />
 
     <ImageView
         android:id="@+id/editor_bar_btn_format_list_numbered"
@@ -43,7 +43,7 @@
         android:layout_height="54dp"
         android:src="@drawable/ic_format_list_numbered_grey600_24dp"
         android:scaleType="center"
-        android:background="@drawable/rect_btn_background" />
+        android:background="@drawable/selectable_item_background" />
 
     <ImageView
         android:id="@+id/editor_bar_btn_insert_code"
@@ -51,7 +51,7 @@
         android:layout_height="54dp"
         android:src="@drawable/ic_insert_code_grey600_24dp"
         android:scaleType="center"
-        android:background="@drawable/rect_btn_background" />
+        android:background="@drawable/selectable_item_background" />
 
     <ImageView
         android:id="@+id/editor_bar_btn_insert_link"
@@ -59,7 +59,7 @@
         android:layout_height="54dp"
         android:src="@drawable/ic_insert_link_grey600_24dp"
         android:scaleType="center"
-        android:background="@drawable/rect_btn_background" />
+        android:background="@drawable/selectable_item_background" />
 
     <ImageView
         android:id="@+id/editor_bar_btn_insert_photo"
@@ -67,7 +67,7 @@
         android:layout_height="54dp"
         android:src="@drawable/ic_insert_photo_grey600_24dp"
         android:scaleType="center"
-        android:background="@drawable/rect_btn_background" />
+        android:background="@drawable/selectable_item_background" />
 
     <ImageView
         android:id="@+id/editor_bar_btn_preview"
@@ -75,6 +75,6 @@
         android:layout_height="54dp"
         android:src="@drawable/ic_visibility_grey600_24dp"
         android:scaleType="center"
-        android:background="@drawable/rect_btn_background" />
+        android:background="@drawable/selectable_item_background" />
 
 </LinearLayout>

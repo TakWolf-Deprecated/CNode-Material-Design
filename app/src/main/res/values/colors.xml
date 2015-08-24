@@ -10,9 +10,9 @@
     <color name="text_color_light">#ccffffff</color>
     <color name="text_color_disable">#88757575</color>
 
-    <color name="rect_btn_background_normal">@android:color/white</color>
-    <color name="rect_btn_background_pressed">#ffeeeeee</color>
-    <color name="rect_btn_background_accent">#ffcccccc</color>
+    <color name="selectable_item_background_normal">@android:color/white</color>
+    <color name="selectable_item_background_pressed">#ffeeeeee</color>
+    <color name="selectable_item_background_accent">#ffcccccc</color>
 
     <color name="fab_color_primary">@color/color_accent</color>
     <color name="fab_color_primary_dark">#ff48bd06</color>

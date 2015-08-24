@@ -7,12 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.util.HandlerUtils;
 
-public class LogoActivity extends AppCompatActivity implements Runnable {
+public class LaunchActivity extends AppCompatActivity implements Runnable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logo);
+        setContentView(R.layout.activity_launch);
         HandlerUtils.postDelayed(this, 2000);
     }
 

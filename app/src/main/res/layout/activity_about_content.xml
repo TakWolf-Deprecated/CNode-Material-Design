@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/rect_btn_background"
+        android:background="@drawable/selectable_item_background"
         android:clickable="true">
 
         <TextView
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/rect_btn_background">
+        android:background="@drawable/selectable_item_background">
 
         <TextView
             android:layout_width="match_parent"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/rect_btn_background">
+        android:background="@drawable/selectable_item_background">
 
         <TextView
             android:layout_width="match_parent"
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/rect_btn_background">
+        android:background="@drawable/selectable_item_background">
 
         <TextView
             android:layout_width="match_parent"
@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/rect_btn_background">
+        android:background="@drawable/selectable_item_background">
 
         <TextView
             android:layout_width="match_parent"
@@ -154,7 +154,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/rect_btn_background">
+        android:background="@drawable/selectable_item_background">
 
         <TextView
             android:layout_width="match_parent"
@@ -184,7 +184,7 @@
         android:text="@string/open_source_license"
         android:textColor="@color/text_color_primary"
         android:textSize="16sp"
-        android:background="@drawable/rect_btn_background" />
+        android:background="@drawable/selectable_item_background" />
 
     <View style="@style/AppTheme.ShadowGap" />
 

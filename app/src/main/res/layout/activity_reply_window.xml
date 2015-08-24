@@ -24,7 +24,7 @@
                 android:layout_height="54dp"
                 android:src="@drawable/ic_close_grey600_24dp"
                 android:scaleType="center"
-                android:background="@drawable/rect_btn_background" />
+                android:background="@drawable/selectable_item_background" />
 
             <View style="@style/AppTheme.DeepLine.Vertical"
                 android:layout_toEndOf="@+id/reply_window_btn_tool_close"
@@ -57,7 +57,7 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_send_grey600_24dp"
                 android:scaleType="center"
-                android:background="@drawable/rect_btn_background" />
+                android:background="@drawable/selectable_item_background" />
 
         </RelativeLayout>
 

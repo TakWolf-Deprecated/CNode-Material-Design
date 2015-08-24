@@ -4,7 +4,7 @@
     android:id="@+id/notification_item_btn_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rect_btn_background"
+    android:background="@drawable/selectable_item_background"
     android:orientation="vertical">
 
     <LinearLayout

@@ -53,28 +53,28 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected DrawerLayout drawerLayout;
 
     // 导航部分的个人信息
-    @Bind(R.id.main_left_img_avatar)
+    @Bind(R.id.main_nav_img_avatar)
     protected ImageView imgAvatar;
 
-    @Bind(R.id.main_left_tv_login_name)
+    @Bind(R.id.main_nav_tv_login_name)
     protected TextView tvLoginName;
 
-    @Bind(R.id.main_left_tv_score)
+    @Bind(R.id.main_nav_tv_score)
     protected TextView tvScore;
 
-    @Bind(R.id.main_left_tv_badger_notification)
+    @Bind(R.id.main_nav_tv_badger_notification)
     protected TextView tvBadgerNotification;
 
-    @Bind(R.id.main_left_btn_logout)
+    @Bind(R.id.main_nav_btn_logout)
     protected View btnLogout;
 
     // 主要导航项
     @Bind({
-            R.id.main_left_btn_all,
-            R.id.main_left_btn_good,
-            R.id.main_left_btn_share,
-            R.id.main_left_btn_ask,
-            R.id.main_left_btn_job
+            R.id.main_nav_btn_all,
+            R.id.main_nav_btn_good,
+            R.id.main_nav_btn_share,
+            R.id.main_nav_btn_ask,
+            R.id.main_nav_btn_job
     })
     protected List<CheckedTextView> navMainItemList;
 
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             tvScore.setText(null);
             btnLogout.setVisibility(View.GONE);
         } else {
-            Picasso.with(this).load(LoginShared.getAvatarUrl(this)).error(R.drawable.image_default).into(imgAvatar);
+            Picasso.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
             tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
             btnLogout.setVisibility(View.VISIBLE);
@@ -299,27 +299,27 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
      * 主导航项单击事件
      */
     @OnClick({
-            R.id.main_left_btn_all,
-            R.id.main_left_btn_good,
-            R.id.main_left_btn_share,
-            R.id.main_left_btn_ask,
-            R.id.main_left_btn_job
+            R.id.main_nav_btn_all,
+            R.id.main_nav_btn_good,
+            R.id.main_nav_btn_share,
+            R.id.main_nav_btn_ask,
+            R.id.main_nav_btn_job
     })
     public void onNavigationMainItemClick(CheckedTextView itemView) {
         switch (itemView.getId()) {
-            case R.id.main_left_btn_all:
+            case R.id.main_nav_btn_all:
                 drawerLayout.setDrawerListener(tabAllDrawerListener);
                 break;
-            case R.id.main_left_btn_good:
+            case R.id.main_nav_btn_good:
                 drawerLayout.setDrawerListener(tabGoodDrawerListener);
                 break;
-            case R.id.main_left_btn_share:
+            case R.id.main_nav_btn_share:
                 drawerLayout.setDrawerListener(tabShareDrawerListener);
                 break;
-            case R.id.main_left_btn_ask:
+            case R.id.main_nav_btn_ask:
                 drawerLayout.setDrawerListener(tabAskDrawerListener);
                 break;
-            case R.id.main_left_btn_job:
+            case R.id.main_nav_btn_job:
                 drawerLayout.setDrawerListener(tabJobDrawerListener);
                 break;
             default:
@@ -368,13 +368,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
      */
 
     @OnClick({
-            R.id.main_left_btn_notification,
-            R.id.main_left_btn_setting,
-            R.id.main_left_btn_about
+            R.id.main_nav_btn_notification,
+            R.id.main_nav_btn_setting,
+            R.id.main_nav_btn_about
     })
     public void onNavigationItemOtherClick(View itemView) {
         switch (itemView.getId()) {
-            case R.id.main_left_btn_notification:
+            case R.id.main_nav_btn_notification:
                 if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
                     showNeedLoginDialog();
                 } else {
@@ -382,11 +382,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     drawerLayout.closeDrawers();
                 }
                 break;
-            case R.id.main_left_btn_setting:
+            case R.id.main_nav_btn_setting:
                 drawerLayout.setDrawerListener(settingDrawerListener);
                 drawerLayout.closeDrawers();
                 break;
-            case R.id.main_left_btn_about:
+            case R.id.main_nav_btn_about:
                 drawerLayout.setDrawerListener(aboutDrawerListener);
                 drawerLayout.closeDrawers();
                 break;
@@ -420,7 +420,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     /**
      * 注销按钮
      */
-    @OnClick(R.id.main_left_btn_logout)
+    @OnClick(R.id.main_nav_btn_logout)
     protected void onBtnLogoutClick() {
         new MaterialDialog.Builder(this)
                 .content(R.string.logout_tip)
@@ -442,7 +442,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     /**
      * 用户信息按钮
      */
-    @OnClick(R.id.main_left_layout_info)
+    @OnClick(R.id.main_nav_layout_info)
     protected void onBtnInfoClick() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
