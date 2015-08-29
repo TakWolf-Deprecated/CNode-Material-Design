@@ -43,11 +43,11 @@ public final class SharedWrapper {
     }
 
     private String getDigestKey(String key) {
-        return SHA256.getMessageDigest(key);
+        return Digest.SHA256.getMessage(key);
     }
 
     private String getSecretKey() {
-        return SHA256.getMessageDigest(SECRET_KEY);
+        return Digest.SHA256.getMessage(SECRET_KEY);
     }
 
     private String get(String key, String defValue) {
