@@ -7,6 +7,8 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import org.cnodejs.android.md.util.DES3;
+import org.cnodejs.android.md.util.Digest;
 import org.cnodejs.android.md.util.GsonWrapper;
 
 import java.lang.reflect.Type;

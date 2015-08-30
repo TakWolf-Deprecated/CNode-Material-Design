@@ -142,6 +142,7 @@ public class EditorBarHandler {
      */
     @OnClick(R.id.editor_bar_btn_insert_photo)
     protected void onBtnInsertPhotoClick() {
+        /*
         if (SettingShared.isEnableThirdPartyImageUploadApi(context)) { // 使用第三方图片接口
             if (!LoginShared.isPermitUseThirdPartyImageUploadApi(context)) { // 用户还没有授权，提示授权对话框
                 showThirdPartyImageUploadApiPermitDialog();
@@ -151,6 +152,10 @@ public class EditorBarHandler {
         } else { // 未开启，使用默认插入方式
             insertPhotoDefaultAction();
         }
+        */
+
+        // TODO 使用默认的图片上传方式
+        insertPhotoDefaultAction();
     }
 
     private void insertPhotoApiAction() {
