@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rey.material.widget.Switch;
 
@@ -91,6 +92,11 @@ public class SettingActivity extends AppCompatActivity implements Switch.OnCheck
                 break;
             case R.id.setting_switch_third_party_image_upload_api:
                 SettingShared.setEnableThirdPartyImageUploadApi(this, b);
+
+                // TODO
+                Toast.makeText(this, "该功能暂未实现", Toast.LENGTH_SHORT).show();
+                // TODO
+
                 break;
         }
     }
