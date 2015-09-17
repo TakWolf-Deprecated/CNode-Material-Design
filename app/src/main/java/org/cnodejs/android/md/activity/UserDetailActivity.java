@@ -183,7 +183,7 @@ public class UserDetailActivity extends AppCompatActivity {
     @OnClick(R.id.user_detail_tv_github_username)
     protected void onBtnGithubUsernameClick() {
         if (!TextUtils.isEmpty(githubUsername)) {
-            ShipUtils.openUrlByBrowser(this, "https://github.com/" + githubUsername);
+            ShipUtils.openInBrowser(this, "https://github.com/" + githubUsername);
         }
     }
 

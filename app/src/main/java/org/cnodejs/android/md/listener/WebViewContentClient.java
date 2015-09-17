@@ -28,7 +28,7 @@ public class WebViewContentClient extends WebViewClient {
             intent.putExtra("topicId", url.substring(26));
             context.startActivity(intent);
         } else { // 其他连接
-            ShipUtils.openUrlByBrowser(context, url);
+            ShipUtils.openInBrowser(context, url);
         }
         return true;
     }

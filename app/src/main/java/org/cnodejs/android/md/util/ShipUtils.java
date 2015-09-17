@@ -20,7 +20,7 @@ public final class ShipUtils {
         }
     }
 
-    public static void openUrlByBrowser(Context context, String url) {
+    public static void openInBrowser(Context context, String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);

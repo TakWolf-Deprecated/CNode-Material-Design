@@ -33,6 +33,7 @@ import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.HandlerUtils;
+import org.cnodejs.android.md.widget.RefreshLayoutUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,20 +121,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         recyclerView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, 20));
         fabNewTopic.attachToRecyclerView(recyclerView);
 
-        refreshLayout.setColorSchemeResources(R.color.red_light, R.color.green_light, R.color.blue_light, R.color.orange_light);
-        refreshLayout.setOnRefreshListener(this);
-
-        HandlerUtils.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                refreshLayout.setRefreshing(true);
-                onRefresh();
-            }
-
-        }, 100); // refreshLayout无法直接在onCreate中设置刷新状态
-
         updateUserInfoViews();
+
+        RefreshLayoutUtils.initOnCreate(refreshLayout, this);
+        RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
     }
 
     @Override

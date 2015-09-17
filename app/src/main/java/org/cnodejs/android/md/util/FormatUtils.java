@@ -15,12 +15,12 @@ public final class FormatUtils {
     private static final long month = 31 * day;   //月
     private static final long year = 12 * month;  //年
 
-    public static String getRecentlyTimeFormatText(DateTime date) {
-        if (date == null) {
+    public static String getRecentlyTimeFormatText(DateTime dateTime) {
+        if (dateTime == null) {
             return null;
         }
-        long diff = new Date().getTime() - date.getMillis();
-        long r = 0;
+        long diff = new Date().getTime() - dateTime.getMillis();
+        long r;
         if (diff > year) {
             r = (diff / year);
             return r + "年前";

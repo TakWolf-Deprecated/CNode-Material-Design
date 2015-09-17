@@ -22,6 +22,7 @@ import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.HandlerUtils;
+import org.cnodejs.android.md.widget.RefreshLayoutUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,22 +60,12 @@ public class NotificationActivity extends AppCompatActivity implements Toolbar.O
         toolbar.inflateMenu(R.menu.notification);
         toolbar.setOnMenuItemClickListener(this);
 
-        refreshLayout.setColorSchemeResources(R.color.red_light, R.color.green_light, R.color.blue_light, R.color.orange_light);
-        refreshLayout.setOnRefreshListener(this);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NotificationAdapter(this, messageList);
         recyclerView.setAdapter(adapter);
 
-        HandlerUtils.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                refreshLayout.setRefreshing(true);
-                onRefresh();
-            }
-
-        }, 100); // refreshLayout无法直接在onCreate中设置刷新状态
+        RefreshLayoutUtils.initOnCreate(refreshLayout, this);
+        RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
     }
 
     @Override
