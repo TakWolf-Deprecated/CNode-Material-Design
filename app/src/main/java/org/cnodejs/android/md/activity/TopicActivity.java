@@ -129,7 +129,7 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_open_in_browser:
-                ShipUtils.openUrlByBrowser(this, "https://cnodejs.org/topic/" + topicId);
+                ShipUtils.openInBrowser(this, "https://cnodejs.org/topic/" + topicId);
                 return true;
             default:
                 return false;
