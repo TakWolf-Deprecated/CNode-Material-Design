@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+// 根据日期自动生成build号
+def calendar = Calendar.getInstance();
+def year = String.format("%d", calendar.get(Calendar.YEAR));
+def month = String.format("%02d", calendar.get(Calendar.MONTH) + 1);
+def day = String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH));
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -8,7 +14,7 @@ android {
         applicationId "org.cnodejs.android.md"
         minSdkVersion 9
         targetSdkVersion 23
-        versionCode 15
+        versionCode Integer.parseInt(year + month + day)
         versionName "1.0.5"
     }
     buildTypes {
