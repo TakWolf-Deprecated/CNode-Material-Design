@@ -1,6 +1,5 @@
 package org.cnodejs.android.md.activity;
 
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -34,6 +33,7 @@ import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 import org.cnodejs.android.md.widget.EditorBarHandler;
+import org.cnodejs.android.md.widget.RefreshLayoutUtils;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -112,25 +112,15 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
                 .cancelable(false)
                 .build();
 
-        refreshLayout.setColorSchemeResources(R.color.red_light, R.color.green_light, R.color.blue_light, R.color.orange_light);
-        refreshLayout.setOnRefreshListener(this);
-
-        HandlerUtils.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                refreshLayout.setRefreshing(true);
-                onRefresh();
-            }
-
-        }, 100); // refreshLayout无法直接在onCreate中设置刷新状态
+        RefreshLayoutUtils.initOnCreate(refreshLayout, this);
+        RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
     }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_open_in_browser:
-                ShipUtils.openUrlByBrowser(this, "https://cnodejs.org/topic/" + topicId);
+                ShipUtils.openInBrowser(this, "https://cnodejs.org/topic/" + topicId);
                 return true;
             default:
                 return false;

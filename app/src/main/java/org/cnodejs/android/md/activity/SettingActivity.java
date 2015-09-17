@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rey.material.widget.Switch;
 
@@ -33,6 +34,9 @@ public class SettingActivity extends AppCompatActivity implements Switch.OnCheck
     @Bind(R.id.setting_btn_modify_topic_sign)
     protected TextView btnModifyTopicSign;
 
+    @Bind(R.id.setting_switch_third_party_image_upload_api)
+    protected Switch switchThirdPartyImageUploadApi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +49,12 @@ public class SettingActivity extends AppCompatActivity implements Switch.OnCheck
         switchNewTopicDraft.setChecked(SettingShared.isEnableNewTopicDraft(this));
         switchTopicSign.setChecked(SettingShared.isEnableTopicSign(this));
         btnModifyTopicSign.setEnabled(SettingShared.isEnableTopicSign(this));
+        switchThirdPartyImageUploadApi.setChecked(SettingShared.isEnableThirdPartyImageUploadApi(this));
 
         switchNotification.setOnCheckedChangeListener(this);
         switchNewTopicDraft.setOnCheckedChangeListener(this);
         switchTopicSign.setOnCheckedChangeListener(this);
+        switchThirdPartyImageUploadApi.setOnCheckedChangeListener(this);
     }
 
     @OnClick(R.id.setting_btn_notification)
@@ -66,6 +72,11 @@ public class SettingActivity extends AppCompatActivity implements Switch.OnCheck
         switchTopicSign.toggle();
     }
 
+    @OnClick(R.id.setting_btn_third_party_image_upload_api)
+    protected void onBtnThirdPartyImageUploadApiClick() {
+        switchThirdPartyImageUploadApi.toggle();
+    }
+
     @Override
     public void onCheckedChanged(Switch switchView, boolean b) {
         switch (switchView.getId()) {
@@ -78,6 +89,14 @@ public class SettingActivity extends AppCompatActivity implements Switch.OnCheck
             case R.id.setting_switch_topic_sign:
                 SettingShared.setEnableTopicSign(this, b);
                 btnModifyTopicSign.setEnabled(b);
+                break;
+            case R.id.setting_switch_third_party_image_upload_api:
+                SettingShared.setEnableThirdPartyImageUploadApi(this, b);
+
+                // TODO
+                Toast.makeText(this, "该功能暂未实现", Toast.LENGTH_SHORT).show();
+                // TODO
+
                 break;
         }
     }

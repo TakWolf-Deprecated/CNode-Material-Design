@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:background="@drawable/rect_btn_background">
+                android:background="@drawable/selectable_item_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:background="@drawable/rect_btn_background">
+                android:background="@drawable/selectable_item_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -135,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:background="@drawable/rect_btn_background">
+                android:background="@drawable/selectable_item_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -181,7 +181,50 @@
                 android:text="@string/modify_topic_sign"
                 android:textColor="@drawable/setting_item_title_text_color"
                 android:textSize="16sp"
-                android:background="@drawable/rect_btn_background" />
+                android:background="@drawable/selectable_item_background" />
+
+            <View style="@style/AppTheme.DeepLine" />
+
+            <RelativeLayout
+                android:id="@+id/setting_btn_third_party_image_upload_api"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:background="@drawable/selectable_item_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/setting_switch_third_party_image_upload_api"
+                    android:layout_toLeftOf="@+id/setting_switch_third_party_image_upload_api"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/third_party_image_upload_api"
+                        android:textColor="@color/text_color_primary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/third_party_image_upload_api_summary"
+                        android:textColor="@color/text_color_secondary"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <com.rey.material.widget.Switch style="@style/Material.Widget.Switch"
+                    android:id="@+id/setting_switch_third_party_image_upload_api"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

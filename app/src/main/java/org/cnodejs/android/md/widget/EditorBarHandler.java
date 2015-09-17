@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.widget;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -11,6 +12,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.activity.MarkdownPreviewActivity;
+import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 
 import butterknife.ButterKnife;
@@ -136,14 +138,90 @@ public class EditorBarHandler {
     }
 
     /**
-     * 插入图片 TODO 目前没有图片上传接口
+     * 插入图片 TODO 图片上传接口使用第三方实现
      */
     @OnClick(R.id.editor_bar_btn_insert_photo)
     protected void onBtnInsertPhotoClick() {
+        /*
+        if (SettingShared.isEnableThirdPartyImageUploadApi(context)) { // 使用第三方图片接口
+            if (!LoginShared.isPermitUseThirdPartyImageUploadApi(context)) { // 用户还没有授权，提示授权对话框
+                showThirdPartyImageUploadApiPermitDialog();
+            } else {
+                insertPhotoApiAction();
+            }
+        } else { // 未开启，使用默认插入方式
+            insertPhotoDefaultAction();
+        }
+        */
+
+        // TODO 使用默认的图片上传方式
+        insertPhotoDefaultAction();
+    }
+
+    private void insertPhotoApiAction() {
+        // TODO
+        Toast.makeText(context, "TODO 进入图片附件页面", Toast.LENGTH_SHORT).show();
+    }
+
+    private void insertPhotoDefaultAction() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), " ![Image](http://resource) ");
         edtContent.setSelection(edtContent.getSelectionEnd() - 10, edtContent.getSelectionEnd() - 2);
         imm.showSoftInput(edtContent, 0);
+    }
+
+    private void showThirdPartyImageUploadApiPermitDialog() {
+        new MaterialDialog.Builder(context)
+                .title("授权提示")
+                .content("图片上传接口使用第三方服务，要求上传您的用户令牌进行权限认证，这需要您的授权。如果您不信任这个服务，请选择关闭设置。您要授权使用该服务吗？")
+                .positiveText("授权使用")
+                .negativeText("关闭设置")
+                .callback(new MaterialDialog.ButtonCallback() {
+
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        LoginShared.setPermitUseThirdPartyImageUploadApi(context, true);
+                        showThirdPartyImageUploadApiPermitPositiveDialog();
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        SettingShared.setEnableThirdPartyImageUploadApi(context, false);
+                        showThirdPartyImageUploadApiPermitNegativeDialog();
+                    }
+
+                })
+                .show();
+    }
+
+    private void showThirdPartyImageUploadApiPermitPositiveDialog() {
+        new MaterialDialog.Builder(context)
+                .content("授权成功，您可以在设置页面关闭这个功能。")
+                .positiveText(R.string.confirm)
+                .dismissListener(new DialogInterface.OnDismissListener() {
+
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        insertPhotoApiAction();
+                    }
+
+                })
+                .show();
+    }
+
+    private void showThirdPartyImageUploadApiPermitNegativeDialog() {
+        new MaterialDialog.Builder(context)
+                .content("该功能已关闭，插入图片将使用普通模式。您可以在设置页面中重新开启这个功能。")
+                .positiveText(R.string.confirm)
+                .dismissListener(new DialogInterface.OnDismissListener() {
+
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        insertPhotoDefaultAction();
+                    }
+
+                })
+                .show();
     }
 
     /**

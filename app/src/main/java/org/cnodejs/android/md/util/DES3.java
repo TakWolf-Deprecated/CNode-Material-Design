@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.storage;
+package org.cnodejs.android.md.util;
 
 import java.security.Key;
 

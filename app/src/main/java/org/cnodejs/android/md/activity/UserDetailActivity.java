@@ -131,7 +131,7 @@ public class UserDetailActivity extends AppCompatActivity {
     }
 
     private void updateUserInfoViews(User user) {
-        Picasso.with(this).load(user.getAvatarUrl()).error(R.drawable.image_default).into(imgAvatar);
+        Picasso.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_default).into(imgAvatar);
         tvLoginName.setText(user.getLoginName());
         if (TextUtils.isEmpty(user.getGithubUsername())) {
             tvGithubUsername.setVisibility(View.INVISIBLE);
@@ -183,7 +183,7 @@ public class UserDetailActivity extends AppCompatActivity {
     @OnClick(R.id.user_detail_tv_github_username)
     protected void onBtnGithubUsernameClick() {
         if (!TextUtils.isEmpty(githubUsername)) {
-            ShipUtils.openUrlByBrowser(this, "https://github.com/" + githubUsername);
+            ShipUtils.openInBrowser(this, "https://github.com/" + githubUsername);
         }
     }
 

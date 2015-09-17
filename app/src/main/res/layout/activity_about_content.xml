@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View style="@style/AppTheme.ShadowGap" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:background="@drawable/selectable_item_background"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/current_version"
+            android:textColor="@color/text_color_primary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/about_tv_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="14sp"
+            android:singleLine="true"
+            tools:text="v0.0.0-build-0" />
+
+    </LinearLayout>
+
+    <View style="@style/AppTheme.DeepLine" />
+
+    <LinearLayout
+        android:id="@+id/about_btn_open_source_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:background="@drawable/selectable_item_background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/open_source_url"
+            android:textColor="@color/text_color_primary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/open_source_url_content"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="14sp"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <View style="@style/AppTheme.DeepLine" />
+
+    <LinearLayout
+        android:id="@+id/about_btn_about_third_party_image_upload_api"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:background="@drawable/selectable_item_background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_third_party_image_upload_api"
+            android:textColor="@color/text_color_primary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_third_party_image_upload_api_content"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="14sp"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <View style="@style/AppTheme.DeepLine" />
+
+    <LinearLayout
+        android:id="@+id/about_btn_about_cnode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:background="@drawable/selectable_item_background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_cnode"
+            android:textColor="@color/text_color_primary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_cnode_content"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="14sp"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <View style="@style/AppTheme.DeepLine" />
+
+    <LinearLayout
+        android:id="@+id/about_btn_about_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:background="@drawable/selectable_item_background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_author"
+            android:textColor="@color/text_color_primary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_author_content"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="14sp"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <View style="@style/AppTheme.ShadowGap" />
+
+    <LinearLayout
+        android:id="@+id/about_btn_advice_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:background="@drawable/selectable_item_background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/advice_feedback"
+            android:textColor="@color/text_color_primary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/advice_feedback_content"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="14sp"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <View style="@style/AppTheme.ShadowGap" />
+
+    <TextView
+        android:id="@+id/about_btn_open_source_license"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/open_source_license"
+        android:textColor="@color/text_color_primary"
+        android:textSize="16sp"
+        android:background="@drawable/selectable_item_background" />
+
+    <View style="@style/AppTheme.ShadowGap" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:padding="8dp"
+        android:text="@string/about_copyright"
+        android:textColor="@color/text_color_secondary"
+        android:textSize="14sp"
+        android:gravity="center" />
+
+</LinearLayout>

@@ -1,225 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <FrameLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/about_layout_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:background="@color/color_primary">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
 
-        <LinearLayout
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/about_layout_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="40dp"
-            android:paddingBottom="16dp"
-            android:orientation="vertical">
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/color_primary"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="48dp"
-                android:paddingRight="48dp"
-                android:src="@drawable/logo"
+                android:src="@drawable/about_header_bg"
                 android:scaleType="fitCenter"
-                android:adjustViewBounds="true" />
+                android:adjustViewBounds="true"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax" />
 
-            <TextView
+            <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/logo_url"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                android:gravity="center" />
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
 
-        </LinearLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/about_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-            app:title="@string/about"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </android.support.design.widget.AppBarLayout>
 
-    </FrameLayout>
-
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <include layout="@layout/activity_about_content" />
 
-            <View style="@style/AppTheme.ShadowGap" />
+    </android.support.v4.widget.NestedScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@drawable/rect_btn_background"
-                android:clickable="true">
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/about_fab_open_in_app_store"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_anchor="@+id/about_layout_appbar"
+        app:layout_anchorGravity="bottom|right|end"
+        android:src="@drawable/ic_grade_white_24dp"
+        android:layout_margin="16dp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/current_version"
-                    android:textColor="@color/text_color_primary"
-                    android:textSize="16sp" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/about_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#01000000"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        app:title="@string/about"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_collapseMode="pin" />
 
-                <TextView
-                    android:id="@+id/about_tv_version"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/text_color_secondary"
-                    android:textSize="14sp"
-                    tools:text="v0.0.0-build-0" />
-
-            </LinearLayout>
-
-            <View style="@style/AppTheme.DeepLine" />
-
-            <LinearLayout
-                android:id="@+id/about_btn_open_source_url"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@drawable/rect_btn_background">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/open_source_url"
-                    android:textColor="@color/text_color_primary"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/open_source_url_content"
-                    android:textColor="@color/text_color_secondary"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <View style="@style/AppTheme.DeepLine" />
-
-            <LinearLayout
-                android:id="@+id/about_btn_about_cnode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@drawable/rect_btn_background">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_cnode"
-                    android:textColor="@color/text_color_primary"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/about_cnode_content"
-                    android:textColor="@color/text_color_secondary"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <View style="@style/AppTheme.DeepLine" />
-
-            <LinearLayout
-                android:id="@+id/about_btn_about_author"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@drawable/rect_btn_background">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_author"
-                    android:textColor="@color/text_color_primary"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/about_author_content"
-                    android:textColor="@color/text_color_secondary"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <View style="@style/AppTheme.ShadowGap" />
-
-            <LinearLayout
-                android:id="@+id/about_btn_advice_feedback"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@drawable/rect_btn_background">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/advice_feedback"
-                    android:textColor="@color/text_color_primary"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/advice_feedback_content"
-                    android:textColor="@color/text_color_secondary"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <View style="@style/AppTheme.ShadowGap" />
-
-            <TextView
-                android:id="@+id/about_btn_open_source_license"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@string/open_source_license"
-                android:textColor="@color/text_color_primary"
-                android:textSize="16sp"
-                android:background="@drawable/rect_btn_background" />
-
-            <View style="@style/AppTheme.ShadowGap" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:padding="8dp"
-                android:text="@string/about_copyright"
-                android:textColor="@color/text_color_secondary"
-                android:textSize="14sp"
-                android:gravity="center" />
-
-        </LinearLayout>
-
-    </ScrollView>
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

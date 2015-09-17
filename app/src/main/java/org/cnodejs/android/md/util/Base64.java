@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.storage;
+package org.cnodejs.android.md.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -15,36 +15,36 @@ public class Base64 {
     public static String encodeFromBytes(byte[] data) {
         int start = 0;
         int len = data.length;
-        StringBuffer buf = new StringBuffer(data.length * 3 / 2);
+        StringBuilder sb = new StringBuilder(data.length * 3 / 2);
         int end = len - 3;
         int i = start;
         int n = 0;
         while (i <= end) {
             int d = ((((int) data[i]) & 0x0ff) << 16) | ((((int) data[i + 1]) & 0x0ff) << 8) | (((int) data[i + 2]) & 0x0ff);
-            buf.append(legalChars[(d >> 18) & 63]);
-            buf.append(legalChars[(d >> 12) & 63]);
-            buf.append(legalChars[(d >> 6) & 63]);
-            buf.append(legalChars[d & 63]);
+            sb.append(legalChars[(d >> 18) & 63]);
+            sb.append(legalChars[(d >> 12) & 63]);
+            sb.append(legalChars[(d >> 6) & 63]);
+            sb.append(legalChars[d & 63]);
             i += 3;
             if (n++ >= 14) {
                 n = 0;
-                buf.append(" ");
+                sb.append(" ");
             }
         }
         if (i == start + len - 2) {
             int d = ((((int) data[i]) & 0x0ff) << 16) | ((((int) data[i + 1]) & 255) << 8);
-            buf.append(legalChars[(d >> 18) & 63]);
-            buf.append(legalChars[(d >> 12) & 63]);
-            buf.append(legalChars[(d >> 6) & 63]);
-            buf.append("=");
+            sb.append(legalChars[(d >> 18) & 63]);
+            sb.append(legalChars[(d >> 12) & 63]);
+            sb.append(legalChars[(d >> 6) & 63]);
+            sb.append("=");
         } 
         else if (i == start + len - 1) {
             int d = (((int) data[i]) & 0x0ff) << 16;
-            buf.append(legalChars[(d >> 18) & 63]);
-            buf.append(legalChars[(d >> 12) & 63]);
-            buf.append("==");
+            sb.append(legalChars[(d >> 18) & 63]);
+            sb.append(legalChars[(d >> 12) & 63]);
+            sb.append("==");
         }
-        return buf.toString();
+        return sb.toString();
     }
 
     public static String decode(String s) {
@@ -61,7 +61,6 @@ public class Base64 {
         byte[] decodedBytes = bos.toByteArray();
         try {
             bos.close();
-            bos = null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

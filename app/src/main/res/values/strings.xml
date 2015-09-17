@@ -63,12 +63,17 @@
     <string name="current_version">当前版本</string>
     <string name="open_source_url">项目开源主页</string>
     <string name="open_source_url_content">https://github.com/TakWolf/CNode-Material-Design</string>
+    <string name="about_third_party_image_upload_api">关于第三方图片上传接口</string>
+    <string name="about_third_party_image_upload_api_content">https://github.com/TakWolf/CNode-Image-Upload-API</string>
     <string name="about_cnode">关于CNode社区</string>
     <string name="about_cnode_content">https://cnodejs.org/about</string>
     <string name="about_author">关于作者</string>
     <string name="about_author_content">http://blog.takwolf.com/about</string>
     <string name="advice_feedback">意见反馈</string>
     <string name="advice_feedback_content">向作者发送电子邮件</string>
+    <string name="open_in_app_store">为应用评分</string>
+    <string name="open_in_app_store_content">觉得赞就给个好评吧！</string>
+    <string name="go_to_app_store">去评分</string>
     <string name="open_source_license">开放源代码许可</string>
     <string name="about_copyright">Copyright © 2015&#8211;2016 TakWolf</string>
 
@@ -84,6 +89,8 @@
     <string name="modify_topic_sign">设置小尾巴</string>
     <string name="modify_topic_sign_hint">来点炫酷的，不要写太多字喔&#8230;</string>
     <string name="default_topic_sign">默认尾巴</string>
+    <string name="third_party_image_upload_api">第三方图片上传接口</string>
+    <string name="third_party_image_upload_api_summary">更多信息，请参考关于页面的相关连接</string>
 
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="send">发送</string>

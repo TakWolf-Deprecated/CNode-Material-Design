@@ -96,7 +96,7 @@
                     android:textColor="@color/text_color_secondary"
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:background="@drawable/rect_btn_background"
+                    android:background="@drawable/selectable_item_background"
                     tools:text="12" />
 
                 <ImageView
@@ -106,7 +106,7 @@
                     android:padding="8dp"
                     android:src="@drawable/ic_reply_grey600_24dp"
                     android:scaleType="center"
-                    android:background="@drawable/rect_btn_background" />
+                    android:background="@drawable/selectable_item_background" />
 
             </LinearLayout>
 

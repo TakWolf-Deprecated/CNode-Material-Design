@@ -9,7 +9,7 @@ public final class ShipUtils {
 
     private ShipUtils() {}
 
-    public static void openAppStore(Context context) {
+    public static void openInAppStore(Context context) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setData(Uri.parse("market://details?id=" + context.getPackageName()));
@@ -20,7 +20,7 @@ public final class ShipUtils {
         }
     }
 
-    public static void openUrlByBrowser(Context context, String url) {
+    public static void openInBrowser(Context context, String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);
