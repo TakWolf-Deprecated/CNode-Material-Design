@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "org.cnodejs.android.md"
@@ -34,7 +34,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:1.3.0'
     compile 'com.github.rey5137:material:1.1.1'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
-    compile 'com.afollestad:material-dialogs:0.7.6.0'
+    compile 'com.afollestad:material-dialogs:0.7.9.1'
     compile 'com.pnikosis:materialish-progress:1.7'
     compile 'com.melnykov:floatingactionbutton:1.3.0'
 
