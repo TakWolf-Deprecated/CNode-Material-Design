@@ -50,7 +50,7 @@
                 <Spinner
                     android:id="@+id/new_topic_spn_tab"
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
+                    android:layout_height="56dp"
                     android:entries="@array/tabs" />
 
             </LinearLayout>
