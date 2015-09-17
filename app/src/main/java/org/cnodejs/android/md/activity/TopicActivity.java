@@ -33,6 +33,7 @@ import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 import org.cnodejs.android.md.widget.EditorBarHandler;
+import org.cnodejs.android.md.widget.RefreshLayoutUtils;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -111,18 +112,8 @@ public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLay
                 .cancelable(false)
                 .build();
 
-        refreshLayout.setColorSchemeResources(R.color.red_light, R.color.green_light, R.color.blue_light, R.color.orange_light);
-        refreshLayout.setOnRefreshListener(this);
-
-        HandlerUtils.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                refreshLayout.setRefreshing(true);
-                onRefresh();
-            }
-
-        }, 100); // refreshLayout无法直接在onCreate中设置刷新状态
+        RefreshLayoutUtils.initOnCreate(refreshLayout, this);
+        RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
     }
 
     @Override
