@@ -14,7 +14,7 @@
 
 [![Google Play Store](/art/git_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
-[CNodeMD-v1.0.6](http://takwolf.com/download/CNodeMD-v1.0.6.apk)
+[CNodeMD-v1.0.7](http://takwolf.com/download/CNodeMD-v1.0.7.apk)
 
 [Google Play](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
