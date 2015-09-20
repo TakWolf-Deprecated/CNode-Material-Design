@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -38,6 +40,12 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class UserDetailActivity extends AppCompatActivity {
+
+    public static void open(Context context, String loginName) {
+        Intent intent = new Intent(context, UserDetailActivity.class);
+        intent.putExtra("loginName", loginName);
+        context.startActivity(intent);
+    }
 
     @Bind(R.id.user_detail_toolbar)
     protected Toolbar toolbar;

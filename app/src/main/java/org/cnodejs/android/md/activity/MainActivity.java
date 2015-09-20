@@ -33,7 +33,6 @@ import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.widget.RefreshLayoutUtils;
 
 import java.util.ArrayList;
@@ -437,9 +436,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
         } else {
-            Intent intent = new Intent(this, UserDetailActivity.class);
-            intent.putExtra("loginName", LoginShared.getLoginName(this));
-            startActivity(intent);
+            UserDetailActivity.open(this, LoginShared.getLoginName(this));
         }
     }
 

@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -30,7 +32,6 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
-import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 import org.cnodejs.android.md.widget.EditorBarHandler;
 import org.cnodejs.android.md.widget.RefreshLayoutUtils;
@@ -46,7 +47,13 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class TopicActivity  extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, TopicAdapter.OnAtClickListener, Toolbar.OnMenuItemClickListener {
+public class TopicActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, TopicAdapter.OnAtClickListener, Toolbar.OnMenuItemClickListener {
+
+    public static void open(Context context, String topicId) {
+        Intent intent = new Intent(context, TopicActivity.class);
+        intent.putExtra("topicId", topicId);
+        context.startActivity(intent);
+    }
 
     @Bind(R.id.topic_layout_root)
     protected ViewGroup layoutRoot;

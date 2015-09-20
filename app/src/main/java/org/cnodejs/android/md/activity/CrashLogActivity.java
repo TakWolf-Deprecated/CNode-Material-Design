@@ -47,17 +47,17 @@ public class CrashLogActivity extends AppCompatActivity implements Toolbar.OnMen
         //构建字符串
         StringBuilder sb = new StringBuilder();
         sb.append("生产厂商：\n");
-        sb.append(Build.MANUFACTURER + "\n\n");
+        sb.append(Build.MANUFACTURER).append("\n\n");
         sb.append("手机型号：\n");
-        sb.append(Build.MODEL + "\n\n");
+        sb.append(Build.MODEL).append("\n\n");
         sb.append("系统版本：\n");
-        sb.append(Build.VERSION.RELEASE + "\n\n");
+        sb.append(Build.VERSION.RELEASE).append("\n\n");
         sb.append("异常时间：\n");
         sb.append(new DateTime()).append("\n\n");
         sb.append("异常类型：\n");
-        sb.append(e.getClass().getName() + "\n\n");
+        sb.append(e.getClass().getName()).append("\n\n");
         sb.append("异常信息：\n");
-        sb.append(e.getMessage() + "\n\n");
+        sb.append(e.getMessage()).append("\n\n");
         sb.append("异常堆栈：\n" );
         Writer writer = new StringWriter();
         PrintWriter printWriter = new PrintWriter(writer);
