@@ -33,7 +33,6 @@ import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.widget.RefreshLayoutUtils;
 
 import java.util.ArrayList;

@@ -27,7 +27,6 @@ import org.cnodejs.android.md.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.User;
-import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.ArrayList;
