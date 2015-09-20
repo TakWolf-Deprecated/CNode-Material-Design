@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private void updateUserInfoViews() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            Picasso.with(this).load(R.drawable.image_default).into(imgAvatar);
+            Picasso.with(this).load(R.drawable.image_default).placeholder(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(R.string.click_avatar_to_login);
             tvScore.setText(null);
             btnLogout.setVisibility(View.GONE);
