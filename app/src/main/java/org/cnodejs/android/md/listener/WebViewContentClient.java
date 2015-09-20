@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.listener;
 
 import android.content.Context;
-import android.content.Intent;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -22,9 +21,7 @@ public class WebViewContentClient extends WebViewClient {
         if (url.startsWith("https://cnodejs.org/user/")) { // 用户主页协议
             UserDetailActivity.open(context, url.substring(25));
         } else if (url.startsWith("https://cnodejs.org/topic/")) { // 话题主页协议
-            Intent intent = new Intent(context, TopicActivity.class);
-            intent.putExtra("topicId", url.substring(26));
-            context.startActivity(intent);
+            TopicActivity.open(context, url.substring(26));
         } else { // 其他连接
             ShipUtils.openInBrowser(context, url);
         }

@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -18,7 +17,6 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.activity.TopicActivity;
 import org.cnodejs.android.md.activity.UserDetailActivity;
 import org.cnodejs.android.md.listener.WebViewContentClient;
-import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.MarkdownUtils;
@@ -130,9 +128,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         @OnClick(R.id.notification_item_btn_item)
         protected void onBtnItemClick() {
-            Intent intent = new Intent(context, TopicActivity.class);
-            intent.putExtra("topicId", message.getTopic().getId());
-            context.startActivity(intent);
+            TopicActivity.open(context, message.getTopic().getId());
         }
 
     }

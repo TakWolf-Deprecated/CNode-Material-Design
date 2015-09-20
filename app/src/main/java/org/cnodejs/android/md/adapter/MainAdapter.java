@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import com.squareup.picasso.Picasso;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.activity.TopicActivity;
 import org.cnodejs.android.md.activity.UserDetailActivity;
-import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.util.FormatUtils;
 
@@ -170,9 +168,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         @OnClick(R.id.main_item_btn_item)
         protected void onBtnItemClick() {
-            Intent intent = new Intent(context, TopicActivity.class);
-            intent.putExtra("topicId", topic.getId());
-            context.startActivity(intent);
+            TopicActivity.open(context, topic.getId());
         }
 
     }
