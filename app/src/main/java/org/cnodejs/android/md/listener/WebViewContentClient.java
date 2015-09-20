@@ -20,9 +20,7 @@ public class WebViewContentClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView webView, String url) {
         if (url.startsWith("https://cnodejs.org/user/")) { // 用户主页协议
-            Intent intent = new Intent(context, UserDetailActivity.class);
-            intent.putExtra("loginName", url.substring(25));
-            context.startActivity(intent);
+            UserDetailActivity.open(context, url.substring(25));
         } else if (url.startsWith("https://cnodejs.org/topic/")) { // 话题主页协议
             Intent intent = new Intent(context, TopicActivity.class);
             intent.putExtra("topicId", url.substring(26));

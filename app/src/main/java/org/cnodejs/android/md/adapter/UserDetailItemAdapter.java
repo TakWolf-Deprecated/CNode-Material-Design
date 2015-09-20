@@ -84,9 +84,7 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
 
         @OnClick(R.id.user_detail_item_img_avatar)
         protected void onBtnAvatarClick() {
-            Intent intent = new Intent(context, UserDetailActivity.class);
-            intent.putExtra("loginName", topic.getAuthor().getLoginName());
-            context.startActivity(intent);
+            UserDetailActivity.open(context, topic.getAuthor().getLoginName());
         }
 
         @OnClick(R.id.user_detail_item_btn_item)

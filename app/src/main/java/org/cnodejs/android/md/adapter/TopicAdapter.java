@@ -175,9 +175,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_header_img_avatar)
         protected void onBtnAvatarClick() {
-            Intent intent = new Intent(context, UserDetailActivity.class);
-            intent.putExtra("loginName", topic.getAuthor().getLoginName());
-            context.startActivity(intent);
+            UserDetailActivity.open(context, topic.getAuthor().getLoginName());
         }
 
     }
@@ -237,9 +235,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_reply_img_avatar)
         protected void onBtnAvatarClick() {
-            Intent intent = new Intent(context, UserDetailActivity.class);
-            intent.putExtra("loginName", reply.getAuthor().getLoginName());
-            context.startActivity(intent);
+            UserDetailActivity.open(context, reply.getAuthor().getLoginName());
         }
 
         @OnClick(R.id.topic_item_reply_btn_ups)

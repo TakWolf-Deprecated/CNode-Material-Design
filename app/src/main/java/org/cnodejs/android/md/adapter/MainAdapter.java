@@ -165,9 +165,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         @OnClick(R.id.main_item_img_avatar)
         protected void onBtnAvatarClick() {
-            Intent intent = new Intent(context, UserDetailActivity.class);
-            intent.putExtra("loginName", topic.getAuthor().getLoginName());
-            context.startActivity(intent);
+            UserDetailActivity.open(context, topic.getAuthor().getLoginName());
         }
 
         @OnClick(R.id.main_item_btn_item)
