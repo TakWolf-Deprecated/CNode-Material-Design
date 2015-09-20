@@ -95,7 +95,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             Picasso.with(context).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_default).into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
-            tvTime.setText(FormatUtils.getRecentlyTimeFormatText(message.getReply().getCreateAt()));
+            tvTime.setText(FormatUtils.getRecentlyTimeText(message.getReply().getCreateAt()));
             tvTopicTitle.setText("话题：" + message.getTopic().getTitle());
 
             // 判断通知类型

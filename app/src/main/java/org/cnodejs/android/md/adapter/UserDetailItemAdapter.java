@@ -79,7 +79,7 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
             tvTitle.setText(topic.getTitle());
             Picasso.with(context).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(topic.getAuthor().getLoginName());
-            tvLastReplyTime.setText(FormatUtils.getRecentlyTimeFormatText(topic.getLastReplyAt()));
+            tvLastReplyTime.setText(FormatUtils.getRecentlyTimeText(topic.getLastReplyAt()));
         }
 
         @OnClick(R.id.user_detail_item_img_avatar)

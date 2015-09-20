@@ -32,6 +32,7 @@ import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
+import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.widget.RefreshLayoutUtils;
 
@@ -144,10 +145,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 public void success(Result<Integer> result, Response response) {
                     if (result.getData() <= 0) {
                         tvBadgerNotification.setText(null);
-                    } else if (result.getData() > 99) {
-                        tvBadgerNotification.setText("99+");
                     } else {
-                        tvBadgerNotification.setText(String.valueOf(result.getData()));
+                        tvBadgerNotification.setText(FormatUtils.getDisplayCountText(result.getData()));
                     }
                 }
 

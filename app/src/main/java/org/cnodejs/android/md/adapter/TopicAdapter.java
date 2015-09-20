@@ -161,7 +161,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 tvVisitCount.setText(topic.getVisitCount() + "次浏览");
                 Picasso.with(context).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_default).into(imgAvatar);
                 tvLoginName.setText(topic.getAuthor().getLoginName());
-                tvCreateTime.setText(context.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeFormatText(topic.getCreateAt()));
+                tvCreateTime.setText(context.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeText(topic.getCreateAt()));
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
 
                 // TODO 这里直接使用WebView，有性能问题
@@ -225,7 +225,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             Picasso.with(context).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_default).into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             tvIndex.setText(position + 1 + "楼");
-            tvCreateTime.setText(FormatUtils.getRecentlyTimeFormatText(reply.getCreateAt()));
+            tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
             btnUps.setText(String.valueOf(reply.getUps().size()));
             btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUps().contains(LoginShared.getId(context)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
             iconDeepLine.setVisibility(position == topic.getReplies().size() - 1 ? View.GONE : View.VISIBLE);

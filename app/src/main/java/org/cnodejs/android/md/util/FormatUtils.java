@@ -15,7 +15,7 @@ public final class FormatUtils {
     private static final long month = 31 * day;   //月
     private static final long year = 12 * month;  //年
 
-    public static String getRecentlyTimeFormatText(DateTime dateTime) {
+    public static String getRecentlyTimeText(DateTime dateTime) {
         if (dateTime == null) {
             return null;
         }
@@ -46,6 +46,14 @@ public final class FormatUtils {
             return r + "分钟前";
         }
         return "刚刚";
+    }
+
+    public static String getDisplayCountText(int count) {
+        if (count > 99) {
+            return "99+";
+        } else {
+            return String.valueOf(count);
+        }
     }
 
 }

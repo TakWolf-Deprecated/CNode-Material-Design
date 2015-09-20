@@ -159,7 +159,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             tvCreateTime.setText(context.getString(R.string.create_at_$) + topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss"));
             tvReplyCount.setText(String.valueOf(topic.getReplyCount()));
             tvVisitCount.setText(String.valueOf(topic.getVisitCount()));
-            tvLastReplyTime.setText(FormatUtils.getRecentlyTimeFormatText(topic.getLastReplyAt()));
+            tvLastReplyTime.setText(FormatUtils.getRecentlyTimeText(topic.getLastReplyAt()));
             iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
         }
 
