@@ -1,7 +1,7 @@
 package org.cnodejs.android.md.model.api;
 
 import org.cnodejs.android.md.BuildConfig;
-import org.cnodejs.android.md.util.GsonWrapper;
+import org.cnodejs.android.md.util.gson.GsonWrapper;
 
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;

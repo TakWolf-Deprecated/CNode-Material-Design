@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import org.cnodejs.android.md.BuildConfig;
-import org.cnodejs.android.md.activity.CrashLogActivity;
+import org.cnodejs.android.md.ui.activity.CrashLogActivity;
 
 public class AppController extends Application implements Thread.UncaughtExceptionHandler {
 
