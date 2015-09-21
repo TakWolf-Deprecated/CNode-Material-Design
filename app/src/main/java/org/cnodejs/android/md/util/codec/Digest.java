@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.util;
+package org.cnodejs.android.md.util.codec;
 
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
