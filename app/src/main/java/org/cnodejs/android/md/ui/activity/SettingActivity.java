@@ -78,20 +78,20 @@ public class SettingActivity extends AppCompatActivity implements Switch.OnCheck
     }
 
     @Override
-    public void onCheckedChanged(Switch switchView, boolean b) {
+    public void onCheckedChanged(Switch switchView, boolean isChecked) {
         switch (switchView.getId()) {
             case R.id.setting_switch_notification:
-                SettingShared.setEnableNotification(this, b);
+                SettingShared.setEnableNotification(this, isChecked);
                 break;
             case R.id.setting_switch_new_topic_draft:
-                SettingShared.setEnableNewTopicDraft(this, b);
+                SettingShared.setEnableNewTopicDraft(this, isChecked);
                 break;
             case R.id.setting_switch_topic_sign:
-                SettingShared.setEnableTopicSign(this, b);
-                btnModifyTopicSign.setEnabled(b);
+                SettingShared.setEnableTopicSign(this, isChecked);
+                btnModifyTopicSign.setEnabled(isChecked);
                 break;
             case R.id.setting_switch_third_party_image_upload_api:
-                SettingShared.setEnableThirdPartyImageUploadApi(this, b);
+                SettingShared.setEnableThirdPartyImageUploadApi(this, isChecked);
 
                 // TODO
                 Toast.makeText(this, "该功能暂未实现", Toast.LENGTH_SHORT).show();
