@@ -1,12 +1,12 @@
-package org.cnodejs.android.md.activity;
+package org.cnodejs.android.md.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.listener.WebViewContentClient;
+import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.listener.WebViewContentClient;
 import org.cnodejs.android.md.util.MarkdownUtils;
 
 import butterknife.Bind;

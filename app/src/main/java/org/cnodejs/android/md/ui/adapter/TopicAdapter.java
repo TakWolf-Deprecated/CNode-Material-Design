@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.adapter;
+package org.cnodejs.android.md.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,9 +17,9 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.activity.LoginActivity;
-import org.cnodejs.android.md.activity.UserDetailActivity;
-import org.cnodejs.android.md.listener.WebViewContentClient;
+import org.cnodejs.android.md.ui.activity.LoginActivity;
+import org.cnodejs.android.md.ui.activity.UserDetailActivity;
+import org.cnodejs.android.md.ui.listener.WebViewContentClient;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.TopicUpInfo;

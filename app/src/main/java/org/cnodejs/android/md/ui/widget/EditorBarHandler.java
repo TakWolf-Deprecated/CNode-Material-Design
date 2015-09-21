@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.widget;
+package org.cnodejs.android.md.ui.widget;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.activity.MarkdownPreviewActivity;
+import org.cnodejs.android.md.ui.activity.MarkdownPreviewActivity;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 

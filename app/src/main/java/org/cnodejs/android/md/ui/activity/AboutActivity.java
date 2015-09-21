@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.activity;
+package org.cnodejs.android.md.ui.activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -11,7 +11,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import butterknife.Bind;

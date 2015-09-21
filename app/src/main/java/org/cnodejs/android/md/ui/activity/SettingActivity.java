@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.activity;
+package org.cnodejs.android.md.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.rey.material.widget.Switch;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.storage.SettingShared;
 
 import butterknife.Bind;

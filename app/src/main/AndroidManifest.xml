@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="org.cnodejs.android.md.activity.LaunchActivity"
+            android:name="org.cnodejs.android.md.ui.activity.LaunchActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.FitsStatusBar.TranslucentNavigation"
             android:screenOrientation="portrait"
@@ -26,82 +26,82 @@
         </activity>
 
         <activity
-            android:name="org.cnodejs.android.md.activity.MainActivity"
+            android:name="org.cnodejs.android.md.ui.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.FitsStatusBar"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.LoginActivity"
+            android:name="org.cnodejs.android.md.ui.activity.LoginActivity"
             android:label="@string/login"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.QrCodeActivity"
+            android:name="org.cnodejs.android.md.ui.activity.QrCodeActivity"
             android:label="@string/open_qrcode"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.TopicActivity"
+            android:name="org.cnodejs.android.md.ui.activity.TopicActivity"
             android:label="@string/topic"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.NewTopicActivity"
+            android:name="org.cnodejs.android.md.ui.activity.NewTopicActivity"
             android:label="@string/new_topic"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.MarkdownPreviewActivity"
+            android:name="org.cnodejs.android.md.ui.activity.MarkdownPreviewActivity"
             android:label="@string/markdown_preview"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.UserDetailActivity"
+            android:name="org.cnodejs.android.md.ui.activity.UserDetailActivity"
             android:label="@string/user_detail"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.NotificationActivity"
+            android:name="org.cnodejs.android.md.ui.activity.NotificationActivity"
             android:label="@string/notification"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.SettingActivity"
+            android:name="org.cnodejs.android.md.ui.activity.SettingActivity"
             android:label="@string/setting"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.ModifyTopicSignActivity"
+            android:name="org.cnodejs.android.md.ui.activity.ModifyTopicSignActivity"
             android:label="@string/modify_topic_sign"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.AboutActivity"
+            android:name="org.cnodejs.android.md.ui.activity.AboutActivity"
             android:label="@string/about"
             android:theme="@style/AppTheme.FitsStatusBar"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.LicenseActivity"
+            android:name="org.cnodejs.android.md.ui.activity.LicenseActivity"
             android:label="@string/open_source_license"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.activity.CrashLogActivity"
+            android:name="org.cnodejs.android.md.ui.activity.CrashLogActivity"
             android:label="@string/app_crash"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />

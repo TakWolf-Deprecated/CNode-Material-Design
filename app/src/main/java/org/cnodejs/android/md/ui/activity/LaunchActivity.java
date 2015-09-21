@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.activity;
+package org.cnodejs.android.md.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

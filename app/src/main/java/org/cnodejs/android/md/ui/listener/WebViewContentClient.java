@@ -1,11 +1,11 @@
-package org.cnodejs.android.md.listener;
+package org.cnodejs.android.md.ui.listener;
 
 import android.content.Context;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import org.cnodejs.android.md.activity.TopicActivity;
-import org.cnodejs.android.md.activity.UserDetailActivity;
+import org.cnodejs.android.md.ui.activity.TopicActivity;
+import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.util.ShipUtils;
 
 public class WebViewContentClient extends WebViewClient {

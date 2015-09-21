@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.activity;
+package org.cnodejs.android.md.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.storage.SettingShared;
 
 import butterknife.Bind;

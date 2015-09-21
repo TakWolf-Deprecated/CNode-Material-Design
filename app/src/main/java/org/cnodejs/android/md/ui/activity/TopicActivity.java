@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.activity;
+package org.cnodejs.android.md.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,8 +23,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.adapter.TopicAdapter;
-import org.cnodejs.android.md.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.adapter.TopicAdapter;
+import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Author;
 import org.cnodejs.android.md.model.entity.Reply;
@@ -33,8 +33,8 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.util.ShipUtils;
-import org.cnodejs.android.md.widget.EditorBarHandler;
-import org.cnodejs.android.md.widget.RefreshLayoutUtils;
+import org.cnodejs.android.md.ui.widget.EditorBarHandler;
+import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;

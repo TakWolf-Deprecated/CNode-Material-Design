@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.listener;
+package org.cnodejs.android.md.ui.listener;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;

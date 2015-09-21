@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.widget;
+package org.cnodejs.android.md.ui.widget;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
