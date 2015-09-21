@@ -64,7 +64,7 @@ public class AboutActivity extends AppCompatActivity {
         ShipUtils.sendEmail(
                 this,
                 "takwolf@foxmail.com",
-                "来自 CNodeMD-" + version + " 的客户端反馈",
+                "来自 CNodeMD-" + VERSION_TEXT + " 的客户端反馈",
                 "设备信息：Android " + Build.VERSION.RELEASE + " - " + Build.MANUFACTURER + " - " + Build.MODEL + "\n（如果涉及隐私请手动删除这个内容）\n\n");
     }
 
