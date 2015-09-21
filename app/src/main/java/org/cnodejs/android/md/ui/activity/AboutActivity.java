@@ -20,13 +20,13 @@ import butterknife.OnClick;
 
 public class AboutActivity extends AppCompatActivity {
 
+    public static final String VERSION_TEXT = "v" + BuildConfig.VERSION_NAME + "-build-" + BuildConfig.VERSION_CODE;
+
     @Bind(R.id.about_toolbar)
     protected Toolbar toolbar;
 
     @Bind(R.id.about_tv_version)
     protected TextView tvVersion;
-
-    public static final String version = "v" + BuildConfig.VERSION_NAME + "-build-" + BuildConfig.VERSION_CODE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class AboutActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        tvVersion.setText(version);
+        tvVersion.setText(VERSION_TEXT);
     }
 
     @OnClick(R.id.about_btn_open_source_url)
