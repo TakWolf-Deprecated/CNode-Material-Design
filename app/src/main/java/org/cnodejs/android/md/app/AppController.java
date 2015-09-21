@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.activity.CrashLogActivity;
 
 public class AppController extends Application implements Thread.UncaughtExceptionHandler {
@@ -21,7 +22,9 @@ public class AppController extends Application implements Thread.UncaughtExcepti
         if (context == null) {
             context = this;
 
-            Thread.setDefaultUncaughtExceptionHandler(this);
+            if (!BuildConfig.DEBUG) {
+                Thread.setDefaultUncaughtExceptionHandler(this);
+            }
         }
     }
 
