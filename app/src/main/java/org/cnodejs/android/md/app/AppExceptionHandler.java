@@ -15,7 +15,7 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
     }
 
     @Override
-    public void uncaughtException(Thread thread, final Throwable e) {
+    public void uncaughtException(Thread thread, Throwable e) {
         Intent intent = new Intent(context, CrashLogActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Bundle bundle = new Bundle();
