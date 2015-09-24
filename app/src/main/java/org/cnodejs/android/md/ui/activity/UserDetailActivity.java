@@ -139,7 +139,7 @@ public class UserDetailActivity extends AppCompatActivity {
     }
 
     private void updateUserInfoViews(User user) {
-        Picasso.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_default).into(imgAvatar);
+        Picasso.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
         tvLoginName.setText(user.getLoginName());
         if (TextUtils.isEmpty(user.getGithubUsername())) {
             tvGithubUsername.setVisibility(View.INVISIBLE);
