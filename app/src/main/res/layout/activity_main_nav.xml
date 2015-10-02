@@ -32,7 +32,7 @@
                 android:id="@+id/main_nav_img_avatar"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                android:src="@drawable/image_default" />
+                android:src="@drawable/image_placeholder" />
 
             <TextView
                 android:id="@+id/main_nav_tv_login_name"

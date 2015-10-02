@@ -36,7 +36,7 @@
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:layout_marginTop="24dp"
-                    android:src="@drawable/image_default" />
+                    android:src="@drawable/image_placeholder" />
 
                 <TextView
                     android:id="@+id/user_detail_tv_login_name"

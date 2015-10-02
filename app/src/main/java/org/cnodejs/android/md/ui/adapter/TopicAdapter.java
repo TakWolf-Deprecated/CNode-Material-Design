@@ -159,7 +159,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 tvTab.setBackgroundResource(topic.isTop() ? R.drawable.topic_tab_top_background : R.drawable.topic_tab_normal_background);
                 tvTab.setTextColor(context.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
                 tvVisitCount.setText(topic.getVisitCount() + "次浏览");
-                Picasso.with(context).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_default).into(imgAvatar);
+                Picasso.with(context).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
                 tvLoginName.setText(topic.getAuthor().getLoginName());
                 tvCreateTime.setText(context.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeText(topic.getCreateAt()));
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
@@ -220,7 +220,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             this.position = position;
             reply = topic.getReplies().get(position);
 
-            Picasso.with(context).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_default).into(imgAvatar);
+            Picasso.with(context).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             tvIndex.setText(position + 1 + "楼");
             tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));

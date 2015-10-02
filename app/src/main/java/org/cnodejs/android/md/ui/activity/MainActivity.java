@@ -177,12 +177,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private void updateUserInfoViews() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            Picasso.with(this).load(R.drawable.image_default).placeholder(R.drawable.image_default).into(imgAvatar);
+            Picasso.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(R.string.click_avatar_to_login);
             tvScore.setText(null);
             btnLogout.setVisibility(View.GONE);
         } else {
-            Picasso.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_default).into(imgAvatar);
+            Picasso.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
             tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
             btnLogout.setVisibility(View.VISIBLE);

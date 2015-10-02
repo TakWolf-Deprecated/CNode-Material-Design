@@ -91,7 +91,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         protected void update(int position) {
             message = messageList.get(position);
 
-            Picasso.with(context).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_default).into(imgAvatar);
+            Picasso.with(context).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
             tvTime.setText(FormatUtils.getRecentlyTimeText(message.getReply().getCreateAt()));
             tvTopicTitle.setText("话题：" + message.getTopic().getTitle());

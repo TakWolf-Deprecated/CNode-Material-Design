@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base App Theme -->
     <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
@@ -9,13 +8,12 @@
         <item name="windowActionModeOverlay">true</item>
     </style>
 
-    <!-- App Theme -->
     <style name="AppTheme" parent="BaseAppTheme" />
 
-    <!-- App Theme FitsStatusBar -->
+    <style name="AppTheme.Launch" />
+
     <style name="AppTheme.FitsStatusBar" />
 
-    <!-- App Theme FitsStatusBar TranslucentNavigation -->
     <style name="AppTheme.FitsStatusBar.TranslucentNavigation" />
 
     <!-- Deep Line -->

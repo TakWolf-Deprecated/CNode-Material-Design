@@ -1,8 +1,5 @@
 package org.cnodejs.android.md.model.entity;
 
-import android.text.Html;
-import android.text.Spanned;
-
 import com.google.gson.annotations.SerializedName;
 
 import org.cnodejs.android.md.util.MarkdownUtils;

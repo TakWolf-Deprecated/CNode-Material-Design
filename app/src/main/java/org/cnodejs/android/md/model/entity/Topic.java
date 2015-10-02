@@ -5,8 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import org.cnodejs.android.md.util.MarkdownUtils;
 import org.joda.time.DateTime;
 
-import java.util.List;
-
 public class Topic {
 
     private String id;
