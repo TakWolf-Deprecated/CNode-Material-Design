@@ -14,13 +14,13 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.adapter.NotificationAdapter;
-import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.storage.LoginShared;
+import org.cnodejs.android.md.ui.adapter.NotificationAdapter;
+import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
 
 import java.util.ArrayList;

@@ -11,9 +11,9 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.activity.MarkdownPreviewActivity;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
+import org.cnodejs.android.md.ui.activity.MarkdownPreviewActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

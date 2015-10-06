@@ -10,8 +10,8 @@ import android.widget.Toast;
 import com.rey.material.widget.Switch;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.storage.SettingShared;
+import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
