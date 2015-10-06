@@ -24,7 +24,7 @@
             android:id="@+id/main_nav_layout_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/nav_status_bar_adapt_height"
+            android:layout_marginTop="@dimen/status_bar_adapt_height"
             android:padding="16dp"
             android:orientation="vertical">
 
