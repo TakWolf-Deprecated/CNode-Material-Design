@@ -7,8 +7,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.storage.SettingShared;
+import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -23,8 +23,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.adapter.TopicAdapter;
-import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Author;
 import org.cnodejs.android.md.model.entity.Reply;
@@ -32,9 +30,11 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
-import org.cnodejs.android.md.util.ShipUtils;
+import org.cnodejs.android.md.ui.adapter.TopicAdapter;
+import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
+import org.cnodejs.android.md.util.ShipUtils;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class TopicActivity extends AppCompatActivity implements SwipeRefreshLayo
 
     @Bind(R.id.topic_toolbar)
     protected Toolbar toolbar;
-    
+
     @Bind(R.id.topic_refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
@@ -267,7 +267,7 @@ public class TopicActivity extends AppCompatActivity implements SwipeRefreshLayo
 
             });
         }
-        
+
     }
 
 }

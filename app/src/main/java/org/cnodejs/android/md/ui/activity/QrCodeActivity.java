@@ -16,7 +16,7 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class QrCodeActivity  extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
+public class QrCodeActivity extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     @Bind(R.id.qrcode_toolbar)
     protected Toolbar toolbar;

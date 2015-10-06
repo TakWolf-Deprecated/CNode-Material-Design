@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.ui.activity.TopicActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
-import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;

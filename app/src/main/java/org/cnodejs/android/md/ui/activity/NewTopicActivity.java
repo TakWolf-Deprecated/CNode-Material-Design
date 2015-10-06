@@ -12,12 +12,12 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.storage.TopicShared;
+import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 
 import butterknife.Bind;

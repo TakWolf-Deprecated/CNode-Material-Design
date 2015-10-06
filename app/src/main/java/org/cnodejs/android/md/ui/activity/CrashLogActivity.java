@@ -58,7 +58,7 @@ public class CrashLogActivity extends AppCompatActivity implements Toolbar.OnMen
         sb.append(e.getClass().getName()).append("\n\n");
         sb.append("异常信息：\n");
         sb.append(e.getMessage()).append("\n\n");
-        sb.append("异常堆栈：\n" );
+        sb.append("异常堆栈：\n");
         Writer writer = new StringWriter();
         PrintWriter printWriter = new PrintWriter(writer);
         e.printStackTrace(printWriter);

@@ -22,9 +22,6 @@ import com.melnykov.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.adapter.MainAdapter;
-import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
-import org.cnodejs.android.md.ui.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.CallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
@@ -32,8 +29,11 @@ import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
-import org.cnodejs.android.md.util.FormatUtils;
+import org.cnodejs.android.md.ui.adapter.MainAdapter;
+import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
+import org.cnodejs.android.md.ui.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
+import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.ArrayList;
 import java.util.List;

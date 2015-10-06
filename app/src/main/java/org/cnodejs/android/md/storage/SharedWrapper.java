@@ -115,7 +115,7 @@ public final class SharedWrapper {
         set(key, Long.toString(value));
     }
 
-    public <T>T getObject(String key, Class<T> clz) {
+    public <T> T getObject(String key, Class<T> clz) {
         String json = get(key, null);
         if (json == null) {
             return null;
@@ -128,7 +128,7 @@ public final class SharedWrapper {
         }
     }
 
-    public <T>T getObject(String key, Type typeOfT) {
+    public <T> T getObject(String key, Type typeOfT) {
         String json = get(key, null);
         if (json == null) {
             return null;

@@ -37,8 +37,7 @@ public class Base64 {
             sb.append(legalChars[(d >> 12) & 63]);
             sb.append(legalChars[(d >> 6) & 63]);
             sb.append("=");
-        } 
-        else if (i == start + len - 1) {
+        } else if (i == start + len - 1) {
             int d = (((int) data[i]) & 0x0ff) << 16;
             sb.append(legalChars[(d >> 18) & 63]);
             sb.append(legalChars[(d >> 12) & 63]);
@@ -94,22 +93,20 @@ public class Base64 {
     private static int decode(char c) {
         if (c >= 'A' && c <= 'Z') {
             return ((int) c) - 65;
-        }
-        else if (c >= 'a' && c <= 'z') {
+        } else if (c >= 'a' && c <= 'z') {
             return ((int) c) - 97 + 26;
-        }
-        else if (c >= '0' && c <= '9') {
+        } else if (c >= '0' && c <= '9') {
             return ((int) c) - 48 + 26 + 26;
         } else {
             switch (c) {
-            case '+':
-                return 62;
-            case '/':
-                return 63;
-            case '=':
-                return 0;
-            default:
-                throw new RuntimeException("unexpected code: " + c);
+                case '+':
+                    return 62;
+                case '/':
+                    return 63;
+                case '=':
+                    return 0;
+                default:
+                    throw new RuntimeException("unexpected code: " + c);
             }
         }
     }
