@@ -56,5 +56,5 @@ dependencies {
 
     compile 'com.dlazaro66.qrcodereaderview:qrcodereaderview:1.0.0'
 
-    compile project(':markdown-view')
+    compile 'org.tautua.markdownpapers:markdownpapers-core:1.4.2'
 }

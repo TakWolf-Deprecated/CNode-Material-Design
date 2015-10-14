@@ -68,7 +68,7 @@
 
     </LinearLayout>
 
-    <us.feras.mdv.MarkdownView
+    <org.cnodejs.android.md.ui.widget.CNodeWebView
         android:id="@+id/notification_item_web_reply_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

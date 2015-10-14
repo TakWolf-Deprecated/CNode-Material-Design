@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +23,8 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.ui.activity.LoginActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
-import org.cnodejs.android.md.ui.listener.WebViewContentClient;
+import org.cnodejs.android.md.ui.widget.CNodeWebView;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.MarkdownUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,7 +32,6 @@ import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import us.feras.mdv.MarkdownView;
 
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> {
 
@@ -46,8 +43,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     private TopicWithReply topic;
 
     private boolean isHeaderShow = false; // TODO 当false时，渲染header，其他时间不渲染
-
-    private WebViewClient webViewClient;
 
     public interface OnAtClickListener {
 
@@ -61,8 +56,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.onAtClickListener = onAtClickListener;
-
-        this.webViewClient = new WebViewContentClient(context);
     }
 
     public void setTopic(TopicWithReply topic) {
@@ -137,7 +130,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         protected TextView tvCreateTime;
 
         @Bind(R.id.topic_item_header_web_content)
-        protected MarkdownView webReplyContent;
+        protected CNodeWebView webReplyContent;
 
         @Bind(R.id.topic_item_header_icon_good)
         protected View iconGood;
@@ -148,8 +141,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         public HeaderViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
-            webReplyContent.setWebViewClient(webViewClient); // TODO 对内连接做分发
         }
 
         public void update(int position) {
@@ -165,7 +156,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
 
                 // TODO 这里直接使用WebView，有性能问题
-                webReplyContent.loadMarkdown(topic.makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);
+                webReplyContent.loadRenderedContent(topic.getRenderedContent());
 
                 isHeaderShow = true;
             }
@@ -198,7 +189,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         protected TextView btnUps;
 
         @Bind(R.id.topic_item_reply_web_content)
-        protected MarkdownView webReplyContent;
+        protected CNodeWebView webReplyContent;
 
         @Bind(R.id.topic_item_reply_icon_deep_line)
         protected View iconDeepLine;
@@ -212,8 +203,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         public ReplyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
-            webReplyContent.setWebViewClient(webViewClient); // TODO 对内连接做分发
         }
 
         public void update(int position) {
@@ -230,7 +219,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             iconShadowGap.setVisibility(position == topic.getReplies().size() - 1 ? View.VISIBLE : View.GONE);
 
             // TODO 这里直接使用WebView，有性能问题
-            webReplyContent.loadMarkdown(reply.makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);
+            webReplyContent.loadRenderedContent(reply.getRenderedContent());
         }
 
         @OnClick(R.id.topic_item_reply_img_avatar)

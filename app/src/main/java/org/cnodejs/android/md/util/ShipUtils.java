@@ -22,6 +22,7 @@ public final class ShipUtils {
 
     public static void openInBrowser(Context context, String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);
         } else {
@@ -31,6 +32,7 @@ public final class ShipUtils {
 
     public static void sendEmail(Context context, String email, String subject, String text) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setData(Uri.parse("mailto:" + email));
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             intent.putExtra(Intent.EXTRA_SUBJECT, subject);

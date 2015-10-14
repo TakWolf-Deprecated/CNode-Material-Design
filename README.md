@@ -74,7 +74,7 @@
 
 - [QRCodeReaderView](https://github.com/dlazaro66/QRCodeReaderView)
 
-- [MarkdownView](https://github.com/falnatsheh/MarkdownView)
+- [MarkdownPapers](http://markdown.tautua.org)
 
 - [Material design icons](https://github.com/google/material-design-icons)
 

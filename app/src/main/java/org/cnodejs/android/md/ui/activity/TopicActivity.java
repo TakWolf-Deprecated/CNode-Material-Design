@@ -51,6 +51,7 @@ public class TopicActivity extends AppCompatActivity implements SwipeRefreshLayo
 
     public static void open(Context context, String topicId) {
         Intent intent = new Intent(context, TopicActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("topicId", topicId);
         context.startActivity(intent);
     }
