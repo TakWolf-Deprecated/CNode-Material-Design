@@ -8,17 +8,17 @@
     <View style="@style/AppTheme.ShadowGap" />
 
     <LinearLayout
+        android:id="@+id/about_btn_version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/selectable_item_background"
-        android:clickable="true">
+        android:background="@drawable/selectable_item_background">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/current_version"
+            android:text="@string/version_check_update"
             android:textColor="@color/text_color_primary"
             android:textSize="16sp" />
 
@@ -30,7 +30,7 @@
             android:textColor="@color/text_color_secondary"
             android:textSize="14sp"
             android:singleLine="true"
-            tools:text="v0.0.0-build-0" />
+            tools:text="当前版本：0.0.0-build-0" />
 
     </LinearLayout>
 

@@ -1,11 +1,8 @@
 package org.cnodejs.android.md.model.entity;
 
-import android.text.Html;
-import android.text.Spanned;
-
 import com.google.gson.annotations.SerializedName;
 
-import org.cnodejs.android.md.util.MarkdownUtils;
+import org.cnodejs.android.md.util.FormatUtils;
 import org.joda.time.DateTime;
 
 import java.util.List;
@@ -63,14 +60,14 @@ public class Reply {
         this.createAt = createAt;
     }
 
-    // TODO 对markdown做参数过滤
-    private String filterContent = null;
+    // TODO Markdown渲染缓存
+    private String renderedContent = null;
 
-    public String makeSureAndGetFilterContent() {
-        if (filterContent == null) { // 需要渲染
-            filterContent = MarkdownUtils.cnodeFilter(getContent());
+    public String getRenderedContent() {
+        if (renderedContent == null) { // 需要渲染
+            renderedContent = FormatUtils.renderMarkdown(getContent());
         }
-        return filterContent;
+        return renderedContent;
     }
 
 }

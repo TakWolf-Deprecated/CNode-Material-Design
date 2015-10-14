@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.cnodejs.android.md.util.MarkdownUtils;
-
 public class Message {
 
     public enum Type {

@@ -7,9 +7,9 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import org.cnodejs.android.md.util.DES3;
-import org.cnodejs.android.md.util.Digest;
-import org.cnodejs.android.md.util.GsonWrapper;
+import org.cnodejs.android.md.util.codec.DES3;
+import org.cnodejs.android.md.util.codec.Digest;
+import org.cnodejs.android.md.util.gson.GsonWrapper;
 
 import java.lang.reflect.Type;
 
@@ -115,7 +115,7 @@ public final class SharedWrapper {
         set(key, Long.toString(value));
     }
 
-    public <T>T getObject(String key, Class<T> clz) {
+    public <T> T getObject(String key, Class<T> clz) {
         String json = get(key, null);
         if (json == null) {
             return null;
@@ -128,7 +128,7 @@ public final class SharedWrapper {
         }
     }
 
-    public <T>T getObject(String key, Type typeOfT) {
+    public <T> T getObject(String key, Type typeOfT) {
         String json = get(key, null);
         if (json == null) {
             return null;

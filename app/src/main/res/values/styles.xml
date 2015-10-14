@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base App Theme -->
+    <!-- AppTheme -->
     <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
@@ -9,14 +9,20 @@
         <item name="windowActionModeOverlay">true</item>
     </style>
 
-    <!-- App Theme -->
     <style name="AppTheme" parent="BaseAppTheme" />
 
-    <!-- App Theme FitsStatusBar -->
+    <style name="AppTheme.Launch" />
+
     <style name="AppTheme.FitsStatusBar" />
 
-    <!-- App Theme FitsStatusBar TranslucentNavigation -->
     <style name="AppTheme.FitsStatusBar.TranslucentNavigation" />
+
+    <!-- App Theme Dialog -->
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+    </style>
 
     <!-- Deep Line -->
     <style name="AppTheme.DeepLine">
@@ -73,6 +79,7 @@
         <item name="android:paddingRight">16dp</item>
         <item name="android:textColor">@color/text_color_secondary</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 

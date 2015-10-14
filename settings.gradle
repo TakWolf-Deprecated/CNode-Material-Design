@@ -1,1 +1,1 @@
-include ':app', ':markdown-view'
+include ':app', ':umeng-update-sdk'

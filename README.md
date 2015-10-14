@@ -2,7 +2,7 @@
 
 [https://github.com/TakWolf/CNode-Material-Design](https://github.com/TakWolf/CNode-Material-Design)
 
-![](/art/ic_launcher.png)
+![Logo](/art/ic_launcher.png)
 
 [![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
 
@@ -13,8 +13,6 @@
 ## Download ##
 
 [![Google Play Store](/art/git_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
-
-[CNodeMD-v1.0.7](http://takwolf.com/download/CNodeMD-v1.0.7.apk)
 
 [Google Play](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
@@ -74,7 +72,7 @@
 
 - [QRCodeReaderView](https://github.com/dlazaro66/QRCodeReaderView)
 
-- [MarkdownView](https://github.com/falnatsheh/MarkdownView)
+- [MarkdownPapers](http://markdown.tautua.org)
 
 - [Material design icons](https://github.com/google/material-design-icons)
 

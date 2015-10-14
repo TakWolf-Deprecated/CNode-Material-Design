@@ -2,7 +2,7 @@ package org.cnodejs.android.md.storage;
 
 import android.content.Context;
 
-public class TopicShared {
+public final class TopicShared {
 
     private TopicShared() {}
 

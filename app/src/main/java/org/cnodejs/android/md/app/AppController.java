@@ -1,28 +1,34 @@
 package org.cnodejs.android.md.app;
 
 import android.app.Application;
-import android.content.Intent;
-import android.os.Bundle;
+import android.content.Context;
 
-import org.cnodejs.android.md.activity.CrashLogActivity;
+import com.umeng.update.UpdateConfig;
 
-public class AppController extends Application implements Thread.UncaughtExceptionHandler {
+import org.cnodejs.android.md.BuildConfig;
+
+public class AppController extends Application {
+
+    private static Context context;
+
+    public static Context getContext() {
+        return context;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Thread.setDefaultUncaughtExceptionHandler(this);
-    }
+        if (context == null) {
+            context = this;
 
-    @Override
-    public void uncaughtException(Thread thread, final Throwable e) {
-        Intent intent = new Intent(this, CrashLogActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("e", e);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        System.exit(1);
+            // 配置全局异常捕获
+            if (!BuildConfig.DEBUG) {
+                Thread.setDefaultUncaughtExceptionHandler(new AppExceptionHandler(this));
+            }
+
+            // 配置友盟更新日志
+            UpdateConfig.setDebug(BuildConfig.DEBUG);
+        }
     }
 
 }

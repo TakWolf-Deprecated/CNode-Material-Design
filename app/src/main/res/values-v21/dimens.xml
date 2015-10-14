@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="nav_status_bar_adapt_height">24dp</dimen>
-
-    <dimen name="card_view_container_padding">5dp</dimen>
-    <dimen name="card_view_margin">5dp</dimen>
+    <dimen name="status_bar_adapt_height">25dp</dimen>
 
 </resources>
