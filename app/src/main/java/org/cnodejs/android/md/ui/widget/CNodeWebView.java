@@ -31,7 +31,7 @@ public class CNodeWebView extends WebView {
         setWebViewClient(CNodeWebViewClient.with(context));
     }
 
-    public void loadFilterContent(String data) {
+    public void loadRenderedContent(String data) {
         loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
     }
 

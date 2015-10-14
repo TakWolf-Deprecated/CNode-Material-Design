@@ -132,14 +132,14 @@ public class Topic {
         this.createAt = createAt;
     }
 
-    // TODO 对markdown做参数过滤
-    private String filterContent = null;
+    // TODO Markdown渲染缓存
+    private String renderedContent = null;
 
-    public String makeSureAndGetFilterContent() {
-        if (filterContent == null) { // 需要渲染
-            filterContent = FormatUtils.getHtmlFromCNodeMarkdown(getContent());
+    public String getRenderedContent() {
+        if (renderedContent == null) { // 需要渲染
+            renderedContent = FormatUtils.renderMarkdown(getContent());
         }
-        return filterContent;
+        return renderedContent;
     }
 
 }

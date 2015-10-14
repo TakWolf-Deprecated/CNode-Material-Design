@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -157,7 +156,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
 
                 // TODO 这里直接使用WebView，有性能问题
-                webReplyContent.loadFilterContent(topic.makeSureAndGetFilterContent());
+                webReplyContent.loadRenderedContent(topic.getRenderedContent());
 
                 isHeaderShow = true;
             }
@@ -220,7 +219,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             iconShadowGap.setVisibility(position == topic.getReplies().size() - 1 ? View.VISIBLE : View.GONE);
 
             // TODO 这里直接使用WebView，有性能问题
-            webReplyContent.loadFilterContent(reply.makeSureAndGetFilterContent());
+            webReplyContent.loadRenderedContent(reply.getRenderedContent());
         }
 
         @OnClick(R.id.topic_item_reply_img_avatar)

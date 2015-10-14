@@ -28,7 +28,7 @@ public class MarkdownPreviewActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        cnodeWebView.loadFilterContent(FormatUtils.getHtmlFromCNodeMarkdown(getIntent().getStringExtra("markdownText")));
+        cnodeWebView.loadRenderedContent(FormatUtils.renderMarkdown(getIntent().getStringExtra("markdownText")));
     }
 
     @Override

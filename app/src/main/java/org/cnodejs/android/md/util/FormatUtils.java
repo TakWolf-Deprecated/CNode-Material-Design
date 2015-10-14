@@ -104,7 +104,7 @@ public final class FormatUtils {
             "</body>\n" +
             "</html>";
 
-    public static String getHtmlFromCNodeMarkdown(String text) {
+    public static String renderMarkdown(String text) {
         // 协议替换
         text = text.replace("](/user/", "](https://cnodejs.org/user/"); // TODO 替换@用户协议
         text = text.replace("](//dn-cnode.qbox.me/", "](https://dn-cnode.qbox.me/"); // TODO 替换CNode CDN图片路径
