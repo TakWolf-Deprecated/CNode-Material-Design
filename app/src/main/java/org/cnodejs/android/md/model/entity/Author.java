@@ -4,6 +4,8 @@ import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.cnodejs.android.md.util.FormatUtils;
+
 public class Author {
 
     @SerializedName("loginname")
@@ -21,11 +23,7 @@ public class Author {
     }
 
     public String getAvatarUrl() { // TODO 修复头像地址的历史遗留问题
-        if (!TextUtils.isEmpty(avatarUrl) && avatarUrl.startsWith("//gravatar.com/avatar/")) {
-            return "https:" + avatarUrl;
-        } else {
-            return avatarUrl;
-        }
+        return FormatUtils.getCompatAvatarUrl(avatarUrl);
     }
 
     public void setAvatarUrl(String avatarUrl) {

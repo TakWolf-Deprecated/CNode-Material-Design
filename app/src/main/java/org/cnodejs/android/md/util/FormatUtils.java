@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.util;
 
+import android.text.TextUtils;
+
 import org.joda.time.DateTime;
 
 import java.util.Date;
@@ -62,6 +64,17 @@ public final class FormatUtils {
             return "";
         } else {
             return String.valueOf(count);
+        }
+    }
+
+    /**
+     * 修复头像地址的历史遗留问题
+     */
+    public static String getCompatAvatarUrl(String avatarUrl) {
+        if (!TextUtils.isEmpty(avatarUrl) && avatarUrl.startsWith("//gravatar.com/avatar/")) {
+            return "https:" + avatarUrl;
+        } else {
+            return avatarUrl;
         }
     }
 
