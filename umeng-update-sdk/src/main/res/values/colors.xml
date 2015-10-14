@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="umeng_text_color_primary">#ff212121</color>
+    <color name="umeng_text_color_secondary">#ff757575</color>
+
+    <color name="umeng_color_primary">#ff80bd01</color>
+
+    <color name="umeng_button_cancel_normal">#ffdddddd</color>
+    <color name="umeng_button_cancel_pressed">#ffbbbbbb</color>
+    <color name="umeng_button_cancel_accent">#99ffffff</color>
+
+    <color name="umeng_button_ok_normal">@color/umeng_color_primary</color>
+    <color name="umeng_button_ok_pressed">#ff48bd06</color>
+    <color name="umeng_button_ok_accent">#99ffffff</color>
+
+</resources>

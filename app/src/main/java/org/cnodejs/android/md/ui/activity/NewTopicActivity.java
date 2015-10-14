@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class NewTopicActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
+public class NewTopicActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
 
     @Bind(R.id.new_topic_toolbar)
     protected Toolbar toolbar;
