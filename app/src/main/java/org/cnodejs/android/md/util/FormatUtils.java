@@ -48,9 +48,14 @@ public final class FormatUtils {
         return "刚刚";
     }
 
-    public static String getDisplayCountText(int count) {
+    /**
+     * 获取菜单导航消息数目字符串
+     */
+    public static String getNavigationDisplayCountText(int count) {
         if (count > 99) {
             return "99+";
+        } else if (count <= 0) {
+            return "";
         } else {
             return String.valueOf(count);
         }

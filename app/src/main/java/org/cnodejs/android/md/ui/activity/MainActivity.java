@@ -142,11 +142,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                 @Override
                 public void success(Result<Integer> result, Response response) {
-                    if (result.getData() <= 0) {
-                        tvBadgerNotification.setText(null);
-                    } else {
-                        tvBadgerNotification.setText(FormatUtils.getDisplayCountText(result.getData()));
-                    }
+                    tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
                 }
 
                 @Override
