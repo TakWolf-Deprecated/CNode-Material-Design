@@ -72,7 +72,7 @@ public final class FormatUtils {
      */
     public static String getCompatAvatarUrl(String avatarUrl) {
         if (!TextUtils.isEmpty(avatarUrl) && avatarUrl.startsWith("//gravatar.com/avatar/")) {
-            return "https:" + avatarUrl;
+            return "http:" + avatarUrl;
         } else {
             return avatarUrl;
         }
