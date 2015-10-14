@@ -8,12 +8,16 @@ public final class FormatUtils {
 
     private FormatUtils() {}
 
-    private static final long minute = 60 * 1000; //分钟
-    private static final long hour = 60 * minute; //小时
-    private static final long day = 24 * hour;    //天
-    private static final long week = 7 * day;     //周
-    private static final long month = 31 * day;   //月
-    private static final long year = 12 * month;  //年
+    /**
+     * 获取最近时间字符串
+     */
+
+    private static final long minute = 60 * 1000;
+    private static final long hour = 60 * minute;
+    private static final long day = 24 * hour;
+    private static final long week = 7 * day;
+    private static final long month = 31 * day;
+    private static final long year = 12 * month;
 
     public static String getRecentlyTimeText(DateTime dateTime) {
         if (dateTime == null) {
