@@ -6,6 +6,10 @@ def year = String.format("%d", calendar.get(Calendar.YEAR));
 def month = String.format("%02d", calendar.get(Calendar.MONTH) + 1);
 def day = String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH));
 
+// 读取local.properties文件
+def Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
 
     compileSdkVersion 23
@@ -17,6 +21,11 @@ android {
         targetSdkVersion 21
         versionCode Integer.parseInt(year + month + day)
         versionName "1.0.7"
+
+        manifestPlaceholders = [
+                UMENG_CHANNEL: "CNodeJS",
+                UMENG_APPKEY: properties.getProperty("umeng.appkey")
+        ]
     }
 
     buildTypes {
@@ -57,4 +66,7 @@ dependencies {
     compile 'com.dlazaro66.qrcodereaderview:qrcodereaderview:1.0.0'
 
     compile 'org.tautua.markdownpapers:markdownpapers-core:1.4.2'
+
+    compile project(':umeng-update-sdk')
+    compile 'com.umeng.analytics:analytics:5.6.1'
 }

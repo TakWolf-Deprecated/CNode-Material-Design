@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.umeng.update.UmengUpdateAgent;
 
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
@@ -20,7 +21,7 @@ import butterknife.OnClick;
 
 public class AboutActivity extends AppCompatActivity {
 
-    public static final String VERSION_TEXT = "v" + BuildConfig.VERSION_NAME + "-build-" + BuildConfig.VERSION_CODE;
+    public static final String VERSION_TEXT = BuildConfig.VERSION_NAME + "-build-" + BuildConfig.VERSION_CODE;
 
     @Bind(R.id.about_toolbar)
     protected Toolbar toolbar;
@@ -36,7 +37,12 @@ public class AboutActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        tvVersion.setText(VERSION_TEXT);
+        tvVersion.setText(getString(R.string.current_version_$) + VERSION_TEXT);
+    }
+
+    @OnClick(R.id.about_btn_version)
+    protected void onBtnVersionClick() {
+        UmengUpdateAgent.forceUpdate(this);
     }
 
     @OnClick(R.id.about_btn_open_source_url)

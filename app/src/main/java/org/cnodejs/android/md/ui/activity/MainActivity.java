@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
+import com.umeng.update.UmengUpdateAgent;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
@@ -125,6 +126,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         RefreshLayoutUtils.initOnCreate(refreshLayout, this);
         RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
+
+        // 友盟更新
+        UmengUpdateAgent.update(this);
     }
 
     @Override

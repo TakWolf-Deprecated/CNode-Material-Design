@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/umeng_button_ok_accent">
+    <item>
+        <selector>
+            <item android:state_pressed="true" android:drawable="@drawable/umeng_update_button_ok_bg_pressed" />
+            <item android:drawable="@drawable/umeng_update_button_ok_bg_normal" />
+        </selector>
+    </item>
+</ripple>

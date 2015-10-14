@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- AppTheme -->
     <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
@@ -15,6 +16,13 @@
     <style name="AppTheme.FitsStatusBar" />
 
     <style name="AppTheme.FitsStatusBar.TranslucentNavigation" />
+
+    <!-- App Theme Dialog -->
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+    </style>
 
     <!-- Deep Line -->
     <style name="AppTheme.DeepLine">
