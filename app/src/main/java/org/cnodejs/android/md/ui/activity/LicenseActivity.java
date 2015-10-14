@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
@@ -12,7 +11,7 @@ import org.cnodejs.android.md.util.DocumentUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class LicenseActivity extends AppCompatActivity {
+public class LicenseActivity extends BaseActivity {
 
     @Bind(R.id.license_toolbar)
     protected Toolbar toolbar;

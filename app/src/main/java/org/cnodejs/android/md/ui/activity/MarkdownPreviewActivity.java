@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import org.cnodejs.android.md.R;
@@ -12,7 +11,7 @@ import org.cnodejs.android.md.util.FormatUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MarkdownPreviewActivity extends AppCompatActivity {
+public class MarkdownPreviewActivity extends BaseActivity {
 
     @Bind(R.id.markdown_preview_toolbar)
     protected Toolbar toolbar;

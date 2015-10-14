@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -16,7 +15,7 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class QrCodeActivity extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
+public class QrCodeActivity extends BaseActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     @Bind(R.id.qrcode_toolbar)
     protected Toolbar toolbar;

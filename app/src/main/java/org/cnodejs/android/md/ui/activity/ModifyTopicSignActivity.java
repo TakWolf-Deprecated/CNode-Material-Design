@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -13,7 +12,7 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ModifyTopicSignActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
+public class ModifyTopicSignActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
 
     @Bind(R.id.modify_topic_sign_toolbar)
     protected Toolbar toolbar;

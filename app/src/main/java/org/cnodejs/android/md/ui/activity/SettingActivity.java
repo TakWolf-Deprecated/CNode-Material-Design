@@ -2,7 +2,6 @@ package org.cnodejs.android.md.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingActivity extends AppCompatActivity implements Switch.OnCheckedChangeListener {
+public class SettingActivity extends BaseActivity implements Switch.OnCheckedChangeListener {
 
     @Bind(R.id.setting_toolbar)
     protected Toolbar toolbar;

@@ -2,12 +2,11 @@ package org.cnodejs.android.md.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.util.HandlerUtils;
 
-public class LaunchActivity extends AppCompatActivity implements Runnable {
+public class LaunchActivity extends BaseActivity implements Runnable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
