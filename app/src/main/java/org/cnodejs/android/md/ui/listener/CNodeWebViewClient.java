@@ -8,12 +8,25 @@ import org.cnodejs.android.md.ui.activity.TopicActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.util.ShipUtils;
 
-public class WebViewContentClient extends WebViewClient {
+public class CNodeWebViewClient extends WebViewClient {
 
-    private Context context;
+    private volatile static CNodeWebViewClient singleton;
 
-    public WebViewContentClient(Context context) {
-        this.context = context;
+    public static CNodeWebViewClient with(Context context) {
+        if (singleton == null) {
+            synchronized (CNodeWebViewClient.class) {
+                if (singleton == null) {
+                    singleton = new CNodeWebViewClient(context);
+                }
+            }
+        }
+        return singleton;
+    }
+
+    private final Context context;
+
+    private CNodeWebViewClient(Context context) {
+        this.context = context.getApplicationContext();
     }
 
     @Override

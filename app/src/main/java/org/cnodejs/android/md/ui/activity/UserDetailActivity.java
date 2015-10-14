@@ -43,6 +43,7 @@ public class UserDetailActivity extends AppCompatActivity {
 
     public static void open(Context context, String loginName) {
         Intent intent = new Intent(context, UserDetailActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("loginName", loginName);
         context.startActivity(intent);
     }

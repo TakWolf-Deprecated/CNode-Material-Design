@@ -21,8 +21,8 @@
         android:layout_height="match_parent"
         android:background="@android:color/white">
 
-        <us.feras.mdv.MarkdownView
-            android:id="@+id/markdown_preview_makrdown_view"
+        <org.cnodejs.android.md.ui.widget.CNodeWebView
+            android:id="@+id/markdown_preview_web_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

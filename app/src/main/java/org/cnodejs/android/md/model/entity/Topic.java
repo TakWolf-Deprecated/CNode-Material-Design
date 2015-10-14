@@ -2,7 +2,7 @@ package org.cnodejs.android.md.model.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.cnodejs.android.md.util.MarkdownUtils;
+import org.cnodejs.android.md.util.FormatUtils;
 import org.joda.time.DateTime;
 
 public class Topic {
@@ -137,7 +137,7 @@ public class Topic {
 
     public String makeSureAndGetFilterContent() {
         if (filterContent == null) { // 需要渲染
-            filterContent = MarkdownUtils.cnodeFilter(getContent());
+            filterContent = FormatUtils.getHtmlFromCNodeMarkdown(getContent());
         }
         return filterContent;
     }

@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,16 +16,14 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.ui.activity.TopicActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
-import org.cnodejs.android.md.ui.listener.WebViewContentClient;
+import org.cnodejs.android.md.ui.widget.CNodeWebView;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.MarkdownUtils;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import us.feras.mdv.MarkdownView;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
 
@@ -34,14 +31,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     private LayoutInflater inflater;
     private List<Message> messageList;
 
-    private WebViewClient webViewClient;
-
     public NotificationAdapter(Context context, @NonNull List<Message> messageList) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.messageList = messageList;
-
-        this.webViewClient = new WebViewContentClient(context);
     }
 
     @Override
@@ -74,7 +67,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         protected TextView tvAction;
 
         @Bind(R.id.notification_item_web_reply_content)
-        protected MarkdownView webReplyContent;
+        protected CNodeWebView webReplyContent;
 
         @Bind(R.id.notification_item_tv_topic_title)
         protected TextView tvTopicTitle;
@@ -84,8 +77,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         protected ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
-            webReplyContent.setWebViewClient(webViewClient); // TODO 对内连接做分发
         }
 
         protected void update(int position) {
@@ -104,12 +95,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 } else {
                     tvAction.setText("在回复中@了您");
                     webReplyContent.setVisibility(View.VISIBLE);
-                    webReplyContent.loadMarkdown(message.getReply().makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);  // TODO 这里直接使用WebView，有性能问题
+                    webReplyContent.loadFilterContent(message.getReply().makeSureAndGetFilterContent());  // TODO 这里直接使用WebView，有性能问题
                 }
             } else {
                 tvAction.setText("回复了您的话题");
                 webReplyContent.setVisibility(View.VISIBLE);
-                webReplyContent.loadMarkdown(message.getReply().makeSureAndGetFilterContent(), MarkdownUtils.THEME_CSS);  // TODO 这里直接使用WebView，有性能问题
+                webReplyContent.loadFilterContent(message.getReply().makeSureAndGetFilterContent());  // TODO 这里直接使用WebView，有性能问题
             }
 
             // 已读未读状态
