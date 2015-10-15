@@ -15,8 +15,6 @@
 
     <style name="AppTheme.FitsStatusBar" />
 
-    <style name="AppTheme.FitsStatusBar.TranslucentNavigation" />
-
     <!-- App Theme Dialog -->
     <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">@color/color_primary</item>
