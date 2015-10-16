@@ -8,11 +8,17 @@
 
     <include layout="@layout/activity_main_center" />
 
-    <android.support.design.widget.NavigationView
+    <org.cnodejs.android.md.ui.widget.ScrimInsetsScrollView
         android:layout_height="match_parent"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
         android:layout_gravity="start"
         android:background="@android:color/white"
-        app:headerLayout="@layout/activity_main_nav" />
+        android:scrollbars="none"
+        app:appInsetForeground="#44000000">
+
+        <include layout="@layout/activity_main_nav" />
+
+    </org.cnodejs.android.md.ui.widget.ScrimInsetsScrollView>
 
 </android.support.v4.widget.DrawerLayout>
