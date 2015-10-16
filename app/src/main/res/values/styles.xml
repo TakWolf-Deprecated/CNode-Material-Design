@@ -40,7 +40,6 @@
         <item name="android:layout_height">8dp</item>
     </style>
 
-    <!-- Shadow Gap -->
     <style name="AppTheme.ShadowGap">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">4dp</item>
@@ -48,14 +47,13 @@
         <item name="android:background">@drawable/gap_shadow</item>
     </style>
 
-    <!-- Shadow Gap Opposite -->
     <style name="AppTheme.ShadowGap.Opposite">
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:background">@drawable/gap_shadow_opposite</item>
     </style>
 
-    <!-- Navigation Item -->
+    <!-- Navigation -->
     <style name="AppTheme.NavigationItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
@@ -68,7 +66,6 @@
         <item name="android:background">@drawable/selectable_item_background</item>
     </style>
 
-    <!-- Navigation Item Badger -->
     <style name="AppTheme.NavigationItemBadger">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">48dp</item>
@@ -88,7 +85,6 @@
         <item name="android:background">@drawable/button_image</item>
     </style>
 
-    <!-- Button -->
     <style name="AppTheme.Button.Stroke">
         <item name="android:textColor">@drawable/button_stroke_text_color</item>
         <item name="android:background">@drawable/button_stroke_image</item>
