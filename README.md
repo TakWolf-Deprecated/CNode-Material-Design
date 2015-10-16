@@ -90,6 +90,8 @@
 
 > [https://cnodejs.org/topic/559bd1b91e5c761761468884](https://cnodejs.org/topic/559bd1b91e5c761761468884)
 
+> PS：基于React Native实现，目前只有IOS版本，作者有计划适配Android。比较不错的技术实践，作者比较活跃。
+
 ### [CNode-android](https://github.com/iwhys/CNode-android) ###
 
 > 这是为CNodejs社区(https://cnodejs.org/) 开发的原生Android版客户端。适用于Android4.0及以上。
