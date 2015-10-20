@@ -1,7 +1,5 @@
 package org.cnodejs.android.md.model.entity;
 
-import android.text.TextUtils;
-
 import com.google.gson.annotations.SerializedName;
 
 import org.cnodejs.android.md.util.FormatUtils;
