@@ -1,6 +1,6 @@
 package org.cnodejs.android.md.ui.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -27,13 +27,13 @@ import butterknife.OnClick;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
 
-    private Context context;
+    private Activity activity;
     private LayoutInflater inflater;
     private List<Message> messageList;
 
-    public NotificationAdapter(Context context, @NonNull List<Message> messageList) {
-        this.context = context;
-        inflater = LayoutInflater.from(context);
+    public NotificationAdapter(Activity activity, @NonNull List<Message> messageList) {
+        this.activity = activity;
+        inflater = LayoutInflater.from(activity);
         this.messageList = messageList;
     }
 
@@ -82,7 +82,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         protected void update(int position) {
             message = messageList.get(position);
 
-            Picasso.with(context).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+            Picasso.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
             tvTime.setText(FormatUtils.getRecentlyTimeText(message.getReply().getCreateAt()));
             tvTopicTitle.setText("话题：" + message.getTopic().getTitle());
@@ -104,22 +104,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             }
 
             // 已读未读状态
-            tvTime.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));
+            tvTime.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));
             tvFrom.getPaint().setFakeBoldText(!message.isRead());
-            tvFrom.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_primary : R.color.text_color_primary));
+            tvFrom.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_primary : R.color.text_color_primary));
             tvAction.getPaint().setFakeBoldText(!message.isRead());
-            tvAction.setTextColor(context.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.text_color_primary));
+            tvAction.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.text_color_primary));
             tvTopicTitle.getPaint().setFakeBoldText(!message.isRead());
         }
 
         @OnClick(R.id.notification_item_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.open(context, message.getAuthor().getLoginName());
+            UserDetailActivity.openWithTransitionAnimation(activity, message.getAuthor().getLoginName(), imgAvatar);
         }
 
         @OnClick(R.id.notification_item_btn_item)
         protected void onBtnItemClick() {
-            TopicActivity.open(context, message.getTopic().getId());
+            TopicActivity.open(activity, message.getTopic().getId());
         }
 
     }

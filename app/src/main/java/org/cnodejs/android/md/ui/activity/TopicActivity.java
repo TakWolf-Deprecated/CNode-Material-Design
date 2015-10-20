@@ -136,7 +136,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
 
     @Override
     public void onRefresh() {
-        ApiClient.service.getTopic(topicId, false, new Callback<Result<TopicWithReply>>() {
+        ApiClient.service.getTopic(topicId, true, new Callback<Result<TopicWithReply>>() {
 
             @Override
             public void success(Result<TopicWithReply> result, Response response) {

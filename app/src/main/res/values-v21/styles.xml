@@ -3,6 +3,7 @@
 
     <style name="AppTheme" parent="BaseAppTheme">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="AppTheme.Launch">
@@ -12,10 +13,6 @@
 
     <style name="AppTheme.FitsStatusBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
-    <style name="AppTheme.FitsStatusBar.TranslucentNavigation">
-        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
 </resources>

@@ -105,7 +105,7 @@ public final class FormatUtils {
             "</html>";
 
     public static String renderMarkdown(String text) {
-        // 协议替换
+        // 替换Markdown
         text = text.replace("](/user/", "](https://cnodejs.org/user/"); // TODO 替换@用户协议
         text = text.replace("](//dn-cnode.qbox.me/", "](https://dn-cnode.qbox.me/"); // TODO 替换CNode CDN图片路径
         // 转换
@@ -113,6 +113,10 @@ public final class FormatUtils {
         try {
             md.transform(new StringReader(text), out);
             text = out.toString();
+
+            // 替换Html
+            text = text.replace("<a href=\"/user/", "<a href=\"https://cnodejs.org/user/"); // TODO 替换@用户协议
+            text = text.replace("<img src=\"//dn-cnode.qbox.me/", "<img src=\"https://dn-cnode.qbox.me/"); // TODO 替换CNode CDN图片路径
 
             // 生成完整html
             return HTML_0 + "\n<link type=\"text/css\" rel=\"stylesheet\" href=\"" + THEME_CSS + "\">" + HTML_1 + text + HTML_2;

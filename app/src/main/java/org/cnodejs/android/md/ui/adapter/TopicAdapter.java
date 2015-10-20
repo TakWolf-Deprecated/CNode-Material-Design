@@ -1,6 +1,6 @@
 package org.cnodejs.android.md.ui.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -38,7 +38,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_REPLY = 1;
 
-    private Context context;
+    private Activity activity;
     private LayoutInflater inflater;
     private TopicWithReply topic;
 
@@ -52,9 +52,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     private OnAtClickListener onAtClickListener;
 
-    public TopicAdapter(Context context, @NonNull OnAtClickListener onAtClickListener) {
-        this.context = context;
-        inflater = LayoutInflater.from(context);
+    public TopicAdapter(Activity activity, @NonNull OnAtClickListener onAtClickListener) {
+        this.activity = activity;
+        inflater = LayoutInflater.from(activity);
         this.onAtClickListener = onAtClickListener;
     }
 
@@ -148,11 +148,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 tvTitle.setText(topic.getTitle());
                 tvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
                 tvTab.setBackgroundResource(topic.isTop() ? R.drawable.topic_tab_top_background : R.drawable.topic_tab_normal_background);
-                tvTab.setTextColor(context.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
+                tvTab.setTextColor(activity.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
                 tvVisitCount.setText(topic.getVisitCount() + "次浏览");
-                Picasso.with(context).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+                Picasso.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
                 tvLoginName.setText(topic.getAuthor().getLoginName());
-                tvCreateTime.setText(context.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeText(topic.getCreateAt()));
+                tvCreateTime.setText(activity.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeText(topic.getCreateAt()));
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
 
                 // TODO 这里直接使用WebView，有性能问题
@@ -166,7 +166,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_header_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.open(context, topic.getAuthor().getLoginName());
+            UserDetailActivity.openWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar);
         }
 
     }
@@ -209,12 +209,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             this.position = position;
             reply = topic.getReplies().get(position);
 
-            Picasso.with(context).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+            Picasso.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             tvIndex.setText(position + 1 + "楼");
             tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
             btnUps.setText(String.valueOf(reply.getUps().size()));
-            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUps().contains(LoginShared.getId(context)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
+            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUps().contains(LoginShared.getId(activity)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
             iconDeepLine.setVisibility(position == topic.getReplies().size() - 1 ? View.GONE : View.VISIBLE);
             iconShadowGap.setVisibility(position == topic.getReplies().size() - 1 ? View.VISIBLE : View.GONE);
 
@@ -224,15 +224,15 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_reply_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.open(context, reply.getAuthor().getLoginName());
+            UserDetailActivity.openWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar);
         }
 
         @OnClick(R.id.topic_item_reply_btn_ups)
         protected void onBtnUpsClick() {
-            if (TextUtils.isEmpty(LoginShared.getAccessToken(context))) {
+            if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
                 showNeedLoginDialog();
-            } else if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(context))) {
-                Toast.makeText(context, "不能帮自己点赞", Toast.LENGTH_SHORT).show();
+            } else if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
+                Toast.makeText(activity, "不能帮自己点赞", Toast.LENGTH_SHORT).show();
             } else {
                 upTopicAsyncTask(this);
             }
@@ -240,7 +240,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_reply_btn_at)
         protected void onBtnAtClick() {
-            if (TextUtils.isEmpty(LoginShared.getAccessToken(context))) {
+            if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
                 showNeedLoginDialog();
             } else {
                 onAtClickListener.onAt(reply.getAuthor().getLoginName());
@@ -250,7 +250,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     }
 
     public void showNeedLoginDialog() {
-        new MaterialDialog.Builder(context)
+        new MaterialDialog.Builder(activity)
                 .content(R.string.need_login_tip)
                 .positiveText(R.string.login)
                 .negativeText(R.string.cancel)
@@ -258,7 +258,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
                     @Override
                     public void onPositive(MaterialDialog dialog) {
-                        context.startActivity(new Intent(context, LoginActivity.class));
+                        activity.startActivity(new Intent(activity, LoginActivity.class));
                     }
 
                 })
@@ -266,7 +266,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     }
 
     public void showAccessTokenErrorDialog() {
-        new MaterialDialog.Builder(context)
+        new MaterialDialog.Builder(activity)
                 .content(R.string.access_token_error_tip)
                 .positiveText(R.string.confirm)
                 .show();
@@ -275,19 +275,19 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     private void upTopicAsyncTask(final ReplyViewHolder holder) {
         final int position = holder.position; // 标记当时的位置信息
         final Reply reply = holder.reply; // 保存当时的回复对象
-        ApiClient.service.upTopic(LoginShared.getAccessToken(context), holder.reply.getId(), new Callback<TopicUpInfo>() {
+        ApiClient.service.upTopic(LoginShared.getAccessToken(activity), holder.reply.getId(), new Callback<TopicUpInfo>() {
 
             @Override
             public void success(TopicUpInfo info, Response response) {
                 if (info.getAction() == TopicUpInfo.Action.up) {
-                    reply.getUps().add(LoginShared.getId(context));
+                    reply.getUps().add(LoginShared.getId(activity));
                 } else if (info.getAction() == TopicUpInfo.Action.down) {
-                    reply.getUps().remove(LoginShared.getId(context));
+                    reply.getUps().remove(LoginShared.getId(activity));
                 }
                 // 如果位置没有变，则更新界面
                 if (position == holder.position) {
                     holder.btnUps.setText(String.valueOf(holder.reply.getUps().size()));
-                    holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUps().contains(LoginShared.getId(context)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
+                    holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUps().contains(LoginShared.getId(activity)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
                 }
             }
 
@@ -296,7 +296,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                     showAccessTokenErrorDialog();
                 } else {
-                    Toast.makeText(context, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
                 }
             }
 

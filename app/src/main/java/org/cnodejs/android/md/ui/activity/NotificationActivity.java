@@ -68,7 +68,7 @@ public class NotificationActivity extends BaseActivity implements Toolbar.OnMenu
 
     @Override
     public void onRefresh() {
-        ApiClient.service.getMessages(LoginShared.getAccessToken(this), new Callback<Result<Notification>>() {
+        ApiClient.service.getMessages(LoginShared.getAccessToken(this), true, new Callback<Result<Notification>>() {
 
             @Override
             public void success(Result<Notification> result, Response response) {

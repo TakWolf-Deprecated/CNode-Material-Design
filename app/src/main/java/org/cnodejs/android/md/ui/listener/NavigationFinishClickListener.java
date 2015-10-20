@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.ui.listener;
 
 import android.app.Activity;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
 public class NavigationFinishClickListener implements View.OnClickListener {
@@ -13,7 +14,7 @@ public class NavigationFinishClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        activity.finish();
+        ActivityCompat.finishAfterTransition(activity);
     }
 
 }
