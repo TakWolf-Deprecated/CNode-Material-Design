@@ -1,6 +1,6 @@
 package org.cnodejs.android.md.ui.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,13 +25,13 @@ import butterknife.OnClick;
 
 public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAdapter.ViewHolder> {
 
-    private Context context;
+    private Activity activity;
     private LayoutInflater inflater;
     private List<TopicSimple> topicList;
 
-    public UserDetailItemAdapter(Context context, @NonNull List<TopicSimple> topicList) {
-        this.context = context;
-        inflater = LayoutInflater.from(context);
+    public UserDetailItemAdapter(Activity activity, @NonNull List<TopicSimple> topicList) {
+        this.activity = activity;
+        inflater = LayoutInflater.from(activity);
         this.topicList = topicList;
     }
 
@@ -75,19 +75,19 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
             topic = topicList.get(position);
 
             tvTitle.setText(topic.getTitle());
-            Picasso.with(context).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+            Picasso.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(topic.getAuthor().getLoginName());
             tvLastReplyTime.setText(FormatUtils.getRecentlyTimeText(topic.getLastReplyAt()));
         }
 
         @OnClick(R.id.user_detail_item_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.open(context, topic.getAuthor().getLoginName());
+            UserDetailActivity.openWithAvatar(activity, topic.getAuthor().getLoginName(), imgAvatar);
         }
 
         @OnClick(R.id.user_detail_item_btn_item)
         protected void onBtnItemClick() {
-            TopicActivity.open(context, topic.getId());
+            TopicActivity.open(activity, topic.getId());
         }
 
     }

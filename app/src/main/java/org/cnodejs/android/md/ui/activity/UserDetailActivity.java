@@ -1,13 +1,17 @@
 package org.cnodejs.android.md.ui.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -39,6 +43,14 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class UserDetailActivity extends BaseActivity {
+
+    public static void openWithAvatar(Activity activity, String loginName, ImageView imgAvatar) {
+        Intent intent = new Intent(activity, UserDetailActivity.class);
+        intent.putExtra("loginName", loginName);
+
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imgAvatar, activity.getString(R.string.transition_name_img_avatar));
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
 
     public static void open(Context context, String loginName) {
         Intent intent = new Intent(context, UserDetailActivity.class);
@@ -86,6 +98,8 @@ public class UserDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
         ButterKnife.bind(this);
+
+        ViewCompat.setTransitionName(imgAvatar, getString(R.string.transition_name_img_avatar));
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
