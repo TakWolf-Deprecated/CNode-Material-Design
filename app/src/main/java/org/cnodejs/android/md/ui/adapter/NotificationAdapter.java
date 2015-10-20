@@ -1,9 +1,7 @@
 package org.cnodejs.android.md.ui.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -116,7 +114,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         @OnClick(R.id.notification_item_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithAvatar(activity, message.getAuthor().getLoginName(), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(activity, message.getAuthor().getLoginName(), imgAvatar);
         }
 
         @OnClick(R.id.notification_item_btn_item)

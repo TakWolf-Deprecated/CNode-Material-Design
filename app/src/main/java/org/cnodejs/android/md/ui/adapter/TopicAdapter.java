@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.ui.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -167,7 +166,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_header_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithAvatar(activity, topic.getAuthor().getLoginName(), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar);
         }
 
     }
@@ -225,7 +224,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_reply_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithAvatar(activity, reply.getAuthor().getLoginName(), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar);
         }
 
         @OnClick(R.id.topic_item_reply_btn_ups)

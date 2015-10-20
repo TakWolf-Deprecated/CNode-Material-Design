@@ -44,7 +44,7 @@ import retrofit.client.Response;
 
 public class UserDetailActivity extends BaseActivity {
 
-    public static void openWithAvatar(Activity activity, String loginName, ImageView imgAvatar) {
+    public static void openWithTransitionAnimation(Activity activity, String loginName, ImageView imgAvatar) {
         Intent intent = new Intent(activity, UserDetailActivity.class);
         intent.putExtra("loginName", loginName);
 

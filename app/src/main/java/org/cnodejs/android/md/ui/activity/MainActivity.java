@@ -435,7 +435,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
         } else {
-            UserDetailActivity.openWithAvatar(this, LoginShared.getLoginName(this), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(this, LoginShared.getLoginName(this), imgAvatar);
         }
     }
 
