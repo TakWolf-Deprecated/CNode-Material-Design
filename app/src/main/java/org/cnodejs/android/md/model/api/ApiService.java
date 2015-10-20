@@ -100,6 +100,7 @@ public interface ApiService {
     @GET("/v1/messages")
     void getMessages(
             @Query("accesstoken") String accessToken,
+            @Query("mdrender") Boolean mdrender,
             Callback<Result<Notification>> callback
     );
 
