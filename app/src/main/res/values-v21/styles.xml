@@ -3,6 +3,7 @@
 
     <style name="AppTheme" parent="BaseAppTheme">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="AppTheme.Launch">
