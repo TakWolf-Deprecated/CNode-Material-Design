@@ -20,7 +20,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 21
         versionCode Integer.parseInt(year + month + day)
-        versionName "1.0.8"
+        versionName "1.0.9"
 
         manifestPlaceholders = [
                 UMENG_CHANNEL: "CNodeJS",
