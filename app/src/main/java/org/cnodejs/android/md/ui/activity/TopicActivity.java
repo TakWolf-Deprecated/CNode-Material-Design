@@ -238,17 +238,17 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
                     reply.setAuthor(author);
                     reply.setContent(content);
                     reply.setCreateAt(new DateTime());
-                    reply.setUps(new ArrayList<String>());
-                    topic.getReplies().add(reply);
+                    reply.setUpList(new ArrayList<String>());
+                    topic.getReplyList().add(reply);
                     // 更新adapter并让recyclerView滑动到最底部
                     replyWindow.dismiss();
-                    if (topic.getReplies().size() == 1) { // 需要全刷新
+                    if (topic.getReplyList().size() == 1) { // 需要全刷新
                         adapter.notifyDataSetChanged();
                     } else { // 插入刷新
-                        adapter.notifyItemChanged(topic.getReplies().size() - 1);
-                        adapter.notifyItemInserted(topic.getReplies().size());
+                        adapter.notifyItemChanged(topic.getReplyList().size() - 1);
+                        adapter.notifyItemInserted(topic.getReplyList().size());
                     }
-                    recyclerView.smoothScrollToPosition(topic.getReplies().size());
+                    recyclerView.smoothScrollToPosition(topic.getReplyList().size());
                     // 清空回复框内容
                     edtContent.setText(null);
                     // 提示

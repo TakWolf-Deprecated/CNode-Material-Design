@@ -1,17 +1,20 @@
 package org.cnodejs.android.md.model.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class TopicWithReply extends Topic {
 
-    private List<Reply> replies;
+    @SerializedName("replies")
+    private List<Reply> replyList;
 
-    public List<Reply> getReplies() {
-        return replies;
+    public List<Reply> getReplyList() {
+        return replyList;
     }
 
-    public void setReplies(List<Reply> replies) {
-        this.replies = replies;
+    public void setReplyList(List<Reply> replyList) {
+        this.replyList = replyList;
     }
 
 }

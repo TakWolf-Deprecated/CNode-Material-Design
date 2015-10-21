@@ -181,8 +181,8 @@ public class UserDetailActivity extends BaseActivity {
         }
 
         public void update(@NonNull User user) {
-            fmList.get(0).notifyDataSetChanged(user.getRecentReplies());
-            fmList.get(1).notifyDataSetChanged(user.getRecentTopics());
+            fmList.get(0).notifyDataSetChanged(user.getRecentReplyList());
+            fmList.get(1).notifyDataSetChanged(user.getRecentTopicList());
         }
 
         @Override

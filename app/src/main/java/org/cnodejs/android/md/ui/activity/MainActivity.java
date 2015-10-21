@@ -209,7 +209,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         final TabType tab = currentTab;
-        ApiClient.service.getTopics(tab, 1, 20, false, new Callback<Result<List<Topic>>>() {
+        ApiClient.service.getTopicList(tab, 1, 20, false, new Callback<Result<List<Topic>>>() {
 
             @Override
             public void success(Result<List<Topic>> result, Response response) {
@@ -241,7 +241,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             final TabType tab = currentTab;
             final int page = currentPage;
-            ApiClient.service.getTopics(tab, page + 1, 20, false, new Callback<Result<List<Topic>>>() {
+            ApiClient.service.getTopicList(tab, page + 1, 20, false, new Callback<Result<List<Topic>>>() {
 
                 @Override
                 public void success(Result<List<Topic>> result, Response response) {
