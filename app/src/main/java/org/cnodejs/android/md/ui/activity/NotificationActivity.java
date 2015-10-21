@@ -74,8 +74,8 @@ public class NotificationActivity extends BaseActivity implements Toolbar.OnMenu
             public void success(Result<Notification> result, Response response) {
                 if (!isFinishing()) {
                     messageList.clear();
-                    messageList.addAll(result.getData().getHasNotReadMessages());
-                    messageList.addAll(result.getData().getHasReadMessages());
+                    messageList.addAll(result.getData().getHasNotReadMessageList());
+                    messageList.addAll(result.getData().getHasReadMessageList());
                     notifyDataSetChanged();
                     refreshLayout.setRefreshing(false);
                 }

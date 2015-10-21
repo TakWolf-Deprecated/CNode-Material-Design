@@ -65,7 +65,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return topic == null ? 0 : topic.getReplies().size() + 1;
+        return topic == null ? 0 : topic.getReplyList().size() + 1;
     }
 
     @Override
@@ -161,7 +161,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 isHeaderShow = true;
             }
 
-            layoutNoReply.setVisibility(topic.getReplies().size() > 0 ? View.GONE : View.VISIBLE);
+            layoutNoReply.setVisibility(topic.getReplyList().size() > 0 ? View.GONE : View.VISIBLE);
         }
 
         @OnClick(R.id.topic_item_header_img_avatar)
@@ -207,16 +207,16 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         public void update(int position) {
             this.position = position;
-            reply = topic.getReplies().get(position);
+            reply = topic.getReplyList().get(position);
 
             Picasso.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             tvIndex.setText(position + 1 + "楼");
             tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
-            btnUps.setText(String.valueOf(reply.getUps().size()));
-            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUps().contains(LoginShared.getId(activity)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
-            iconDeepLine.setVisibility(position == topic.getReplies().size() - 1 ? View.GONE : View.VISIBLE);
-            iconShadowGap.setVisibility(position == topic.getReplies().size() - 1 ? View.VISIBLE : View.GONE);
+            btnUps.setText(String.valueOf(reply.getUpList().size()));
+            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
+            iconDeepLine.setVisibility(position == topic.getReplyList().size() - 1 ? View.GONE : View.VISIBLE);
+            iconShadowGap.setVisibility(position == topic.getReplyList().size() - 1 ? View.VISIBLE : View.GONE);
 
             // TODO 这里直接使用WebView，有性能问题
             webReplyContent.loadRenderedContent(reply.getRenderedContent());
@@ -280,14 +280,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             @Override
             public void success(TopicUpInfo info, Response response) {
                 if (info.getAction() == TopicUpInfo.Action.up) {
-                    reply.getUps().add(LoginShared.getId(activity));
+                    reply.getUpList().add(LoginShared.getId(activity));
                 } else if (info.getAction() == TopicUpInfo.Action.down) {
-                    reply.getUps().remove(LoginShared.getId(activity));
+                    reply.getUpList().remove(LoginShared.getId(activity));
                 }
                 // 如果位置没有变，则更新界面
                 if (position == holder.position) {
-                    holder.btnUps.setText(String.valueOf(holder.reply.getUps().size()));
-                    holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUps().contains(LoginShared.getId(activity)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
+                    holder.btnUps.setText(String.valueOf(holder.reply.getUpList().size()));
+                    holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
                 }
             }
 

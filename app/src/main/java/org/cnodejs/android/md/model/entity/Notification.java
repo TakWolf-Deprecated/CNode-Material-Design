@@ -7,25 +7,25 @@ import java.util.List;
 public class Notification {
 
     @SerializedName("has_read_messages")
-    private List<Message> hasReadMessages;
+    private List<Message> hasReadMessageList;
 
     @SerializedName("hasnot_read_messages")
-    private List<Message> hasNotReadMessages;
+    private List<Message> hasNotReadMessageList;
 
-    public List<Message> getHasReadMessages() {
-        return hasReadMessages;
+    public List<Message> getHasReadMessageList() {
+        return hasReadMessageList;
     }
 
-    public void setHasReadMessages(List<Message> hasReadMessages) {
-        this.hasReadMessages = hasReadMessages;
+    public void setHasReadMessageList(List<Message> hasReadMessageList) {
+        this.hasReadMessageList = hasReadMessageList;
     }
 
-    public List<Message> getHasNotReadMessages() {
-        return hasNotReadMessages;
+    public List<Message> getHasNotReadMessageList() {
+        return hasNotReadMessageList;
     }
 
-    public void setHasNotReadMessages(List<Message> hasNotReadMessages) {
-        this.hasNotReadMessages = hasNotReadMessages;
+    public void setHasNotReadMessageList(List<Message> hasNotReadMessageList) {
+        this.hasNotReadMessageList = hasNotReadMessageList;
     }
 
 }
