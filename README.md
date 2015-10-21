@@ -32,19 +32,17 @@
 
 ## Screenshot ##
 
-![image](/art/screenshot_01_s.png) ![image](/art/screenshot_02_s.png)
+![image](/art/screenshot_s01.png) ![image](/art/screenshot_s02.png)
 
-![image](/art/screenshot_03_s.png) ![image](/art/screenshot_04_s.png)
+![image](/art/screenshot_s03.png) ![image](/art/screenshot_s04.png)
 
-![image](/art/screenshot_05_s.png) ![image](/art/screenshot_06_s.png)
+![image](/art/screenshot_s05.png) ![image](/art/screenshot_s06.png)
 
-![image](/art/screenshot_07_s.png) ![image](/art/screenshot_08_s.png)
+![image](/art/screenshot_s07.png) ![image](/art/screenshot_s08.png)
 
-![image](/art/screenshot_09_s.png) ![image](/art/screenshot_10_s.png)
+![image](/art/screenshot_s09.png) ![image](/art/screenshot_s10.png)
 
-![image](/art/screenshot_11_s.png) ![image](/art/screenshot_12_s.png)
-
-![image](/art/screenshot_13_s.png)
+![image](/art/screenshot_s11.png) ![image](/art/screenshot_s12.png)
 
 ## Libraries used ##
 
