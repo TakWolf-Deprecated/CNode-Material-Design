@@ -166,7 +166,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_header_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
         }
 
     }
@@ -224,7 +224,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_reply_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar, reply.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.topic_item_reply_btn_ups)

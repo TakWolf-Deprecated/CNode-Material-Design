@@ -16,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,10 +31,12 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.ui.fragment.UserDetailItemFragment;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,9 +47,10 @@ import retrofit.client.Response;
 
 public class UserDetailActivity extends BaseActivity {
 
-    public static void openWithTransitionAnimation(Activity activity, String loginName, ImageView imgAvatar) {
+    public static void openWithTransitionAnimation(Activity activity, String loginName, ImageView imgAvatar, String avatarUrl) {
         Intent intent = new Intent(activity, UserDetailActivity.class);
         intent.putExtra("loginName", loginName);
+        intent.putExtra("avatarUrl", avatarUrl);
 
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imgAvatar, activity.getString(R.string.transition_name_img_avatar));
         ActivityCompat.startActivity(activity, intent, options.toBundle());
@@ -109,8 +113,23 @@ public class UserDetailActivity extends BaseActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         loginName = getIntent().getStringExtra("loginName");
+        if (!TextUtils.isEmpty(loginName)) {
+            tvLoginName.setText(loginName);
+        }
 
-        getUserAsyncTask();
+        String avatarUrl = getIntent().getStringExtra("avatarUrl");
+        if (!TextUtils.isEmpty(avatarUrl)) {
+            Picasso.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+        }
+
+        HandlerUtils.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                getUserAsyncTask();
+            }
+
+        }, 1000);
     }
 
     @OnClick(R.id.user_detail_img_avatar)
