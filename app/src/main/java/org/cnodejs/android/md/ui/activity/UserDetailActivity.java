@@ -122,14 +122,7 @@ public class UserDetailActivity extends BaseActivity {
             Picasso.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).into(imgAvatar);
         }
 
-        HandlerUtils.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                getUserAsyncTask();
-            }
-
-        }, 1000);
+        getUserAsyncTask();
     }
 
     @OnClick(R.id.user_detail_img_avatar)
@@ -142,34 +135,43 @@ public class UserDetailActivity extends BaseActivity {
     private void getUserAsyncTask() {
         loading = true;
         progressWheel.spin();
-        ApiClient.service.getUser(loginName, new Callback<Result<User>>() {
-
-            @Override
-            public void success(Result<User> result, Response response) {
-                if (!isFinishing()) {
-                    updateUserInfoViews(result.getData());
-                    adapter.update(result.getData());
-                    githubUsername = result.getData().getGithubUsername();
-                    progressWheel.setProgress(0);
-                    loading = false;
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                if (!isFinishing()) {
-                    if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
-                        Toast.makeText(UserDetailActivity.this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(UserDetailActivity.this, R.string.data_load_faild_and_click_avatar_to_reload, Toast.LENGTH_SHORT).show();
-                    }
-                    progressWheel.setProgress(0);
-                    loading = false;
-                }
-            }
-
-        });
+        HandlerUtils.postDelayed(getUserRunnable, 1000);
     }
+
+    private final Runnable getUserRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            ApiClient.service.getUser(loginName, new Callback<Result<User>>() {
+
+                @Override
+                public void success(Result<User> result, Response response) {
+                    if (!isFinishing()) {
+                        updateUserInfoViews(result.getData());
+                        adapter.update(result.getData());
+                        githubUsername = result.getData().getGithubUsername();
+                        progressWheel.setProgress(0);
+                        loading = false;
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if (!isFinishing()) {
+                        if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
+                            Toast.makeText(UserDetailActivity.this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(UserDetailActivity.this, R.string.data_load_faild_and_click_avatar_to_reload, Toast.LENGTH_SHORT).show();
+                        }
+                        progressWheel.setProgress(0);
+                        loading = false;
+                    }
+                }
+
+            });
+        }
+
+    };
 
     private void updateUserInfoViews(User user) {
         Picasso.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
