@@ -27,7 +27,7 @@ public interface ApiService {
     //=====
 
     @GET("/v1/topics")
-    void getTopics(
+    void getTopicList(
             @Query("tab") TabType tab,
             @Query("page") Integer page,
             @Query("limit") Integer limit,
