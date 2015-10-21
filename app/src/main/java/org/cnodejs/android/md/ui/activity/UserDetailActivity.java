@@ -16,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,10 +31,12 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.ui.fragment.UserDetailItemFragment;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,9 +47,10 @@ import retrofit.client.Response;
 
 public class UserDetailActivity extends BaseActivity {
 
-    public static void openWithTransitionAnimation(Activity activity, String loginName, ImageView imgAvatar) {
+    public static void openWithTransitionAnimation(Activity activity, String loginName, ImageView imgAvatar, String avatarUrl) {
         Intent intent = new Intent(activity, UserDetailActivity.class);
         intent.putExtra("loginName", loginName);
+        intent.putExtra("avatarUrl", avatarUrl);
 
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imgAvatar, activity.getString(R.string.transition_name_img_avatar));
         ActivityCompat.startActivity(activity, intent, options.toBundle());
@@ -109,6 +113,14 @@ public class UserDetailActivity extends BaseActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         loginName = getIntent().getStringExtra("loginName");
+        if (!TextUtils.isEmpty(loginName)) {
+            tvLoginName.setText(loginName);
+        }
+
+        String avatarUrl = getIntent().getStringExtra("avatarUrl");
+        if (!TextUtils.isEmpty(avatarUrl)) {
+            Picasso.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+        }
 
         getUserAsyncTask();
     }
@@ -123,34 +135,43 @@ public class UserDetailActivity extends BaseActivity {
     private void getUserAsyncTask() {
         loading = true;
         progressWheel.spin();
-        ApiClient.service.getUser(loginName, new Callback<Result<User>>() {
-
-            @Override
-            public void success(Result<User> result, Response response) {
-                if (!isFinishing()) {
-                    updateUserInfoViews(result.getData());
-                    adapter.update(result.getData());
-                    githubUsername = result.getData().getGithubUsername();
-                    progressWheel.setProgress(0);
-                    loading = false;
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                if (!isFinishing()) {
-                    if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
-                        Toast.makeText(UserDetailActivity.this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(UserDetailActivity.this, R.string.data_load_faild_and_click_avatar_to_reload, Toast.LENGTH_SHORT).show();
-                    }
-                    progressWheel.setProgress(0);
-                    loading = false;
-                }
-            }
-
-        });
+        HandlerUtils.postDelayed(getUserRunnable, 1000);
     }
+
+    private final Runnable getUserRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            ApiClient.service.getUser(loginName, new Callback<Result<User>>() {
+
+                @Override
+                public void success(Result<User> result, Response response) {
+                    if (!isFinishing()) {
+                        updateUserInfoViews(result.getData());
+                        adapter.update(result.getData());
+                        githubUsername = result.getData().getGithubUsername();
+                        progressWheel.setProgress(0);
+                        loading = false;
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if (!isFinishing()) {
+                        if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
+                            Toast.makeText(UserDetailActivity.this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(UserDetailActivity.this, R.string.data_load_faild_and_click_avatar_to_reload, Toast.LENGTH_SHORT).show();
+                        }
+                        progressWheel.setProgress(0);
+                        loading = false;
+                    }
+                }
+
+            });
+        }
+
+    };
 
     private void updateUserInfoViews(User user) {
         Picasso.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);

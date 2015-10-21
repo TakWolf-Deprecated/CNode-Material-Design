@@ -42,9 +42,14 @@ public class UserDetailItemFragment extends Fragment {
     }
 
     public void notifyDataSetChanged(List<TopicSimple> topicList) {
-        this.topicList.clear();
-        this.topicList.addAll(topicList);
-        adapter.notifyDataSetChanged();
+        if (this.topicList.size() > 0) {
+            this.topicList.clear();
+            this.topicList.addAll(topicList);
+            adapter.notifyDataSetChanged();
+        } else {
+            this.topicList.addAll(topicList);
+            adapter.notifyItemRangeInserted(0, topicList.size());
+        }
     }
 
 }

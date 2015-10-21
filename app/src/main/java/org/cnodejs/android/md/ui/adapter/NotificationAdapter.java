@@ -114,7 +114,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         @OnClick(R.id.notification_item_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithTransitionAnimation(activity, message.getAuthor().getLoginName(), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(activity, message.getAuthor().getLoginName(), imgAvatar, message.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.notification_item_btn_item)
