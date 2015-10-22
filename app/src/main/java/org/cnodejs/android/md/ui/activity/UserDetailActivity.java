@@ -96,6 +96,7 @@ public class UserDetailActivity extends BaseActivity {
     private String githubUsername;
 
     private boolean loading = false;
+    private long startLoadingTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,44 +135,59 @@ public class UserDetailActivity extends BaseActivity {
 
     private void getUserAsyncTask() {
         loading = true;
+        startLoadingTime = System.currentTimeMillis();
         progressWheel.spin();
-        HandlerUtils.postDelayed(getUserRunnable, 1000);
-    }
+        ApiClient.service.getUser(loginName, new Callback<Result<User>>() {
 
-    private final Runnable getUserRunnable = new Runnable() {
-
-        @Override
-        public void run() {
-            ApiClient.service.getUser(loginName, new Callback<Result<User>>() {
-
-                @Override
-                public void success(Result<User> result, Response response) {
-                    if (!isFinishing()) {
-                        updateUserInfoViews(result.getData());
-                        adapter.update(result.getData());
-                        githubUsername = result.getData().getGithubUsername();
-                        progressWheel.setProgress(0);
-                        loading = false;
-                    }
+            private long getPostTime() {
+                long postTime = 1000 - (System.currentTimeMillis() - startLoadingTime);
+                if (postTime > 0) {
+                    return postTime;
+                } else {
+                    return 0;
                 }
+            }
 
-                @Override
-                public void failure(RetrofitError error) {
-                    if (!isFinishing()) {
-                        if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
-                            Toast.makeText(UserDetailActivity.this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(UserDetailActivity.this, R.string.data_load_faild_and_click_avatar_to_reload, Toast.LENGTH_SHORT).show();
+            @Override
+            public void success(final Result<User> result, Response response) {
+                HandlerUtils.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (!isFinishing()) {
+                            updateUserInfoViews(result.getData());
+                            adapter.update(result.getData());
+                            githubUsername = result.getData().getGithubUsername();
+                            progressWheel.setProgress(0);
+                            loading = false;
                         }
-                        progressWheel.setProgress(0);
-                        loading = false;
                     }
-                }
 
-            });
-        }
+                }, getPostTime());
+            }
 
-    };
+            @Override
+            public void failure(final RetrofitError error) {
+                HandlerUtils.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (!isFinishing()) {
+                            if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
+                                Toast.makeText(UserDetailActivity.this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(UserDetailActivity.this, R.string.data_load_faild_and_click_avatar_to_reload, Toast.LENGTH_SHORT).show();
+                            }
+                            progressWheel.setProgress(0);
+                            loading = false;
+                        }
+                    }
+
+                }, getPostTime());
+            }
+
+        });
+    }
 
     private void updateUserInfoViews(User user) {
         Picasso.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
