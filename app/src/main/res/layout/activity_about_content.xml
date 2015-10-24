@@ -5,8 +5,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <View style="@style/AppTheme.ShadowGap" />
-
     <LinearLayout
         android:id="@+id/about_btn_version"
         android:layout_width="match_parent"
