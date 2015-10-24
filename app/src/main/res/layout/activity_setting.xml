@@ -67,7 +67,7 @@
 
                 </LinearLayout>
 
-                <com.rey.material.widget.Switch style="@style/Material.Widget.Switch"
+                <android.support.v7.widget.SwitchCompat
                     android:id="@+id/setting_switch_notification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
 
                 </LinearLayout>
 
-                <com.rey.material.widget.Switch style="@style/Material.Widget.Switch"
+                <android.support.v7.widget.SwitchCompat
                     android:id="@+id/setting_switch_new_topic_draft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
 
                 </LinearLayout>
 
-                <com.rey.material.widget.Switch style="@style/Material.Widget.Switch"
+                <android.support.v7.widget.SwitchCompat
                     android:id="@+id/setting_switch_topic_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -216,7 +216,7 @@
 
                 </LinearLayout>
 
-                <com.rey.material.widget.Switch style="@style/Material.Widget.Switch"
+                <android.support.v7.widget.SwitchCompat
                     android:id="@+id/setting_switch_third_party_image_upload_api"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
