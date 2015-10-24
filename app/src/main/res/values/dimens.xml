@@ -3,6 +3,8 @@
 
     <dimen name="status_bar_adapt_height">0dp</dimen>
 
+    <dimen name="elevation_normal">4dp</dimen>
+
     <dimen name="button_corner_radius">2dp</dimen>
 
 </resources>
