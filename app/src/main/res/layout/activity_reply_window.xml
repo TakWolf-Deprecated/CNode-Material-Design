@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="@android:color/white"
-            android:elevation="@dimen/elevation_normal">
+            android:elevation="@dimen/elevation_editor">
 
             <ImageView
                 android:id="@+id/reply_window_btn_tool_close"
