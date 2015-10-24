@@ -47,12 +47,14 @@ import retrofit.client.Response;
 
 public class UserDetailActivity extends BaseActivity {
 
+    private static final String NAME_IMG_AVATAR = "imgAvatar";
+
     public static void openWithTransitionAnimation(Activity activity, String loginName, ImageView imgAvatar, String avatarUrl) {
         Intent intent = new Intent(activity, UserDetailActivity.class);
         intent.putExtra("loginName", loginName);
         intent.putExtra("avatarUrl", avatarUrl);
 
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imgAvatar, activity.getString(R.string.transition_name_img_avatar));
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imgAvatar, NAME_IMG_AVATAR);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
@@ -104,7 +106,7 @@ public class UserDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_user_detail);
         ButterKnife.bind(this);
 
-        ViewCompat.setTransitionName(imgAvatar, getString(R.string.transition_name_img_avatar));
+        ViewCompat.setTransitionName(imgAvatar, NAME_IMG_AVATAR);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
