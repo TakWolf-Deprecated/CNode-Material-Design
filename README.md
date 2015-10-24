@@ -60,8 +60,6 @@
 
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
 
-- [Material](http://rey5137.com/material)
-
 - [MaterialEditText](https://github.com/rengwuxian/MaterialEditText)
 
 - [Material Dialogs](https://github.com/afollestad/material-dialogs)
