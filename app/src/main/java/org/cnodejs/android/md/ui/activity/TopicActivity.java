@@ -113,7 +113,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
         replyWindow.setBackgroundDrawable(new ColorDrawable(0x01000000));
         replyWindow.setFocusable(true);
         replyWindow.setOutsideTouchable(true);
-        replyWindow.setAnimationStyle(R.style.AppTheme_ReplyWindowAnim);
+        replyWindow.setAnimationStyle(R.style.AppWidget_ReplyWindowAnim);
         // - END -
 
         dialog = new MaterialDialog.Builder(this)

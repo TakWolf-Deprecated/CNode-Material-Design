@@ -125,7 +125,7 @@
 
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@style/AppTheme.Dialog"
+            android:theme="@style/AppDialog"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 

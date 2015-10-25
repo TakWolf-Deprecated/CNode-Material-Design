@@ -158,7 +158,7 @@
         android:scaleType="centerInside"
         android:adjustViewBounds="true" />
 
-    <View style="@style/AppTheme.DeepLine"
+    <View style="@style/AppWidget.DeepLine"
         android:layout_gravity="bottom" />
 
 </FrameLayout>

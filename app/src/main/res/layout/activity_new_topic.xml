@@ -55,7 +55,7 @@
 
             </LinearLayout>
 
-            <View style="@style/AppTheme.DeepLine" />
+            <View style="@style/AppWidget.DeepLine" />
 
             <EditText
                 android:id="@+id/new_topic_edt_title"
@@ -68,7 +68,7 @@
                 android:hint="@string/new_topic_title_hint"
                 android:background="?attr/widgetBackground" />
 
-            <View style="@style/AppTheme.DeepLine" />
+            <View style="@style/AppWidget.DeepLine" />
 
         </LinearLayout>
 

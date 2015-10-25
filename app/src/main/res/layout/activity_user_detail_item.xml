@@ -71,6 +71,6 @@
 
     </LinearLayout>
 
-    <View style="@style/AppTheme.DeepLine" />
+    <View style="@style/AppWidget.DeepLine" />
 
 </LinearLayout>

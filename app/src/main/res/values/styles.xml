@@ -37,45 +37,48 @@
     <style name="AppThemeLaunch" parent="BaseAppThemeLight" />
 
     <!-- App Theme Dialog -->
-    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+    <style name="AppDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
+    <!-- AppWidget -->
+    <style name="AppWidget" parent="Theme.AppCompat.Light" />
+
     <!-- Deep Line -->
-    <style name="AppTheme.DeepLine">
+    <style name="AppWidget.DeepLine">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
-    <style name="AppTheme.DeepLine.Vertical">
+    <style name="AppWidget.DeepLine.Vertical">
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">match_parent</item>
     </style>
 
     <!-- Gap -->
-    <style name="AppTheme.ItemGap">
+    <style name="AppWidget.ItemGap">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">8dp</item>
     </style>
 
-    <style name="AppTheme.ShadowGap">
+    <style name="AppWidget.ShadowGap">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/elevation_normal</item>
         <item name="android:layout_marginBottom">@dimen/shadow_gap_margin_fill</item>
         <item name="android:background">@drawable/gap_shadow</item>
     </style>
 
-    <style name="AppTheme.ShadowGap.Opposite">
+    <style name="AppWidget.ShadowGap.Opposite">
         <item name="android:layout_marginTop">@dimen/shadow_gap_margin_fill</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:background">@drawable/gap_shadow_opposite</item>
     </style>
 
     <!-- Navigation -->
-    <style name="AppTheme.NavigationItem">
+    <style name="AppWidget.NavigationItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:paddingLeft">16dp</item>
@@ -87,7 +90,7 @@
         <item name="android:background">@drawable/selectable_item_background</item>
     </style>
 
-    <style name="AppTheme.NavigationItemBadger">
+    <style name="AppWidget.NavigationItemBadger">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_gravity">end</item>
@@ -99,25 +102,25 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="AppTheme.NavigationItemDeepLineGap" parent="AppTheme.DeepLine">
+    <style name="AppWidget.NavigationItemDeepLineGap" parent="AppWidget.DeepLine">
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginBottom">8dp</item>
     </style>
 
     <!-- Button -->
-    <style name="AppTheme.Button">
+    <style name="AppWidget.Button">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/button_image</item>
     </style>
 
-    <style name="AppTheme.Button.Stroke">
+    <style name="AppWidget.Button.Stroke">
         <item name="android:textColor">@drawable/button_stroke_text_color</item>
         <item name="android:background">@drawable/button_stroke_image</item>
     </style>
 
     <!-- Reply Window Anim -->
-    <style name="AppTheme.ReplyWindowAnim">
+    <style name="AppWidget.ReplyWindowAnim">
         <item name="android:windowEnterAnimation">@anim/reply_window_popup_in</item>
         <item name="android:windowExitAnimation">@anim/reply_window_popup_out</item>
     </style>

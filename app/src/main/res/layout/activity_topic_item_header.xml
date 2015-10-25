@@ -118,7 +118,7 @@
 
         </LinearLayout>
 
-        <View style="@style/AppTheme.ShadowGap" />
+        <View style="@style/AppWidget.ShadowGap" />
 
         <LinearLayout
             android:id="@+id/topic_item_header_layout_no_reply"
@@ -136,7 +136,7 @@
                 android:gravity="center"
                 android:background="?attr/widgetBackground" />
 
-            <View style="@style/AppTheme.ShadowGap" />
+            <View style="@style/AppWidget.ShadowGap" />
 
         </LinearLayout>
 

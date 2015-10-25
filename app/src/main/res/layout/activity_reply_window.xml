@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <View style="@style/AppTheme.ShadowGap.Opposite" />
+    <View style="@style/AppWidget.ShadowGap.Opposite" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:scaleType="center"
                 android:background="@drawable/selectable_item_background" />
 
-            <View style="@style/AppTheme.DeepLine.Vertical"
+            <View style="@style/AppWidget.DeepLine.Vertical"
                 android:layout_toEndOf="@+id/reply_window_btn_tool_close"
                 android:layout_toRightOf="@+id/reply_window_btn_tool_close" />
 
@@ -44,7 +44,7 @@
 
             </HorizontalScrollView>
 
-            <View style="@style/AppTheme.DeepLine.Vertical"
+            <View style="@style/AppWidget.DeepLine.Vertical"
                 android:layout_toStartOf="@+id/reply_window_btn_tool_send"
                 android:layout_toLeftOf="@+id/reply_window_btn_tool_send" />
 

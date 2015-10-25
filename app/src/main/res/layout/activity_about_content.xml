@@ -32,7 +32,7 @@
 
     </LinearLayout>
 
-    <View style="@style/AppTheme.DeepLine" />
+    <View style="@style/AppWidget.DeepLine" />
 
     <LinearLayout
         android:id="@+id/about_btn_open_source_url"
@@ -60,7 +60,7 @@
 
     </LinearLayout>
 
-    <View style="@style/AppTheme.DeepLine" />
+    <View style="@style/AppWidget.DeepLine" />
 
     <LinearLayout
         android:id="@+id/about_btn_about_third_party_image_upload_api"
@@ -88,7 +88,7 @@
 
     </LinearLayout>
 
-    <View style="@style/AppTheme.DeepLine" />
+    <View style="@style/AppWidget.DeepLine" />
 
     <LinearLayout
         android:id="@+id/about_btn_about_cnode"
@@ -116,7 +116,7 @@
 
     </LinearLayout>
 
-    <View style="@style/AppTheme.DeepLine" />
+    <View style="@style/AppWidget.DeepLine" />
 
     <LinearLayout
         android:id="@+id/about_btn_about_author"
@@ -144,7 +144,7 @@
 
     </LinearLayout>
 
-    <View style="@style/AppTheme.ShadowGap" />
+    <View style="@style/AppWidget.ShadowGap" />
 
     <LinearLayout
         android:id="@+id/about_btn_advice_feedback"
@@ -172,7 +172,7 @@
 
     </LinearLayout>
 
-    <View style="@style/AppTheme.ShadowGap" />
+    <View style="@style/AppWidget.ShadowGap" />
 
     <TextView
         android:id="@+id/about_btn_open_source_license"
@@ -184,7 +184,7 @@
         android:textSize="16sp"
         android:background="@drawable/selectable_item_background" />
 
-    <View style="@style/AppTheme.ShadowGap" />
+    <View style="@style/AppWidget.ShadowGap" />
 
     <TextView
         android:layout_width="match_parent"

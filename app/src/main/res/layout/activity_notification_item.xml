@@ -90,6 +90,6 @@
         android:background="@drawable/notification_item_reference_background"
         tools:text="原话题：【深js拾遗】mbot 机器人大放送！！！！！！！先抢先得噢亲！！！！" />
 
-    <View style="@style/AppTheme.DeepLine" />
+    <View style="@style/AppWidget.DeepLine" />
 
 </LinearLayout>
