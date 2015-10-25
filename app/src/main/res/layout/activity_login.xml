@@ -56,7 +56,8 @@
         app:met_floatingLabel="highlight"
         app:met_primaryColor="@color/color_accent"
         app:met_textColor="?android:attr/textColorPrimary"
-        app:met_textColorHint="?android:attr/textColorHint" />
+        app:met_textColorHint="?android:attr/textColorHint"
+        app:met_floatingLabelTextColor="?android:attr/textColorSecondary" />
 
     <LinearLayout
         android:layout_width="match_parent"
