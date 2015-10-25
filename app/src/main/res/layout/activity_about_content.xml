@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/version_check_update"
-            android:textColor="@color/text_color_primary"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp" />
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="@color/text_color_secondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp"
             android:singleLine="true"
             tools:text="当前版本：0.0.0-build-0" />
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/open_source_url"
-            android:textColor="@color/text_color_primary"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp" />
 
         <TextView
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/open_source_url_content"
-            android:textColor="@color/text_color_secondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp"
             android:singleLine="true" />
 
@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/about_third_party_image_upload_api"
-            android:textColor="@color/text_color_primary"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp" />
 
         <TextView
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/about_third_party_image_upload_api_content"
-            android:textColor="@color/text_color_secondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp"
             android:singleLine="true" />
 
@@ -102,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/about_cnode"
-            android:textColor="@color/text_color_primary"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp" />
 
         <TextView
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/about_cnode_content"
-            android:textColor="@color/text_color_secondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp"
             android:singleLine="true" />
 
@@ -130,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/about_author"
-            android:textColor="@color/text_color_primary"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp" />
 
         <TextView
@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/about_author_content"
-            android:textColor="@color/text_color_secondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp"
             android:singleLine="true" />
 
@@ -158,7 +158,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/advice_feedback"
-            android:textColor="@color/text_color_primary"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp" />
 
         <TextView
@@ -166,7 +166,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/advice_feedback_content"
-            android:textColor="@color/text_color_secondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp"
             android:singleLine="true" />
 
@@ -180,7 +180,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/open_source_license"
-        android:textColor="@color/text_color_primary"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         android:background="@drawable/selectable_item_background" />
 
@@ -192,7 +192,7 @@
         android:layout_marginBottom="8dp"
         android:padding="8dp"
         android:text="@string/about_copyright"
-        android:textColor="@color/text_color_secondary"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp"
         android:gravity="center" />
 

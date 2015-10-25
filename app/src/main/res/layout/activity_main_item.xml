@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:textColor="@color/text_color_primary"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp"
                 android:singleLine="true"
                 tools:text="话题的标题" />
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="12sp"
                     android:singleLine="true"
                     tools:text="TakWolf" />
@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="12sp"
                     android:singleLine="true"
                     tools:text="创建于：2015-1-1 19:20:15" />
@@ -117,7 +117,7 @@
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:text="@string/$slash"
-                        android:textColor="@color/text_color_secondary"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
                         android:singleLine="true" />
 
@@ -125,7 +125,7 @@
                         android:id="@+id/main_item_tv_visit_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/text_color_secondary"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
                         android:singleLine="true"
                         tools:text="205" />
@@ -137,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="12sp"
                     android:singleLine="true"
                     tools:text="2分前" />

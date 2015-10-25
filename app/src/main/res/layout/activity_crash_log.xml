@@ -32,7 +32,7 @@
                 android:padding="8dp"
                 android:text="@string/crash_log_tip"
                 android:textSize="16sp"
-                android:textColor="@color/text_color_primary" />
+                android:textColor="?android:attr/textColorPrimary" />
 
             <TextView
                 android:id="@+id/crash_log_tv_info"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:textSize="16sp"
-                android:textColor="@color/text_color_primary" />
+                android:textColor="?android:attr/textColorPrimary" />
 
         </LinearLayout>
 

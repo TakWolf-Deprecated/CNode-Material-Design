@@ -5,10 +5,6 @@
     <color name="color_primary_dark">#ff1d1d1d</color>
     <color name="color_accent">#ff80bd01</color>
 
-    <color name="text_color_primary">#de000000</color>
-    <color name="text_color_primary_disabled">#39000000</color>
-    <color name="text_color_secondary">#8a000000</color>
-    <color name="text_color_secondary_disabled">#24000000</color>
     <color name="text_color_light">#b3ffffff</color>
 
     <color name="selectable_item_background_normal">@android:color/white</color>

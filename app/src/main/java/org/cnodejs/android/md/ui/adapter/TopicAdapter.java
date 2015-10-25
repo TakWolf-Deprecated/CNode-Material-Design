@@ -2,6 +2,7 @@ package org.cnodejs.android.md.ui.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -24,6 +25,7 @@ import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.ui.activity.LoginActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.widget.CNodeWebView;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.Bind;
@@ -148,7 +150,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 tvTitle.setText(topic.getTitle());
                 tvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
                 tvTab.setBackgroundResource(topic.isTop() ? R.drawable.topic_tab_top_background : R.drawable.topic_tab_normal_background);
-                tvTab.setTextColor(activity.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
+                tvTab.setTextColor(topic.isTop() ? Color.WHITE : ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
                 tvVisitCount.setText(topic.getVisitCount() + "次浏览");
                 Picasso.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
                 tvLoginName.setText(topic.getAuthor().getLoginName());

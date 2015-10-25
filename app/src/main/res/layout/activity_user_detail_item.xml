@@ -31,7 +31,7 @@
                 android:id="@+id/user_detail_item_tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color_primary"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp"
                 android:singleLine="true"
                 tools:text="文章标题" />
@@ -48,7 +48,7 @@
                     android:layout_toStartOf="@+id/user_detail_item_tv_last_reply_time"
                     android:layout_toLeftOf="@+id/user_detail_item_tv_last_reply_time"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
                     android:singleLine="true"
                     tools:text="TakWolf" />
@@ -61,7 +61,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
                     tools:text="1天前" />
 
