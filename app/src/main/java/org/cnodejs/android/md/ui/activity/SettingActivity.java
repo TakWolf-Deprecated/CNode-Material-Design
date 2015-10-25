@@ -94,8 +94,6 @@ public class SettingActivity extends BaseActivity {
         SettingShared.setEnableThirdPartyImageUploadApi(this, switchThirdPartyImageUploadApi.isChecked());
 
         // TODO
-        Toast.makeText(this, "该功能暂未实现", Toast.LENGTH_SHORT).show();
-        // TODO
     }
 
 }
