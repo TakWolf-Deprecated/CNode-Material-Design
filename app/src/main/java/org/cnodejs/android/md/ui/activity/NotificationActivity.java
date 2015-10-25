@@ -21,6 +21,7 @@ import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.ui.adapter.NotificationAdapter;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ public class NotificationActivity extends BaseActivity implements Toolbar.OnMenu
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);

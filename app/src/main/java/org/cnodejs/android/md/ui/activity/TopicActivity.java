@@ -33,6 +33,7 @@ import org.cnodejs.android.md.ui.adapter.TopicAdapter;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 import org.joda.time.DateTime;
@@ -86,6 +87,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);

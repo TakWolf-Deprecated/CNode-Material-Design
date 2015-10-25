@@ -13,6 +13,7 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.LoginInfo;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,6 +34,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);

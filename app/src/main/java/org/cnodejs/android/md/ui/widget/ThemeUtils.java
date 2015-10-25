@@ -32,7 +32,9 @@ public final class ThemeUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             activity.recreate();
         } else {
-            activity.startActivity(new Intent(activity, activity.getClass()));
+            Intent intent = activity.getIntent();
+            intent.setClass(activity, activity.getClass());
+            activity.startActivity(intent);
             activity.finish();
             activity.overridePendingTransition(0, 0);
         }

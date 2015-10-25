@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.CNodeWebView;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.Bind;
@@ -31,6 +32,7 @@ public class MarkdownPreviewActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_markdown_preview);
         ButterKnife.bind(this);
