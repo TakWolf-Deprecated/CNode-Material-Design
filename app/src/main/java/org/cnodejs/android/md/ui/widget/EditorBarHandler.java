@@ -233,10 +233,7 @@ public class EditorBarHandler {
         if (SettingShared.isEnableTopicSign(context)) { // 添加小尾巴
             content += "\n\n" + SettingShared.getTopicSignContent(context);
         }
-
-        Intent intent = new Intent(context, MarkdownPreviewActivity.class);
-        intent.putExtra("markdownText", content);
-        context.startActivity(intent);
+        MarkdownPreviewActivity.open(context, content);
     }
 
 }
