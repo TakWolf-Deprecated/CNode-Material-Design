@@ -74,6 +74,9 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Bind(R.id.main_nav_btn_theme_dark)
     protected ImageView imgThemeDark;
 
+    @Bind(R.id.main_nav_img_top_background)
+    protected ImageView imgTopBackground;
+
     // 主要导航项
     @Bind({
             R.id.main_nav_btn_all,
@@ -133,6 +136,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         updateUserInfoViews();
 
         imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
+        imgTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
 
         RefreshLayoutUtils.initOnCreate(refreshLayout, this);
         RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
