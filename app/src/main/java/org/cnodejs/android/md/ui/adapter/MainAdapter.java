@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.ui.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.ui.activity.TopicActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;
@@ -151,7 +153,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             tvTitle.setText(topic.getTitle());
             tvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
             tvTab.setBackgroundResource(topic.isTop() ? R.drawable.topic_tab_top_background : R.drawable.topic_tab_normal_background);
-            tvTab.setTextColor(activity.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
+            tvTab.setTextColor(topic.isTop() ? Color.WHITE : ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
             Picasso.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvAuthor.setText(topic.getAuthor().getLoginName());
             tvCreateTime.setText(activity.getString(R.string.create_at_$) + topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss"));

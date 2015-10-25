@@ -106,10 +106,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             // 已读未读状态
             tvTime.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));
             tvFrom.getPaint().setFakeBoldText(!message.isRead());
-            tvFrom.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_primary : R.color.text_color_primary));
+            tvFrom.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.text_color_primary));
             tvAction.getPaint().setFakeBoldText(!message.isRead());
             tvAction.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.text_color_primary));
             tvTopicTitle.getPaint().setFakeBoldText(!message.isRead());
+            tvTopicTitle.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.text_color_primary));
         }
 
         @OnClick(R.id.notification_item_img_avatar)
