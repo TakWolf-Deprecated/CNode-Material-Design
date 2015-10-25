@@ -66,9 +66,8 @@ public class SettingActivity extends BaseActivity {
     protected void onBtnThemeDarkClick() {
         switchThemeDark.toggle();
         SettingShared.setEnableThemeDark(this, switchThemeDark.isChecked());
-
-        // TODO 
-
+        // TODO 重启 Activity
+        ThemeUtils.recreateActivity(this);
     }
 
     @OnClick(R.id.setting_btn_new_topic_draft)

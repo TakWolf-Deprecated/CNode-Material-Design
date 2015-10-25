@@ -24,8 +24,10 @@ public final class ThemeUtils {
         }
     }
 
-    public static void configThemeBeforeOnCreate(Activity activity, @StyleRes int light, @StyleRes int dark) {
-        activity.setTheme(SettingShared.isEnableThemeDark(activity) ? dark : light);
+    public static boolean configThemeBeforeOnCreate(Activity activity, @StyleRes int light, @StyleRes int dark) {
+        boolean enable = SettingShared.isEnableThemeDark(activity);
+        activity.setTheme(enable ? dark : light);
+        return enable;
     }
 
     public static void recreateActivity(Activity activity) {

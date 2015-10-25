@@ -29,6 +29,7 @@ import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
+import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.ui.adapter.MainAdapter;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.ui.listener.RecyclerViewLoadMoreListener;
@@ -108,9 +109,12 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     // 首次按下返回键时间戳
     private long firstBackPressedTime = 0;
 
+    // 是否启用夜间模式
+    private boolean enableThemeDark;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
+        enableThemeDark = ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -128,6 +132,8 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
         updateUserInfoViews();
 
+        imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
+
         RefreshLayoutUtils.initOnCreate(refreshLayout, this);
         RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
 
@@ -139,6 +145,10 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     protected void onResume() {
         super.onResume();
         getMessageCountAsyncTask();
+        // TODO 判断是否需要切换主题
+        if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
+            ThemeUtils.recreateActivity(this);
+        }
     }
 
     /**
@@ -437,7 +447,9 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
      */
     @OnClick(R.id.main_nav_btn_theme_dark)
     protected void onBtnThemeDarkClick() {
-        // TODO
+        SettingShared.setEnableThemeDark(this, !enableThemeDark);
+        // TODO 重启 Activity
+        ThemeUtils.recreateActivity(this);
     }
 
     /**
