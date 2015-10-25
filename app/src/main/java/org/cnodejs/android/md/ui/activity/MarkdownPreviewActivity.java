@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
@@ -12,6 +14,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MarkdownPreviewActivity extends BaseActivity {
+
+    private static final String KEY_MARKDOWN = "markdown";
+
+    public static void open(Context context, String markdown) {
+        Intent intent = new Intent(context, MarkdownPreviewActivity.class);
+        intent.putExtra(KEY_MARKDOWN, markdown);
+        context.startActivity(intent);
+    }
 
     @Bind(R.id.markdown_preview_toolbar)
     protected Toolbar toolbar;
@@ -27,7 +37,7 @@ public class MarkdownPreviewActivity extends BaseActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        cnodeWebView.loadRenderedContent(FormatUtils.renderMarkdown(getIntent().getStringExtra("markdownText")));
+        cnodeWebView.loadRenderedContent(FormatUtils.renderMarkdown(getIntent().getStringExtra(KEY_MARKDOWN)));
     }
 
     @Override

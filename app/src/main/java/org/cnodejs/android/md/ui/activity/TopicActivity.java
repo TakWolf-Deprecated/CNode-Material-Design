@@ -33,6 +33,7 @@ import org.cnodejs.android.md.ui.adapter.TopicAdapter;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
+import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 import org.joda.time.DateTime;
 
@@ -237,6 +238,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
                     author.setAvatarUrl(LoginShared.getAvatarUrl(TopicActivity.this));
                     reply.setAuthor(author);
                     reply.setContent(content);
+                    reply.setHandleContent(FormatUtils.renderMarkdown(content)); // TODO 本地要做预渲染处理
                     reply.setCreateAt(new DateTime());
                     reply.setUpList(new ArrayList<String>());
                     topic.getReplyList().add(reply);
