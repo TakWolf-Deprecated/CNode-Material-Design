@@ -80,6 +80,20 @@
                 android:textSize="14sp"
                 android:background="@drawable/button_transparent_image" />
 
+            <ImageView
+                android:id="@+id/main_nav_btn_theme_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/main_nav_layout_info"
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                android:src="@drawable/ic_brightness_3_white_24dp"
+                android:scaleType="center"
+                android:adjustViewBounds="true"
+                android:background="@drawable/button_transparent_image" />
+
         </RelativeLayout>
 
         <View style="@style/AppTheme.ItemGap" />

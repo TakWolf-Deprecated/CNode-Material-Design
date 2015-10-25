@@ -85,6 +85,47 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                android:text="@string/theme"
+                android:textColor="@color/color_accent"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:id="@+id/setting_btn_theme_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@drawable/selectable_item_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/setting_switch_theme_dark"
+                    android:layout_toLeftOf="@+id/setting_switch_theme_dark"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/theme_dark"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/setting_switch_theme_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:clickable="false" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/topic"
                 android:textColor="@color/color_accent"
                 android:textSize="14sp" />
@@ -233,6 +274,8 @@
                     android:clickable="false" />
 
             </RelativeLayout>
+
+            <View style="@style/AppTheme.ItemGap" />
 
         </LinearLayout>
 

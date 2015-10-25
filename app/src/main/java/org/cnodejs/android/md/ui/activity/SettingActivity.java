@@ -23,6 +23,9 @@ public class SettingActivity extends BaseActivity {
     @Bind(R.id.setting_switch_notification)
     protected SwitchCompat switchNotification;
 
+    @Bind(R.id.setting_switch_theme_dark)
+    protected SwitchCompat switchThemeDark;
+
     @Bind(R.id.setting_switch_new_topic_draft)
     protected SwitchCompat switchNewTopicDraft;
 
@@ -44,6 +47,7 @@ public class SettingActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
         switchNotification.setChecked(SettingShared.isEnableNotification(this));
+        switchThemeDark.setChecked(SettingShared.isEnableThemeDark(this));
         switchNewTopicDraft.setChecked(SettingShared.isEnableNewTopicDraft(this));
         switchTopicSign.setChecked(SettingShared.isEnableTopicSign(this));
         btnModifyTopicSign.setEnabled(SettingShared.isEnableTopicSign(this));
@@ -54,6 +58,15 @@ public class SettingActivity extends BaseActivity {
     protected void onBtnNotificationClick() {
         switchNotification.toggle();
         SettingShared.setEnableNotification(this, switchNotification.isChecked());
+    }
+
+    @OnClick(R.id.setting_btn_theme_dark)
+    protected void onBtnThemeDarkClick() {
+        switchThemeDark.toggle();
+        SettingShared.setEnableThemeDark(this, switchThemeDark.isChecked());
+
+        // TODO 
+
     }
 
     @OnClick(R.id.setting_btn_new_topic_draft)

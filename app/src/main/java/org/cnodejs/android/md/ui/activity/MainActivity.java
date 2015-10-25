@@ -69,6 +69,9 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Bind(R.id.main_nav_btn_logout)
     protected View btnLogout;
 
+    @Bind(R.id.main_nav_btn_theme_dark)
+    protected ImageView imgThemeDark;
+
     // 主要导航项
     @Bind({
             R.id.main_nav_btn_all,
@@ -425,6 +428,14 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
                 })
                 .show();
+    }
+
+    /**
+     * 主题按钮
+     */
+    @OnClick(R.id.main_nav_btn_theme_dark)
+    protected void onBtnThemeDarkClick() {
+        // TODO
     }
 
     /**
