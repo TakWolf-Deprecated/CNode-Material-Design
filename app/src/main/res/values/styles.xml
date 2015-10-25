@@ -9,6 +9,7 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="widgetBackground">@android:color/white</item>
         <item name="widgetBackgroundPressed">#ffeeeeee</item>
+        <item name="widgetBackgroundAccent">#ffcccccc</item>
     </style>
 
     <style name="AppThemeLight" parent="BaseAppThemeLight" />
@@ -23,6 +24,7 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="widgetBackground">#ff333333</item>
         <item name="widgetBackgroundPressed">#ff444444</item>
+        <item name="widgetBackgroundAccent">#ff666666</item>
     </style>
 
     <style name="AppThemeDark" parent="BaseAppThemeDark" />
@@ -43,7 +45,7 @@
     <style name="AppTheme.DeepLine">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">#ffdddddd</item>
+        <item name="android:background">?android:attr/listDivider</item>
     </style>
 
     <style name="AppTheme.DeepLine.Vertical">
