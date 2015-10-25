@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="widgetBackground">@android:color/white</item>
+        <item name="widgetBackgroundPressed">#ffeeeeee</item>
     </style>
 
     <style name="AppThemeLight" parent="BaseAppThemeLight" />
@@ -19,6 +21,8 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="widgetBackground">#ff333333</item>
+        <item name="widgetBackgroundPressed">#ff444444</item>
     </style>
 
     <style name="AppThemeDark" parent="BaseAppThemeDark" />
