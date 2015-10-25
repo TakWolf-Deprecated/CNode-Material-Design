@@ -1,72 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- AppTheme -->
-    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- App Theme Light -->
+    <style name="BaseAppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="mainNavItemTextColor">@color/main_nav_item_text_color</item>
+        <item name="widgetBackground">@android:color/white</item>
+        <item name="widgetBackgroundPressed">#ffeeeeee</item>
+        <item name="widgetBackgroundAccent">#ffcccccc</item>
     </style>
 
-    <style name="AppTheme" parent="BaseAppTheme" />
+    <style name="AppThemeLight" parent="BaseAppThemeLight" />
 
-    <style name="AppTheme.Launch" />
+    <style name="AppThemeLight.FitsStatusBar" />
 
-    <style name="AppTheme.FitsStatusBar" />
+    <!-- App Theme Dark -->
+    <style name="BaseAppThemeDark" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="mainNavItemTextColor">@color/main_nav_item_text_color_dark</item>
+        <item name="widgetBackground">#ff3a3a3a</item>
+        <item name="widgetBackgroundPressed">#ff444444</item>
+        <item name="widgetBackgroundAccent">#ff666666</item>
+    </style>
+
+    <style name="AppThemeDark" parent="BaseAppThemeDark" />
+
+    <style name="AppThemeDark.FitsStatusBar" />
+
+    <!-- App Theme Launch -->
+    <style name="AppThemeLaunch" parent="BaseAppThemeLight" />
 
     <!-- App Theme Dialog -->
-    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+    <style name="AppDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
+    <!-- AppWidget -->
+    <style name="AppWidget" parent="Theme.AppCompat.Light" />
+
     <!-- Deep Line -->
-    <style name="AppTheme.DeepLine">
+    <style name="AppWidget.DeepLine">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">#ffdddddd</item>
+        <item name="android:background">?android:attr/listDivider</item>
     </style>
 
-    <style name="AppTheme.DeepLine.Vertical">
+    <style name="AppWidget.DeepLine.Vertical">
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">match_parent</item>
     </style>
 
     <!-- Gap -->
-    <style name="AppTheme.ItemGap">
+    <style name="AppWidget.ItemGap">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">8dp</item>
     </style>
 
-    <style name="AppTheme.ShadowGap">
+    <style name="AppWidget.ShadowGap">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/elevation_normal</item>
         <item name="android:layout_marginBottom">@dimen/shadow_gap_margin_fill</item>
         <item name="android:background">@drawable/gap_shadow</item>
     </style>
 
-    <style name="AppTheme.ShadowGap.Opposite">
+    <style name="AppWidget.ShadowGap.Opposite">
         <item name="android:layout_marginTop">@dimen/shadow_gap_margin_fill</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:background">@drawable/gap_shadow_opposite</item>
     </style>
 
     <!-- Navigation -->
-    <style name="AppTheme.NavigationItem">
+    <style name="AppWidget.NavigationItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:drawablePadding">32dp</item>
-        <item name="android:textColor">@color/main_nav_item_text_color</item>
+        <item name="android:textColor">?attr/mainNavItemTextColor</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/selectable_item_background</item>
     </style>
 
-    <style name="AppTheme.NavigationItemBadger">
+    <style name="AppWidget.NavigationItemBadger">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_gravity">end</item>
@@ -78,25 +102,25 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="AppTheme.NavigationItemDeepLineGap" parent="AppTheme.DeepLine">
+    <style name="AppWidget.NavigationItemDeepLineGap" parent="AppWidget.DeepLine">
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginBottom">8dp</item>
     </style>
 
     <!-- Button -->
-    <style name="AppTheme.Button">
+    <style name="AppWidget.Button">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">16sp</item>
         <item name="android:background">@drawable/button_image</item>
     </style>
 
-    <style name="AppTheme.Button.Stroke">
+    <style name="AppWidget.Button.Stroke">
         <item name="android:textColor">@drawable/button_stroke_text_color</item>
         <item name="android:background">@drawable/button_stroke_image</item>
     </style>
 
     <!-- Reply Window Anim -->
-    <style name="AppTheme.ReplyWindowAnim">
+    <style name="AppWidget.ReplyWindowAnim">
         <item name="android:windowEnterAnimation">@anim/reply_window_popup_in</item>
         <item name="android:windowExitAnimation">@anim/reply_window_popup_out</item>
     </style>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="?attr/widgetBackground"
     android:orientation="vertical">
 
     <LinearLayout
@@ -54,14 +54,17 @@
         android:maxLength="36"
         android:singleLine="true"
         app:met_floatingLabel="highlight"
-        app:met_primaryColor="@color/color_accent" />
+        app:met_primaryColor="@color/color_accent"
+        app:met_textColor="?android:attr/textColorPrimary"
+        app:met_textColorHint="?android:attr/textColorHint"
+        app:met_floatingLabelTextColor="?android:attr/textColorSecondary" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button style="@style/AppTheme.Button.Stroke"
+        <Button style="@style/AppWidget.Button.Stroke"
             android:id="@+id/login_btn_qrcode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,7 +77,7 @@
             android:layout_marginBottom="8dp"
             android:text="@string/open_qrcode" />
 
-        <Button style="@style/AppTheme.Button"
+        <Button style="@style/AppWidget.Button"
             android:id="@+id/login_btn_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 import org.joda.time.DateTime;
 
@@ -31,6 +32,7 @@ public class CrashLogActivity extends BaseActivity implements Toolbar.OnMenuItem
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crash_log);
         ButterKnife.bind(this);

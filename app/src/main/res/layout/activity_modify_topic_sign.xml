@@ -23,6 +23,6 @@
         android:hint="@string/modify_topic_sign_hint"
         android:padding="16dp"
         android:gravity="start"
-        android:background="@android:color/white" />
+        android:background="?attr/widgetBackground" />
 
 </LinearLayout>

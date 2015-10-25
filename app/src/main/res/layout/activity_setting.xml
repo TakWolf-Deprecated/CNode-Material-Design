@@ -19,7 +19,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="?attr/widgetBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -173,7 +173,7 @@
 
             </RelativeLayout>
 
-            <View style="@style/AppTheme.DeepLine" />
+            <View style="@style/AppWidget.DeepLine" />
 
             <RelativeLayout
                 android:id="@+id/setting_btn_topic_sign"
@@ -218,7 +218,7 @@
 
             </RelativeLayout>
 
-            <View style="@style/AppTheme.DeepLine" />
+            <View style="@style/AppWidget.DeepLine" />
 
             <TextView
                 android:id="@+id/setting_btn_modify_topic_sign"
@@ -230,7 +230,7 @@
                 android:textSize="16sp"
                 android:background="@drawable/selectable_item_background" />
 
-            <View style="@style/AppTheme.DeepLine" />
+            <View style="@style/AppWidget.DeepLine" />
 
             <RelativeLayout
                 android:id="@+id/setting_btn_third_party_image_upload_api"
@@ -275,7 +275,7 @@
 
             </RelativeLayout>
 
-            <View style="@style/AppTheme.ItemGap" />
+            <View style="@style/AppWidget.ItemGap" />
 
         </LinearLayout>
 

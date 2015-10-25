@@ -12,6 +12,7 @@ import com.umeng.update.UmengUpdateAgent;
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import butterknife.Bind;
@@ -30,6 +31,7 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);

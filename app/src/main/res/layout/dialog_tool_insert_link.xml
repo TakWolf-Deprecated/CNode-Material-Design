@@ -17,7 +17,10 @@
         android:inputType="text"
         android:singleLine="true"
         app:met_floatingLabel="highlight"
-        app:met_primaryColor="@color/color_accent" />
+        app:met_primaryColor="@color/color_accent"
+        app:met_textColor="?android:attr/textColorPrimary"
+        app:met_textColorHint="?android:attr/textColorHint"
+        app:met_floatingLabelTextColor="?android:attr/textColorSecondary" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/dialog_tool_insert_link_edt_link"
@@ -31,6 +34,9 @@
         android:inputType="text"
         android:singleLine="true"
         app:met_floatingLabel="highlight"
-        app:met_primaryColor="@color/color_accent" />
+        app:met_primaryColor="@color/color_accent"
+        app:met_textColor="?android:attr/textColorPrimary"
+        app:met_textColorHint="?android:attr/textColorHint"
+        app:met_floatingLabelTextColor="?android:attr/textColorSecondary" />
 
 </LinearLayout>

@@ -7,10 +7,6 @@
 
     <color name="text_color_light">#b3ffffff</color>
 
-    <color name="selectable_item_background_normal">@android:color/white</color>
-    <color name="selectable_item_background_pressed">#ffeeeeee</color>
-    <color name="selectable_item_background_accent">#ffcccccc</color>
-
     <color name="fab_color_primary">@color/color_accent</color>
     <color name="fab_color_primary_dark">#ff48bd06</color>
     <color name="fab_color_accent">#99ffffff</color>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="?attr/widgetBackground"
     android:orientation="vertical">
 
     <LinearLayout
@@ -71,6 +71,6 @@
 
     </LinearLayout>
 
-    <View style="@style/AppTheme.DeepLine" />
+    <View style="@style/AppWidget.DeepLine" />
 
 </LinearLayout>

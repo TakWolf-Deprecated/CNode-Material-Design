@@ -12,7 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="?attr/widgetBackground"
             android:orientation="vertical">
 
             <TextView
@@ -118,7 +118,7 @@
 
         </LinearLayout>
 
-        <View style="@style/AppTheme.ShadowGap" />
+        <View style="@style/AppWidget.ShadowGap" />
 
         <LinearLayout
             android:id="@+id/topic_item_header_layout_no_reply"
@@ -134,9 +134,9 @@
                 android:textColor="?android:attr/textColorSecondary"
                 android:textSize="16sp"
                 android:gravity="center"
-                android:background="@android:color/white" />
+                android:background="?attr/widgetBackground" />
 
-            <View style="@style/AppTheme.ShadowGap" />
+            <View style="@style/AppWidget.ShadowGap" />
 
         </LinearLayout>
 

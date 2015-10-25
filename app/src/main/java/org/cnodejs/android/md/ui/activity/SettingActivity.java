@@ -10,6 +10,7 @@ import android.widget.Toast;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -40,6 +41,7 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
@@ -64,9 +66,8 @@ public class SettingActivity extends BaseActivity {
     protected void onBtnThemeDarkClick() {
         switchThemeDark.toggle();
         SettingShared.setEnableThemeDark(this, switchThemeDark.isChecked());
-
-        // TODO 
-
+        // TODO 重启 Activity
+        ThemeUtils.recreateActivity(this);
     }
 
     @OnClick(R.id.setting_btn_new_topic_draft)
@@ -92,8 +93,6 @@ public class SettingActivity extends BaseActivity {
         switchThirdPartyImageUploadApi.toggle();
         SettingShared.setEnableThirdPartyImageUploadApi(this, switchThirdPartyImageUploadApi.isChecked());
 
-        // TODO
-        Toast.makeText(this, "该功能暂未实现", Toast.LENGTH_SHORT).show();
         // TODO
     }
 

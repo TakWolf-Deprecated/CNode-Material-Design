@@ -31,6 +31,7 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.ui.fragment.UserDetailItemFragment;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
@@ -102,6 +103,7 @@ public class UserDetailActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
         ButterKnife.bind(this);
