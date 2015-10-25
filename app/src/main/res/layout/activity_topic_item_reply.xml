@@ -37,7 +37,7 @@
                     android:id="@+id/topic_item_reply_tv_login_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_color_primary"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="16sp"
                     tools:text="TakWolf" />
 
@@ -62,7 +62,7 @@
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:text="@string/$dot"
-                        android:textColor="@color/text_color_secondary"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="14sp"
                         android:singleLine="true" />
 
@@ -70,7 +70,7 @@
                         android:id="@+id/topic_item_reply_tv_create_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/text_color_secondary"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="14sp"
                         android:singleLine="true"
                         tools:text="1小时前" />
@@ -93,7 +93,7 @@
                     android:drawableStart="@drawable/main_nav_ic_good_grey_24dp"
                     android:drawableLeft="@drawable/main_nav_ic_good_grey_24dp"
                     android:drawablePadding="8dp"
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:background="@drawable/selectable_item_background"

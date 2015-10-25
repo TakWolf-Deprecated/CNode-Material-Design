@@ -23,7 +23,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:textColor="@color/text_color_primary"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="话题的标题" />
@@ -60,7 +60,7 @@
                         android:id="@+id/topic_item_header_tv_login_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/text_color_primary"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16sp"
                         tools:text="TakWolf" />
 
@@ -69,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textColor="@color/text_color_secondary"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="14sp"
                         android:singleLine="true"
                         tools:text="发布于：2天前" />
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:padding="24dp"
                 android:text="@string/no_reply"
-                android:textColor="@color/text_color_secondary"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:background="@android:color/white" />
