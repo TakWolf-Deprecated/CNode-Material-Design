@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="mainNavItemTextColor" format="color|reference" />
     <attr name="widgetBackground" format="color|reference" />
     <attr name="widgetBackgroundPressed" format="color|reference" />
     <attr name="widgetBackgroundAccent" format="color|reference" />

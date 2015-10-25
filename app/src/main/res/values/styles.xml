@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="mainNavItemTextColor">@color/main_nav_item_text_color</item>
         <item name="widgetBackground">@android:color/white</item>
         <item name="widgetBackgroundPressed">#ffeeeeee</item>
         <item name="widgetBackgroundAccent">#ffcccccc</item>
@@ -22,6 +23,7 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="mainNavItemTextColor">@color/main_nav_item_text_color_dark</item>
         <item name="widgetBackground">#ff3a3a3a</item>
         <item name="widgetBackgroundPressed">#ff444444</item>
         <item name="widgetBackgroundAccent">#ff666666</item>
@@ -79,7 +81,7 @@
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:drawablePadding">32dp</item>
-        <item name="android:textColor">@color/main_nav_item_text_color</item>
+        <item name="android:textColor">?attr/mainNavItemTextColor</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/selectable_item_background</item>
