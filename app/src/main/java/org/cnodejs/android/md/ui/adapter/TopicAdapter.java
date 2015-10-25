@@ -156,7 +156,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
 
                 // TODO 这里直接使用WebView，有性能问题
-                webReplyContent.loadRenderedContent(topic.getRenderedContent());
+                webReplyContent.loadRenderedContent(topic.getHandleContent());
 
                 isHeaderShow = true;
             }
@@ -219,7 +219,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             iconShadowGap.setVisibility(position == topic.getReplyList().size() - 1 ? View.VISIBLE : View.GONE);
 
             // TODO 这里直接使用WebView，有性能问题
-            webReplyContent.loadRenderedContent(reply.getRenderedContent());
+            webReplyContent.loadRenderedContent(reply.getHandleContent());
         }
 
         @OnClick(R.id.topic_item_reply_img_avatar)

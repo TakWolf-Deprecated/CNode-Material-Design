@@ -61,14 +61,18 @@ public class Reply {
         this.createAt = createAt;
     }
 
-    // TODO Markdown渲染缓存
-    private String renderedContent = null;
+    // TODO Html渲染缓存
+    private String handleContent = null;
 
-    public String getRenderedContent() {
-        if (renderedContent == null) { // 需要渲染
-            renderedContent = FormatUtils.renderMarkdown(getContent());
+    public String getHandleContent() {
+        if (handleContent == null) {
+            handleContent = FormatUtils.handleHtml(getContent());
         }
-        return renderedContent;
+        return handleContent;
+    }
+
+    public void setHandleContent(String content) {
+        handleContent = content;
     }
 
 }

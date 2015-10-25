@@ -95,12 +95,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 } else {
                     tvAction.setText("在回复中@了您");
                     webReplyContent.setVisibility(View.VISIBLE);
-                    webReplyContent.loadRenderedContent(message.getReply().getRenderedContent());  // TODO 这里直接使用WebView，有性能问题
+                    webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // TODO 这里直接使用WebView，有性能问题
                 }
             } else {
                 tvAction.setText("回复了您的话题");
                 webReplyContent.setVisibility(View.VISIBLE);
-                webReplyContent.loadRenderedContent(message.getReply().getRenderedContent());  // TODO 这里直接使用WebView，有性能问题
+                webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // TODO 这里直接使用WebView，有性能问题
             }
 
             // 已读未读状态
