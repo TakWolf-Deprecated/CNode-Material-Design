@@ -26,7 +26,7 @@ public final class SettingShared {
     }
 
     public static boolean isEnableThemeDark(Context context) {
-        return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_THEME_DARK, true);
+        return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_THEME_DARK, false);
     }
 
     public static void setEnableThemeDark(Context context, boolean enable) {
