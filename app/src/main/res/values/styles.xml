@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- AppTheme -->
-    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- App Theme Light -->
+    <style name="BaseAppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionModeOverlay">true</item>
     </style>
 
-    <style name="AppTheme" parent="BaseAppTheme" />
+    <style name="AppThemeLight" parent="BaseAppThemeLight" />
 
-    <style name="AppTheme.Launch" />
+    <style name="AppThemeLight.FitsStatusBar" />
 
-    <style name="AppTheme.FitsStatusBar" />
+    <!-- App Theme Dark -->
+    <style name="BaseAppThemeDark" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="AppThemeDark" parent="BaseAppThemeDark" />
+
+    <style name="AppThemeDark.FitsStatusBar" />
+
+    <!-- App Theme Launch -->
+    <style name="AppThemeLaunch" parent="BaseAppThemeLight" />
 
     <!-- App Theme Dialog -->
     <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
