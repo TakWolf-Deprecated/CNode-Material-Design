@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="ScrimInsetsView">
+    <declare-styleable name="ScrimInsetsScrollView">
         <attr name="appInsetForeground" format="reference|color" />
     </declare-styleable>
 
