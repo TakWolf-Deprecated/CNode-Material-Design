@@ -101,7 +101,7 @@
             android:hint="@string/new_topic_content_hint"
             android:textSize="16sp"
             android:minLines="30"
-            android:background="?attr/widgetBackgroundPressed" />
+            android:background="?attr/widgetBackgroundDark" />
 
     </android.support.v4.widget.NestedScrollView>
 

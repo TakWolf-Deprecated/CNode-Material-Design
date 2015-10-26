@@ -94,7 +94,7 @@
                         android:paddingRight="4dp"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
-                        android:background="@drawable/topic_tab_top_background"
+                        android:background="@drawable/reference_background_accent"
                         tools:text="置顶" />
 
                     <TextView
@@ -114,7 +114,8 @@
                 android:id="@+id/topic_item_header_web_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp" />
+                android:layout_margin="16dp"
+                android:background="?attr/widgetBackground" />
 
         </LinearLayout>
 

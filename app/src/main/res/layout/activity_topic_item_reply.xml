@@ -96,7 +96,7 @@
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:background="@drawable/selectable_item_background"
+                    android:background="?attr/selectableItemBackground"
                     tools:text="12" />
 
                 <ImageView
@@ -106,7 +106,7 @@
                     android:padding="8dp"
                     android:src="@drawable/ic_reply_grey600_24dp"
                     android:scaleType="center"
-                    android:background="@drawable/selectable_item_background" />
+                    android:background="?attr/selectableItemBackground" />
 
             </LinearLayout>
 
@@ -119,7 +119,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"
+            android:background="?attr/widgetBackground" />
 
     </LinearLayout>
 

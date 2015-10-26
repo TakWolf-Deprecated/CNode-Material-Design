@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
@@ -19,6 +20,15 @@ public final class ThemeUtils {
         TypedArray a = context.obtainStyledAttributes(null, new int[]{attr});
         try {
             return a.getColor(0, 0);
+        } finally {
+            a.recycle();
+        }
+    }
+
+    public static Drawable getThemeAttrDrawable(@NonNull Context context, @AttrRes int attr) {
+        TypedArray a = context.obtainStyledAttributes(null, new int[]{attr});
+        try {
+            return a.getDrawable(0);
         } finally {
             a.recycle();
         }

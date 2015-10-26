@@ -4,7 +4,7 @@
     android:id="@+id/notification_item_btn_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/selectable_item_background"
+    android:background="?attr/selectableItemBackground"
     android:orientation="vertical">
 
     <LinearLayout
@@ -74,7 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:background="?attr/widgetBackground" />
 
     <TextView
         android:id="@+id/notification_item_tv_topic_title"
@@ -87,7 +88,7 @@
         android:padding="12dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp"
-        android:background="@drawable/notification_item_reference_background"
+        android:background="?attr/referenceBackgroundNormal"
         tools:text="原话题：【深js拾遗】mbot 机器人大放送！！！！！！！先抢先得噢亲！！！！" />
 
     <View style="@style/AppWidget.DeepLine" />
