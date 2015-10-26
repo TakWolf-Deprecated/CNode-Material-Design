@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -22,6 +21,7 @@ import org.cnodejs.android.md.ui.adapter.NotificationAdapter;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +89,7 @@ public class NotificationActivity extends BaseActivity implements Toolbar.OnMenu
                     if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                         showAccessTokenErrorDialog();
                     } else {
-                        Toast.makeText(NotificationActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(NotificationActivity.this).show(R.string.data_load_faild);
                     }
                     refreshLayout.setRefreshing(false);
                 }
@@ -140,7 +140,7 @@ public class NotificationActivity extends BaseActivity implements Toolbar.OnMenu
                     if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                         showAccessTokenErrorDialog();
                     } else {
-                        Toast.makeText(NotificationActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(NotificationActivity.this).show(R.string.data_load_faild);
                     }
                 }
             }

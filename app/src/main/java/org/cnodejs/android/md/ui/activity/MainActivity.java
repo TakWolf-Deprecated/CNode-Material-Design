@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
@@ -35,6 +34,7 @@ import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.ui.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.ArrayList;
@@ -244,7 +244,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void failure(RetrofitError error) {
                 if (currentTab == tab) {
-                    Toast.makeText(MainActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                    ToastUtils.with(MainActivity.this).show(R.string.data_load_faild);
                     refreshLayout.setRefreshing(false);
                 }
             }
@@ -271,7 +271,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                             adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
                             currentPage++;
                         } else {
-                            Toast.makeText(MainActivity.this, R.string.have_no_more_data, Toast.LENGTH_SHORT).show();
+                            ToastUtils.with(MainActivity.this).show(R.string.have_no_more_data);
                             adapter.setLoading(false);
                             adapter.notifyItemChanged(adapter.getItemCount() - 1);
                         }
@@ -281,7 +281,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 @Override
                 public void failure(RetrofitError error) {
                     if (currentTab == tab && currentPage == page) {
-                        Toast.makeText(MainActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(MainActivity.this).show(R.string.data_load_faild);
                         adapter.setLoading(false);
                         adapter.notifyItemChanged(adapter.getItemCount() - 1);
                     }
@@ -521,7 +521,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         } else {
             long secondBackPressedTime = System.currentTimeMillis();
             if (secondBackPressedTime - firstBackPressedTime > 2000) {
-                Toast.makeText(this, R.string.press_back_again_to_exit, Toast.LENGTH_SHORT).show();
+                ToastUtils.with(this).show(R.string.press_back_again_to_exit);
                 firstBackPressedTime = secondBackPressedTime;
             } else {
                 finish();

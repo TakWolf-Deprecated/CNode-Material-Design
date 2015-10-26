@@ -16,11 +16,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.squareup.picasso.Picasso;
@@ -32,12 +30,12 @@ import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.ui.fragment.UserDetailItemFragment;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -178,9 +176,9 @@ public class UserDetailActivity extends BaseActivity {
                     public void run() {
                         if (!isFinishing()) {
                             if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
-                                Toast.makeText(UserDetailActivity.this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
+                                ToastUtils.with(UserDetailActivity.this).show(R.string.user_not_found);
                             } else {
-                                Toast.makeText(UserDetailActivity.this, R.string.data_load_faild_and_click_avatar_to_reload, Toast.LENGTH_SHORT).show();
+                                ToastUtils.with(UserDetailActivity.this).show(R.string.data_load_faild_and_click_avatar_to_reload);
                             }
                             progressWheel.setProgress(0);
                             loading = false;

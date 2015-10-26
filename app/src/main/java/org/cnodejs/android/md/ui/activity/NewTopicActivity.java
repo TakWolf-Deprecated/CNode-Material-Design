@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -19,6 +18,7 @@ import org.cnodejs.android.md.storage.TopicShared;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -98,10 +98,10 @@ public class NewTopicActivity extends BaseActivity implements Toolbar.OnMenuItem
             case R.id.action_send:
                 if (edtTitle.length() < 10) {
                     edtTitle.requestFocus();
-                    Toast.makeText(this, "标题要求10字以上", Toast.LENGTH_SHORT).show();
+                    ToastUtils.with(this).show("标题要求10字以上");
                 } else if (edtContent.length() == 0) {
                     edtContent.requestFocus();
-                    Toast.makeText(this, "内容不能为空", Toast.LENGTH_SHORT).show();
+                    ToastUtils.with(this).show("内容不能为空");
                 } else {
                     TabType tab = getTabByPosition(spnTab.getSelectedItemPosition());
                     String title = edtTitle.getText().toString().trim();
@@ -144,7 +144,7 @@ public class NewTopicActivity extends BaseActivity implements Toolbar.OnMenuItem
                 TopicShared.clear(NewTopicActivity.this);
                 // 结束当前并提示
                 finish();
-                Toast.makeText(NewTopicActivity.this, "话题发布成功", Toast.LENGTH_SHORT).show();
+                ToastUtils.with(NewTopicActivity.this).show("话题发布成功");
             }
 
             @Override
@@ -153,7 +153,7 @@ public class NewTopicActivity extends BaseActivity implements Toolbar.OnMenuItem
                 if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                     showAccessTokenErrorDialog();
                 } else {
-                    Toast.makeText(NewTopicActivity.this, R.string.network_faild, Toast.LENGTH_SHORT).show();
+                    ToastUtils.with(NewTopicActivity.this).show(R.string.network_faild);
                 }
             }
 

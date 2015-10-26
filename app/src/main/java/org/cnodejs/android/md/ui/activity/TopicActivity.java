@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
@@ -34,6 +33,7 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 import org.joda.time.DateTime;
@@ -156,9 +156,9 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
             public void failure(RetrofitError error) {
                 if (!isFinishing()) {
                     if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
-                        Toast.makeText(TopicActivity.this, R.string.topic_not_found, Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(TopicActivity.this).show(R.string.topic_not_found);
                     } else {
-                        Toast.makeText(TopicActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(TopicActivity.this).show(R.string.data_load_faild);
                     }
                     refreshLayout.setRefreshing(false);
                 }
@@ -215,7 +215,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
         @OnClick(R.id.reply_window_btn_tool_send)
         protected void onBtnToolSendClick() {
             if (edtContent.length() == 0) {
-                Toast.makeText(TopicActivity.this, "内容不能为空", Toast.LENGTH_SHORT).show();
+                ToastUtils.with(TopicActivity.this).show("内容不能为空");
             } else {
                 String content = edtContent.getText().toString();
                 if (SettingShared.isEnableTopicSign(TopicActivity.this)) { // 添加小尾巴
@@ -256,7 +256,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
                     // 清空回复框内容
                     edtContent.setText(null);
                     // 提示
-                    Toast.makeText(TopicActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                    ToastUtils.with(TopicActivity.this).show("发送成功");
                 }
 
                 @Override
@@ -265,7 +265,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
                     if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                         adapter.showAccessTokenErrorDialog();
                     } else {
-                        Toast.makeText(TopicActivity.this, R.string.network_faild, Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(TopicActivity.this).show(R.string.network_faild);
                     }
                 }
 
