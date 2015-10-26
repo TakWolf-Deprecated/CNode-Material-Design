@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:drawable="@color/selectable_item_background_general_dark_pressed" />
+    <item android:state_pressed="true" android:drawable="@color/selectable_item_background_general_dark_pressed" />
+    <item android:drawable="@color/selectable_item_background_general_dark_normal" />
+</selector>
