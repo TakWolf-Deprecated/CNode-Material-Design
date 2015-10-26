@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_primary"
-        android:elevation="4dp"
+        android:elevation="@dimen/elevation_normal"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/markdown_preview"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -19,7 +19,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="?attr/widgetBackground">
 
         <org.cnodejs.android.md.ui.widget.CNodeWebView
             android:id="@+id/markdown_preview_web_view"
@@ -28,7 +28,8 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:background="?attr/widgetBackground" />
 
     </ScrollView>
 

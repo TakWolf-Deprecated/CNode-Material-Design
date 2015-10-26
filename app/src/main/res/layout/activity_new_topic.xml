@@ -7,21 +7,21 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:elevation="@dimen/elevation_editor">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/new_topic_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_primary"
-                android:elevation="4dp"
+                android:elevation="@dimen/elevation_normal"
                 app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                 app:title="@string/new_topic"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -34,7 +34,7 @@
                 android:paddingLeft="16dp"
                 android:paddingEnd="16dp"
                 android:paddingRight="16dp"
-                android:background="@android:color/white"
+                android:background="?attr/widgetBackground"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -55,7 +55,7 @@
 
             </LinearLayout>
 
-            <View style="@style/AppTheme.DeepLine" />
+            <View style="@style/AppWidget.DeepLine" />
 
             <EditText
                 android:id="@+id/new_topic_edt_title"
@@ -66,9 +66,9 @@
                 android:textStyle="bold"
                 android:singleLine="true"
                 android:hint="@string/new_topic_title_hint"
-                android:background="@android:color/white" />
+                android:background="?attr/widgetBackground" />
 
-            <View style="@style/AppTheme.DeepLine" />
+            <View style="@style/AppWidget.DeepLine" />
 
         </LinearLayout>
 
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
-            android:background="@android:color/white">
+            android:background="?attr/widgetBackground">
 
             <include layout="@layout/activity_editor_bar" />
 
@@ -101,7 +101,7 @@
             android:hint="@string/new_topic_content_hint"
             android:textSize="16sp"
             android:minLines="30"
-            android:background="#ffeeeeee" />
+            android:background="?attr/widgetBackgroundDark" />
 
     </android.support.v4.widget.NestedScrollView>
 

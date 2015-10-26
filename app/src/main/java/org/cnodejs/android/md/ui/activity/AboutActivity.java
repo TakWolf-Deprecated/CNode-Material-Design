@@ -12,6 +12,7 @@ import com.umeng.update.UmengUpdateAgent;
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import butterknife.Bind;
@@ -30,6 +31,7 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
@@ -47,11 +49,6 @@ public class AboutActivity extends BaseActivity {
     @OnClick(R.id.about_btn_open_source_url)
     protected void onBtnOpenSourceUrlClick() {
         ShipUtils.openInBrowser(this, getString(R.string.open_source_url_content));
-    }
-
-    @OnClick(R.id.about_btn_about_third_party_image_upload_api)
-    protected void onBtnAboutThirdPartyImageUploadApiClick() {
-        ShipUtils.openInBrowser(this, getString(R.string.about_third_party_image_upload_api_content));
     }
 
     @OnClick(R.id.about_btn_about_cnode)

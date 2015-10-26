@@ -4,19 +4,18 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <View style="@style/AppTheme.ShadowGap.Opposite" />
+    <View style="@style/AppWidget.ShadowGap.Opposite" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@android:color/white">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@android:color/white"
-            android:elevation="2dp">
+            android:background="?attr/widgetBackground"
+            android:elevation="@dimen/elevation_editor">
 
             <ImageView
                 android:id="@+id/reply_window_btn_tool_close"
@@ -24,9 +23,9 @@
                 android:layout_height="56dp"
                 android:src="@drawable/ic_close_grey600_24dp"
                 android:scaleType="center"
-                android:background="@drawable/selectable_item_background" />
+                android:background="?attr/selectableItemBackgroundGeneral" />
 
-            <View style="@style/AppTheme.DeepLine.Vertical"
+            <View style="@style/AppWidget.DeepLine.Vertical"
                 android:layout_toEndOf="@+id/reply_window_btn_tool_close"
                 android:layout_toRightOf="@+id/reply_window_btn_tool_close" />
 
@@ -45,7 +44,7 @@
 
             </HorizontalScrollView>
 
-            <View style="@style/AppTheme.DeepLine.Vertical"
+            <View style="@style/AppWidget.DeepLine.Vertical"
                 android:layout_toStartOf="@+id/reply_window_btn_tool_send"
                 android:layout_toLeftOf="@+id/reply_window_btn_tool_send" />
 
@@ -57,7 +56,7 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_send_grey600_24dp"
                 android:scaleType="center"
-                android:background="@drawable/selectable_item_background" />
+                android:background="?attr/selectableItemBackgroundGeneral" />
 
         </RelativeLayout>
 
@@ -77,7 +76,7 @@
                 android:hint="@string/new_topic_content_hint"
                 android:textSize="16sp"
                 android:minLines="20"
-                android:background="#ffeeeeee" />
+                android:background="?attr/widgetBackgroundDark" />
 
         </ScrollView>
 

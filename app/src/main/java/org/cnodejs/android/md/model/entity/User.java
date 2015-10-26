@@ -23,10 +23,10 @@ public class User {
     private int score;
 
     @SerializedName("recent_topics")
-    private List<TopicSimple> recentTopics;
+    private List<TopicSimple> recentTopicList;
 
     @SerializedName("recent_replies")
-    private List<TopicSimple> recentReplies;
+    private List<TopicSimple> recentReplyList;
 
     public String getLoginName() {
         return loginName;
@@ -68,20 +68,20 @@ public class User {
         this.score = score;
     }
 
-    public List<TopicSimple> getRecentTopics() {
-        return recentTopics;
+    public List<TopicSimple> getRecentTopicList() {
+        return recentTopicList;
     }
 
-    public void setRecentTopics(List<TopicSimple> recentTopics) {
-        this.recentTopics = recentTopics;
+    public void setRecentTopicList(List<TopicSimple> recentTopicList) {
+        this.recentTopicList = recentTopicList;
     }
 
-    public List<TopicSimple> getRecentReplies() {
-        return recentReplies;
+    public List<TopicSimple> getRecentReplyList() {
+        return recentReplyList;
     }
 
-    public void setRecentReplies(List<TopicSimple> recentReplies) {
-        this.recentReplies = recentReplies;
+    public void setRecentReplyList(List<TopicSimple> recentReplyList) {
+        this.recentReplyList = recentReplyList;
     }
 
 }

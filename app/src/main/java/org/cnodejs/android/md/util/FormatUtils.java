@@ -2,6 +2,7 @@ package org.cnodejs.android.md.util;
 
 import android.text.TextUtils;
 
+import org.cnodejs.android.md.ui.activity.SettingActivity;
 import org.joda.time.DateTime;
 import org.tautua.markdownpapers.Markdown;
 import org.tautua.markdownpapers.parser.ParseException;
@@ -87,42 +88,21 @@ public final class FormatUtils {
      */
     private static final Markdown md = new Markdown();
 
-    public static final String THEME_CSS = "file:///android_asset/cnode.css";
-
-    private static final String HTML_0 = "" +
-            "<!DOCTYPE html>\n" +
-            "<html>\n" +
-            "<head>\n" +
-            "<meta charset=\"UTF-8\">\n" +
-            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1\">";
-
-    private static final String HTML_1 = "\n" +
-            "</head>\n" +
-            "<body>\n";
-
-    private static final String HTML_2 = "\n" +
-            "</body>\n" +
-            "</html>";
-
     public static String renderMarkdown(String text) {
-        // 替换Markdown
-        text = text.replace("](/user/", "](https://cnodejs.org/user/"); // TODO 替换@用户协议
-        text = text.replace("](//dn-cnode.qbox.me/", "](https://dn-cnode.qbox.me/"); // TODO 替换CNode CDN图片路径
-        // 转换
         StringWriter out = new StringWriter();
         try {
             md.transform(new StringReader(text), out);
             text = out.toString();
-
-            // 替换Html
-            text = text.replace("<a href=\"/user/", "<a href=\"https://cnodejs.org/user/"); // TODO 替换@用户协议
-            text = text.replace("<img src=\"//dn-cnode.qbox.me/", "<img src=\"https://dn-cnode.qbox.me/"); // TODO 替换CNode CDN图片路径
-
-            // 生成完整html
-            return HTML_0 + "\n<link type=\"text/css\" rel=\"stylesheet\" href=\"" + THEME_CSS + "\">" + HTML_1 + text + HTML_2;
         } catch (ParseException e) {
-            return text;
+            // nothing to do
         }
+        return text;
+    }
+
+    public static String handleHtml(String text) {
+        text = text.replace("<a href=\"/user/", "<a href=\"https://cnodejs.org/user/"); // TODO 替换@用户协议
+        text = text.replace("<img src=\"//", "<img src=\"https://"); // TODO 替换缩略URL引用路径为https协议
+        return text;
     }
 
 }

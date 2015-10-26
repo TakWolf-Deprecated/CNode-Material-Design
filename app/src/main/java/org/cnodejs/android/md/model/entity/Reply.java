@@ -15,7 +15,8 @@ public class Reply {
 
     private String content;
 
-    private List<String> ups;
+    @SerializedName("ups")
+    private List<String> upList;
 
     @SerializedName("create_at")
     private DateTime createAt;
@@ -44,12 +45,12 @@ public class Reply {
         this.content = content;
     }
 
-    public List<String> getUps() {
-        return ups;
+    public List<String> getUpList() {
+        return upList;
     }
 
-    public void setUps(List<String> ups) {
-        this.ups = ups;
+    public void setUpList(List<String> upList) {
+        this.upList = upList;
     }
 
     public DateTime getCreateAt() {
@@ -60,14 +61,18 @@ public class Reply {
         this.createAt = createAt;
     }
 
-    // TODO Markdown渲染缓存
-    private String renderedContent = null;
+    // TODO Html渲染缓存
+    private String handleContent = null;
 
-    public String getRenderedContent() {
-        if (renderedContent == null) { // 需要渲染
-            renderedContent = FormatUtils.renderMarkdown(getContent());
+    public String getHandleContent() {
+        if (handleContent == null) {
+            handleContent = FormatUtils.handleHtml(getContent());
         }
-        return renderedContent;
+        return handleContent;
+    }
+
+    public void setHandleContent(String content) {
+        handleContent = content;
     }
 
 }

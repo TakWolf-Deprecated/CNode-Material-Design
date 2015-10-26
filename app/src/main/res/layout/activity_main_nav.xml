@@ -6,14 +6,13 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
     android:layout_gravity="start"
-    android:background="@android:color/white"
+    android:background="?attr/widgetBackground"
     android:scrollbars="none"
     app:appInsetForeground="#44000000">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -22,6 +21,7 @@
             android:background="@color/color_primary">
 
             <ImageView
+                android:id="@+id/main_nav_img_top_background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignBottom="@+id/main_nav_layout_info"
@@ -80,72 +80,86 @@
                 android:textSize="14sp"
                 android:background="@drawable/button_transparent_image" />
 
+            <ImageView
+                android:id="@+id/main_nav_btn_theme_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/main_nav_layout_info"
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                android:src="@drawable/ic_brightness_3_white_24dp"
+                android:scaleType="center"
+                android:adjustViewBounds="true"
+                android:background="@drawable/button_transparent_image" />
+
         </RelativeLayout>
 
-        <View style="@style/AppTheme.ItemGap" />
+        <View style="@style/AppWidget.ItemGap" />
 
-        <CheckedTextView style="@style/AppTheme.NavigationItem"
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
             android:id="@+id/main_nav_btn_all"
             android:drawableStart="@drawable/main_nav_ic_all"
             android:drawableLeft="@drawable/main_nav_ic_all"
             android:text="@string/tab_all"
             android:checked="true" />
 
-        <CheckedTextView style="@style/AppTheme.NavigationItem"
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
             android:id="@+id/main_nav_btn_good"
             android:drawableStart="@drawable/main_nav_ic_good"
             android:drawableLeft="@drawable/main_nav_ic_good"
             android:text="@string/tab_good" />
 
-        <CheckedTextView style="@style/AppTheme.NavigationItem"
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
             android:id="@+id/main_nav_btn_share"
             android:drawableStart="@drawable/main_nav_ic_share"
             android:drawableLeft="@drawable/main_nav_ic_share"
             android:text="@string/tab_share" />
 
-        <CheckedTextView style="@style/AppTheme.NavigationItem"
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
             android:id="@+id/main_nav_btn_ask"
             android:drawableStart="@drawable/main_nav_ic_ask"
             android:drawableLeft="@drawable/main_nav_ic_ask"
             android:text="@string/tab_ask" />
 
-        <CheckedTextView style="@style/AppTheme.NavigationItem"
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
             android:id="@+id/main_nav_btn_job"
             android:drawableStart="@drawable/main_nav_ic_job"
             android:drawableLeft="@drawable/main_nav_ic_job"
             android:text="@string/tab_job" />
 
-        <View style="@style/AppTheme.NavigationItemDeepLineGap" />
+        <View style="@style/AppWidget.NavigationItemDeepLineGap" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView style="@style/AppTheme.NavigationItem"
+            <TextView style="@style/AppWidget.NavigationItem"
                 android:id="@+id/main_nav_btn_notification"
                 android:drawableStart="@drawable/main_nav_ic_notification_grey_24dp"
                 android:drawableLeft="@drawable/main_nav_ic_notification_grey_24dp"
                 android:text="@string/notification" />
 
-            <TextView style="@style/AppTheme.NavigationItemBadger"
+            <TextView style="@style/AppWidget.NavigationItemBadger"
                 android:id="@+id/main_nav_tv_badger_notification"
                 tools:text="99+" />
 
         </FrameLayout>
 
-        <TextView style="@style/AppTheme.NavigationItem"
+        <TextView style="@style/AppWidget.NavigationItem"
             android:id="@+id/main_nav_btn_setting"
             android:drawableStart="@drawable/main_nav_ic_setting_grey_24dp"
             android:drawableLeft="@drawable/main_nav_ic_setting_grey_24dp"
             android:text="@string/setting" />
 
-        <TextView style="@style/AppTheme.NavigationItem"
+        <TextView style="@style/AppWidget.NavigationItem"
             android:id="@+id/main_nav_btn_about"
             android:drawableStart="@drawable/main_nav_ic_about_grey_24dp"
             android:drawableLeft="@drawable/main_nav_ic_about_grey_24dp"
             android:text="@string/about" />
 
-        <View style="@style/AppTheme.ItemGap" />
+        <View style="@style/AppWidget.ItemGap" />
 
     </LinearLayout>
 

@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#88303030"
-            android:elevation="4dp"
+            android:elevation="@dimen/elevation_normal"
             app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
             app:title="@string/open_qrcode"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"

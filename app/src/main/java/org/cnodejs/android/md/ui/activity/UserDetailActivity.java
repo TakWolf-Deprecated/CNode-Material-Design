@@ -19,7 +19,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.squareup.picasso.Picasso;
@@ -30,6 +29,9 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.ui.fragment.UserDetailItemFragment;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
+import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.ArrayList;
@@ -44,11 +46,14 @@ import retrofit.client.Response;
 
 public class UserDetailActivity extends BaseActivity {
 
-    public static void openWithTransitionAnimation(Activity activity, String loginName, ImageView imgAvatar) {
+    private static final String NAME_IMG_AVATAR = "imgAvatar";
+
+    public static void openWithTransitionAnimation(Activity activity, String loginName, ImageView imgAvatar, String avatarUrl) {
         Intent intent = new Intent(activity, UserDetailActivity.class);
         intent.putExtra("loginName", loginName);
+        intent.putExtra("avatarUrl", avatarUrl);
 
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imgAvatar, activity.getString(R.string.transition_name_img_avatar));
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imgAvatar, NAME_IMG_AVATAR);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
@@ -92,14 +97,16 @@ public class UserDetailActivity extends BaseActivity {
     private String githubUsername;
 
     private boolean loading = false;
+    private long startLoadingTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
         ButterKnife.bind(this);
 
-        ViewCompat.setTransitionName(imgAvatar, getString(R.string.transition_name_img_avatar));
+        ViewCompat.setTransitionName(imgAvatar, NAME_IMG_AVATAR);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
@@ -109,6 +116,14 @@ public class UserDetailActivity extends BaseActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         loginName = getIntent().getStringExtra("loginName");
+        if (!TextUtils.isEmpty(loginName)) {
+            tvLoginName.setText(loginName);
+        }
+
+        String avatarUrl = getIntent().getStringExtra("avatarUrl");
+        if (!TextUtils.isEmpty(avatarUrl)) {
+            Picasso.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+        }
 
         getUserAsyncTask();
     }
@@ -122,31 +137,55 @@ public class UserDetailActivity extends BaseActivity {
 
     private void getUserAsyncTask() {
         loading = true;
+        startLoadingTime = System.currentTimeMillis();
         progressWheel.spin();
         ApiClient.service.getUser(loginName, new Callback<Result<User>>() {
 
-            @Override
-            public void success(Result<User> result, Response response) {
-                if (!isFinishing()) {
-                    updateUserInfoViews(result.getData());
-                    adapter.update(result.getData());
-                    githubUsername = result.getData().getGithubUsername();
-                    progressWheel.setProgress(0);
-                    loading = false;
+            private long getPostTime() {
+                long postTime = 1000 - (System.currentTimeMillis() - startLoadingTime);
+                if (postTime > 0) {
+                    return postTime;
+                } else {
+                    return 0;
                 }
             }
 
             @Override
-            public void failure(RetrofitError error) {
-                if (!isFinishing()) {
-                    if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
-                        Toast.makeText(UserDetailActivity.this, R.string.user_not_found, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(UserDetailActivity.this, R.string.data_load_faild_and_click_avatar_to_reload, Toast.LENGTH_SHORT).show();
+            public void success(final Result<User> result, Response response) {
+                HandlerUtils.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (!isFinishing()) {
+                            updateUserInfoViews(result.getData());
+                            adapter.update(result.getData());
+                            githubUsername = result.getData().getGithubUsername();
+                            progressWheel.setProgress(0);
+                            loading = false;
+                        }
                     }
-                    progressWheel.setProgress(0);
-                    loading = false;
-                }
+
+                }, getPostTime());
+            }
+
+            @Override
+            public void failure(final RetrofitError error) {
+                HandlerUtils.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (!isFinishing()) {
+                            if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
+                                ToastUtils.with(UserDetailActivity.this).show(R.string.user_not_found);
+                            } else {
+                                ToastUtils.with(UserDetailActivity.this).show(R.string.data_load_faild_and_click_avatar_to_reload);
+                            }
+                            progressWheel.setProgress(0);
+                            loading = false;
+                        }
+                    }
+
+                }, getPostTime());
             }
 
         });
@@ -181,8 +220,8 @@ public class UserDetailActivity extends BaseActivity {
         }
 
         public void update(@NonNull User user) {
-            fmList.get(0).notifyDataSetChanged(user.getRecentReplies());
-            fmList.get(1).notifyDataSetChanged(user.getRecentTopics());
+            fmList.get(0).notifyDataSetChanged(user.getRecentReplyList());
+            fmList.get(1).notifyDataSetChanged(user.getRecentTopicList());
         }
 
         @Override

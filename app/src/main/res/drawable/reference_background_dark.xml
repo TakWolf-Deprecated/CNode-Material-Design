@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid
-        android:color="@color/color_accent" />
+        android:color="@color/selectable_item_background_general_dark_pressed" />
     <corners
         android:topLeftRadius="4dp"
         android:topRightRadius="4dp"
         android:bottomRightRadius="4dp"
-        android:bottomLeftRadius="4dp"/>
+        android:bottomLeftRadius="4dp" />
 </shape>

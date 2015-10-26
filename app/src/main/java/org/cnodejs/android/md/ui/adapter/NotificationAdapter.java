@@ -17,6 +17,7 @@ import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.ui.activity.TopicActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.widget.CNodeWebView;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;
@@ -95,26 +96,37 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 } else {
                     tvAction.setText("在回复中@了您");
                     webReplyContent.setVisibility(View.VISIBLE);
-                    webReplyContent.loadRenderedContent(message.getReply().getRenderedContent());  // TODO 这里直接使用WebView，有性能问题
+                    webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // TODO 这里直接使用WebView，有性能问题
                 }
             } else {
                 tvAction.setText("回复了您的话题");
                 webReplyContent.setVisibility(View.VISIBLE);
-                webReplyContent.loadRenderedContent(message.getReply().getRenderedContent());  // TODO 这里直接使用WebView，有性能问题
+                webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // TODO 这里直接使用WebView，有性能问题
             }
 
-            // 已读未读状态
-            tvTime.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.color_accent));
-            tvFrom.getPaint().setFakeBoldText(!message.isRead());
-            tvFrom.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_primary : R.color.text_color_primary));
-            tvAction.getPaint().setFakeBoldText(!message.isRead());
-            tvAction.setTextColor(activity.getResources().getColor(message.isRead() ? R.color.text_color_secondary : R.color.text_color_primary));
-            tvTopicTitle.getPaint().setFakeBoldText(!message.isRead());
+            // 消息状态
+            if (message.isRead()) { // 已读
+                tvTime.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+                tvFrom.getPaint().setFakeBoldText(false);
+                tvFrom.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+                tvAction.getPaint().setFakeBoldText(false);
+                tvAction.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+                tvTopicTitle.getPaint().setFakeBoldText(false);
+                tvTopicTitle.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+            } else { // 未读
+                tvTime.setTextColor(ThemeUtils.getThemeAttrColor(activity, R.attr.colorAccent));
+                tvFrom.getPaint().setFakeBoldText(true);
+                tvFrom.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
+                tvAction.getPaint().setFakeBoldText(true);
+                tvAction.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
+                tvTopicTitle.getPaint().setFakeBoldText(true);
+                tvTopicTitle.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
+            }
         }
 
         @OnClick(R.id.notification_item_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithTransitionAnimation(activity, message.getAuthor().getLoginName(), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(activity, message.getAuthor().getLoginName(), imgAvatar, message.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.notification_item_btn_item)

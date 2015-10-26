@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
@@ -29,10 +28,13 @@ import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
+import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.ui.adapter.MainAdapter;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.ui.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.ArrayList;
@@ -69,6 +71,12 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Bind(R.id.main_nav_btn_logout)
     protected View btnLogout;
 
+    @Bind(R.id.main_nav_btn_theme_dark)
+    protected ImageView imgThemeDark;
+
+    @Bind(R.id.main_nav_img_top_background)
+    protected ImageView imgTopBackground;
+
     // 主要导航项
     @Bind({
             R.id.main_nav_btn_all,
@@ -104,8 +112,12 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     // 首次按下返回键时间戳
     private long firstBackPressedTime = 0;
 
+    // 是否启用夜间模式
+    private boolean enableThemeDark;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        enableThemeDark = ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -123,6 +135,9 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
         updateUserInfoViews();
 
+        imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
+        imgTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
+
         RefreshLayoutUtils.initOnCreate(refreshLayout, this);
         RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
 
@@ -134,6 +149,10 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     protected void onResume() {
         super.onResume();
         getMessageCountAsyncTask();
+        // TODO 判断是否需要切换主题
+        if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
+            ThemeUtils.recreateActivity(this);
+        }
     }
 
     /**
@@ -209,7 +228,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         final TabType tab = currentTab;
-        ApiClient.service.getTopics(tab, 1, 20, false, new Callback<Result<List<Topic>>>() {
+        ApiClient.service.getTopicList(tab, 1, 20, true, new Callback<Result<List<Topic>>>() {
 
             @Override
             public void success(Result<List<Topic>> result, Response response) {
@@ -225,7 +244,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void failure(RetrofitError error) {
                 if (currentTab == tab) {
-                    Toast.makeText(MainActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                    ToastUtils.with(MainActivity.this).show(R.string.data_load_faild);
                     refreshLayout.setRefreshing(false);
                 }
             }
@@ -241,7 +260,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             final TabType tab = currentTab;
             final int page = currentPage;
-            ApiClient.service.getTopics(tab, page + 1, 20, false, new Callback<Result<List<Topic>>>() {
+            ApiClient.service.getTopicList(tab, page + 1, 20, true, new Callback<Result<List<Topic>>>() {
 
                 @Override
                 public void success(Result<List<Topic>> result, Response response) {
@@ -252,7 +271,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                             adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
                             currentPage++;
                         } else {
-                            Toast.makeText(MainActivity.this, R.string.have_no_more_data, Toast.LENGTH_SHORT).show();
+                            ToastUtils.with(MainActivity.this).show(R.string.have_no_more_data);
                             adapter.setLoading(false);
                             adapter.notifyItemChanged(adapter.getItemCount() - 1);
                         }
@@ -262,7 +281,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 @Override
                 public void failure(RetrofitError error) {
                     if (currentTab == tab && currentPage == page) {
-                        Toast.makeText(MainActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(MainActivity.this).show(R.string.data_load_faild);
                         adapter.setLoading(false);
                         adapter.notifyItemChanged(adapter.getItemCount() - 1);
                     }
@@ -428,6 +447,16 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     }
 
     /**
+     * 主题按钮
+     */
+    @OnClick(R.id.main_nav_btn_theme_dark)
+    protected void onBtnThemeDarkClick() {
+        SettingShared.setEnableThemeDark(this, !enableThemeDark);
+        // TODO 重启 Activity
+        ThemeUtils.recreateActivity(this);
+    }
+
+    /**
      * 用户信息按钮
      */
     @OnClick(R.id.main_nav_layout_info)
@@ -435,7 +464,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
         } else {
-            UserDetailActivity.openWithTransitionAnimation(this, LoginShared.getLoginName(this), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(this, LoginShared.getLoginName(this), imgAvatar, LoginShared.getAvatarUrl(this));
         }
     }
 
@@ -492,7 +521,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         } else {
             long secondBackPressedTime = System.currentTimeMillis();
             if (secondBackPressedTime - firstBackPressedTime > 2000) {
-                Toast.makeText(this, R.string.press_back_again_to_exit, Toast.LENGTH_SHORT).show();
+                ToastUtils.with(this).show(R.string.press_back_again_to_exit);
                 firstBackPressedTime = secondBackPressedTime;
             } else {
                 finish();

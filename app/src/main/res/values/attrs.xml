@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="ScrimInsetsView">
+    <attr name="widgetBackground" format="color|reference" />
+    <attr name="widgetBackgroundDark" format="color|reference" />
+    <attr name="selectableItemBackgroundGeneral" format="color|reference" />
+    <attr name="mainNavItemTextColor" format="color|reference" />
+    <attr name="referenceBackgroundNormal" format="color|reference" />
+    <attr name="referenceBackgroundAccent" format="color|reference" />
+
+    <declare-styleable name="ScrimInsetsScrollView">
         <attr name="appInsetForeground" format="reference|color" />
     </declare-styleable>
 

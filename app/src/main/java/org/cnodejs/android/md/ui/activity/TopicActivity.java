@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
@@ -33,6 +32,9 @@ import org.cnodejs.android.md.ui.adapter.TopicAdapter;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
+import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 import org.joda.time.DateTime;
 
@@ -85,6 +87,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);
@@ -110,7 +113,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
         replyWindow.setBackgroundDrawable(new ColorDrawable(0x01000000));
         replyWindow.setFocusable(true);
         replyWindow.setOutsideTouchable(true);
-        replyWindow.setAnimationStyle(R.style.AppTheme_ReplyWindowAnim);
+        replyWindow.setAnimationStyle(R.style.AppWidget_ReplyWindowAnim);
         // - END -
 
         dialog = new MaterialDialog.Builder(this)
@@ -153,9 +156,9 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
             public void failure(RetrofitError error) {
                 if (!isFinishing()) {
                     if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
-                        Toast.makeText(TopicActivity.this, R.string.topic_not_found, Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(TopicActivity.this).show(R.string.topic_not_found);
                     } else {
-                        Toast.makeText(TopicActivity.this, R.string.data_load_faild, Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(TopicActivity.this).show(R.string.data_load_faild);
                     }
                     refreshLayout.setRefreshing(false);
                 }
@@ -212,7 +215,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
         @OnClick(R.id.reply_window_btn_tool_send)
         protected void onBtnToolSendClick() {
             if (edtContent.length() == 0) {
-                Toast.makeText(TopicActivity.this, "内容不能为空", Toast.LENGTH_SHORT).show();
+                ToastUtils.with(TopicActivity.this).show("内容不能为空");
             } else {
                 String content = edtContent.getText().toString();
                 if (SettingShared.isEnableTopicSign(TopicActivity.this)) { // 添加小尾巴
@@ -237,22 +240,23 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
                     author.setAvatarUrl(LoginShared.getAvatarUrl(TopicActivity.this));
                     reply.setAuthor(author);
                     reply.setContent(content);
+                    reply.setHandleContent(FormatUtils.renderMarkdown(content)); // TODO 本地要做预渲染处理
                     reply.setCreateAt(new DateTime());
-                    reply.setUps(new ArrayList<String>());
-                    topic.getReplies().add(reply);
+                    reply.setUpList(new ArrayList<String>());
+                    topic.getReplyList().add(reply);
                     // 更新adapter并让recyclerView滑动到最底部
                     replyWindow.dismiss();
-                    if (topic.getReplies().size() == 1) { // 需要全刷新
+                    if (topic.getReplyList().size() == 1) { // 需要全刷新
                         adapter.notifyDataSetChanged();
                     } else { // 插入刷新
-                        adapter.notifyItemChanged(topic.getReplies().size() - 1);
-                        adapter.notifyItemInserted(topic.getReplies().size());
+                        adapter.notifyItemChanged(topic.getReplyList().size() - 1);
+                        adapter.notifyItemInserted(topic.getReplyList().size());
                     }
-                    recyclerView.smoothScrollToPosition(topic.getReplies().size());
+                    recyclerView.smoothScrollToPosition(topic.getReplyList().size());
                     // 清空回复框内容
                     edtContent.setText(null);
                     // 提示
-                    Toast.makeText(TopicActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                    ToastUtils.with(TopicActivity.this).show("发送成功");
                 }
 
                 @Override
@@ -261,7 +265,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
                     if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                         adapter.showAccessTokenErrorDialog();
                     } else {
-                        Toast.makeText(TopicActivity.this, R.string.network_faild, Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(TopicActivity.this).show(R.string.network_faild);
                     }
                 }
 

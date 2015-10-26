@@ -2,6 +2,7 @@ package org.cnodejs.android.md.ui.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.picasso.Picasso;
@@ -24,6 +24,8 @@ import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.ui.activity.LoginActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.widget.CNodeWebView;
+import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.Bind;
@@ -65,7 +67,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return topic == null ? 0 : topic.getReplies().size() + 1;
+        return topic == null ? 0 : topic.getReplyList().size() + 1;
     }
 
     @Override
@@ -147,8 +149,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             if (!isHeaderShow) {
                 tvTitle.setText(topic.getTitle());
                 tvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
-                tvTab.setBackgroundResource(topic.isTop() ? R.drawable.topic_tab_top_background : R.drawable.topic_tab_normal_background);
-                tvTab.setTextColor(activity.getResources().getColor(topic.isTop() ? android.R.color.white : R.color.text_color_secondary));
+                tvTab.setBackgroundDrawable(ThemeUtils.getThemeAttrDrawable(activity, topic.isTop() ? R.attr.referenceBackgroundAccent : R.attr.referenceBackgroundNormal));
+                tvTab.setTextColor(topic.isTop() ? Color.WHITE : ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
                 tvVisitCount.setText(topic.getVisitCount() + "次浏览");
                 Picasso.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
                 tvLoginName.setText(topic.getAuthor().getLoginName());
@@ -156,17 +158,17 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
 
                 // TODO 这里直接使用WebView，有性能问题
-                webReplyContent.loadRenderedContent(topic.getRenderedContent());
+                webReplyContent.loadRenderedContent(topic.getHandleContent());
 
                 isHeaderShow = true;
             }
 
-            layoutNoReply.setVisibility(topic.getReplies().size() > 0 ? View.GONE : View.VISIBLE);
+            layoutNoReply.setVisibility(topic.getReplyList().size() > 0 ? View.GONE : View.VISIBLE);
         }
 
         @OnClick(R.id.topic_item_header_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
         }
 
     }
@@ -207,24 +209,24 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         public void update(int position) {
             this.position = position;
-            reply = topic.getReplies().get(position);
+            reply = topic.getReplyList().get(position);
 
             Picasso.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             tvIndex.setText(position + 1 + "楼");
             tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
-            btnUps.setText(String.valueOf(reply.getUps().size()));
-            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUps().contains(LoginShared.getId(activity)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
-            iconDeepLine.setVisibility(position == topic.getReplies().size() - 1 ? View.GONE : View.VISIBLE);
-            iconShadowGap.setVisibility(position == topic.getReplies().size() - 1 ? View.VISIBLE : View.GONE);
+            btnUps.setText(String.valueOf(reply.getUpList().size()));
+            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
+            iconDeepLine.setVisibility(position == topic.getReplyList().size() - 1 ? View.GONE : View.VISIBLE);
+            iconShadowGap.setVisibility(position == topic.getReplyList().size() - 1 ? View.VISIBLE : View.GONE);
 
             // TODO 这里直接使用WebView，有性能问题
-            webReplyContent.loadRenderedContent(reply.getRenderedContent());
+            webReplyContent.loadRenderedContent(reply.getHandleContent());
         }
 
         @OnClick(R.id.topic_item_reply_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar);
+            UserDetailActivity.openWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar, reply.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.topic_item_reply_btn_ups)
@@ -232,7 +234,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
                 showNeedLoginDialog();
             } else if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
-                Toast.makeText(activity, "不能帮自己点赞", Toast.LENGTH_SHORT).show();
+                ToastUtils.with(activity).show("不能帮自己点赞");
             } else {
                 upTopicAsyncTask(this);
             }
@@ -280,14 +282,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             @Override
             public void success(TopicUpInfo info, Response response) {
                 if (info.getAction() == TopicUpInfo.Action.up) {
-                    reply.getUps().add(LoginShared.getId(activity));
+                    reply.getUpList().add(LoginShared.getId(activity));
                 } else if (info.getAction() == TopicUpInfo.Action.down) {
-                    reply.getUps().remove(LoginShared.getId(activity));
+                    reply.getUpList().remove(LoginShared.getId(activity));
                 }
                 // 如果位置没有变，则更新界面
                 if (position == holder.position) {
-                    holder.btnUps.setText(String.valueOf(holder.reply.getUps().size()));
-                    holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUps().contains(LoginShared.getId(activity)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
+                    holder.btnUps.setText(String.valueOf(holder.reply.getUpList().size()));
+                    holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.main_nav_ic_good_theme_24dp : R.drawable.main_nav_ic_good_grey_24dp, 0, 0, 0);
                 }
             }
 
@@ -296,7 +298,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                     showAccessTokenErrorDialog();
                 } else {
-                    Toast.makeText(activity, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                    ToastUtils.with(activity).show(R.string.network_faild);
                 }
             }
 

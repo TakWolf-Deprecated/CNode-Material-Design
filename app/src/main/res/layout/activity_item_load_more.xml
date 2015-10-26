@@ -5,7 +5,7 @@
     android:layout_height="64dp"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="?attr/widgetBackground">
 
     <com.pnikosis.materialishprogress.ProgressWheel
         android:visibility="gone"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/load_more"
-        android:textColor="@color/text_color_secondary"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="16sp" />
 
 </LinearLayout>

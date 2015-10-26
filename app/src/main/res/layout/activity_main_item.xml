@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white">
+    android:background="?attr/widgetBackground">
 
     <LinearLayout
         android:id="@+id/main_item_btn_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:background="@drawable/selectable_item_background"
+        android:background="?attr/selectableItemBackgroundGeneral"
         android:orientation="vertical">
 
         <LinearLayout
@@ -29,7 +29,7 @@
                 android:paddingRight="4dp"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
-                android:background="@drawable/topic_tab_top_background"
+                android:background="@drawable/reference_background_accent"
                 tools:text="置顶" />
 
             <TextView
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:textColor="@color/text_color_primary"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp"
                 android:singleLine="true"
                 tools:text="话题的标题" />
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="12sp"
                     android:singleLine="true"
                     tools:text="TakWolf" />
@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="12sp"
                     android:singleLine="true"
                     tools:text="创建于：2015-1-1 19:20:15" />
@@ -117,7 +117,7 @@
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:text="@string/$slash"
-                        android:textColor="@color/text_color_secondary"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
                         android:singleLine="true" />
 
@@ -125,7 +125,7 @@
                         android:id="@+id/main_item_tv_visit_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/text_color_secondary"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
                         android:singleLine="true"
                         tools:text="205" />
@@ -137,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textColor="@color/text_color_secondary"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="12sp"
                     android:singleLine="true"
                     tools:text="2分前" />
@@ -158,7 +158,7 @@
         android:scaleType="centerInside"
         android:adjustViewBounds="true" />
 
-    <View style="@style/AppTheme.DeepLine"
+    <View style="@style/AppWidget.DeepLine"
         android:layout_gravity="bottom" />
 
 </FrameLayout>

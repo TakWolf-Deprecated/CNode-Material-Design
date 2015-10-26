@@ -64,8 +64,6 @@
     <string name="current_version_$">当前版本：</string>
     <string name="open_source_url">项目开源主页</string>
     <string name="open_source_url_content">https://github.com/TakWolf/CNode-Material-Design</string>
-    <string name="about_third_party_image_upload_api">关于第三方图片上传接口</string>
-    <string name="about_third_party_image_upload_api_content">https://github.com/TakWolf/CNode-Image-Upload-API</string>
     <string name="about_cnode">关于CNode社区</string>
     <string name="about_cnode_content">https://cnodejs.org/about</string>
     <string name="about_author">关于作者</string>
@@ -83,6 +81,8 @@
     <string name="notice">通知</string>
     <string name="receive_notification">接收消息推送</string>
     <string name="receive_notification_summary">开启也没用，这功能压根没做</string>
+    <string name="theme">主题</string>
+    <string name="theme_dark">夜间模式</string>
     <string name="new_topic_draft">保存草稿</string>
     <string name="new_topic_draft_summary">没有发布的话题内容会被保存</string>
     <string name="topic_sign">话题小尾巴</string>
@@ -90,8 +90,6 @@
     <string name="modify_topic_sign">设置小尾巴</string>
     <string name="modify_topic_sign_hint">来点炫酷的，不要写太多字喔&#8230;</string>
     <string name="default_topic_sign">默认尾巴</string>
-    <string name="third_party_image_upload_api">第三方图片上传接口</string>
-    <string name="third_party_image_upload_api_summary">更多信息，请参考关于页面的相关连接</string>
 
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="send">发送</string>
@@ -109,8 +107,5 @@
 
     <string name="app_crash">程序崩溃</string>
     <string name="crash_log_tip">非常抱歉，程序运行过程中出现了一个无法避免的错误。您可以将该问题发送给开发者，此举将有助于改善应用体验。由此给您带来的诸多不便，我们深表歉意，敬请谅解。</string>
-
-    <string name="transition_name_img_avatar">imgAvatar</string>
-    <string name="transition_name_tv_title">tvTitle</string>
 
 </resources>

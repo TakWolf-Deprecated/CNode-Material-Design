@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="BaseAppTheme">
+    <!-- App Theme Light -->
+    <style name="AppThemeLight" parent="BaseAppThemeLight">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
 
-    <style name="AppTheme.Launch">
+    <style name="AppThemeLight.FitsStatusBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="AppTheme.FitsStatusBar">
+    <!-- App Theme Dark -->
+    <style name="AppThemeDark" parent="BaseAppThemeDark">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="AppThemeDark.FitsStatusBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- App Theme Launch -->
+    <style name="AppThemeLaunch" parent="BaseAppThemeLight">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
 </resources>
