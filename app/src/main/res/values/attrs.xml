@@ -3,6 +3,7 @@
 
     <attr name="widgetBackground" format="color|reference" />
     <attr name="widgetBackgroundDark" format="color|reference" />
+    <attr name="selectableItemBackgroundGeneral" format="color|reference" />
     <attr name="mainNavItemTextColor" format="color|reference" />
     <attr name="referenceBackgroundNormal" format="color|reference" />
     <attr name="referenceBackgroundAccent" format="color|reference" />

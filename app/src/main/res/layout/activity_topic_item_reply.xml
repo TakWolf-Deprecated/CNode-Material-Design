@@ -96,7 +96,7 @@
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:background="?attr/selectableItemBackground"
+                    android:background="?attr/selectableItemBackgroundGeneral"
                     tools:text="12" />
 
                 <ImageView
@@ -106,7 +106,7 @@
                     android:padding="8dp"
                     android:src="@drawable/ic_reply_grey600_24dp"
                     android:scaleType="center"
-                    android:background="?attr/selectableItemBackground" />
+                    android:background="?attr/selectableItemBackgroundGeneral" />
 
             </LinearLayout>
 
