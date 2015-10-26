@@ -63,34 +63,6 @@
     <View style="@style/AppWidget.DeepLine" />
 
     <LinearLayout
-        android:id="@+id/about_btn_about_third_party_image_upload_api"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical"
-        android:background="@drawable/selectable_item_background">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_third_party_image_upload_api"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/about_third_party_image_upload_api_content"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp"
-            android:singleLine="true" />
-
-    </LinearLayout>
-
-    <View style="@style/AppWidget.DeepLine" />
-
-    <LinearLayout
         android:id="@+id/about_btn_about_cnode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
