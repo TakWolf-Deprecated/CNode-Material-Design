@@ -36,14 +36,6 @@
 
 ![image](/art/screenshot_s03.png) ![image](/art/screenshot_s04.png)
 
-![image](/art/screenshot_s05.png) ![image](/art/screenshot_s06.png)
-
-![image](/art/screenshot_s07.png) ![image](/art/screenshot_s08.png)
-
-![image](/art/screenshot_s09.png) ![image](/art/screenshot_s10.png)
-
-![image](/art/screenshot_s11.png) ![image](/art/screenshot_s12.png)
-
 ## Libraries used ##
 
 - [Butter Knife](https://github.com/JakeWharton/butterknife)
