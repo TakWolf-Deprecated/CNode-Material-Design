@@ -3,7 +3,8 @@ package org.cnodejs.android.md.util;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.Toast;
+
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 
 public final class ShipUtils {
 
@@ -16,7 +17,7 @@ public final class ShipUtils {
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);
         } else {
-            Toast.makeText(context, "您的系统中没有安装应用商店", Toast.LENGTH_SHORT).show();
+            ToastUtils.with(context).show("您的系统中没有安装应用商店");
         }
     }
 
@@ -26,7 +27,7 @@ public final class ShipUtils {
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);
         } else {
-            Toast.makeText(context, "您的系统中没有安装浏览器", Toast.LENGTH_SHORT).show();
+            ToastUtils.with(context).show("您的系统中没有安装浏览器");
         }
     }
 
@@ -39,7 +40,7 @@ public final class ShipUtils {
             intent.putExtra(Intent.EXTRA_TEXT, text);
             context.startActivity(intent);
         } else {
-            Toast.makeText(context, "您的系统中没有安装邮件客户端", Toast.LENGTH_SHORT).show();
+            ToastUtils.with(context).show("您的系统中没有安装邮件客户端");
         }
     }
 

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.picasso.Picasso;
@@ -26,6 +25,7 @@ import org.cnodejs.android.md.ui.activity.LoginActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.widget.CNodeWebView;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.Bind;
@@ -234,7 +234,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
                 showNeedLoginDialog();
             } else if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
-                Toast.makeText(activity, "不能帮自己点赞", Toast.LENGTH_SHORT).show();
+                ToastUtils.with(activity).show("不能帮自己点赞");
             } else {
                 upTopicAsyncTask(this);
             }
@@ -298,7 +298,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                     showAccessTokenErrorDialog();
                 } else {
-                    Toast.makeText(activity, "网络访问失败，请重试", Toast.LENGTH_SHORT).show();
+                    ToastUtils.with(activity).show(R.string.network_faild);
                 }
             }
 

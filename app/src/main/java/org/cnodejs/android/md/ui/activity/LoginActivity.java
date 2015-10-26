@@ -3,7 +3,6 @@ package org.cnodejs.android.md.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -14,6 +13,7 @@ import org.cnodejs.android.md.model.entity.LoginInfo;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,7 +63,7 @@ public class LoginActivity extends BaseActivity {
                     if (dialog.isShowing()) {
                         dialog.dismiss();
                         LoginShared.login(LoginActivity.this, accessToken, loginInfo);
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                        ToastUtils.with(LoginActivity.this).show("登录成功");
                         setResult(RESULT_OK);
                         finish();
                     }
@@ -76,7 +76,7 @@ public class LoginActivity extends BaseActivity {
                         if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
                             edtAccessToken.setError(getString(R.string.access_token_error));
                         } else {
-                            Toast.makeText(LoginActivity.this, R.string.network_faild, Toast.LENGTH_SHORT).show();
+                            ToastUtils.with(LoginActivity.this).show(R.string.network_faild);
                         }
                     }
                 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.storage.SettingShared;

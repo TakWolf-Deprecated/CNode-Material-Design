@@ -2,11 +2,9 @@ package org.cnodejs.android.md.ui.widget;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -160,7 +158,7 @@ public class EditorBarHandler {
 
     private void insertPhotoApiAction() {
         // TODO
-        Toast.makeText(context, "TODO 进入图片附件页面", Toast.LENGTH_SHORT).show();
+        ToastUtils.with(context).show("TODO 进入图片附件页面");
     }
 
     private void insertPhotoDefaultAction() {
