@@ -35,9 +35,6 @@ public class SettingActivity extends BaseActivity {
     @Bind(R.id.setting_btn_modify_topic_sign)
     protected TextView btnModifyTopicSign;
 
-    @Bind(R.id.setting_switch_third_party_image_upload_api)
-    protected SwitchCompat switchThirdPartyImageUploadApi;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
@@ -52,7 +49,6 @@ public class SettingActivity extends BaseActivity {
         switchNewTopicDraft.setChecked(SettingShared.isEnableNewTopicDraft(this));
         switchTopicSign.setChecked(SettingShared.isEnableTopicSign(this));
         btnModifyTopicSign.setEnabled(SettingShared.isEnableTopicSign(this));
-        switchThirdPartyImageUploadApi.setChecked(SettingShared.isEnableThirdPartyImageUploadApi(this));
     }
 
     @OnClick(R.id.setting_btn_notification)
@@ -85,14 +81,6 @@ public class SettingActivity extends BaseActivity {
     @OnClick(R.id.setting_btn_modify_topic_sign)
     protected void onBtnModifyTopicSignClick() {
         startActivity(new Intent(this, ModifyTopicSignActivity.class));
-    }
-
-    @OnClick(R.id.setting_btn_third_party_image_upload_api)
-    protected void onBtnThirdPartyImageUploadApiClick() {
-        switchThirdPartyImageUploadApi.toggle();
-        SettingShared.setEnableThirdPartyImageUploadApi(this, switchThirdPartyImageUploadApi.isChecked());
-
-        // TODO
     }
 
 }
