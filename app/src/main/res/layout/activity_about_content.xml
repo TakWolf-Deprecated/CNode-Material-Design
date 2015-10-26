@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/selectable_item_background">
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/selectable_item_background">
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/selectable_item_background">
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="match_parent"
@@ -96,7 +96,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/selectable_item_background">
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="match_parent"
@@ -124,7 +124,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="@drawable/selectable_item_background">
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="match_parent"
@@ -154,7 +154,7 @@
         android:text="@string/open_source_license"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
-        android:background="@drawable/selectable_item_background" />
+        android:background="?attr/selectableItemBackground" />
 
     <View style="@style/AppWidget.ShadowGap" />
 

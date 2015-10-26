@@ -4,7 +4,6 @@
     <attr name="mainNavItemTextColor" format="color|reference" />
     <attr name="widgetBackground" format="color|reference" />
     <attr name="widgetBackgroundPressed" format="color|reference" />
-    <attr name="widgetBackgroundAccent" format="color|reference" />
 
     <declare-styleable name="ScrimInsetsScrollView">
         <attr name="appInsetForeground" format="reference|color" />
