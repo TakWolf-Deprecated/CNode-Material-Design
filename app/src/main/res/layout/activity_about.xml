@@ -54,10 +54,10 @@
         android:id="@+id/about_fab_open_in_app_store"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        app:layout_anchor="@+id/about_layout_appbar"
-        app:layout_anchorGravity="bottom|right|end"
         android:src="@drawable/ic_grade_white_24dp"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        app:layout_anchor="@+id/about_layout_appbar"
+        app:layout_anchorGravity="bottom|right|end" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/about_toolbar"
