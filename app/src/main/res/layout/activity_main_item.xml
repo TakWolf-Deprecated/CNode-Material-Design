@@ -29,7 +29,7 @@
                 android:paddingRight="4dp"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
-                android:background="@drawable/topic_tab_top_background"
+                android:background="@drawable/reference_background_accent"
                 tools:text="置顶" />
 
             <TextView

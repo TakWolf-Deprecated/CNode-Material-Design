@@ -8,9 +8,11 @@
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="selectableItemBackground">@drawable/selectable_item_background_light</item>
-        <item name="mainNavItemTextColor">@color/main_nav_item_text_color_light</item>
         <item name="widgetBackground">@color/selectable_item_background_light_normal</item>
-        <item name="widgetBackgroundPressed">@color/selectable_item_background_light_pressed</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_light_pressed</item>
+        <item name="mainNavItemTextColor">@color/main_nav_item_text_color_light</item>
+        <item name="referenceBackgroundNormal">@drawable/reference_background_light</item>
+        <item name="referenceBackgroundAccent">@drawable/reference_background_accent</item>
     </style>
 
     <style name="AppThemeLight" parent="BaseAppThemeLight" />
@@ -24,9 +26,11 @@
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="selectableItemBackground">@drawable/selectable_item_background_dark</item>
-        <item name="mainNavItemTextColor">@color/main_nav_item_text_color_dark</item>
         <item name="widgetBackground">@color/selectable_item_background_dark_normal</item>
-        <item name="widgetBackgroundPressed">@color/selectable_item_background_dark_pressed</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_dark_pressed</item>
+        <item name="mainNavItemTextColor">@color/main_nav_item_text_color_dark</item>
+        <item name="referenceBackgroundNormal">@drawable/reference_background_dark</item>
+        <item name="referenceBackgroundAccent">@drawable/reference_background_accent</item>
     </style>
 
     <style name="AppThemeDark" parent="BaseAppThemeDark" />
