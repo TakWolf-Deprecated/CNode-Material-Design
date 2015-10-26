@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="color_primary">#ff303030</color>
+    <color name="color_primary">#ff333333</color>
     <color name="color_primary_dark">#ff1d1d1d</color>
     <color name="color_accent">#ff80bd01</color>
 
@@ -11,7 +11,7 @@
     <color name="selectable_item_background_light_normal">@android:color/white</color>
     <color name="selectable_item_background_light_pressed">#ffeeeeee</color>
     <color name="selectable_item_background_light_accent">#ffcccccc</color>
-    <color name="selectable_item_background_dark_normal">#ff3a3a3a</color>
+    <color name="selectable_item_background_dark_normal">#ff3c3c3c</color>
     <color name="selectable_item_background_dark_pressed">#ff444444</color>
     <color name="selectable_item_background_dark_accent">#ff666666</color>
 
