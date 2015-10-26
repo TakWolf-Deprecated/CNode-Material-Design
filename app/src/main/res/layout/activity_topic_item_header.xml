@@ -114,7 +114,8 @@
                 android:id="@+id/topic_item_header_web_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp" />
+                android:layout_margin="16dp"
+                android:background="?attr/widgetBackground" />
 
         </LinearLayout>
 

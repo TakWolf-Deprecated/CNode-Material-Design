@@ -74,7 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:background="?attr/widgetBackground" />
 
     <TextView
         android:id="@+id/notification_item_tv_topic_title"
