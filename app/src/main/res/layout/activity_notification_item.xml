@@ -87,7 +87,7 @@
         android:padding="12dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp"
-        android:background="@drawable/reference_background_light"
+        android:background="?attr/referenceBackgroundNormal"
         tools:text="原话题：【深js拾遗】mbot 机器人大放送！！！！！！！先抢先得噢亲！！！！" />
 
     <View style="@style/AppWidget.DeepLine" />
