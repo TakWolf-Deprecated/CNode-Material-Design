@@ -68,6 +68,8 @@
 
 - [Material design icons](https://github.com/google/material-design-icons)
 
+- [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
+
 ## Other Clients ##
 
 ### [CNodejs Ionic app](https://github.com/lanceli/cnodejs-ionic) ###
