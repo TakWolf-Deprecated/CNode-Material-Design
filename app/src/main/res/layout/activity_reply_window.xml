@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="?attr/widgetBackground"
+            android:background="?attr/widgetBackgroundTitle"
             android:elevation="@dimen/elevation_editor">
 
             <ImageView
