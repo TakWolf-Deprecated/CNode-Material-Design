@@ -11,7 +11,7 @@ import org.cnodejs.android.md.ui.listener.CNodeWebViewClient;
 
 public class CNodeWebView extends WebView {
 
-    private static final String THEME_CSS = "file:///android_asset/cnode.css";
+    private static final String THEME_CSS_LIGHT = "file:///android_asset/cnode_light.css";
     private static final String THEME_CSS_DARK = "file:///android_asset/cnode_dark.css";
 
     private static final String HTML_0 = "" +
@@ -51,7 +51,7 @@ public class CNodeWebView extends WebView {
     }
 
     private String getThemeCSS() {
-        return SettingShared.isEnableThemeDark(getContext()) ? THEME_CSS_DARK : THEME_CSS;
+        return SettingShared.isEnableThemeDark(getContext()) ? THEME_CSS_DARK : THEME_CSS_LIGHT;
     }
 
     public void loadRenderedContent(String data) {
