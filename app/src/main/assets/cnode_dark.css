@@ -442,7 +442,7 @@ body {
   padding-bottom: 0.2em;
   margin: 0;
   font-size: 85%;
-  background-color: rgba(0,0,0,0.04);
+  background-color: #555;
   border-radius: 3px;
 }
 
@@ -657,4 +657,8 @@ body {
   z-index: 1;
   position: relative;
   border-color: #4078c0;
+}
+
+.markdown-text table {
+  color: #333;
 }
