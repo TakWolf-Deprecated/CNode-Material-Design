@@ -2,7 +2,7 @@
 
 ![Logo](/art/ic_launcher.png)
 
-> [CNode社区](https://cnodejs.org) 第三方Android客户端，原生App，Material Design风格
+> [CNode社区](https://cnodejs.org) 第三方Android客户端，原生App，Material Design风格，支持夜间模式
 
 > [https://cnodejs.org/topic/55c2f7f15965fe2c74f4791d](https://cnodejs.org/topic/55c2f7f15965fe2c74f4791d)
 
