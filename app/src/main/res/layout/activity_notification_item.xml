@@ -72,16 +72,12 @@
         android:id="@+id/notification_item_web_reply_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:background="?attr/widgetBackground" />
+        android:layout_margin="12dp" />
 
     <TextView
         android:id="@+id/notification_item_tv_topic_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

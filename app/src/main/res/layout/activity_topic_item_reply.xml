@@ -11,26 +11,32 @@
         android:background="?attr/widgetBackground"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:paddingRight="16dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/topic_item_reply_img_avatar"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/image_placeholder" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/topic_item_reply_img_avatar"
+                android:layout_toRightOf="@+id/topic_item_reply_img_avatar"
+                android:layout_toStartOf="@+id/topic_item_reply_layout_icon"
+                android:layout_toLeftOf="@+id/topic_item_reply_layout_icon"
                 android:orientation="vertical">
 
                 <TextView
@@ -80,8 +86,12 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/topic_item_reply_layout_icon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:gravity="end"
                 android:orientation="horizontal">
 
@@ -90,13 +100,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:drawableStart="@drawable/main_nav_ic_good_grey_24dp"
-                    android:drawableLeft="@drawable/main_nav_ic_good_grey_24dp"
+                    android:drawableStart="@drawable/ic_thumb_up_grey600_24dp"
+                    android:drawableLeft="@drawable/ic_thumb_up_grey600_24dp"
                     android:drawablePadding="8dp"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
                     android:gravity="center"
-                    android:background="?attr/selectableItemBackgroundGeneral"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     tools:text="12" />
 
                 <ImageView
@@ -106,21 +116,17 @@
                     android:padding="8dp"
                     android:src="@drawable/ic_reply_grey600_24dp"
                     android:scaleType="center"
-                    android:background="?attr/selectableItemBackgroundGeneral" />
+                    android:background="?attr/selectableItemBackgroundBorderless" />
 
             </LinearLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <org.cnodejs.android.md.ui.widget.CNodeWebView
             android:id="@+id/topic_item_reply_web_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:background="?attr/widgetBackground" />
+            android:layout_margin="12dp" />
 
     </LinearLayout>
 

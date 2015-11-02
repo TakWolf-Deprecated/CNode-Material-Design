@@ -11,7 +11,7 @@ import org.cnodejs.android.md.ui.listener.CNodeWebViewClient;
 
 public class CNodeWebView extends WebView {
 
-    private static final String THEME_CSS = "file:///android_asset/cnode.css";
+    private static final String THEME_CSS_LIGHT = "file:///android_asset/cnode_light.css";
     private static final String THEME_CSS_DARK = "file:///android_asset/cnode_dark.css";
 
     private static final String HTML_0 = "" +
@@ -19,13 +19,13 @@ public class CNodeWebView extends WebView {
             "<html>\n" +
             "<head>\n" +
             "<meta charset=\"UTF-8\">\n" +
-            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1\">";
+            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1\">\n";
 
-    private static final String HTML_1 = "\n" +
+    private static final String HTML_1 = "" +
             "</head>\n" +
             "<body>\n";
 
-    private static final String HTML_2 = "\n" +
+    private static final String HTML_2 = "" +
             "</body>\n" +
             "</html>";
 
@@ -51,11 +51,11 @@ public class CNodeWebView extends WebView {
     }
 
     private String getThemeCSS() {
-        return SettingShared.isEnableThemeDark(getContext()) ? THEME_CSS_DARK : THEME_CSS;
+        return SettingShared.isEnableThemeDark(getContext()) ? THEME_CSS_DARK : THEME_CSS_LIGHT;
     }
 
     public void loadRenderedContent(String data) {
-        data = HTML_0 + "\n<link type=\"text/css\" rel=\"stylesheet\" href=\"" + getThemeCSS() + "\">" + HTML_1 + data + HTML_2;
+        data = HTML_0 + "<link type=\"text/css\" rel=\"stylesheet\" href=\"" + getThemeCSS() + "\">\n" + HTML_1 + data + "\n" + HTML_2;
         loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
     }
 

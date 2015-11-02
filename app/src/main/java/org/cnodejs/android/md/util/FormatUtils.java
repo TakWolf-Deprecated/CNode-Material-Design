@@ -85,6 +85,7 @@ public final class FormatUtils {
 
     /**
      * CNode兼容性的Markdown转换
+     * 最外层包裹 <div class="markdown-text"></div> 以保证和服务端渲染同步
      */
     private static final Markdown md = new Markdown();
 
@@ -96,7 +97,7 @@ public final class FormatUtils {
         } catch (ParseException e) {
             // nothing to do
         }
-        return text;
+        return "<div class=\"markdown-text\">" + text + "</div>";
     }
 
     public static String handleHtml(String text) {

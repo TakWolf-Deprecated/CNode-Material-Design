@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="?attr/widgetBackground"
+            android:background="?attr/widgetBackgroundTitle"
             android:elevation="@dimen/elevation_editor">
 
             <ImageView
@@ -23,7 +23,7 @@
                 android:layout_height="56dp"
                 android:src="@drawable/ic_close_grey600_24dp"
                 android:scaleType="center"
-                android:background="?attr/selectableItemBackgroundGeneral" />
+                android:background="?attr/selectableItemBackground" />
 
             <View style="@style/AppWidget.DeepLine.Vertical"
                 android:layout_toEndOf="@+id/reply_window_btn_tool_close"
@@ -56,7 +56,7 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_send_grey600_24dp"
                 android:scaleType="center"
-                android:background="?attr/selectableItemBackgroundGeneral" />
+                android:background="?attr/selectableItemBackground" />
 
         </RelativeLayout>
 
