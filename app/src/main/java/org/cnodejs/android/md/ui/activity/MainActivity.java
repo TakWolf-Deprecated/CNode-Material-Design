@@ -524,7 +524,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 ToastUtils.with(this).show(R.string.press_back_again_to_exit);
                 firstBackPressedTime = secondBackPressedTime;
             } else {
-                finish();
+                super.onBackPressed();
             }
         }
     }
