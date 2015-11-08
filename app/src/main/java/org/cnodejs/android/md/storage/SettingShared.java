@@ -14,7 +14,7 @@ public final class SettingShared {
     private static final String KEY_ENABLE_TOPIC_SIGN = "topic_sign";
     private static final String KEY_TOPIC_SIGN_CONTENT = "topic_sign_content";
 
-    public static final String DEFAULT_TOPIC_SIGN_CONTENT = "来自炫酷的 [CNodeMD](https://github.com/TakWolf/CNode-Material-Design)";
+    public static final String DEFAULT_TOPIC_SIGN_CONTENT = "来自酷炫的 [CNodeMD](https://github.com/TakWolf/CNode-Material-Design)";
 
     public static boolean isEnableNotification(Context context) {
         return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_NOTIFICATION, true);
