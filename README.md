@@ -22,12 +22,6 @@
 
 - [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
-- [百度手机助手](http://shouji.baidu.com/software/item?docid=8020805)
-
-- [91应用市场](http://apk.91.com/Soft/Android/org.cnodejs.android.md.html)
-
-- [安卓市场](http://apk.hiapk.com/appinfo/org.cnodejs.android.md)
-
 - [安智市场](http://www.anzhi.com/soft_2315984.html)
 
 ## Screenshot ##
