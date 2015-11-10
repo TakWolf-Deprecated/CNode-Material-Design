@@ -20,6 +20,8 @@
 
 - [魅族Flyme应用中心](http://app.flyme.cn/apps/public/detail?package_name=org.cnodejs.android.md)
 
+- [小米应用商店](http://app.mi.com/detail/118728)
+
 - [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
 - [安智市场](http://www.anzhi.com/soft_2315984.html)
