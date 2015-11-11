@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="status_bar_adapt_height">0dp</dimen>
-
     <dimen name="elevation_editor">2dp</dimen>
     <dimen name="elevation_normal">2dp</dimen>
     <dimen name="shadow_gap_margin_fill">6dp</dimen>

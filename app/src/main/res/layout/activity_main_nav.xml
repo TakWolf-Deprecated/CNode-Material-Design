@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_gravity="start"
     android:background="?attr/widgetBackground"
     android:scrollbars="none"
@@ -29,11 +28,16 @@
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true" />
 
+            <View
+                android:id="@+id/main_nav_adapt_status_bar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
             <LinearLayout
                 android:id="@+id/main_nav_layout_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/status_bar_adapt_height"
+                android:layout_below="@+id/main_nav_adapt_status_bar"
                 android:padding="16dp"
                 android:orientation="vertical">
 
