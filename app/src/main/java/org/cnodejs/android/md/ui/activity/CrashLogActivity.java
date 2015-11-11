@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.ShipUtils;
@@ -20,7 +21,7 @@ import java.io.Writer;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class CrashLogActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
+public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
     @Bind(R.id.crash_log_toolbar)
     protected Toolbar toolbar;

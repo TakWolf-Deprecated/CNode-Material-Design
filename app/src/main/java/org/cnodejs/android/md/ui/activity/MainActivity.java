@@ -30,6 +30,7 @@ import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.ui.adapter.MainAdapter;
+import org.cnodejs.android.md.ui.base.DrawerLayoutActivity;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.ui.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
@@ -47,13 +48,20 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
+public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
     private static final int REQUEST_LOGIN = 1024;
 
     // 抽屉导航布局
     @Bind(R.id.main_drawer_layout)
     protected DrawerLayout drawerLayout;
+
+    // 状态栏
+    @Bind(R.id.main_center_adapt_status_bar)
+    protected View centerAdaptStatusBar;
+
+    @Bind(R.id.main_nav_adapt_status_bar)
+    protected View navAdaptStatusBar;
 
     // 导航部分的个人信息
     @Bind(R.id.main_nav_img_avatar)
@@ -121,6 +129,9 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        adaptStatusBar(centerAdaptStatusBar);
+        adaptStatusBar(navAdaptStatusBar);
 
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
         drawerLayout.setDrawerListener(openDrawerListener);

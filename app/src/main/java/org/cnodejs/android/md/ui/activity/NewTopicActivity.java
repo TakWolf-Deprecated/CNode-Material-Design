@@ -15,6 +15,7 @@ import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.storage.TopicShared;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
@@ -26,7 +27,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class NewTopicActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
+public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
     @Bind(R.id.new_topic_toolbar)
     protected Toolbar toolbar;

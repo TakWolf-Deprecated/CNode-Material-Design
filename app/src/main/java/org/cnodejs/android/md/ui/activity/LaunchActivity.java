@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.ui.base.BaseActivity;
 import org.cnodejs.android.md.util.HandlerUtils;
 
 public class LaunchActivity extends BaseActivity implements Runnable {

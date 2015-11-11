@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.ui.activity;
+package org.cnodejs.android.md.ui.base;
 
 import android.support.v7.app.AppCompatActivity;
 

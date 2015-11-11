@@ -18,6 +18,7 @@ import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.ui.adapter.NotificationAdapter;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
@@ -32,7 +33,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class NotificationActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class NotificationActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.notification_toolbar)
     protected Toolbar toolbar;
