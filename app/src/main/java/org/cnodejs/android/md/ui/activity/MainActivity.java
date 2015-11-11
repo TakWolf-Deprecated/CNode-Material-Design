@@ -500,15 +500,15 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         new MaterialDialog.Builder(this)
                 .content(R.string.need_login_tip)
                 .positiveText(R.string.login)
-                .negativeText(R.string.cancel)
-                .callback(new MaterialDialog.ButtonCallback() {
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
 
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), REQUEST_LOGIN);
                     }
 
                 })
+                .negativeText(R.string.cancel)
                 .show();
     }
 
