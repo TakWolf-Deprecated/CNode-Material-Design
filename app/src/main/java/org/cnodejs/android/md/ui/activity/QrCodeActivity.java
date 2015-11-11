@@ -10,12 +10,15 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class QrCodeActivity extends BaseActivity implements QRCodeReaderView.OnQRCodeReadListener {
+public class QrCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
+
+    public static final String EXTRA_QRCODE = "qrcode";
 
     @Bind(R.id.qrcode_toolbar)
     protected Toolbar toolbar;
@@ -49,7 +52,7 @@ public class QrCodeActivity extends BaseActivity implements QRCodeReaderView.OnQ
     @Override
     public void onQRCodeRead(String text, PointF[] points) {
         Intent intent = new Intent();
-        intent.putExtra("qrcode", text);
+        intent.putExtra(EXTRA_QRCODE, text);
         setResult(RESULT_OK, intent);
         finish();
     }

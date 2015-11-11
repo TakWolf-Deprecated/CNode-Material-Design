@@ -12,7 +12,7 @@ public final class LoginShared {
 
     private LoginShared() {}
 
-    private static final String TAG = LoginShared.class.getSimpleName();
+    private static final String TAG = "LoginShared";
 
     private static final String KEY_ACCESS_TOKEN = "access_token";
     private static final String KEY_ID = "id";

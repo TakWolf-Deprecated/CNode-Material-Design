@@ -6,7 +6,7 @@ public final class TopicShared {
 
     private TopicShared() {}
 
-    private static final String TAG = TopicShared.class.getSimpleName(); // TODO 这里需要添加当前用户loginName，避免用户数据混淆
+    private static final String TAG = "TopicShared"; // TODO 这里需要添加当前用户loginName，避免用户数据混淆
 
     private static final String KEY_NEW_TOPIC_TAB_POSITION = "new_topic_tab_position";
     private static final String KEY_NEW_TOPIC_TITLE = "new_topic_title";

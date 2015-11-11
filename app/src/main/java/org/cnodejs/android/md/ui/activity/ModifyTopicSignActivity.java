@@ -7,13 +7,14 @@ import android.widget.EditText;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.storage.SettingShared;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ModifyTopicSignActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
+public class ModifyTopicSignActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
     @Bind(R.id.modify_topic_sign_toolbar)
     protected Toolbar toolbar;

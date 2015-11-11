@@ -5,6 +5,7 @@
     <style name="AppThemeLaunch" parent="BaseAppThemeLight">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowBackground">@color/color_primary</item>
     </style>
 
 </resources>

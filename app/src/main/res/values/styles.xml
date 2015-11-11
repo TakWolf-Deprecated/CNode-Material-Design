@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="android:listDivider">@color/list_divider_light</item>
         <item name="widgetBackground">@color/selectable_item_background_general_light_normal</item>
         <item name="widgetBackgroundDark">@color/selectable_item_background_general_light_pressed</item>
         <item name="widgetBackgroundTitle">@android:color/white</item>
@@ -26,6 +27,7 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="android:listDivider">@color/list_divider_dark</item>
         <item name="widgetBackground">@color/selectable_item_background_general_dark_normal</item>
         <item name="widgetBackgroundDark">@color/selectable_item_background_general_dark_pressed</item>
         <item name="widgetBackgroundTitle">@color/color_primary</item>
@@ -40,7 +42,9 @@
     <style name="AppThemeDark.FitsStatusBar" />
 
     <!-- App Theme Launch -->
-    <style name="AppThemeLaunch" parent="BaseAppThemeLight" />
+    <style name="AppThemeLaunch" parent="BaseAppThemeLight">
+        <item name="android:windowBackground">@color/color_primary</item>
+    </style>
 
     <!-- App Theme Dialog -->
     <style name="AppDialog" parent="Theme.AppCompat.Light.Dialog">

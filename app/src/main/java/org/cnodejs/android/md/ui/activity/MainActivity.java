@@ -2,6 +2,7 @@ package org.cnodejs.android.md.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,6 +16,7 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
@@ -30,6 +32,7 @@ import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.ui.adapter.MainAdapter;
+import org.cnodejs.android.md.ui.base.DrawerLayoutActivity;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.ui.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
@@ -47,13 +50,20 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
+public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
     private static final int REQUEST_LOGIN = 1024;
 
     // 抽屉导航布局
     @Bind(R.id.main_drawer_layout)
     protected DrawerLayout drawerLayout;
+
+    // 状态栏
+    @Bind(R.id.main_center_adapt_status_bar)
+    protected View centerAdaptStatusBar;
+
+    @Bind(R.id.main_nav_adapt_status_bar)
+    protected View navAdaptStatusBar;
 
     // 导航部分的个人信息
     @Bind(R.id.main_nav_img_avatar)
@@ -121,6 +131,9 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        adaptStatusBar(centerAdaptStatusBar);
+        adaptStatusBar(navAdaptStatusBar);
 
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
         drawerLayout.setDrawerListener(openDrawerListener);
@@ -432,17 +445,17 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         new MaterialDialog.Builder(this)
                 .content(R.string.logout_tip)
                 .positiveText(R.string.logout)
-                .negativeText(R.string.cancel)
-                .callback(new MaterialDialog.ButtonCallback() {
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
 
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         LoginShared.logout(MainActivity.this);
                         tvBadgerNotification.setText(null); // 未读消息清空
                         updateUserInfoViews();
                     }
 
                 })
+                .negativeText(R.string.cancel)
                 .show();
     }
 
@@ -487,15 +500,15 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         new MaterialDialog.Builder(this)
                 .content(R.string.need_login_tip)
                 .positiveText(R.string.login)
-                .negativeText(R.string.cancel)
-                .callback(new MaterialDialog.ButtonCallback() {
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
 
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), REQUEST_LOGIN);
                     }
 
                 })
+                .negativeText(R.string.cancel)
                 .show();
     }
 
@@ -524,7 +537,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 ToastUtils.with(this).show(R.string.press_back_again_to_exit);
                 firstBackPressedTime = secondBackPressedTime;
             } else {
-                finish();
+                super.onBackPressed();
             }
         }
     }

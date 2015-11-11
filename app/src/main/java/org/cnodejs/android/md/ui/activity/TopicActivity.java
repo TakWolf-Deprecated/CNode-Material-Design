@@ -29,6 +29,7 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.ui.adapter.TopicAdapter;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
@@ -48,12 +49,14 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, TopicAdapter.OnAtClickListener, Toolbar.OnMenuItemClickListener {
+public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayout.OnRefreshListener, TopicAdapter.OnAtClickListener, Toolbar.OnMenuItemClickListener {
+
+    private static final String EXTRA_TOPIC_ID = "topicId";
 
     public static void open(Context context, String topicId) {
         Intent intent = new Intent(context, TopicActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("topicId", topicId);
+        intent.putExtra(EXTRA_TOPIC_ID, topicId);
         context.startActivity(intent);
     }
 
@@ -92,7 +95,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);
 
-        topicId = getIntent().getStringExtra("topicId");
+        topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.topic);
@@ -117,7 +120,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
         // - END -
 
         dialog = new MaterialDialog.Builder(this)
-                .content("正在发布中...")
+                .content(R.string.posting_$_)
                 .progress(true, 0)
                 .cancelable(false)
                 .build();
@@ -215,7 +218,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
         @OnClick(R.id.reply_window_btn_tool_send)
         protected void onBtnToolSendClick() {
             if (edtContent.length() == 0) {
-                ToastUtils.with(TopicActivity.this).show("内容不能为空");
+                ToastUtils.with(TopicActivity.this).show(R.string.content_empty_error_tip);
             } else {
                 String content = edtContent.getText().toString();
                 if (SettingShared.isEnableTopicSign(TopicActivity.this)) { // 添加小尾巴
@@ -256,7 +259,7 @@ public class TopicActivity extends BaseActivity implements SwipeRefreshLayout.On
                     // 清空回复框内容
                     edtContent.setText(null);
                     // 提示
-                    ToastUtils.with(TopicActivity.this).show("发送成功");
+                    ToastUtils.with(TopicActivity.this).show(R.string.post_success);
                 }
 
                 @Override
