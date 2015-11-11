@@ -10,6 +10,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.ui.base.BaseActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 
 import butterknife.Bind;

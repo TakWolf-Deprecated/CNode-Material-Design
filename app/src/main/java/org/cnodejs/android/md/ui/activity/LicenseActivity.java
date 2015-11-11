@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.ui.base.BaseActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.DocumentUtils;

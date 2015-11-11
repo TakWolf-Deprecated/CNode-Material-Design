@@ -11,6 +11,7 @@ import com.umeng.update.UmengUpdateAgent;
 
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.ui.base.BaseActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.ShipUtils;

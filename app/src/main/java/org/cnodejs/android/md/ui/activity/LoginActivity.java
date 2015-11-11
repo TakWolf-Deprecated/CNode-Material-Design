@@ -11,6 +11,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.LoginInfo;
 import org.cnodejs.android.md.storage.LoginShared;
+import org.cnodejs.android.md.ui.base.BaseActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.ui.widget.ToastUtils;
