@@ -6,7 +6,7 @@ public final class SettingShared {
 
     private SettingShared() {}
 
-    private static final String TAG = SettingShared.class.getSimpleName();
+    private static final String TAG = "SettingShared";
 
     private static final String KEY_ENABLE_NOTIFICATION = "notification";
     private static final String KEY_ENABLE_THEME_DARK = "theme_dark";
