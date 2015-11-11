@@ -11,7 +11,7 @@ import com.umeng.update.UmengUpdateAgent;
 
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.base.BaseActivity;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.ShipUtils;
@@ -20,7 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends StatusBarActivity {
 
     public static final String VERSION_TEXT = BuildConfig.VERSION_NAME + "-build-" + BuildConfig.VERSION_CODE;
 

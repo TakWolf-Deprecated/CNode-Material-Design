@@ -5,7 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.base.BaseActivity;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.DocumentUtils;
@@ -13,7 +13,7 @@ import org.cnodejs.android.md.util.DocumentUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class LicenseActivity extends BaseActivity {
+public class LicenseActivity extends StatusBarActivity {
 
     @Bind(R.id.license_toolbar)
     protected Toolbar toolbar;

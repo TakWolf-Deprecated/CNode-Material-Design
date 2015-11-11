@@ -11,7 +11,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.LoginInfo;
 import org.cnodejs.android.md.storage.LoginShared;
-import org.cnodejs.android.md.ui.base.BaseActivity;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.ui.widget.ToastUtils;
@@ -23,7 +23,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends StatusBarActivity {
 
     private static final int REQUEST_QRCODE = 100;
 

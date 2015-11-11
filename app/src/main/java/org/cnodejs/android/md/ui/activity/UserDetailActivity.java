@@ -27,7 +27,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.User;
-import org.cnodejs.android.md.ui.base.BaseActivity;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.fragment.UserDetailItemFragment;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
@@ -45,7 +45,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class UserDetailActivity extends BaseActivity {
+public class UserDetailActivity extends StatusBarActivity {
 
     private static final String NAME_IMG_AVATAR = "imgAvatar";
 

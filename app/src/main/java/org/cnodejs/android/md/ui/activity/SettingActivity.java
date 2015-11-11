@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.storage.SettingShared;
-import org.cnodejs.android.md.ui.base.BaseActivity;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 
@@ -16,7 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingActivity extends BaseActivity {
+public class SettingActivity extends StatusBarActivity {
 
     @Bind(R.id.setting_toolbar)
     protected Toolbar toolbar;

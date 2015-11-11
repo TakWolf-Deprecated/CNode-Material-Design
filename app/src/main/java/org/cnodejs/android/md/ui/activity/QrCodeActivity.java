@@ -10,13 +10,13 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.base.BaseActivity;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class QrCodeActivity extends BaseActivity implements QRCodeReaderView.OnQRCodeReadListener {
+public class QrCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     @Bind(R.id.qrcode_toolbar)
     protected Toolbar toolbar;

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.base.BaseActivity;
+import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.CNodeWebView;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
@@ -15,7 +15,7 @@ import org.cnodejs.android.md.util.FormatUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MarkdownPreviewActivity extends BaseActivity {
+public class MarkdownPreviewActivity extends StatusBarActivity {
 
     private static final String KEY_MARKDOWN = "markdown";
 
