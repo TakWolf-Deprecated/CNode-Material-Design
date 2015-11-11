@@ -1,10 +1,12 @@
 package org.cnodejs.android.md.ui.widget;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.cnodejs.android.md.R;
@@ -115,12 +117,11 @@ public class EditorBarHandler {
                 .title(R.string.add_link)
                 .customView(R.layout.dialog_tool_insert_link, false)
                 .positiveText(R.string.confirm)
-                .negativeText(R.string.cancel)
-                .callback(new MaterialDialog.ButtonCallback() {
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
 
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        View view = dialog.getCustomView();
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        View view = materialDialog.getCustomView();
                         EditText edtTitle = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_title);
                         EditText edtLink = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_link);
 
@@ -130,6 +131,7 @@ public class EditorBarHandler {
                     }
 
                 })
+                .negativeText(R.string.cancel)
                 .show();
     }
 
