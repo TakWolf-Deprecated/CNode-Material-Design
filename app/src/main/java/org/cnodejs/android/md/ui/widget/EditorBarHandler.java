@@ -120,8 +120,8 @@ public class EditorBarHandler {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
 
                     @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                        View view = materialDialog.getCustomView();
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        View view = dialog.getCustomView();
                         EditText edtTitle = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_title);
                         EditText edtLink = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_link);
 

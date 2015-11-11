@@ -259,7 +259,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
 
                     @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         activity.startActivity(new Intent(activity, LoginActivity.class));
                     }
 

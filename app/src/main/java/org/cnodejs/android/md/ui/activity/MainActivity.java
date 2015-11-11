@@ -448,7 +448,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
 
                     @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         LoginShared.logout(MainActivity.this);
                         tvBadgerNotification.setText(null); // 未读消息清空
                         updateUserInfoViews();
@@ -503,7 +503,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
 
                     @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), REQUEST_LOGIN);
                     }
 
