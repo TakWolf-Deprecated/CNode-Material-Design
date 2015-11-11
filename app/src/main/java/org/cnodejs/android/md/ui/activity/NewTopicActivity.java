@@ -58,7 +58,7 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
         toolbar.setOnMenuItemClickListener(this);
 
         dialog = new MaterialDialog.Builder(this)
-                .content(R.string.topic_posting)
+                .content(R.string.posting_$_)
                 .progress(true, 0)
                 .cancelable(false)
                 .build();
@@ -99,10 +99,10 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
             case R.id.action_send:
                 if (edtTitle.length() < 10) {
                     edtTitle.requestFocus();
-                    ToastUtils.with(this).show(R.string.topic_title_empty_error_tip);
+                    ToastUtils.with(this).show(R.string.title_empty_error_tip);
                 } else if (edtContent.length() == 0) {
                     edtContent.requestFocus();
-                    ToastUtils.with(this).show(R.string.topic_content_empty_error_tip);
+                    ToastUtils.with(this).show(R.string.content_empty_error_tip);
                 } else {
                     TabType tab = getTabByPosition(spnTab.getSelectedItemPosition());
                     String title = edtTitle.getText().toString().trim();
@@ -145,7 +145,7 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
                 TopicShared.clear(NewTopicActivity.this);
                 // 结束当前并提示
                 finish();
-                ToastUtils.with(NewTopicActivity.this).show(R.string.topic_post_success);
+                ToastUtils.with(NewTopicActivity.this).show(R.string.post_success);
             }
 
             @Override

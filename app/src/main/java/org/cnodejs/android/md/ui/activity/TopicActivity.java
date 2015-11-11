@@ -118,7 +118,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         // - END -
 
         dialog = new MaterialDialog.Builder(this)
-                .content("正在发布中...")
+                .content(R.string.posting_$_)
                 .progress(true, 0)
                 .cancelable(false)
                 .build();
@@ -216,7 +216,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         @OnClick(R.id.reply_window_btn_tool_send)
         protected void onBtnToolSendClick() {
             if (edtContent.length() == 0) {
-                ToastUtils.with(TopicActivity.this).show("内容不能为空");
+                ToastUtils.with(TopicActivity.this).show(R.string.content_empty_error_tip);
             } else {
                 String content = edtContent.getText().toString();
                 if (SettingShared.isEnableTopicSign(TopicActivity.this)) { // 添加小尾巴
@@ -257,7 +257,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
                     // 清空回复框内容
                     edtContent.setText(null);
                     // 提示
-                    ToastUtils.with(TopicActivity.this).show("发送成功");
+                    ToastUtils.with(TopicActivity.this).show(R.string.post_success);
                 }
 
                 @Override

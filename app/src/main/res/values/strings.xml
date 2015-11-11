@@ -44,10 +44,10 @@
 
     <string name="topic">话题</string>
     <string name="new_topic">发布话题</string>
-    <string name="topic_posting">正在发布中&#8230;</string>
-    <string name="topic_post_success">话题发布成功</string>
-    <string name="topic_title_empty_error_tip">标题要求10字以上</string>
-    <string name="topic_content_empty_error_tip">内容不能为空</string>
+    <string name="posting_$_">正在发布中&#8230;</string>
+    <string name="post_success">发布成功</string>
+    <string name="title_empty_error_tip">标题要求10字以上</string>
+    <string name="content_empty_error_tip">内容不能为空</string>
 
     <string name="user_detail">用户资料</string>
     
