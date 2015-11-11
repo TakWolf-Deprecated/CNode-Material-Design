@@ -17,11 +17,11 @@ import butterknife.ButterKnife;
 
 public class MarkdownPreviewActivity extends StatusBarActivity {
 
-    private static final String KEY_MARKDOWN = "markdown";
+    private static final String EXTRA_MARKDOWN = "markdown";
 
     public static void open(Context context, String markdown) {
         Intent intent = new Intent(context, MarkdownPreviewActivity.class);
-        intent.putExtra(KEY_MARKDOWN, markdown);
+        intent.putExtra(EXTRA_MARKDOWN, markdown);
         context.startActivity(intent);
     }
 
@@ -40,7 +40,7 @@ public class MarkdownPreviewActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        cnodeWebView.loadRenderedContent(FormatUtils.renderMarkdown(getIntent().getStringExtra(KEY_MARKDOWN)));
+        cnodeWebView.loadRenderedContent(FormatUtils.renderMarkdown(getIntent().getStringExtra(EXTRA_MARKDOWN)));
     }
 
     @Override
