@@ -46,11 +46,11 @@ public class LoginActivity extends StatusBarActivity {
     @OnClick(R.id.login_btn_login)
     protected void onBtnLoginClick() {
         if (edtAccessToken.getText().length() < 36) {
-            edtAccessToken.setError("令牌格式错误，应为32位UUID（四段分割）字符串");
+            edtAccessToken.setError(getString(R.string.access_token_format_error_tip));
         } else {
 
             final MaterialDialog dialog = new MaterialDialog.Builder(this)
-                    .content("正在登录中...")
+                    .content(R.string.logging_in_$_)
                     .progress(true, 0)
                     .build();
             dialog.show();
@@ -64,7 +64,7 @@ public class LoginActivity extends StatusBarActivity {
                     if (dialog.isShowing()) {
                         dialog.dismiss();
                         LoginShared.login(LoginActivity.this, accessToken, loginInfo);
-                        ToastUtils.with(LoginActivity.this).show("登录成功");
+                        ToastUtils.with(LoginActivity.this).show(R.string.login_success);
                         setResult(RESULT_OK);
                         finish();
                     }
@@ -96,7 +96,7 @@ public class LoginActivity extends StatusBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_QRCODE && resultCode == RESULT_OK) {
-            edtAccessToken.setText(data.getStringExtra("qrcode"));
+            edtAccessToken.setText(data.getStringExtra(QrCodeActivity.EXTRA_QRCODE));
             edtAccessToken.setSelection(edtAccessToken.length());
         }
     }

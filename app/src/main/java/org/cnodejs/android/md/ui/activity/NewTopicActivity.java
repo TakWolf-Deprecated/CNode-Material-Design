@@ -58,7 +58,7 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
         toolbar.setOnMenuItemClickListener(this);
 
         dialog = new MaterialDialog.Builder(this)
-                .content("正在发布中...")
+                .content(R.string.posting_$_)
                 .progress(true, 0)
                 .cancelable(false)
                 .build();
@@ -99,10 +99,10 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
             case R.id.action_send:
                 if (edtTitle.length() < 10) {
                     edtTitle.requestFocus();
-                    ToastUtils.with(this).show("标题要求10字以上");
+                    ToastUtils.with(this).show(R.string.title_empty_error_tip);
                 } else if (edtContent.length() == 0) {
                     edtContent.requestFocus();
-                    ToastUtils.with(this).show("内容不能为空");
+                    ToastUtils.with(this).show(R.string.content_empty_error_tip);
                 } else {
                     TabType tab = getTabByPosition(spnTab.getSelectedItemPosition());
                     String title = edtTitle.getText().toString().trim();
@@ -145,7 +145,7 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
                 TopicShared.clear(NewTopicActivity.this);
                 // 结束当前并提示
                 finish();
-                ToastUtils.with(NewTopicActivity.this).show("话题发布成功");
+                ToastUtils.with(NewTopicActivity.this).show(R.string.post_success);
             }
 
             @Override
