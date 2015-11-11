@@ -51,10 +51,12 @@ import retrofit.client.Response;
 
 public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayout.OnRefreshListener, TopicAdapter.OnAtClickListener, Toolbar.OnMenuItemClickListener {
 
+    private static final String EXTRA_TOPIC_ID = "topicId";
+
     public static void open(Context context, String topicId) {
         Intent intent = new Intent(context, TopicActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("topicId", topicId);
+        intent.putExtra(EXTRA_TOPIC_ID, topicId);
         context.startActivity(intent);
     }
 
@@ -93,7 +95,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);
 
-        topicId = getIntent().getStringExtra("topicId");
+        topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.topic);
