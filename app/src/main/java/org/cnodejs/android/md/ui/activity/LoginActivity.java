@@ -96,7 +96,7 @@ public class LoginActivity extends StatusBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_QRCODE && resultCode == RESULT_OK) {
-            edtAccessToken.setText(data.getStringExtra("qrcode"));
+            edtAccessToken.setText(data.getStringExtra(QrCodeActivity.EXTRA_QRCODE));
             edtAccessToken.setSelection(edtAccessToken.length());
         }
     }
