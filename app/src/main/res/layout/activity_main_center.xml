@@ -9,7 +9,8 @@
         android:id="@+id/main_center_adapt_status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/colorPrimaryDark" />
+        android:background="?attr/colorPrimaryDark"
+        android:elevation="@dimen/elevation_normal" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/main_toolbar"
