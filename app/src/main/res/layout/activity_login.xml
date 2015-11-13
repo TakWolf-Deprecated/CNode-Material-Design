@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/elevation_normal"
+        android:elevation="@dimen/app_bar_elevation"
         android:orientation="vertical"
         android:background="@color/color_primary">
 

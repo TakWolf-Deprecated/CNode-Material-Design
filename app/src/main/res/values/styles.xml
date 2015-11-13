@@ -76,7 +76,7 @@
 
     <style name="AppWidget.ShadowGap">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/elevation_normal</item>
+        <item name="android:layout_height">@dimen/shadow_gap_elevation</item>
         <item name="android:layout_marginBottom">@dimen/shadow_gap_margin_fill</item>
         <item name="android:background">@drawable/gap_shadow</item>
     </style>
