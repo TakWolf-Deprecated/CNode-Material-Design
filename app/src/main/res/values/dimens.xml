@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="app_bar_elevation">4dp</dimen>
+
     <dimen name="editor_bar_elevation">2dp</dimen>
 
-    <dimen name="elevation_normal">2dp</dimen>
+    <dimen name="shadow_gap_elevation">2dp</dimen>
     <dimen name="shadow_gap_margin_fill">6dp</dimen>
 
     <dimen name="button_corner_radius">2dp</dimen>
