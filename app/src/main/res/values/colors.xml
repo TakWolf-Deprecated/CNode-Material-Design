@@ -5,6 +5,9 @@
     <color name="color_primary_dark">#ff222222</color>
     <color name="color_accent">#ff80bd01</color>
 
+    <color name="window_background_light">#ffeeeeee</color>
+    <color name="window_background_dark">#ff303030</color>
+
     <color name="text_color_light">#b3ffffff</color>
     <color name="text_color_dark">#de000000</color>
     
