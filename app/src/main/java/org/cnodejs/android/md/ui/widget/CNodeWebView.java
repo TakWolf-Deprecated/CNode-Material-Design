@@ -19,7 +19,7 @@ public class CNodeWebView extends WebView {
             "<html>\n" +
             "<head>\n" +
             "<meta charset=\"UTF-8\">\n" +
-            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1\">\n";
+            "<meta name=\"viewport\" content=\"width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1\">\n";
 
     private static final String HTML_1 = "" +
             "</head>\n" +
