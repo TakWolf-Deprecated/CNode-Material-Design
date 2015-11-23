@@ -26,13 +26,13 @@
 
 - [安智市场](http://www.anzhi.com/soft_2315984.html)
 
-## Screenshot ##
+## Screenshots ##
 
 ![image](/art/screenshot_s01.png) ![image](/art/screenshot_s02.png)
 
 ![image](/art/screenshot_s03.png) ![image](/art/screenshot_s04.png)
 
-## Libraries used ##
+## Credits ##
 
 - [Butter Knife](https://github.com/JakeWharton/butterknife)
 
