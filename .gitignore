@@ -1,4 +1,4 @@
-# Created by https://www.gitignore.io/api/android,intellij,osx,windows
+# Created by https://www.gitignore.io/api/android,intellij,osx,windows,linux
 
 ### Android ###
 # Built application files
@@ -131,3 +131,13 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+
+### Linux ###
+*~
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
