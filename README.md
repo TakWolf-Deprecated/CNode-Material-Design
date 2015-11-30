@@ -84,6 +84,12 @@
 
 > PS：基于React Native实现，目前只有IOS版本，作者有计划适配Android。比较不错的技术实践，作者比较活跃。
 
+### [Vue-cnodejs](https://github.com/shinygang/Vue-cnodejs) ###
+
+> 基于vue.js重写Cnodejs.org社区的webapp，[线上访问地址](http://shinygang.github.io/cnodevue)
+
+> [https://cnodejs.org/topic/565c4473d0bc14ae279399fe](https://cnodejs.org/topic/565c4473d0bc14ae279399fe)
+
 ### [CNode-android](https://github.com/iwhys/CNode-android) ###
 
 > 这是为CNodejs社区(https://cnodejs.org/) 开发的原生Android版客户端。适用于Android4.0及以上。
