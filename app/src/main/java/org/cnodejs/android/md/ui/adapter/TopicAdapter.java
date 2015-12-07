@@ -133,7 +133,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         protected TextView tvCreateTime;
 
         @Bind(R.id.topic_item_header_web_content)
-        protected CNodeWebView webReplyContent;
+        protected CNodeWebView webContent;
 
         @Bind(R.id.topic_item_header_icon_good)
         protected View iconGood;
@@ -159,7 +159,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
 
                 // TODO 这里直接使用WebView，有性能问题
-                webReplyContent.loadRenderedContent(topic.getHandleContent());
+                webContent.loadRenderedContent(topic.getHandleContent());
 
                 isHeaderShow = true;
             }
@@ -192,7 +192,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         protected TextView btnUps;
 
         @Bind(R.id.topic_item_reply_web_content)
-        protected CNodeWebView webReplyContent;
+        protected CNodeWebView webContent;
 
         @Bind(R.id.topic_item_reply_icon_deep_line)
         protected View iconDeepLine;
@@ -222,7 +222,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             iconShadowGap.setVisibility(position == topic.getReplyList().size() - 1 ? View.VISIBLE : View.GONE);
 
             // TODO 这里直接使用WebView，有性能问题
-            webReplyContent.loadRenderedContent(reply.getHandleContent());
+            webContent.loadRenderedContent(reply.getHandleContent());
         }
 
         @OnClick(R.id.topic_item_reply_img_avatar)
