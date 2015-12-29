@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public final class DocumentUtils {
+public final class ResRawUtils {
 
-    private DocumentUtils() {}
+    private ResRawUtils() {}
 
     public static String getString(Context context, int docRawId) {
         try {

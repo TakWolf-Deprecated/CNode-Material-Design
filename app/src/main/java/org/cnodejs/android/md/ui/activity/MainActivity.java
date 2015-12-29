@@ -20,7 +20,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
-import com.umeng.update.UmengUpdateAgent;
+import com.umeng.analytics.MobclickAgent;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
@@ -39,6 +39,7 @@ import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.ui.widget.ToastUtils;
 import org.cnodejs.android.md.util.FormatUtils;
+import org.cnodejs.android.md.util.UpdateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,8 +155,8 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         RefreshLayoutUtils.initOnCreate(refreshLayout, this);
         RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
 
-        // 友盟更新
-        UmengUpdateAgent.update(this);
+        // 更新检查
+        UpdateUtils.update(this);
     }
 
     @Override
@@ -452,6 +453,8 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
                         LoginShared.logout(MainActivity.this);
                         tvBadgerNotification.setText(null); // 未读消息清空
                         updateUserInfoViews();
+
+                        MobclickAgent.onProfileSignOff(); // TODO 结束友盟账号统计
                     }
 
                 })

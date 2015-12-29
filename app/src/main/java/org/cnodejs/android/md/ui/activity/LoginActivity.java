@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.umeng.analytics.MobclickAgent;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
@@ -67,6 +68,8 @@ public class LoginActivity extends StatusBarActivity {
                         ToastUtils.with(LoginActivity.this).show(R.string.login_success);
                         setResult(RESULT_OK);
                         finish();
+
+                        MobclickAgent.onProfileSignIn(loginInfo.getLoginName()); // TODO 开始友盟账号统计
                     }
                 }
 

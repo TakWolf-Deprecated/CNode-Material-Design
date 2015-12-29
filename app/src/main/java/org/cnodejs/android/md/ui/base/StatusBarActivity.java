@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import org.cnodejs.android.md.R;
@@ -24,17 +25,17 @@ public class StatusBarActivity extends BaseActivity {
     @Override
     public void setContentView(int layoutResID) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            LinearLayout rootView = new LinearLayout(this);
+            FrameLayout rootView = new FrameLayout(this);
             rootView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            rootView.setOrientation(LinearLayout.VERTICAL);
+
+            View contentView = LayoutInflater.from(this).inflate(layoutResID, rootView, false);
+            contentView.setFitsSystemWindows(true);
+            rootView.addView(contentView);
 
             View statusBarView = new View(this);
             statusBarView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ThemeUtils.getStatusBarHeight(this)));
             statusBarView.setBackgroundColor(ThemeUtils.getThemeAttrColor(this, R.attr.colorPrimaryDark));
             rootView.addView(statusBarView);
-
-            View contentView = LayoutInflater.from(this).inflate(layoutResID, rootView, false);
-            rootView.addView(contentView);
 
             super.setContentView(rootView);
         } else {

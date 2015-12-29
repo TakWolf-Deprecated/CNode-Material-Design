@@ -26,13 +26,13 @@
 
 - [安智市场](http://www.anzhi.com/soft_2315984.html)
 
-## Screenshot ##
+## Screenshots ##
 
 ![image](/art/screenshot_s01.png) ![image](/art/screenshot_s02.png)
 
 ![image](/art/screenshot_s03.png) ![image](/art/screenshot_s04.png)
 
-## Libraries used ##
+## Credits ##
 
 - [Butter Knife](https://github.com/JakeWharton/butterknife)
 
@@ -68,7 +68,9 @@
 
 ## Other Clients ##
 
-### [CNodejs Ionic app](https://github.com/lanceli/cnodejs-ionic) ###
+**带有 ![image](/art/ic_good_project.png) 标志的是笔者推荐的项目**
+
+### [CNodejs Ionic app](https://github.com/lanceli/cnodejs-ionic) ![image](/art/ic_good_project.png) ###
 
 > [https://cnodejs.org](http://cnodejs.org) hybird mobile application powered by [Ionic Framework](http://ionicframework.com) using AngularJS and Cordova. The development stage powered by [Ionic Framework generator](https://github.com/diegonetto/generator-ionic).
 
@@ -76,7 +78,7 @@
 
 > PS：官方客户端
 
-### [Noder](https://github.com/soliury/noder-react-native) ###
+### [Noder](https://github.com/soliury/noder-react-native) ![image](/art/ic_good_project.png) ###
 
 > A new [cnodejs.org](http://cnodejs.org) mobile app powered by [React-Native](http://facebook.github.io/react-native/) and [Redux](https://github.com/gaearon/redux). 
 
@@ -84,7 +86,13 @@
 
 > PS：基于React Native实现，目前只有IOS版本，作者有计划适配Android。比较不错的技术实践，作者比较活跃。
 
-### [CNode-android](https://github.com/iwhys/CNode-android) ###
+### [Vue-cnodejs](https://github.com/shinygang/Vue-cnodejs) ![image](/art/ic_good_project.png) ###
+
+> 基于vue.js重写Cnodejs.org社区的webapp，[线上访问地址](http://shinygang.github.io/cnodevue)
+
+> [https://cnodejs.org/topic/565c4473d0bc14ae279399fe](https://cnodejs.org/topic/565c4473d0bc14ae279399fe)
+
+### [CNode-android](https://github.com/iwhys/CNode-android) ![image](/art/ic_good_project.png) ###
 
 > 这是为CNodejs社区(https://cnodejs.org/) 开发的原生Android版客户端。适用于Android4.0及以上。
 
