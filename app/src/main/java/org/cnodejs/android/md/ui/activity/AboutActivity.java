@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.umeng.update.UmengUpdateAgent;
 
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
@@ -15,6 +14,7 @@ import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.ShipUtils;
+import org.cnodejs.android.md.util.UpdateUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,7 +44,7 @@ public class AboutActivity extends StatusBarActivity {
 
     @OnClick(R.id.about_btn_version)
     protected void onBtnVersionClick() {
-        UmengUpdateAgent.forceUpdate(this);
+        UpdateUtils.forceUpdate(this);
     }
 
     @OnClick(R.id.about_btn_open_source_url)
