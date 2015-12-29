@@ -20,6 +20,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
+import com.umeng.analytics.MobclickAgent;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
@@ -452,6 +453,8 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
                         LoginShared.logout(MainActivity.this);
                         tvBadgerNotification.setText(null); // 未读消息清空
                         updateUserInfoViews();
+
+                        MobclickAgent.onProfileSignOff(); // TODO 结束友盟账号统计
                     }
 
                 })
