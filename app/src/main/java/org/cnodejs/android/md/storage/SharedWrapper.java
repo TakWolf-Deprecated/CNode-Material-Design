@@ -2,9 +2,6 @@ package org.cnodejs.android.md.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import org.cnodejs.android.md.util.codec.DES3;
@@ -15,41 +12,24 @@ import java.lang.reflect.Type;
 
 public final class SharedWrapper {
 
-    private volatile static String SECRET_KEY;
-
     public static SharedWrapper with(Context context, String name) {
-        if (TextUtils.isEmpty(SECRET_KEY)) {
-            synchronized (SharedWrapper.class) {
-                if (TextUtils.isEmpty(SECRET_KEY)) { // 获取设备ID
-                    TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-                    SECRET_KEY = tm.getDeviceId();
-                }
-                if (TextUtils.isEmpty(SECRET_KEY)) { // 获取AndroidId
-                    SECRET_KEY = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-                }
-                if (TextUtils.isEmpty(SECRET_KEY)) { // 获取序列号
-                    SECRET_KEY = Build.SERIAL;
-                }
-                if (TextUtils.isEmpty(SECRET_KEY)) { // 获取包名称-最保底的选择
-                    SECRET_KEY = context.getPackageName();
-                }
-            }
-        }
         return new SharedWrapper(context, name);
     }
 
-    private SharedPreferences sp;
+    private final Context context;
+    private final SharedPreferences sp;
 
     private SharedWrapper(Context context, String name) {
+        this.context = context.getApplicationContext();
         sp = context.getSharedPreferences(getDigestKey(name), Context.MODE_PRIVATE);
     }
 
     private String getDigestKey(String key) {
-        return Digest.SHA256.getMessage(key);
+        return Digest.MD5.getMessage(key);
     }
 
     private String getSecretKey() {
-        return Digest.SHA256.getMessage(SECRET_KEY);
+        return Digest.SHA256.getMessage(DeviceInfo.getDeviceToken(context));
     }
 
     private String get(String key, String defValue) {
@@ -115,7 +95,7 @@ public final class SharedWrapper {
         set(key, Long.toString(value));
     }
 
-    public <T> T getObject(String key, Class<T> clz) {
+    public <T>T getObject(String key, Class<T> clz) {
         String json = get(key, null);
         if (json == null) {
             return null;
@@ -128,7 +108,7 @@ public final class SharedWrapper {
         }
     }
 
-    public <T> T getObject(String key, Type typeOfT) {
+    public <T>T getObject(String key, Type typeOfT) {
         String json = get(key, null);
         if (json == null) {
             return null;
