@@ -9,20 +9,26 @@ import org.cnodejs.android.md.BuildConfig;
 
 public final class UpdateUtils {
 
-    public static final boolean FOR_GOOGLE_PLAY = false; // GooglePlay政策不允许应用存在内更新
+    private static final boolean FOR_GOOGLE_PLAY = false; // GooglePlay政策不允许应用存在内更新
 
     static {
-        UpdateConfig.setDebug(BuildConfig.DEBUG);
+        if (!FOR_GOOGLE_PLAY) {
+            UpdateConfig.setDebug(BuildConfig.DEBUG);
+        }
     }
 
     private UpdateUtils() {}
 
     public static void update(Context context) {
-        UmengUpdateAgent.update(context);
+        if (!FOR_GOOGLE_PLAY) {
+            UmengUpdateAgent.update(context);
+        }
     }
 
     public static void forceUpdate(Context context) {
-        UmengUpdateAgent.forceUpdate(context);
+        if (!FOR_GOOGLE_PLAY) {
+            UmengUpdateAgent.forceUpdate(context);
+        }
     }
 
 }
