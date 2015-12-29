@@ -18,17 +18,15 @@ public class AppController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (context == null) {
-            context = this;
+        context = this;
 
-            // 配置全局异常捕获
-            if (!BuildConfig.DEBUG) {
-                Thread.setDefaultUncaughtExceptionHandler(new AppExceptionHandler(this));
-            }
-
-            // 配置友盟更新日志
-            UpdateConfig.setDebug(BuildConfig.DEBUG);
+        // 配置全局异常捕获
+        if (!BuildConfig.DEBUG) {
+            Thread.setDefaultUncaughtExceptionHandler(new AppExceptionHandler(this));
         }
+
+        // 配置友盟更新日志
+        UpdateConfig.setDebug(BuildConfig.DEBUG);
     }
 
 }
