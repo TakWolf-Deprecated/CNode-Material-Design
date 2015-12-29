@@ -39,7 +39,7 @@ public class AboutActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        tvVersion.setText(getString(R.string.current_version_$) + VERSION_TEXT);
+        tvVersion.setText(VERSION_TEXT);
     }
 
     @OnClick(R.id.about_btn_version)
