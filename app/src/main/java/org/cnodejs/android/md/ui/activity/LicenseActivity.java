@@ -8,7 +8,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
-import org.cnodejs.android.md.util.DocumentUtils;
+import org.cnodejs.android.md.util.ResRawUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,7 +30,7 @@ public class LicenseActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        tvLicense.setText(DocumentUtils.getString(this, R.raw.open_source));
+        tvLicense.setText(ResRawUtils.getString(this, R.raw.open_source));
     }
 
 }
