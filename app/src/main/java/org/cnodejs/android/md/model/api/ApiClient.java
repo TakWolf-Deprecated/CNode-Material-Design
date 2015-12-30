@@ -11,7 +11,7 @@ public final class ApiClient {
     private ApiClient() {}
 
     public static final ApiService service = new RestAdapter.Builder()
-            .setEndpoint(Define.API_HOST)
+            .setEndpoint(ApiDefine.API_HOST)
             .setConverter(new GsonConverter(GsonWrapper.gson))
             .setRequestInterceptor(new ApiRequestInterceptor())
             .setLogLevel(BuildConfig.DEBUG ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE)

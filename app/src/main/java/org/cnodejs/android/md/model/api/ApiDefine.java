@@ -4,9 +4,9 @@ import android.os.Build;
 
 import org.cnodejs.android.md.BuildConfig;
 
-public final class Define {
+public final class ApiDefine {
 
-    private Define() {}
+    private ApiDefine() {}
 
     public static final String API_HOST = "https://cnodejs.org/api";
 
