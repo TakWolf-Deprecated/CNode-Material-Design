@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.umeng.analytics.MobclickAgent;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {

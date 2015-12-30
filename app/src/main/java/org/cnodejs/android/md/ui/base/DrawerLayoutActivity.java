@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 
-public class DrawerLayoutActivity extends BaseActivity {
+public abstract class DrawerLayoutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

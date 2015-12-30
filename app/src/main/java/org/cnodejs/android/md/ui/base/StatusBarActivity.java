@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 
-public class StatusBarActivity extends BaseActivity {
+public abstract class StatusBarActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
