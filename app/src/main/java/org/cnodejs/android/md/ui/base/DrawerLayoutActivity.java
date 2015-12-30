@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 
 public class DrawerLayoutActivity extends BaseActivity {
