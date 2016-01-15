@@ -78,6 +78,14 @@
 
 > PS：官方客户端
 
+### [CNode Swift for iOS](https://github.com/klesh/cnodejs-swift) ![image](/art/ic_good_project.png) ###
+
+> CNode.js app written in Swift for iOS
+
+> [https://cnodejs.org/topic/5698c285e5c79df62a37a13b](https://cnodejs.org/topic/5698c285e5c79df62a37a13b)
+
+> PS：基于Swift的原生iOS客户端，体验良好
+
 ### [Noder](https://github.com/soliury/noder-react-native) ![image](/art/ic_good_project.png) ###
 
 > A new [cnodejs.org](http://cnodejs.org) mobile app powered by [React-Native](http://facebook.github.io/react-native/) and [Redux](https://github.com/gaearon/redux). 
@@ -92,9 +100,9 @@
 
 > [https://cnodejs.org/topic/565c4473d0bc14ae279399fe](https://cnodejs.org/topic/565c4473d0bc14ae279399fe)
 
-### [CNode-android](https://github.com/iwhys/CNode-android) ![image](/art/ic_good_project.png) ###
+### [CNode-android](https://github.com/iwhys/CNode-android) ###
 
-> 这是为CNodejs社区(https://cnodejs.org/) 开发的原生Android版客户端。适用于Android4.0及以上。
+> 这是为CNodejs社区(https://cnodejs.org) 开发的原生Android版客户端。适用于Android4.0及以上。
 
 > [https://cnodejs.org/topic/552dbeede10460475e7f7554](https://cnodejs.org/topic/552dbeede10460475e7f7554)
 
