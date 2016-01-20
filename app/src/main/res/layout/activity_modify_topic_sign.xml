@@ -20,9 +20,10 @@
         android:id="@+id/modify_topic_sign_edt_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="@string/modify_topic_sign_hint"
         android:padding="16dp"
+        android:hint="@string/modify_topic_sign_hint"
         android:gravity="start"
+        android:textSize="16sp"
         android:background="?attr/widgetBackground" />
 
 </LinearLayout>
