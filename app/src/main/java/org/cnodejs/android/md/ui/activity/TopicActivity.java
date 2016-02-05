@@ -75,8 +75,8 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
     @Bind(R.id.topic_fab_reply)
     protected FloatingActionButton fabReply;
 
-    @Bind(R.id.topic_layout_no_data)
-    protected ViewGroup layoutNoData;
+    @Bind(R.id.topic_icon_no_data)
+    protected View iconNoData;
 
     private PopupWindow replyWindow;
     private ReplyHandler replyHandler;
@@ -150,7 +150,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
                     topic = result.getData();
                     adapter.setTopic(result.getData());
                     adapter.notifyDataSetChanged();
-                    layoutNoData.setVisibility(View.GONE);
+                    iconNoData.setVisibility(View.GONE);
                     refreshLayout.setRefreshing(false);
                 }
             }

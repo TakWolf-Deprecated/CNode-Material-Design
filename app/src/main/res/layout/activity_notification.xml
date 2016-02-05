@@ -20,29 +20,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/notification_layout_no_data"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_no_data" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/no_message"
-                android:textColor="#ffbababa"
-                android:textSize="16sp" />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/notification_icon_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/ic_no_data"
+            android:drawablePadding="16dp"
+            android:text="@string/no_message"
+            android:textColor="#ffbababa"
+            android:textSize="16sp"
+            android:gravity="center" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/notification_refresh_layout"
