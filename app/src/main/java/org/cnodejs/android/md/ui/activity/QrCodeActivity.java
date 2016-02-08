@@ -18,7 +18,7 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class QrCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
+public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     public static final String EXTRA_QRCODE = "qrcode";
 

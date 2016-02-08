@@ -92,14 +92,14 @@ public class LoginActivity extends StatusBarActivity {
 
     @OnClick(R.id.login_btn_qrcode)
     protected void onBtnQrcodeClick() {
-        startActivityForResult(new Intent(this, QrCodeActivity.class), REQUEST_QRCODE);
+        startActivityForResult(new Intent(this, QRCodeActivity.class), REQUEST_QRCODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_QRCODE && resultCode == RESULT_OK) {
-            edtAccessToken.setText(data.getStringExtra(QrCodeActivity.EXTRA_QRCODE));
+            edtAccessToken.setText(data.getStringExtra(QRCodeActivity.EXTRA_QRCODE));
             edtAccessToken.setSelection(edtAccessToken.length());
         }
     }
