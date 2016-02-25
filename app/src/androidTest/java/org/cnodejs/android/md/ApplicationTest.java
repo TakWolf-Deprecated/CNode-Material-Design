@@ -1,4 +1,4 @@
-package com.takwolf.cnode_material;
+package org.cnodejs.android.md;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -119,6 +119,34 @@
     <View style="@style/AppWidget.ShadowGap" />
 
     <LinearLayout
+        android:id="@+id/about_btn_open_in_app_store"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackgroundGeneral">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/open_in_app_store"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/open_in_app_store_content"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="14sp"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <View style="@style/AppWidget.DeepLine" />
+
+    <LinearLayout
         android:id="@+id/about_btn_advice_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -165,7 +193,7 @@
         android:padding="8dp"
         android:text="@string/about_copyright"
         android:textColor="?android:attr/textColorSecondary"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:gravity="center" />
 
 </LinearLayout>
