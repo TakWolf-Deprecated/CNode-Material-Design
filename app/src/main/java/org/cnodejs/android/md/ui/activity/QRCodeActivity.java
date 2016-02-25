@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.animation.AnimationUtils;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
@@ -16,7 +18,7 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class QrCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
+public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     public static final String EXTRA_QRCODE = "qrcode";
 
@@ -25,6 +27,9 @@ public class QrCodeActivity extends StatusBarActivity implements QRCodeReaderVie
 
     @Bind(R.id.qrcode_qr_view)
     protected QRCodeReaderView qrCodeReaderView;
+
+    @Bind(R.id.qrcode_icon_line)
+    protected View iconLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class QrCodeActivity extends StatusBarActivity implements QRCodeReaderVie
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
         qrCodeReaderView.setOnQRCodeReadListener(this);
+
+        iconLine.startAnimation(AnimationUtils.loadAnimation(this, R.anim.qrcode_line_anim));
     }
 
     @Override

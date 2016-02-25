@@ -67,6 +67,7 @@
     <string name="access_token_$">Access Token :</string>
     <string name="open_qrcode">扫描二维码</string>
     <string name="can_not_open_camera">无法打开相机</string>
+    <string name="qrcode_tip">将二维码放入扫描框内</string>
 
     <string name="current_version">当前版本</string>
     <string name="open_source_url">项目开源主页</string>
@@ -77,9 +78,8 @@
     <string name="about_author_content">http://blog.takwolf.com/about</string>
     <string name="advice_feedback">意见反馈</string>
     <string name="advice_feedback_content">向作者发送电子邮件</string>
-    <string name="open_in_app_store">为应用评分</string>
+    <string name="open_in_app_store">去商店评分</string>
     <string name="open_in_app_store_content">觉得赞就给个好评吧！</string>
-    <string name="go_to_app_store">去评分</string>
     <string name="open_source_license">开放源代码许可</string>
     <string name="about_copyright">Copyright © 2015&#8211;2016 TakWolf</string>
 

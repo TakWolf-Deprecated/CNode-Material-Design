@@ -90,7 +90,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             // 判断通知类型
             if (message.getType() == Message.Type.at) {
-                if (message.getReply() == null || TextUtils.isEmpty(message.getReply().getContent())) {
+                if (message.getReply() == null || message.getReply().isEmptyContent()) {
                     tvAction.setText("在话题中@了您");
                     webReplyContent.setVisibility(View.GONE);
                 } else {

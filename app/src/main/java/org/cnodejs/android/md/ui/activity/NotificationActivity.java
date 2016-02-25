@@ -44,8 +44,8 @@ public class NotificationActivity extends StatusBarActivity implements Toolbar.O
     @Bind(R.id.notification_recycler_view)
     protected RecyclerView recyclerView;
 
-    @Bind(R.id.notification_layout_no_data)
-    protected ViewGroup layoutNoData;
+    @Bind(R.id.notification_icon_no_data)
+    protected View iconNoData;
 
     private NotificationAdapter adapter;
     private List<Message> messageList = new ArrayList<>();
@@ -101,7 +101,7 @@ public class NotificationActivity extends StatusBarActivity implements Toolbar.O
 
     private void notifyDataSetChanged() {
         adapter.notifyDataSetChanged();
-        layoutNoData.setVisibility(messageList.size() == 0 ? View.VISIBLE : View.GONE);
+        iconNoData.setVisibility(messageList.size() == 0 ? View.VISIBLE : View.GONE);
     }
 
     private void showAccessTokenErrorDialog() {

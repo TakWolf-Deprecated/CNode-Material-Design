@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.model.entity;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.cnodejs.android.md.util.FormatUtils;
@@ -73,6 +75,10 @@ public class Reply {
 
     public void setHandleContent(String content) {
         handleContent = content;
+    }
+
+    public boolean isEmptyContent() {
+        return TextUtils.isEmpty(getContent()) || TextUtils.equals(getContent(), "<div class=\"markdown-text\"></div>");
     }
 
 }

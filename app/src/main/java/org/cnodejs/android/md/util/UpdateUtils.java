@@ -6,6 +6,7 @@ import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UpdateConfig;
 
 import org.cnodejs.android.md.BuildConfig;
+import org.cnodejs.android.md.ui.widget.ToastUtils;
 
 public final class UpdateUtils {
 
@@ -28,6 +29,8 @@ public final class UpdateUtils {
     public static void forceUpdate(Context context) {
         if (!FOR_GOOGLE_PLAY) {
             UmengUpdateAgent.forceUpdate(context);
+        } else {
+            ToastUtils.with(context).show("Google Play");
         }
     }
 
