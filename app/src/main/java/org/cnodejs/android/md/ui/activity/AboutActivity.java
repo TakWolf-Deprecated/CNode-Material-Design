@@ -62,6 +62,11 @@ public class AboutActivity extends StatusBarActivity {
         ShipUtils.openInBrowser(this, getString(R.string.about_author_content));
     }
 
+    @OnClick(R.id.about_btn_open_in_app_store)
+    protected void onBtnOpenInAppStoreClick() {
+        ShipUtils.openInAppStore(AboutActivity.this);
+    }
+
     @OnClick(R.id.about_btn_advice_feedback)
     protected void onBtnAdviceFeedbackClick() {
         ShipUtils.sendEmail(
@@ -69,24 +74,6 @@ public class AboutActivity extends StatusBarActivity {
                 "takwolf@foxmail.com",
                 "来自 CNodeMD-" + VERSION_TEXT + " 的客户端反馈",
                 "设备信息：Android " + Build.VERSION.RELEASE + " - " + Build.MANUFACTURER + " - " + Build.MODEL + "\n（如果涉及隐私请手动删除这个内容）\n\n");
-    }
-
-    @OnClick(R.id.about_fab_open_in_app_store)
-    protected void onBtnOpenInAppStoreClick() {
-        new MaterialDialog.Builder(this)
-                .title(R.string.open_in_app_store)
-                .content(R.string.open_in_app_store_content)
-                .positiveText(R.string.go_to_app_store)
-                .negativeText(R.string.cancel)
-                .callback(new MaterialDialog.ButtonCallback() {
-
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        ShipUtils.openInAppStore(AboutActivity.this);
-                    }
-
-                })
-                .show();
     }
 
     @OnClick(R.id.about_btn_open_source_license)
