@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
@@ -30,6 +29,8 @@ import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.ui.adapter.TopicAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
+import org.cnodejs.android.md.ui.dialog.DialogUtils;
+import org.cnodejs.android.md.ui.dialog.ProgressDialog;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
@@ -81,7 +82,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
     private PopupWindow replyWindow;
     private ReplyHandler replyHandler;
 
-    private MaterialDialog dialog;
+    private ProgressDialog dialog;
 
     private String topicId;
     private TopicWithReply topic;
@@ -119,11 +120,9 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         replyWindow.setAnimationStyle(R.style.AppWidget_ReplyWindowAnim);
         // - END -
 
-        dialog = new MaterialDialog.Builder(this)
-                .content(R.string.posting_$_)
-                .progress(true, 0)
-                .cancelable(false)
-                .build();
+        dialog = DialogUtils.createProgressDialog(this);
+        dialog.setMessage(R.string.posting_$_);
+        dialog.setCancelable(false);
 
         RefreshLayoutUtils.initOnCreate(refreshLayout, this);
         RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);

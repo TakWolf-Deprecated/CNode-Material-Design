@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.ui.adapter;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -12,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
@@ -24,6 +23,7 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.ui.activity.LoginActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
+import org.cnodejs.android.md.ui.dialog.DialogUtils;
 import org.cnodejs.android.md.ui.widget.CNodeWebView;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.ui.widget.ToastUtils;
@@ -253,25 +253,24 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     }
 
     public void showNeedLoginDialog() {
-        new MaterialDialog.Builder(activity)
-                .content(R.string.need_login_tip)
-                .positiveText(R.string.login)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
+        DialogUtils.createAlertDialogBuilder(activity)
+                .setMessage(R.string.need_login_tip)
+                .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    public void onClick(DialogInterface dialog, int which) {
                         activity.startActivity(new Intent(activity, LoginActivity.class));
                     }
 
                 })
-                .negativeText(R.string.cancel)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
     public void showAccessTokenErrorDialog() {
-        new MaterialDialog.Builder(activity)
-                .content(R.string.access_token_error_tip)
-                .positiveText(R.string.confirm)
+        DialogUtils.createAlertDialogBuilder(activity)
+                .setMessage(R.string.access_token_error_tip)
+                .setPositiveButton(R.string.confirm, null)
                 .show();
     }
 

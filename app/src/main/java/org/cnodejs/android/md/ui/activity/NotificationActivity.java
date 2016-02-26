@@ -8,8 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.Message;
@@ -18,6 +16,7 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.ui.adapter.NotificationAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
+import org.cnodejs.android.md.ui.dialog.DialogUtils;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
@@ -104,9 +103,9 @@ public class NotificationActivity extends StatusBarActivity implements Toolbar.O
     }
 
     private void showAccessTokenErrorDialog() {
-        new MaterialDialog.Builder(this)
-                .content(R.string.access_token_error_tip)
-                .positiveText(R.string.confirm)
+        DialogUtils.createAlertDialogBuilder(this)
+                .setMessage(R.string.access_token_error_tip)
+                .setPositiveButton(R.string.confirm, null)
                 .show();
     }
 

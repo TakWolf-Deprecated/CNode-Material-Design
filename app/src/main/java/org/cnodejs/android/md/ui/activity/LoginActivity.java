@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.umeng.analytics.MobclickAgent;
 
@@ -13,6 +12,8 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.LoginInfo;
 import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
+import org.cnodejs.android.md.ui.dialog.DialogUtils;
+import org.cnodejs.android.md.ui.dialog.ProgressDialog;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.ui.widget.ToastUtils;
@@ -50,10 +51,8 @@ public class LoginActivity extends StatusBarActivity {
             edtAccessToken.setError(getString(R.string.access_token_format_error_tip));
         } else {
 
-            final MaterialDialog dialog = new MaterialDialog.Builder(this)
-                    .content(R.string.logging_in_$_)
-                    .progress(true, 0)
-                    .build();
+            final ProgressDialog dialog = DialogUtils.createProgressDialog(this);
+            dialog.setMessage(R.string.logging_in_$_);
             dialog.show();
 
             final String accessToken = edtAccessToken.getText().toString();

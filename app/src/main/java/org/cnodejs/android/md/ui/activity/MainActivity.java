@@ -1,8 +1,8 @@
 package org.cnodejs.android.md.ui.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,8 +15,6 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
@@ -32,6 +30,7 @@ import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.ui.adapter.MainAdapter;
 import org.cnodejs.android.md.ui.base.DrawerLayoutActivity;
+import org.cnodejs.android.md.ui.dialog.DialogUtils;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.ui.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
@@ -442,13 +441,12 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
      */
     @OnClick(R.id.main_nav_btn_logout)
     protected void onBtnLogoutClick() {
-        new MaterialDialog.Builder(this)
-                .content(R.string.logout_tip)
-                .positiveText(R.string.logout)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
+        DialogUtils.createAlertDialogBuilder(this)
+                .setMessage(R.string.logout_tip)
+                .setPositiveButton(R.string.logout, new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    public void onClick(DialogInterface dialog, int which) {
                         LoginShared.logout(MainActivity.this);
                         tvBadgerNotification.setText(null); // 未读消息清空
                         updateUserInfoViews();
@@ -457,7 +455,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
                     }
 
                 })
-                .negativeText(R.string.cancel)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
@@ -499,18 +497,17 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
      * 显示需要登录对话框
      */
     private void showNeedLoginDialog() {
-        new MaterialDialog.Builder(this)
-                .content(R.string.need_login_tip)
-                .positiveText(R.string.login)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
+        DialogUtils.createAlertDialogBuilder(this)
+                .setMessage(R.string.need_login_tip)
+                .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    public void onClick(DialogInterface dialog, int which) {
                         startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), REQUEST_LOGIN);
                     }
 
                 })
-                .negativeText(R.string.cancel)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 

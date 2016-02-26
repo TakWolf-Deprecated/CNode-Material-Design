@@ -50,8 +50,6 @@
 
 - [MaterialEditText](https://github.com/rengwuxian/MaterialEditText)
 
-- [Material Dialogs](https://github.com/afollestad/material-dialogs)
-
 - [materialish-progress](https://github.com/pnikosis/materialish-progress)
 
 - [FloatingActionButton](https://github.com/makovkastar/FloatingActionButton)

@@ -10,6 +10,7 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 
+import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.storage.SettingShared;
 
 public final class ThemeUtils {
@@ -50,6 +51,10 @@ public final class ThemeUtils {
             activity.finish();
             activity.overridePendingTransition(0, 0);
         }
+    }
+
+    public static int getDialogThemeRes(Context context) {
+        return SettingShared.isEnableThemeDark(context) ? R.style.AppDialogDark : R.style.AppDialogLight;
     }
 
     public static int getStatusBarHeight(Context context) {
