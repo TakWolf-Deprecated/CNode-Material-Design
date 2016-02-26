@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;

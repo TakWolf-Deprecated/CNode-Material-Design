@@ -63,7 +63,10 @@ public class Reply {
         this.createAt = createAt;
     }
 
-    // TODO Html渲染缓存
+    /**
+     * Html渲染缓存
+     */
+
     private String handleContent = null;
 
     public String getHandleContent() {

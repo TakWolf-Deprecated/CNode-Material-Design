@@ -27,7 +27,7 @@ public class AppController extends Application {
             Thread.setDefaultUncaughtExceptionHandler(new AppExceptionHandler(this));
         }
 
-        // TODO 友盟账号统计
+        // 友盟账号统计
         if (!TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             MobclickAgent.onProfileSignIn(LoginShared.getLoginName(this));
         } else {

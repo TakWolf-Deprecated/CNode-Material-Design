@@ -62,7 +62,7 @@ public class SettingActivity extends StatusBarActivity {
     protected void onBtnThemeDarkClick() {
         switchThemeDark.toggle();
         SettingShared.setEnableThemeDark(this, switchThemeDark.isChecked());
-        // TODO 重启 Activity
+        // 重启 Activity
         ThemeUtils.recreateActivity(this);
     }
 

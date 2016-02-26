@@ -61,7 +61,7 @@ public class Topic {
     }
 
     public TabType getTab() {
-        return tab == null ? TabType.all : tab; // TODO 接口中有些话题没有Tab属性，这里保证Tab不为空
+        return tab == null ? TabType.all : tab; // 接口中有些话题没有Tab属性，这里保证Tab不为空
     }
 
     public void setTab(TabType tab) {
@@ -132,7 +132,10 @@ public class Topic {
         this.createAt = createAt;
     }
 
-    // TODO Html渲染缓存
+    /**
+     * Html渲染缓存
+     */
+
     private String handleContent = null;
 
     public String getHandleContent() {
