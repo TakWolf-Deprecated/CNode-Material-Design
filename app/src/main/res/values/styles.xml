@@ -48,14 +48,21 @@
         <item name="android:windowBackground">@color/color_primary</item>
     </style>
 
-    <!-- App Theme Dialog -->
-    <style name="AppDialog" parent="Theme.AppCompat.Light.Dialog">
+    <!-- App Dialog Light -->
+    <style name="AppDialogLight" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
-    <!-- AppWidget -->
+    <!-- App Dialog Dark -->
+    <style name="AppDialogDark" parent="Theme.AppCompat.Dialog">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+    </style>
+    
+    <!-- App Widget -->
     <style name="AppWidget" parent="Theme.AppCompat.Light" />
 
     <!-- Deep Line -->
