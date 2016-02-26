@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View style="@style/AppWidget.ShadowGap.Opposite" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/widgetBackgroundTitle"
+        android:elevation="@dimen/editor_bar_elevation">
+
+        <ImageView
+            android:id="@+id/topic_reply_window_btn_tool_close"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/ic_close_grey600_24dp"
+            android:scaleType="center"
+            android:background="?attr/selectableItemBackground" />
+
+        <View style="@style/AppWidget.DeepLine.Vertical"
+            android:layout_toEndOf="@+id/topic_reply_window_btn_tool_close"
+            android:layout_toRightOf="@+id/topic_reply_window_btn_tool_close" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/topic_reply_window_btn_tool_close"
+            android:layout_toRightOf="@+id/topic_reply_window_btn_tool_close"
+            android:layout_toStartOf="@+id/topic_reply_window_btn_tool_send"
+            android:layout_toLeftOf="@+id/topic_reply_window_btn_tool_send"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:scrollbars="none">
+
+            <include layout="@layout/activity_editor_bar" />
+
+        </HorizontalScrollView>
+
+        <View style="@style/AppWidget.DeepLine.Vertical"
+            android:layout_toStartOf="@+id/topic_reply_window_btn_tool_send"
+            android:layout_toLeftOf="@+id/topic_reply_window_btn_tool_send" />
+
+        <ImageView
+            android:id="@+id/topic_reply_window_btn_tool_send"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_send_grey600_24dp"
+            android:scaleType="center"
+            android:background="?attr/selectableItemBackground" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <EditText
+            android:id="@+id/topic_reply_window_edt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="96dp"
+            android:gravity="start"
+            android:hint="@string/new_topic_content_hint"
+            android:textSize="16sp"
+            android:minLines="20"
+            android:background="?attr/widgetBackgroundDark" />
+
+    </ScrollView>
+
+</LinearLayout>
