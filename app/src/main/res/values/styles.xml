@@ -61,7 +61,7 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
     </style>
-    
+
     <!-- App Widget -->
     <style name="AppWidget" parent="Theme.AppCompat.Light" />
 
