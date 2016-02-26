@@ -8,11 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
+import org.cnodejs.android.md.ui.dialog.DialogUtils;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 
 import butterknife.Bind;
@@ -66,13 +66,13 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
 
     @Override
     public void cameraNotFound() {
-        new MaterialDialog.Builder(this)
-                .content(R.string.can_not_open_camera)
-                .positiveText(R.string.confirm)
-                .cancelListener(new DialogInterface.OnCancelListener() {
+        DialogUtils.createAlertDialogBuilder(this)
+                .setMessage(R.string.can_not_open_camera)
+                .setPositiveButton(R.string.confirm, null)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
 
                     @Override
-                    public void onCancel(DialogInterface dialog) {
+                    public void onDismiss(DialogInterface dialog) {
                         setResult(RESULT_CANCELED);
                         finish();
                     }

@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.entity.TabType;
@@ -16,6 +14,8 @@ import org.cnodejs.android.md.storage.LoginShared;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.storage.TopicShared;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
+import org.cnodejs.android.md.ui.dialog.DialogUtils;
+import org.cnodejs.android.md.ui.dialog.ProgressDialog;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
@@ -44,7 +44,7 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
     @Bind(R.id.new_topic_edt_content)
     protected EditText edtContent;
 
-    private MaterialDialog dialog;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +57,9 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
         toolbar.inflateMenu(R.menu.new_topic);
         toolbar.setOnMenuItemClickListener(this);
 
-        dialog = new MaterialDialog.Builder(this)
-                .content(R.string.posting_$_)
-                .progress(true, 0)
-                .cancelable(false)
-                .build();
+        dialog = DialogUtils.createProgressDialog(this);
+        dialog.setMessage(R.string.posting_$_);
+        dialog.setCancelable(false);
 
         // 创建EditorBar
         new EditorBarHandler(this, editorBar, edtContent);
@@ -162,9 +160,9 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
     }
 
     private void showAccessTokenErrorDialog() {
-        new MaterialDialog.Builder(this)
-                .content(R.string.access_token_error_tip)
-                .positiveText(R.string.confirm)
+        DialogUtils.createAlertDialogBuilder(this)
+                .setMessage(R.string.access_token_error_tip)
+                .setPositiveButton(R.string.confirm, null)
                 .show();
     }
 

@@ -1,17 +1,16 @@
 package org.cnodejs.android.md.ui.widget;
 
+import android.app.Dialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
-
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.storage.SettingShared;
 import org.cnodejs.android.md.ui.activity.MarkdownPreviewActivity;
+import org.cnodejs.android.md.ui.dialog.DialogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -112,18 +111,16 @@ public class EditorBarHandler {
      */
     @OnClick(R.id.editor_bar_btn_insert_link)
     protected void onBtnInsertLinkClick() {
-        new MaterialDialog.Builder(context)
-                .iconRes(R.drawable.ic_insert_link_grey600_24dp)
-                .title(R.string.add_link)
-                .customView(R.layout.dialog_tool_insert_link, false)
-                .positiveText(R.string.confirm)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
+        DialogUtils.createAlertDialogBuilder(context)
+                .setIcon(R.drawable.ic_insert_link_grey600_24dp)
+                .setTitle(R.string.add_link)
+                .setView(R.layout.dialog_tool_insert_link)
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        View view = dialog.getCustomView();
-                        EditText edtTitle = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_title);
-                        EditText edtLink = ButterKnife.findById(view, R.id.dialog_tool_insert_link_edt_link);
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText edtTitle = ButterKnife.findById((Dialog) dialog, R.id.dialog_tool_insert_link_edt_title);
+                        EditText edtLink = ButterKnife.findById((Dialog) dialog, R.id.dialog_tool_insert_link_edt_link);
 
                         String insertText = " [" + edtTitle.getText() + "](" + edtLink.getText() + ") ";
                         edtContent.requestFocus();
@@ -131,7 +128,7 @@ public class EditorBarHandler {
                     }
 
                 })
-                .negativeText(R.string.cancel)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
