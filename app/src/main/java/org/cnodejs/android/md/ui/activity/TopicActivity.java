@@ -110,7 +110,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
 
         // 创建回复窗口
         LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.activity_reply_window, layoutRoot, false);
+        View view = inflater.inflate(R.layout.activity_topic_reply_window, layoutRoot, false);
         replyHandler = new ReplyHandler(view);
 
         replyWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
