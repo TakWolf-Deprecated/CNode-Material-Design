@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -108,11 +107,11 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     @Bind(R.id.main_recycler_view)
     protected RecyclerView recyclerView;
 
+    @Bind(R.id.main_icon_no_data)
+    protected View iconNoData;
+
     @Bind(R.id.main_fab_new_topic)
     protected FloatingActionButton fabNewTopic;
-
-    @Bind(R.id.main_layout_no_data)
-    protected ViewGroup layoutNoData;
 
     // 当前版块，默认为all
     private TabType currentTab = TabType.all;
@@ -313,7 +312,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
             adapter.setLoading(false);
         }
         adapter.notifyDataSetChanged();
-        layoutNoData.setVisibility(topicList.size() == 0 ? View.VISIBLE : View.GONE);
+        iconNoData.setVisibility(topicList.size() == 0 ? View.VISIBLE : View.GONE);
     }
 
     /**

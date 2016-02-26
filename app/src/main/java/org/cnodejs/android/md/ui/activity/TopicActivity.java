@@ -72,11 +72,11 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
     @Bind(R.id.topic_recycler_view)
     protected RecyclerView recyclerView;
 
-    @Bind(R.id.topic_fab_reply)
-    protected FloatingActionButton fabReply;
-
     @Bind(R.id.topic_icon_no_data)
     protected View iconNoData;
+
+    @Bind(R.id.topic_fab_reply)
+    protected FloatingActionButton fabReply;
 
     private PopupWindow replyWindow;
     private ReplyHandler replyHandler;
