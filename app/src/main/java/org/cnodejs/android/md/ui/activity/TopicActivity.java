@@ -195,7 +195,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         @Bind(R.id.editor_bar_layout_root)
         protected ViewGroup editorBar;
 
-        @Bind(R.id.reply_window_edt_content)
+        @Bind(R.id.topic_reply_window_edt_content)
         protected EditText edtContent;
 
         protected ReplyHandler(View view) {
@@ -206,7 +206,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         /**
          * 关闭
          */
-        @OnClick(R.id.reply_window_btn_tool_close)
+        @OnClick(R.id.topic_reply_window_btn_tool_close)
         protected void onBtnToolCloseClick() {
             replyWindow.dismiss();
         }
@@ -214,7 +214,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         /**
          * 发送
          */
-        @OnClick(R.id.reply_window_btn_tool_send)
+        @OnClick(R.id.topic_reply_window_btn_tool_send)
         protected void onBtnToolSendClick() {
             if (edtContent.length() == 0) {
                 ToastUtils.with(TopicActivity.this).show(R.string.content_empty_error_tip);

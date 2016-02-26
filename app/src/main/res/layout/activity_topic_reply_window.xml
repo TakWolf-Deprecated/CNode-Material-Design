@@ -13,7 +13,7 @@
         android:elevation="@dimen/editor_bar_elevation">
 
         <ImageView
-            android:id="@+id/reply_window_btn_tool_close"
+            android:id="@+id/topic_reply_window_btn_tool_close"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:src="@drawable/ic_close_grey600_24dp"
@@ -21,16 +21,16 @@
             android:background="?attr/selectableItemBackground" />
 
         <View style="@style/AppWidget.DeepLine.Vertical"
-            android:layout_toEndOf="@+id/reply_window_btn_tool_close"
-            android:layout_toRightOf="@+id/reply_window_btn_tool_close" />
+            android:layout_toEndOf="@+id/topic_reply_window_btn_tool_close"
+            android:layout_toRightOf="@+id/topic_reply_window_btn_tool_close" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/reply_window_btn_tool_close"
-            android:layout_toRightOf="@+id/reply_window_btn_tool_close"
-            android:layout_toStartOf="@+id/reply_window_btn_tool_send"
-            android:layout_toLeftOf="@+id/reply_window_btn_tool_send"
+            android:layout_toEndOf="@+id/topic_reply_window_btn_tool_close"
+            android:layout_toRightOf="@+id/topic_reply_window_btn_tool_close"
+            android:layout_toStartOf="@+id/topic_reply_window_btn_tool_send"
+            android:layout_toLeftOf="@+id/topic_reply_window_btn_tool_send"
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             android:scrollbars="none">
@@ -40,11 +40,11 @@
         </HorizontalScrollView>
 
         <View style="@style/AppWidget.DeepLine.Vertical"
-            android:layout_toStartOf="@+id/reply_window_btn_tool_send"
-            android:layout_toLeftOf="@+id/reply_window_btn_tool_send" />
+            android:layout_toStartOf="@+id/topic_reply_window_btn_tool_send"
+            android:layout_toLeftOf="@+id/topic_reply_window_btn_tool_send" />
 
         <ImageView
-            android:id="@+id/reply_window_btn_tool_send"
+            android:id="@+id/topic_reply_window_btn_tool_send"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_alignParentEnd="true"
@@ -60,7 +60,7 @@
         android:layout_height="300dp">
 
         <EditText
-            android:id="@+id/reply_window_edt_content"
+            android:id="@+id/topic_reply_window_edt_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
