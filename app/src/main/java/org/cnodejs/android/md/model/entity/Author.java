@@ -20,7 +20,7 @@ public class Author {
         this.loginName = loginName;
     }
 
-    public String getAvatarUrl() { // TODO 修复头像地址的历史遗留问题
+    public String getAvatarUrl() { // 修复头像地址的历史遗留问题
         return FormatUtils.getCompatAvatarUrl(avatarUrl);
     }
 

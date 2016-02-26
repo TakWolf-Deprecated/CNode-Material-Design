@@ -2,7 +2,6 @@ package org.cnodejs.android.md.util;
 
 import android.text.TextUtils;
 
-import org.cnodejs.android.md.ui.activity.SettingActivity;
 import org.joda.time.DateTime;
 import org.tautua.markdownpapers.Markdown;
 import org.tautua.markdownpapers.parser.ParseException;
@@ -101,8 +100,8 @@ public final class FormatUtils {
     }
 
     public static String handleHtml(String text) {
-        text = text.replace("<a href=\"/user/", "<a href=\"https://cnodejs.org/user/"); // TODO 替换@用户协议
-        text = text.replace("<img src=\"//", "<img src=\"https://"); // TODO 替换缩略URL引用路径为https协议
+        text = text.replace("<a href=\"/user/", "<a href=\"https://cnodejs.org/user/"); // 替换@用户协议
+        text = text.replace("<img src=\"//", "<img src=\"https://"); // 替换缩略URL引用路径为https协议
         return text;
     }
 

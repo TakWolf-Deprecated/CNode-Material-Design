@@ -243,7 +243,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
                     author.setAvatarUrl(LoginShared.getAvatarUrl(TopicActivity.this));
                     reply.setAuthor(author);
                     reply.setContent(content);
-                    reply.setHandleContent(FormatUtils.renderMarkdown(content)); // TODO 本地要做预渲染处理
+                    reply.setHandleContent(FormatUtils.renderMarkdown(content)); // 本地要做预渲染处理
                     reply.setCreateAt(new DateTime());
                     reply.setUpList(new ArrayList<String>());
                     topic.getReplyList().add(reply);

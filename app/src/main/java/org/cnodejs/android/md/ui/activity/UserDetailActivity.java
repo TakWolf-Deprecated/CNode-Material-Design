@@ -129,6 +129,12 @@ public class UserDetailActivity extends StatusBarActivity {
         getUserAsyncTask();
     }
 
+    /**
+     * Activity被销毁的时候不保存Fragment
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {}
+
     @OnClick(R.id.user_detail_img_avatar)
     protected void onBtnAvatarClick() {
         if (!loading) {

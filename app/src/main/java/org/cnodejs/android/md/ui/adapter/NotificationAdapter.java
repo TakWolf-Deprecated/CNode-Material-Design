@@ -3,7 +3,6 @@ package org.cnodejs.android.md.ui.adapter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,12 +95,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 } else {
                     tvAction.setText("在回复中@了您");
                     webReplyContent.setVisibility(View.VISIBLE);
-                    webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // TODO 这里直接使用WebView，有性能问题
+                    webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // 这里直接使用WebView，有性能问题
                 }
             } else {
                 tvAction.setText("回复了您的话题");
                 webReplyContent.setVisibility(View.VISIBLE);
-                webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // TODO 这里直接使用WebView，有性能问题
+                webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // 这里直接使用WebView，有性能问题
             }
 
             // 消息状态

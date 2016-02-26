@@ -45,7 +45,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     private LayoutInflater inflater;
     private TopicWithReply topic;
 
-    private boolean isHeaderShow = false; // TODO 当false时，渲染header，其他时间不渲染
+    private boolean isHeaderShow = false; // 当false时，渲染header，其他时间不渲染
 
     public interface OnAtClickListener {
 
@@ -158,7 +158,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 tvCreateTime.setText(activity.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeText(topic.getCreateAt()));
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
 
-                // TODO 这里直接使用WebView，有性能问题
+                // 这里直接使用WebView，有性能问题
                 webContent.loadRenderedContent(topic.getHandleContent());
 
                 isHeaderShow = true;
@@ -221,7 +221,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             iconDeepLine.setVisibility(position == topic.getReplyList().size() - 1 ? View.GONE : View.VISIBLE);
             iconShadowGap.setVisibility(position == topic.getReplyList().size() - 1 ? View.VISIBLE : View.GONE);
 
-            // TODO 这里直接使用WebView，有性能问题
+            // 这里直接使用WebView，有性能问题
             webContent.loadRenderedContent(reply.getHandleContent());
         }
 

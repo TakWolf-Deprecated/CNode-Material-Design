@@ -20,9 +20,9 @@ public class Message {
 
     private Author author;
 
-    private TopicSimple topic; // TODO 这里不含Author字段，注意
+    private TopicSimple topic; // 这里不含Author字段，注意
 
-    private Reply reply; // TODO 这里不含Author字段，注意
+    private Reply reply; // 这里不含Author字段，注意
 
     public String getId() {
         return id;
@@ -34,7 +34,7 @@ public class Message {
 
     @NonNull
     public Type getType() {
-        return type == null ? Type.reply : type; // TODO 保证返回不为空
+        return type == null ? Type.reply : type; // 保证返回不为空
     }
 
     public void setType(Type type) {

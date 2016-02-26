@@ -72,7 +72,7 @@ public class EditorBarHandler {
     }
 
     /**
-     * 有序列表 TODO 这里算法需要优化
+     * 有序列表 FIXME 这里算法需要优化
      */
     @OnClick(R.id.editor_bar_btn_format_list_numbered)
     protected void onBtnFormatListNumberedClick() {

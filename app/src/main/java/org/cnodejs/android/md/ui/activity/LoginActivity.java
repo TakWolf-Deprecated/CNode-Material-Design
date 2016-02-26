@@ -69,7 +69,7 @@ public class LoginActivity extends StatusBarActivity {
                         setResult(RESULT_OK);
                         finish();
 
-                        MobclickAgent.onProfileSignIn(loginInfo.getLoginName()); // TODO 开始友盟账号统计
+                        MobclickAgent.onProfileSignIn(loginInfo.getLoginName()); // 开始友盟账号统计
                     }
                 }
 

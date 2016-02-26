@@ -163,7 +163,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     protected void onResume() {
         super.onResume();
         getMessageCountAsyncTask();
-        // TODO 判断是否需要切换主题
+        // 判断是否需要切换主题
         if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
             ThemeUtils.recreateActivity(this);
         }
@@ -454,7 +454,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
                         tvBadgerNotification.setText(null); // 未读消息清空
                         updateUserInfoViews();
 
-                        MobclickAgent.onProfileSignOff(); // TODO 结束友盟账号统计
+                        MobclickAgent.onProfileSignOff(); // 结束友盟账号统计
                     }
 
                 })
@@ -468,7 +468,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     @OnClick(R.id.main_nav_btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
-        // TODO 重启 Activity
+        // 重启 Activity
         ThemeUtils.recreateActivity(this);
     }
 
