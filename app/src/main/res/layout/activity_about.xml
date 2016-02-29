@@ -13,7 +13,6 @@
         app:elevation="@dimen/app_bar_elevation">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/about_layout_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
@@ -58,7 +57,6 @@
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/about"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:layout_collapseMode="pin" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 </android.support.design.widget.CoordinatorLayout>
