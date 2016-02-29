@@ -13,7 +13,6 @@
         app:elevation="@dimen/app_bar_elevation">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/about_layout_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
