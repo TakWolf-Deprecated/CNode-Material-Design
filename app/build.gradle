@@ -62,6 +62,5 @@ dependencies {
 
     compile 'org.tautua.markdownpapers:markdownpapers-core:1.4.2'
 
-    compile project(':umeng-update-sdk')
     compile 'com.umeng.analytics:analytics:5.6.4'
 }
