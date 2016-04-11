@@ -6,6 +6,8 @@ import android.text.TextUtils;
 
 import com.umeng.analytics.MobclickAgent;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.storage.LoginShared;
 
@@ -21,6 +23,9 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+
+        // 初始化JodaTimeAndroid
+        JodaTimeAndroid.init(this);
 
         // 配置全局异常捕获
         if (!BuildConfig.DEBUG) {
