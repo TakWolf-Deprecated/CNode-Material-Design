@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.storage;
 
 import android.content.Context;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import org.cnodejs.android.md.util.codec.Digest;
@@ -21,13 +20,6 @@ public final class DeviceInfo {
             synchronized (DeviceInfo.class) {
                 if (TextUtils.isEmpty(deviceToken)) {
                     deviceToken = context.getSharedPreferences(Digest.MD5.getMessage(TAG), Context.MODE_PRIVATE).getString(KEY_DEVICE_TOKEN, null);
-                }
-                if (TextUtils.isEmpty(deviceToken)) {
-                    TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-                    if (!TextUtils.isEmpty(tm.getDeviceId())) {
-                        deviceToken = Digest.MD5.getMessage(tm.getDeviceId());
-                        context.getSharedPreferences(Digest.MD5.getMessage(TAG), Context.MODE_PRIVATE).edit().putString(KEY_DEVICE_TOKEN, deviceToken).apply();
-                    }
                 }
                 if (TextUtils.isEmpty(deviceToken)) {
                     deviceToken = Digest.MD5.getMessage(UUID.randomUUID().toString());
