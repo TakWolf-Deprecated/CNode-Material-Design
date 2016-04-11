@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.AttrRes;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 
@@ -17,6 +18,7 @@ public final class ThemeUtils {
 
     private ThemeUtils() {}
 
+    @ColorInt
     public static int getThemeAttrColor(@NonNull Context context, @AttrRes int attr) {
         TypedArray a = context.obtainStyledAttributes(null, new int[]{attr});
         try {
