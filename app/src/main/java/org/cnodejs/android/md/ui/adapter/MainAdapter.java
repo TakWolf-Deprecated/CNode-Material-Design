@@ -30,13 +30,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private static final int TYPE_NORMAL = 0;
     private static final int TYPE_LOAD_MORE = 1;
 
-    private Activity activity;
-    private LayoutInflater inflater;
-    private List<Topic> topicList;
+    private final Activity activity;
+    private final LayoutInflater inflater;
+    private final List<Topic> topicList;
 
     private boolean loading = false;
 
-    public MainAdapter(Activity activity, @NonNull List<Topic> topicList) {
+    public MainAdapter(@NonNull Activity activity, @NonNull List<Topic> topicList) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
         this.topicList = topicList;

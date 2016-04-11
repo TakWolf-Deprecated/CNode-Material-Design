@@ -25,11 +25,11 @@ import butterknife.OnClick;
 
 public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAdapter.ViewHolder> {
 
-    private Activity activity;
-    private LayoutInflater inflater;
-    private List<TopicSimple> topicList;
+    private final Activity activity;
+    private final LayoutInflater inflater;
+    private final List<TopicSimple> topicList;
 
-    public UserDetailItemAdapter(Activity activity, @NonNull List<TopicSimple> topicList) {
+    public UserDetailItemAdapter(@NonNull Activity activity, @NonNull List<TopicSimple> topicList) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
         this.topicList = topicList;
