@@ -12,7 +12,6 @@ import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.util.ShipUtils;
-import org.cnodejs.android.md.util.UpdateUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,7 +41,7 @@ public class AboutActivity extends StatusBarActivity {
 
     @OnClick(R.id.about_btn_version)
     protected void onBtnVersionClick() {
-        UpdateUtils.forceUpdate(this);
+        // nothing to do
     }
 
     @OnClick(R.id.about_btn_open_source_url)
