@@ -40,9 +40,11 @@
 
 - [Joda-Time](http://www.joda.org/joda-time)
 
-- [Retrofit](http://square.github.io/retrofit)
+- [Joda-Time-Android](https://github.com/dlew/joda-time-android)
 
 - [OkHttp](http://square.github.io/okhttp)
+
+- [Retrofit](http://square.github.io/retrofit)
 
 - [Picasso](http://square.github.io/picasso)
 

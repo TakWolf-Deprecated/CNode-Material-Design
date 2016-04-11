@@ -41,8 +41,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_REPLY = 1;
 
-    private Activity activity;
-    private LayoutInflater inflater;
+    private final Activity activity;
+    private final LayoutInflater inflater;
     private TopicWithReply topic;
 
     private boolean isHeaderShow = false; // 当false时，渲染header，其他时间不渲染
@@ -53,9 +53,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     }
 
-    private OnAtClickListener onAtClickListener;
+    private final OnAtClickListener onAtClickListener;
 
-    public TopicAdapter(Activity activity, @NonNull OnAtClickListener onAtClickListener) {
+    public TopicAdapter(@NonNull Activity activity, @NonNull OnAtClickListener onAtClickListener) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
         this.onAtClickListener = onAtClickListener;

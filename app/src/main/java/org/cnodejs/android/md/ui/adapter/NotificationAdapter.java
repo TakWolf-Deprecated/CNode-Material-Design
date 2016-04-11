@@ -27,11 +27,11 @@ import butterknife.OnClick;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
 
-    private Activity activity;
-    private LayoutInflater inflater;
-    private List<Message> messageList;
+    private final Activity activity;
+    private final LayoutInflater inflater;
+    private final List<Message> messageList;
 
-    public NotificationAdapter(Activity activity, @NonNull List<Message> messageList) {
+    public NotificationAdapter(@NonNull Activity activity, @NonNull List<Message> messageList) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
         this.messageList = messageList;
