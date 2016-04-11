@@ -40,11 +40,9 @@ http://www.joda.org/joda-time
 Licensed under the Apache License, Version 2.0 (the "License").
 
 ====================================
-Retrofit
+Joda-Time-Android
 ====================================
-http://square.github.io/retrofit
-
-Copyright 2013 Square, Inc.
+https://github.com/dlew/joda-time-android
 
 Licensed under the Apache License, Version 2.0 (the "License").
 
@@ -54,6 +52,15 @@ OkHttp
 http://square.github.io/okhttp
 
 Copyright 2014 Square, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License").
+
+====================================
+Retrofit
+====================================
+http://square.github.io/retrofit
+
+Copyright 2013 Square, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License").
 
