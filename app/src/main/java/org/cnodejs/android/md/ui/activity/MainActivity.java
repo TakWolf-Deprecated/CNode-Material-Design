@@ -37,7 +37,6 @@ import org.cnodejs.android.md.ui.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.ui.widget.ThemeUtils;
 import org.cnodejs.android.md.ui.widget.ToastUtils;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.UpdateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,9 +151,6 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
 
         RefreshLayoutUtils.initOnCreate(refreshLayout, this);
         RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
-
-        // 更新检查
-        UpdateUtils.update(this);
     }
 
     @Override
