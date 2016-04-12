@@ -1,15 +1,45 @@
 package org.cnodejs.android.md.model.entity;
 
-public class Result<T> {
+import com.google.gson.annotations.SerializedName;
 
-    private T data;
+public class Result {
 
-    public T getData() {
-        return data;
+    private boolean success;
+
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public static class Data<T> extends Result {
+
+        private T data;
+
+        public T getData() {
+            return data;
+        }
+
+    }
+
+    public static class CreateTopic extends Result {
+
+        @SerializedName("topic_id")
+        private String topicId;
+
+        public String getTopicId() {
+            return topicId;
+        }
+
+    }
+
+    public static class ReplyTopic extends Result {
+
+        @SerializedName("reply_id")
+        private String replyId;
+
+        public String getReplyId() {
+            return replyId;
+        }
+
     }
 
 }

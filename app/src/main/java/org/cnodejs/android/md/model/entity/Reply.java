@@ -20,6 +20,9 @@ public class Reply {
     @SerializedName("ups")
     private List<String> upList;
 
+    @SerializedName("reply_id")
+    private String replyId;
+
     @SerializedName("create_at")
     private DateTime createAt;
 
@@ -53,6 +56,14 @@ public class Reply {
 
     public void setUpList(List<String> upList) {
         this.upList = upList;
+    }
+
+    public String getReplyId() {
+        return replyId;
+    }
+
+    public void setReplyId(String replyId) {
+        this.replyId = replyId;
     }
 
     public DateTime getCreateAt() {

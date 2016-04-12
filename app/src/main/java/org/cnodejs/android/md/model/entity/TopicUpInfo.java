@@ -1,6 +1,6 @@
 package org.cnodejs.android.md.model.entity;
 
-public class TopicUpInfo {
+public class TopicUpInfo extends Result {
 
     public enum Action {
         up,
@@ -10,11 +10,7 @@ public class TopicUpInfo {
     private Action action;
 
     public Action getAction() {
-        return action;
-    }
-
-    public void setAction(Action action) {
-        this.action = action;
+        return action == null ? Action.down : action;
     }
 
 }

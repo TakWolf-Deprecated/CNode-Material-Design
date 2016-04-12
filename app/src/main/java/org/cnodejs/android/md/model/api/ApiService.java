@@ -10,15 +10,14 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.entity.User;
 
 import java.util.List;
-import java.util.Map;
 
-import retrofit.Callback;
-import retrofit.http.Field;
-import retrofit.http.FormUrlEncoded;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -26,89 +25,107 @@ public interface ApiService {
     // 主题
     //=====
 
-    @GET("/v1/topics")
-    void getTopicList(
+    @GET("topics")
+    Call<Result.Data<List<Topic>>> getTopicList(
             @Query("tab") TabType tab,
             @Query("page") Integer page,
             @Query("limit") Integer limit,
-            @Query("mdrender") Boolean mdrender,
-            Callback<Result<List<Topic>>> callback
+            @Query("mdrender") Boolean mdrender
     );
 
-    @GET("/v1/topic/{id}")
-    void getTopic(
-            @Path("id") String id,
-            @Query("mdrender") Boolean mdrender,
-            Callback<Result<TopicWithReply>> callback
+    @GET("topic/{topicId}")
+    Call<Result.Data<TopicWithReply>> getTopic(
+            @Query("accesstoken") String accessToken,
+            @Path("topicId") String topicId,
+            @Query("mdrender") Boolean mdrender
     );
-
+    
+    @POST("topics")
     @FormUrlEncoded
-    @POST("/v1/topics")
-    void newTopic(
+    Call<Result.CreateTopic> createTopic(
             @Field("accesstoken") String accessToken,
             @Field("tab") TabType tab,
             @Field("title") String title,
-            @Field("content") String content,
-            Callback<Void> callback
+            @Field("content") String content
     );
 
+    //=========
+    // 主题收藏
+    //=========
+
+    @POST("topic_collect/collect")
     @FormUrlEncoded
-    @POST("/v1/topic/{topicId}/replies")
-    void replyTopic(
+    Call<Result> collectTopic(
+            @Field("accesstoken") String accessToken,
+            @Field("topic_id") String topicId
+    );
+
+    @POST("topic_collect/de_collect")
+    @FormUrlEncoded
+    Call<Result> decollectTopic(
+            @Field("accesstoken") String accessToken,
+            @Field("topic_id") String topicId
+    );
+
+    @GET("topic_collect/{loginName}")
+    Call<Result.Data<List<Topic>>> getCollectTopicList(
+            @Path("loginName") String loginName
+    );
+
+    //=====
+    // 评论
+    //=====
+
+    @POST("topic/{topicId}/replies")
+    @FormUrlEncoded
+    Call<Result.ReplyTopic> replyTopic(
             @Field("accesstoken") String accessToken,
             @Path("topicId") String topicId,
             @Field("content") String content,
-            @Field("reply_id") String replyId,
-            Callback<Map<String, String>> callback
+            @Field("reply_id") String replyId
     );
 
+    @POST("reply/{replyId}/ups")
     @FormUrlEncoded
-    @POST("/v1/reply/{replyId}/ups")
-    void upTopic(
+    Call<TopicUpInfo> upTopic(
             @Field("accesstoken") String accessToken,
-            @Path("replyId") String replyId,
-            Callback<TopicUpInfo> callback
+            @Path("replyId") String replyId
     );
 
     //=====
     // 用户
     //=====
 
-    @GET("/v1/user/{loginName}")
-    void getUser(
-            @Path("loginName") String loginName,
-            Callback<Result<User>> callback
+    @GET("user/{loginName}")
+    Call<Result.Data<User>> getUser(
+            @Path("loginName") String loginName
     );
 
+    @POST("accesstoken")
     @FormUrlEncoded
-    @POST("/v1/accesstoken")
-    void accessToken(
-            @Field("accesstoken") String accessToken,
-            Callback<LoginInfo> callback
+    Call<LoginInfo> accessToken(
+            @Field("accesstoken") String accessToken
     );
 
     //=========
     // 消息通知
     //=========
 
-    @GET("/v1/message/count")
-    void getMessageCount(
-            @Query("accesstoken") String accessToken,
-            Callback<Result<Integer>> callback
+    @GET("message/count")
+    Call<Result.Data<Integer>> getMessageCount(
+            @Query("accesstoken") String accessToken
     );
 
-    @GET("/v1/messages")
-    void getMessages(
+    @GET("messages")
+    Call<Result.Data<Notification>> getMessages(
             @Query("accesstoken") String accessToken,
-            @Query("mdrender") Boolean mdrender,
-            Callback<Result<Notification>> callback
+            @Query("mdrender") Boolean mdrender
     );
 
+    @POST("message/mark_all")
     @FormUrlEncoded
-    @POST("/v1/message/mark_all")
-    void markAllMessageRead(
-            @Field("accesstoken") String accessToken,
-            Callback<Void> callback
+    Call<Result> markAllMessageRead(
+            @Field("accesstoken") String accessToken
     );
 
 }

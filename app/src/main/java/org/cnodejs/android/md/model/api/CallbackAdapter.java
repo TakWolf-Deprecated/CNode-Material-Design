@@ -1,15 +1,15 @@
 package org.cnodejs.android.md.model.api;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CallbackAdapter<T> implements Callback<T> {
 
     @Override
-    public void success(T t, Response response) {}
+    public void onResponse(Call<T> call, Response<T> response) {}
 
     @Override
-    public void failure(RetrofitError error) {}
+    public void onFailure(Call<T> call, Throwable t) {}
 
 }

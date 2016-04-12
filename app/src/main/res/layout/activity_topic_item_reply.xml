@@ -122,7 +122,7 @@
 
         </RelativeLayout>
 
-        <org.cnodejs.android.md.ui.widget.CNodeWebView
+        <org.cnodejs.android.md.logic.widget.CNodeWebView
             android:id="@+id/topic_item_reply_web_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
