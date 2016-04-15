@@ -2,14 +2,10 @@ package org.cnodejs.android.md.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.text.TextUtils;
-
-import com.umeng.analytics.MobclickAgent;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.cnodejs.android.md.BuildConfig;
-import org.cnodejs.android.md.model.storage.LoginShared;
 
 public class AppController extends Application {
 
