@@ -26,7 +26,7 @@ public final class ResUtils {
             reader.close();
             return sb.toString();
         } catch (IOException e) {
-            return "文档读取失败。";
+            return "";
         }
     }
 
