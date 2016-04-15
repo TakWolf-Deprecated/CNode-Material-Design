@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -34,6 +35,26 @@ public class LoginActivity extends StatusBarActivity {
 
     public static void startForResult(@NonNull Activity activity) {
         activity.startActivityForResult(new Intent(activity, LoginActivity.class), REQUEST_LOGIN);
+    }
+
+    public static boolean startForResultWithAccessTokenCheck(@NonNull final Activity activity) {
+        if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
+            DialogUtils.createAlertDialogBuilder(activity)
+                    .setMessage(R.string.need_login_tip)
+                    .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startForResult(activity);
+                        }
+
+                    })
+                    .setNegativeButton(R.string.cancel, null)
+                    .show();
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Bind(R.id.login_toolbar)
