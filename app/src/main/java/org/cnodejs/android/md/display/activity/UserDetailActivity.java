@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.display.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,14 +23,15 @@ import com.pnikosis.materialishprogress.ProgressWheel;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.entity.Result;
-import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.fragment.UserDetailItemFragment;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
+import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.api.CallbackAdapter;
+import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
@@ -41,28 +41,27 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class UserDetailActivity extends StatusBarActivity {
 
+    private static final String EXTRA_LOGIN_NAME = "loginName";
+    private static final String EXTRA_AVATAR_URL = "avatarUrl";
     private static final String NAME_IMG_AVATAR = "imgAvatar";
 
-    public static void openWithTransitionAnimation(Activity activity, String loginName, ImageView imgAvatar, String avatarUrl) {
+    public static void startWithTransitionAnimation(@NonNull Activity activity, String loginName, @NonNull ImageView imgAvatar, String avatarUrl) {
         Intent intent = new Intent(activity, UserDetailActivity.class);
-        intent.putExtra("loginName", loginName);
-        intent.putExtra("avatarUrl", avatarUrl);
-
+        intent.putExtra(EXTRA_LOGIN_NAME, loginName);
+        intent.putExtra(EXTRA_AVATAR_URL, avatarUrl);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imgAvatar, NAME_IMG_AVATAR);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
-    public static void open(Context context, String loginName) {
-        Intent intent = new Intent(context, UserDetailActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("loginName", loginName);
-        context.startActivity(intent);
+    public static void start(@NonNull Activity activity, String loginName) {
+        Intent intent = new Intent(activity, UserDetailActivity.class);
+        intent.putExtra(EXTRA_LOGIN_NAME, loginName);
+        activity.startActivity(intent);
     }
 
     @Bind(R.id.user_detail_toolbar)
@@ -116,12 +115,12 @@ public class UserDetailActivity extends StatusBarActivity {
         viewPager.setOffscreenPageLimit(adapter.getCount());
         tabLayout.setupWithViewPager(viewPager);
 
-        loginName = getIntent().getStringExtra("loginName");
+        loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
         if (!TextUtils.isEmpty(loginName)) {
             tvLoginName.setText(loginName);
         }
 
-        String avatarUrl = getIntent().getStringExtra("avatarUrl");
+        String avatarUrl = getIntent().getStringExtra(EXTRA_AVATAR_URL);
         if (!TextUtils.isEmpty(avatarUrl)) {
             Picasso.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).into(imgAvatar);
         }
@@ -146,7 +145,8 @@ public class UserDetailActivity extends StatusBarActivity {
         loading = true;
         startLoadingTime = System.currentTimeMillis();
         progressWheel.spin();
-        ApiClient.service.getUser(loginName, new Callback<Result<User>>() {
+        Call<Result.Data<User>> call = ApiClient.service.getUser(loginName);
+        call.enqueue(new CallbackAdapter<Result.Data<User>>() {
 
             private long getPostTime() {
                 long postTime = 1000 - (System.currentTimeMillis() - startLoadingTime);
@@ -158,7 +158,7 @@ public class UserDetailActivity extends StatusBarActivity {
             }
 
             @Override
-            public void success(final Result<User> result, Response response) {
+            public boolean onResultOk(Response<Result.Data<User>> response, final Result.Data<User> result) {
                 HandlerUtils.postDelayed(new Runnable() {
 
                     @Override
@@ -167,32 +167,54 @@ public class UserDetailActivity extends StatusBarActivity {
                             updateUserInfoViews(result.getData());
                             adapter.update(result.getData());
                             githubUsername = result.getData().getGithubUsername();
-                            progressWheel.setProgress(0);
-                            loading = false;
+                            onFinish();
                         }
                     }
 
                 }, getPostTime());
+                return true;
             }
 
             @Override
-            public void failure(final RetrofitError error) {
+            public boolean onResultError(final Response<Result.Data<User>> response, final Result.Error error) {
                 HandlerUtils.postDelayed(new Runnable() {
 
                     @Override
                     public void run() {
                         if (!isFinishing()) {
-                            if (error.getResponse() != null && error.getResponse().getStatus() == 404) {
-                                ToastUtils.with(UserDetailActivity.this).show(R.string.user_not_found);
+                            if (response.code() == 404) {
+                                ToastUtils.with(UserDetailActivity.this).show(error.getErrorMessage());
                             } else {
                                 ToastUtils.with(UserDetailActivity.this).show(R.string.data_load_faild_and_click_avatar_to_reload);
                             }
-                            progressWheel.setProgress(0);
-                            loading = false;
+                            onFinish();
                         }
                     }
 
                 }, getPostTime());
+                return true;
+            }
+
+            @Override
+            public boolean onCallException(Throwable t, Result.Error error) {
+                HandlerUtils.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (!isFinishing()) {
+                            ToastUtils.with(UserDetailActivity.this).show(R.string.data_load_faild_and_click_avatar_to_reload);
+                            onFinish();
+                        }
+                    }
+
+                }, getPostTime());
+                return true;
+            }
+
+            @Override
+            public void onFinish() {
+                progressWheel.setProgress(0);
+                loading = false;
             }
 
         });

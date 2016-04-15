@@ -52,7 +52,7 @@
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/main_fab_new_topic"
+            android:id="@+id/main_fab_create_topic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

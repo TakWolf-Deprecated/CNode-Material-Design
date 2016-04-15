@@ -255,28 +255,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     }
 
-    public void showNeedLoginDialog() {
-        DialogUtils.createAlertDialogBuilder(activity)
-                .setMessage(R.string.need_login_tip)
-                .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        activity.startActivity(new Intent(activity, LoginActivity.class));
-                    }
-
-                })
-                .setNegativeButton(R.string.cancel, null)
-                .show();
-    }
-
-    public void showAccessTokenErrorDialog() {
-        DialogUtils.createAlertDialogBuilder(activity)
-                .setMessage(R.string.access_token_error_tip)
-                .setPositiveButton(R.string.confirm, null)
-                .show();
-    }
-
     private void upTopicAsyncTask(final ReplyViewHolder holder) {
         final int position = holder.position; // 标记当时的位置信息
         final Reply reply = holder.reply; // 保存当时的回复对象

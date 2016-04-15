@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
-import com.umeng.analytics.MobclickAgent;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.MainAdapter;
@@ -48,8 +47,6 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
-
-    private static final int REQUEST_LOGIN = 1024;
 
     // 抽屉导航布局
     @Bind(R.id.main_drawer_layout)
@@ -107,13 +104,13 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     @Bind(R.id.main_icon_no_data)
     protected View iconNoData;
 
-    @Bind(R.id.main_fab_new_topic)
-    protected FloatingActionButton fabNewTopic;
+    @Bind(R.id.main_fab_create_topic)
+    protected FloatingActionButton fabCreateTopic;
 
     // 当前版块，默认为all
     private TabType currentTab = TabType.all;
     private int currentPage = 0; // 从未加载
-    private List<Topic> topicList = new ArrayList<>();
+    private final List<Topic> topicList = new ArrayList<>();
     private MainAdapter adapter;
 
     // 首次按下返回键时间戳
@@ -141,7 +138,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         adapter = new MainAdapter(this, topicList);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, 20));
-        fabNewTopic.attachToRecyclerView(recyclerView);
+        fabCreateTopic.attachToRecyclerView(recyclerView);
 
         updateUserInfoViews();
 
@@ -166,21 +163,17 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
      * 未读消息数目
      */
     private void getMessageCountAsyncTask() {
-        if (!TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            Call<Result.Data<Integer>> call =  ApiClient.service.getMessageCount(LoginShared.getAccessToken(this));
+        final String accessToken = LoginShared.getAccessToken(this);
+        if (!TextUtils.isEmpty(accessToken)) {
+            Call<Result.Data<Integer>> call =  ApiClient.service.getMessageCount(accessToken);
             call.enqueue(new CallbackAdapter<Result.Data<Integer>>() {
 
                 @Override
-                public void onResponse(Call<Result.Data<Integer>> call, Response<Result.Data<Integer>> response) {
-                    if (!TextUtils.isEmpty(LoginShared.getAccessToken(MainActivity.this))) {
-                        if (response.isSuccessful()) {
-                            tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(response.body().getData()));
-                        } else {
-                            if (response.code() == 403) {
-                                tvBadgerNotification.setText(null);
-                            }
-                        }
+                public boolean onResultOk(Response<Result.Data<Integer>> response, Result.Data<Integer> result) {
+                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(MainActivity.this))) {
+                        tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
                     }
+                    return false;
                 }
 
             });
@@ -217,18 +210,18 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     }
 
     private void getUserAsyncTask() {
-        if (!TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+        final String accessToken = LoginShared.getAccessToken(this);
+        if (!TextUtils.isEmpty(accessToken)) {
             Call<Result.Data<User>> call = ApiClient.service.getUser(LoginShared.getLoginName(this));
             call.enqueue(new CallbackAdapter<Result.Data<User>>() {
 
                 @Override
-                public void onResponse(Call<Result.Data<User>> call, Response<Result.Data<User>> response) {
-                    if (!TextUtils.isEmpty(LoginShared.getAccessToken(MainActivity.this))) {
-                        if (response.isSuccessful()) {
-                            LoginShared.update(MainActivity.this, response.body().getData());
-                            updateUserInfoViews();
-                        }
+                public boolean onResultOk(Response<Result.Data<User>> response, Result.Data<User> result) {
+                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(MainActivity.this))) {
+                        LoginShared.update(MainActivity.this, result.getData());
+                        updateUserInfoViews();
                     }
+                    return false;
                 }
 
             });
@@ -244,28 +237,39 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, 1, 20, true);
         call.enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
 
-
             @Override
-            public void success(Result<List<Topic>> result, Response response) {
-                if (currentTab == tab && result.getData() != null) {
+            public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
+                if (currentTab == tab) {
                     topicList.clear();
                     topicList.addAll(result.getData());
                     notifyDataSetChanged();
-                    refreshLayout.setRefreshing(false);
                     currentPage = 1;
                 }
+                return false;
             }
 
             @Override
-            public void failure(RetrofitError error) {
+            public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
                 if (currentTab == tab) {
-                    ToastUtils.with(MainActivity.this).show(R.string.data_load_faild);
+                    ToastUtils.with(MainActivity.this).show(error.getErrorMessage());
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onCallException(Throwable t, Result.Error error) {
+                if (currentTab == tab) {
+                    ToastUtils.with(MainActivity.this).show(error.getErrorMessage());
+                }
+                return false;
+            }
+
+            @Override
+            public void onFinish() {
+                if (currentTab == tab) {
                     refreshLayout.setRefreshing(false);
                 }
             }
-
-
-
 
         });
     }
@@ -278,28 +282,45 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
 
             final TabType tab = currentTab;
             final int page = currentPage;
-            ApiClient.service.getTopicList(tab, page + 1, 20, true, new Callback<Result<List<Topic>>>() {
+            Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, page + 1, 20, true);
+            call.enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
 
                 @Override
-                public void success(Result<List<Topic>> result, Response response) {
+                public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
                     if (currentTab == tab && currentPage == page) {
                         if (result.getData().size() > 0) {
                             topicList.addAll(result.getData());
                             adapter.setLoading(false);
                             adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
                             currentPage++;
+                            return true;
                         } else {
                             ToastUtils.with(MainActivity.this).show(R.string.have_no_more_data);
-                            adapter.setLoading(false);
-                            adapter.notifyItemChanged(adapter.getItemCount() - 1);
+                            return false;
                         }
                     }
+                    return false;
                 }
 
                 @Override
-                public void failure(RetrofitError error) {
+                public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
                     if (currentTab == tab && currentPage == page) {
-                        ToastUtils.with(MainActivity.this).show(R.string.data_load_faild);
+                        ToastUtils.with(MainActivity.this).show(error.getErrorMessage());
+                    }
+                    return false;
+                }
+
+                @Override
+                public boolean onCallException(Throwable t, Result.Error error) {
+                    if (currentTab == tab && currentPage == page) {
+                        ToastUtils.with(MainActivity.this).show(error.getErrorMessage());
+                    }
+                    return false;
+                }
+
+                @Override
+                public void onFinish() {
+                    if (currentTab == tab && currentPage == page) {
                         adapter.setLoading(false);
                         adapter.notifyItemChanged(adapter.getItemCount() - 1);
                     }
@@ -375,7 +396,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
                 notifyDataSetChanged();
                 refreshLayout.setRefreshing(true);
                 onRefresh();
-                fabNewTopic.show(true);
+                fabCreateTopic.show(true);
             }
             drawerLayout.setDrawerListener(openDrawerListener);
         }
@@ -400,9 +421,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     public void onNavigationItemOtherClick(View itemView) {
         switch (itemView.getId()) {
             case R.id.main_nav_btn_notification:
-                if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-                    showNeedLoginDialog();
-                } else {
+                if (LoginActivity.startForResultWithAccessTokenCheck(this)) {
                     drawerLayout.setDrawerListener(notificationDrawerListener);
                     drawerLayout.closeDrawers();
                 }
@@ -469,8 +488,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     @OnClick(R.id.main_nav_btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
-        // 重启 Activity
-        ThemeUtils.recreateActivity(this);
+        ThemeUtils.recreateActivity(this); // 重启Activity
     }
 
     /**
@@ -479,40 +497,20 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     @OnClick(R.id.main_nav_layout_info)
     protected void onBtnInfoClick() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            startActivityForResult(new Intent(this, LoginActivity.class), REQUEST_LOGIN);
+            LoginActivity.startForResult(this);
         } else {
-            UserDetailActivity.openWithTransitionAnimation(this, LoginShared.getLoginName(this), imgAvatar, LoginShared.getAvatarUrl(this));
+            UserDetailActivity.startWithTransitionAnimation(this, LoginShared.getLoginName(this), imgAvatar, LoginShared.getAvatarUrl(this));
         }
     }
 
     /**
      * 发帖按钮
      */
-    @OnClick(R.id.main_fab_new_topic)
-    protected void onBtnNewTopicClick() {
-        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            showNeedLoginDialog();
-        } else {
-            startActivity(new Intent(this, NewTopicActivity.class));
+    @OnClick(R.id.main_fab_create_topic)
+    protected void onBtnCreateTopicClick() {
+        if (LoginActivity.startForResultWithAccessTokenCheck(this)) {
+            startActivity(new Intent(this, CreateTopicActivity.class));
         }
-    }
-
-    /**
-     * 显示需要登录对话框
-     */
-    private void showNeedLoginDialog() {
-        DialogUtils.createAlertDialogBuilder(this)
-                .setMessage(R.string.need_login_tip)
-                .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivityForResult(new Intent(MainActivity.this, LoginActivity.class), REQUEST_LOGIN);
-                    }
-
-                })
-                .setNegativeButton(R.string.cancel, null)
-                .show();
     }
 
     /**
@@ -521,7 +519,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
+        if (requestCode == LoginActivity.REQUEST_LOGIN && resultCode == RESULT_OK) {
             updateUserInfoViews();
             getUserAsyncTask();
         }

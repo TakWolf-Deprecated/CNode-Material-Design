@@ -1,8 +1,10 @@
 package org.cnodejs.android.md.display.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 
 import org.cnodejs.android.md.R;
@@ -19,10 +21,10 @@ public class MarkdownPreviewActivity extends StatusBarActivity {
 
     private static final String EXTRA_MARKDOWN = "markdown";
 
-    public static void open(Context context, String markdown) {
-        Intent intent = new Intent(context, MarkdownPreviewActivity.class);
+    public static void start(@NonNull Activity activity, String markdown) {
+        Intent intent = new Intent(activity, MarkdownPreviewActivity.class);
         intent.putExtra(EXTRA_MARKDOWN, markdown);
-        context.startActivity(intent);
+        activity.startActivity(intent);
     }
 
     @Bind(R.id.markdown_preview_toolbar)

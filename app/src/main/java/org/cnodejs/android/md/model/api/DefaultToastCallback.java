@@ -30,29 +30,35 @@ public class DefaultToastCallback<T extends Result> extends CallbackAdapter<T> {
     }
 
     public boolean onResultErrorAuth(Response<T> response, Result.Error error) {
-        DialogUtils.createAlertDialogBuilder(activity)
-                .setMessage(R.string.access_token_out_of_date)
-                .setPositiveButton(R.string.relogin, new DialogInterface.OnClickListener() {
+        if (!activity.isFinishing()) {
+            DialogUtils.createAlertDialogBuilder(activity)
+                    .setMessage(R.string.access_token_out_of_date)
+                    .setPositiveButton(R.string.relogin, new DialogInterface.OnClickListener() {
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        LoginActivity.startForResult(activity);
-                    }
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            LoginActivity.startForResult(activity);
+                        }
 
-                })
-                .setNegativeButton(R.string.cancel, null)
-                .show();
+                    })
+                    .setNegativeButton(R.string.cancel, null)
+                    .show();
+        }
         return false;
     }
 
     public boolean onResultErrorOther(Response<T> response, Result.Error error) {
-        ToastUtils.with(activity).show(error.getErrorMessage());
+        if (!activity.isFinishing()) {
+            ToastUtils.with(activity).show(error.getErrorMessage());
+        }
         return false;
     }
 
     @Override
     public boolean onCallException(Throwable t, Result.Error error) {
-        ToastUtils.with(activity).show(error.getErrorMessage());
+        if (!activity.isFinishing()) {
+            ToastUtils.with(activity).show(error.getErrorMessage());
+        }
         return false;
     }
 

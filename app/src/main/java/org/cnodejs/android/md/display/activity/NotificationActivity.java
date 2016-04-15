@@ -9,27 +9,25 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.display.adapter.NotificationAdapter;
+import org.cnodejs.android.md.display.base.StatusBarActivity;
+import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
+import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
-import org.cnodejs.android.md.display.adapter.NotificationAdapter;
-import org.cnodejs.android.md.display.base.StatusBarActivity;
-import org.cnodejs.android.md.display.dialog.DialogUtils;
-import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
-import org.cnodejs.android.md.display.widget.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class NotificationActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -69,27 +67,23 @@ public class NotificationActivity extends StatusBarActivity implements Toolbar.O
 
     @Override
     public void onRefresh() {
-        ApiClient.service.getMessages(LoginShared.getAccessToken(this), true, new Callback<Result<Notification>>() {
+        Call<Result.Data<Notification>> call = ApiClient.service.getMessages(LoginShared.getAccessToken(this), true);
+        call.enqueue(new DefaultToastCallback<Result.Data<Notification>>(this) {
 
             @Override
-            public void success(Result<Notification> result, Response response) {
+            public boolean onResultOk(Response<Result.Data<Notification>> response, Result.Data<Notification> result) {
                 if (!isFinishing()) {
                     messageList.clear();
                     messageList.addAll(result.getData().getHasNotReadMessageList());
                     messageList.addAll(result.getData().getHasReadMessageList());
                     notifyDataSetChanged();
-                    refreshLayout.setRefreshing(false);
                 }
+                return false;
             }
 
             @Override
-            public void failure(RetrofitError error) {
+            public void onFinish() {
                 if (!isFinishing()) {
-                    if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
-                        showAccessTokenErrorDialog();
-                    } else {
-                        ToastUtils.with(NotificationActivity.this).show(R.string.data_load_faild);
-                    }
                     refreshLayout.setRefreshing(false);
                 }
             }
@@ -100,13 +94,6 @@ public class NotificationActivity extends StatusBarActivity implements Toolbar.O
     private void notifyDataSetChanged() {
         adapter.notifyDataSetChanged();
         iconNoData.setVisibility(messageList.size() == 0 ? View.VISIBLE : View.GONE);
-    }
-
-    private void showAccessTokenErrorDialog() {
-        DialogUtils.createAlertDialogBuilder(this)
-                .setMessage(R.string.access_token_error_tip)
-                .setPositiveButton(R.string.confirm, null)
-                .show();
     }
 
     @Override
@@ -121,27 +108,18 @@ public class NotificationActivity extends StatusBarActivity implements Toolbar.O
     }
 
     private void markAllMessageReadAsyncTask() {
-        ApiClient.service.markAllMessageRead(LoginShared.getAccessToken(this), new Callback<Void>() {
+        Call<Result> call = ApiClient.service.markAllMessageRead(LoginShared.getAccessToken(this));
+        call.enqueue(new DefaultToastCallback<Result>(this) {
 
             @Override
-            public void success(Void nothing, Response response) {
+            public boolean onResultOk(Response<Result> response, Result result) {
                 if (!isFinishing()) {
                     for (Message message : messageList) {
                         message.setRead(true);
                     }
                     notifyDataSetChanged();
                 }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                if (!isFinishing()) {
-                    if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
-                        showAccessTokenErrorDialog();
-                    } else {
-                        ToastUtils.with(NotificationActivity.this).show(R.string.data_load_faild);
-                    }
-                }
+                return false;
             }
 
         });

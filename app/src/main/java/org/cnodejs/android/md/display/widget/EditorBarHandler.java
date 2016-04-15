@@ -3,6 +3,7 @@ package org.cnodejs.android.md.display.widget;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -17,11 +18,11 @@ import butterknife.OnClick;
 
 public class EditorBarHandler {
 
-    private Context context;
-    private EditText edtContent;
-    private InputMethodManager imm;
+    private final Context context;
+    private final EditText edtContent;
+    private final InputMethodManager imm;
 
-    public EditorBarHandler(Context context, View editorBar, EditText edtContent) {
+    public EditorBarHandler(@NonNull Context context, @NonNull View editorBar, @NonNull EditText edtContent) {
         this.context = context;
         this.edtContent = edtContent;
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);

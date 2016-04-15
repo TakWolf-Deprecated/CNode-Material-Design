@@ -9,6 +9,8 @@ import android.widget.Spinner;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.api.DefaultToastCallback;
+import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
@@ -23,11 +25,10 @@ import org.cnodejs.android.md.display.widget.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Response;
 
-public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
+public class CreateTopicActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
     @Bind(R.id.new_topic_toolbar)
     protected Toolbar toolbar;
@@ -44,7 +45,9 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
     @Bind(R.id.new_topic_edt_content)
     protected EditText edtContent;
 
-    private ProgressDialog dialog;
+    private ProgressDialog progressDialog;
+
+    private boolean saveTopicDraft = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +60,9 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
         toolbar.inflateMenu(R.menu.new_topic);
         toolbar.setOnMenuItemClickListener(this);
 
-        dialog = DialogUtils.createProgressDialog(this);
-        dialog.setMessage(R.string.posting_$_);
-        dialog.setCancelable(false);
+        progressDialog = DialogUtils.createProgressDialog(this);
+        progressDialog.setMessage(R.string.posting_$_);
+        progressDialog.setCancelable(false);
 
         // 创建EditorBar
         new EditorBarHandler(this, editorBar, edtContent);
@@ -80,16 +83,12 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
     @Override
     protected void onPause() {
         super.onPause();
-        if (SettingShared.isEnableNewTopicDraft(this)) {
+        if (SettingShared.isEnableNewTopicDraft(this) && saveTopicDraft) {
             TopicShared.setNewTopicTabPosition(this, spnTab.getSelectedItemPosition());
             TopicShared.setNewTopicTitle(this, edtTitle.getText().toString());
             TopicShared.setNewTopicContent(this, edtContent.getText().toString());
         }
     }
-
-    /**
-     * 发送逻辑
-     */
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -108,7 +107,7 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
                     if (SettingShared.isEnableTopicSign(this)) { // 添加小尾巴
                         content += "\n\n" + SettingShared.getTopicSignContent(this);
                     }
-                    newTipicAsyncTask(tab, title, content);
+                    createTipicAsyncTask(tab, title, content);
                 }
                 return true;
             default:
@@ -129,41 +128,27 @@ public class NewTopicActivity extends StatusBarActivity implements Toolbar.OnMen
         }
     }
 
-    private void newTipicAsyncTask(TabType tab, String title, String content) {
-        dialog.show();
-        ApiClient.service.newTopic(LoginShared.getAccessToken(this), tab, title, content, new Callback<Void>() {
+    private void createTipicAsyncTask(TabType tab, String title, String content) {
+        progressDialog.show();
+        Call<Result.CreateTopic> call = ApiClient.service.createTopic(LoginShared.getAccessToken(this), tab, title, content);
+        call.enqueue(new DefaultToastCallback<Result.CreateTopic>(this) {
 
             @Override
-            public void success(Void nothing, Response response) {
-                dialog.dismiss();
-                // 清除草稿 TODO 由于保存草稿的动作在onPause中，并且保存过程是异步的，因此保险起见，优先清除控件数据
-                spnTab.setSelection(0);
-                edtTitle.setText(null);
-                edtContent.setText(null);
-                TopicShared.clear(NewTopicActivity.this);
-                // 结束当前并提示
+            public boolean onResultOk(Response<Result.CreateTopic> response, Result.CreateTopic result) {
+                saveTopicDraft = false;
+                TopicShared.clear(CreateTopicActivity.this);
+                ToastUtils.with(CreateTopicActivity.this).show(R.string.post_success);
+                TopicActivity.start(CreateTopicActivity.this, result.getTopicId());
                 finish();
-                ToastUtils.with(NewTopicActivity.this).show(R.string.post_success);
+                return false;
             }
 
             @Override
-            public void failure(RetrofitError error) {
-                dialog.dismiss();
-                if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
-                    showAccessTokenErrorDialog();
-                } else {
-                    ToastUtils.with(NewTopicActivity.this).show(R.string.network_faild);
-                }
+            public void onFinish() {
+                progressDialog.dismiss();
             }
 
         });
-    }
-
-    private void showAccessTokenErrorDialog() {
-        DialogUtils.createAlertDialogBuilder(this)
-                .setMessage(R.string.access_token_error_tip)
-                .setPositiveButton(R.string.confirm, null)
-                .show();
     }
 
 }
