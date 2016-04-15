@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import org.cnodejs.android.md.logic.widget.ToastUtils;
+import org.cnodejs.android.md.display.widget.ToastUtils;
 
 public final class ShipUtils {
 

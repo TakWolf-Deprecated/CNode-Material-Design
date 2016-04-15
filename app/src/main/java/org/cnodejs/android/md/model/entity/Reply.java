@@ -11,6 +11,11 @@ import java.util.List;
 
 public class Reply {
 
+    public enum UpAction {
+        up,
+        down
+    }
+
     private String id;
 
     private Author author;

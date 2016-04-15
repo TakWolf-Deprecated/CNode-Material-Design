@@ -31,13 +31,6 @@ public class AppController extends Application {
         if (!BuildConfig.DEBUG) {
             Thread.setDefaultUncaughtExceptionHandler(new AppExceptionHandler(this));
         }
-
-        // 友盟账号统计
-        if (!TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            MobclickAgent.onProfileSignIn(LoginShared.getLoginName(this));
-        } else {
-            MobclickAgent.onProfileSignOff();
-        }
     }
 
 }

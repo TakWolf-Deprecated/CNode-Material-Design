@@ -1,7 +1,7 @@
 package org.cnodejs.android.md.model.api;
 
-import org.cnodejs.android.md.model.util.HttpUtils;
 import org.cnodejs.android.md.model.util.EntityUtils;
+import org.cnodejs.android.md.model.util.HttpUtils;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

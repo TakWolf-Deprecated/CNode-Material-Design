@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.util;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import org.joda.time.DateTime;
@@ -8,7 +9,7 @@ import org.tautua.markdownpapers.parser.ParseException;
 
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.Date;
+import java.util.UUID;
 
 public final class FormatUtils {
 
@@ -25,37 +26,40 @@ public final class FormatUtils {
     private static final long month = 31 * day;
     private static final long year = 12 * month;
 
-    public static String getRecentlyTimeText(DateTime dateTime) {
-        if (dateTime == null) {
-            return null;
-        }
-        long diff = new Date().getTime() - dateTime.getMillis();
-        long r;
+    public static String getRecentlyTimeText(@NonNull DateTime dateTime) {
+        long diff = new DateTime().getMillis() - dateTime.getMillis();
         if (diff > year) {
-            r = (diff / year);
-            return r + "年前";
+            return (diff / year) + "年前";
+        } else if (diff > month) {
+            return (diff / month) + "个月前";
+        } else if (diff > week) {
+            return (diff / week) + "周前";
+        } else if (diff > day) {
+            return (diff / day) + "天前";
+        } else if (diff > hour) {
+            return (diff / hour) + "小时前";
+        } else if (diff > minute) {
+            return (diff / minute) + "分钟前";
+        } else {
+            return "刚刚";
         }
-        if (diff > month) {
-            r = (diff / month);
-            return r + "个月前";
+    }
+
+    /**
+     * 检测是否是用户accessToken
+     */
+    public static boolean isAccessToken(String accessToken) {
+        if (TextUtils.isEmpty(accessToken)) {
+            return false;
+        } else {
+            try {
+                //noinspection ResultOfMethodCallIgnored
+                UUID.fromString(accessToken);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
         }
-        if (diff > week) {
-            r = (diff / week);
-            return r + "周前";
-        }
-        if (diff > day) {
-            r = (diff / day);
-            return r + "天前";
-        }
-        if (diff > hour) {
-            r = (diff / hour);
-            return r + "小时前";
-        }
-        if (diff > minute) {
-            r = (diff / minute);
-            return r + "分钟前";
-        }
-        return "刚刚";
     }
 
     /**
@@ -89,8 +93,11 @@ public final class FormatUtils {
     private static final Markdown md = new Markdown();
 
     public static String renderMarkdown(String text) {
-        StringWriter out = new StringWriter();
+        if (TextUtils.isEmpty(text)) {
+            text = "";
+        }
         try {
+            StringWriter out = new StringWriter();
             md.transform(new StringReader(text), out);
             text = out.toString();
         } catch (ParseException e) {
@@ -99,10 +106,12 @@ public final class FormatUtils {
         return "<div class=\"markdown-text\">" + text + "</div>";
     }
 
-    public static String handleHtml(String text) {
-        text = text.replace("<a href=\"/user/", "<a href=\"https://cnodejs.org/user/"); // 替换@用户协议
-        text = text.replace("<img src=\"//", "<img src=\"https://"); // 替换缩略URL引用路径为https协议
-        return text;
+    public static String handleHtml(String html) {
+        if (!TextUtils.isEmpty(html)) {
+            html = html.replace("<a href=\"/user/", "<a href=\"https://cnodejs.org/user/"); // 替换@用户协议
+            html = html.replace("<img src=\"//", "<img src=\"https://"); // 替换缩略URL引用路径为https协议
+        }
+        return html;
     }
 
 }

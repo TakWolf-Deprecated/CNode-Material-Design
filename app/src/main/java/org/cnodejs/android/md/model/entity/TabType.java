@@ -16,9 +16,10 @@ public enum TabType {
 
     job(R.string.tab_job);
 
+    @StringRes
     private int nameId;
 
-    TabType(int nameId) {
+    TabType(@StringRes int nameId) {
         this.nameId = nameId;
     }
 

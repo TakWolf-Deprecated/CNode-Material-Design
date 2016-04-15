@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import org.cnodejs.android.md.logic.activity.CrashLogActivity;
+import org.cnodejs.android.md.display.activity.CrashLogActivity;
 
 public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
 

@@ -3,7 +3,7 @@ package org.cnodejs.android.md.model.storage;
 import android.content.Context;
 import android.text.TextUtils;
 
-import org.cnodejs.android.md.model.entity.LoginInfo;
+import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.User;
 
 public final class LoginShared {
@@ -24,7 +24,7 @@ public final class LoginShared {
     private static String avatarUrl;
     private static Integer score;
 
-    public static void login(Context context, String accessToken, LoginInfo loginInfo) {
+    public static void login(Context context, String accessToken, Result.Login loginInfo) {
         SharedWrapper sharedWrapper = SharedWrapper.with(context, TAG);
         sharedWrapper.setString(KEY_ACCESS_TOKEN, accessToken);
         sharedWrapper.setString(KEY_ID, loginInfo.getId());

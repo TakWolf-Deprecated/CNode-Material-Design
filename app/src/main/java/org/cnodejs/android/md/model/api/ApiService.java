@@ -1,11 +1,9 @@
 package org.cnodejs.android.md.model.api;
 
-import org.cnodejs.android.md.model.entity.LoginInfo;
 import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
-import org.cnodejs.android.md.model.entity.TopicUpInfo;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.entity.User;
 
@@ -35,8 +33,8 @@ public interface ApiService {
 
     @GET("topic/{topicId}")
     Call<Result.Data<TopicWithReply>> getTopic(
-            @Query("accesstoken") String accessToken,
             @Path("topicId") String topicId,
+            @Query("accesstoken") String accessToken,
             @Query("mdrender") Boolean mdrender
     );
     
@@ -79,17 +77,17 @@ public interface ApiService {
     @POST("topic/{topicId}/replies")
     @FormUrlEncoded
     Call<Result.ReplyTopic> replyTopic(
-            @Field("accesstoken") String accessToken,
             @Path("topicId") String topicId,
+            @Field("accesstoken") String accessToken,
             @Field("content") String content,
             @Field("reply_id") String replyId
     );
 
     @POST("reply/{replyId}/ups")
     @FormUrlEncoded
-    Call<TopicUpInfo> upTopic(
-            @Field("accesstoken") String accessToken,
-            @Path("replyId") String replyId
+    Call<Result.UpReply> upReply(
+            @Path("replyId") String replyId,
+            @Field("accesstoken") String accessToken
     );
 
     //=====
@@ -103,7 +101,7 @@ public interface ApiService {
 
     @POST("accesstoken")
     @FormUrlEncoded
-    Call<LoginInfo> accessToken(
+    Call<Result.Login> accessToken(
             @Field("accesstoken") String accessToken
     );
 
