@@ -26,22 +26,26 @@ public final class FormatUtils {
     private static final long month = 31 * day;
     private static final long year = 12 * month;
 
-    public static String getRecentlyTimeText(@NonNull DateTime dateTime) {
-        long diff = new DateTime().getMillis() - dateTime.getMillis();
-        if (diff > year) {
-            return (diff / year) + "年前";
-        } else if (diff > month) {
-            return (diff / month) + "个月前";
-        } else if (diff > week) {
-            return (diff / week) + "周前";
-        } else if (diff > day) {
-            return (diff / day) + "天前";
-        } else if (diff > hour) {
-            return (diff / hour) + "小时前";
-        } else if (diff > minute) {
-            return (diff / minute) + "分钟前";
+    public static String getRecentlyTimeText(DateTime dateTime) {
+        if (dateTime == null) {
+            return null;
         } else {
-            return "刚刚";
+            long diff = new DateTime().getMillis() - dateTime.getMillis();
+            if (diff > year) {
+                return (diff / year) + "年前";
+            } else if (diff > month) {
+                return (diff / month) + "个月前";
+            } else if (diff > week) {
+                return (diff / week) + "周前";
+            } else if (diff > day) {
+                return (diff / day) + "天前";
+            } else if (diff > hour) {
+                return (diff / hour) + "小时前";
+            } else if (diff > minute) {
+                return (diff / minute) + "分钟前";
+            } else {
+                return "刚刚";
+            }
         }
     }
 
