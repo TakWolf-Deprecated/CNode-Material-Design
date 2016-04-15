@@ -249,7 +249,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     private void upReplyAsyncTask(final ReplyViewHolder holder) {
         final int position = holder.position; // 标记当时的位置信息
         final Reply reply = holder.reply; // 保存当时的回复对象
-        Call<Result.UpReply> call = ApiClient.service.upReply(LoginShared.getAccessToken(activity), holder.reply.getId());
+        Call<Result.UpReply> call = ApiClient.service.upReply(holder.reply.getId(), LoginShared.getAccessToken(activity));
         call.enqueue(new DefaultToastCallback<Result.UpReply>(activity) {
 
             @Override

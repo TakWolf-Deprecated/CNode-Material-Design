@@ -230,7 +230,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
 
         private void replyTopicAsyncTask(final String content) {
             progressDialog.show();
-            Call<Result.ReplyTopic> call = ApiClient.service.replyTopic(LoginShared.getAccessToken(TopicActivity.this), topicId, content, null);
+            Call<Result.ReplyTopic> call = ApiClient.service.replyTopic(topicId, LoginShared.getAccessToken(TopicActivity.this), content, null);
             call.enqueue(new DefaultToastCallback<Result.ReplyTopic>(TopicActivity.this) {
 
                 @Override
