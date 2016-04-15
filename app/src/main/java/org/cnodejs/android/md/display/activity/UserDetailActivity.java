@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.display.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -62,6 +63,13 @@ public class UserDetailActivity extends StatusBarActivity {
         Intent intent = new Intent(activity, UserDetailActivity.class);
         intent.putExtra(EXTRA_LOGIN_NAME, loginName);
         activity.startActivity(intent);
+    }
+
+    public static void start(@NonNull Context context, String loginName) {
+        Intent intent = new Intent(context, UserDetailActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(EXTRA_LOGIN_NAME, loginName);
+        context.startActivity(intent);
     }
 
     @Bind(R.id.user_detail_toolbar)

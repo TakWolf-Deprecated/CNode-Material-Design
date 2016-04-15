@@ -24,7 +24,7 @@ public class UserDetailItemFragment extends Fragment {
     protected RecyclerView recyclerView;
 
     private UserDetailItemAdapter adapter;
-    private List<TopicSimple> topicList = new ArrayList<>();
+    private final List<TopicSimple> topicList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

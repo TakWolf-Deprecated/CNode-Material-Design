@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.display.widget;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,14 +19,14 @@ import butterknife.OnClick;
 
 public class EditorBarHandler {
 
-    private final Context context;
+    private final Activity activity;
     private final EditText edtContent;
     private final InputMethodManager imm;
 
-    public EditorBarHandler(@NonNull Context context, @NonNull View editorBar, @NonNull EditText edtContent) {
-        this.context = context;
+    public EditorBarHandler(@NonNull Activity activity, @NonNull View editorBar, @NonNull EditText edtContent) {
+        this.activity = activity;
         this.edtContent = edtContent;
-        imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         ButterKnife.bind(this, editorBar);
     }
 
@@ -112,7 +113,7 @@ public class EditorBarHandler {
      */
     @OnClick(R.id.editor_bar_btn_insert_link)
     protected void onBtnInsertLinkClick() {
-        DialogUtils.createAlertDialogBuilder(context)
+        DialogUtils.createAlertDialogBuilder(activity)
                 .setIcon(R.drawable.ic_insert_link_grey600_24dp)
                 .setTitle(R.string.add_link)
                 .setView(R.layout.dialog_tool_insert_link)
@@ -150,10 +151,10 @@ public class EditorBarHandler {
     @OnClick(R.id.editor_bar_btn_preview)
     protected void onBtnPreviewClick() {
         String content = edtContent.getText().toString();
-        if (SettingShared.isEnableTopicSign(context)) { // 添加小尾巴
-            content += "\n\n" + SettingShared.getTopicSignContent(context);
+        if (SettingShared.isEnableTopicSign(activity)) { // 添加小尾巴
+            content += "\n\n" + SettingShared.getTopicSignContent(activity);
         }
-        MarkdownPreviewActivity.open(context, content);
+        MarkdownPreviewActivity.start(activity, content);
     }
 
 }

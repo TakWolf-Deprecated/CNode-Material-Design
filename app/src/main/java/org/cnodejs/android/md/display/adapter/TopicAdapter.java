@@ -1,12 +1,9 @@
 package org.cnodejs.android.md.display.adapter;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,26 +13,22 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.CallbackAdapter;
-import org.cnodejs.android.md.model.entity.Reply;
-import org.cnodejs.android.md.model.entity.TopicUpInfo;
-import org.cnodejs.android.md.model.entity.TopicWithReply;
-import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.display.activity.LoginActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
-import org.cnodejs.android.md.display.dialog.DialogUtils;
 import org.cnodejs.android.md.display.widget.CNodeWebView;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
+import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.api.DefaultToastCallback;
+import org.cnodejs.android.md.model.entity.Reply;
+import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.TopicWithReply;
+import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -172,7 +165,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_header_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
+            UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
         }
 
     }
@@ -230,77 +223,51 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @OnClick(R.id.topic_item_reply_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar, reply.getAuthor().getAvatarUrl());
+            UserDetailActivity.startWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar, reply.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.topic_item_reply_btn_ups)
         protected void onBtnUpsClick() {
-            if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
-                showNeedLoginDialog();
-            } else if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
-                ToastUtils.with(activity).show("不能帮自己点赞");
-            } else {
-                upTopicAsyncTask(this);
+            if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
+                if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
+                    ToastUtils.with(activity).show(R.string.can_not_up_yourself_reply);
+                } else {
+                    upReplyAsyncTask(this);
+                }
             }
         }
 
         @OnClick(R.id.topic_item_reply_btn_at)
         protected void onBtnAtClick() {
-            if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
-                showNeedLoginDialog();
-            } else {
+            if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
                 onAtClickListener.onAt(reply.getAuthor().getLoginName());
             }
         }
 
     }
 
-    private void upTopicAsyncTask(final ReplyViewHolder holder) {
+    private void upReplyAsyncTask(final ReplyViewHolder holder) {
         final int position = holder.position; // 标记当时的位置信息
         final Reply reply = holder.reply; // 保存当时的回复对象
-        Call<TopicUpInfo> call = ApiClient.service.upTopic(LoginShared.getAccessToken(activity), holder.reply.getId());
-        call.enqueue(new CallbackAdapter<TopicUpInfo>() {
+        Call<Result.UpReply> call = ApiClient.service.upReply(LoginShared.getAccessToken(activity), holder.reply.getId());
+        call.enqueue(new DefaultToastCallback<Result.UpReply>(activity) {
 
             @Override
-            public void onResponse(Call<TopicUpInfo> call, Response<TopicUpInfo> response) {
-                super.onResponse(call, response);
-            }
-
-            @Override
-            public void onFailure(Call<TopicUpInfo> call, Throwable t) {
-                super.onFailure(call, t);
-            }
-
-
-
-
-            @Override
-            public void success(TopicUpInfo info, Response response) {
-                if (info.getAction() == TopicUpInfo.Action.up) {
-                    reply.getUpList().add(LoginShared.getId(activity));
-                } else if (info.getAction() == TopicUpInfo.Action.down) {
-                    reply.getUpList().remove(LoginShared.getId(activity));
+            public boolean onResultOk(Response<Result.UpReply> response, Result.UpReply result) {
+                if (!activity.isFinishing()) {
+                    if (result.getAction() == Reply.UpAction.up) {
+                        reply.getUpList().add(LoginShared.getId(activity));
+                    } else if (result.getAction() == Reply.UpAction.down) {
+                        reply.getUpList().remove(LoginShared.getId(activity));
+                    }
+                    // 如果位置没有变，则更新界面
+                    if (position == holder.position) {
+                        holder.btnUps.setText(String.valueOf(holder.reply.getUpList().size()));
+                        holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
+                    }
                 }
-                // 如果位置没有变，则更新界面
-                if (position == holder.position) {
-                    holder.btnUps.setText(String.valueOf(holder.reply.getUpList().size()));
-                    holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
-                }
+                return false;
             }
-
-            @Override
-            public void failure(RetrofitError error) {
-                if (error.getResponse() != null && error.getResponse().getStatus() == 403) {
-                    showAccessTokenErrorDialog();
-                } else {
-                    ToastUtils.with(activity).show(R.string.network_faild);
-                }
-            }
-
-
-
-
-
 
         });
     }

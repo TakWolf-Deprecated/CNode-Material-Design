@@ -37,6 +37,7 @@
     <string name="no_reply">暂无回复</string>
     <string name="data_load_faild_and_click_avatar_to_reload">数据加载失败，点击头像重试</string>
     <string name="have_no_more_data">已没有更多数据</string>
+    <string name="can_not_up_yourself_reply">不能帮自己点赞</string>
 
     <string name="topic">话题</string>
     <string name="new_topic">发布话题</string>

@@ -32,9 +32,9 @@ public class CNodeWebViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView webView, String url) {
         if (url.startsWith("https://cnodejs.org/user/")) { // 用户主页协议
-            UserDetailActivity.open(context, url.substring(25));
+            UserDetailActivity.start(context, url.substring(25));
         } else if (url.startsWith("https://cnodejs.org/topic/")) { // 话题主页协议
-            TopicActivity.open(context, url.substring(26));
+            TopicActivity.start(context, url.substring(26));
         } else { // 其他连接
             ShipUtils.openInBrowser(context, url);
         }

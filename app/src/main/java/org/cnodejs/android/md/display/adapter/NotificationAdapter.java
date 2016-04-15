@@ -125,12 +125,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         @OnClick(R.id.notification_item_img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.openWithTransitionAnimation(activity, message.getAuthor().getLoginName(), imgAvatar, message.getAuthor().getAvatarUrl());
+            UserDetailActivity.startWithTransitionAnimation(activity, message.getAuthor().getLoginName(), imgAvatar, message.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.notification_item_btn_item)
         protected void onBtnItemClick() {
-            TopicActivity.open(activity, message.getTopic().getId());
+            TopicActivity.start(activity, message.getTopic().getId());
         }
 
     }

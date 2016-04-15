@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.display.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -57,6 +58,13 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         Intent intent = new Intent(activity, TopicActivity.class);
         intent.putExtra(EXTRA_TOPIC_ID, topicId);
         activity.startActivity(intent);
+    }
+
+    public static void start(@NonNull Context context, String topicId) {
+        Intent intent = new Intent(context, TopicActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(EXTRA_TOPIC_ID, topicId);
+        context.startActivity(intent);
     }
 
     @Bind(R.id.topic_layout_root)

@@ -6,9 +6,9 @@ import android.support.v7.widget.RecyclerView;
 
 public class RecyclerViewLoadMoreListener extends RecyclerView.OnScrollListener {
 
-    private LinearLayoutManager linearLayoutManager;
-    private OnLoadMoreListener onLoadMoreListener;
-    private int limit;
+    private final LinearLayoutManager linearLayoutManager;
+    private final OnLoadMoreListener onLoadMoreListener;
+    private final int limit;
 
     public RecyclerViewLoadMoreListener(@NonNull LinearLayoutManager linearLayoutManager, @NonNull OnLoadMoreListener onLoadMoreListener, int limit) {
         super();
