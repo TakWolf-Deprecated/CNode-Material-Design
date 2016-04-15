@@ -63,6 +63,17 @@ public final class FormatUtils {
     }
 
     /**
+     * 生成一个不重复的requestCode
+     */
+
+    private static int requestCodeSeed = 0;
+
+    public synchronized static int createRequestCode() {
+        requestCodeSeed++;
+        return requestCodeSeed;
+    }
+
+    /**
      * 获取菜单导航消息数目字符串
      */
     public static String getNavigationDisplayCountText(int count) {

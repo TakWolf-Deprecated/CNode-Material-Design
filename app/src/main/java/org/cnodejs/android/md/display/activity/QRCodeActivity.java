@@ -16,13 +16,14 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.dialog.DialogUtils;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
-    public static final int REQUEST_QRCODE = R.id.request_qrcode;
+    public static final int REQUEST_QRCODE = FormatUtils.createRequestCode();
     public static final String EXTRA_QRCODE = "qrcode";
 
     public static void startForResult(@NonNull Activity activity) {

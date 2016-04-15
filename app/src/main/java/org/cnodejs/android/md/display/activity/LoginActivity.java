@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends StatusBarActivity {
 
-    public static final int REQUEST_LOGIN = R.id.request_login;
+    public static final int REQUEST_LOGIN = FormatUtils.createRequestCode();
 
     public static void startForResult(@NonNull Activity activity) {
         activity.startActivityForResult(new Intent(activity, LoginActivity.class), REQUEST_LOGIN);
