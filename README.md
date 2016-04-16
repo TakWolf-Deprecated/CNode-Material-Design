@@ -100,13 +100,25 @@
 
 > [https://cnodejs.org/topic/559bd1b91e5c761761468884](https://cnodejs.org/topic/559bd1b91e5c761761468884)
 
-> PS：基于React Native实现，目前只有IOS版本，作者有计划适配Android。比较不错的技术实践，作者比较活跃。
+> PS：基于React Native实现，包含iOS和Android两个平台
 
 ### [Vue-cnodejs](https://github.com/shinygang/Vue-cnodejs) ![image](/art/ic_good_project.png) ###
 
 > 基于vue.js重写Cnodejs.org社区的webapp，[线上访问地址](http://shinygang.github.io/cnodevue)
 
 > [https://cnodejs.org/topic/565c4473d0bc14ae279399fe](https://cnodejs.org/topic/565c4473d0bc14ae279399fe)
+
+### [swift-cnode](https://github.com/nswbmw/swift-cnode) ###
+
+> [CNode社区](https://cnodejs.org/) 的又一 swift 客户端，未完成...不定期更新，欢迎 fork 与 PR。
+
+> [https://cnodejs.org/topic/570a7adcbc564eaf3c6a4901](https://cnodejs.org/topic/570a7adcbc564eaf3c6a4901)
+
+### [cnode-angular-material](https://github.com/XGHeaven/cnode-angular-material) ###
+
+> CNode.JS 社区的 Angular-Material 的实现，暂时处于开发状态中 [http://cnode.xgheaven.cn](http://cnode.xgheaven.cn)
+
+> [https://cnodejs.org/topic/566bb3a35af0e6ab3bf1a280](https://cnodejs.org/topic/566bb3a35af0e6ab3bf1a280)
 
 ### [CNode-android](https://github.com/iwhys/CNode-android) ###
 
