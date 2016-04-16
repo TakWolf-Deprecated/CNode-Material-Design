@@ -2,11 +2,15 @@ package org.cnodejs.android.md.display.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.target.ImageViewTarget;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
@@ -33,6 +37,9 @@ public class ImagePreviewActivity extends StatusBarActivity {
     @Bind(R.id.image_preview_photo_view)
     protected PhotoView photoView;
 
+    @Bind(R.id.image_preview_progress_wheel)
+    protected ProgressWheel progressWheel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +48,31 @@ public class ImagePreviewActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        Glide.with(this).load(getIntent().getStringExtra(EXTRA_IMAGE_URL)).placeholder(R.drawable.image_placeholder).into(photoView);
+        loadImageAsyncTask();
+    }
+
+    private void loadImageAsyncTask() {
+        Glide.with(this).load(getIntent().getStringExtra(EXTRA_IMAGE_URL)).error(R.drawable.image_error).into(new ImageViewTarget<GlideDrawable>(photoView) {
+
+            @Override
+            public void onLoadStarted(Drawable placeholder) {
+                super.onLoadStarted(placeholder);
+                progressWheel.spin();
+            }
+
+            @Override
+            public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                super.onLoadFailed(e, errorDrawable);
+                progressWheel.stopSpinning();
+            }
+
+            @Override
+            protected void setResource(GlideDrawable resource) {
+                getView().setImageDrawable(resource);
+                progressWheel.stopSpinning();
+            }
+
+        });
     }
 
 }
