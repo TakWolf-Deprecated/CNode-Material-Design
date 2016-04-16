@@ -15,8 +15,8 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.melnykov.fab.FloatingActionButton;
-import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.MainAdapter;
@@ -197,12 +197,12 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
 
     private void updateUserInfoViews() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            Picasso.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+            Glide.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(R.string.click_avatar_to_login);
             tvScore.setText(null);
             btnLogout.setVisibility(View.GONE);
         } else {
-            Picasso.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+            Glide.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
             tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
             btnLogout.setVisibility(View.VISIBLE);

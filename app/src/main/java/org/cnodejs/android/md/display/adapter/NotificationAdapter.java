@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Message;
@@ -82,7 +82,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         protected void update(int position) {
             message = messageList.get(position);
 
-            Picasso.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+            Glide.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
             tvTime.setText(FormatUtils.getRecentlyTimeText(message.getReply().getCreateAt()));
             tvTopicTitle.setText("话题：" + message.getTopic().getTitle());

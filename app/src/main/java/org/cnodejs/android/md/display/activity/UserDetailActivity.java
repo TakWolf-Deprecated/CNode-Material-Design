@@ -20,8 +20,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.pnikosis.materialishprogress.ProgressWheel;
-import com.squareup.picasso.Picasso;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
@@ -130,7 +130,7 @@ public class UserDetailActivity extends StatusBarActivity {
 
         String avatarUrl = getIntent().getStringExtra(EXTRA_AVATAR_URL);
         if (!TextUtils.isEmpty(avatarUrl)) {
-            Picasso.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+            Glide.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
         }
 
         getUserAsyncTask();
@@ -229,7 +229,7 @@ public class UserDetailActivity extends StatusBarActivity {
     }
 
     private void updateUserInfoViews(User user) {
-        Picasso.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+        Glide.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
         tvLoginName.setText(user.getLoginName());
         if (TextUtils.isEmpty(user.getGithubUsername())) {
             tvGithubUsername.setVisibility(View.INVISIBLE);

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
@@ -41,7 +41,7 @@ public class ImagePreviewActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        Picasso.with(this).load(getIntent().getStringExtra(EXTRA_IMAGE_URL)).placeholder(R.drawable.image_placeholder).into(photoView);
+        Glide.with(this).load(getIntent().getStringExtra(EXTRA_IMAGE_URL)).placeholder(R.drawable.image_placeholder).into(photoView);
     }
 
 }
