@@ -40,10 +40,12 @@ public class CNodeWebView extends WebView {
     private static final String JS_IMAGE_INTERFACE_SCRIPT = "" +
             "javascript:\n" +
             "(function() {\n" +
-            "    var objs = document.getElementsByTagName(\"img\");\n" +
+            "    var objs = document.getElementsByTagName('img');\n" +
             "    for (var i = 0; i < objs.length; i++) {\n" +
             "        objs[i].onclick = function() {\n" +
-            "            window." + JS_IMAGE_INTERFACE_NAME + ".openImage(this.src);\n" +
+            "            if (this.parentNode.nodeName !== 'A') {\n" +
+            "                window." + JS_IMAGE_INTERFACE_NAME + ".openImage(this.src);\n" +
+            "            }\n" +
             "        }\n" +
             "    }\n" +
             "})();";
