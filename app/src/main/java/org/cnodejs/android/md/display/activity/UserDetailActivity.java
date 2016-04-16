@@ -221,7 +221,7 @@ public class UserDetailActivity extends StatusBarActivity {
 
             @Override
             public void onFinish() {
-                progressWheel.setProgress(0);
+                progressWheel.stopSpinning();
                 loading = false;
             }
 
