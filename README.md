@@ -1,10 +1,15 @@
-# CNode Material Design [![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9) #
+![Banner](/art/banner-1024-500.png)
+
+# CNode Material Design #
+
+[![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
+[![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
 
 ![Logo](/art/ic_launcher.png)
 
-> [CNode社区](https://cnodejs.org) 第三方Android客户端，原生App，Material Design风格，支持夜间模式
+[CNode社区](https://cnodejs.org) 第三方Android客户端，原生App，Material Design风格，支持夜间模式
 
-> [https://cnodejs.org/topic/55c2f7f15965fe2c74f4791d](https://cnodejs.org/topic/55c2f7f15965fe2c74f4791d)
+[https://cnodejs.org/topic/55c2f7f15965fe2c74f4791d](https://cnodejs.org/topic/55c2f7f15965fe2c74f4791d)
 
 ## Download ##
 
