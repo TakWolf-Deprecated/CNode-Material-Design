@@ -52,7 +52,7 @@
 
 - [Retrofit](http://square.github.io/retrofit)
 
-- [Picasso](http://square.github.io/picasso)
+- [Glide](https://github.com/bumptech/glide)
 
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
 
@@ -63,6 +63,8 @@
 - [FloatingActionButton](https://github.com/makovkastar/FloatingActionButton)
 
 - [QRCodeReaderView](https://github.com/dlazaro66/QRCodeReaderView)
+
+- [PhotoView](https://github.com/chrisbanes/PhotoView)
 
 - [MarkdownPapers](http://markdown.tautua.org)
 

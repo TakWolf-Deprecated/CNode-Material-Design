@@ -51,8 +51,6 @@ OkHttp
 ====================================
 http://square.github.io/okhttp
 
-Copyright 2014 Square, Inc.
-
 Licensed under the Apache License, Version 2.0 (the "License").
 
 ====================================
@@ -65,13 +63,11 @@ Copyright 2013 Square, Inc.
 Licensed under the Apache License, Version 2.0 (the "License").
 
 ====================================
-Picasso
+Glide
 ====================================
-http://square.github.io/picasso
+https://github.com/bumptech/glide
 
-Copyright 2013 Square, Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License").
+BSD, part MIT and Apache 2.0.
 
 ====================================
 CircleImageView
@@ -115,6 +111,15 @@ QRCodeReaderView
 https://github.com/dlazaro66/QRCodeReaderView
 
 Copyright 2013 David Lázaro
+
+Licensed under the Apache License, Version 2.0 (the "License").
+
+====================================
+PhotoView
+====================================
+https://github.com/chrisbanes/PhotoView
+
+Copyright 2011, 2012 Chris Banes
 
 Licensed under the Apache License, Version 2.0 (the "License").
 
