@@ -52,7 +52,7 @@ public class ImagePreviewActivity extends StatusBarActivity {
     }
 
     private void loadImageAsyncTask() {
-        Glide.with(this).load(getIntent().getStringExtra(EXTRA_IMAGE_URL)).error(R.drawable.image_error).into(new ImageViewTarget<GlideDrawable>(photoView) {
+        Glide.with(this).load(getIntent().getStringExtra(EXTRA_IMAGE_URL)).error(R.drawable.image_error).dontAnimate().into(new ImageViewTarget<GlideDrawable>(photoView) {
 
             @Override
             public void onLoadStarted(Drawable placeholder) {
