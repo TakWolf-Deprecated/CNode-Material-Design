@@ -1,6 +1,6 @@
 package org.cnodejs.android.md.display.activity;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,10 +20,11 @@ public class ImagePreviewActivity extends StatusBarActivity {
 
     private static final String EXTRA_IMAGE_URL = "imageUrl";
 
-    public static void start(@NonNull Activity activity, String imageUrl) {
-        Intent intent = new Intent(activity, ImagePreviewActivity.class);
+    public static void start(@NonNull Context context, String imageUrl) {
+        Intent intent = new Intent(context, ImagePreviewActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(EXTRA_IMAGE_URL, imageUrl);
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 
     @Bind(R.id.image_preview_toolbar)
