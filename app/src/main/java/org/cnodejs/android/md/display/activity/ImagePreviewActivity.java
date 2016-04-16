@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
@@ -33,6 +37,9 @@ public class ImagePreviewActivity extends StatusBarActivity {
     @Bind(R.id.image_preview_photo_view)
     protected PhotoView photoView;
 
+    @Bind(R.id.image_preview_progress_wheel)
+    protected ProgressWheel progressWheel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +48,26 @@ public class ImagePreviewActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        Picasso.with(this).load(getIntent().getStringExtra(EXTRA_IMAGE_URL)).placeholder(R.drawable.image_placeholder).into(photoView);
+        loadImageAsyncTask();
+    }
+
+    private void loadImageAsyncTask() {
+        progressWheel.spin();
+        Glide.with(this).load(getIntent().getStringExtra(EXTRA_IMAGE_URL)).error(R.drawable.image_error).dontAnimate().listener(new RequestListener<String, GlideDrawable>() {
+
+            @Override
+            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                progressWheel.stopSpinning();
+                return false;
+            }
+
+            @Override
+            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                progressWheel.stopSpinning();
+                return false;
+            }
+
+        }).into(photoView);
     }
 
 }

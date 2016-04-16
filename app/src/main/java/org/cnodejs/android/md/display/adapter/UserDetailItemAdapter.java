@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.TopicSimple;
@@ -75,7 +75,7 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
             topic = topicList.get(position);
 
             tvTitle.setText(topic.getTitle());
-            Picasso.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+            Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(topic.getAuthor().getLoginName());
             tvLastReplyTime.setText(FormatUtils.getRecentlyTimeText(topic.getLastReplyAt()));
         }

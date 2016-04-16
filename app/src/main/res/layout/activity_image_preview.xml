@@ -2,27 +2,49 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:layout_height="match_parent">
 
     <uk.co.senab.photoview.PhotoView
         android:id="@+id/image_preview_photo_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="?attr/actionBarSize"
-        android:src="@drawable/image_placeholder"
         android:scaleType="center"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:background="@android:color/black" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/image_preview_toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#cc303030"
-        android:elevation="@dimen/app_bar_elevation"
-        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-        app:title="@string/image_preview"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/image_preview_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#cc303030"
+            android:elevation="@dimen/app_bar_elevation"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+            app:title="@string/image_preview"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.pnikosis.materialishprogress.ProgressWheel
+                android:id="@+id/image_preview_progress_wheel"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                app:matProg_barColor="@color/color_accent"
+                app:matProg_progressIndeterminate="true"
+                app:matProg_barWidth="4dp"
+                app:matProg_fillRadius="true" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

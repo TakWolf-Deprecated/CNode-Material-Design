@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.LoginActivity;
@@ -149,7 +149,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
                 tvTab.setBackgroundDrawable(ThemeUtils.getThemeAttrDrawable(activity, topic.isTop() ? R.attr.referenceBackgroundAccent : R.attr.referenceBackgroundNormal));
                 tvTab.setTextColor(topic.isTop() ? Color.WHITE : ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
                 tvVisitCount.setText(topic.getVisitCount() + "次浏览");
-                Picasso.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+                Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
                 tvLoginName.setText(topic.getAuthor().getLoginName());
                 tvCreateTime.setText(activity.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeText(topic.getCreateAt()));
                 iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
@@ -208,7 +208,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             this.position = position;
             reply = topic.getReplyList().get(position);
 
-            Picasso.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
+            Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             tvIndex.setText(position + 1 + "楼");
             tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
