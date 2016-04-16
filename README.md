@@ -2,10 +2,11 @@
 
 # CNode Material Design #
 
-[![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
+[![Platform](https://img.shields.io/badge/platform-Android-green.svg?style=flat)](http://developer.android.com/index.html)
 [![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
-![Logo](/art/ic_launcher.png)
+![Logo](/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
 [CNode社区](https://cnodejs.org) 第三方Android客户端，原生App，Material Design风格，支持夜间模式
 
