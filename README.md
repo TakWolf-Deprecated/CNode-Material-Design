@@ -120,6 +120,12 @@
 
 > [https://cnodejs.org/topic/566bb3a35af0e6ab3bf1a280](https://cnodejs.org/topic/566bb3a35af0e6ab3bf1a280)
 
+### [Ioniclub](https://github.com/XueRainey/Ioniclub) ###
+
+> Ioniclub is hybird mobile app of [https://cnodejs.org](https://cnodejs.org), web demo [http://rainey.coding.io/ioniclub/](http://rainey.coding.io/ioniclub/)
+
+> [https://cnodejs.org/topic/57111863434cfcfa52684a8e](https://cnodejs.org/topic/57111863434cfcfa52684a8e)
+
 ### [CNode-android](https://github.com/iwhys/CNode-android) ###
 
 > 这是为CNodejs社区(https://cnodejs.org) 开发的原生Android版客户端。适用于Android4.0及以上。
@@ -150,13 +156,13 @@
 
 > PS：CNode社区早期的客户端实践项目，基于Ionic 和 PhoneGap。作者已经很长时间没有更新了。
 
-### [cnodejs-reader](https://github.com/cnodejs/cnodejs-reader) ###
+### [cnodejs-reader](https://github.com/cnodejs/cnodejs-reader) ![image](/art/ic_good_project.png) ###
 
-> CNode.js client in React. React 版本的 CNode 网页版。
+> CNode.js client in React. Demo: [http://r.nodejs-china.org](http://r.nodejs-china.org)
 
 > [https://cnodejs.org/topic/545b97cc3e1f39344c5b3c1a](https://cnodejs.org/topic/545b97cc3e1f39344c5b3c1a)
 
-> PS：CNode社区早期的客户端实践项目。演示地址在 [http://r.nodejs-china.org](http://r.nodejs-china.org)。
+> PS：开发基于cirru，一种定制过语法的JavaScript，详情地址在 [http://script.cirru.org](http://script.cirru.org)
 
 ### [CNode4WP](https://github.com/heimeil/CNode4WP) ###
 
