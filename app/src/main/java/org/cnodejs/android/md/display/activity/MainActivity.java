@@ -156,7 +156,14 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         getMessageCountAsyncTask();
         // 判断是否需要切换主题
         if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
-            ThemeUtils.recreateActivity(this);
+            HandlerUtils.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    ThemeUtils.recreateActivity(MainActivity.this);
+                }
+
+            });
         }
     }
 
