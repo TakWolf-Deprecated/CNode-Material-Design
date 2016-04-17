@@ -113,14 +113,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         @Bind(R.id.topic_item_header_tv_title)
         protected TextView tvTitle;
 
-        @Bind(R.id.topic_item_header_tv_tab)
-        protected TextView tvTab;
-
-        @Bind(R.id.topic_item_header_tv_visit_count)
-        protected TextView tvVisitCount;
+        @Bind(R.id.topic_item_header_icon_good)
+        protected View iconGood;
 
         @Bind(R.id.topic_item_header_img_avatar)
         protected ImageView imgAvatar;
+
+        @Bind(R.id.topic_item_header_tv_tab)
+        protected TextView tvTab;
 
         @Bind(R.id.topic_item_header_tv_login_name)
         protected TextView tvLoginName;
@@ -128,11 +128,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         @Bind(R.id.topic_item_header_tv_create_time)
         protected TextView tvCreateTime;
 
+        @Bind(R.id.topic_item_header_tv_visit_count)
+        protected TextView tvVisitCount;
+
+        @Bind(R.id.topic_item_header_btn_favorite)
+        protected ImageView btnFavorite;
+
         @Bind(R.id.topic_item_header_web_content)
         protected CNodeWebView webContent;
-
-        @Bind(R.id.topic_item_header_icon_good)
-        protected View iconGood;
 
         @Bind(R.id.topic_item_header_layout_no_reply)
         protected ViewGroup layoutNoReply;
@@ -145,14 +148,15 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         public void update(int position) {
             if (!isHeaderShow) {
                 tvTitle.setText(topic.getTitle());
+                iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
+                Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
                 tvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
                 tvTab.setBackgroundDrawable(ThemeUtils.getThemeAttrDrawable(activity, topic.isTop() ? R.attr.referenceBackgroundAccent : R.attr.referenceBackgroundNormal));
                 tvTab.setTextColor(topic.isTop() ? Color.WHITE : ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
-                tvVisitCount.setText(topic.getVisitCount() + "次浏览");
-                Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
                 tvLoginName.setText(topic.getAuthor().getLoginName());
-                tvCreateTime.setText(activity.getString(R.string.post_at_$) + FormatUtils.getRecentlyTimeText(topic.getCreateAt()));
-                iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
+                tvCreateTime.setText(FormatUtils.getRecentlyTimeText(topic.getCreateAt()) + "创建");
+                tvVisitCount.setText(topic.getVisitCount() + "次浏览");
+                btnFavorite.setImageResource(topic.isCollect() ? R.drawable.ic_favorite_theme_24dp : R.drawable.ic_favorite_outline_grey600_24dp);
 
                 // 这里直接使用WebView，有性能问题
                 webContent.loadRenderedContent(topic.getHandleContent());

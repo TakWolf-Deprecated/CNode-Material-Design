@@ -55,7 +55,6 @@
     <string name="ok">好的</string>
 
     <string name="create_at_$">创建于：</string>
-    <string name="post_at_$">发布于：</string>
     <string name="score_$">积分：</string>
     <string name="register_time_$">注册时间：</string>
     <string name="$slash">/</string>
