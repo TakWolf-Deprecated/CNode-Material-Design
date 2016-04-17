@@ -5,23 +5,14 @@ import com.google.gson.annotations.SerializedName;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.joda.time.DateTime;
 
-public class Topic {
-
-    private String id;
+public class Topic extends TopicSimple {
 
     @SerializedName("author_id")
     private String authorId;
 
-    private Author author;
-
     private TabType tab;
 
-    private String title;
-
     private String content;
-
-    @SerializedName("last_reply_at")
-    private DateTime lastReplyAt;
 
     private boolean good;
 
@@ -36,28 +27,12 @@ public class Topic {
     @SerializedName("create_at")
     private DateTime createAt;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getAuthorId() {
         return authorId;
     }
 
     public void setAuthorId(String authorId) {
         this.authorId = authorId;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
     }
 
     public TabType getTab() {
@@ -68,28 +43,12 @@ public class Topic {
         this.tab = tab;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public DateTime getLastReplyAt() {
-        return lastReplyAt;
-    }
-
-    public void setLastReplyAt(DateTime lastReplyAt) {
-        this.lastReplyAt = lastReplyAt;
     }
 
     public boolean isGood() {
