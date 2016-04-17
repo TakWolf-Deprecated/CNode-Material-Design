@@ -36,6 +36,7 @@ import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.util.FormatUtils;
+import org.cnodejs.android.md.util.HandlerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -209,7 +210,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         }
 
     };
-    
+
     private void updateUserInfoViews() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             Glide.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
@@ -404,44 +405,41 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         switch (itemView.getId()) {
             case R.id.main_nav_btn_notification:
                 if (LoginActivity.startForResultWithAccessTokenCheck(this)) {
-                    drawerLayout.setDrawerListener(notificationDrawerListener);
-                    drawerLayout.closeDrawers();
+                    notificationAction.startDelayed();
                 }
                 break;
             case R.id.main_nav_btn_setting:
-                drawerLayout.setDrawerListener(settingDrawerListener);
-                drawerLayout.closeDrawers();
+                settingAction.startDelayed();
                 break;
             case R.id.main_nav_btn_about:
-                drawerLayout.setDrawerListener(aboutDrawerListener);
-                drawerLayout.closeDrawers();
-                break;
-            default:
-                drawerLayout.setDrawerListener(openDrawerListener);
-                drawerLayout.closeDrawers();
+                aboutAction.startDelayed();
                 break;
         }
+        drawerLayout.closeDrawers();
     }
 
-    private class OtherItemDrawerListener extends DrawerLayout.SimpleDrawerListener {
+    private class OtherItemAction implements Runnable {
 
         private Class gotoClz;
 
-        protected OtherItemDrawerListener(Class gotoClz) {
+        protected OtherItemAction(Class gotoClz) {
             this.gotoClz = gotoClz;
         }
 
         @Override
-        public void onDrawerClosed(View drawerView) {
+        public void run() {
             startActivity(new Intent(MainActivity.this, gotoClz));
-            drawerLayout.setDrawerListener(openDrawerListener);
+        }
+
+        public void startDelayed() {
+            HandlerUtils.postDelayed(this, 1000);
         }
 
     }
 
-    private DrawerLayout.DrawerListener notificationDrawerListener = new OtherItemDrawerListener(NotificationActivity.class);
-    private DrawerLayout.DrawerListener settingDrawerListener = new OtherItemDrawerListener(SettingActivity.class);
-    private DrawerLayout.DrawerListener aboutDrawerListener = new OtherItemDrawerListener(AboutActivity.class);
+    private OtherItemAction notificationAction = new OtherItemAction(NotificationActivity.class);
+    private OtherItemAction settingAction = new OtherItemAction(SettingActivity.class);
+    private OtherItemAction aboutAction = new OtherItemAction(AboutActivity.class);
 
     /**
      * 注销按钮
