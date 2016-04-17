@@ -120,6 +120,12 @@
 
 > [https://cnodejs.org/topic/566bb3a35af0e6ab3bf1a280](https://cnodejs.org/topic/566bb3a35af0e6ab3bf1a280)
 
+### [Ioniclub](https://github.com/XueRainey/Ioniclub) ###
+
+> Ioniclub is hybird mobile app of [https://cnodejs.org](https://cnodejs.org), web demo [http://rainey.coding.io/ioniclub/](http://rainey.coding.io/ioniclub/)
+
+> [https://cnodejs.org/topic/57111863434cfcfa52684a8e](https://cnodejs.org/topic/57111863434cfcfa52684a8e)
+
 ### [CNode-android](https://github.com/iwhys/CNode-android) ###
 
 > 这是为CNodejs社区(https://cnodejs.org) 开发的原生Android版客户端。适用于Android4.0及以上。
