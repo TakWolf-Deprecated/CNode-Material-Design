@@ -22,6 +22,7 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.util.FormatUtils;
@@ -172,6 +173,51 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
             UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
         }
 
+        @OnClick(R.id.topic_item_header_btn_favorite)
+        protected void onBtnFavoriteClick() {
+            if (topic != null) {
+                if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
+                    if (topic.isCollect()) {
+                        decollectTopicAsyncTask(topic, btnFavorite);
+                    } else {
+                        collectTopicAsyncTask(topic, btnFavorite);
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void collectTopicAsyncTask(@NonNull final TopicWithReply topic, @NonNull final ImageView btnFavorite) {
+        Call<Result> call = ApiClient.service.collectTopic(LoginShared.getAccessToken(activity), topic.getId());
+        call.enqueue(new DefaultToastCallback<Result>(activity) {
+
+            @Override
+            public boolean onResultOk(Response<Result> response, Result result) {
+                if (!activity.isFinishing()) {
+                    topic.setCollect(true);
+                    btnFavorite.setImageResource(R.drawable.ic_favorite_theme_24dp);
+                }
+                return false;
+            }
+
+        });
+    }
+
+    private void decollectTopicAsyncTask(@NonNull final TopicWithReply topic, @NonNull final ImageView btnFavorite) {
+        Call<Result> call = ApiClient.service.decollectTopic(LoginShared.getAccessToken(activity), topic.getId());
+        call.enqueue(new DefaultToastCallback<Result>(activity) {
+
+            @Override
+            public boolean onResultOk(Response<Result> response, Result result) {
+                if (!activity.isFinishing()) {
+                    topic.setCollect(false);
+                    btnFavorite.setImageResource(R.drawable.ic_favorite_outline_grey600_24dp);
+                }
+                return false;
+            }
+
+        });
     }
 
     public class ReplyViewHolder extends ViewHolder {
