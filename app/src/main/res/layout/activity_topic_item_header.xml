@@ -62,6 +62,8 @@
                             android:id="@+id/topic_item_header_tv_tab"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
                             android:paddingLeft="4dp"
                             android:paddingRight="4dp"
                             android:textColor="@android:color/white"
@@ -73,8 +75,6 @@
                             android:id="@+id/topic_item_header_tv_login_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginLeft="8dp"
                             android:textColor="?android:attr/textColorPrimary"
                             android:textSize="16sp"
                             tools:text="TakWolf" />
@@ -111,7 +111,7 @@
                             android:id="@+id/topic_item_header_tv_visit_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_accent"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:textSize="14sp"
                             android:singleLine="true"
                             tools:text="115次浏览" />
