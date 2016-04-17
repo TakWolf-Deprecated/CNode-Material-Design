@@ -1,20 +1,21 @@
 package org.cnodejs.android.md.model.api;
 
-import org.cnodejs.android.md.BuildConfig;
-import org.cnodejs.android.md.util.gson.GsonWrapper;
+import org.cnodejs.android.md.model.util.EntityUtils;
+import org.cnodejs.android.md.model.util.HttpUtils;
 
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class ApiClient {
 
     private ApiClient() {}
 
-    public static final ApiService service = new RestAdapter.Builder()
-            .setEndpoint(ApiDefine.API_HOST)
-            .setConverter(new GsonConverter(GsonWrapper.gson))
-            .setRequestInterceptor(new ApiRequestInterceptor())
-            .setLogLevel(BuildConfig.DEBUG ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE)
+    public static final String API_BASE_URL = "https://cnodejs.org/api/v1/";
+
+    public static final ApiService service = new Retrofit.Builder()
+            .baseUrl(API_BASE_URL)
+            .client(HttpUtils.client)
+            .addConverterFactory(GsonConverterFactory.create(EntityUtils.gson))
             .build()
             .create(ApiService.class);
 

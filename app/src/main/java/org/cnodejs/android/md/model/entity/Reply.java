@@ -11,6 +11,11 @@ import java.util.List;
 
 public class Reply {
 
+    public enum UpAction {
+        up,
+        down
+    }
+
     private String id;
 
     private Author author;
@@ -19,6 +24,9 @@ public class Reply {
 
     @SerializedName("ups")
     private List<String> upList;
+
+    @SerializedName("reply_id")
+    private String replyId;
 
     @SerializedName("create_at")
     private DateTime createAt;
@@ -55,6 +63,14 @@ public class Reply {
         this.upList = upList;
     }
 
+    public String getReplyId() {
+        return replyId;
+    }
+
+    public void setReplyId(String replyId) {
+        this.replyId = replyId;
+    }
+
     public DateTime getCreateAt() {
         return createAt;
     }
@@ -63,7 +79,10 @@ public class Reply {
         this.createAt = createAt;
     }
 
-    // TODO Html渲染缓存
+    /**
+     * Html渲染缓存
+     */
+
     private String handleContent = null;
 
     public String getHandleContent() {

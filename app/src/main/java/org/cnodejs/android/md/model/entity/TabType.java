@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.model.entity;
 
+import android.support.annotation.StringRes;
+
 import org.cnodejs.android.md.R;
 
 public enum TabType {
@@ -14,12 +16,14 @@ public enum TabType {
 
     job(R.string.tab_job);
 
+    @StringRes
     private int nameId;
 
-    TabType(int nameId) {
+    TabType(@StringRes int nameId) {
         this.nameId = nameId;
     }
 
+    @StringRes
     public int getNameId() {
         return nameId;
     }

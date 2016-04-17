@@ -12,7 +12,6 @@
     <string name="tab_share">分享</string>
     <string name="tab_ask">问答</string>
     <string name="tab_job">招聘</string>
-    <string name="tab_unkonw">未知</string>
 
     <string name="notification">消息</string>
     <string name="setting">设置</string>
@@ -21,9 +20,9 @@
     <string name="click_avatar_to_login">点击头像登录</string>
     <string name="press_back_again_to_exit">再按一次退出</string>
 
-    <string name="access_token_error">令牌验证错误</string>
-    <string name="access_token_error_tip">您的用户令牌已经失效，您可能需要重新登录账户。</string>
-    <string name="access_token_format_error_tip">令牌格式错误，应为32位UUID（四段分割）字符串</string>
+    <string name="access_token_auth_error">AccessToken验证错误</string>
+    <string name="access_token_format_error">AccessToken格式错误，应为UUID</string>
+    <string name="access_token_out_of_date">您的AccessToken已经过期，您可能需要重新登录账户。</string>
 
     <string name="login">登录</string>
     <string name="logout">注销</string>
@@ -31,16 +30,14 @@
     <string name="logout_tip">确定要注销吗？</string>
     <string name="logging_in_$_">正在登录中&#8230;</string>
     <string name="login_success">登录成功</string>
+    <string name="relogin">重新登录</string>
     
     <string name="no_data">暂无数据</string>
     <string name="no_message">暂无消息</string>
     <string name="no_reply">暂无回复</string>
-    <string name="data_load_faild">数据加载失败，请重试</string>
-    <string name="network_faild">网络访问失败，请重试</string>
     <string name="data_load_faild_and_click_avatar_to_reload">数据加载失败，点击头像重试</string>
     <string name="have_no_more_data">已没有更多数据</string>
-    <string name="user_not_found">用户不存在</string>
-    <string name="topic_not_found">话题不存在</string>
+    <string name="can_not_up_yourself_reply">不能帮自己点赞</string>
 
     <string name="topic">话题</string>
     <string name="new_topic">发布话题</string>
@@ -58,7 +55,6 @@
     <string name="ok">好的</string>
 
     <string name="create_at_$">创建于：</string>
-    <string name="post_at_$">发布于：</string>
     <string name="score_$">积分：</string>
     <string name="register_time_$">注册时间：</string>
     <string name="$slash">/</string>
@@ -111,6 +107,7 @@
     <string name="http_$">http://</string>
 
     <string name="markdown_preview">Markdown预览</string>
+    <string name="image_preview">查看图片</string>
 
     <string name="app_crash">程序崩溃</string>
     <string name="crash_log_tip">非常抱歉，程序运行过程中出现了一个无法避免的错误。您可以将该问题发送给开发者，此举将有助于改善应用体验。由此给您带来的诸多不便，我们深表歉意，敬请谅解。</string>

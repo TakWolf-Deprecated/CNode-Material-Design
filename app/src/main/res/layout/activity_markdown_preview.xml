@@ -22,7 +22,7 @@
         android:paddingBottom="16dp"
         android:background="?attr/widgetBackground">
 
-        <org.cnodejs.android.md.ui.widget.CNodeWebView
+        <org.cnodejs.android.md.display.widget.CNodeWebView
             android:id="@+id/markdown_preview_web_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

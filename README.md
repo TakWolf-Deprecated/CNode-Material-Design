@@ -1,10 +1,16 @@
-# CNode Material Design [![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9) #
+![Banner](/art/banner-1024-500.png)
 
-![Logo](/art/ic_launcher.png)
+# CNode Material Design #
 
-> [CNode社区](https://cnodejs.org) 第三方Android客户端，原生App，Material Design风格，支持夜间模式
+[![Platform](https://img.shields.io/badge/platform-Android-green.svg?style=flat)](http://developer.android.com/index.html)
+[![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
-> [https://cnodejs.org/topic/55c2f7f15965fe2c74f4791d](https://cnodejs.org/topic/55c2f7f15965fe2c74f4791d)
+![Logo](/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+
+[CNode社区](https://cnodejs.org) 第三方Android客户端，原生App，Material Design风格，支持夜间模式
+
+[https://cnodejs.org/topic/55c2f7f15965fe2c74f4791d](https://cnodejs.org/topic/55c2f7f15965fe2c74f4791d)
 
 ## Download ##
 
@@ -40,23 +46,25 @@
 
 - [Joda-Time](http://www.joda.org/joda-time)
 
-- [Retrofit](http://square.github.io/retrofit)
+- [Joda-Time-Android](https://github.com/dlew/joda-time-android)
 
 - [OkHttp](http://square.github.io/okhttp)
 
-- [Picasso](http://square.github.io/picasso)
+- [Retrofit](http://square.github.io/retrofit)
+
+- [Glide](https://github.com/bumptech/glide)
 
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
 
 - [MaterialEditText](https://github.com/rengwuxian/MaterialEditText)
-
-- [Material Dialogs](https://github.com/afollestad/material-dialogs)
 
 - [materialish-progress](https://github.com/pnikosis/materialish-progress)
 
 - [FloatingActionButton](https://github.com/makovkastar/FloatingActionButton)
 
 - [QRCodeReaderView](https://github.com/dlazaro66/QRCodeReaderView)
+
+- [PhotoView](https://github.com/chrisbanes/PhotoView)
 
 - [MarkdownPapers](http://markdown.tautua.org)
 
@@ -92,13 +100,31 @@
 
 > [https://cnodejs.org/topic/559bd1b91e5c761761468884](https://cnodejs.org/topic/559bd1b91e5c761761468884)
 
-> PS：基于React Native实现，目前只有IOS版本，作者有计划适配Android。比较不错的技术实践，作者比较活跃。
+> PS：基于React Native实现，包含iOS和Android两个平台
 
 ### [Vue-cnodejs](https://github.com/shinygang/Vue-cnodejs) ![image](/art/ic_good_project.png) ###
 
 > 基于vue.js重写Cnodejs.org社区的webapp，[线上访问地址](http://shinygang.github.io/cnodevue)
 
 > [https://cnodejs.org/topic/565c4473d0bc14ae279399fe](https://cnodejs.org/topic/565c4473d0bc14ae279399fe)
+
+### [swift-cnode](https://github.com/nswbmw/swift-cnode) ###
+
+> [CNode社区](https://cnodejs.org/) 的又一 swift 客户端，未完成...不定期更新，欢迎 fork 与 PR。
+
+> [https://cnodejs.org/topic/570a7adcbc564eaf3c6a4901](https://cnodejs.org/topic/570a7adcbc564eaf3c6a4901)
+
+### [cnode-angular-material](https://github.com/XGHeaven/cnode-angular-material) ###
+
+> CNode.JS 社区的 Angular-Material 的实现，暂时处于开发状态中 [http://cnode.xgheaven.cn](http://cnode.xgheaven.cn)
+
+> [https://cnodejs.org/topic/566bb3a35af0e6ab3bf1a280](https://cnodejs.org/topic/566bb3a35af0e6ab3bf1a280)
+
+### [Ioniclub](https://github.com/XueRainey/Ioniclub) ###
+
+> Ioniclub is hybird mobile app of [https://cnodejs.org](https://cnodejs.org), web demo [http://rainey.coding.io/ioniclub/](http://rainey.coding.io/ioniclub/)
+
+> [https://cnodejs.org/topic/57111863434cfcfa52684a8e](https://cnodejs.org/topic/57111863434cfcfa52684a8e)
 
 ### [CNode-android](https://github.com/iwhys/CNode-android) ###
 
@@ -130,13 +156,13 @@
 
 > PS：CNode社区早期的客户端实践项目，基于Ionic 和 PhoneGap。作者已经很长时间没有更新了。
 
-### [cnodejs-reader](https://github.com/cnodejs/cnodejs-reader) ###
+### [cnodejs-reader](https://github.com/cnodejs/cnodejs-reader) ![image](/art/ic_good_project.png) ###
 
-> CNode.js client in React. React 版本的 CNode 网页版。
+> CNode.js client in React. Demo: [http://r.nodejs-china.org](http://r.nodejs-china.org)
 
 > [https://cnodejs.org/topic/545b97cc3e1f39344c5b3c1a](https://cnodejs.org/topic/545b97cc3e1f39344c5b3c1a)
 
-> PS：CNode社区早期的客户端实践项目。演示地址在 [http://r.nodejs-china.org](http://r.nodejs-china.org)。
+> PS：开发基于cirru，一种定制过语法的JavaScript，详情地址在 [http://script.cirru.org](http://script.cirru.org)
 
 ### [CNode4WP](https://github.com/heimeil/CNode4WP) ###
 
