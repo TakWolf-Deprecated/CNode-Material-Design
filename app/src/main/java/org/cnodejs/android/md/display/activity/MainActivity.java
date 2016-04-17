@@ -432,7 +432,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         }
 
         public void startDelayed() {
-            HandlerUtils.postDelayed(this, 1000);
+            HandlerUtils.postDelayed(this, 400);
         }
 
     }
