@@ -8,9 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -24,19 +21,20 @@ import com.bumptech.glide.Glide;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.display.adapter.UserDetailAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
-import org.cnodejs.android.md.display.fragment.UserDetailItemFragment;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.CallbackAdapter;
+import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.util.HandlerUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -99,7 +97,7 @@ public class UserDetailActivity extends StatusBarActivity {
     @Bind(R.id.user_detail_progress_wheel)
     protected ProgressWheel progressWheel;
 
-    private ViewPagerAdapter adapter;
+    private UserDetailAdapter adapter;
 
     private String loginName;
     private String githubUsername;
@@ -118,15 +116,13 @@ public class UserDetailActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new UserDetailAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
         tabLayout.setupWithViewPager(viewPager);
 
         loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
-        if (!TextUtils.isEmpty(loginName)) {
-            tvLoginName.setText(loginName);
-        }
+        tvLoginName.setText(loginName);
 
         String avatarUrl = getIntent().getStringExtra(EXTRA_AVATAR_URL);
         if (!TextUtils.isEmpty(avatarUrl)) {
@@ -134,6 +130,7 @@ public class UserDetailActivity extends StatusBarActivity {
         }
 
         getUserAsyncTask();
+        getCollectTopicListAsyncTask();
     }
 
     /**
@@ -146,7 +143,29 @@ public class UserDetailActivity extends StatusBarActivity {
     protected void onBtnAvatarClick() {
         if (!loading) {
             getUserAsyncTask();
+            getCollectTopicListAsyncTask();
         }
+    }
+
+    @OnClick(R.id.user_detail_tv_github_username)
+    protected void onBtnGithubUsernameClick() {
+        if (!TextUtils.isEmpty(githubUsername)) {
+            ShipUtils.openInBrowser(this, "https://github.com/" + githubUsername);
+        }
+    }
+
+    private void updateUserInfoViews(User user) {
+        Glide.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+        tvLoginName.setText(user.getLoginName());
+        if (TextUtils.isEmpty(user.getGithubUsername())) {
+            tvGithubUsername.setVisibility(View.INVISIBLE);
+            tvGithubUsername.setText(null);
+        } else {
+            tvGithubUsername.setVisibility(View.VISIBLE);
+            tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
+        }
+        tvCreateTime.setText(getString(R.string.register_time_$) + user.getCreateAt().toString("yyyy-MM-dd"));
+        tvScore.setText(getString(R.string.score_$) + user.getScore());
     }
 
     private void getUserAsyncTask() {
@@ -228,61 +247,17 @@ public class UserDetailActivity extends StatusBarActivity {
         });
     }
 
-    private void updateUserInfoViews(User user) {
-        Glide.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-        tvLoginName.setText(user.getLoginName());
-        if (TextUtils.isEmpty(user.getGithubUsername())) {
-            tvGithubUsername.setVisibility(View.INVISIBLE);
-            tvGithubUsername.setText(null);
-        } else {
-            tvGithubUsername.setVisibility(View.VISIBLE);
-            tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
-        }
-        tvCreateTime.setText(getString(R.string.register_time_$) + user.getCreateAt().toString("yyyy-MM-dd"));
-        tvScore.setText(getString(R.string.score_$) + user.getScore());
-    }
+    private void getCollectTopicListAsyncTask() {
+        Call<Result.Data<List<Topic>>> call = ApiClient.service.getCollectTopicList(loginName);
+        call.enqueue(new DefaultToastCallback<Result.Data<List<Topic>>>(this) {
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
+            @Override
+            public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
+                adapter.update(result.getData());
+                return false;
+            }
 
-        private List<UserDetailItemFragment> fmList = new ArrayList<>();
-        private String[] titles = {
-                "最近回复",
-                "最新发布"
-        };
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-            fmList.add(new UserDetailItemFragment());
-            fmList.add(new UserDetailItemFragment());
-        }
-
-        public void update(@NonNull User user) {
-            fmList.get(0).notifyDataSetChanged(user.getRecentReplyList());
-            fmList.get(1).notifyDataSetChanged(user.getRecentTopicList());
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fmList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fmList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles[position];
-        }
-
-    }
-
-    @OnClick(R.id.user_detail_tv_github_username)
-    protected void onBtnGithubUsernameClick() {
-        if (!TextUtils.isEmpty(githubUsername)) {
-            ShipUtils.openInBrowser(this, "https://github.com/" + githubUsername);
-        }
+        });
     }
 
 }
