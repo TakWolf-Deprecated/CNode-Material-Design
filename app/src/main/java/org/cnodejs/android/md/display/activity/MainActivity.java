@@ -130,7 +130,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         adaptStatusBar(navAdaptStatusBar);
 
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
-        drawerLayout.setDrawerListener(openDrawerListener);
+        drawerLayout.addDrawerListener(drawerListener);
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -159,32 +159,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         }
     }
 
-    /**
-     * 未读消息数目
-     */
-    private void getMessageCountAsyncTask() {
-        final String accessToken = LoginShared.getAccessToken(this);
-        if (!TextUtils.isEmpty(accessToken)) {
-            Call<Result.Data<Integer>> call =  ApiClient.service.getMessageCount(accessToken);
-            call.enqueue(new CallbackAdapter<Result.Data<Integer>>() {
-
-                @Override
-                public boolean onResultOk(Response<Result.Data<Integer>> response, Result.Data<Integer> result) {
-                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(MainActivity.this))) {
-                        tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
-                    }
-                    return false;
-                }
-
-            });
-        }
-    }
-
-    /**
-     * 用户信息更新逻辑
-     */
-
-    private DrawerLayout.DrawerListener openDrawerListener = new DrawerLayout.SimpleDrawerListener() {
+    private final DrawerLayout.DrawerListener drawerListener = new DrawerLayout.SimpleDrawerListener() {
 
         @Override
         public void onDrawerOpened(View drawerView) {
@@ -193,8 +168,48 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
             getMessageCountAsyncTask();
         }
 
-    };
+        @Override
+        public void onDrawerClosed(View drawerView) {
+            TabType newTab = TabType.all;
+            for (CheckedTextView navItem : navMainItemList) {
+                if (navItem.isChecked()) {
+                    switch (navItem.getId()) {
+                        case R.id.main_nav_btn_all:
+                            newTab = TabType.all;
+                            break;
+                        case R.id.main_nav_btn_good:
+                            newTab = TabType.good;
+                            break;
+                        case R.id.main_nav_btn_share:
+                            newTab = TabType.share;
+                            break;
+                        case R.id.main_nav_btn_ask:
+                            newTab = TabType.ask;
+                            break;
+                        case R.id.main_nav_btn_job:
+                            newTab = TabType.job;
+                            break;
+                        default:
+                            newTab = TabType.all;
+                            break;
+                    }
+                    break;
+                }
+            }
+            if (newTab != currentTab) {
+                currentTab = newTab;
+                currentPage = 0;
+                toolbar.setTitle(currentTab.getNameId());
+                topicList.clear();
+                notifyDataSetChanged();
+                refreshLayout.setRefreshing(true);
+                onRefresh();
+                fabCreateTopic.show(true);
+            }
+        }
 
+    };
+    
     private void updateUserInfoViews() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             Glide.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
@@ -220,6 +235,24 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
                     if (TextUtils.equals(accessToken, LoginShared.getAccessToken(MainActivity.this))) {
                         LoginShared.update(MainActivity.this, result.getData());
                         updateUserInfoViews();
+                    }
+                    return false;
+                }
+
+            });
+        }
+    }
+
+    private void getMessageCountAsyncTask() {
+        final String accessToken = LoginShared.getAccessToken(this);
+        if (!TextUtils.isEmpty(accessToken)) {
+            Call<Result.Data<Integer>> call =  ApiClient.service.getMessageCount(accessToken);
+            call.enqueue(new CallbackAdapter<Result.Data<Integer>>() {
+
+                @Override
+                public boolean onResultOk(Response<Result.Data<Integer>> response, Result.Data<Integer> result) {
+                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(MainActivity.this))) {
+                        tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
                     }
                     return false;
                 }
@@ -352,62 +385,11 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
             R.id.main_nav_btn_job
     })
     public void onNavigationMainItemClick(CheckedTextView itemView) {
-        switch (itemView.getId()) {
-            case R.id.main_nav_btn_all:
-                drawerLayout.setDrawerListener(tabAllDrawerListener);
-                break;
-            case R.id.main_nav_btn_good:
-                drawerLayout.setDrawerListener(tabGoodDrawerListener);
-                break;
-            case R.id.main_nav_btn_share:
-                drawerLayout.setDrawerListener(tabShareDrawerListener);
-                break;
-            case R.id.main_nav_btn_ask:
-                drawerLayout.setDrawerListener(tabAskDrawerListener);
-                break;
-            case R.id.main_nav_btn_job:
-                drawerLayout.setDrawerListener(tabJobDrawerListener);
-                break;
-            default:
-                drawerLayout.setDrawerListener(openDrawerListener);
-                break;
-        }
         for (CheckedTextView navItem : navMainItemList) {
             navItem.setChecked(navItem.getId() == itemView.getId());
         }
         drawerLayout.closeDrawers();
     }
-
-    private class MainItemDrawerListener extends DrawerLayout.SimpleDrawerListener {
-
-        private TabType tabType;
-
-        protected MainItemDrawerListener(TabType tabType) {
-            this.tabType = tabType;
-        }
-
-        @Override
-        public void onDrawerClosed(View drawerView) {
-            if (tabType != currentTab) {
-                currentTab = tabType;
-                currentPage = 0;
-                toolbar.setTitle(currentTab.getNameId());
-                topicList.clear();
-                notifyDataSetChanged();
-                refreshLayout.setRefreshing(true);
-                onRefresh();
-                fabCreateTopic.show(true);
-            }
-            drawerLayout.setDrawerListener(openDrawerListener);
-        }
-
-    }
-
-    private DrawerLayout.DrawerListener tabAllDrawerListener = new MainItemDrawerListener(TabType.all);
-    private DrawerLayout.DrawerListener tabGoodDrawerListener = new MainItemDrawerListener(TabType.good);
-    private DrawerLayout.DrawerListener tabShareDrawerListener = new MainItemDrawerListener(TabType.share);
-    private DrawerLayout.DrawerListener tabAskDrawerListener = new MainItemDrawerListener(TabType.ask);
-    private DrawerLayout.DrawerListener tabJobDrawerListener = new MainItemDrawerListener(TabType.job);
 
     /**
      * 次要菜单导航
