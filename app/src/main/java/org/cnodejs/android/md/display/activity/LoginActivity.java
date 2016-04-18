@@ -138,4 +138,12 @@ public class LoginActivity extends StatusBarActivity {
         }
     }
 
+    @OnClick(R.id.login_btn_login_tip)
+    protected void onBtnLoginTipClick() {
+        DialogUtils.createAlertDialogBuilder(this)
+                .setMessage(R.string.how_to_get_access_token_tip_content)
+                .setPositiveButton(R.string.confirm, null)
+                .show();
+    }
+
 }
