@@ -27,7 +27,7 @@ public class Message {
     private Reply reply; // 这里不含Author字段，注意
 
     @SerializedName("create_at")
-    private DateTime createAt; // TODO 这个字段目前不存在，需要服务端补全
+    private DateTime createAt;
 
     public String getId() {
         return id;
@@ -78,15 +78,8 @@ public class Message {
         this.reply = reply;
     }
 
-    public DateTime getCreateAt() { // TODO 这里做兼容处理
-        //return createAt;
-        if (createAt != null) {
-            return createAt;
-        } else if (getReply() != null && getReply().getCreateAt() != null) {
-            return getReply().getCreateAt();
-        } else {
-            return getTopic().getLastReplyAt();
-        }
+    public DateTime getCreateAt() {
+        return createAt;
     }
 
     public void setCreateAt(DateTime createAt) {
