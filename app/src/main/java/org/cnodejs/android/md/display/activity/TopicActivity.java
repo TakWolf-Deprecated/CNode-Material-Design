@@ -7,8 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -26,6 +25,7 @@ import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.dialog.DialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
 import org.cnodejs.android.md.display.widget.EditorBarHandler;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
@@ -76,8 +76,8 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
     @Bind(R.id.topic_refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
-    @Bind(R.id.topic_recycler_view)
-    protected RecyclerView recyclerView;
+    @Bind(R.id.topic_list_view)
+    protected ListView listView;
 
     @Bind(R.id.topic_icon_no_data)
     protected View iconNoData;
@@ -93,6 +93,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
     private String topicId;
     private TopicWithReply topic;
 
+    private TopicHeaderViewHolder headerViewHolder;
     private TopicAdapter adapter;
 
     @Override
@@ -108,11 +109,12 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         toolbar.inflateMenu(R.menu.topic);
         toolbar.setOnMenuItemClickListener(this);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        headerViewHolder = new TopicHeaderViewHolder(this, listView);
+        headerViewHolder.update(null, false, 0); // TODO
         adapter = new TopicAdapter(this, this);
-        recyclerView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
-        fabReply.attachToRecyclerView(recyclerView);
+        fabReply.attachToListView(listView);
 
         // 创建回复窗口
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -154,7 +156,8 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
             public boolean onResultOk(Response<Result.Data<TopicWithReply>> response, Result.Data<TopicWithReply> result) {
                 if (!isFinishing()) {
                     topic = result.getData();
-                    adapter.setTopic(result.getData());
+                    headerViewHolder.update(topic);
+                    adapter.update(topic);
                     adapter.notifyDataSetChanged();
                     iconNoData.setVisibility(View.GONE);
                 }
@@ -249,13 +252,8 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
                     topic.getReplyList().add(reply);
                     // 更新adapter并让recyclerView滑动到最底部
                     replyWindow.dismiss();
-                    if (topic.getReplyList().size() == 1) { // 需要全刷新
-                        adapter.notifyDataSetChanged();
-                    } else { // 插入刷新
-                        adapter.notifyItemChanged(topic.getReplyList().size() - 1);
-                        adapter.notifyItemInserted(topic.getReplyList().size());
-                    }
-                    recyclerView.smoothScrollToPosition(topic.getReplyList().size());
+                    adapter.notifyDataSetChanged();
+                    listView.smoothScrollToPosition(topic.getReplyList().size());
                     // 清空回复框内容
                     edtContent.setText(null);
                     // 提示
