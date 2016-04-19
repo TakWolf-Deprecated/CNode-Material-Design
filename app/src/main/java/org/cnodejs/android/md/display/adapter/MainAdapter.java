@@ -170,7 +170,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         @OnClick(R.id.main_item_btn_item)
         protected void onBtnItemClick() {
-            TopicActivity.start(activity, topic.getId());
+            TopicActivity.start(activity, topic);
         }
 
     }
