@@ -21,9 +21,10 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
-import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.util.FormatUtils;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,36 +34,32 @@ import retrofit2.Response;
 
 public class TopicAdapter extends BaseAdapter {
 
-    private final Activity activity;
-    private final LayoutInflater inflater;
-    private TopicWithReply topic;
-
     public interface OnAtClickListener {
 
         void onAt(String loginName);
 
     }
 
+    private final Activity activity;
+    private final LayoutInflater inflater;
+    private final List<Reply> replyList;
     private final OnAtClickListener onAtClickListener;
 
-    public TopicAdapter(@NonNull Activity activity, @NonNull OnAtClickListener onAtClickListener) {
+    public TopicAdapter(@NonNull Activity activity, @NonNull List<Reply> replyList, @NonNull OnAtClickListener onAtClickListener) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
+        this.replyList = replyList;
         this.onAtClickListener = onAtClickListener;
-    }
-
-    public void update(TopicWithReply topic) {
-        this.topic = topic;
     }
 
     @Override
     public int getCount() {
-        return topic == null ? 0 : topic.getReplyList().size();
+        return replyList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return topic.getReplyList().get(position);
+        return replyList.get(position);
     }
 
     @Override
@@ -120,7 +117,7 @@ public class TopicAdapter extends BaseAdapter {
 
         public void update(int position) {
             this.position = position;
-            reply = topic.getReplyList().get(position);
+            reply = replyList.get(position);
 
             Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
@@ -128,8 +125,8 @@ public class TopicAdapter extends BaseAdapter {
             tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
             btnUps.setText(String.valueOf(reply.getUpList().size()));
             btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
-            iconDeepLine.setVisibility(position == topic.getReplyList().size() - 1 ? View.GONE : View.VISIBLE);
-            iconShadowGap.setVisibility(position == topic.getReplyList().size() - 1 ? View.VISIBLE : View.GONE);
+            iconDeepLine.setVisibility(position == replyList.size() - 1 ? View.GONE : View.VISIBLE);
+            iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
 
             // 这里直接使用WebView，有性能问题
             webContent.loadRenderedContent(reply.getHandleContent());

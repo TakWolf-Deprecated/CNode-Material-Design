@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -35,14 +36,17 @@ import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Author;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
+import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,6 +57,14 @@ import retrofit2.Response;
 public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayout.OnRefreshListener, TopicAdapter.OnAtClickListener, Toolbar.OnMenuItemClickListener {
 
     private static final String EXTRA_TOPIC_ID = "topicId";
+    private static final String EXTRA_TOPIC = "topic";
+
+    public static void start(@NonNull Activity activity, @NonNull Topic topic) {
+        Intent intent = new Intent(activity, TopicActivity.class);
+        intent.putExtra(EXTRA_TOPIC_ID, topic.getId());
+        intent.putExtra(EXTRA_TOPIC, EntityUtils.gson.toJson(topic));
+        activity.startActivity(intent);
+    }
 
     public static void start(@NonNull Activity activity, String topicId) {
         Intent intent = new Intent(activity, TopicActivity.class);
@@ -91,7 +103,8 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
     private ProgressDialog progressDialog;
 
     private String topicId;
-    private TopicWithReply topic;
+    private Topic topic;
+    private final List<Reply> replyList = new ArrayList<>();
 
     private TopicHeaderViewHolder headerViewHolder;
     private TopicAdapter adapter;
@@ -104,15 +117,20 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         ButterKnife.bind(this);
 
         topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
+        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_TOPIC))) {
+            topic = EntityUtils.gson.fromJson(getIntent().getStringExtra(EXTRA_TOPIC), Topic.class);
+        }
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.topic);
         toolbar.setOnMenuItemClickListener(this);
 
         headerViewHolder = new TopicHeaderViewHolder(this, listView);
-        headerViewHolder.update(null, false, 0); // TODO
-        adapter = new TopicAdapter(this, this);
+        headerViewHolder.update(topic, false, 0);
+        adapter = new TopicAdapter(this, replyList, this);
         listView.setAdapter(adapter);
+
+        iconNoData.setVisibility(topic == null ? View.VISIBLE : View.GONE);
 
         fabReply.attachToListView(listView);
 
@@ -156,8 +174,9 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
             public boolean onResultOk(Response<Result.Data<TopicWithReply>> response, Result.Data<TopicWithReply> result) {
                 if (!isFinishing()) {
                     topic = result.getData();
-                    headerViewHolder.update(topic);
-                    adapter.update(topic);
+                    headerViewHolder.update(result.getData());
+                    replyList.clear();
+                    replyList.addAll(result.getData().getReplyList());
                     adapter.notifyDataSetChanged();
                     iconNoData.setVisibility(View.GONE);
                 }
@@ -249,11 +268,11 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
                     reply.setHandleContent(FormatUtils.renderMarkdown(content)); // 本地要做预渲染处理
                     reply.setCreateAt(new DateTime());
                     reply.setUpList(new ArrayList<String>());
-                    topic.getReplyList().add(reply);
+                    replyList.add(reply);
                     // 更新adapter并让recyclerView滑动到最底部
                     replyWindow.dismiss();
                     adapter.notifyDataSetChanged();
-                    listView.smoothScrollToPosition(topic.getReplyList().size());
+                    listView.smoothScrollToPosition(replyList.size());
                     // 清空回复框内容
                     edtContent.setText(null);
                     // 提示
