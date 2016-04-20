@@ -110,6 +110,10 @@ public class TopicHeaderViewHolder {
         update(topic, topic.isCollect(), topic.getReplyList().size());
     }
 
+    public void update(int replyCount) {
+        layoutNoReply.setVisibility(replyCount > 0 ? View.GONE : View.VISIBLE);
+    }
+
     @OnClick(R.id.topic_item_header_img_avatar)
     protected void onBtnAvatarClick() {
         UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());

@@ -269,8 +269,9 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
                     reply.setCreateAt(new DateTime());
                     reply.setUpList(new ArrayList<String>());
                     replyList.add(reply);
-                    // 更新adapter并让recyclerView滑动到最底部
+                    // 更新header和adapter
                     replyWindow.dismiss();
+                    headerViewHolder.update(replyList.size());
                     adapter.notifyDataSetChanged();
                     listView.smoothScrollToPosition(replyList.size());
                     // 清空回复框内容
