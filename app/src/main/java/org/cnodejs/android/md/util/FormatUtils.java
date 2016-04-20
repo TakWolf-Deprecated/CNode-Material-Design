@@ -104,9 +104,12 @@ public final class FormatUtils {
     private static final Markdown md = new Markdown();
 
     public static String renderMarkdown(String text) {
-        if (TextUtils.isEmpty(text)) {
-            text = "";
-        }
+        // 保证text不为null
+        text = TextUtils.isEmpty(text) ? "" : text;
+        // 解析@协议
+        text = " " + text;
+        text = text.replaceAll(" @([a-zA-Z0-9_]+)", "\\[@$1\\]\\(https://cnodejs.org/user/$1\\)").trim();
+        // 渲染markdown
         try {
             StringWriter out = new StringWriter();
             md.transform(new StringReader(text), out);
@@ -114,6 +117,7 @@ public final class FormatUtils {
         } catch (ParseException e) {
             // nothing to do
         }
+        // 添加样式容器
         return "<div class=\"markdown-text\">" + text + "</div>";
     }
 
