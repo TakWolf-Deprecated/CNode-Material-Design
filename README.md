@@ -127,6 +127,12 @@
 
 > [https://cnodejs.org/topic/57111863434cfcfa52684a8e](https://cnodejs.org/topic/57111863434cfcfa52684a8e)
 
+### [cnode-vue](https://github.com/ihanyang/cnode-vue) ###
+
+> Vue版 cnodejs.org社区 WebApp [线上访问](http://hanyang.coding.io/)
+
+> [https://cnodejs.org/topic/56f8beb9b819f527325e7883](https://cnodejs.org/topic/56f8beb9b819f527325e7883)
+
 ### [CNode-android](https://github.com/iwhys/CNode-android) ###
 
 > 这是为CNodejs社区(https://cnodejs.org) 开发的原生Android版客户端。适用于Android4.0及以上。
