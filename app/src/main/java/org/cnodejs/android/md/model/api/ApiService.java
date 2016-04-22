@@ -71,7 +71,7 @@ public interface ApiService {
     );
 
     //=====
-    // 评论
+    // 回复
     //=====
 
     @POST("topic/{topicId}/replies")
