@@ -67,6 +67,12 @@ public class TopicHeaderViewHolder {
     @Bind(R.id.topic_item_header_layout_no_reply)
     protected ViewGroup layoutNoReply;
 
+    @Bind(R.id.topic_item_header_layout_reply_count)
+    protected ViewGroup layoutReplyCount;
+
+    @Bind(R.id.topic_item_header_tv_reply_count)
+    protected TextView tvReplyCount;
+
     private final Activity activity;
     private Topic topic;
     private boolean isCollect;
@@ -99,7 +105,8 @@ public class TopicHeaderViewHolder {
             // 这里直接使用WebView，有性能问题
             webContent.loadRenderedContent(topic.getHandleContent());
 
-            layoutNoReply.setVisibility(replyCount > 0 ? View.GONE : View.VISIBLE);
+            // 更新回复数目
+            update(replyCount);
         } else {
             layoutContent.setVisibility(View.GONE);
             iconGood.setVisibility(View.GONE);
@@ -112,6 +119,8 @@ public class TopicHeaderViewHolder {
 
     public void update(int replyCount) {
         layoutNoReply.setVisibility(replyCount > 0 ? View.GONE : View.VISIBLE);
+        layoutReplyCount.setVisibility(replyCount > 0 ? View.VISIBLE : View.GONE);
+        tvReplyCount.setText(replyCount + "条回复");
     }
 
     @OnClick(R.id.topic_item_header_img_avatar)
