@@ -88,7 +88,7 @@
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp"
         android:background="?attr/referenceBackgroundNormal"
-        tools:text="原话题：【深js拾遗】mbot 机器人大放送！！！！！！！先抢先得噢亲！！！！" />
+        tools:text="原话题：这里是话题的标题" />
 
     <View style="@style/AppWidget.DeepLine" />
 
