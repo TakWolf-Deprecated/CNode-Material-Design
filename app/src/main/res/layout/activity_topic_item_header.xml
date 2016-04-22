@@ -165,6 +165,26 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/topic_item_header_layout_reply_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/topic_item_header_tv_reply_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="16sp"
+                android:background="?attr/widgetBackground"
+                tools:text="10条回复" />
+
+            <View style="@style/AppWidget.DeepLine" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <ImageView

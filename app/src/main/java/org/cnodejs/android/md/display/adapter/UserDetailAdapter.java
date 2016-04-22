@@ -19,7 +19,7 @@ public class UserDetailAdapter extends FragmentPagerAdapter {
     private final String[] titles = {
             "最近回复",
             "最新发布",
-            "主题收藏"
+            "话题收藏"
     };
 
     public UserDetailAdapter(FragmentManager manager) {
