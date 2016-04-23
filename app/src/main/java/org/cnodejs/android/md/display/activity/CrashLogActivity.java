@@ -39,7 +39,7 @@ public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMen
         ButterKnife.bind(this);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
-        toolbar.inflateMenu(R.menu.new_topic);
+        toolbar.inflateMenu(R.menu.crash_log);
         toolbar.setOnMenuItemClickListener(this);
 
         //接收异常对象
