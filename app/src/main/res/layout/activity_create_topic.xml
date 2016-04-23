@@ -18,7 +18,7 @@
             app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/new_topic_toolbar"
+                android:id="@+id/create_topic_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_primary"
@@ -49,7 +49,7 @@
                     android:textSize="16sp" />
 
                 <Spinner
-                    android:id="@+id/new_topic_spn_tab"
+                    android:id="@+id/create_topic_spn_tab"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:entries="@array/tabs" />
@@ -59,14 +59,14 @@
             <View style="@style/AppWidget.DeepLine" />
 
             <EditText
-                android:id="@+id/new_topic_edt_title"
+                android:id="@+id/create_topic_edt_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:singleLine="true"
-                android:hint="@string/new_topic_title_hint"
+                android:hint="@string/create_topic_title_hint"
                 android:background="?attr/widgetBackground" />
 
             <View style="@style/AppWidget.DeepLine" />
@@ -91,7 +91,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <EditText
-            android:id="@+id/new_topic_edt_content"
+            android:id="@+id/create_topic_edt_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
@@ -99,7 +99,7 @@
             android:paddingTop="16dp"
             android:paddingBottom="96dp"
             android:gravity="start"
-            android:hint="@string/new_topic_content_hint"
+            android:hint="@string/create_topic_content_hint"
             android:textSize="16sp"
             android:minLines="30"
             android:background="?attr/widgetBackgroundDark" />

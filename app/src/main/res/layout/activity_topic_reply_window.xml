@@ -68,7 +68,7 @@
             android:paddingTop="16dp"
             android:paddingBottom="96dp"
             android:gravity="start"
-            android:hint="@string/new_topic_content_hint"
+            android:hint="@string/create_topic_content_hint"
             android:textSize="16sp"
             android:minLines="20"
             android:background="?attr/widgetBackgroundDark" />

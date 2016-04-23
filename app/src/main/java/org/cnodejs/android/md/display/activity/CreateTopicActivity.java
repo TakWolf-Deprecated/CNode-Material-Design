@@ -30,19 +30,19 @@ import retrofit2.Response;
 
 public class CreateTopicActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
-    @Bind(R.id.new_topic_toolbar)
+    @Bind(R.id.create_topic_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.new_topic_spn_tab)
+    @Bind(R.id.create_topic_spn_tab)
     protected Spinner spnTab;
 
-    @Bind(R.id.new_topic_edt_title)
+    @Bind(R.id.create_topic_edt_title)
     protected EditText edtTitle;
 
     @Bind(R.id.editor_bar_layout_root)
     protected ViewGroup editorBar;
 
-    @Bind(R.id.new_topic_edt_content)
+    @Bind(R.id.create_topic_edt_content)
     protected EditText edtContent;
 
     private ProgressDialog progressDialog;
@@ -53,11 +53,11 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
     protected void onCreate(Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_topic);
+        setContentView(R.layout.activity_create_topic);
         ButterKnife.bind(this);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
-        toolbar.inflateMenu(R.menu.new_topic);
+        toolbar.inflateMenu(R.menu.create_topic);
         toolbar.setOnMenuItemClickListener(this);
 
         progressDialog = DialogUtils.createProgressDialog(this);

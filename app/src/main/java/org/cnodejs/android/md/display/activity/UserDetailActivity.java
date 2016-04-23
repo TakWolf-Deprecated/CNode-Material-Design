@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class UserDetailActivity extends StatusBarActivity {
+public class UserDetailActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
     private static final String EXTRA_LOGIN_NAME = "loginName";
     private static final String EXTRA_AVATAR_URL = "avatarUrl";
@@ -115,6 +116,8 @@ public class UserDetailActivity extends StatusBarActivity {
         ViewCompat.setTransitionName(imgAvatar, NAME_IMG_AVATAR);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
+        toolbar.inflateMenu(R.menu.user_detail);
+        toolbar.setOnMenuItemClickListener(this);
 
         adapter = new UserDetailAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
@@ -131,6 +134,17 @@ public class UserDetailActivity extends StatusBarActivity {
 
         getUserAsyncTask();
         getCollectTopicListAsyncTask();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_open_in_browser:
+                ShipUtils.openInBrowser(this, "https://cnodejs.org/user/" + loginName);
+                return true;
+            default:
+                return false;
+        }
     }
 
     /**

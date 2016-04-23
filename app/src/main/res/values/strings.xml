@@ -100,8 +100,8 @@
     <string name="send">发送</string>
     <string name="send_to_tab_$">发布到分类：</string>
 
-    <string name="new_topic_title_hint">标题，字数10字以上</string>
-    <string name="new_topic_content_hint">说点什么吧&#8230;</string>
+    <string name="create_topic_title_hint">标题，字数10字以上</string>
+    <string name="create_topic_content_hint">说点什么吧&#8230;</string>
 
     <string name="title">标题</string>
     <string name="add_link">添加连接</string>
