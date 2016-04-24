@@ -23,7 +23,13 @@ public class CallbackAdapter<T extends Result> implements Callback<T> {
 
     @Override
     public final void onFailure(Call<T> call, Throwable t) {
-        if (!onCallException(t, Result.buildError(t))) {
+        boolean interrupt;
+        if (call.isCanceled()) {
+            interrupt = onCallCancel();
+        } else {
+            interrupt = onCallException(t, Result.buildError(t));
+        }
+        if (!interrupt) {
             onFinish();
         }
     }
@@ -33,6 +39,10 @@ public class CallbackAdapter<T extends Result> implements Callback<T> {
     }
 
     public boolean onResultError(Response<T> response, Result.Error error) {
+        return false;
+    }
+
+    public boolean onCallCancel() {
         return false;
     }
 
