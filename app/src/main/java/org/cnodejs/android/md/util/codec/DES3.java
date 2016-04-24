@@ -10,7 +10,7 @@ import javax.crypto.spec.IvParameterSpec;
 public class DES3 {
 
     private static final String IV = "01234567";
-    private static final String CHARSET = "utf-8";
+    private static final String CHARSET = "UTF-8";
 
     public static String encrypt(String iv, String secretKey, String plainText) throws Exception {
         DESedeKeySpec spec = new DESedeKeySpec(secretKey.getBytes());
