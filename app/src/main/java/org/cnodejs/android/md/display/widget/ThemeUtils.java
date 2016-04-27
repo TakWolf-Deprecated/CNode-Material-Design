@@ -13,6 +13,7 @@ import android.support.annotation.StyleRes;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.storage.SettingShared;
+import org.cnodejs.android.md.util.HandlerUtils;
 
 public final class ThemeUtils {
 
@@ -43,7 +44,7 @@ public final class ThemeUtils {
         return enable;
     }
 
-    public static void recreateActivity(Activity activity) {
+    public static void recreateActivity(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             activity.recreate();
         } else {
@@ -53,6 +54,17 @@ public final class ThemeUtils {
             activity.finish();
             activity.overridePendingTransition(0, 0);
         }
+    }
+
+    public static void recreateActivityDelayed(@NonNull final Activity activity) {
+        HandlerUtils.post(new Runnable() {
+
+            @Override
+            public void run() {
+                ThemeUtils.recreateActivity(activity);
+            }
+
+        });
     }
 
     public static int getDialogThemeRes(Context context) {
