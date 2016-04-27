@@ -38,7 +38,7 @@ public final class ThemeUtils {
         }
     }
 
-    public static boolean configThemeBeforeOnCreate(Activity activity, @StyleRes int light, @StyleRes int dark) {
+    public static boolean configThemeBeforeOnCreate(@NonNull Activity activity, @StyleRes int light, @StyleRes int dark) {
         boolean enable = SettingShared.isEnableThemeDark(activity);
         activity.setTheme(enable ? dark : light);
         return enable;
@@ -67,11 +67,11 @@ public final class ThemeUtils {
         });
     }
 
-    public static int getDialogThemeRes(Context context) {
+    public static int getDialogThemeRes(@NonNull Context context) {
         return SettingShared.isEnableThemeDark(context) ? R.style.AppDialogDark : R.style.AppDialogLight;
     }
 
-    public static int getStatusBarHeight(Context context) {
+    public static int getStatusBarHeight(@NonNull Context context) {
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         return resourceId > 0 ? context.getResources().getDimensionPixelSize(resourceId) : 0;
     }
