@@ -14,6 +14,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.dialog.DialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
+import org.cnodejs.android.md.display.listener.DialogCancelCallListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.view.ILoginView;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
@@ -117,15 +118,8 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
     }
 
     @Override
-    public void onLoginStart(@NonNull final Call<Result.Login> call) {
-        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                call.cancel();
-            }
-
-        });
+    public void onLoginStart(@NonNull Call<Result.Login> call) {
+        progressDialog.setOnCancelListener(new DialogCancelCallListener(call));
         progressDialog.show();
     }
 
