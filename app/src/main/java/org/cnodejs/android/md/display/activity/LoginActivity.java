@@ -84,13 +84,7 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
 
     @OnClick(R.id.login_btn_login)
     protected void onBtnLoginClick() {
-        final String accessToken = edtAccessToken.getText().toString().trim();
-        if (!FormatUtils.isAccessToken(accessToken)) {
-            edtAccessToken.setError(getString(R.string.access_token_format_error));
-            edtAccessToken.requestFocus();
-        } else {
-            loginPresenter.loginAsyncTask(accessToken);
-        }
+        loginPresenter.loginAsyncTask(edtAccessToken.getText().toString().trim());
     }
 
     @OnClick(R.id.login_btn_qrcode)
@@ -114,6 +108,12 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
                 .setMessage(R.string.how_to_get_access_token_tip_content)
                 .setPositiveButton(R.string.confirm, null)
                 .show();
+    }
+
+    @Override
+    public void onAccessTokenFormatError() {
+        edtAccessToken.setError(getString(R.string.access_token_format_error));
+        edtAccessToken.requestFocus();
     }
 
     @Override
