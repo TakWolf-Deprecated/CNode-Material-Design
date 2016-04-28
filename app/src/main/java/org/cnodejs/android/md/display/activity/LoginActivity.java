@@ -22,7 +22,7 @@ import org.cnodejs.android.md.display.widget.ToastUtils;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
-import org.cnodejs.android.md.presenter.implement.LoginPersenter;
+import org.cnodejs.android.md.presenter.implement.LoginPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.Bind;
@@ -80,7 +80,7 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
         progressDialog = DialogUtils.createProgressDialog(this);
         progressDialog.setMessage(R.string.logging_in_$_);
 
-        loginPresenter = new LoginPersenter(this, this);
+        loginPresenter = new LoginPresenter(this, this);
     }
 
     @OnClick(R.id.login_btn_login)
