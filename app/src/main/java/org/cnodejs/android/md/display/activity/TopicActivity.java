@@ -19,6 +19,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.TopicAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
@@ -89,7 +90,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
     private final List<Reply> replyList = new ArrayList<>();
 
     private ITopicReplyView topicReplyView;
-    private TopicHeaderViewHolder headerViewHolder;
+    private ITopicHeaderView topicHeaderView;
     private TopicAdapter adapter;
 
     private ITopicPresenter topicPresenter;
@@ -111,8 +112,8 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         toolbar.setOnMenuItemClickListener(this);
 
         topicReplyView = new TopicReplyViewHolder(this, layoutRoot, topicId, this);
-        headerViewHolder = new TopicHeaderViewHolder(this, listView);
-        headerViewHolder.update(topic, false, 0);
+        topicHeaderView = new TopicHeaderViewHolder(this, listView);
+        topicHeaderView.updateViews(topic, false, 0);
         adapter = new TopicAdapter(this, replyList, topicReplyView);
         listView.setAdapter(adapter);
 
@@ -162,7 +163,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
     public boolean onGetTopicResultOk(@NonNull Result.Data<TopicWithReply> result) {
         if (!isFinishing()) {
             topic = result.getData();
-            headerViewHolder.update(result.getData());
+            topicHeaderView.updateViews(result.getData());
             replyList.clear();
             replyList.addAll(result.getData().getReplyList());
             adapter.notifyDataSetChanged();
@@ -180,7 +181,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
 
     @Override
     public void appendReplyAndUpdateViews(@NonNull Reply reply) {
-        headerViewHolder.update(replyList.size());
+        topicHeaderView.updateReplyCount(replyList.size());
         replyList.add(reply);
         adapter.notifyDataSetChanged();
         listView.smoothScrollToPosition(replyList.size());
