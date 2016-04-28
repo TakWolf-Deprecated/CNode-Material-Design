@@ -11,10 +11,10 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.activity.TopicActivity;
 import org.cnodejs.android.md.display.adapter.TopicAdapter;
 import org.cnodejs.android.md.display.dialog.DialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
+import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.widget.EditorBarHandler;
 import org.cnodejs.android.md.display.widget.ToastUtils;
 import org.cnodejs.android.md.model.api.ApiClient;
@@ -46,15 +46,15 @@ public class TopicReplyViewHolder implements TopicAdapter.OnAtClickListener {
     private final Activity activity;
     private final ViewGroup layoutRoot;
     private final String topicId;
-    private final TopicActivity topicActivity;
+    private final ITopicView topicView;
     private final PopupWindow replyWindow;
     private final ProgressDialog progressDialog;
 
-    public TopicReplyViewHolder(@NonNull Activity activity, @NonNull ViewGroup layoutRoot, @NonNull String topicId, @NonNull TopicActivity topicActivity) {
+    public TopicReplyViewHolder(@NonNull Activity activity, @NonNull ViewGroup layoutRoot, @NonNull String topicId, @NonNull ITopicView topicView) {
         this.activity = activity;
         this.layoutRoot = layoutRoot;
         this.topicId = topicId;
-        this.topicActivity = topicActivity;
+        this.topicView = topicView;
         LayoutInflater inflater = LayoutInflater.from(activity);
         View view = inflater.inflate(R.layout.activity_topic_reply_window, layoutRoot, false);
         ButterKnife.bind(this, view);
@@ -115,7 +115,7 @@ public class TopicReplyViewHolder implements TopicAdapter.OnAtClickListener {
                 reply.setHandleContent(FormatUtils.renderMarkdown(content)); // 本地要做预渲染处理
                 reply.setCreateAt(new DateTime());
                 reply.setUpList(new ArrayList<String>());
-                topicActivity.insertReplyAndUpdateViews(reply);
+                topicView.appendReplyAndUpdateViews(reply);
                 dismissReplyWindow();
                 edtContent.setText(null);
                 ToastUtils.with(activity).show(R.string.post_success);

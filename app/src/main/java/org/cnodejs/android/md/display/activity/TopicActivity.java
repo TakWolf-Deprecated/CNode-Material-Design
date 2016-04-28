@@ -19,18 +19,18 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.TopicAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
 import org.cnodejs.android.md.display.viewholder.TopicReplyViewHolder;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
-import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
-import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.util.EntityUtils;
+import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
+import org.cnodejs.android.md.presenter.implement.TopicPresenter;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.ArrayList;
@@ -39,10 +39,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Response;
 
-public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
+public class TopicActivity extends StatusBarActivity implements ITopicView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
     private static final String EXTRA_TOPIC_ID = "topicId";
     private static final String EXTRA_TOPIC = "topic";
@@ -93,6 +91,8 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
     private TopicHeaderViewHolder headerViewHolder;
     private TopicAdapter adapter;
 
+    private ITopicPresenter topicPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
@@ -119,6 +119,8 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
 
         fabReply.attachToListView(listView);
 
+        topicPresenter = new TopicPresenter(this, this);
+
         RefreshLayoutUtils.initOnCreate(refreshLayout, this);
         RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
     }
@@ -136,30 +138,7 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
 
     @Override
     public void onRefresh() {
-        Call<Result.Data<TopicWithReply>> call = ApiClient.service.getTopic(topicId, LoginShared.getAccessToken(this), true);
-        call.enqueue(new DefaultToastCallback<Result.Data<TopicWithReply>>(this) {
-
-            @Override
-            public boolean onResultOk(Response<Result.Data<TopicWithReply>> response, Result.Data<TopicWithReply> result) {
-                if (!isFinishing()) {
-                    topic = result.getData();
-                    headerViewHolder.update(result.getData());
-                    replyList.clear();
-                    replyList.addAll(result.getData().getReplyList());
-                    adapter.notifyDataSetChanged();
-                    iconNoData.setVisibility(View.GONE);
-                }
-                return false;
-            }
-
-            @Override
-            public void onFinish() {
-                if (!isFinishing()) {
-                    refreshLayout.setRefreshing(false);
-                }
-            }
-
-        });
+        topicPresenter.getTopicAsyncTask(topicId);
     }
 
     @OnClick(R.id.topic_fab_reply)
@@ -178,9 +157,30 @@ public class TopicActivity extends StatusBarActivity implements SwipeRefreshLayo
         }
     }
 
-    public void insertReplyAndUpdateViews(@NonNull Reply reply) {
-        replyList.add(reply);
+    @Override
+    public boolean onGetTopicResultOk(@NonNull Result.Data<TopicWithReply> result) {
+        if (!isFinishing()) {
+            topic = result.getData();
+            headerViewHolder.update(result.getData());
+            replyList.clear();
+            replyList.addAll(result.getData().getReplyList());
+            adapter.notifyDataSetChanged();
+            iconNoData.setVisibility(View.GONE);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onGetTopicFinish() {
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void appendReplyAndUpdateViews(@NonNull Reply reply) {
         headerViewHolder.update(replyList.size());
+        replyList.add(reply);
         adapter.notifyDataSetChanged();
         listView.smoothScrollToPosition(replyList.size());
     }
