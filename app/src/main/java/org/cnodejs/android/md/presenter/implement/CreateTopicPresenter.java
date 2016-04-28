@@ -27,7 +27,7 @@ public class CreateTopicPresenter implements ICreateTopicPresenter {
     }
 
     @Override
-    public void createTipicAsyncTask(@NonNull TabType tab, String title, String content) {
+    public void createTopicAsyncTask(@NonNull TabType tab, String title, String content) {
         if (TextUtils.isEmpty(title) || title.length() < 10) {
             createTopicView.onTitleEmptyError();
         } else if (TextUtils.isEmpty(content)) {
