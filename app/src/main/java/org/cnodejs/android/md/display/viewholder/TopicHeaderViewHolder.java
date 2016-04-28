@@ -32,43 +32,43 @@ import butterknife.OnClick;
 
 public class TopicHeaderViewHolder implements ITopicHeaderView {
 
-    @Bind(R.id.topic_item_header_layout_content)
+    @Bind(R.id.topic_header_layout_content)
     protected ViewGroup layoutContent;
 
-    @Bind(R.id.topic_item_header_icon_good)
+    @Bind(R.id.topic_header_icon_good)
     protected View iconGood;
 
-    @Bind(R.id.topic_item_header_tv_title)
+    @Bind(R.id.topic_header_tv_title)
     protected TextView tvTitle;
 
-    @Bind(R.id.topic_item_header_img_avatar)
+    @Bind(R.id.topic_header_img_avatar)
     protected ImageView imgAvatar;
 
-    @Bind(R.id.topic_item_header_tv_tab)
+    @Bind(R.id.topic_header_tv_tab)
     protected TextView tvTab;
 
-    @Bind(R.id.topic_item_header_tv_login_name)
+    @Bind(R.id.topic_header_tv_login_name)
     protected TextView tvLoginName;
 
-    @Bind(R.id.topic_item_header_tv_create_time)
+    @Bind(R.id.topic_header_tv_create_time)
     protected TextView tvCreateTime;
 
-    @Bind(R.id.topic_item_header_tv_visit_count)
+    @Bind(R.id.topic_header_tv_visit_count)
     protected TextView tvVisitCount;
 
-    @Bind(R.id.topic_item_header_btn_favorite)
+    @Bind(R.id.topic_header_btn_favorite)
     protected ImageView btnFavorite;
 
-    @Bind(R.id.topic_item_header_web_content)
+    @Bind(R.id.topic_header_web_content)
     protected CNodeWebView webContent;
 
-    @Bind(R.id.topic_item_header_layout_no_reply)
+    @Bind(R.id.topic_header_layout_no_reply)
     protected ViewGroup layoutNoReply;
 
-    @Bind(R.id.topic_item_header_layout_reply_count)
+    @Bind(R.id.topic_header_layout_reply_count)
     protected ViewGroup layoutReplyCount;
 
-    @Bind(R.id.topic_item_header_tv_reply_count)
+    @Bind(R.id.topic_header_tv_reply_count)
     protected TextView tvReplyCount;
 
     private final Activity activity;
@@ -80,18 +80,18 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
     public TopicHeaderViewHolder(@NonNull Activity activity, @NonNull ListView listView) {
         this.activity = activity;
         LayoutInflater inflater = LayoutInflater.from(activity);
-        View headerView = inflater.inflate(R.layout.activity_topic_item_header, listView, false);
+        View headerView = inflater.inflate(R.layout.activity_topic_header, listView, false);
         ButterKnife.bind(this, headerView);
         listView.addHeaderView(headerView, null, false);
         this.topicHeaderPresenter = new TopicHeaderPresenter(activity, this);
     }
 
-    @OnClick(R.id.topic_item_header_img_avatar)
+    @OnClick(R.id.topic_header_img_avatar)
     protected void onBtnAvatarClick() {
         UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
     }
 
-    @OnClick(R.id.topic_item_header_btn_favorite)
+    @OnClick(R.id.topic_header_btn_favorite)
     protected void onBtnFavoriteClick() {
         if (topic != null) {
             if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
