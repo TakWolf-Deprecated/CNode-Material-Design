@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.LoginActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
+import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.widget.CNodeWebView;
 import org.cnodejs.android.md.display.widget.ToastUtils;
 import org.cnodejs.android.md.model.api.ApiClient;
@@ -34,22 +35,16 @@ import retrofit2.Response;
 
 public class TopicAdapter extends BaseAdapter {
 
-    public interface OnAtClickListener {
-
-        void onAt(String loginName);
-
-    }
-
     private final Activity activity;
     private final LayoutInflater inflater;
     private final List<Reply> replyList;
-    private final OnAtClickListener onAtClickListener;
+    private final ITopicReplyView topicReplyView;
 
-    public TopicAdapter(@NonNull Activity activity, @NonNull List<Reply> replyList, @NonNull OnAtClickListener onAtClickListener) {
+    public TopicAdapter(@NonNull Activity activity, @NonNull List<Reply> replyList, @NonNull ITopicReplyView topicReplyView) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
         this.replyList = replyList;
-        this.onAtClickListener = onAtClickListener;
+        this.topicReplyView = topicReplyView;
     }
 
     @Override
@@ -151,7 +146,7 @@ public class TopicAdapter extends BaseAdapter {
         @OnClick(R.id.topic_item_reply_btn_at)
         protected void onBtnAtClick() {
             if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
-                onAtClickListener.onAt(reply.getAuthor().getLoginName());
+                topicReplyView.onAt(reply);
             }
         }
 

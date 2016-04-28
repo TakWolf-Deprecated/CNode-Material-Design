@@ -11,31 +11,21 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.adapter.TopicAdapter;
 import org.cnodejs.android.md.display.dialog.DialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
+import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.widget.EditorBarHandler;
 import org.cnodejs.android.md.display.widget.ToastUtils;
-import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
-import org.cnodejs.android.md.model.entity.Author;
 import org.cnodejs.android.md.model.entity.Reply;
-import org.cnodejs.android.md.model.entity.Result;
-import org.cnodejs.android.md.model.storage.LoginShared;
-import org.cnodejs.android.md.model.storage.SettingShared;
-import org.cnodejs.android.md.util.FormatUtils;
-import org.joda.time.DateTime;
-
-import java.util.ArrayList;
+import org.cnodejs.android.md.presenter.contract.ITopicReplyPresenter;
+import org.cnodejs.android.md.presenter.implement.TopicReplyPresenter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Response;
 
-public class TopicReplyViewHolder implements TopicAdapter.OnAtClickListener {
+public class TopicReplyViewHolder implements ITopicReplyView {
 
     @Bind(R.id.editor_bar_layout_root)
     protected ViewGroup editorBar;
@@ -49,6 +39,8 @@ public class TopicReplyViewHolder implements TopicAdapter.OnAtClickListener {
     private final ITopicView topicView;
     private final PopupWindow replyWindow;
     private final ProgressDialog progressDialog;
+
+    private final ITopicReplyPresenter topicReplyPresenter;
 
     public TopicReplyViewHolder(@NonNull Activity activity, @NonNull ViewGroup layoutRoot, @NonNull String topicId, @NonNull ITopicView topicView) {
         this.activity = activity;
@@ -70,14 +62,8 @@ public class TopicReplyViewHolder implements TopicAdapter.OnAtClickListener {
         progressDialog.setCancelable(false);
 
         new EditorBarHandler(activity, editorBar, edtContent); // 创建editorBar
-    }
 
-    public void showReplyWindow() {
-        replyWindow.showAtLocation(layoutRoot, Gravity.BOTTOM, 0, 0);
-    }
-
-    public void dismissReplyWindow() {
-        replyWindow.dismiss();
+        topicReplyPresenter = new TopicReplyPresenter(activity, this);
     }
 
     @OnClick(R.id.topic_reply_window_btn_tool_close)
@@ -87,53 +73,48 @@ public class TopicReplyViewHolder implements TopicAdapter.OnAtClickListener {
 
     @OnClick(R.id.topic_reply_window_btn_tool_send)
     protected void onBtnToolSendClick() {
-        if (edtContent.length() == 0) {
-            ToastUtils.with(activity).show(R.string.content_empty_error_tip);
-        } else {
-            String content = edtContent.getText().toString();
-            if (SettingShared.isEnableTopicSign(activity)) { // 添加小尾巴
-                content += "\n\n" + SettingShared.getTopicSignContent(activity);
-            }
-            replyTopicAsyncTask(content);
-        }
-    }
-
-    private void replyTopicAsyncTask(final String content) {
-        progressDialog.show();
-        Call<Result.ReplyTopic> call = ApiClient.service.replyTopic(topicId, LoginShared.getAccessToken(activity), content, null);
-        call.enqueue(new DefaultToastCallback<Result.ReplyTopic>(activity) {
-
-            @Override
-            public boolean onResultOk(Response<Result.ReplyTopic> response, Result.ReplyTopic result) {
-                Reply reply = new Reply();
-                reply.setId(result.getReplyId());
-                Author author = new Author();
-                author.setLoginName(LoginShared.getLoginName(activity));
-                author.setAvatarUrl(LoginShared.getAvatarUrl(activity));
-                reply.setAuthor(author);
-                reply.setContent(content);
-                reply.setHandleContent(FormatUtils.renderMarkdown(content)); // 本地要做预渲染处理
-                reply.setCreateAt(new DateTime());
-                reply.setUpList(new ArrayList<String>());
-                topicView.appendReplyAndUpdateViews(reply);
-                dismissReplyWindow();
-                edtContent.setText(null);
-                ToastUtils.with(activity).show(R.string.post_success);
-                return false;
-            }
-
-            @Override
-            public void onFinish() {
-                progressDialog.dismiss();
-            }
-
-        });
+        topicReplyPresenter.replyTopicAsyncTask(topicId, edtContent.getText().toString().trim(), null);
     }
 
     @Override
-    public void onAt(String loginName) {
-        edtContent.getText().insert(edtContent.getSelectionEnd(), " @" + loginName + " ");
+    public void showReplyWindow() {
+        replyWindow.showAtLocation(layoutRoot, Gravity.BOTTOM, 0, 0);
+    }
+
+    @Override
+    public void dismissReplyWindow() {
+        replyWindow.dismiss();
+    }
+
+    @Override
+    public void onAt(@NonNull Reply target) {
+        edtContent.getText().insert(edtContent.getSelectionEnd(), " @" + target.getAuthor().getLoginName() + " ");
         showReplyWindow();
+    }
+
+    @Override
+    public void onContentEmptyError() {
+        ToastUtils.with(activity).show(R.string.content_empty_error_tip);
+        edtContent.requestFocus();
+    }
+
+    @Override
+    public void onReplyTopicStart() {
+        progressDialog.show();
+    }
+
+    @Override
+    public boolean onReplyTopicResultOk(@NonNull Reply reply) {
+        topicView.appendReplyAndUpdateViews(reply);
+        dismissReplyWindow();
+        edtContent.setText(null);
+        ToastUtils.with(activity).show(R.string.post_success);
+        return false;
+    }
+
+    @Override
+    public void onReplyTopicFinish() {
+        progressDialog.dismiss();
     }
 
 }

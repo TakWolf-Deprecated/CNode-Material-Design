@@ -19,6 +19,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.TopicAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
 import org.cnodejs.android.md.display.viewholder.TopicReplyViewHolder;
@@ -87,7 +88,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
     private Topic topic;
     private final List<Reply> replyList = new ArrayList<>();
 
-    private TopicReplyViewHolder replyViewHolder;
+    private ITopicReplyView topicReplyView;
     private TopicHeaderViewHolder headerViewHolder;
     private TopicAdapter adapter;
 
@@ -109,10 +110,10 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         toolbar.inflateMenu(R.menu.topic);
         toolbar.setOnMenuItemClickListener(this);
 
-        replyViewHolder = new TopicReplyViewHolder(this, layoutRoot, topicId, this);
+        topicReplyView = new TopicReplyViewHolder(this, layoutRoot, topicId, this);
         headerViewHolder = new TopicHeaderViewHolder(this, listView);
         headerViewHolder.update(topic, false, 0);
-        adapter = new TopicAdapter(this, replyList, replyViewHolder);
+        adapter = new TopicAdapter(this, replyList, topicReplyView);
         listView.setAdapter(adapter);
 
         iconNoData.setVisibility(topic == null ? View.VISIBLE : View.GONE);
@@ -144,7 +145,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
     @OnClick(R.id.topic_fab_reply)
     protected void onBtnReplyClick() {
         if (topic != null && LoginActivity.startForResultWithAccessTokenCheck(this)) {
-            replyViewHolder.showReplyWindow();
+            topicReplyView.showReplyWindow();
         }
     }
 
