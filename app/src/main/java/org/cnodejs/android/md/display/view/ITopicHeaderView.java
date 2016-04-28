@@ -17,6 +17,6 @@ public interface ITopicHeaderView {
 
     boolean onCollectTopicResultOk(Result result);
 
-    boolean OnDecollectTopicResultOk(Result result);
+    boolean onDecollectTopicResultOk(Result result);
 
 }

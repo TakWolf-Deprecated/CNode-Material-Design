@@ -43,7 +43,7 @@ public class TopicHeaderPresenter implements ITopicHeaderPresenter {
 
             @Override
             public boolean onResultOk(Response<Result> response, Result result) {
-                return topicHeaderView.OnDecollectTopicResultOk(result);
+                return topicHeaderView.onDecollectTopicResultOk(result);
             }
 
         });

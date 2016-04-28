@@ -154,7 +154,7 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
     }
 
     @Override
-    public boolean OnDecollectTopicResultOk(Result result) {
+    public boolean onDecollectTopicResultOk(Result result) {
         if (!activity.isFinishing()) {
             isCollect = false;
             btnFavorite.setImageResource(R.drawable.ic_favorite_outline_grey600_24dp);
