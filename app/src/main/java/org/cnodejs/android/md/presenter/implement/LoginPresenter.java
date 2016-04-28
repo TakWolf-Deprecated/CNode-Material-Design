@@ -13,12 +13,12 @@ import org.cnodejs.android.md.util.FormatUtils;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class LoginPersenter implements ILoginPresenter {
+public class LoginPresenter implements ILoginPresenter {
 
     private final Activity activity;
     private final ILoginView loginView;
 
-    public LoginPersenter(@NonNull Activity activity, @NonNull ILoginView loginView) {
+    public LoginPresenter(@NonNull Activity activity, @NonNull ILoginView loginView) {
         this.activity = activity;
         this.loginView = loginView;
     }
