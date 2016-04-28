@@ -3,6 +3,7 @@ package org.cnodejs.android.md.display.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,17 +25,17 @@ import org.cnodejs.android.md.display.base.DrawerLayoutActivity;
 import org.cnodejs.android.md.display.dialog.DialogUtils;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.display.listener.RecyclerViewLoadMoreListener;
+import org.cnodejs.android.md.display.view.IMainView;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
-import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.CallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
-import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
+import org.cnodejs.android.md.presenter.contract.IMainPresenter;
+import org.cnodejs.android.md.presenter.implement.MainPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.HandlerUtils;
 
@@ -44,10 +45,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Response;
 
-public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
+public class MainActivity extends DrawerLayoutActivity implements IMainView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
     // 抽屉导航布局
     @Bind(R.id.main_drawer_layout)
@@ -114,6 +113,8 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     private final List<Topic> topicList = new ArrayList<>();
     private MainAdapter adapter;
 
+    private IMainPresenter mainPresenter;
+
     // 首次按下返回键时间戳
     private long firstBackPressedTime = 0;
 
@@ -141,6 +142,8 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         recyclerView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, 20));
         fabCreateTopic.attachToRecyclerView(recyclerView);
 
+        mainPresenter = new MainPresenter(this, this);
+
         updateUserInfoViews();
 
         imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
@@ -153,17 +156,10 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
     @Override
     protected void onResume() {
         super.onResume();
-        getMessageCountAsyncTask();
+        mainPresenter.getMessageCountAsyncTask();
         // 判断是否需要切换主题
         if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
-            HandlerUtils.post(new Runnable() {
-
-                @Override
-                public void run() {
-                    ThemeUtils.recreateActivity(MainActivity.this);
-                }
-
-            });
+            ThemeUtils.recreateActivityDelayed(this);
         }
     }
 
@@ -172,8 +168,8 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         @Override
         public void onDrawerOpened(View drawerView) {
             updateUserInfoViews();
-            getUserAsyncTask();
-            getMessageCountAsyncTask();
+            mainPresenter.getUserAsyncTask();
+            mainPresenter.getMessageCountAsyncTask();
         }
 
         @Override
@@ -218,101 +214,9 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
 
     };
 
-    private void updateUserInfoViews() {
-        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            Glide.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-            tvLoginName.setText(R.string.click_avatar_to_login);
-            tvScore.setText(null);
-            btnLogout.setVisibility(View.GONE);
-        } else {
-            Glide.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-            tvLoginName.setText(LoginShared.getLoginName(this));
-            tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
-            btnLogout.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void getUserAsyncTask() {
-        final String accessToken = LoginShared.getAccessToken(this);
-        if (!TextUtils.isEmpty(accessToken)) {
-            Call<Result.Data<User>> call = ApiClient.service.getUser(LoginShared.getLoginName(this));
-            call.enqueue(new CallbackAdapter<Result.Data<User>>() {
-
-                @Override
-                public boolean onResultOk(Response<Result.Data<User>> response, Result.Data<User> result) {
-                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(MainActivity.this))) {
-                        LoginShared.update(MainActivity.this, result.getData());
-                        updateUserInfoViews();
-                    }
-                    return false;
-                }
-
-            });
-        }
-    }
-
-    private void getMessageCountAsyncTask() {
-        final String accessToken = LoginShared.getAccessToken(this);
-        if (!TextUtils.isEmpty(accessToken)) {
-            Call<Result.Data<Integer>> call =  ApiClient.service.getMessageCount(accessToken);
-            call.enqueue(new CallbackAdapter<Result.Data<Integer>>() {
-
-                @Override
-                public boolean onResultOk(Response<Result.Data<Integer>> response, Result.Data<Integer> result) {
-                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(MainActivity.this))) {
-                        tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
-                    }
-                    return false;
-                }
-
-            });
-        }
-    }
-
-    /**
-     * 刷新和加载逻辑
-     */
     @Override
     public void onRefresh() {
-        final TabType tab = currentTab;
-        Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, 1, 20, true);
-        call.enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
-
-            @Override
-            public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                if (currentTab == tab) {
-                    topicList.clear();
-                    topicList.addAll(result.getData());
-                    notifyDataSetChanged();
-                    currentPage = 1;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
-                if (currentTab == tab) {
-                    ToastUtils.with(MainActivity.this).show(error.getErrorMessage());
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onCallException(Throwable t, Result.Error error) {
-                if (currentTab == tab) {
-                    ToastUtils.with(MainActivity.this).show(error.getErrorMessage());
-                }
-                return false;
-            }
-
-            @Override
-            public void onFinish() {
-                if (currentTab == tab) {
-                    refreshLayout.setRefreshing(false);
-                }
-            }
-
-        });
+        mainPresenter.refreshTopicListAsyncTask(currentTab, 20, true);
     }
 
     @Override
@@ -320,54 +224,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         if (adapter.canLoadMore()) {
             adapter.setLoading(true);
             adapter.notifyItemChanged(adapter.getItemCount() - 1);
-
-            final TabType tab = currentTab;
-            final int page = currentPage;
-            Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, page + 1, 20, true);
-            call.enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
-
-                @Override
-                public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                    if (currentTab == tab && currentPage == page) {
-                        if (result.getData().size() > 0) {
-                            topicList.addAll(result.getData());
-                            adapter.setLoading(false);
-                            adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
-                            currentPage++;
-                            return true;
-                        } else {
-                            ToastUtils.with(MainActivity.this).show(R.string.have_no_more_data);
-                            return false;
-                        }
-                    }
-                    return false;
-                }
-
-                @Override
-                public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
-                    if (currentTab == tab && currentPage == page) {
-                        ToastUtils.with(MainActivity.this).show(error.getErrorMessage());
-                    }
-                    return false;
-                }
-
-                @Override
-                public boolean onCallException(Throwable t, Result.Error error) {
-                    if (currentTab == tab && currentPage == page) {
-                        ToastUtils.with(MainActivity.this).show(error.getErrorMessage());
-                    }
-                    return false;
-                }
-
-                @Override
-                public void onFinish() {
-                    if (currentTab == tab && currentPage == page) {
-                        adapter.setLoading(false);
-                        adapter.notifyItemChanged(adapter.getItemCount() - 1);
-                    }
-                }
-
-            });
+            mainPresenter.loadMoreTopicListAsyncTask(currentTab, currentPage, 20, true);
         }
     }
 
@@ -508,7 +365,7 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LoginActivity.REQUEST_LOGIN && resultCode == RESULT_OK) {
             updateUserInfoViews();
-            getUserAsyncTask();
+            mainPresenter.getUserAsyncTask();
         }
     }
 
@@ -528,6 +385,88 @@ public class MainActivity extends DrawerLayoutActivity implements SwipeRefreshLa
                 super.onBackPressed();
             }
         }
+    }
+
+    @Override
+    public boolean onRefreshTopicListResultOk(@NonNull TabType tab, @NonNull Result.Data<List<Topic>> result) {
+        if (currentTab == tab) {
+            topicList.clear();
+            topicList.addAll(result.getData());
+            notifyDataSetChanged();
+            currentPage = 1;
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean onRefreshTopicListResultErrorOrCallException(@NonNull TabType tab, @NonNull Result.Error error) {
+        if (currentTab == tab) {
+            ToastUtils.with(this).show(error.getErrorMessage());
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onRefreshTopicListFinish() {
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public boolean onLoadMoreTopicListResultOk(@NonNull TabType tab, @NonNull Integer page, Result.Data<List<Topic>> result) {
+        if (currentTab == tab && currentPage == page) {
+            if (result.getData().size() > 0) {
+                topicList.addAll(result.getData());
+                adapter.setLoading(false);
+                adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
+                currentPage++;
+                return true;
+            } else {
+                ToastUtils.with(this).show(R.string.have_no_more_data);
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean onLoadMoreTopicListResultErrorOrCallException(@NonNull TabType tab, @NonNull Integer page, @NonNull Result.Error error) {
+        if (currentTab == tab && currentPage == page) {
+            ToastUtils.with(this).show(error.getErrorMessage());
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onLoadMoreTopicListFinish() {
+        adapter.setLoading(false);
+        adapter.notifyItemChanged(adapter.getItemCount() - 1);
+    }
+
+    @Override
+    public void updateUserInfoViews() {
+        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+            Glide.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            tvLoginName.setText(R.string.click_avatar_to_login);
+            tvScore.setText(null);
+            btnLogout.setVisibility(View.GONE);
+        } else {
+            Glide.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            tvLoginName.setText(LoginShared.getLoginName(this));
+            tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
+            btnLogout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void updateMessageCountViews(@NonNull Result.Data<Integer> result) {
+        tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
     }
 
 }

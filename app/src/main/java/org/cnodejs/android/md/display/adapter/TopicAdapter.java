@@ -15,13 +15,14 @@ import com.bumptech.glide.Glide;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.LoginActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
+import org.cnodejs.android.md.display.view.ITopicItemReplyView;
+import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.widget.CNodeWebView;
 import org.cnodejs.android.md.display.widget.ToastUtils;
-import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Reply;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
+import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
+import org.cnodejs.android.md.presenter.implement.TopicItemReplyPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;
@@ -29,27 +30,19 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Response;
 
 public class TopicAdapter extends BaseAdapter {
-
-    public interface OnAtClickListener {
-
-        void onAt(String loginName);
-
-    }
 
     private final Activity activity;
     private final LayoutInflater inflater;
     private final List<Reply> replyList;
-    private final OnAtClickListener onAtClickListener;
+    private final ITopicReplyView topicReplyView;
 
-    public TopicAdapter(@NonNull Activity activity, @NonNull List<Reply> replyList, @NonNull OnAtClickListener onAtClickListener) {
+    public TopicAdapter(@NonNull Activity activity, @NonNull List<Reply> replyList, @NonNull ITopicReplyView topicReplyView) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
         this.replyList = replyList;
-        this.onAtClickListener = onAtClickListener;
+        this.topicReplyView = topicReplyView;
     }
 
     @Override
@@ -81,7 +74,7 @@ public class TopicAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements ITopicItemReplyView {
 
         @Bind(R.id.topic_item_reply_img_avatar)
         protected ImageView imgAvatar;
@@ -107,29 +100,21 @@ public class TopicAdapter extends BaseAdapter {
         @Bind(R.id.topic_item_reply_icon_shadow_gap)
         protected View iconShadowGap;
 
+        private final ITopicItemReplyPresenter topicItemReplyPresenter;
+
         private Reply reply;
         private int position = -1;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            topicItemReplyPresenter = new TopicItemReplyPresenter(activity, this);
         }
 
         public void update(int position) {
             this.position = position;
             reply = replyList.get(position);
-
-            Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-            tvLoginName.setText(reply.getAuthor().getLoginName());
-            tvIndex.setText(position + 1 + "楼");
-            tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
-            btnUps.setText(String.valueOf(reply.getUpList().size()));
-            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
-            iconDeepLine.setVisibility(position == replyList.size() - 1 ? View.GONE : View.VISIBLE);
-            iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
-
-            // 这里直接使用WebView，有性能问题
-            webContent.loadRenderedContent(reply.getHandleContent());
+            updateReplyViews(reply);
         }
 
         @OnClick(R.id.topic_item_reply_img_avatar)
@@ -143,7 +128,7 @@ public class TopicAdapter extends BaseAdapter {
                 if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
                     ToastUtils.with(activity).show(R.string.can_not_up_yourself_reply);
                 } else {
-                    upReplyAsyncTask(this);
+                    topicItemReplyPresenter.upReplyAsyncTask(reply, position);
                 }
             }
         }
@@ -151,36 +136,42 @@ public class TopicAdapter extends BaseAdapter {
         @OnClick(R.id.topic_item_reply_btn_at)
         protected void onBtnAtClick() {
             if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
-                onAtClickListener.onAt(reply.getAuthor().getLoginName());
+                topicReplyView.onAt(reply);
             }
         }
 
-    }
+        @Override
+        public void updateReplyViews(@NonNull Reply reply) {
+            Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            tvLoginName.setText(reply.getAuthor().getLoginName());
+            tvIndex.setText(position + 1 + "楼");
+            tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
+            updateUpViews(reply);
+            iconDeepLine.setVisibility(position == replyList.size() - 1 ? View.GONE : View.VISIBLE);
+            iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
 
-    private void upReplyAsyncTask(final ViewHolder holder) {
-        final int position = holder.position; // 标记当时的位置信息
-        final Reply reply = holder.reply; // 保存当时的回复对象
-        Call<Result.UpReply> call = ApiClient.service.upReply(holder.reply.getId(), LoginShared.getAccessToken(activity));
-        call.enqueue(new DefaultToastCallback<Result.UpReply>(activity) {
+            // 这里直接使用WebView，有性能问题
+            webContent.loadRenderedContent(reply.getHandleContent());
+        }
 
-            @Override
-            public boolean onResultOk(Response<Result.UpReply> response, Result.UpReply result) {
-                if (!activity.isFinishing()) {
-                    if (result.getAction() == Reply.UpAction.up) {
-                        reply.getUpList().add(LoginShared.getId(activity));
-                    } else if (result.getAction() == Reply.UpAction.down) {
-                        reply.getUpList().remove(LoginShared.getId(activity));
-                    }
-                    // 如果位置没有变，则更新界面
-                    if (position == holder.position) {
-                        holder.btnUps.setText(String.valueOf(holder.reply.getUpList().size()));
-                        holder.btnUps.setCompoundDrawablesWithIntrinsicBounds(holder.reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
-                    }
+        @Override
+        public void updateUpViews(@NonNull Reply reply) {
+            btnUps.setText(String.valueOf(reply.getUpList().size()));
+            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
+        }
+
+        @Override
+        public boolean onUpReplyResultOk(@NonNull Reply reply, int position) {
+            if (!activity.isFinishing()) {
+                if (position == this.position) {
+                    updateUpViews(reply);
                 }
                 return false;
+            } else {
+                return true;
             }
+        }
 
-        });
     }
 
 }

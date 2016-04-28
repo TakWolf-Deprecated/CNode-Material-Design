@@ -13,6 +13,7 @@ import android.support.annotation.StyleRes;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.storage.SettingShared;
+import org.cnodejs.android.md.util.HandlerUtils;
 
 public final class ThemeUtils {
 
@@ -37,13 +38,13 @@ public final class ThemeUtils {
         }
     }
 
-    public static boolean configThemeBeforeOnCreate(Activity activity, @StyleRes int light, @StyleRes int dark) {
+    public static boolean configThemeBeforeOnCreate(@NonNull Activity activity, @StyleRes int light, @StyleRes int dark) {
         boolean enable = SettingShared.isEnableThemeDark(activity);
         activity.setTheme(enable ? dark : light);
         return enable;
     }
 
-    public static void recreateActivity(Activity activity) {
+    public static void recreateActivity(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             activity.recreate();
         } else {
@@ -55,11 +56,22 @@ public final class ThemeUtils {
         }
     }
 
-    public static int getDialogThemeRes(Context context) {
+    public static void recreateActivityDelayed(@NonNull final Activity activity) {
+        HandlerUtils.post(new Runnable() {
+
+            @Override
+            public void run() {
+                ThemeUtils.recreateActivity(activity);
+            }
+
+        });
+    }
+
+    public static int getDialogThemeRes(@NonNull Context context) {
         return SettingShared.isEnableThemeDark(context) ? R.style.AppDialogDark : R.style.AppDialogLight;
     }
 
-    public static int getStatusBarHeight(Context context) {
+    public static int getStatusBarHeight(@NonNull Context context) {
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         return resourceId > 0 ? context.getResources().getDimensionPixelSize(resourceId) : 0;
     }

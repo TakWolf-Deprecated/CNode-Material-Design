@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/topic_item_header_layout_content"
+        android:id="@+id/topic_header_layout_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -17,7 +17,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/topic_item_header_tv_title"
+                android:id="@+id/topic_header_tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -33,7 +33,7 @@
                 android:paddingRight="16dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/topic_item_header_img_avatar"
+                    android:id="@+id/topic_header_img_avatar"
                     android:layout_width="44dp"
                     android:layout_height="44dp"
                     android:layout_centerVertical="true"
@@ -47,10 +47,10 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/topic_item_header_img_avatar"
-                    android:layout_toRightOf="@+id/topic_item_header_img_avatar"
-                    android:layout_toStartOf="@+id/topic_item_header_btn_favorite"
-                    android:layout_toLeftOf="@+id/topic_item_header_btn_favorite"
+                    android:layout_toEndOf="@+id/topic_header_img_avatar"
+                    android:layout_toRightOf="@+id/topic_header_img_avatar"
+                    android:layout_toStartOf="@+id/topic_header_btn_favorite"
+                    android:layout_toLeftOf="@+id/topic_header_btn_favorite"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -60,7 +60,7 @@
                         android:gravity="center_vertical">
 
                         <TextView
-                            android:id="@+id/topic_item_header_tv_tab"
+                            android:id="@+id/topic_header_tv_tab"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
@@ -73,7 +73,7 @@
                             tools:text="置顶" />
 
                         <TextView
-                            android:id="@+id/topic_item_header_tv_login_name"
+                            android:id="@+id/topic_header_tv_login_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="?android:attr/textColorPrimary"
@@ -90,7 +90,7 @@
                         android:gravity="center_vertical">
 
                         <TextView
-                            android:id="@+id/topic_item_header_tv_create_time"
+                            android:id="@+id/topic_header_tv_create_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="?android:attr/textColorSecondary"
@@ -109,7 +109,7 @@
                             android:singleLine="true" />
 
                         <TextView
-                            android:id="@+id/topic_item_header_tv_visit_count"
+                            android:id="@+id/topic_header_tv_visit_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="?android:attr/textColorSecondary"
@@ -122,7 +122,7 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/topic_item_header_btn_favorite"
+                    android:id="@+id/topic_header_btn_favorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -136,7 +136,7 @@
             </RelativeLayout>
 
             <org.cnodejs.android.md.display.widget.CNodeWebView
-                android:id="@+id/topic_item_header_web_content"
+                android:id="@+id/topic_header_web_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp" />
@@ -146,7 +146,7 @@
         <View style="@style/AppWidget.ShadowGap" />
 
         <LinearLayout
-            android:id="@+id/topic_item_header_layout_no_reply"
+            android:id="@+id/topic_header_layout_no_reply"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -166,13 +166,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/topic_item_header_layout_reply_count"
+            android:id="@+id/topic_header_layout_reply_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/topic_item_header_tv_reply_count"
+                android:id="@+id/topic_header_tv_reply_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -188,7 +188,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/topic_item_header_icon_good"
+        android:id="@+id/topic_header_icon_good"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_gravity="end"

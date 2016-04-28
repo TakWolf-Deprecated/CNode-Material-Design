@@ -80,7 +80,7 @@ public interface ApiService {
             @Path("topicId") String topicId,
             @Field("accesstoken") String accessToken,
             @Field("content") String content,
-            @Field("reply_id") String replyId
+            @Field("reply_id") String targetId
     );
 
     @POST("reply/{replyId}/ups")
