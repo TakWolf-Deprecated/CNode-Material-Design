@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_open_in_browser"
-        android:title="@string/open_in_browser"
-        android:icon="@drawable/ic_open_in_browser_white_24dp"
+        android:id="@+id/action_share"
+        android:title="@string/share"
+        android:icon="@drawable/ic_share_white_24dp"
         android:orderInCategory="1"
         app:showAsAction="always" />
 
