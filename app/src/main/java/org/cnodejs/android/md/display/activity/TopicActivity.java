@@ -130,8 +130,10 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_open_in_browser:
-                ShipUtils.openInBrowser(this, "https://cnodejs.org/topic/" + topicId);
+            case R.id.action_share:
+                if (topic != null) {
+                    ShipUtils.share(this, "《" + topic.getTitle() + "》\nhttps://cnodejs.org/topic/" + topicId + "\n—— 来自CNode社区");
+                }
                 return true;
             default:
                 return false;
