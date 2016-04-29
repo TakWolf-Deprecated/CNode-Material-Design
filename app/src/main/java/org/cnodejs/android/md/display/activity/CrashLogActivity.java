@@ -84,7 +84,8 @@ public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMen
                         this,
                         "takwolf@foxmail.com",
                         "来自 CNodeMD-" + AboutActivity.VERSION_TEXT + " 的客户端崩溃日志",
-                        crashLog);
+                        crashLog
+                );
                 return true;
             default:
                 return false;
