@@ -67,6 +67,11 @@
         <item name="windowMinWidthMinor">@fraction/dialog_min_width_minor</item>
     </style>
 
+    <style name="AppDialogLight.TopicReply">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/AppAnim.BottomSheetDialog</item>
+    </style>
+
     <!-- App Dialog Dark -->
     <style name="BaseAppDialogDark" parent="Theme.AppCompat.Dialog">
         <item name="colorPrimary">@color/color_primary</item>
@@ -84,6 +89,11 @@
     <style name="AppDialogDark.Alert">
         <item name="windowMinWidthMajor">@fraction/dialog_min_width_major</item>
         <item name="windowMinWidthMinor">@fraction/dialog_min_width_minor</item>
+    </style>
+
+    <style name="AppDialogDark.TopicReply">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/AppAnim.BottomSheetDialog</item>
     </style>
 
     <!-- App Widget -->
