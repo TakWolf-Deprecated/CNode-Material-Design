@@ -49,11 +49,18 @@
     </style>
 
     <!-- App Dialog Light -->
-    <style name="AppDialogLight" parent="Theme.AppCompat.Light.Dialog">
+    <style name="BaseAppDialogLight" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
+        <item name="android:listDivider">@color/list_divider_light</item>
+        <item name="widgetBackground">@color/selectable_item_background_general_light_normal</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_general_light_pressed</item>
+        <item name="widgetBackgroundTitle">@android:color/white</item>
+        <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_light</item>
     </style>
+
+    <style name="AppDialogLight" parent="BaseAppDialogLight" />
 
     <style name="AppDialogLight.Alert">
         <item name="windowMinWidthMajor">@fraction/dialog_min_width_major</item>
@@ -61,11 +68,18 @@
     </style>
 
     <!-- App Dialog Dark -->
-    <style name="AppDialogDark" parent="Theme.AppCompat.Dialog">
+    <style name="BaseAppDialogDark" parent="Theme.AppCompat.Dialog">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
+        <item name="android:listDivider">@color/list_divider_dark</item>
+        <item name="widgetBackground">@color/selectable_item_background_general_dark_normal</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_general_dark_pressed</item>
+        <item name="widgetBackgroundTitle">@color/color_primary</item>
+        <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_dark</item>
     </style>
+
+    <style name="AppDialogDark" parent="BaseAppDialogDark" />
 
     <style name="AppDialogDark.Alert">
         <item name="windowMinWidthMajor">@fraction/dialog_min_width_major</item>
