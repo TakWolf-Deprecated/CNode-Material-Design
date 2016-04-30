@@ -8,7 +8,7 @@
         android:id="@+id/image_preview_photo_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize"
+        android:paddingTop="@dimen/app_bar_size"
         android:scaleType="center"
         android:adjustViewBounds="true"
         android:background="@android:color/black" />
