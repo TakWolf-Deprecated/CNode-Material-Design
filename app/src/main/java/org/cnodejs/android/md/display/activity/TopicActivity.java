@@ -23,6 +23,7 @@ import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.model.entity.Reply;
@@ -159,7 +160,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
 
     @Override
     public boolean onGetTopicResultOk(@NonNull Result.Data<TopicWithReply> result) {
-        if (!isFinishing()) {
+        if (ActivityUtils.isAlive(this)) {
             topic = result.getData();
             topicHeaderView.updateViews(result.getData());
             replyList.clear();

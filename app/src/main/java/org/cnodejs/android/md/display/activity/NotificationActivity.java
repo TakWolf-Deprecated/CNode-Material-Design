@@ -14,6 +14,7 @@ import org.cnodejs.android.md.display.adapter.NotificationAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.view.INotificationView;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.model.entity.Message;
@@ -91,7 +92,7 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
 
     @Override
     public boolean onGetMessagesResultOk(@NonNull Result.Data<Notification> result) {
-        if (!isFinishing()) {
+        if (ActivityUtils.isAlive(this)) {
             messageList.clear();
             messageList.addAll(result.getData().getHasNotReadMessageList());
             messageList.addAll(result.getData().getHasReadMessageList());
@@ -109,7 +110,7 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
 
     @Override
     public boolean onMarkAllMessageReadResultOk() {
-        if (!isFinishing()) {
+        if (ActivityUtils.isAlive(this)) {
             for (Message message : messageList) {
                 message.setRead(true);
             }
