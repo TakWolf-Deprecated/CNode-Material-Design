@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -18,12 +17,12 @@ import com.melnykov.fab.FloatingActionButton;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.TopicAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
+import org.cnodejs.android.md.display.dialog.TopicReplyDialog;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
-import org.cnodejs.android.md.display.viewholder.TopicReplyViewHolder;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.model.entity.Reply;
@@ -67,9 +66,6 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         context.startActivity(intent);
     }
 
-    @Bind(R.id.topic_layout_root)
-    protected ViewGroup layoutRoot;
-
     @Bind(R.id.topic_toolbar)
     protected Toolbar toolbar;
 
@@ -111,7 +107,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         toolbar.inflateMenu(R.menu.topic);
         toolbar.setOnMenuItemClickListener(this);
 
-        topicReplyView = new TopicReplyViewHolder(this, layoutRoot, topicId, this);
+        topicReplyView = TopicReplyDialog.createWithAutoTheme(this, topicId, this);
         topicHeaderView = new TopicHeaderViewHolder(this, listView);
         topicHeaderView.updateViews(topic, false, 0);
         adapter = new TopicAdapter(this, replyList, topicReplyView);
