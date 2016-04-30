@@ -12,7 +12,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
-import org.cnodejs.android.md.display.dialog.DialogUtils;
+import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
 import org.cnodejs.android.md.display.listener.DialogCancelCallListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
@@ -40,7 +40,7 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
 
     public static boolean startForResultWithAccessTokenCheck(@NonNull final Activity activity) {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
-            DialogUtils.createAlertDialogBuilder(activity)
+            AlertDialogUtils.createBuilderWithAutoTheme(activity)
                     .setMessage(R.string.need_login_tip)
                     .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
 
@@ -77,7 +77,7 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        progressDialog = DialogUtils.createProgressDialog(this);
+        progressDialog = ProgressDialog.createWithAutoTheme(this);
         progressDialog.setMessage(R.string.logging_in_$_);
 
         loginPresenter = new LoginPresenter(this, this);
@@ -105,7 +105,7 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
 
     @OnClick(R.id.login_btn_login_tip)
     protected void onBtnLoginTipClick() {
-        DialogUtils.createAlertDialogBuilder(this)
+        AlertDialogUtils.createBuilderWithAutoTheme(this)
                 .setMessage(R.string.how_to_get_access_token_tip_content)
                 .setPositiveButton(R.string.confirm, null)
                 .show();

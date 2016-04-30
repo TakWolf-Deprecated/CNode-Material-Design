@@ -22,7 +22,7 @@ import com.melnykov.fab.FloatingActionButton;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.MainAdapter;
 import org.cnodejs.android.md.display.base.DrawerLayoutActivity;
-import org.cnodejs.android.md.display.dialog.DialogUtils;
+import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.display.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.display.view.IMainView;
@@ -310,7 +310,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
      */
     @OnClick(R.id.main_nav_btn_logout)
     protected void onBtnLogoutClick() {
-        DialogUtils.createAlertDialogBuilder(this)
+        AlertDialogUtils.createBuilderWithAutoTheme(this)
                 .setMessage(R.string.logout_tip)
                 .setPositiveButton(R.string.logout, new DialogInterface.OnClickListener() {
 

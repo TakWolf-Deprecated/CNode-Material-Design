@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.display.dialog;
 
-import android.content.Context;
+import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatDialog;
 import android.text.TextUtils;
@@ -9,31 +10,22 @@ import android.view.Window;
 import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.model.storage.SettingShared;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class ProgressDialog extends AppCompatDialog {
 
-    public ProgressDialog(Context context) {
-        super(context);
-        init();
-    }
-
-    public ProgressDialog(Context context, int theme) {
-        super(context, theme);
-        init();
-    }
-
-    protected ProgressDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
-        super(context, cancelable, cancelListener);
-        init();
+    public static ProgressDialog createWithAutoTheme(@NonNull Activity activity) {
+        return new ProgressDialog(activity, SettingShared.isEnableThemeDark(activity) ? R.style.AppDialogDark_Alert : R.style.AppDialogLight_Alert);
     }
 
     @Bind(R.id.dialog_progress_tv_message)
     protected TextView tvMessage;
 
-    private void init() {
+    private ProgressDialog(@NonNull Activity activity, int theme) {
+        super(activity, theme);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_progress);
         ButterKnife.bind(this);

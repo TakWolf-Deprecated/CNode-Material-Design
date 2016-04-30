@@ -88,21 +88,19 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/widgetBackgroundDark"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <EditText
             android:id="@+id/create_topic_edt_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="96dp"
+            android:padding="16dp"
             android:gravity="start"
             android:hint="@string/create_topic_content_hint"
             android:textSize="16sp"
-            android:minLines="30"
-            android:background="?attr/widgetBackgroundDark" />
+            android:minLines="10"
+            android:background="@android:color/transparent" />
 
     </android.support.v4.widget.NestedScrollView>
 
