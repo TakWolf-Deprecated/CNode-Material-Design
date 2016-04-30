@@ -26,6 +26,7 @@ import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.display.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.display.view.IMainView;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
@@ -159,7 +160,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         mainPresenter.getMessageCountAsyncTask();
         // 判断是否需要切换主题
         if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
-            ThemeUtils.recreateActivityDelayed(this);
+            ActivityUtils.recreateDelayed(this);
         }
     }
 
@@ -332,7 +333,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
     @OnClick(R.id.main_nav_btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
-        ThemeUtils.recreateActivity(this); // 重启Activity
+        ActivityUtils.recreate(this); // 重启Activity
     }
 
     /**

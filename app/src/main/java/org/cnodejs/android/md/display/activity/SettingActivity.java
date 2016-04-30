@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
@@ -62,7 +63,7 @@ public class SettingActivity extends StatusBarActivity {
     protected void onBtnThemeDarkClick() {
         switchThemeDark.toggle();
         SettingShared.setEnableThemeDark(this, switchThemeDark.isChecked());
-        ThemeUtils.recreateActivity(this); // 重启Activity
+        ActivityUtils.recreate(this); // 重启Activity
     }
 
     @OnClick(R.id.setting_btn_new_topic_draft)
