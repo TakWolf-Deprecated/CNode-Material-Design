@@ -17,6 +17,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.LoginActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.view.ITopicHeaderView;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.CNodeWebView;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.model.entity.Result;
@@ -146,7 +147,7 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
 
     @Override
     public boolean onCollectTopicResultOk(Result result) {
-        if (!activity.isFinishing()) {
+        if (ActivityUtils.isAlive(activity)) {
             isCollect = true;
             btnFavorite.setImageResource(R.drawable.ic_favorite_theme_24dp);
         }
@@ -155,7 +156,7 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
 
     @Override
     public boolean onDecollectTopicResultOk(Result result) {
-        if (!activity.isFinishing()) {
+        if (ActivityUtils.isAlive(activity)) {
             isCollect = false;
             btnFavorite.setImageResource(R.drawable.ic_favorite_outline_grey600_24dp);
         }

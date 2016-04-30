@@ -26,6 +26,7 @@ import org.cnodejs.android.md.display.adapter.UserDetailAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.view.IUserDetailView;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
 import org.cnodejs.android.md.model.entity.Result;
@@ -176,7 +177,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
 
     @Override
     public boolean onGetUserResultOk(@NonNull Result.Data<User> result) {
-        if (!isFinishing()) {
+        if (ActivityUtils.isAlive(this)) {
             updateUserInfoViews(result.getData());
             adapter.update(result.getData());
             githubUsername = result.getData().getGithubUsername();
@@ -188,7 +189,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
 
     @Override
     public boolean onGetUserResultError(@NonNull Result.Error error) {
-        if (!isFinishing()) {
+        if (ActivityUtils.isAlive(this)) {
             ToastUtils.with(this).show(error.getErrorMessage());
             return false;
         } else {
@@ -198,7 +199,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
 
     @Override
     public boolean onGetUserLoadError() {
-        if (!isFinishing()) {
+        if (ActivityUtils.isAlive(this)) {
             ToastUtils.with(this).show(R.string.data_load_faild_and_click_avatar_to_reload);
             return false;
         } else {
@@ -229,7 +230,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
 
     @Override
     public boolean onGetCollectTopicListResultOk(@NonNull Result.Data<List<Topic>> result) {
-        if (!isFinishing()) {
+        if (ActivityUtils.isAlive(this)) {
             adapter.update(result.getData());
             return false;
         } else {

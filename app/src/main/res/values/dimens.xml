@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="app_bar_size">56dp</dimen>
     <dimen name="app_bar_elevation">4dp</dimen>
 
     <dimen name="editor_bar_elevation">2dp</dimen>

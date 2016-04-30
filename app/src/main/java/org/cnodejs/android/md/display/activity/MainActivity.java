@@ -26,6 +26,7 @@ import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.display.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.display.view.IMainView;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
@@ -159,7 +160,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         mainPresenter.getMessageCountAsyncTask();
         // 判断是否需要切换主题
         if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
-            ThemeUtils.recreateActivityDelayed(this);
+            ActivityUtils.recreateDelayed(this);
         }
     }
 
@@ -332,7 +333,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
     @OnClick(R.id.main_nav_btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
-        ThemeUtils.recreateActivity(this); // 重启Activity
+        ActivityUtils.recreate(this); // 重启Activity
     }
 
     /**
@@ -451,22 +452,26 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
 
     @Override
     public void updateUserInfoViews() {
-        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            Glide.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-            tvLoginName.setText(R.string.click_avatar_to_login);
-            tvScore.setText(null);
-            btnLogout.setVisibility(View.GONE);
-        } else {
-            Glide.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-            tvLoginName.setText(LoginShared.getLoginName(this));
-            tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
-            btnLogout.setVisibility(View.VISIBLE);
+        if (ActivityUtils.isAlive(this)) {
+            if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+                Glide.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+                tvLoginName.setText(R.string.click_avatar_to_login);
+                tvScore.setText(null);
+                btnLogout.setVisibility(View.GONE);
+            } else {
+                Glide.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+                tvLoginName.setText(LoginShared.getLoginName(this));
+                tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
+                btnLogout.setVisibility(View.VISIBLE);
+            }
         }
     }
 
     @Override
     public void updateMessageCountViews(@NonNull Result.Data<Integer> result) {
-        tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
+        if (ActivityUtils.isAlive(this)) {
+            tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
+        }
     }
 
 }

@@ -6,14 +6,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/app_bar_size"
         android:background="?attr/widgetBackgroundTitle"
         android:elevation="@dimen/editor_bar_elevation">
 
         <ImageView
             android:id="@+id/dialog_topic_reply_btn_tool_close"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="@dimen/app_bar_size"
+            android:layout_height="@dimen/app_bar_size"
             android:src="@drawable/ic_close_grey600_24dp"
             android:scaleType="center"
             android:background="?attr/selectableItemBackground" />
@@ -43,8 +43,8 @@
 
         <ImageView
             android:id="@+id/dialog_topic_reply_btn_tool_send"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="@dimen/app_bar_size"
+            android:layout_height="@dimen/app_bar_size"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_send_grey600_24dp"
