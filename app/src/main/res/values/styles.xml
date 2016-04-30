@@ -148,10 +148,12 @@
         <item name="android:background">@drawable/button_stroke_image</item>
     </style>
 
-    <!-- Reply Window Anim -->
-    <style name="AppWidget.ReplyWindowAnim">
-        <item name="android:windowEnterAnimation">@anim/reply_window_popup_in</item>
-        <item name="android:windowExitAnimation">@anim/reply_window_popup_out</item>
+    <!-- App Animation -->
+    <style name="AppAnim" parent="android:Animation" />
+
+    <style name="AppAnim.BottomSheetDialog">
+        <item name="android:windowEnterAnimation">@anim/bottom_sheet_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_sheet_slide_out</item>
     </style>
 
 </resources>
