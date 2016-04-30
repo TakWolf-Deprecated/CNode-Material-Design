@@ -17,6 +17,7 @@ import org.cnodejs.android.md.display.activity.LoginActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.view.ITopicItemReplyView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.CNodeWebView;
 import org.cnodejs.android.md.display.widget.ToastUtils;
 import org.cnodejs.android.md.model.entity.Reply;
@@ -162,7 +163,7 @@ public class TopicAdapter extends BaseAdapter {
 
         @Override
         public boolean onUpReplyResultOk(@NonNull Reply reply, int position) {
-            if (!activity.isFinishing()) {
+            if (ActivityUtils.isAlive(activity)) {
                 if (position == this.position) {
                     updateUpViews(reply);
                 }

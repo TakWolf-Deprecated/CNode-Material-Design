@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.LoginActivity;
 import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
 import org.cnodejs.android.md.model.entity.Result;
 
@@ -30,7 +31,7 @@ public class DefaultToastCallback<T extends Result> extends CallbackAdapter<T> {
     }
 
     public boolean onResultErrorAuth(Response<T> response, Result.Error error) {
-        if (!activity.isFinishing()) {
+        if (ActivityUtils.isAlive(activity)) {
             AlertDialogUtils.createBuilderWithAutoTheme(activity)
                     .setMessage(R.string.access_token_out_of_date)
                     .setPositiveButton(R.string.relogin, new DialogInterface.OnClickListener() {
@@ -48,7 +49,7 @@ public class DefaultToastCallback<T extends Result> extends CallbackAdapter<T> {
     }
 
     public boolean onResultErrorOther(Response<T> response, Result.Error error) {
-        if (!activity.isFinishing()) {
+        if (ActivityUtils.isAlive(activity)) {
             ToastUtils.with(activity).show(error.getErrorMessage());
         }
         return false;
@@ -56,7 +57,7 @@ public class DefaultToastCallback<T extends Result> extends CallbackAdapter<T> {
 
     @Override
     public boolean onCallException(Throwable t, Result.Error error) {
-        if (!activity.isFinishing()) {
+        if (ActivityUtils.isAlive(activity)) {
             ToastUtils.with(activity).show(error.getErrorMessage());
         }
         return false;
