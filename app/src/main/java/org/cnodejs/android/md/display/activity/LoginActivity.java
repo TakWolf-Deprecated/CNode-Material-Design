@@ -77,7 +77,7 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        progressDialog = DialogUtils.createProgressDialog(this);
+        progressDialog = ProgressDialog.createWithAutoTheme(this);
         progressDialog.setMessage(R.string.logging_in_$_);
 
         loginPresenter = new LoginPresenter(this, this);

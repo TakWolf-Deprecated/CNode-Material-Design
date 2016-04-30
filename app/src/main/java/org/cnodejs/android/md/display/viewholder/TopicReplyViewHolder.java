@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.dialog.DialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
@@ -57,7 +56,7 @@ public class TopicReplyViewHolder implements ITopicReplyView {
         replyWindow.setOutsideTouchable(true);
         replyWindow.setAnimationStyle(R.style.AppWidget_ReplyWindowAnim);
 
-        progressDialog = DialogUtils.createProgressDialog(activity);
+        progressDialog = ProgressDialog.createWithAutoTheme(activity);
         progressDialog.setMessage(R.string.posting_$_);
         progressDialog.setCancelable(false);
 

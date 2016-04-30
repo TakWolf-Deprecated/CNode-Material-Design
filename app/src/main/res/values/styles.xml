@@ -53,6 +53,9 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
+    </style>
+
+    <style name="AppDialogLight.Alert">
         <item name="windowMinWidthMajor">@fraction/dialog_min_width_major</item>
         <item name="windowMinWidthMinor">@fraction/dialog_min_width_minor</item>
     </style>
@@ -62,6 +65,9 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
+    </style>
+
+    <style name="AppDialogDark.Alert">
         <item name="windowMinWidthMajor">@fraction/dialog_min_width_major</item>
         <item name="windowMinWidthMinor">@fraction/dialog_min_width_minor</item>
     </style>

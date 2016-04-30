@@ -9,10 +9,6 @@ public final class DialogUtils {
 
     private DialogUtils() {}
 
-    public static ProgressDialog createProgressDialog(Context context) {
-        return new ProgressDialog(context, ThemeUtils.getDialogThemeRes(context));
-    }
-
     public static AlertDialog.Builder createAlertDialogBuilder(Context context) {
         return new AlertDialog.Builder(context, ThemeUtils.getDialogThemeRes(context));
     }

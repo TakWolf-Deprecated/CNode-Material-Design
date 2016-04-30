@@ -10,7 +10,6 @@ import android.widget.Spinner;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
-import org.cnodejs.android.md.display.dialog.DialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.view.ICreateTopicView;
@@ -61,7 +60,7 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
         toolbar.inflateMenu(R.menu.create_topic);
         toolbar.setOnMenuItemClickListener(this);
 
-        progressDialog = DialogUtils.createProgressDialog(this);
+        progressDialog = ProgressDialog.createWithAutoTheme(this);
         progressDialog.setMessage(R.string.posting_$_);
         progressDialog.setCancelable(false);
 
