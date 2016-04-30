@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.LoginActivity;
-import org.cnodejs.android.md.display.dialog.DialogUtils;
+import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
 import org.cnodejs.android.md.model.entity.Result;
 
@@ -31,7 +31,7 @@ public class DefaultToastCallback<T extends Result> extends CallbackAdapter<T> {
 
     public boolean onResultErrorAuth(Response<T> response, Result.Error error) {
         if (!activity.isFinishing()) {
-            DialogUtils.createAlertDialogBuilder(activity)
+            AlertDialogUtils.createBuilderWithAutoTheme(activity)
                     .setMessage(R.string.access_token_out_of_date)
                     .setPositiveButton(R.string.relogin, new DialogInterface.OnClickListener() {
 

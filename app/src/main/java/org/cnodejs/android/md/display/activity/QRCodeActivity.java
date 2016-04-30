@@ -14,7 +14,7 @@ import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
-import org.cnodejs.android.md.display.dialog.DialogUtils;
+import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.util.FormatUtils;
 
@@ -74,7 +74,7 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
 
     @Override
     public void cameraNotFound() {
-        DialogUtils.createAlertDialogBuilder(this)
+        AlertDialogUtils.createBuilderWithAutoTheme(this)
                 .setMessage(R.string.can_not_open_camera)
                 .setPositiveButton(R.string.confirm, null)
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {

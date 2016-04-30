@@ -11,7 +11,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 
-import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.util.HandlerUtils;
 
@@ -65,10 +64,6 @@ public final class ThemeUtils {
             }
 
         });
-    }
-
-    public static int getDialogThemeRes(@NonNull Context context) {
-        return SettingShared.isEnableThemeDark(context) ? R.style.AppDialogDark : R.style.AppDialogLight;
     }
 
     public static int getStatusBarHeight(@NonNull Context context) {
