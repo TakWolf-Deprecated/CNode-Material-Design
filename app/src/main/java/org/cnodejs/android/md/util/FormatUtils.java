@@ -19,27 +19,27 @@ public final class FormatUtils {
      * 获取最近时间字符串
      */
 
-    private static final long minute = 60 * 1000;
-    private static final long hour = 60 * minute;
-    private static final long day = 24 * hour;
-    private static final long week = 7 * day;
-    private static final long month = 31 * day;
-    private static final long year = 12 * month;
+    private static final long MINUTE = 60 * 1000;
+    private static final long HOUR = 60 * MINUTE;
+    private static final long DAY = 24 * HOUR;
+    private static final long WEEK = 7 * DAY;
+    private static final long MONTH = 31 * DAY;
+    private static final long YEAR = 12 * MONTH;
 
     public static String getRecentlyTimeText(@NonNull DateTime dateTime) {
         long diff = new DateTime().getMillis() - dateTime.getMillis();
-        if (diff > year) {
-            return (diff / year) + "年前";
-        } else if (diff > month) {
-            return (diff / month) + "个月前";
-        } else if (diff > week) {
-            return (diff / week) + "周前";
-        } else if (diff > day) {
-            return (diff / day) + "天前";
-        } else if (diff > hour) {
-            return (diff / hour) + "小时前";
-        } else if (diff > minute) {
-            return (diff / minute) + "分钟前";
+        if (diff > YEAR) {
+            return (diff / YEAR) + "年前";
+        } else if (diff > MONTH) {
+            return (diff / MONTH) + "个月前";
+        } else if (diff > WEEK) {
+            return (diff / WEEK) + "周前";
+        } else if (diff > DAY) {
+            return (diff / DAY) + "天前";
+        } else if (diff > HOUR) {
+            return (diff / HOUR) + "小时前";
+        } else if (diff > MINUTE) {
+            return (diff / MINUTE) + "分钟前";
         } else {
             return "刚刚";
         }

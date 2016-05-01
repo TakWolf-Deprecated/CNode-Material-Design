@@ -48,7 +48,7 @@ public final class ShipUtils {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, text);
-        context.startActivity(Intent.createChooser(intent, "分享到："));
+        context.startActivity(Intent.createChooser(intent, "分享方式"));
     }
 
 }
