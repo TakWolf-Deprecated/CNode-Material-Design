@@ -43,7 +43,7 @@ public class TopicReplyPresenter implements ITopicReplyPresenter {
                 finalContent = content;
             }
             topicReplyView.onReplyTopicStart();
-            Call<Result.ReplyTopic> call = ApiClient.service.replyTopic(topicId, LoginShared.getAccessToken(activity), content, targetId);
+            Call<Result.ReplyTopic> call = ApiClient.service.replyTopic(topicId, LoginShared.getAccessToken(activity), finalContent, targetId);
             call.enqueue(new DefaultToastCallback<Result.ReplyTopic>(activity) {
 
                 @Override
