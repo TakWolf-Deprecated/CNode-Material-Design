@@ -188,9 +188,9 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
 
     @Override
     public void appendReplyAndUpdateViews(@NonNull Reply reply) {
-        topicHeaderView.updateReplyCount(replyList.size());
         replyList.add(reply);
         positionMap.put(reply.getId(), replyList.size() - 1);
+        topicHeaderView.updateReplyCount(replyList.size());
         adapter.notifyDataSetChanged();
         listView.smoothScrollToPosition(replyList.size());
     }
