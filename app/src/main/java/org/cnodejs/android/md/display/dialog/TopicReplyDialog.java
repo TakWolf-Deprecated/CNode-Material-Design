@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatDialog;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
@@ -38,6 +40,12 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
     @Bind(R.id.editor_bar_layout_root)
     protected ViewGroup editorBar;
 
+    @Bind(R.id.dialog_topic_reply_layout_target)
+    protected ViewGroup layoutTarget;
+
+    @Bind(R.id.dialog_topic_reply_tv_target)
+    protected TextView tvTarget;
+
     @Bind(R.id.dialog_topic_reply_edt_content)
     protected EditText edtContent;
 
@@ -45,6 +53,8 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
     private final ITopicView topicView;
     private final ProgressDialog progressDialog;
     private final ITopicReplyPresenter topicReplyPresenter;
+
+    private String targetId = null;
 
     private TopicReplyDialog(@NonNull Activity activity, int theme, @NonNull String topicId, @NonNull ITopicView topicView) {
         super(activity, theme);
@@ -79,7 +89,13 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
 
     @OnClick(R.id.dialog_topic_reply_btn_tool_send)
     protected void onBtnToolSendClick() {
-        topicReplyPresenter.replyTopicAsyncTask(topicId, edtContent.getText().toString().trim(), null);
+        topicReplyPresenter.replyTopicAsyncTask(topicId, edtContent.getText().toString().trim(), targetId);
+    }
+
+    @OnClick(R.id.dialog_topic_reply_btn_clear_target)
+    protected void onBtnClearTargetClick() {
+        targetId = null;
+        layoutTarget.setVisibility(View.GONE);
     }
 
     @Override
@@ -93,7 +109,10 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
     }
 
     @Override
-    public void onAt(@NonNull Reply target) {
+    public void onAt(@NonNull Reply target, @NonNull Integer targetPosition) {
+        targetId = target.getId();
+        layoutTarget.setVisibility(View.VISIBLE);
+        tvTarget.setText("回复：" + (targetPosition + 1) + "楼");
         edtContent.getText().insert(edtContent.getSelectionEnd(), " @" + target.getAuthor().getLoginName() + " ");
         showReplyWindow();
     }
@@ -113,6 +132,8 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
     public boolean onReplyTopicResultOk(@NonNull Reply reply) {
         topicView.appendReplyAndUpdateViews(reply);
         dismissReplyWindow();
+        targetId = null;
+        layoutTarget.setVisibility(View.GONE);
         edtContent.setText(null);
         ToastUtils.with(getContext()).show(R.string.post_success);
         return false;

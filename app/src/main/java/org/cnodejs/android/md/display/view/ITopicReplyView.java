@@ -10,7 +10,7 @@ public interface ITopicReplyView {
 
     void dismissReplyWindow();
 
-    void onAt(@NonNull Reply target);
+    void onAt(@NonNull Reply target, @NonNull Integer targetPosition);
 
     void onContentEmptyError();
 

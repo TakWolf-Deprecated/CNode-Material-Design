@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    android:background="?attr/widgetBackgroundDark">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -53,21 +56,61 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/dialog_topic_reply_layout_target"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/widgetBackgroundDark">
+        android:background="#8880bd01"
+        tools:visibility="visible">
 
-        <EditText
-            android:id="@+id/dialog_topic_reply_edt_content"
+        <TextView
+            android:id="@+id/dialog_topic_reply_tv_target"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:gravity="start"
-            android:hint="@string/create_topic_content_hint"
+            android:layout_gravity="start|center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="@android:color/white"
             android:textSize="16sp"
-            android:minLines="12"
-            android:background="@android:color/transparent" />
+            tools:text="回复：16楼" />
+
+        <ImageView
+            android:id="@+id/dialog_topic_reply_btn_clear_target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:padding="8dp"
+            android:src="@drawable/ic_close_white_18dp"
+            android:scaleType="center"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/dialog_topic_reply_edt_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:gravity="start"
+                android:hint="@string/create_topic_content_hint"
+                android:textSize="16sp"
+                android:minLines="12"
+                android:background="@android:color/transparent" />
+
+        </LinearLayout>
 
     </ScrollView>
 

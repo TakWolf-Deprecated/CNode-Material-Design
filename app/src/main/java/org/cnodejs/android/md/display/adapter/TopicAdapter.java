@@ -144,7 +144,7 @@ public class TopicAdapter extends BaseAdapter {
         @OnClick(R.id.topic_item_reply_btn_at)
         protected void onBtnAtClick() {
             if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
-                topicReplyView.onAt(reply);
+                topicReplyView.onAt(reply, positionMap.get(reply.getId()));
             }
         }
 
