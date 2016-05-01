@@ -122,6 +122,17 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/topic_item_reply_tv_target_position"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:textColor="@color/color_accent"
+            android:textSize="16sp"
+            tools:text="回复：1楼" />
+
         <org.cnodejs.android.md.display.widget.CNodeWebView
             android:id="@+id/topic_item_reply_web_content"
             android:layout_width="match_parent"

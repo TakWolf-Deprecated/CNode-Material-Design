@@ -2,6 +2,7 @@ package org.cnodejs.android.md.display.adapter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import org.cnodejs.android.md.presenter.implement.TopicItemReplyPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,12 +39,14 @@ public class TopicAdapter extends BaseAdapter {
     private final Activity activity;
     private final LayoutInflater inflater;
     private final List<Reply> replyList;
+    private final Map<String, Integer> positionMap;
     private final ITopicReplyView topicReplyView;
 
-    public TopicAdapter(@NonNull Activity activity, @NonNull List<Reply> replyList, @NonNull ITopicReplyView topicReplyView) {
+    public TopicAdapter(@NonNull Activity activity, @NonNull List<Reply> replyList, @NonNull Map<String, Integer> positionMap, @NonNull ITopicReplyView topicReplyView) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
         this.replyList = replyList;
+        this.positionMap = positionMap;
         this.topicReplyView = topicReplyView;
     }
 
@@ -92,6 +96,9 @@ public class TopicAdapter extends BaseAdapter {
         @Bind(R.id.topic_item_reply_btn_ups)
         protected TextView btnUps;
 
+        @Bind(R.id.topic_item_reply_tv_target_position)
+        protected TextView tvTargetPosition;
+
         @Bind(R.id.topic_item_reply_web_content)
         protected CNodeWebView webContent;
 
@@ -115,7 +122,7 @@ public class TopicAdapter extends BaseAdapter {
         public void update(int position) {
             this.position = position;
             reply = replyList.get(position);
-            updateReplyViews(reply);
+            updateReplyViews(reply, position, positionMap.get(reply.getReplyId()));
         }
 
         @OnClick(R.id.topic_item_reply_img_avatar)
@@ -142,17 +149,24 @@ public class TopicAdapter extends BaseAdapter {
         }
 
         @Override
-        public void updateReplyViews(@NonNull Reply reply) {
+        public void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
             Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             tvIndex.setText(position + 1 + "楼");
             tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
             updateUpViews(reply);
-            iconDeepLine.setVisibility(position == replyList.size() - 1 ? View.GONE : View.VISIBLE);
-            iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
+            if (targetPosition == null) {
+                tvTargetPosition.setVisibility(View.GONE);
+            } else {
+                tvTargetPosition.setVisibility(View.VISIBLE);
+                tvTargetPosition.setText("回复：" + (targetPosition + 1) + "楼");
+            }
 
             // 这里直接使用WebView，有性能问题
             webContent.loadRenderedContent(reply.getHandleContent());
+
+            iconDeepLine.setVisibility(position == replyList.size() - 1 ? View.GONE : View.VISIBLE);
+            iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
         }
 
         @Override

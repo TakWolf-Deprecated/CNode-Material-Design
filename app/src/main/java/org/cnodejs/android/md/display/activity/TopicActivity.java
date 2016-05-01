@@ -36,7 +36,9 @@ import org.cnodejs.android.md.presenter.implement.TopicPresenter;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -85,6 +87,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
     private String topicId;
     private Topic topic;
     private final List<Reply> replyList = new ArrayList<>();
+    private final Map<String, Integer> positionMap = new HashMap<>();
 
     private ITopicReplyView topicReplyView;
     private ITopicHeaderView topicHeaderView;
@@ -111,7 +114,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         topicReplyView = TopicReplyDialog.createWithAutoTheme(this, topicId, this);
         topicHeaderView = new TopicHeaderViewHolder(this, listView);
         topicHeaderView.updateViews(topic, false, 0);
-        adapter = new TopicAdapter(this, replyList, topicReplyView);
+        adapter = new TopicAdapter(this, replyList, positionMap, topicReplyView);
         listView.setAdapter(adapter);
 
         iconNoData.setVisibility(topic == null ? View.VISIBLE : View.GONE);
@@ -165,6 +168,11 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
             topicHeaderView.updateViews(result.getData());
             replyList.clear();
             replyList.addAll(result.getData().getReplyList());
+            positionMap.clear();
+            for (int n = 0; n < replyList.size(); n++) {
+                Reply reply = replyList.get(n);
+                positionMap.put(reply.getId(), n);
+            }
             adapter.notifyDataSetChanged();
             iconNoData.setVisibility(View.GONE);
             return false;
@@ -182,6 +190,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
     public void appendReplyAndUpdateViews(@NonNull Reply reply) {
         topicHeaderView.updateReplyCount(replyList.size());
         replyList.add(reply);
+        positionMap.put(reply.getId(), replyList.size() - 1);
         adapter.notifyDataSetChanged();
         listView.smoothScrollToPosition(replyList.size());
     }
