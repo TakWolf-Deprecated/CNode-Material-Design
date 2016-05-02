@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "org.cnodejs.android.md"
         minSdkVersion 9
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode Integer.parseInt(time)
         versionName "1.1.1-beta.4"
 

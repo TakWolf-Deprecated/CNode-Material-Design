@@ -90,7 +90,15 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
 
     @OnClick(R.id.login_btn_qrcode)
     protected void onBtnQrcodeClick() {
-        QRCodeActivity.startForResult(this);
+        QRCodeActivity.startForResultWithPermissionCheck(this);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == QRCodeActivity.PERMISSIONS_REQUEST_QRCODE) {
+            QRCodeActivity.startForResultWithPermissionHandle(this, permissions, grantResults);
+        }
     }
 
     @Override
