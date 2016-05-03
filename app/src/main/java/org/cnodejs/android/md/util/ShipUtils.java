@@ -8,6 +8,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.TopicActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.widget.ToastUtils;
+import org.cnodejs.android.md.model.api.ApiDefine;
 
 public final class ShipUtils {
 
@@ -55,11 +56,11 @@ public final class ShipUtils {
     }
 
     public static void handleLink(Context context, String url) {
-        if (url.startsWith("https://cnodejs.org/user/")) { // 用户主页协议
-            UserDetailActivity.start(context, Uri.parse(url).getPath().replace("/user/", ""));
-        } else if (url.startsWith("https://cnodejs.org/topic/")) { // 话题主页协议
-            TopicActivity.start(context, Uri.parse(url).getPath().replace("/topic/", ""));
-        } else { // 其他连接
+        if (FormatUtils.isUserLinkUrl(url)) {
+            UserDetailActivity.start(context, Uri.parse(url).getPath().replace(ApiDefine.USER_PATH_PREFIX, ""));
+        } else if (FormatUtils.isTopicLinkUrl(url)) {
+            TopicActivity.start(context, Uri.parse(url).getPath().replace(ApiDefine.TOPIC_PATH_PREFIX, ""));
+        } else {
             ShipUtils.openInBrowser(context, url);
         }
     }

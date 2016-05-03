@@ -26,6 +26,7 @@ import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
 import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
@@ -33,6 +34,7 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
+import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.ArrayList;
@@ -102,7 +104,14 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);
 
-        topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
+        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_TOPIC_ID))) {
+            topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
+        } else if (FormatUtils.isTopicLinkUrl(getIntent().getDataString())) {
+            topicId = getIntent().getData().getPath().replace(ApiDefine.TOPIC_PATH_PREFIX, "");
+        } else {
+            topicId = "";
+        }
+
         if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_TOPIC))) {
             topic = EntityUtils.gson.fromJson(getIntent().getStringExtra(EXTRA_TOPIC), Topic.class);
         }
@@ -132,7 +141,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         switch (item.getItemId()) {
             case R.id.action_share:
                 if (topic != null) {
-                    ShipUtils.share(this, "《" + topic.getTitle() + "》\nhttps://cnodejs.org/topic/" + topicId + "\n—— 来自CNode社区");
+                    ShipUtils.share(this, "《" + topic.getTitle() + "》\n" + ApiDefine.TOPIC_LINK_URL_PREFIX + topicId + "\n—— 来自CNode社区");
                 }
                 return true;
             default:

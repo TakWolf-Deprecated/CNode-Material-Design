@@ -1,8 +1,10 @@
 package org.cnodejs.android.md.util;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import org.cnodejs.android.md.model.api.ApiDefine;
 import org.joda.time.DateTime;
 import org.tautua.markdownpapers.Markdown;
 import org.tautua.markdownpapers.parser.ParseException;
@@ -98,6 +100,18 @@ public final class FormatUtils {
     }
 
     /**
+     * 标准URL检测
+     */
+
+    public static boolean isUserLinkUrl(@Nullable String url) {
+        return !TextUtils.isEmpty(url) && url.startsWith(ApiDefine.USER_LINK_URL_PREFIX);
+    }
+
+    public static boolean isTopicLinkUrl(@Nullable String url) {
+        return !TextUtils.isEmpty(url) && url.startsWith(ApiDefine.TOPIC_LINK_URL_PREFIX);
+    }
+
+    /**
      * CNode兼容性的Markdown转换
      * 最外层包裹 <div class="markdown-text"></div> 以保证和服务端渲染同步
      */
@@ -108,7 +122,7 @@ public final class FormatUtils {
         text = TextUtils.isEmpty(text) ? "" : text;
         // 解析@协议
         text = " " + text;
-        text = text.replaceAll(" @([a-zA-Z0-9_]+)", "\\[@$1\\]\\(https://cnodejs.org/user/$1\\)").trim();
+        text = text.replaceAll(" @([a-zA-Z0-9_-]+)", "\\[@$1\\]\\(" + ApiDefine.USER_LINK_URL_PREFIX + "$1\\)").trim();
         // 渲染markdown
         try {
             StringWriter out = new StringWriter();
@@ -123,7 +137,7 @@ public final class FormatUtils {
 
     public static String handleHtml(String html) {
         if (!TextUtils.isEmpty(html)) {
-            html = html.replace("<a href=\"/user/", "<a href=\"https://cnodejs.org/user/"); // 替换@用户协议
+            html = html.replace("<a href=\"" + ApiDefine.USER_PATH_PREFIX, "<a href=\"" + ApiDefine.USER_LINK_URL_PREFIX); // 替换@用户协议
             html = html.replace("<img src=\"//", "<img src=\"https://"); // 替换缩略URL引用路径为https协议
         }
         return html;
