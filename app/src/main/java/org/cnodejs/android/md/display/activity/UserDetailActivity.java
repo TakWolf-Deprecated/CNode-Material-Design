@@ -34,6 +34,7 @@ import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
 import org.cnodejs.android.md.presenter.implement.UserDetailPresenter;
+import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.List;
@@ -123,7 +124,14 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         viewPager.setOffscreenPageLimit(adapter.getCount());
         tabLayout.setupWithViewPager(viewPager);
 
-        loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
+        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_LOGIN_NAME))) {
+            loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
+        } else if (FormatUtils.isUserLinkUrl(getIntent().getDataString())) {
+            loginName = getIntent().getData().getPath().replace("/user/", "");
+        } else {
+            loginName = "";
+        }
+
         tvLoginName.setText(loginName);
 
         String avatarUrl = getIntent().getStringExtra(EXTRA_AVATAR_URL);
