@@ -122,7 +122,7 @@ public final class FormatUtils {
         text = TextUtils.isEmpty(text) ? "" : text;
         // 解析@协议
         text = " " + text;
-        text = text.replaceAll(" @([a-zA-Z0-9_]+)", "\\[@$1\\]\\(" + ApiDefine.USER_LINK_URL_PREFIX + "$1\\)").trim();
+        text = text.replaceAll(" @([a-zA-Z0-9_-]+)", "\\[@$1\\]\\(" + ApiDefine.USER_LINK_URL_PREFIX + "$1\\)").trim();
         // 渲染markdown
         try {
             StringWriter out = new StringWriter();
