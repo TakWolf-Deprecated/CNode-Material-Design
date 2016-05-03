@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,15 +25,17 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.UserDetailAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.view.IUserDetailView;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
-import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.CallbackAdapter;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
+import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
-import org.cnodejs.android.md.util.HandlerUtils;
+import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
+import org.cnodejs.android.md.presenter.implement.UserDetailPresenter;
+import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.List;
@@ -40,10 +43,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Response;
 
-public class UserDetailActivity extends StatusBarActivity {
+public class UserDetailActivity extends StatusBarActivity implements IUserDetailView, Toolbar.OnMenuItemClickListener {
 
     private static final String EXTRA_LOGIN_NAME = "loginName";
     private static final String EXTRA_AVATAR_URL = "avatarUrl";
@@ -99,11 +100,12 @@ public class UserDetailActivity extends StatusBarActivity {
 
     private UserDetailAdapter adapter;
 
+    private IUserDetailPresenter userDetailPresenter;
+
     private String loginName;
     private String githubUsername;
 
     private boolean loading = false;
-    private long startLoadingTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,13 +117,22 @@ public class UserDetailActivity extends StatusBarActivity {
         ViewCompat.setTransitionName(imgAvatar, NAME_IMG_AVATAR);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
+        toolbar.inflateMenu(R.menu.user_detail);
+        toolbar.setOnMenuItemClickListener(this);
 
         adapter = new UserDetailAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
         tabLayout.setupWithViewPager(viewPager);
 
-        loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
+        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_LOGIN_NAME))) {
+            loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
+        } else if (FormatUtils.isUserLinkUrl(getIntent().getDataString())) {
+            loginName = getIntent().getData().getPath().replace(ApiDefine.USER_PATH_PREFIX, "");
+        } else {
+            loginName = "";
+        }
+
         tvLoginName.setText(loginName);
 
         String avatarUrl = getIntent().getStringExtra(EXTRA_AVATAR_URL);
@@ -129,8 +140,21 @@ public class UserDetailActivity extends StatusBarActivity {
             Glide.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
         }
 
-        getUserAsyncTask();
-        getCollectTopicListAsyncTask();
+        userDetailPresenter = new UserDetailPresenter(this, this);
+
+        userDetailPresenter.getUserAsyncTask(loginName);
+        userDetailPresenter.getCollectTopicListAsyncTask(loginName);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_open_in_browser:
+                ShipUtils.openInBrowser(this, ApiDefine.USER_LINK_URL_PREFIX + loginName);
+                return true;
+            default:
+                return false;
+        }
     }
 
     /**
@@ -142,8 +166,8 @@ public class UserDetailActivity extends StatusBarActivity {
     @OnClick(R.id.user_detail_img_avatar)
     protected void onBtnAvatarClick() {
         if (!loading) {
-            getUserAsyncTask();
-            getCollectTopicListAsyncTask();
+            userDetailPresenter.getUserAsyncTask(loginName);
+            userDetailPresenter.getCollectTopicListAsyncTask(loginName);
         }
     }
 
@@ -154,7 +178,52 @@ public class UserDetailActivity extends StatusBarActivity {
         }
     }
 
-    private void updateUserInfoViews(User user) {
+    @Override
+    public void onGetUserStart() {
+        loading = true;
+        progressWheel.spin();
+    }
+
+    @Override
+    public boolean onGetUserResultOk(@NonNull Result.Data<User> result) {
+        if (ActivityUtils.isAlive(this)) {
+            updateUserInfoViews(result.getData());
+            adapter.update(result.getData());
+            githubUsername = result.getData().getGithubUsername();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean onGetUserResultError(@NonNull Result.Error error) {
+        if (ActivityUtils.isAlive(this)) {
+            ToastUtils.with(this).show(error.getErrorMessage());
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean onGetUserLoadError() {
+        if (ActivityUtils.isAlive(this)) {
+            ToastUtils.with(this).show(R.string.data_load_faild_and_click_avatar_to_reload);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onGetUserFinish() {
+        progressWheel.stopSpinning();
+        loading = false;
+    }
+
+    @Override
+    public void updateUserInfoViews(@NonNull User user) {
         Glide.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
         tvLoginName.setText(user.getLoginName());
         if (TextUtils.isEmpty(user.getGithubUsername())) {
@@ -168,96 +237,14 @@ public class UserDetailActivity extends StatusBarActivity {
         tvScore.setText(getString(R.string.score_$) + user.getScore());
     }
 
-    private void getUserAsyncTask() {
-        loading = true;
-        startLoadingTime = System.currentTimeMillis();
-        progressWheel.spin();
-        Call<Result.Data<User>> call = ApiClient.service.getUser(loginName);
-        call.enqueue(new CallbackAdapter<Result.Data<User>>() {
-
-            private long getPostTime() {
-                long postTime = 1000 - (System.currentTimeMillis() - startLoadingTime);
-                if (postTime > 0) {
-                    return postTime;
-                } else {
-                    return 0;
-                }
-            }
-
-            @Override
-            public boolean onResultOk(Response<Result.Data<User>> response, final Result.Data<User> result) {
-                HandlerUtils.postDelayed(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        if (!isFinishing()) {
-                            updateUserInfoViews(result.getData());
-                            adapter.update(result.getData());
-                            githubUsername = result.getData().getGithubUsername();
-                            onFinish();
-                        }
-                    }
-
-                }, getPostTime());
-                return true;
-            }
-
-            @Override
-            public boolean onResultError(final Response<Result.Data<User>> response, final Result.Error error) {
-                HandlerUtils.postDelayed(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        if (!isFinishing()) {
-                            if (response.code() == 404) {
-                                ToastUtils.with(UserDetailActivity.this).show(error.getErrorMessage());
-                            } else {
-                                ToastUtils.with(UserDetailActivity.this).show(R.string.data_load_faild_and_click_avatar_to_reload);
-                            }
-                            onFinish();
-                        }
-                    }
-
-                }, getPostTime());
-                return true;
-            }
-
-            @Override
-            public boolean onCallException(Throwable t, Result.Error error) {
-                HandlerUtils.postDelayed(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        if (!isFinishing()) {
-                            ToastUtils.with(UserDetailActivity.this).show(R.string.data_load_faild_and_click_avatar_to_reload);
-                            onFinish();
-                        }
-                    }
-
-                }, getPostTime());
-                return true;
-            }
-
-            @Override
-            public void onFinish() {
-                progressWheel.stopSpinning();
-                loading = false;
-            }
-
-        });
-    }
-
-    private void getCollectTopicListAsyncTask() {
-        Call<Result.Data<List<Topic>>> call = ApiClient.service.getCollectTopicList(loginName);
-        call.enqueue(new DefaultToastCallback<Result.Data<List<Topic>>>(this) {
-
-            @Override
-            public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                adapter.update(result.getData());
-                return false;
-            }
-
-        });
+    @Override
+    public boolean onGetCollectTopicListResultOk(@NonNull Result.Data<List<Topic>> result) {
+        if (ActivityUtils.isAlive(this)) {
+            adapter.update(result.getData());
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

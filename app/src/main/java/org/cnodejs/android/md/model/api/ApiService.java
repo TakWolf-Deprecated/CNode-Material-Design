@@ -20,7 +20,7 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     //=====
-    // 主题
+    // 话题
     //=====
 
     @GET("topics")
@@ -48,7 +48,7 @@ public interface ApiService {
     );
 
     //=========
-    // 主题收藏
+    // 话题收藏
     //=========
 
     @POST("topic_collect/collect")
@@ -71,7 +71,7 @@ public interface ApiService {
     );
 
     //=====
-    // 评论
+    // 回复
     //=====
 
     @POST("topic/{topicId}/replies")
@@ -80,7 +80,7 @@ public interface ApiService {
             @Path("topicId") String topicId,
             @Field("accesstoken") String accessToken,
             @Field("content") String content,
-            @Field("reply_id") String replyId
+            @Field("reply_id") String targetId
     );
 
     @POST("reply/{replyId}/ups")

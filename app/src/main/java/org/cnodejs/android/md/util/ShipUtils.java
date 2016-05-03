@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.display.activity.TopicActivity;
+import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.widget.ToastUtils;
+import org.cnodejs.android.md.model.api.ApiDefine;
 
 public final class ShipUtils {
 
@@ -41,6 +45,23 @@ public final class ShipUtils {
             context.startActivity(intent);
         } else {
             ToastUtils.with(context).show("您的系统中没有安装邮件客户端");
+        }
+    }
+
+    public static void share(Context context, String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)));
+    }
+
+    public static void handleLink(Context context, String url) {
+        if (FormatUtils.isUserLinkUrl(url)) {
+            UserDetailActivity.start(context, Uri.parse(url).getPath().replace(ApiDefine.USER_PATH_PREFIX, ""));
+        } else if (FormatUtils.isTopicLinkUrl(url)) {
+            TopicActivity.start(context, Uri.parse(url).getPath().replace(ApiDefine.TOPIC_PATH_PREFIX, ""));
+        } else {
+            ShipUtils.openInBrowser(context, url);
         }
     }
 

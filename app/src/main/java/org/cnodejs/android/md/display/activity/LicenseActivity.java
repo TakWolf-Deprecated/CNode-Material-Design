@@ -8,7 +8,10 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.display.widget.ToastUtils;
 import org.cnodejs.android.md.util.ResUtils;
+
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,7 +33,12 @@ public class LicenseActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        tvLicense.setText(ResUtils.getRawString(this, R.raw.open_source));
+        try {
+            tvLicense.setText(ResUtils.getRawString(this, R.raw.open_source));
+        } catch (IOException e) {
+            tvLicense.setText(null);
+            ToastUtils.with(this).show("资源读取失败");
+        }
     }
 
 }

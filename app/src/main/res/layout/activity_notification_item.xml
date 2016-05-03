@@ -72,23 +72,20 @@
         android:id="@+id/notification_item_web_reply_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="12dp" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/notification_item_tv_topic_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_margin="16dp"
         android:padding="12dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp"
         android:background="?attr/referenceBackgroundNormal"
-        tools:text="原话题：【深js拾遗】mbot 机器人大放送！！！！！！！先抢先得噢亲！！！！" />
+        tools:text="原话题：这里是话题的标题" />
 
     <View style="@style/AppWidget.DeepLine" />
 

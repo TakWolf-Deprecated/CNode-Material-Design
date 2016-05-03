@@ -31,7 +31,7 @@
     <string name="logging_in_$_">正在登录中&#8230;</string>
     <string name="login_success">登录成功</string>
     <string name="relogin">重新登录</string>
-    
+
     <string name="no_data">暂无数据</string>
     <string name="no_message">暂无消息</string>
     <string name="no_reply">暂无回复</string>
@@ -62,8 +62,14 @@
 
     <string name="access_token_$">Access Token :</string>
     <string name="open_qrcode">扫描二维码</string>
+    <string name="qrcode_request_permission_rationale_tip">二维码扫描组件需要相机权限才能工作，请确保在弹出的授权对话框中为应用授予相机权限。</string>
+    <string name="qrcode_permission_denied_tip">二维码扫描组件无法工作，请确保在设置中为应用授予了相机权限。</string>
+    <string name="open_permissions_request">打开授权</string>
+    <string name="go_to_setting">去设置</string>
     <string name="can_not_open_camera">无法打开相机</string>
     <string name="qrcode_tip">将二维码放入扫描框内</string>
+    <string name="$_how_to_get_access_token_$"><u>如何获取Access Token？</u></string>
+    <string name="how_to_get_access_token_tip_content">在CNode社区网站端登录你的账户，然后在右上角找到「设置」按钮，点击进入后将页面滑动到最底部来查看你的Access Token。</string>
 
     <string name="current_version">当前版本</string>
     <string name="open_source_url">项目开源主页</string>
@@ -95,11 +101,12 @@
     <string name="default_topic_sign">默认尾巴</string>
 
     <string name="open_in_browser">在浏览器中打开</string>
+    <string name="share">分享</string>
     <string name="send">发送</string>
     <string name="send_to_tab_$">发布到分类：</string>
 
-    <string name="new_topic_title_hint">标题，字数10字以上</string>
-    <string name="new_topic_content_hint">说点什么吧&#8230;</string>
+    <string name="create_topic_title_hint">标题，字数10字以上</string>
+    <string name="create_topic_content_hint">说点什么吧&#8230;</string>
 
     <string name="title">标题</string>
     <string name="add_link">添加连接</string>

@@ -1,8 +1,10 @@
 package org.cnodejs.android.md.util;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import org.cnodejs.android.md.model.api.ApiDefine;
 import org.joda.time.DateTime;
 import org.tautua.markdownpapers.Markdown;
 import org.tautua.markdownpapers.parser.ParseException;
@@ -19,27 +21,27 @@ public final class FormatUtils {
      * 获取最近时间字符串
      */
 
-    private static final long minute = 60 * 1000;
-    private static final long hour = 60 * minute;
-    private static final long day = 24 * hour;
-    private static final long week = 7 * day;
-    private static final long month = 31 * day;
-    private static final long year = 12 * month;
+    private static final long MINUTE = 60 * 1000;
+    private static final long HOUR = 60 * MINUTE;
+    private static final long DAY = 24 * HOUR;
+    private static final long WEEK = 7 * DAY;
+    private static final long MONTH = 31 * DAY;
+    private static final long YEAR = 12 * MONTH;
 
     public static String getRecentlyTimeText(@NonNull DateTime dateTime) {
         long diff = new DateTime().getMillis() - dateTime.getMillis();
-        if (diff > year) {
-            return (diff / year) + "年前";
-        } else if (diff > month) {
-            return (diff / month) + "个月前";
-        } else if (diff > week) {
-            return (diff / week) + "周前";
-        } else if (diff > day) {
-            return (diff / day) + "天前";
-        } else if (diff > hour) {
-            return (diff / hour) + "小时前";
-        } else if (diff > minute) {
-            return (diff / minute) + "分钟前";
+        if (diff > YEAR) {
+            return (diff / YEAR) + "年前";
+        } else if (diff > MONTH) {
+            return (diff / MONTH) + "个月前";
+        } else if (diff > WEEK) {
+            return (diff / WEEK) + "周前";
+        } else if (diff > DAY) {
+            return (diff / DAY) + "天前";
+        } else if (diff > HOUR) {
+            return (diff / HOUR) + "小时前";
+        } else if (diff > MINUTE) {
+            return (diff / MINUTE) + "分钟前";
         } else {
             return "刚刚";
         }
@@ -98,15 +100,30 @@ public final class FormatUtils {
     }
 
     /**
+     * 标准URL检测
+     */
+
+    public static boolean isUserLinkUrl(@Nullable String url) {
+        return !TextUtils.isEmpty(url) && url.startsWith(ApiDefine.USER_LINK_URL_PREFIX);
+    }
+
+    public static boolean isTopicLinkUrl(@Nullable String url) {
+        return !TextUtils.isEmpty(url) && url.startsWith(ApiDefine.TOPIC_LINK_URL_PREFIX);
+    }
+
+    /**
      * CNode兼容性的Markdown转换
      * 最外层包裹 <div class="markdown-text"></div> 以保证和服务端渲染同步
      */
     private static final Markdown md = new Markdown();
 
     public static String renderMarkdown(String text) {
-        if (TextUtils.isEmpty(text)) {
-            text = "";
-        }
+        // 保证text不为null
+        text = TextUtils.isEmpty(text) ? "" : text;
+        // 解析@协议
+        text = " " + text;
+        text = text.replaceAll(" @([a-zA-Z0-9_-]+)", "\\[@$1\\]\\(" + ApiDefine.USER_LINK_URL_PREFIX + "$1\\)").trim();
+        // 渲染markdown
         try {
             StringWriter out = new StringWriter();
             md.transform(new StringReader(text), out);
@@ -114,12 +131,13 @@ public final class FormatUtils {
         } catch (ParseException e) {
             // nothing to do
         }
+        // 添加样式容器
         return "<div class=\"markdown-text\">" + text + "</div>";
     }
 
     public static String handleHtml(String html) {
         if (!TextUtils.isEmpty(html)) {
-            html = html.replace("<a href=\"/user/", "<a href=\"https://cnodejs.org/user/"); // 替换@用户协议
+            html = html.replace("<a href=\"" + ApiDefine.USER_PATH_PREFIX, "<a href=\"" + ApiDefine.USER_LINK_URL_PREFIX); // 替换@用户协议
             html = html.replace("<img src=\"//", "<img src=\"https://"); // 替换缩略URL引用路径为https协议
         }
         return html;

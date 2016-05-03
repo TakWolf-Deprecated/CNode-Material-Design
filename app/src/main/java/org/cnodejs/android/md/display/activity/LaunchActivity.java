@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.BaseActivity;
+import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.util.HandlerUtils;
 
 public class LaunchActivity extends BaseActivity implements Runnable {
@@ -18,7 +19,7 @@ public class LaunchActivity extends BaseActivity implements Runnable {
 
     @Override
     public void run() {
-        if (!isFinishing()) {
+        if (ActivityUtils.isAlive(this)) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }

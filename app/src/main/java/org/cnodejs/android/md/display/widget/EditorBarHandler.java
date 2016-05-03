@@ -12,7 +12,7 @@ import android.widget.EditText;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.display.activity.MarkdownPreviewActivity;
-import org.cnodejs.android.md.display.dialog.DialogUtils;
+import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -113,7 +113,7 @@ public class EditorBarHandler {
      */
     @OnClick(R.id.editor_bar_btn_insert_link)
     protected void onBtnInsertLinkClick() {
-        DialogUtils.createAlertDialogBuilder(activity)
+        AlertDialogUtils.createBuilderWithAutoTheme(activity)
                 .setIcon(R.drawable.ic_insert_link_grey600_24dp)
                 .setTitle(R.string.add_link)
                 .setView(R.layout.dialog_tool_insert_link)

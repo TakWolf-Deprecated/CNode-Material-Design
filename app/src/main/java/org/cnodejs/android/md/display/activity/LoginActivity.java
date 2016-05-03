@@ -12,24 +12,25 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
-import org.cnodejs.android.md.display.dialog.DialogUtils;
+import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
+import org.cnodejs.android.md.display.listener.DialogCancelCallListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.view.ILoginView;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
-import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
+import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
+import org.cnodejs.android.md.presenter.implement.LoginPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
-import retrofit2.Response;
 
-public class LoginActivity extends StatusBarActivity {
+public class LoginActivity extends StatusBarActivity implements ILoginView {
 
     public static final int REQUEST_LOGIN = FormatUtils.createRequestCode();
 
@@ -39,7 +40,7 @@ public class LoginActivity extends StatusBarActivity {
 
     public static boolean startForResultWithAccessTokenCheck(@NonNull final Activity activity) {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
-            DialogUtils.createAlertDialogBuilder(activity)
+            AlertDialogUtils.createBuilderWithAutoTheme(activity)
                     .setMessage(R.string.need_login_tip)
                     .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
 
@@ -65,6 +66,8 @@ public class LoginActivity extends StatusBarActivity {
 
     protected ProgressDialog progressDialog;
 
+    private ILoginPresenter loginPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
@@ -74,58 +77,28 @@ public class LoginActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        progressDialog = DialogUtils.createProgressDialog(this);
+        progressDialog = ProgressDialog.createWithAutoTheme(this);
         progressDialog.setMessage(R.string.logging_in_$_);
+
+        loginPresenter = new LoginPresenter(this, this);
     }
 
     @OnClick(R.id.login_btn_login)
     protected void onBtnLoginClick() {
-        final String accessToken = edtAccessToken.getText().toString().trim();
-        if (!FormatUtils.isAccessToken(accessToken)) {
-            edtAccessToken.setError(getString(R.string.access_token_format_error));
-            edtAccessToken.requestFocus();
-        } else {
-            final Call<Result.Login> call = ApiClient.service.accessToken(accessToken);
-            progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    call.cancel();
-                }
-
-            });
-            progressDialog.show();
-            call.enqueue(new DefaultToastCallback<Result.Login>(this) {
-
-                @Override
-                public boolean onResultOk(Response<Result.Login> response, Result.Login loginInfo) {
-                    LoginShared.login(LoginActivity.this, accessToken, loginInfo);
-                    ToastUtils.with(LoginActivity.this).show(R.string.login_success);
-                    setResult(RESULT_OK);
-                    finish();
-                    return false;
-                }
-
-                @Override
-                public boolean onResultErrorAuth(Response<Result.Login> response, Result.Error error) {
-                    edtAccessToken.setError(getString(R.string.access_token_auth_error));
-                    edtAccessToken.requestFocus();
-                    return false;
-                }
-
-                @Override
-                public void onFinish() {
-                    progressDialog.setOnCancelListener(null);
-                    progressDialog.dismiss();
-                }
-
-            });
-        }
+        loginPresenter.loginAsyncTask(edtAccessToken.getText().toString().trim());
     }
 
     @OnClick(R.id.login_btn_qrcode)
     protected void onBtnQrcodeClick() {
-        QRCodeActivity.startForResult(this);
+        QRCodeActivity.startForResultWithPermissionCheck(this);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == QRCodeActivity.PERMISSIONS_REQUEST_QRCODE) {
+            QRCodeActivity.startForResultWithPermissionHandle(this, permissions, grantResults);
+        }
     }
 
     @Override
@@ -136,6 +109,48 @@ public class LoginActivity extends StatusBarActivity {
             edtAccessToken.setSelection(edtAccessToken.length());
             onBtnLoginClick();
         }
+    }
+
+    @OnClick(R.id.login_btn_login_tip)
+    protected void onBtnLoginTipClick() {
+        AlertDialogUtils.createBuilderWithAutoTheme(this)
+                .setMessage(R.string.how_to_get_access_token_tip_content)
+                .setPositiveButton(R.string.confirm, null)
+                .show();
+    }
+
+    @Override
+    public void onAccessTokenFormatError() {
+        edtAccessToken.setError(getString(R.string.access_token_format_error));
+        edtAccessToken.requestFocus();
+    }
+
+    @Override
+    public void onLoginStart(@NonNull Call<Result.Login> call) {
+        progressDialog.setOnCancelListener(new DialogCancelCallListener(call));
+        progressDialog.show();
+    }
+
+    @Override
+    public boolean onLoginResultOk(@NonNull String accessToken, @NonNull Result.Login loginInfo) {
+        LoginShared.login(this, accessToken, loginInfo);
+        ToastUtils.with(this).show(R.string.login_success);
+        setResult(RESULT_OK);
+        finish();
+        return false;
+    }
+
+    @Override
+    public boolean onLoginResultErrorAuth(@NonNull Result.Error error) {
+        edtAccessToken.setError(getString(R.string.access_token_auth_error));
+        edtAccessToken.requestFocus();
+        return false;
+    }
+
+    @Override
+    public void onLoginFinish() {
+        progressDialog.setOnCancelListener(null);
+        progressDialog.dismiss();
     }
 
 }

@@ -10,8 +10,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import org.cnodejs.android.md.display.activity.ImagePreviewActivity;
-import org.cnodejs.android.md.display.activity.TopicActivity;
-import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.util.ShipUtils;
 
@@ -63,13 +61,7 @@ public class CNodeWebView extends WebView {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-            if (url.startsWith("https://cnodejs.org/user/")) { // 用户主页协议
-                UserDetailActivity.start(getContext(), url.substring(25));
-            } else if (url.startsWith("https://cnodejs.org/topic/")) { // 话题主页协议
-                TopicActivity.start(getContext(), url.substring(26));
-            } else { // 其他连接
-                ShipUtils.openInBrowser(getContext(), url);
-            }
+            ShipUtils.handleLink(getContext(), url);
             return true;
         }
 

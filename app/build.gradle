@@ -16,9 +16,9 @@ android {
     defaultConfig {
         applicationId "org.cnodejs.android.md"
         minSdkVersion 9
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode Integer.parseInt(time)
-        versionName "1.1.0"
+        versionName "1.1.1"
 
         manifestPlaceholders = [
                 UMENG_CHANNEL: "CNodeJS",
