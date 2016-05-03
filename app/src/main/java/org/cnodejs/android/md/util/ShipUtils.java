@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.display.activity.TopicActivity;
+import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.widget.ToastUtils;
 
 public final class ShipUtils {
@@ -48,7 +51,17 @@ public final class ShipUtils {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, text);
-        context.startActivity(Intent.createChooser(intent, "分享方式"));
+        context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)));
+    }
+
+    public static void handleLink(Context context, String url) {
+        if (url.startsWith("https://cnodejs.org/user/")) { // 用户主页协议
+            UserDetailActivity.start(context, Uri.parse(url).getPath().replace("/user/", ""));
+        } else if (url.startsWith("https://cnodejs.org/topic/")) { // 话题主页协议
+            TopicActivity.start(context, Uri.parse(url).getPath().replace("/topic/", ""));
+        } else { // 其他连接
+            ShipUtils.openInBrowser(context, url);
+        }
     }
 
 }
