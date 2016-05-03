@@ -55,11 +55,11 @@ public final class ShipUtils {
     }
 
     public static void handleLink(Context context, String url) {
-        if (url.startsWith("https://cnodejs.org/user/")) { // 用户主页协议
+        if (FormatUtils.isUserLinkUrl(url)) {
             UserDetailActivity.start(context, Uri.parse(url).getPath().replace("/user/", ""));
-        } else if (url.startsWith("https://cnodejs.org/topic/")) { // 话题主页协议
+        } else if (FormatUtils.isTopicLinkUrl(url)) {
             TopicActivity.start(context, Uri.parse(url).getPath().replace("/topic/", ""));
-        } else { // 其他连接
+        } else {
             ShipUtils.openInBrowser(context, url);
         }
     }
