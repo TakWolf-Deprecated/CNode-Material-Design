@@ -271,16 +271,18 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
             case R.id.main_nav_btn_notification:
                 if (LoginActivity.startForResultWithAccessTokenCheck(this)) {
                     notificationAction.startDelayed();
+                    drawerLayout.closeDrawers();
                 }
                 break;
             case R.id.main_nav_btn_setting:
                 settingAction.startDelayed();
+                drawerLayout.closeDrawers();
                 break;
             case R.id.main_nav_btn_about:
                 aboutAction.startDelayed();
+                drawerLayout.closeDrawers();
                 break;
         }
-        drawerLayout.closeDrawers();
     }
 
     private class OtherItemAction implements Runnable {
