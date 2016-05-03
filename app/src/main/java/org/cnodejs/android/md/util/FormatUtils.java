@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.util;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import org.joda.time.DateTime;
@@ -101,11 +102,11 @@ public final class FormatUtils {
      * 标准URL检测
      */
 
-    public static boolean isUserLinkUrl(String url) {
+    public static boolean isUserLinkUrl(@Nullable String url) {
         return !TextUtils.isEmpty(url) && url.startsWith("https://cnodejs.org/user/");
     }
 
-    public static boolean isTopicLinkUrl(String url) {
+    public static boolean isTopicLinkUrl(@Nullable String url) {
         return !TextUtils.isEmpty(url) && url.startsWith("https://cnodejs.org/topic/");
     }
 

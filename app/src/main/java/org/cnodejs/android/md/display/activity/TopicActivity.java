@@ -33,6 +33,7 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
+import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ShipUtils;
 
 import java.util.ArrayList;
@@ -102,7 +103,14 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);
 
-        topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
+        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_TOPIC_ID))) {
+            topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
+        } else if (FormatUtils.isTopicLinkUrl(getIntent().getDataString())) {
+            topicId = getIntent().getData().getPath().replace("/topic/", "");
+        } else {
+            topicId = "";
+        }
+
         if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_TOPIC))) {
             topic = EntityUtils.gson.fromJson(getIntent().getStringExtra(EXTRA_TOPIC), Topic.class);
         }
