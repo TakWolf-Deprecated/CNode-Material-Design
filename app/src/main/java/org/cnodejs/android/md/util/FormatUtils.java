@@ -98,6 +98,18 @@ public final class FormatUtils {
     }
 
     /**
+     * 标准URL检测
+     */
+
+    public static boolean isUserLinkUrl(String url) {
+        return !TextUtils.isEmpty(url) && url.startsWith("https://cnodejs.org/user/");
+    }
+
+    public static boolean isTopicLinkUrl(String url) {
+        return !TextUtils.isEmpty(url) && url.startsWith("https://cnodejs.org/topic/");
+    }
+    
+    /**
      * CNode兼容性的Markdown转换
      * 最外层包裹 <div class="markdown-text"></div> 以保证和服务端渲染同步
      */
