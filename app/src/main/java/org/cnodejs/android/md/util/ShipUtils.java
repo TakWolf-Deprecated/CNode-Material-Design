@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.widget.ToastUtils;
 
 public final class ShipUtils {
@@ -48,7 +49,7 @@ public final class ShipUtils {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, text);
-        context.startActivity(Intent.createChooser(intent, "分享方式"));
+        context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)));
     }
 
 }
