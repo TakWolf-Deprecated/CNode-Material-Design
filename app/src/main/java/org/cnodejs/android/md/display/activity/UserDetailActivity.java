@@ -29,6 +29,7 @@ import org.cnodejs.android.md.display.view.IUserDetailView;
 import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.ThemeUtils;
 import org.cnodejs.android.md.display.widget.ToastUtils;
+import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
@@ -127,7 +128,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_LOGIN_NAME))) {
             loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
         } else if (FormatUtils.isUserLinkUrl(getIntent().getDataString())) {
-            loginName = getIntent().getData().getPath().replace("/user/", "");
+            loginName = getIntent().getData().getPath().replace(ApiDefine.USER_PATH_PREFIX, "");
         } else {
             loginName = "";
         }
@@ -149,7 +150,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_open_in_browser:
-                ShipUtils.openInBrowser(this, "https://cnodejs.org/user/" + loginName);
+                ShipUtils.openInBrowser(this, ApiDefine.USER_LINK_URL_PREFIX + loginName);
                 return true;
             default:
                 return false;
