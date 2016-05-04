@@ -49,6 +49,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends DrawerLayoutActivity implements IMainView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
+    private static final int PAGE_LIMIT = 20;
+
     // 抽屉导航布局
     @Bind(R.id.main_drawer_layout)
     protected DrawerLayout drawerLayout;
@@ -140,7 +142,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new MainAdapter(this, topicList);
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, 20));
+        recyclerView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, PAGE_LIMIT));
         fabCreateTopic.attachToRecyclerView(recyclerView);
 
         mainPresenter = new MainPresenter(this, this);
@@ -217,7 +219,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
 
     @Override
     public void onRefresh() {
-        mainPresenter.refreshTopicListAsyncTask(currentTab, 20, true);
+        mainPresenter.refreshTopicListAsyncTask(currentTab, PAGE_LIMIT, true);
     }
 
     @Override
@@ -225,7 +227,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         if (adapter.canLoadMore()) {
             adapter.setLoading(true);
             adapter.notifyItemChanged(adapter.getItemCount() - 1);
-            mainPresenter.loadMoreTopicListAsyncTask(currentTab, currentPage, 20, true);
+            mainPresenter.loadMoreTopicListAsyncTask(currentTab, currentPage, PAGE_LIMIT, true);
         }
     }
 
@@ -233,7 +235,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
      * 更新列表
      */
     private void notifyDataSetChanged() {
-        if (topicList.size() < 20) {
+        if (topicList.size() < PAGE_LIMIT) {
             adapter.setLoading(false);
         }
         adapter.notifyDataSetChanged();
