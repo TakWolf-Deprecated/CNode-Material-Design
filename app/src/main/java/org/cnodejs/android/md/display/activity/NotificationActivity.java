@@ -12,7 +12,9 @@ import android.view.View;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.NotificationAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
+import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.INotificationView;
 import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
@@ -29,7 +31,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class NotificationActivity extends StatusBarActivity implements INotificationView, Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class NotificationActivity extends StatusBarActivity implements INotificationView, IBackToContentTopView, Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.notification_toolbar)
     protected Toolbar toolbar;
@@ -58,6 +60,7 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.notification);
         toolbar.setOnMenuItemClickListener(this);
+        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NotificationAdapter(this, messageList);
@@ -119,6 +122,11 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
         } else {
             return true;
         }
+    }
+
+    @Override
+    public void backToContentTop() {
+        recyclerView.scrollToPosition(0);
     }
 
 }
