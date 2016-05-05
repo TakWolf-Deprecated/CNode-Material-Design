@@ -18,7 +18,9 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.TopicAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.dialog.TopicReplyDialog;
+import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
@@ -46,7 +48,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TopicActivity extends StatusBarActivity implements ITopicView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
+public class TopicActivity extends StatusBarActivity implements ITopicView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
     private static final String EXTRA_TOPIC_ID = "topicId";
     private static final String EXTRA_TOPIC = "topic";
@@ -119,6 +121,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.topic);
         toolbar.setOnMenuItemClickListener(this);
+        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         topicReplyView = TopicReplyDialog.createWithAutoTheme(this, topicId, this);
         topicHeaderView = new TopicHeaderViewHolder(this, listView);
@@ -202,6 +205,11 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         topicHeaderView.updateReplyCount(replyList.size());
         adapter.notifyDataSetChanged();
         listView.smoothScrollToPosition(replyList.size());
+    }
+
+    @Override
+    public void backToContentTop() {
+        listView.setSelection(0);
     }
 
 }
