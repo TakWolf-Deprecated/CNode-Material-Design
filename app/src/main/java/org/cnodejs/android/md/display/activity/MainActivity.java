@@ -23,8 +23,10 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.MainAdapter;
 import org.cnodejs.android.md.display.base.DrawerLayoutActivity;
 import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
+import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.display.listener.RecyclerViewLoadMoreListener;
+import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.IMainView;
 import org.cnodejs.android.md.display.widget.ActivityUtils;
 import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
@@ -47,7 +49,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends DrawerLayoutActivity implements IMainView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
+public class MainActivity extends DrawerLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
     private static final int PAGE_LIMIT = 20;
 
@@ -137,6 +139,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
         drawerLayout.addDrawerListener(drawerListener);
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
+        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -476,6 +479,11 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         if (ActivityUtils.isAlive(this)) {
             tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
         }
+    }
+
+    @Override
+    public void backToContentTop() {
+        recyclerView.scrollToPosition(0);
     }
 
 }
