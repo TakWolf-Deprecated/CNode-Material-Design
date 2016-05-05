@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/widgetBackground"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/login_layout_top"
+        android:src="@drawable/login_header_bg"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true" />
 
     <LinearLayout
+        android:id="@+id/login_layout_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/app_bar_elevation"
         android:orientation="vertical"
-        android:background="@color/color_primary">
+        android:paddingBottom="56dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/login_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#01000000"
             app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
             app:title="@string/login"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -35,7 +41,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
             android:text="@string/logo_url"
             android:textColor="@android:color/white"
             android:textSize="14sp"
@@ -43,63 +48,77 @@
 
     </LinearLayout>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/login_edt_access_token"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:hint="@string/access_token_$"
-        android:inputType="text"
-        android:maxLength="36"
-        android:singleLine="true"
-        app:met_floatingLabel="highlight"
-        app:met_primaryColor="@color/color_accent"
-        app:met_textColor="?android:attr/textColorPrimary"
-        app:met_textColorHint="?android:attr/textColorHint"
-        app:met_floatingLabelTextColor="?android:attr/textColorSecondary" />
+        android:layout_below="@+id/login_layout_top"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="-40dp"
+        app:contentPadding="8dp"
+        app:cardCornerRadius="@dimen/button_corner_radius"
+        app:cardElevation="@dimen/shadow_gap_elevation"
+        app:cardBackgroundColor="?attr/widgetBackground">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button style="@style/AppWidget.Button.Stroke"
-            android:id="@+id/login_btn_qrcode"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/open_qrcode" />
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-        <Button style="@style/AppWidget.Button"
-            android:id="@+id/login_btn_login"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/login" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/login_edt_access_token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:hint="@string/access_token_$"
+                android:inputType="text"
+                android:maxLength="36"
+                android:singleLine="true"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="@color/color_accent"
+                app:met_textColor="?android:attr/textColorPrimary"
+                app:met_textColorHint="?android:attr/textColorHint"
+                app:met_floatingLabelTextColor="?android:attr/textColorSecondary" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/login_btn_login_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:text="@string/$_how_to_get_access_token_$"
-        android:textColor="@color/color_accent"
-        android:textSize="14sp" />
+                <Button style="@style/AppWidget.Button.Stroke"
+                    android:id="@+id/login_btn_qrcode"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:text="@string/open_qrcode" />
 
-</LinearLayout>
+                <Button style="@style/AppWidget.Button"
+                    android:id="@+id/login_btn_login"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:text="@string/login" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/login_btn_login_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="4dp"
+                android:text="@string/$_how_to_get_access_token_$"
+                android:textColor="@color/color_accent"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
