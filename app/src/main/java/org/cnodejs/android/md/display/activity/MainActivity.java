@@ -165,7 +165,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
         mainPresenter.getMessageCountAsyncTask();
         // 判断是否需要切换主题
         if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
-            ActivityUtils.recreateDelayed(this);
+            ThemeUtils.notifyThemeApply(this, true);
         }
     }
 
@@ -340,7 +340,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     @OnClick(R.id.main_nav_btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
-        ActivityUtils.recreate(this); // 重启Activity
+        ThemeUtils.notifyThemeApply(this, false);
     }
 
     /**

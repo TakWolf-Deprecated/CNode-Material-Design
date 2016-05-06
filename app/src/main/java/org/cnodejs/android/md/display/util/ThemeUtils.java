@@ -16,4 +16,12 @@ public final class ThemeUtils {
         return enable;
     }
 
+    public static void notifyThemeApply(@NonNull Activity activity, boolean delay) {
+        if (delay) {
+            ActivityUtils.recreateDelayed(activity);
+        } else {
+            ActivityUtils.recreate(activity);
+        }
+    }
+
 }
