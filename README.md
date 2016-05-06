@@ -31,8 +31,6 @@
 
 - [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
-- [安智市场](http://www.anzhi.com/soft_2315984.html)
-
 ## Screenshots ##
 
 ![image](/art/screenshot_s01.png) ![image](/art/screenshot_s02.png)
