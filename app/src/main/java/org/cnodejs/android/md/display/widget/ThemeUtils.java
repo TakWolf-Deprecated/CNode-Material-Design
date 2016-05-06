@@ -2,17 +2,14 @@ package org.cnodejs.android.md.display.widget;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 
 import org.cnodejs.android.md.model.storage.SettingShared;
-import org.cnodejs.android.md.util.HandlerUtils;
 
 public final class ThemeUtils {
 

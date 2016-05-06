@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.display.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public final class ToastUtils {
 
     private final Toast toast;
 
+    @SuppressLint("ShowToast")
     private ToastUtils(Context context) {
         toast = Toast.makeText(context.getApplicationContext(), null, Toast.LENGTH_SHORT);
     }
