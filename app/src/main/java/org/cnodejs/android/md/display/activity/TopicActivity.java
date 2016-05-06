@@ -37,7 +37,7 @@ import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.ShipUtils;
+import org.cnodejs.android.md.display.util.Navigator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -144,7 +144,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         switch (item.getItemId()) {
             case R.id.action_share:
                 if (topic != null) {
-                    ShipUtils.share(this, "《" + topic.getTitle() + "》\n" + ApiDefine.TOPIC_LINK_URL_PREFIX + topicId + "\n—— 来自CNode社区");
+                    Navigator.openShare(this, "《" + topic.getTitle() + "》\n" + ApiDefine.TOPIC_LINK_URL_PREFIX + topicId + "\n—— 来自CNode社区");
                 }
                 return true;
             default:

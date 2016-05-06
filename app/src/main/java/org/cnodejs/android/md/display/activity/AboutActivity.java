@@ -11,7 +11,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.util.ThemeUtils;
-import org.cnodejs.android.md.util.ShipUtils;
+import org.cnodejs.android.md.display.util.Navigator;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,27 +46,27 @@ public class AboutActivity extends StatusBarActivity {
 
     @OnClick(R.id.about_btn_open_source_url)
     protected void onBtnOpenSourceUrlClick() {
-        ShipUtils.openInBrowser(this, getString(R.string.open_source_url_content));
+        Navigator.openInBrowser(this, getString(R.string.open_source_url_content));
     }
 
     @OnClick(R.id.about_btn_about_cnode)
     protected void onBtnAboutCNodeClick() {
-        ShipUtils.openInBrowser(this, getString(R.string.about_cnode_content));
+        Navigator.openInBrowser(this, getString(R.string.about_cnode_content));
     }
 
     @OnClick(R.id.about_btn_about_author)
     protected void onBtnAboutAuthorClick() {
-        ShipUtils.openInBrowser(this, getString(R.string.about_author_content));
+        Navigator.openInBrowser(this, getString(R.string.about_author_content));
     }
 
     @OnClick(R.id.about_btn_open_in_app_store)
     protected void onBtnOpenInAppStoreClick() {
-        ShipUtils.openInAppStore(AboutActivity.this);
+        Navigator.openInAppStore(AboutActivity.this);
     }
 
     @OnClick(R.id.about_btn_advice_feedback)
     protected void onBtnAdviceFeedbackClick() {
-        ShipUtils.sendEmail(
+        Navigator.openEmail(
                 this,
                 "takwolf@foxmail.com",
                 "来自 CNodeMD-" + VERSION_TEXT + " 的客户端反馈",

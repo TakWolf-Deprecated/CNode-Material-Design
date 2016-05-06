@@ -11,7 +11,7 @@ import android.webkit.WebViewClient;
 
 import org.cnodejs.android.md.display.activity.ImagePreviewActivity;
 import org.cnodejs.android.md.model.storage.SettingShared;
-import org.cnodejs.android.md.util.ShipUtils;
+import org.cnodejs.android.md.display.util.Navigator;
 
 public class CNodeWebView extends WebView {
 
@@ -61,7 +61,7 @@ public class CNodeWebView extends WebView {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-            ShipUtils.handleLink(getContext(), url);
+            Navigator.openLink(getContext(), url);
             return true;
         }
 

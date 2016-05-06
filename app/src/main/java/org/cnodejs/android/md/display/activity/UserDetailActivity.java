@@ -36,7 +36,7 @@ import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
 import org.cnodejs.android.md.presenter.implement.UserDetailPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.ShipUtils;
+import org.cnodejs.android.md.display.util.Navigator;
 
 import java.util.List;
 
@@ -150,7 +150,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_open_in_browser:
-                ShipUtils.openInBrowser(this, ApiDefine.USER_LINK_URL_PREFIX + loginName);
+                Navigator.openInBrowser(this, ApiDefine.USER_LINK_URL_PREFIX + loginName);
                 return true;
             default:
                 return false;
@@ -174,7 +174,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     @OnClick(R.id.user_detail_tv_github_username)
     protected void onBtnGithubUsernameClick() {
         if (!TextUtils.isEmpty(githubUsername)) {
-            ShipUtils.openInBrowser(this, "https://github.com/" + githubUsername);
+            Navigator.openInBrowser(this, "https://github.com/" + githubUsername);
         }
     }
 
