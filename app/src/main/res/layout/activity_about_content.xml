@@ -119,7 +119,7 @@
     <View style="@style/AppWidget.ShadowGap" />
 
     <LinearLayout
-        android:id="@+id/about_btn_open_in_app_store"
+        android:id="@+id/about_btn_open_in_market"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
@@ -129,7 +129,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/open_in_app_store"
+            android:text="@string/open_in_market"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp" />
 
@@ -137,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/open_in_app_store_content"
+            android:text="@string/open_in_market_content"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp"
             android:singleLine="true" />

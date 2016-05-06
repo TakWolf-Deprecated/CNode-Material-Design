@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.display.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +10,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.widget.CNodeWebView;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.Bind;

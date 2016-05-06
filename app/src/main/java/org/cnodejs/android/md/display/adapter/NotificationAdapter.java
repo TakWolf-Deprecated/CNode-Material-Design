@@ -12,12 +12,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.display.activity.TopicActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.widget.CNodeWebView;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.util.FormatUtils;
+import org.cnodejs.android.md.util.ResUtils;
 
 import java.util.List;
 
@@ -105,21 +105,21 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             // 消息状态
             if (message.isRead()) { // 已读
-                tvTime.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+                tvTime.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
                 tvFrom.getPaint().setFakeBoldText(false);
-                tvFrom.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+                tvFrom.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
                 tvAction.getPaint().setFakeBoldText(false);
-                tvAction.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+                tvAction.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
                 tvTopicTitle.getPaint().setFakeBoldText(false);
-                tvTopicTitle.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+                tvTopicTitle.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
             } else { // 未读
-                tvTime.setTextColor(ThemeUtils.getThemeAttrColor(activity, R.attr.colorAccent));
+                tvTime.setTextColor(ResUtils.getThemeAttrColor(activity, R.attr.colorAccent));
                 tvFrom.getPaint().setFakeBoldText(true);
-                tvFrom.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
+                tvFrom.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
                 tvAction.getPaint().setFakeBoldText(true);
-                tvAction.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
+                tvAction.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
                 tvTopicTitle.getPaint().setFakeBoldText(true);
-                tvTopicTitle.setTextColor(ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
+                tvTopicTitle.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
             }
         }
 

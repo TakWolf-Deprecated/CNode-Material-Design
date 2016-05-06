@@ -25,9 +25,9 @@ import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
-import org.cnodejs.android.md.display.widget.ActivityUtils;
-import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.display.util.ActivityUtils;
+import org.cnodejs.android.md.display.util.RefreshUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
@@ -37,7 +37,7 @@ import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.ShipUtils;
+import org.cnodejs.android.md.display.util.Navigator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -135,8 +135,8 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
 
         topicPresenter = new TopicPresenter(this, this);
 
-        RefreshLayoutUtils.initOnCreate(refreshLayout, this);
-        RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
+        RefreshUtils.initOnCreate(refreshLayout, this);
+        RefreshUtils.refreshOnCreate(refreshLayout, this);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         switch (item.getItemId()) {
             case R.id.action_share:
                 if (topic != null) {
-                    ShipUtils.share(this, "《" + topic.getTitle() + "》\n" + ApiDefine.TOPIC_LINK_URL_PREFIX + topicId + "\n—— 来自CNode社区");
+                    Navigator.openShare(this, "《" + topic.getTitle() + "》\n" + ApiDefine.TOPIC_LINK_URL_PREFIX + topicId + "\n—— 来自CNode社区");
                 }
                 return true;
             default:

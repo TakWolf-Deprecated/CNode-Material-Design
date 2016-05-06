@@ -7,8 +7,8 @@ import android.support.annotation.NonNull;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.LoginActivity;
 import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
-import org.cnodejs.android.md.display.widget.ActivityUtils;
-import org.cnodejs.android.md.display.widget.ToastUtils;
+import org.cnodejs.android.md.display.util.ActivityUtils;
+import org.cnodejs.android.md.display.util.ToastUtils;
 import org.cnodejs.android.md.model.entity.Result;
 
 import retrofit2.Response;

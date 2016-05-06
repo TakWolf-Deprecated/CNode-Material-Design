@@ -7,11 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.widget.ActivityUtils;
-import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
+import org.cnodejs.android.md.model.storage.SettingShared;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,7 +62,7 @@ public class SettingActivity extends StatusBarActivity {
     protected void onBtnThemeDarkClick() {
         switchThemeDark.toggle();
         SettingShared.setEnableThemeDark(this, switchThemeDark.isChecked());
-        ActivityUtils.recreate(this); // 重启Activity
+        ThemeUtils.notifyThemeApply(this, false);
     }
 
     @OnClick(R.id.setting_btn_new_topic_draft)

@@ -28,10 +28,10 @@ import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.display.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.IMainView;
-import org.cnodejs.android.md.display.widget.ActivityUtils;
-import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
-import org.cnodejs.android.md.display.widget.ToastUtils;
+import org.cnodejs.android.md.display.util.ActivityUtils;
+import org.cnodejs.android.md.display.util.RefreshUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
+import org.cnodejs.android.md.display.util.ToastUtils;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
@@ -155,8 +155,8 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
         imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
         imgTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
 
-        RefreshLayoutUtils.initOnCreate(refreshLayout, this);
-        RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
+        RefreshUtils.initOnCreate(refreshLayout, this);
+        RefreshUtils.refreshOnCreate(refreshLayout, this);
     }
 
     @Override
@@ -165,7 +165,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
         mainPresenter.getMessageCountAsyncTask();
         // 判断是否需要切换主题
         if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
-            ActivityUtils.recreateDelayed(this);
+            ThemeUtils.notifyThemeApply(this, true);
         }
     }
 
@@ -340,7 +340,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     @OnClick(R.id.main_nav_btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
-        ActivityUtils.recreate(this); // 重启Activity
+        ThemeUtils.notifyThemeApply(this, false);
     }
 
     /**

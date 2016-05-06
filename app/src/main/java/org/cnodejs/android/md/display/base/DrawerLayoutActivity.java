@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.util.ResUtils;
 
 public abstract class DrawerLayoutActivity extends BaseActivity {
 
@@ -24,7 +24,7 @@ public abstract class DrawerLayoutActivity extends BaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            layoutParams.height = ThemeUtils.getStatusBarHeight(this);
+            layoutParams.height = ResUtils.getStatusBarHeight(this);
             statusBar.setLayoutParams(layoutParams);
         }
     }

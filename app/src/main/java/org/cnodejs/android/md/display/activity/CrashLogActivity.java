@@ -10,8 +10,8 @@ import android.widget.TextView;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
-import org.cnodejs.android.md.util.ShipUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
+import org.cnodejs.android.md.display.util.Navigator;
 import org.joda.time.DateTime;
 
 import java.io.PrintWriter;
@@ -80,7 +80,7 @@ public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMen
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_send:
-                ShipUtils.sendEmail(
+                Navigator.openEmail(
                         this,
                         "takwolf@foxmail.com",
                         "来自 CNodeMD-" + AboutActivity.VERSION_TEXT + " 的客户端崩溃日志",
