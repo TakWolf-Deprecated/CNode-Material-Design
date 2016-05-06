@@ -7,11 +7,11 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.widget.ActivityUtils;
+import org.cnodejs.android.md.display.util.ActivityUtils;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

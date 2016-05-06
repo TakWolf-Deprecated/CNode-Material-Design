@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.BaseActivity;
-import org.cnodejs.android.md.display.widget.ActivityUtils;
+import org.cnodejs.android.md.display.util.ActivityUtils;
 import org.cnodejs.android.md.util.HandlerUtils;
 
 public class LaunchActivity extends BaseActivity implements Runnable {

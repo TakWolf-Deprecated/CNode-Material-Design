@@ -7,7 +7,7 @@ import android.net.Uri;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.TopicActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
-import org.cnodejs.android.md.display.widget.ToastUtils;
+import org.cnodejs.android.md.display.util.ToastUtils;
 import org.cnodejs.android.md.model.api.ApiDefine;
 
 public final class ShipUtils {

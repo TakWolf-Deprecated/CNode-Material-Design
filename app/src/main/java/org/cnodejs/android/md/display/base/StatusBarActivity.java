@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
 
 public abstract class StatusBarActivity extends BaseActivity {
 

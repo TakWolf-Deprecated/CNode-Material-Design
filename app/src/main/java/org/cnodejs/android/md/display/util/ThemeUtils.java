@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.display.widget;
+package org.cnodejs.android.md.display.util;
 
 import android.app.Activity;
 import android.content.Context;

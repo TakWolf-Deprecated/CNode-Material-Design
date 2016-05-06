@@ -16,7 +16,7 @@ import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.display.activity.TopicActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.widget.CNodeWebView;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;
