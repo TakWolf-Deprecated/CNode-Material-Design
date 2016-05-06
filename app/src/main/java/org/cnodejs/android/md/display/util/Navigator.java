@@ -15,7 +15,7 @@ public final class Navigator {
 
     private Navigator() {}
 
-    public static void openInAppStore(@NonNull Context context) {
+    public static void openInMarket(@NonNull Context context) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setData(Uri.parse("market://details?id=" + context.getPackageName()));

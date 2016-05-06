@@ -59,9 +59,9 @@ public class AboutActivity extends StatusBarActivity {
         Navigator.openInBrowser(this, getString(R.string.about_author_content));
     }
 
-    @OnClick(R.id.about_btn_open_in_app_store)
-    protected void onBtnOpenInAppStoreClick() {
-        Navigator.openInAppStore(AboutActivity.this);
+    @OnClick(R.id.about_btn_open_in_market)
+    protected void onBtnOpenInMarketClick() {
+        Navigator.openInMarket(this);
     }
 
     @OnClick(R.id.about_btn_advice_feedback)
