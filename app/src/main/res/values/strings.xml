@@ -85,8 +85,11 @@
     <string name="open_source_license">开放源代码许可</string>
     <string name="about_copyright">Copyright © 2015&#8211;2016 TakWolf</string>
 
+    <string name="no_market_install_in_system">系统中没有安装应用商店</string>
+    <string name="no_browser_install_in_system">系统中没有安装浏览器</string>
+    <string name="no_email_client_install_in_system">系统中没有安装邮件客户端</string>
+    
     <string name="mark_all_read">全部标记为已读</string>
-
     <string name="notice">通知</string>
     <string name="receive_notification">接收消息推送</string>
     <string name="receive_notification_summary">开启也没用，这功能压根没做</string>

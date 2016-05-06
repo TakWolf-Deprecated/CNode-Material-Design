@@ -22,7 +22,7 @@ public final class Navigator {
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);
         } else {
-            ToastUtils.with(context).show("您的系统中没有安装应用商店");
+            ToastUtils.with(context).show(R.string.no_market_install_in_system);
         }
     }
 
@@ -32,7 +32,7 @@ public final class Navigator {
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);
         } else {
-            ToastUtils.with(context).show("您的系统中没有安装浏览器");
+            ToastUtils.with(context).show(R.string.no_browser_install_in_system);
         }
     }
 
@@ -45,7 +45,7 @@ public final class Navigator {
             intent.putExtra(Intent.EXTRA_TEXT, text);
             context.startActivity(intent);
         } else {
-            ToastUtils.with(context).show("您的系统中没有安装邮件客户端");
+            ToastUtils.with(context).show(R.string.no_email_client_install_in_system);
         }
     }
 
