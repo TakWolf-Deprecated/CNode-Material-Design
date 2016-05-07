@@ -18,6 +18,8 @@ public class CNodeWebView extends WebView {
     private static final String THEME_CSS_LIGHT = "file:///android_asset/cnode_light.css";
     private static final String THEME_CSS_DARK = "file:///android_asset/cnode_dark.css";
 
+    private static final String JS_IMAGE_INTERFACE = "imageInterface";
+
     private static final String HTML_0 = "" +
             "<!DOCTYPE html>\n" +
             "<html>\n" +
@@ -30,23 +32,20 @@ public class CNodeWebView extends WebView {
             "<body>\n";
 
     private static final String HTML_2 = "" +
-            "</body>\n" +
-            "</html>";
-
-    private static final String JS_IMAGE_INTERFACE_NAME = "imageInterface";
-
-    private static final String JS_IMAGE_INTERFACE_SCRIPT = "" +
-            "javascript:\n" +
+            "<script>\n" +
             "(function() {\n" +
             "    var objs = document.getElementsByTagName('img');\n" +
             "    for (var i = 0; i < objs.length; i++) {\n" +
             "        objs[i].onclick = function() {\n" +
             "            if (this.parentNode.nodeName !== 'A') {\n" +
-            "                window." + JS_IMAGE_INTERFACE_NAME + ".openImage(this.src);\n" +
+            "                window." + JS_IMAGE_INTERFACE + ".openImage(this.src);\n" +
             "            }\n" +
             "        }\n" +
             "    }\n" +
-            "})();";
+            "})();" +
+            "</script>\n" +
+            "</body>\n" +
+            "</html>";
 
     private class ImageJavascriptInterface {
 
@@ -63,11 +62,6 @@ public class CNodeWebView extends WebView {
         public boolean shouldOverrideUrlLoading(WebView webView, String url) {
             Navigator.openLink(getContext(), url);
             return true;
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            view.loadUrl(JS_IMAGE_INTERFACE_SCRIPT);
         }
 
     }
@@ -96,7 +90,7 @@ public class CNodeWebView extends WebView {
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         getSettings().setJavaScriptEnabled(true);
-        addJavascriptInterface(new ImageJavascriptInterface(), JS_IMAGE_INTERFACE_NAME);
+        addJavascriptInterface(new ImageJavascriptInterface(), JS_IMAGE_INTERFACE);
         setWebViewClient(new CNodeWebViewClient());
     }
 
