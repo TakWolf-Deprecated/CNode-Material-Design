@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/notification_item_btn_item"
     android:layout_width="match_parent"
@@ -74,7 +75,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        app:cssPath="?attr/markdownCssPath" />
 
     <TextView
         android:id="@+id/notification_item_tv_topic_title"

@@ -1,10 +1,12 @@
 package org.cnodejs.android.md.display.widget;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
@@ -25,24 +27,27 @@ public class ScrimInsetsScrollView extends ScrollView {
 
     public ScrimInsetsScrollView(Context context) {
         super(context);
-        init(context, null, 0);
+        init(context, null, 0, 0);
     }
 
     public ScrimInsetsScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs, 0);
+        init(context, attrs, 0, 0);
     }
 
-    public ScrimInsetsScrollView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init(context, attrs, defStyle);
+    public ScrimInsetsScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context, attrs, defStyleAttr, 0);
     }
 
-    private void init(Context context, AttributeSet attrs, int defStyle) {
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ScrimInsetsScrollView, defStyle, 0);
-        if (a == null) {
-            return;
-        }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public ScrimInsetsScrollView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ScrimInsetsScrollView, defStyleAttr, defStyleRes);
         mInsetForeground = a.getDrawable(R.styleable.ScrimInsetsScrollView_appInsetForeground);
         a.recycle();
 
