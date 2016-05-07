@@ -10,7 +10,7 @@
     <attr name="referenceBackgroundAccent" format="color|reference" />
 
     <declare-styleable name="ScrimInsetsScrollView">
-        <attr name="appInsetForeground" format="reference|color" />
+        <attr name="appInsetForeground" format="color|reference" />
     </declare-styleable>
 
 </resources>
