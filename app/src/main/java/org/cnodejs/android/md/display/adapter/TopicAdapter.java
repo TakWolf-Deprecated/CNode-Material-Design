@@ -3,7 +3,6 @@ package org.cnodejs.android.md.display.adapter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +15,11 @@ import com.bumptech.glide.Glide;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.LoginActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
+import org.cnodejs.android.md.display.util.ActivityUtils;
+import org.cnodejs.android.md.display.util.ToastUtils;
 import org.cnodejs.android.md.display.view.ITopicItemReplyView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
-import org.cnodejs.android.md.display.util.ActivityUtils;
 import org.cnodejs.android.md.display.widget.CNodeWebView;
-import org.cnodejs.android.md.display.util.ToastUtils;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
@@ -79,7 +78,7 @@ public class TopicAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements ITopicItemReplyView {
+    public class ViewHolder implements ITopicItemReplyView {
 
         @Bind(R.id.topic_item_reply_img_avatar)
         protected ImageView imgAvatar;
@@ -114,7 +113,6 @@ public class TopicAdapter extends BaseAdapter {
         private int position = -1;
 
         public ViewHolder(View itemView) {
-            super(itemView);
             ButterKnife.bind(this, itemView);
             topicItemReplyPresenter = new TopicItemReplyPresenter(activity, this);
         }
