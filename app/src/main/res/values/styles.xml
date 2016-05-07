@@ -16,6 +16,7 @@
         <item name="mainNavItemTextColor">@color/main_nav_item_text_color_light</item>
         <item name="referenceBackgroundNormal">@drawable/reference_background_light</item>
         <item name="referenceBackgroundAccent">@drawable/reference_background_accent</item>
+        <item name="markdownCssPath">@string/theme_css_path_light</item>
     </style>
 
     <style name="AppThemeLight" parent="BaseAppThemeLight" />
@@ -37,6 +38,7 @@
         <item name="mainNavItemTextColor">@color/main_nav_item_text_color_dark</item>
         <item name="referenceBackgroundNormal">@drawable/reference_background_dark</item>
         <item name="referenceBackgroundAccent">@drawable/reference_background_accent</item>
+        <item name="markdownCssPath">@string/theme_css_path_dark</item>
     </style>
 
     <style name="AppThemeDark" parent="BaseAppThemeDark" />

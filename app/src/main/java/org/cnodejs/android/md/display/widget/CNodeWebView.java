@@ -3,18 +3,17 @@ package org.cnodejs.android.md.display.widget;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.webkit.WebView;
 
+import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.listener.DefaultWebViewClient;
 import org.cnodejs.android.md.display.listener.ImageJavascriptInterface;
-import org.cnodejs.android.md.model.storage.SettingShared;
 
 public class CNodeWebView extends WebView {
-
-    private static final String THEME_CSS_LIGHT = "file:///android_asset/cnode_light.css";
-    private static final String THEME_CSS_DARK = "file:///android_asset/cnode_dark.css";
 
     private static final String HTML_0 = "" +
             "<!DOCTYPE html>\n" +
@@ -43,6 +42,8 @@ public class CNodeWebView extends WebView {
             "</body>\n" +
             "</html>";
 
+    private String cssPath;
+
     public CNodeWebView(Context context) {
         super(context);
         init(context, null, 0, 0);
@@ -66,17 +67,21 @@ public class CNodeWebView extends WebView {
 
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CNodeWebView, defStyleAttr, defStyleRes);
+        cssPath = a.getString(R.styleable.CNodeWebView_cssPath);
+        a.recycle();
+
         getSettings().setJavaScriptEnabled(true);
         addJavascriptInterface(ImageJavascriptInterface.with(context), ImageJavascriptInterface.NAME);
         setWebViewClient(DefaultWebViewClient.instance);
     }
 
-    private String getThemeCSS() {
-        return SettingShared.isEnableThemeDark(getContext()) ? THEME_CSS_DARK : THEME_CSS_LIGHT;
-    }
-
     public void loadRenderedContent(String data) {
-        data = HTML_0 + "<link type=\"text/css\" rel=\"stylesheet\" href=\"" + getThemeCSS() + "\">\n" + HTML_1 + data + "\n" + HTML_2;
+        if (TextUtils.isEmpty(cssPath)) {
+            data = HTML_0 + HTML_1 + data + "\n" + HTML_2;
+        } else {
+            data = HTML_0 + "<link type=\"text/css\" rel=\"stylesheet\" href=\"" + cssPath + "\">\n" + HTML_1 + data + "\n" + HTML_2;
+        }
         loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
     }
 
