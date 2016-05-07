@@ -48,9 +48,7 @@ public class ScrimInsetsScrollView extends ScrollView {
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ScrimInsetsScrollView, defStyleAttr, defStyleRes);
-
         mInsetForeground = a.getDrawable(R.styleable.ScrimInsetsScrollView_appInsetForeground);
-
         a.recycle();
 
         setWillNotDraw(true);
