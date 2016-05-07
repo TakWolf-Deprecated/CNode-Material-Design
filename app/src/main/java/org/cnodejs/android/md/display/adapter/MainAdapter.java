@@ -79,9 +79,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         holder.update(position);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public abstract class ViewHolder extends RecyclerView.ViewHolder {
 
-        protected ViewHolder(View itemView) {
+        protected ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
 
@@ -97,7 +97,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         @Bind(R.id.item_load_more_icon_finish)
         protected View iconFinish;
 
-        protected LoadMoreViewHolder(View itemView) {
+        protected LoadMoreViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -141,7 +141,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         private Topic topic;
 
-        protected NormalViewHolder(View itemView) {
+        protected NormalViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

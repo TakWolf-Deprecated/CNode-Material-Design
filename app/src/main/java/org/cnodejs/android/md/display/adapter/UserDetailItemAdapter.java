@@ -66,7 +66,7 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
 
         private TopicSimple topic;
 
-        protected ViewHolder(View itemView) {
+        protected ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

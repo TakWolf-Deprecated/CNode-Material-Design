@@ -112,7 +112,7 @@ public class TopicAdapter extends BaseAdapter {
         private Reply reply;
         private int position = -1;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             ButterKnife.bind(this, itemView);
             topicItemReplyPresenter = new TopicItemReplyPresenter(activity, this);
         }
