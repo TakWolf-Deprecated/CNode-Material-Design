@@ -5,20 +5,16 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
-import org.cnodejs.android.md.display.activity.ImagePreviewActivity;
+import org.cnodejs.android.md.display.listener.DefaultWebViewClient;
+import org.cnodejs.android.md.display.listener.ImageJavascriptInterface;
 import org.cnodejs.android.md.model.storage.SettingShared;
-import org.cnodejs.android.md.display.util.Navigator;
 
 public class CNodeWebView extends WebView {
 
     private static final String THEME_CSS_LIGHT = "file:///android_asset/cnode_light.css";
     private static final String THEME_CSS_DARK = "file:///android_asset/cnode_dark.css";
-
-    private static final String JS_IMAGE_INTERFACE = "imageInterface";
 
     private static final String HTML_0 = "" +
             "<!DOCTYPE html>\n" +
@@ -38,7 +34,7 @@ public class CNodeWebView extends WebView {
             "    for (var i = 0; i < objs.length; i++) {\n" +
             "        objs[i].onclick = function() {\n" +
             "            if (this.parentNode.nodeName !== 'A') {\n" +
-            "                window." + JS_IMAGE_INTERFACE + ".openImage(this.src);\n" +
+            "                window." + ImageJavascriptInterface.NAME + ".openImage(this.src);\n" +
             "            }\n" +
             "        }\n" +
             "    }\n" +
@@ -46,25 +42,6 @@ public class CNodeWebView extends WebView {
             "</script>\n" +
             "</body>\n" +
             "</html>";
-
-    private class ImageJavascriptInterface {
-
-        @JavascriptInterface
-        public void openImage(String imageUrl) {
-            ImagePreviewActivity.start(getContext(), imageUrl);
-        }
-
-    }
-
-    private class CNodeWebViewClient extends WebViewClient {
-
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-            Navigator.openLink(getContext(), url);
-            return true;
-        }
-
-    }
 
     public CNodeWebView(Context context) {
         super(context);
@@ -90,8 +67,8 @@ public class CNodeWebView extends WebView {
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         getSettings().setJavaScriptEnabled(true);
-        addJavascriptInterface(new ImageJavascriptInterface(), JS_IMAGE_INTERFACE);
-        setWebViewClient(new CNodeWebViewClient());
+        addJavascriptInterface(ImageJavascriptInterface.with(context), ImageJavascriptInterface.NAME);
+        setWebViewClient(DefaultWebViewClient.instance);
     }
 
     private String getThemeCSS() {
