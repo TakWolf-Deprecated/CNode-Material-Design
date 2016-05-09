@@ -7,8 +7,8 @@ import android.widget.TextView;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
-import org.cnodejs.android.md.display.widget.ToastUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
+import org.cnodejs.android.md.display.util.ToastUtils;
 import org.cnodejs.android.md.util.ResUtils;
 
 import java.io.IOException;

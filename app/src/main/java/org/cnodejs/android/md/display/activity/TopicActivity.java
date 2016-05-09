@@ -18,14 +18,16 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.TopicAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.dialog.TopicReplyDialog;
+import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
-import org.cnodejs.android.md.display.widget.ActivityUtils;
-import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.display.util.ActivityUtils;
+import org.cnodejs.android.md.display.util.RefreshUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
@@ -35,7 +37,7 @@ import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.ShipUtils;
+import org.cnodejs.android.md.display.util.Navigator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +48,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TopicActivity extends StatusBarActivity implements ITopicView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
+public class TopicActivity extends StatusBarActivity implements ITopicView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
     private static final String EXTRA_TOPIC_ID = "topicId";
     private static final String EXTRA_TOPIC = "topic";
@@ -119,6 +121,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.topic);
         toolbar.setOnMenuItemClickListener(this);
+        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         topicReplyView = TopicReplyDialog.createWithAutoTheme(this, topicId, this);
         topicHeaderView = new TopicHeaderViewHolder(this, listView);
@@ -132,8 +135,8 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
 
         topicPresenter = new TopicPresenter(this, this);
 
-        RefreshLayoutUtils.initOnCreate(refreshLayout, this);
-        RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
+        RefreshUtils.initOnCreate(refreshLayout, this);
+        RefreshUtils.refreshOnCreate(refreshLayout, this);
     }
 
     @Override
@@ -141,7 +144,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         switch (item.getItemId()) {
             case R.id.action_share:
                 if (topic != null) {
-                    ShipUtils.share(this, "《" + topic.getTitle() + "》\n" + ApiDefine.TOPIC_LINK_URL_PREFIX + topicId + "\n—— 来自CNode社区");
+                    Navigator.openShare(this, "《" + topic.getTitle() + "》\n" + ApiDefine.TOPIC_LINK_URL_PREFIX + topicId + "\n—— 来自CNode社区");
                 }
                 return true;
             default:
@@ -202,6 +205,11 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, Swip
         topicHeaderView.updateReplyCount(replyList.size());
         adapter.notifyDataSetChanged();
         listView.smoothScrollToPosition(replyList.size());
+    }
+
+    @Override
+    public void backToContentTop() {
+        listView.setSelection(0);
     }
 
 }

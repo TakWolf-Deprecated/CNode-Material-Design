@@ -89,6 +89,7 @@
                 android:id="@+id/user_detail_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#01000000"
                 app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />

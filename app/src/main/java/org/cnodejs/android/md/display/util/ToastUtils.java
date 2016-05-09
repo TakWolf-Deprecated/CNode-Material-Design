@@ -1,13 +1,16 @@
-package org.cnodejs.android.md.display.widget;
+package org.cnodejs.android.md.display.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
 public final class ToastUtils {
 
     private volatile static ToastUtils singleton;
 
-    public static ToastUtils with(Context context) {
+    public static ToastUtils with(@NonNull Context context) {
         if (singleton == null) {
             synchronized (ToastUtils.class) {
                 if (singleton == null) {
@@ -20,7 +23,8 @@ public final class ToastUtils {
 
     private final Toast toast;
 
-    private ToastUtils(Context context) {
+    @SuppressLint("ShowToast")
+    private ToastUtils(@NonNull Context context) {
         toast = Toast.makeText(context.getApplicationContext(), null, Toast.LENGTH_SHORT);
     }
 
@@ -29,7 +33,7 @@ public final class ToastUtils {
         toast.show();
     }
 
-    public void show(int resId) {
+    public void show(@StringRes int resId) {
         toast.setText(resId);
         toast.show();
     }

@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.util.ResUtils;
 
 public abstract class StatusBarActivity extends BaseActivity {
 
@@ -22,23 +22,23 @@ public abstract class StatusBarActivity extends BaseActivity {
     }
 
     @Override
-    public void setContentView(int layoutResID) {
+    public void setContentView(int layoutResId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             FrameLayout rootView = new FrameLayout(this);
             rootView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-            View contentView = LayoutInflater.from(this).inflate(layoutResID, rootView, false);
+            View contentView = LayoutInflater.from(this).inflate(layoutResId, rootView, false);
             contentView.setFitsSystemWindows(true);
             rootView.addView(contentView);
 
             View statusBarView = new View(this);
-            statusBarView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ThemeUtils.getStatusBarHeight(this)));
-            statusBarView.setBackgroundColor(ThemeUtils.getThemeAttrColor(this, R.attr.colorPrimaryDark));
+            statusBarView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ResUtils.getStatusBarHeight(this)));
+            statusBarView.setBackgroundColor(ResUtils.getThemeAttrColor(this, R.attr.colorPrimaryDark));
             rootView.addView(statusBarView);
 
             super.setContentView(rootView);
         } else {
-            super.setContentView(layoutResID);
+            super.setContentView(layoutResId);
         }
     }
 

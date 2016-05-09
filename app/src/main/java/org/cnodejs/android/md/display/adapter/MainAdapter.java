@@ -13,11 +13,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.display.activity.TopicActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
+import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.util.FormatUtils;
+import org.cnodejs.android.md.util.ResUtils;
 
 import java.util.List;
 
@@ -79,9 +79,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         holder.update(position);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public abstract class ViewHolder extends RecyclerView.ViewHolder {
 
-        protected ViewHolder(View itemView) {
+        protected ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
 
@@ -97,7 +97,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         @Bind(R.id.item_load_more_icon_finish)
         protected View iconFinish;
 
-        protected LoadMoreViewHolder(View itemView) {
+        protected LoadMoreViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -141,7 +141,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         private Topic topic;
 
-        protected NormalViewHolder(View itemView) {
+        protected NormalViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -152,8 +152,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
             tvTitle.setText(topic.getTitle());
             tvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
-            tvTab.setBackgroundDrawable(ThemeUtils.getThemeAttrDrawable(activity, topic.isTop() ? R.attr.referenceBackgroundAccent : R.attr.referenceBackgroundNormal));
-            tvTab.setTextColor(topic.isTop() ? Color.WHITE : ThemeUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+            tvTab.setBackgroundDrawable(ResUtils.getThemeAttrDrawable(activity, topic.isTop() ? R.attr.referenceBackgroundAccent : R.attr.referenceBackgroundNormal));
+            tvTab.setTextColor(topic.isTop() ? Color.WHITE : ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
             Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvAuthor.setText(topic.getAuthor().getLoginName());
             tvCreateTime.setText(activity.getString(R.string.create_at_$) + topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss"));

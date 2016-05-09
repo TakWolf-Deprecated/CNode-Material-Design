@@ -3,20 +3,17 @@ package org.cnodejs.android.md.display.widget;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
-import org.cnodejs.android.md.display.activity.ImagePreviewActivity;
-import org.cnodejs.android.md.model.storage.SettingShared;
-import org.cnodejs.android.md.util.ShipUtils;
+import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.display.listener.DefaultWebViewClient;
+import org.cnodejs.android.md.display.listener.ImageJavascriptInterface;
 
 public class CNodeWebView extends WebView {
-
-    private static final String THEME_CSS_LIGHT = "file:///android_asset/cnode_light.css";
-    private static final String THEME_CSS_DARK = "file:///android_asset/cnode_dark.css";
 
     private static final String HTML_0 = "" +
             "<!DOCTYPE html>\n" +
@@ -30,47 +27,22 @@ public class CNodeWebView extends WebView {
             "<body>\n";
 
     private static final String HTML_2 = "" +
-            "</body>\n" +
-            "</html>";
-
-    private static final String JS_IMAGE_INTERFACE_NAME = "imageInterface";
-
-    private static final String JS_IMAGE_INTERFACE_SCRIPT = "" +
-            "javascript:\n" +
+            "<script>\n" +
             "(function() {\n" +
             "    var objs = document.getElementsByTagName('img');\n" +
             "    for (var i = 0; i < objs.length; i++) {\n" +
             "        objs[i].onclick = function() {\n" +
             "            if (this.parentNode.nodeName !== 'A') {\n" +
-            "                window." + JS_IMAGE_INTERFACE_NAME + ".openImage(this.src);\n" +
+            "                window." + ImageJavascriptInterface.NAME + ".openImage(this.src);\n" +
             "            }\n" +
             "        }\n" +
             "    }\n" +
-            "})();";
+            "})();" +
+            "</script>\n" +
+            "</body>\n" +
+            "</html>";
 
-    private class ImageJavascriptInterface {
-
-        @JavascriptInterface
-        public void openImage(String imageUrl) {
-            ImagePreviewActivity.start(getContext(), imageUrl);
-        }
-
-    }
-
-    private class CNodeWebViewClient extends WebViewClient {
-
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-            ShipUtils.handleLink(getContext(), url);
-            return true;
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            view.loadUrl(JS_IMAGE_INTERFACE_SCRIPT);
-        }
-
-    }
+    private String cssPath;
 
     public CNodeWebView(Context context) {
         super(context);
@@ -95,17 +67,21 @@ public class CNodeWebView extends WebView {
 
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        getSettings().setJavaScriptEnabled(true);
-        addJavascriptInterface(new ImageJavascriptInterface(), JS_IMAGE_INTERFACE_NAME);
-        setWebViewClient(new CNodeWebViewClient());
-    }
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CNodeWebView, defStyleAttr, defStyleRes);
+        cssPath = a.getString(R.styleable.CNodeWebView_cssPath);
+        a.recycle();
 
-    private String getThemeCSS() {
-        return SettingShared.isEnableThemeDark(getContext()) ? THEME_CSS_DARK : THEME_CSS_LIGHT;
+        getSettings().setJavaScriptEnabled(true);
+        addJavascriptInterface(ImageJavascriptInterface.with(context), ImageJavascriptInterface.NAME);
+        setWebViewClient(DefaultWebViewClient.instance);
     }
 
     public void loadRenderedContent(String data) {
-        data = HTML_0 + "<link type=\"text/css\" rel=\"stylesheet\" href=\"" + getThemeCSS() + "\">\n" + HTML_1 + data + "\n" + HTML_2;
+        if (TextUtils.isEmpty(cssPath)) {
+            data = HTML_0 + HTML_1 + data + "\n" + HTML_2;
+        } else {
+            data = HTML_0 + "<link type=\"text/css\" rel=\"stylesheet\" href=\"" + cssPath + "\">\n" + HTML_1 + data + "\n" + HTML_2;
+        }
         loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
     }
 

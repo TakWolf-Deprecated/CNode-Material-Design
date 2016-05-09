@@ -8,9 +8,14 @@
     <attr name="mainNavItemTextColor" format="color|reference" />
     <attr name="referenceBackgroundNormal" format="color|reference" />
     <attr name="referenceBackgroundAccent" format="color|reference" />
+    <attr name="markdownCssPath" format="string" />
 
     <declare-styleable name="ScrimInsetsScrollView">
-        <attr name="appInsetForeground" format="reference|color" />
+        <attr name="appInsetForeground" format="color|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CNodeWebView">
+        <attr name="cssPath" format="string" />
     </declare-styleable>
 
 </resources>

@@ -23,13 +23,15 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.MainAdapter;
 import org.cnodejs.android.md.display.base.DrawerLayoutActivity;
 import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
+import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.display.listener.RecyclerViewLoadMoreListener;
+import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.IMainView;
-import org.cnodejs.android.md.display.widget.ActivityUtils;
-import org.cnodejs.android.md.display.widget.RefreshLayoutUtils;
-import org.cnodejs.android.md.display.widget.ThemeUtils;
-import org.cnodejs.android.md.display.widget.ToastUtils;
+import org.cnodejs.android.md.display.util.ActivityUtils;
+import org.cnodejs.android.md.display.util.RefreshUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
+import org.cnodejs.android.md.display.util.ToastUtils;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
@@ -47,7 +49,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends DrawerLayoutActivity implements IMainView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
+public class MainActivity extends DrawerLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
+
+    private static final int PAGE_LIMIT = 20;
 
     // 抽屉导航布局
     @Bind(R.id.main_drawer_layout)
@@ -135,12 +139,13 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
         drawerLayout.addDrawerListener(drawerListener);
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
+        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new MainAdapter(this, topicList);
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, 20));
+        recyclerView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, PAGE_LIMIT));
         fabCreateTopic.attachToRecyclerView(recyclerView);
 
         mainPresenter = new MainPresenter(this, this);
@@ -150,8 +155,8 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
         imgTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
 
-        RefreshLayoutUtils.initOnCreate(refreshLayout, this);
-        RefreshLayoutUtils.refreshOnCreate(refreshLayout, this);
+        RefreshUtils.initOnCreate(refreshLayout, this);
+        RefreshUtils.refreshOnCreate(refreshLayout, this);
     }
 
     @Override
@@ -160,7 +165,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         mainPresenter.getMessageCountAsyncTask();
         // 判断是否需要切换主题
         if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
-            ActivityUtils.recreateDelayed(this);
+            ThemeUtils.notifyThemeApply(this, true);
         }
     }
 
@@ -217,7 +222,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
 
     @Override
     public void onRefresh() {
-        mainPresenter.refreshTopicListAsyncTask(currentTab, 20, true);
+        mainPresenter.refreshTopicListAsyncTask(currentTab, PAGE_LIMIT, true);
     }
 
     @Override
@@ -225,7 +230,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         if (adapter.canLoadMore()) {
             adapter.setLoading(true);
             adapter.notifyItemChanged(adapter.getItemCount() - 1);
-            mainPresenter.loadMoreTopicListAsyncTask(currentTab, currentPage, 20, true);
+            mainPresenter.loadMoreTopicListAsyncTask(currentTab, currentPage, PAGE_LIMIT, true);
         }
     }
 
@@ -233,7 +238,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
      * 更新列表
      */
     private void notifyDataSetChanged() {
-        if (topicList.size() < 20) {
+        if (topicList.size() < PAGE_LIMIT) {
             adapter.setLoading(false);
         }
         adapter.notifyDataSetChanged();
@@ -335,7 +340,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
     @OnClick(R.id.main_nav_btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
-        ActivityUtils.recreate(this); // 重启Activity
+        ThemeUtils.notifyThemeApply(this, false);
     }
 
     /**
@@ -474,6 +479,11 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, Swi
         if (ActivityUtils.isAlive(this)) {
             tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
         }
+    }
+
+    @Override
+    public void backToContentTop() {
+        recyclerView.scrollToPosition(0);
     }
 
 }
