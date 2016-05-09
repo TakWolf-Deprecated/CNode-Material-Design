@@ -12,28 +12,28 @@ import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.model.storage.SettingShared;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SettingActivity extends StatusBarActivity {
 
-    @Bind(R.id.setting_toolbar)
+    @BindView(R.id.setting_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.setting_switch_notification)
+    @BindView(R.id.setting_switch_notification)
     protected SwitchCompat switchNotification;
 
-    @Bind(R.id.setting_switch_theme_dark)
+    @BindView(R.id.setting_switch_theme_dark)
     protected SwitchCompat switchThemeDark;
 
-    @Bind(R.id.setting_switch_new_topic_draft)
+    @BindView(R.id.setting_switch_new_topic_draft)
     protected SwitchCompat switchNewTopicDraft;
 
-    @Bind(R.id.setting_switch_topic_sign)
+    @BindView(R.id.setting_switch_topic_sign)
     protected SwitchCompat switchTopicSign;
 
-    @Bind(R.id.setting_btn_modify_topic_sign)
+    @BindView(R.id.setting_btn_modify_topic_sign)
     protected TextView btnModifyTopicSign;
 
     @Override

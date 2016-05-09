@@ -21,7 +21,7 @@ import org.cnodejs.android.md.util.ResUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -54,22 +54,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.notification_item_img_avatar)
+        @BindView(R.id.notification_item_img_avatar)
         protected ImageView imgAvatar;
 
-        @Bind(R.id.notification_item_tv_from)
+        @BindView(R.id.notification_item_tv_from)
         protected TextView tvFrom;
 
-        @Bind(R.id.notification_item_tv_time)
+        @BindView(R.id.notification_item_tv_time)
         protected TextView tvTime;
 
-        @Bind(R.id.notification_item_tv_action)
+        @BindView(R.id.notification_item_tv_action)
         protected TextView tvAction;
 
-        @Bind(R.id.notification_item_web_reply_content)
+        @BindView(R.id.notification_item_web_reply_content)
         protected CNodeWebView webReplyContent;
 
-        @Bind(R.id.notification_item_tv_topic_title)
+        @BindView(R.id.notification_item_tv_topic_title)
         protected TextView tvTopicTitle;
 
         private Message message;

@@ -16,7 +16,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.senab.photoview.PhotoView;
 
@@ -31,13 +31,13 @@ public class ImagePreviewActivity extends StatusBarActivity {
         context.startActivity(intent);
     }
 
-    @Bind(R.id.image_preview_toolbar)
+    @BindView(R.id.image_preview_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.image_preview_photo_view)
+    @BindView(R.id.image_preview_photo_view)
     protected PhotoView photoView;
 
-    @Bind(R.id.image_preview_progress_wheel)
+    @BindView(R.id.image_preview_progress_wheel)
     protected ProgressWheel progressWheel;
 
     @Override

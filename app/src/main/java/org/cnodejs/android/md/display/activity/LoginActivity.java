@@ -25,7 +25,7 @@ import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
 import org.cnodejs.android.md.presenter.implement.LoginPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
@@ -58,10 +58,10 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
         }
     }
 
-    @Bind(R.id.login_toolbar)
+    @BindView(R.id.login_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.login_edt_access_token)
+    @BindView(R.id.login_edt_access_token)
     protected MaterialEditText edtAccessToken;
 
     protected ProgressDialog progressDialog;

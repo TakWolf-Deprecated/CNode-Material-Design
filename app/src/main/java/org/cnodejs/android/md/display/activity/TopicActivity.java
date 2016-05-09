@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -73,19 +73,19 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         context.startActivity(intent);
     }
 
-    @Bind(R.id.topic_toolbar)
+    @BindView(R.id.topic_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.topic_refresh_layout)
+    @BindView(R.id.topic_refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
-    @Bind(R.id.topic_list_view)
+    @BindView(R.id.topic_list_view)
     protected ListView listView;
 
-    @Bind(R.id.topic_icon_no_data)
+    @BindView(R.id.topic_icon_no_data)
     protected View iconNoData;
 
-    @Bind(R.id.topic_fab_reply)
+    @BindView(R.id.topic_fab_reply)
     protected FloatingActionButton fabReply;
 
     private String topicId;

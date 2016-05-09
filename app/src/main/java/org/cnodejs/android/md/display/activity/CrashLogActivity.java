@@ -18,15 +18,15 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
-    @Bind(R.id.crash_log_toolbar)
+    @BindView(R.id.crash_log_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.crash_log_tv_info)
+    @BindView(R.id.crash_log_tv_info)
     protected TextView tvInfo;
 
     private String crashLog;

@@ -22,7 +22,7 @@ import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.ITopicReplyPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicReplyPresenter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -37,16 +37,16 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
         );
     }
 
-    @Bind(R.id.editor_bar_layout_root)
+    @BindView(R.id.editor_bar_layout_root)
     protected ViewGroup editorBar;
 
-    @Bind(R.id.dialog_topic_reply_layout_target)
+    @BindView(R.id.dialog_topic_reply_layout_target)
     protected ViewGroup layoutTarget;
 
-    @Bind(R.id.dialog_topic_reply_tv_target)
+    @BindView(R.id.dialog_topic_reply_tv_target)
     protected TextView tvTarget;
 
-    @Bind(R.id.dialog_topic_reply_edt_content)
+    @BindView(R.id.dialog_topic_reply_edt_content)
     protected EditText edtContent;
 
     private final String topicId;

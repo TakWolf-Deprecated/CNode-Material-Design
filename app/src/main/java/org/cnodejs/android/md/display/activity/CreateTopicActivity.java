@@ -23,24 +23,24 @@ import org.cnodejs.android.md.model.storage.TopicShared;
 import org.cnodejs.android.md.presenter.contract.ICreateTopicPresenter;
 import org.cnodejs.android.md.presenter.implement.CreateTopicPresenter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CreateTopicActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener, ICreateTopicView {
 
-    @Bind(R.id.create_topic_toolbar)
+    @BindView(R.id.create_topic_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.create_topic_spn_tab)
+    @BindView(R.id.create_topic_spn_tab)
     protected Spinner spnTab;
 
-    @Bind(R.id.create_topic_edt_title)
+    @BindView(R.id.create_topic_edt_title)
     protected EditText edtTitle;
 
-    @Bind(R.id.editor_bar_layout_root)
+    @BindView(R.id.editor_bar_layout_root)
     protected ViewGroup editorBar;
 
-    @Bind(R.id.create_topic_edt_content)
+    @BindView(R.id.create_topic_edt_content)
     protected EditText edtContent;
 
     private ProgressDialog progressDialog;

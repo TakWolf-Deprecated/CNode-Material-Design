@@ -45,7 +45,8 @@ import org.cnodejs.android.md.util.HandlerUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -54,40 +55,40 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     private static final int PAGE_LIMIT = 20;
 
     // 抽屉导航布局
-    @Bind(R.id.main_drawer_layout)
+    @BindView(R.id.main_drawer_layout)
     protected DrawerLayout drawerLayout;
 
     // 状态栏
-    @Bind(R.id.main_center_adapt_status_bar)
+    @BindView(R.id.main_center_adapt_status_bar)
     protected View centerAdaptStatusBar;
 
-    @Bind(R.id.main_nav_adapt_status_bar)
+    @BindView(R.id.main_nav_adapt_status_bar)
     protected View navAdaptStatusBar;
 
     // 导航部分的个人信息
-    @Bind(R.id.main_nav_img_avatar)
+    @BindView(R.id.main_nav_img_avatar)
     protected ImageView imgAvatar;
 
-    @Bind(R.id.main_nav_tv_login_name)
+    @BindView(R.id.main_nav_tv_login_name)
     protected TextView tvLoginName;
 
-    @Bind(R.id.main_nav_tv_score)
+    @BindView(R.id.main_nav_tv_score)
     protected TextView tvScore;
 
-    @Bind(R.id.main_nav_tv_badger_notification)
+    @BindView(R.id.main_nav_tv_badger_notification)
     protected TextView tvBadgerNotification;
 
-    @Bind(R.id.main_nav_btn_logout)
+    @BindView(R.id.main_nav_btn_logout)
     protected View btnLogout;
 
-    @Bind(R.id.main_nav_btn_theme_dark)
+    @BindView(R.id.main_nav_btn_theme_dark)
     protected ImageView imgThemeDark;
 
-    @Bind(R.id.main_nav_img_top_background)
+    @BindView(R.id.main_nav_img_top_background)
     protected ImageView imgTopBackground;
 
     // 主要导航项
-    @Bind({
+    @BindViews({
             R.id.main_nav_btn_all,
             R.id.main_nav_btn_good,
             R.id.main_nav_btn_share,
@@ -97,19 +98,19 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     protected List<CheckedTextView> navMainItemList;
 
     // 内容部分
-    @Bind(R.id.main_toolbar)
+    @BindView(R.id.main_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.main_refresh_layout)
+    @BindView(R.id.main_refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
-    @Bind(R.id.main_recycler_view)
+    @BindView(R.id.main_recycler_view)
     protected RecyclerView recyclerView;
 
-    @Bind(R.id.main_icon_no_data)
+    @BindView(R.id.main_icon_no_data)
     protected View iconNoData;
 
-    @Bind(R.id.main_fab_create_topic)
+    @BindView(R.id.main_fab_create_topic)
     protected FloatingActionButton fabCreateTopic;
 
     // 当前版块，默认为all

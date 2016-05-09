@@ -29,7 +29,7 @@ import org.cnodejs.android.md.util.FormatUtils;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -80,31 +80,31 @@ public class TopicAdapter extends BaseAdapter {
 
     public class ViewHolder implements ITopicItemReplyView {
 
-        @Bind(R.id.topic_item_reply_img_avatar)
+        @BindView(R.id.topic_item_reply_img_avatar)
         protected ImageView imgAvatar;
 
-        @Bind(R.id.topic_item_reply_tv_login_name)
+        @BindView(R.id.topic_item_reply_tv_login_name)
         protected TextView tvLoginName;
 
-        @Bind(R.id.topic_item_reply_tv_index)
+        @BindView(R.id.topic_item_reply_tv_index)
         protected TextView tvIndex;
 
-        @Bind(R.id.topic_item_reply_tv_create_time)
+        @BindView(R.id.topic_item_reply_tv_create_time)
         protected TextView tvCreateTime;
 
-        @Bind(R.id.topic_item_reply_btn_ups)
+        @BindView(R.id.topic_item_reply_btn_ups)
         protected TextView btnUps;
 
-        @Bind(R.id.topic_item_reply_tv_target_position)
+        @BindView(R.id.topic_item_reply_tv_target_position)
         protected TextView tvTargetPosition;
 
-        @Bind(R.id.topic_item_reply_web_content)
+        @BindView(R.id.topic_item_reply_web_content)
         protected CNodeWebView webContent;
 
-        @Bind(R.id.topic_item_reply_icon_deep_line)
+        @BindView(R.id.topic_item_reply_icon_deep_line)
         protected View iconDeepLine;
 
-        @Bind(R.id.topic_item_reply_icon_shadow_gap)
+        @BindView(R.id.topic_item_reply_icon_shadow_gap)
         protected View iconShadowGap;
 
         private final ITopicItemReplyPresenter topicItemReplyPresenter;

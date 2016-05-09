@@ -13,7 +13,7 @@ import org.cnodejs.android.md.display.widget.CNodeWebView;
 import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MarkdownPreviewActivity extends StatusBarActivity {
@@ -26,10 +26,10 @@ public class MarkdownPreviewActivity extends StatusBarActivity {
         activity.startActivity(intent);
     }
 
-    @Bind(R.id.markdown_preview_toolbar)
+    @BindView(R.id.markdown_preview_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.markdown_preview_web_view)
+    @BindView(R.id.markdown_preview_web_view)
     protected CNodeWebView cnodeWebView;
 
     @Override

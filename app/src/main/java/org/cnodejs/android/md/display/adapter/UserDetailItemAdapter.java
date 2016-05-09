@@ -19,7 +19,7 @@ import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -52,16 +52,16 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.user_detail_item_img_avatar)
+        @BindView(R.id.user_detail_item_img_avatar)
         protected ImageView imgAvatar;
 
-        @Bind(R.id.user_detail_item_tv_title)
+        @BindView(R.id.user_detail_item_tv_title)
         protected TextView tvTitle;
 
-        @Bind(R.id.user_detail_item_tv_login_name)
+        @BindView(R.id.user_detail_item_tv_login_name)
         protected TextView tvLoginName;
 
-        @Bind(R.id.user_detail_item_tv_last_reply_time)
+        @BindView(R.id.user_detail_item_tv_last_reply_time)
         protected TextView tvLastReplyTime;
 
         private TopicSimple topic;

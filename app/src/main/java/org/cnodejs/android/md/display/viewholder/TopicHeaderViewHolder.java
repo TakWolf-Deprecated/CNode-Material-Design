@@ -27,49 +27,49 @@ import org.cnodejs.android.md.presenter.implement.TopicHeaderPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ResUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class TopicHeaderViewHolder implements ITopicHeaderView {
 
-    @Bind(R.id.topic_header_layout_content)
+    @BindView(R.id.topic_header_layout_content)
     protected ViewGroup layoutContent;
 
-    @Bind(R.id.topic_header_icon_good)
+    @BindView(R.id.topic_header_icon_good)
     protected View iconGood;
 
-    @Bind(R.id.topic_header_tv_title)
+    @BindView(R.id.topic_header_tv_title)
     protected TextView tvTitle;
 
-    @Bind(R.id.topic_header_img_avatar)
+    @BindView(R.id.topic_header_img_avatar)
     protected ImageView imgAvatar;
 
-    @Bind(R.id.topic_header_tv_tab)
+    @BindView(R.id.topic_header_tv_tab)
     protected TextView tvTab;
 
-    @Bind(R.id.topic_header_tv_login_name)
+    @BindView(R.id.topic_header_tv_login_name)
     protected TextView tvLoginName;
 
-    @Bind(R.id.topic_header_tv_create_time)
+    @BindView(R.id.topic_header_tv_create_time)
     protected TextView tvCreateTime;
 
-    @Bind(R.id.topic_header_tv_visit_count)
+    @BindView(R.id.topic_header_tv_visit_count)
     protected TextView tvVisitCount;
 
-    @Bind(R.id.topic_header_btn_favorite)
+    @BindView(R.id.topic_header_btn_favorite)
     protected ImageView btnFavorite;
 
-    @Bind(R.id.topic_header_web_content)
+    @BindView(R.id.topic_header_web_content)
     protected CNodeWebView webContent;
 
-    @Bind(R.id.topic_header_layout_no_reply)
+    @BindView(R.id.topic_header_layout_no_reply)
     protected ViewGroup layoutNoReply;
 
-    @Bind(R.id.topic_header_layout_reply_count)
+    @BindView(R.id.topic_header_layout_reply_count)
     protected ViewGroup layoutReplyCount;
 
-    @Bind(R.id.topic_header_tv_reply_count)
+    @BindView(R.id.topic_header_tv_reply_count)
     protected TextView tvReplyCount;
 
     private final Activity activity;
