@@ -37,7 +37,7 @@
 
 ## Credits ##
 
-- [Butter Knife](https://github.com/JakeWharton/butterknife)
+- [Butter Knife](http://jakewharton.github.io/butterknife)
 
 - [Gson](https://github.com/google/gson)
 

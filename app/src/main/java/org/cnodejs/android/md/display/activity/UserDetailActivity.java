@@ -40,7 +40,7 @@ import org.cnodejs.android.md.display.util.Navigator;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -71,31 +71,31 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         context.startActivity(intent);
     }
 
-    @Bind(R.id.user_detail_toolbar)
+    @BindView(R.id.user_detail_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.user_detail_tab_layout)
+    @BindView(R.id.user_detail_tab_layout)
     protected TabLayout tabLayout;
 
-    @Bind(R.id.user_detail_view_pager)
+    @BindView(R.id.user_detail_view_pager)
     protected ViewPager viewPager;
 
-    @Bind(R.id.user_detail_img_avatar)
+    @BindView(R.id.user_detail_img_avatar)
     protected ImageView imgAvatar;
 
-    @Bind(R.id.user_detail_tv_login_name)
+    @BindView(R.id.user_detail_tv_login_name)
     protected TextView tvLoginName;
 
-    @Bind(R.id.user_detail_tv_github_username)
+    @BindView(R.id.user_detail_tv_github_username)
     protected TextView tvGithubUsername;
 
-    @Bind(R.id.user_detail_tv_create_time)
+    @BindView(R.id.user_detail_tv_create_time)
     protected TextView tvCreateTime;
 
-    @Bind(R.id.user_detail_tv_score)
+    @BindView(R.id.user_detail_tv_score)
     protected TextView tvScore;
 
-    @Bind(R.id.user_detail_progress_wheel)
+    @BindView(R.id.user_detail_progress_wheel)
     protected ProgressWheel progressWheel;
 
     private UserDetailAdapter adapter;

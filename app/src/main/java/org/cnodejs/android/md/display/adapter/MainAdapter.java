@@ -21,7 +21,7 @@ import org.cnodejs.android.md.util.ResUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -91,10 +91,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public class LoadMoreViewHolder extends ViewHolder {
 
-        @Bind(R.id.item_load_more_icon_loading)
+        @BindView(R.id.item_load_more_icon_loading)
         protected View iconLoading;
 
-        @Bind(R.id.item_load_more_icon_finish)
+        @BindView(R.id.item_load_more_icon_finish)
         protected View iconFinish;
 
         protected LoadMoreViewHolder(@NonNull View itemView) {
@@ -112,31 +112,31 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public class NormalViewHolder extends ViewHolder {
 
-        @Bind(R.id.main_item_tv_tab)
+        @BindView(R.id.main_item_tv_tab)
         protected TextView tvTab;
 
-        @Bind(R.id.main_item_tv_title)
+        @BindView(R.id.main_item_tv_title)
         protected TextView tvTitle;
 
-        @Bind(R.id.main_item_img_avatar)
+        @BindView(R.id.main_item_img_avatar)
         protected ImageView imgAvatar;
 
-        @Bind(R.id.main_item_tv_author)
+        @BindView(R.id.main_item_tv_author)
         protected TextView tvAuthor;
 
-        @Bind(R.id.main_item_tv_create_time)
+        @BindView(R.id.main_item_tv_create_time)
         protected TextView tvCreateTime;
 
-        @Bind(R.id.main_item_tv_reply_count)
+        @BindView(R.id.main_item_tv_reply_count)
         protected TextView tvReplyCount;
 
-        @Bind(R.id.main_item_tv_visit_count)
+        @BindView(R.id.main_item_tv_visit_count)
         protected TextView tvVisitCount;
 
-        @Bind(R.id.main_item_tv_last_reply_time)
+        @BindView(R.id.main_item_tv_last_reply_time)
         protected TextView tvLastReplyTime;
 
-        @Bind(R.id.main_item_icon_good)
+        @BindView(R.id.main_item_icon_good)
         protected View iconGood;
 
         private Topic topic;

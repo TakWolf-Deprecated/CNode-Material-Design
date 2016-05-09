@@ -24,7 +24,7 @@ import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.util.FormatUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
@@ -79,13 +79,13 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
         activity.startActivityForResult(new Intent(activity, QRCodeActivity.class), REQUEST_QRCODE);
     }
 
-    @Bind(R.id.qrcode_toolbar)
+    @BindView(R.id.qrcode_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.qrcode_qr_view)
+    @BindView(R.id.qrcode_qr_view)
     protected QRCodeReaderView qrCodeReaderView;
 
-    @Bind(R.id.qrcode_icon_line)
+    @BindView(R.id.qrcode_icon_line)
     protected View iconLine;
 
     @Override

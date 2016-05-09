@@ -10,10 +10,10 @@ import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.display.util.Navigator;
+import org.cnodejs.android.md.display.util.ThemeUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -21,10 +21,10 @@ public class AboutActivity extends StatusBarActivity {
 
     public static final String VERSION_TEXT = BuildConfig.VERSION_NAME + "-build-" + BuildConfig.VERSION_CODE;
 
-    @Bind(R.id.about_toolbar)
+    @BindView(R.id.about_toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.about_tv_version)
+    @BindView(R.id.about_tv_version)
     protected TextView tvVersion;
 
     @Override
