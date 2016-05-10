@@ -11,4 +11,6 @@ public final class ApiDefine {
     public static final String TOPIC_PATH_PREFIX = "/topic/";
     public static final String TOPIC_LINK_URL_PREFIX = HOST + TOPIC_PATH_PREFIX;
 
+    public static final boolean MD_RENDER = true;
+
 }
