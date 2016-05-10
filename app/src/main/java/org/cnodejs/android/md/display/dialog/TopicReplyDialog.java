@@ -113,7 +113,7 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
         targetId = target.getId();
         layoutTarget.setVisibility(View.VISIBLE);
         tvTarget.setText("回复：" + (targetPosition + 1) + "楼");
-        edtContent.getText().insert(edtContent.getSelectionEnd(), " @" + target.getAuthor().getLoginName() + " ");
+        edtContent.getText().insert(edtContent.getSelectionEnd(), (edtContent.getSelectionEnd() == 0 ? "" : " ") + "@" + target.getAuthor().getLoginName() + " ");
         showReplyWindow();
     }
 
