@@ -14,7 +14,7 @@ public class DefaultWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-        if (!TextUtils.isEmpty(url) && !Navigator.openLink(webView.getContext(), url)) {
+        if (!TextUtils.isEmpty(url) && !Navigator.openStandardLink(webView.getContext(), url)) {
             Navigator.openInBrowser(webView.getContext(), url);
         }
         return true;

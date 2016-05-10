@@ -7,12 +7,12 @@ import org.cnodejs.android.md.display.base.BaseActivity;
 import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.display.util.ToastUtils;
 
-public class LinkRouterActivity extends BaseActivity {
+public class StandardLinkRouterActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!Navigator.openLink(this, getIntent().getDataString())) {
+        if (!Navigator.openStandardLink(this, getIntent().getDataString())) {
             ToastUtils.with(this).show(R.string.invalid_link);
         }
         finish();

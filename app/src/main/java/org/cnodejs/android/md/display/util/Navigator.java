@@ -57,7 +57,7 @@ public final class Navigator {
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)));
     }
 
-    public static boolean openLink(@NonNull Context context, @Nullable String url) {
+    public static boolean openStandardLink(@NonNull Context context, @Nullable String url) {
         if (FormatUtils.isUserLinkUrl(url)) {
             UserDetailActivity.start(context, Uri.parse(url).getPath().replace(ApiDefine.USER_PATH_PREFIX, ""));
             return true;
