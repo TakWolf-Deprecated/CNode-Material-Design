@@ -52,17 +52,7 @@
             android:name="org.cnodejs.android.md.display.activity.TopicActivity"
             android:label="@string/topic"
             android:screenOrientation="portrait"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
-            <intent-filter android:label="@string/app_name">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="https"
-                    android:host="cnodejs.org"
-                    android:pathPrefix="/topic/" />
-            </intent-filter>
-        </activity>
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <activity
             android:name="org.cnodejs.android.md.display.activity.CreateTopicActivity"
@@ -87,17 +77,7 @@
             android:name="org.cnodejs.android.md.display.activity.UserDetailActivity"
             android:label="@string/user_detail"
             android:screenOrientation="portrait"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
-            <intent-filter android:label="@string/app_name">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="https"
-                    android:host="cnodejs.org"
-                    android:pathPrefix="/user/" />
-            </intent-filter>
-        </activity>
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <activity
             android:name="org.cnodejs.android.md.display.activity.NotificationActivity"
@@ -135,6 +115,31 @@
             android:label="@string/app_crash"
             android:screenOrientation="portrait"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name="org.cnodejs.android.md.display.activity.StandardLinkRouterActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="https"
+                    android:host="cnodejs.org"
+                    android:pathPrefix="/topic/" />
+            </intent-filter>
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="https"
+                    android:host="cnodejs.org"
+                    android:pathPrefix="/user/" />
+            </intent-filter>
+        </activity>
 
         <!-- 友盟参数 -->
         <meta-data
