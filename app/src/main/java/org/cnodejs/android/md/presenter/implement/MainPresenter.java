@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import org.cnodejs.android.md.display.view.IMainView;
 import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.api.CallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
@@ -30,8 +31,8 @@ public class MainPresenter implements IMainPresenter {
     }
 
     @Override
-    public void refreshTopicListAsyncTask(@NonNull final TabType tab, @NonNull Integer limit, @NonNull Boolean mdrender) {
-        Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, 1, limit, mdrender);
+    public void refreshTopicListAsyncTask(@NonNull final TabType tab, @NonNull Integer limit) {
+        Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, 1, limit, ApiDefine.MD_RENDER);
         call.enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
 
             @Override
@@ -58,8 +59,8 @@ public class MainPresenter implements IMainPresenter {
     }
 
     @Override
-    public void loadMoreTopicListAsyncTask(@NonNull final TabType tab, @NonNull final Integer page, @NonNull Integer limit, @NonNull final Boolean mdrender) {
-        Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, page + 1, limit, mdrender);
+    public void loadMoreTopicListAsyncTask(@NonNull final TabType tab, @NonNull final Integer page, @NonNull Integer limit) {
+        Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, page + 1, limit, ApiDefine.MD_RENDER);
         call.enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
 
             @Override

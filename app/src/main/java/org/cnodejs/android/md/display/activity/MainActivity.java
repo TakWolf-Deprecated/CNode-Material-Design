@@ -223,7 +223,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
 
     @Override
     public void onRefresh() {
-        mainPresenter.refreshTopicListAsyncTask(currentTab, PAGE_LIMIT, true);
+        mainPresenter.refreshTopicListAsyncTask(currentTab, PAGE_LIMIT);
     }
 
     @Override
@@ -231,7 +231,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
         if (adapter.canLoadMore()) {
             adapter.setLoading(true);
             adapter.notifyItemChanged(adapter.getItemCount() - 1);
-            mainPresenter.loadMoreTopicListAsyncTask(currentTab, currentPage, PAGE_LIMIT, true);
+            mainPresenter.loadMoreTopicListAsyncTask(currentTab, currentPage, PAGE_LIMIT);
         }
     }
 

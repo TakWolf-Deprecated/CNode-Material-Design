@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.display.view.INotificationView;
 import org.cnodejs.android.md.model.api.ApiClient;
+import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
@@ -26,7 +27,7 @@ public class NotificationPresenter implements INotificationPresenter {
 
     @Override
     public void getMessagesAsyncTask() {
-        Call<Result.Data<Notification>> call = ApiClient.service.getMessages(LoginShared.getAccessToken(activity), true);
+        Call<Result.Data<Notification>> call = ApiClient.service.getMessages(LoginShared.getAccessToken(activity), ApiDefine.MD_RENDER);
         call.enqueue(new DefaultToastCallback<Result.Data<Notification>>(activity) {
 
             @Override
