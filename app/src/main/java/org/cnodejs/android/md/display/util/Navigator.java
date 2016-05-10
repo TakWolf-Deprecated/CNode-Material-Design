@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.TopicActivity;
@@ -56,13 +57,15 @@ public final class Navigator {
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)));
     }
 
-    public static void openLink(@NonNull Context context, @NonNull String url) {
+    public static boolean openLink(@NonNull Context context, @Nullable String url) {
         if (FormatUtils.isUserLinkUrl(url)) {
             UserDetailActivity.start(context, Uri.parse(url).getPath().replace(ApiDefine.USER_PATH_PREFIX, ""));
+            return true;
         } else if (FormatUtils.isTopicLinkUrl(url)) {
             TopicActivity.start(context, Uri.parse(url).getPath().replace(ApiDefine.TOPIC_PATH_PREFIX, ""));
+            return true;
         } else {
-            openInBrowser(context, url);
+            return false;
         }
     }
 

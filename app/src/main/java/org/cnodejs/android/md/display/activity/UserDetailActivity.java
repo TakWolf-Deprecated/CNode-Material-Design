@@ -25,18 +25,17 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.UserDetailAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.view.IUserDetailView;
 import org.cnodejs.android.md.display.util.ActivityUtils;
+import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.display.util.ToastUtils;
+import org.cnodejs.android.md.display.view.IUserDetailView;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
 import org.cnodejs.android.md.presenter.implement.UserDetailPresenter;
-import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.display.util.Navigator;
 
 import java.util.List;
 
@@ -125,14 +124,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         viewPager.setOffscreenPageLimit(adapter.getCount());
         tabLayout.setupWithViewPager(viewPager);
 
-        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_LOGIN_NAME))) {
-            loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
-        } else if (FormatUtils.isUserLinkUrl(getIntent().getDataString())) {
-            loginName = getIntent().getData().getPath().replace(ApiDefine.USER_PATH_PREFIX, "");
-        } else {
-            loginName = "";
-        }
-
+        loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
         tvLoginName.setText(loginName);
 
         String avatarUrl = getIntent().getStringExtra(EXTRA_AVATAR_URL);

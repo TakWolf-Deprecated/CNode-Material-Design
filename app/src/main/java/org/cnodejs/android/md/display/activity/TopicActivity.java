@@ -20,14 +20,15 @@ import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.dialog.TopicReplyDialog;
 import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.util.ActivityUtils;
+import org.cnodejs.android.md.display.util.Navigator;
+import org.cnodejs.android.md.display.util.RefreshUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
-import org.cnodejs.android.md.display.util.ActivityUtils;
-import org.cnodejs.android.md.display.util.RefreshUtils;
-import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
@@ -36,8 +37,6 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
-import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.display.util.Navigator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,13 +105,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);
 
-        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_TOPIC_ID))) {
-            topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
-        } else if (FormatUtils.isTopicLinkUrl(getIntent().getDataString())) {
-            topicId = getIntent().getData().getPath().replace(ApiDefine.TOPIC_PATH_PREFIX, "");
-        } else {
-            topicId = "";
-        }
+        topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
 
         if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_TOPIC))) {
             topic = EntityUtils.gson.fromJson(getIntent().getStringExtra(EXTRA_TOPIC), Topic.class);
