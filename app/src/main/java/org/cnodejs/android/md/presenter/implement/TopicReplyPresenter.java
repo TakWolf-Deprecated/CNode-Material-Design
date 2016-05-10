@@ -54,8 +54,7 @@ public class TopicReplyPresenter implements ITopicReplyPresenter {
                     author.setLoginName(LoginShared.getLoginName(activity));
                     author.setAvatarUrl(LoginShared.getAvatarUrl(activity));
                     reply.setAuthor(author);
-                    reply.setContent(finalContent);
-                    reply.setHandleContent(FormatUtils.renderMarkdown(finalContent)); // 本地要做预渲染处理
+                    reply.setContentFromLocal(finalContent); // 这里要使用本地的访问器
                     reply.setCreateAt(new DateTime());
                     reply.setUpList(new ArrayList<String>());
                     reply.setReplyId(targetId);
