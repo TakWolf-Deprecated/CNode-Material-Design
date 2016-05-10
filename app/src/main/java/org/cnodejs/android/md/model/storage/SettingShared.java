@@ -8,10 +8,10 @@ public final class SettingShared {
 
     private static final String TAG = "SettingShared";
 
-    private static final String KEY_ENABLE_NOTIFICATION = "notification";
-    private static final String KEY_ENABLE_THEME_DARK = "theme_dark";
-    private static final String KEY_NEW_TOPIC_DRAFT = "new_topic_draft";
-    private static final String KEY_ENABLE_TOPIC_SIGN = "topic_sign";
+    private static final String KEY_ENABLE_NOTIFICATION = "enable_notification";
+    private static final String KEY_ENABLE_THEME_DARK = "enable_theme_dark";
+    private static final String KEY_ENABLE_TOPIC_DRAFT = "enable_topic_draft";
+    private static final String KEY_ENABLE_TOPIC_SIGN = "enable_topic_sign";
     private static final String KEY_TOPIC_SIGN_CONTENT = "topic_sign_content";
 
     public static final String DEFAULT_TOPIC_SIGN_CONTENT = "来自酷炫的 [CNodeMD](https://github.com/TakWolf/CNode-Material-Design)";
@@ -32,12 +32,12 @@ public final class SettingShared {
         SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_THEME_DARK, enable);
     }
 
-    public static boolean isEnableNewTopicDraft(Context context) {
-        return SharedWrapper.with(context, TAG).getBoolean(KEY_NEW_TOPIC_DRAFT, true);
+    public static boolean isEnableTopicDraft(Context context) {
+        return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_DRAFT, true);
     }
 
-    public static void setEnableNewTopicDraft(Context context, boolean enable) {
-        SharedWrapper.with(context, TAG).setBoolean(KEY_NEW_TOPIC_DRAFT, enable);
+    public static void setEnableTopicDraft(Context context, boolean enable) {
+        SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_DRAFT, enable);
     }
 
     public static boolean isEnableTopicSign(Context context) {

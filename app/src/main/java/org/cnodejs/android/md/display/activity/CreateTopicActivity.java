@@ -68,11 +68,11 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
         new EditorBarHandler(this, editorBar, edtContent);
 
         // 载入草稿
-        if (SettingShared.isEnableNewTopicDraft(this)) {
-            spnTab.setSelection(TopicShared.getNewTopicTabPosition(this));
-            edtContent.setText(TopicShared.getNewTopicContent(this));
+        if (SettingShared.isEnableTopicDraft(this)) {
+            spnTab.setSelection(TopicShared.getDraftTabPosition(this));
+            edtContent.setText(TopicShared.getDraftContent(this));
             edtContent.setSelection(edtContent.length());
-            edtTitle.setText(TopicShared.getNewTopicTitle(this));
+            edtTitle.setText(TopicShared.getDraftTitle(this));
             edtTitle.setSelection(edtTitle.length()); // 这个必须最后调用
         }
 
@@ -85,10 +85,10 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
     @Override
     protected void onPause() {
         super.onPause();
-        if (SettingShared.isEnableNewTopicDraft(this) && saveTopicDraft) {
-            TopicShared.setNewTopicTabPosition(this, spnTab.getSelectedItemPosition());
-            TopicShared.setNewTopicTitle(this, edtTitle.getText().toString());
-            TopicShared.setNewTopicContent(this, edtContent.getText().toString());
+        if (SettingShared.isEnableTopicDraft(this) && saveTopicDraft) {
+            TopicShared.setDraftTabPosition(this, spnTab.getSelectedItemPosition());
+            TopicShared.setDraftTitle(this, edtTitle.getText().toString());
+            TopicShared.setDraftContent(this, edtContent.getText().toString());
         }
     }
 

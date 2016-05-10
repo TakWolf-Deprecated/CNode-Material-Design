@@ -131,7 +131,7 @@
                 android:textSize="14sp" />
 
             <RelativeLayout
-                android:id="@+id/setting_btn_new_topic_draft"
+                android:id="@+id/setting_btn_topic_draft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -140,8 +140,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/setting_switch_new_topic_draft"
-                    android:layout_toLeftOf="@+id/setting_switch_new_topic_draft"
+                    android:layout_toStartOf="@+id/setting_switch_topic_draft"
+                    android:layout_toLeftOf="@+id/setting_switch_topic_draft"
                     android:orientation="vertical">
 
                     <TextView
@@ -162,7 +162,7 @@
                 </LinearLayout>
 
                 <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/setting_switch_new_topic_draft"
+                    android:id="@+id/setting_switch_topic_draft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

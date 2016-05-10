@@ -27,8 +27,8 @@ public class SettingActivity extends StatusBarActivity {
     @BindView(R.id.setting_switch_theme_dark)
     protected SwitchCompat switchThemeDark;
 
-    @BindView(R.id.setting_switch_new_topic_draft)
-    protected SwitchCompat switchNewTopicDraft;
+    @BindView(R.id.setting_switch_topic_draft)
+    protected SwitchCompat switchTopicDraft;
 
     @BindView(R.id.setting_switch_topic_sign)
     protected SwitchCompat switchTopicSign;
@@ -47,7 +47,7 @@ public class SettingActivity extends StatusBarActivity {
 
         switchNotification.setChecked(SettingShared.isEnableNotification(this));
         switchThemeDark.setChecked(SettingShared.isEnableThemeDark(this));
-        switchNewTopicDraft.setChecked(SettingShared.isEnableNewTopicDraft(this));
+        switchTopicDraft.setChecked(SettingShared.isEnableTopicDraft(this));
         switchTopicSign.setChecked(SettingShared.isEnableTopicSign(this));
         btnModifyTopicSign.setEnabled(SettingShared.isEnableTopicSign(this));
     }
@@ -65,10 +65,10 @@ public class SettingActivity extends StatusBarActivity {
         ThemeUtils.notifyThemeApply(this, false);
     }
 
-    @OnClick(R.id.setting_btn_new_topic_draft)
+    @OnClick(R.id.setting_btn_topic_draft)
     protected void onBtnNewTopicDraftClick() {
-        switchNewTopicDraft.toggle();
-        SettingShared.setEnableNewTopicDraft(this, switchNewTopicDraft.isChecked());
+        switchTopicDraft.toggle();
+        SettingShared.setEnableTopicDraft(this, switchTopicDraft.isChecked());
     }
 
     @OnClick(R.id.setting_btn_topic_sign)
