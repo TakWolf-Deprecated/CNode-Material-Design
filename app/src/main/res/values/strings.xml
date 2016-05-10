@@ -95,13 +95,15 @@
     <string name="receive_notification_summary">开启也没用，这功能压根没做</string>
     <string name="theme">主题</string>
     <string name="theme_dark">夜间模式</string>
-    <string name="new_topic_draft">保存草稿</string>
-    <string name="new_topic_draft_summary">没有发布的话题内容会被保存</string>
+    <string name="topic_draft">保存草稿</string>
+    <string name="topic_draft_summary">没有发布的话题内容会被保存</string>
     <string name="topic_sign">话题小尾巴</string>
     <string name="topic_sign_summary">开启后可以自定义</string>
     <string name="modify_topic_sign">设置小尾巴</string>
-    <string name="modify_topic_sign_hint">来点炫酷的，不要写太多字喔&#8230;</string>
+    <string name="modify_topic_sign_hint">来点酷炫的，不要写太多字喔&#8230;</string>
     <string name="default_topic_sign">默认尾巴</string>
+    <string name="topic_render_compat">渲染兼容模式</string>
+    <string name="topic_render_compat_summary">如果页面渲染出现问题，请开启这个功能</string>
 
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="share">分享</string>
