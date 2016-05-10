@@ -36,6 +36,9 @@ public class SettingActivity extends StatusBarActivity {
     @BindView(R.id.setting_btn_modify_topic_sign)
     protected TextView btnModifyTopicSign;
 
+    @BindView(R.id.setting_switch_topic_render_compat)
+    protected SwitchCompat switchTopicRenderCompat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
@@ -50,6 +53,7 @@ public class SettingActivity extends StatusBarActivity {
         switchTopicDraft.setChecked(SettingShared.isEnableTopicDraft(this));
         switchTopicSign.setChecked(SettingShared.isEnableTopicSign(this));
         btnModifyTopicSign.setEnabled(SettingShared.isEnableTopicSign(this));
+        switchTopicRenderCompat.setChecked(SettingShared.isEnableTopicRenderCompat(this));
     }
 
     @OnClick(R.id.setting_btn_notification)
@@ -66,7 +70,7 @@ public class SettingActivity extends StatusBarActivity {
     }
 
     @OnClick(R.id.setting_btn_topic_draft)
-    protected void onBtnNewTopicDraftClick() {
+    protected void onBtnTopicDraftClick() {
         switchTopicDraft.toggle();
         SettingShared.setEnableTopicDraft(this, switchTopicDraft.isChecked());
     }
@@ -81,6 +85,12 @@ public class SettingActivity extends StatusBarActivity {
     @OnClick(R.id.setting_btn_modify_topic_sign)
     protected void onBtnModifyTopicSignClick() {
         startActivity(new Intent(this, ModifyTopicSignActivity.class));
+    }
+
+    @OnClick(R.id.setting_btn_topic_render_compat)
+    protected void onBtnTopicRenderCompatClick() {
+        switchTopicRenderCompat.toggle();
+        SettingShared.setEnableTopicRenderCompat(this, switchTopicRenderCompat.isChecked());
     }
 
 }
