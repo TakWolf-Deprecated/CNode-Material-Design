@@ -3,6 +3,7 @@ package org.cnodejs.android.md.display.adapter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +90,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             // 判断通知类型
             if (message.getType() == Message.Type.at) {
-                if (message.getReply() == null || message.getReply().isEmptyContent()) {
+                if (message.getReply() == null || TextUtils.isEmpty(message.getReply().getId())) {
                     tvAction.setText("在话题中@了您");
                     webReplyContent.setVisibility(View.GONE);
                 } else {

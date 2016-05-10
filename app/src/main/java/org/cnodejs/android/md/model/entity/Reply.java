@@ -96,8 +96,4 @@ public class Reply {
         handleContent = content;
     }
 
-    public boolean isEmptyContent() {
-        return TextUtils.isEmpty(getContent()) || TextUtils.equals(getContent(), "<div class=\"markdown-text\"></div>");
-    }
-
 }
