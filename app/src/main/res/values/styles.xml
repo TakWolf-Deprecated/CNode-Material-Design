@@ -132,6 +132,13 @@
         <item name="android:background">@drawable/gap_shadow_opposite</item>
     </style>
 
+    <!-- Badge Dot -->
+    <style name="AppWidget.BadgeDot">
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:background">@drawable/badge_dot</item>
+    </style>
+
     <!-- Navigation -->
     <style name="AppWidget.NavigationItem">
         <item name="android:layout_width">match_parent</item>
