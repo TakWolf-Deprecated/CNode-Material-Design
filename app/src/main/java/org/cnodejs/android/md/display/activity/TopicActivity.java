@@ -1,7 +1,5 @@
 package org.cnodejs.android.md.display.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -49,29 +47,6 @@ import butterknife.OnClick;
 
 public class TopicActivity extends StatusBarActivity implements ITopicView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
-    private static final String EXTRA_TOPIC_ID = "topicId";
-    private static final String EXTRA_TOPIC = "topic";
-
-    public static void start(@NonNull Activity activity, @NonNull Topic topic) {
-        Intent intent = new Intent(activity, TopicActivity.class);
-        intent.putExtra(EXTRA_TOPIC_ID, topic.getId());
-        intent.putExtra(EXTRA_TOPIC, EntityUtils.gson.toJson(topic));
-        activity.startActivity(intent);
-    }
-
-    public static void start(@NonNull Activity activity, String topicId) {
-        Intent intent = new Intent(activity, TopicActivity.class);
-        intent.putExtra(EXTRA_TOPIC_ID, topicId);
-        activity.startActivity(intent);
-    }
-
-    public static void start(@NonNull Context context, String topicId) {
-        Intent intent = new Intent(context, TopicActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(EXTRA_TOPIC_ID, topicId);
-        context.startActivity(intent);
-    }
-
     @BindView(R.id.topic_toolbar)
     protected Toolbar toolbar;
 
@@ -105,10 +80,10 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);
 
-        topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
+        topicId = getIntent().getStringExtra(Navigator.TopicWithAutoCompat.EXTRA_TOPIC_ID);
 
-        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_TOPIC))) {
-            topic = EntityUtils.gson.fromJson(getIntent().getStringExtra(EXTRA_TOPIC), Topic.class);
+        if (!TextUtils.isEmpty(getIntent().getStringExtra(Navigator.TopicWithAutoCompat.EXTRA_TOPIC))) {
+            topic = EntityUtils.gson.fromJson(getIntent().getStringExtra(Navigator.TopicWithAutoCompat.EXTRA_TOPIC), Topic.class);
         }
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));

@@ -26,6 +26,7 @@ import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.display.listener.RecyclerViewLoadMoreListener;
+import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.IMainView;
 import org.cnodejs.android.md.display.util.ActivityUtils;
@@ -301,7 +302,11 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
 
         @Override
         public void run() {
-            startActivity(new Intent(MainActivity.this, gotoClz));
+            if (gotoClz == NotificationActivity.class) {
+                Navigator.NotificationWithAutoCompat.start(MainActivity.this);
+            } else {
+                startActivity(new Intent(MainActivity.this, gotoClz));
+            }
         }
 
         public void startDelayed() {
