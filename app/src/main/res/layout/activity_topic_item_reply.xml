@@ -134,12 +134,12 @@
             android:textSize="16sp"
             tools:text="回复：1楼" />
 
-        <org.cnodejs.android.md.display.widget.CNodeWebView
+        <org.cnodejs.android.md.display.widget.ContentWebView
             android:id="@+id/topic_item_reply_web_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:cssPath="?attr/markdownCssPath" />
+            app:darkTheme="?attr/darkMode" />
 
     </LinearLayout>
 

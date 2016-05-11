@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.util.Navigator;
-import org.cnodejs.android.md.display.widget.CNodeWebView;
+import org.cnodejs.android.md.display.widget.ContentWebView;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ResUtils;
@@ -67,8 +67,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         @BindView(R.id.notification_item_tv_action)
         protected TextView tvAction;
 
-        @BindView(R.id.notification_item_web_reply_content)
-        protected CNodeWebView webReplyContent;
+        @BindView(R.id.notification_item_web_content)
+        protected ContentWebView webContent;
 
         @BindView(R.id.notification_item_tv_topic_title)
         protected TextView tvTopicTitle;
@@ -92,16 +92,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             if (message.getType() == Message.Type.at) {
                 if (message.getReply() == null || TextUtils.isEmpty(message.getReply().getId())) {
                     tvAction.setText("在话题中@了您");
-                    webReplyContent.setVisibility(View.GONE);
+                    webContent.setVisibility(View.GONE);
                 } else {
                     tvAction.setText("在回复中@了您");
-                    webReplyContent.setVisibility(View.VISIBLE);
-                    webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // 这里直接使用WebView，有性能问题
+                    webContent.setVisibility(View.VISIBLE);
+                    webContent.loadRenderedContent(message.getReply().getRenderedContent());  // 这里直接使用WebView，有性能问题
                 }
             } else {
                 tvAction.setText("回复了您的话题");
-                webReplyContent.setVisibility(View.VISIBLE);
-                webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // 这里直接使用WebView，有性能问题
+                webContent.setVisibility(View.VISIBLE);
+                webContent.loadRenderedContent(message.getReply().getRenderedContent());  // 这里直接使用WebView，有性能问题
             }
 
             // 消息状态
