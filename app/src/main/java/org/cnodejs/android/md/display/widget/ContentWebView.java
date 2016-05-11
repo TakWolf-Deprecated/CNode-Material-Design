@@ -38,7 +38,7 @@ public class ContentWebView extends CNodeWebView {
             "            if (this.parentNode.nodeName !== 'A') {\n" +
             "                window." + ImageJavascriptInterface.NAME + ".openImage(this.src);\n" +
             "            }\n" +
-            "        }\n" +
+            "        };\n" +
             "    }\n" +
             "})();" +
             "</script>\n" +
