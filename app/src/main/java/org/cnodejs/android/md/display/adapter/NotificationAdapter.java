@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.activity.TopicActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
+import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.display.widget.CNodeWebView;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.util.FormatUtils;
@@ -131,7 +131,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         @OnClick(R.id.notification_item_btn_item)
         protected void onBtnItemClick() {
-            TopicActivity.start(activity, message.getTopic().getId());
+            Navigator.TopicWithAutoCompat.start(activity, message.getTopic().getId());
         }
 
     }

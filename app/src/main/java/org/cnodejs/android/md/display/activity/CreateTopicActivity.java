@@ -12,6 +12,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.display.view.ICreateTopicView;
 import org.cnodejs.android.md.display.widget.EditorBarHandler;
 import org.cnodejs.android.md.display.util.ThemeUtils;
@@ -138,7 +139,7 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
         saveTopicDraft = false;
         TopicShared.clear(this);
         ToastUtils.with(this).show(R.string.post_success);
-        TopicActivity.start(this, result.getTopicId());
+        Navigator.TopicWithAutoCompat.start(this, result.getTopicId());
         finish();
         return false;
     }

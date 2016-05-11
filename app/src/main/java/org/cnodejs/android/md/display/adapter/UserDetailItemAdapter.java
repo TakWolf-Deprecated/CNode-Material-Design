@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.TopicSimple;
-import org.cnodejs.android.md.display.activity.TopicActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
+import org.cnodejs.android.md.display.util.Navigator;
+import org.cnodejs.android.md.model.entity.TopicSimple;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;
@@ -87,7 +87,7 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
 
         @OnClick(R.id.user_detail_item_btn_item)
         protected void onBtnItemClick() {
-            TopicActivity.start(activity, topic.getId());
+            Navigator.TopicWithAutoCompat.start(activity, topic.getId());
         }
 
     }
