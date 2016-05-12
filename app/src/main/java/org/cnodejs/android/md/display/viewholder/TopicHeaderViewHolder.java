@@ -18,7 +18,7 @@ import org.cnodejs.android.md.display.activity.LoginActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.util.ActivityUtils;
 import org.cnodejs.android.md.display.view.ITopicHeaderView;
-import org.cnodejs.android.md.display.widget.CNodeWebView;
+import org.cnodejs.android.md.display.widget.ContentWebView;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
@@ -61,7 +61,7 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
     protected ImageView btnFavorite;
 
     @BindView(R.id.topic_header_web_content)
-    protected CNodeWebView webContent;
+    protected ContentWebView webContent;
 
     @BindView(R.id.topic_header_layout_no_reply)
     protected ViewGroup layoutNoReply;
@@ -124,7 +124,7 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
             btnFavorite.setImageResource(isCollect ? R.drawable.ic_favorite_theme_24dp : R.drawable.ic_favorite_outline_grey600_24dp);
 
             // 这里直接使用WebView，有性能问题
-            webContent.loadRenderedContent(topic.getHandleContent());
+            webContent.loadRenderedContent(topic.getRenderedContent());
 
             updateReplyCount(replyCount);
         } else {

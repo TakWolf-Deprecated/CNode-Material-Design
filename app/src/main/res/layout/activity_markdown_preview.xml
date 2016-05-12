@@ -26,12 +26,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <org.cnodejs.android.md.display.widget.CNodeWebView
-                android:id="@+id/markdown_preview_web_view"
+            <org.cnodejs.android.md.display.widget.ContentWebView
+                android:id="@+id/markdown_preview_web_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:cssPath="?attr/markdownCssPath" />
+                app:darkTheme="?attr/darkMode" />
 
         </LinearLayout>
 

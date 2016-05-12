@@ -2,6 +2,8 @@ package org.cnodejs.android.md.model.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import org.cnodejs.android.md.util.codec.DES3;
@@ -12,19 +14,19 @@ import java.lang.reflect.Type;
 
 public final class SharedWrapper {
 
-    public static SharedWrapper with(Context context, String name) {
+    public static SharedWrapper with(@NonNull Context context, @NonNull String name) {
         return new SharedWrapper(context, name);
     }
 
     private final Context context;
     private final SharedPreferences sp;
 
-    private SharedWrapper(Context context, String name) {
+    private SharedWrapper(@NonNull Context context, @NonNull String name) {
         this.context = context.getApplicationContext();
         sp = context.getSharedPreferences(getDigestKey(name), Context.MODE_PRIVATE);
     }
 
-    private String getDigestKey(String key) {
+    private String getDigestKey(@NonNull String key) {
         return Digest.MD5.getMessage(key);
     }
 
@@ -32,7 +34,7 @@ public final class SharedWrapper {
         return Digest.SHA256.getMessage(DeviceInfo.getDeviceToken(context));
     }
 
-    private String get(String key, String defValue) {
+    private String get(@NonNull String key, @Nullable String defValue) {
         try {
             String value = DES3.decrypt(getSecretKey(), sp.getString(getDigestKey(key), ""));
             if (TextUtils.isEmpty(value)) {
@@ -45,57 +47,57 @@ public final class SharedWrapper {
         }
     }
 
-    private void set(String key, String value) {
+    private void set(@NonNull String key, @Nullable String value) {
         SharedPreferences.Editor editor = sp.edit();
         try {
-            editor.putString(getDigestKey(key), DES3.encrypt(getSecretKey(), value));
+            editor.putString(getDigestKey(key), DES3.encrypt(getSecretKey(), TextUtils.isEmpty(value) ? "" : value));
         } catch (Exception e) {
             editor.putString(getDigestKey(key), "");
         }
         editor.apply();
     }
 
-    public String getString(String key, String defValue) {
+    public String getString(@NonNull String key, @Nullable String defValue) {
         return get(key, defValue);
     }
 
-    public void setString(String key, String value) {
+    public void setString(@NonNull String key, @Nullable String value) {
         set(key, value);
     }
 
-    public boolean getBoolean(String key, boolean defValue) {
+    public boolean getBoolean(@NonNull String key, boolean defValue) {
         return Boolean.parseBoolean(get(key, Boolean.toString(defValue)));
     }
 
-    public void setBoolean(String key, boolean value) {
+    public void setBoolean(@NonNull String key, boolean value) {
         set(key, Boolean.toString(value));
     }
 
-    public float getFloat(String key, float defValue) {
+    public float getFloat(@NonNull String key, float defValue) {
         return Float.parseFloat(get(key, Float.toString(defValue)));
     }
 
-    public void setFloat(String key, float value) {
+    public void setFloat(@NonNull String key, float value) {
         set(key, Float.toString(value));
     }
 
-    public int getInt(String key, int defValue) {
+    public int getInt(@NonNull String key, int defValue) {
         return Integer.parseInt(get(key, Integer.toString(defValue)));
     }
 
-    public void setInt(String key, int value) {
+    public void setInt(@NonNull String key, int value) {
         set(key, Integer.toString(value));
     }
 
-    public long getLong(String key, long defValue) {
+    public long getLong(@NonNull String key, long defValue) {
         return Long.parseLong(get(key, Long.toString(defValue)));
     }
 
-    public void setLong(String key, long value) {
+    public void setLong(@NonNull String key, long value) {
         set(key, Long.toString(value));
     }
 
-    public <T>T getObject(String key, Class<T> clz) {
+    public <T>T getObject(@NonNull String key, @NonNull Class<T> clz) {
         String json = get(key, null);
         if (json == null) {
             return null;
@@ -108,7 +110,7 @@ public final class SharedWrapper {
         }
     }
 
-    public <T>T getObject(String key, Type typeOfT) {
+    public <T>T getObject(@NonNull String key, @NonNull Type typeOfT) {
         String json = get(key, null);
         if (json == null) {
             return null;
@@ -121,7 +123,7 @@ public final class SharedWrapper {
         }
     }
 
-    public void setObject(String key, Object value) {
+    public void setObject(@NonNull String key, @Nullable Object value) {
         if (value == null) {
             set(key, "");
         } else {

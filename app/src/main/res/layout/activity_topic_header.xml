@@ -136,12 +136,12 @@
 
             </RelativeLayout>
 
-            <org.cnodejs.android.md.display.widget.CNodeWebView
+            <org.cnodejs.android.md.display.widget.ContentWebView
                 android:id="@+id/topic_header_web_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:cssPath="?attr/markdownCssPath" />
+                app:darkTheme="?attr/darkMode" />
 
         </LinearLayout>
 

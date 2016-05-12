@@ -19,7 +19,7 @@ import org.cnodejs.android.md.display.util.ActivityUtils;
 import org.cnodejs.android.md.display.util.ToastUtils;
 import org.cnodejs.android.md.display.view.ITopicItemReplyView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
-import org.cnodejs.android.md.display.widget.CNodeWebView;
+import org.cnodejs.android.md.display.widget.ContentWebView;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
@@ -99,7 +99,7 @@ public class TopicAdapter extends BaseAdapter {
         protected TextView tvTargetPosition;
 
         @BindView(R.id.topic_item_reply_web_content)
-        protected CNodeWebView webContent;
+        protected ContentWebView webContent;
 
         @BindView(R.id.topic_item_reply_icon_deep_line)
         protected View iconDeepLine;
@@ -161,7 +161,7 @@ public class TopicAdapter extends BaseAdapter {
             }
 
             // 这里直接使用WebView，有性能问题
-            webContent.loadRenderedContent(reply.getHandleContent());
+            webContent.loadRenderedContent(reply.getRenderedContent());
 
             iconDeepLine.setVisibility(position == replyList.size() - 1 ? View.GONE : View.VISIBLE);
             iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);

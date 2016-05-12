@@ -16,7 +16,7 @@
         <item name="mainNavItemTextColor">@color/main_nav_item_text_color_light</item>
         <item name="referenceBackgroundNormal">@drawable/reference_background_light</item>
         <item name="referenceBackgroundAccent">@drawable/reference_background_accent</item>
-        <item name="markdownCssPath">@string/theme_css_path_light</item>
+        <item name="darkMode">false</item>
     </style>
 
     <style name="AppThemeLight" parent="BaseAppThemeLight" />
@@ -38,7 +38,7 @@
         <item name="mainNavItemTextColor">@color/main_nav_item_text_color_dark</item>
         <item name="referenceBackgroundNormal">@drawable/reference_background_dark</item>
         <item name="referenceBackgroundAccent">@drawable/reference_background_accent</item>
-        <item name="markdownCssPath">@string/theme_css_path_dark</item>
+        <item name="darkMode">true</item>
     </style>
 
     <style name="AppThemeDark" parent="BaseAppThemeDark" />
@@ -130,6 +130,13 @@
         <item name="android:layout_marginTop">@dimen/shadow_gap_margin_fill</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:background">@drawable/gap_shadow_opposite</item>
+    </style>
+
+    <!-- Badge Dot -->
+    <style name="AppWidget.BadgeDot">
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:background">@drawable/badge_dot</item>
     </style>
 
     <!-- Navigation -->

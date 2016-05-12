@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.util.Navigator;
-import org.cnodejs.android.md.display.widget.CNodeWebView;
+import org.cnodejs.android.md.display.widget.ContentWebView;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ResUtils;
@@ -67,8 +67,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         @BindView(R.id.notification_item_tv_action)
         protected TextView tvAction;
 
-        @BindView(R.id.notification_item_web_reply_content)
-        protected CNodeWebView webReplyContent;
+        @BindView(R.id.notification_item_badge_read)
+        protected View badgeRead;
+
+        @BindView(R.id.notification_item_web_content)
+        protected ContentWebView webContent;
 
         @BindView(R.id.notification_item_tv_topic_title)
         protected TextView tvTopicTitle;
@@ -86,41 +89,24 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             Glide.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
             tvTime.setText(FormatUtils.getRecentlyTimeText(message.getCreateAt()));
+            tvTime.setTextColor(ResUtils.getThemeAttrColor(activity, message.isRead() ? android.R.attr.textColorSecondary : R.attr.colorAccent));
+            badgeRead.setVisibility(message.isRead() ? View.GONE : View.VISIBLE);
             tvTopicTitle.setText("话题：" + message.getTopic().getTitle());
 
             // 判断通知类型
             if (message.getType() == Message.Type.at) {
                 if (message.getReply() == null || TextUtils.isEmpty(message.getReply().getId())) {
                     tvAction.setText("在话题中@了您");
-                    webReplyContent.setVisibility(View.GONE);
+                    webContent.setVisibility(View.GONE);
                 } else {
                     tvAction.setText("在回复中@了您");
-                    webReplyContent.setVisibility(View.VISIBLE);
-                    webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // 这里直接使用WebView，有性能问题
+                    webContent.setVisibility(View.VISIBLE);
+                    webContent.loadRenderedContent(message.getReply().getRenderedContent());  // 这里直接使用WebView，有性能问题
                 }
             } else {
                 tvAction.setText("回复了您的话题");
-                webReplyContent.setVisibility(View.VISIBLE);
-                webReplyContent.loadRenderedContent(message.getReply().getHandleContent());  // 这里直接使用WebView，有性能问题
-            }
-
-            // 消息状态
-            if (message.isRead()) { // 已读
-                tvTime.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
-                tvFrom.getPaint().setFakeBoldText(false);
-                tvFrom.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
-                tvAction.getPaint().setFakeBoldText(false);
-                tvAction.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
-                tvTopicTitle.getPaint().setFakeBoldText(false);
-                tvTopicTitle.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
-            } else { // 未读
-                tvTime.setTextColor(ResUtils.getThemeAttrColor(activity, R.attr.colorAccent));
-                tvFrom.getPaint().setFakeBoldText(true);
-                tvFrom.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
-                tvAction.getPaint().setFakeBoldText(true);
-                tvAction.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
-                tvTopicTitle.getPaint().setFakeBoldText(true);
-                tvTopicTitle.setTextColor(ResUtils.getThemeAttrColor(activity, android.R.attr.textColorPrimary));
+                webContent.setVisibility(View.VISIBLE);
+                webContent.loadRenderedContent(message.getReply().getRenderedContent());  // 这里直接使用WebView，有性能问题
             }
         }
 

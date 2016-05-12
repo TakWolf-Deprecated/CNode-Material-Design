@@ -126,7 +126,4 @@
 
     <string name="invalid_link">无效的链接</string>
 
-    <string name="theme_css_path_light">file:///android_asset/cnode_light.css</string>
-    <string name="theme_css_path_dark">file:///android_asset/cnode_dark.css</string>
-
 </resources>

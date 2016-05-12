@@ -56,27 +56,39 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/notification_item_tv_action"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="?android:attr/textColorSecondary"
-                android:textSize="14sp"
-                tools:text="回复了您的话题" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:id="@+id/notification_item_tv_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="14sp"
+                    tools:text="回复了您的话题" />
+
+                <View style="@style/AppWidget.BadgeDot"
+                    android:id="@+id/notification_item_badge_read"
+                    android:layout_gravity="center|end"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp" />
+
+            </FrameLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <org.cnodejs.android.md.display.widget.CNodeWebView
-        android:id="@+id/notification_item_web_reply_content"
+    <org.cnodejs.android.md.display.widget.ContentWebView
+        android:id="@+id/notification_item_web_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        app:cssPath="?attr/markdownCssPath" />
+        app:darkTheme="?attr/darkMode" />
 
     <TextView
         android:id="@+id/notification_item_tv_topic_title"

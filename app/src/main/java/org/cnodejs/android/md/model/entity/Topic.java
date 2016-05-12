@@ -50,7 +50,7 @@ public class Topic extends TopicSimple {
 
     public void setContent(String content) {
         this.content = content;
-        handleContent = null; // 清除已经处理的Html渲染缓存
+        renderedContent = null; // 清除已经处理的Html渲染缓存
     }
 
     public boolean isGood() {
@@ -97,18 +97,18 @@ public class Topic extends TopicSimple {
      * Html渲染缓存
      */
 
-    @SerializedName("handle_content")
-    private String handleContent;
+    @SerializedName("rendered_content")
+    private String renderedContent;
 
-    public String getHandleContent() {
-        if (handleContent == null) {
+    public String getRenderedContent() {
+        if (renderedContent == null) {
             if (ApiDefine.MD_RENDER) {
-                handleContent = FormatUtils.handleHtml(content);
+                renderedContent = FormatUtils.handleHtml(content);
             } else {
-                handleContent = FormatUtils.handleHtml(FormatUtils.renderMarkdown(content));
+                renderedContent = FormatUtils.handleHtml(FormatUtils.renderMarkdown(content));
             }
         }
-        return handleContent;
+        return renderedContent;
     }
 
 }
