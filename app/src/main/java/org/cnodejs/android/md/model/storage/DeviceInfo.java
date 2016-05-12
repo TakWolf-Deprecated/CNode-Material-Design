@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.model.storage;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import org.cnodejs.android.md.util.codec.Digest;
@@ -15,7 +16,7 @@ public final class DeviceInfo {
     private static final String KEY_DEVICE_TOKEN = "deviceToken";
     private volatile static String deviceToken = null;
 
-    public static String getDeviceToken(Context context) {
+    public static String getDeviceToken(@NonNull Context context) {
         if (TextUtils.isEmpty(deviceToken)) {
             synchronized (DeviceInfo.class) {
                 if (TextUtils.isEmpty(deviceToken)) {

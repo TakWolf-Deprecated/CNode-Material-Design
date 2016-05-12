@@ -2,6 +2,8 @@ package org.cnodejs.android.md.model.storage;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 public final class SettingShared {
 
@@ -18,58 +20,58 @@ public final class SettingShared {
 
     public static final String DEFAULT_TOPIC_SIGN_CONTENT = "来自酷炫的 [CNodeMD](https://github.com/TakWolf/CNode-Material-Design)";
 
-    public static boolean isEnableNotification(Context context) {
+    public static boolean isEnableNotification(@NonNull Context context) {
         return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_NOTIFICATION, true);
     }
 
-    public static void setEnableNotification(Context context, boolean enable) {
+    public static void setEnableNotification(@NonNull Context context, boolean enable) {
         SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_NOTIFICATION, enable);
     }
 
-    public static boolean isEnableThemeDark(Context context) {
+    public static boolean isEnableThemeDark(@NonNull Context context) {
         return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_THEME_DARK, false);
     }
 
-    public static void setEnableThemeDark(Context context, boolean enable) {
+    public static void setEnableThemeDark(@NonNull Context context, boolean enable) {
         SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_THEME_DARK, enable);
     }
 
-    public static boolean isEnableTopicDraft(Context context) {
+    public static boolean isEnableTopicDraft(@NonNull Context context) {
         return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_DRAFT, true);
     }
 
-    public static void setEnableTopicDraft(Context context, boolean enable) {
+    public static void setEnableTopicDraft(@NonNull Context context, boolean enable) {
         SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_DRAFT, enable);
     }
 
-    public static boolean isEnableTopicSign(Context context) {
+    public static boolean isEnableTopicSign(@NonNull Context context) {
         return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_SIGN, true);
     }
 
-    public static void setEnableTopicSign(Context context, boolean enable) {
+    public static void setEnableTopicSign(@NonNull Context context, boolean enable) {
         SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_SIGN, enable);
     }
 
-    public static String getTopicSignContent(Context context) {
+    public static String getTopicSignContent(@NonNull Context context) {
         return SharedWrapper.with(context, TAG).getString(KEY_TOPIC_SIGN_CONTENT, DEFAULT_TOPIC_SIGN_CONTENT);
     }
 
-    public static void setTopicSignContent(Context context, String content) {
+    public static void setTopicSignContent(@NonNull Context context, @Nullable String content) {
         SharedWrapper.with(context, TAG).setString(KEY_TOPIC_SIGN_CONTENT, content);
     }
 
-    public static boolean isEnableTopicRenderCompat(Context context) {
+    public static boolean isEnableTopicRenderCompat(@NonNull Context context) {
         return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_RENDER_COMPAT, Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP);
     }
 
-    public static void setEnableTopicRenderCompat(Context context, boolean enable) {
+    public static void setEnableTopicRenderCompat(@NonNull Context context, boolean enable) {
         SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_RENDER_COMPAT, enable);
     }
 
     /**
      * 检测是否真正启用兼容模式
      */
-    public static boolean isReallyEnableTopicRenderCompat(Context context) {
+    public static boolean isReallyEnableTopicRenderCompat(@NonNull Context context) {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH && isEnableTopicRenderCompat(context);
     }
 
