@@ -37,25 +37,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ScrollView
-                android:id="@+id/notification_compat_scroll_view"
+            <org.cnodejs.android.md.display.widget.NotificationWebView
+                android:id="@+id/notification_compat_web_notification"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <org.cnodejs.android.md.display.widget.NotificationWebView
-                        android:id="@+id/notification_compat_web_notification"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:darkTheme="?attr/darkMode" />
-
-                </LinearLayout>
-
-            </ScrollView>
+                android:layout_height="match_parent"
+                app:darkTheme="?attr/darkMode" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
 

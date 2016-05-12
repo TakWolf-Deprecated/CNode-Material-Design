@@ -47,6 +47,15 @@ public class NotificationWebView extends CNodeWebView {
         loadUrl(isDarkTheme() ? DARK_THEME_PATH : LIGHT_THEME_PATH);
     }
 
+    public void backToContentTop() {
+        loadUrl("" +
+                "javascript:\n" +
+                "(function () {\n" +
+                "    $('body').scrollTop(0);\n" +
+                "})();"
+        );
+    }
+
     public void updateMessageList(@NonNull List<Message> messageList) {
         for (Message message : messageList) {
             message.getReply().getRenderedContent(); // 确保Html渲染
@@ -54,7 +63,7 @@ public class NotificationWebView extends CNodeWebView {
         loadUrl("" +
                 "javascript:\n" +
                 "(function () {\n" +
-                "    updateMessages(" + EntityUtils.gson.toJson(messageList) + ")\n" +
+                "    updateMessages(" + EntityUtils.gson.toJson(messageList) + ");\n" +
                 "})();"
         );
     }
