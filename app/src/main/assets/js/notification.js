@@ -37,8 +37,8 @@ Vue.filter('messageAction', function (message) {
     }
 });
 
-var vmList = new Vue({
-    el: '#list',
+var vmPage = new Vue({
+    el: '#page',
     data: {
         messages: []
     },
@@ -55,7 +55,7 @@ var vmList = new Vue({
     }
 });
 
-vmList.$watch('messages', function () {
+vmPage.$watch('messages', function () {
     $('.markdown-text img').click(function () {
         var img = $(this);
         if (img.parent('a').length <= 0) {
@@ -65,11 +65,11 @@ vmList.$watch('messages', function () {
 });
 
 function updateMessages(messages) {
-    vmList.messages = messages;
+    vmPage.messages = messages;
 }
 
 function markAllMessageRead() {
-    vmList.messages.forEach(function (message) {
+    vmPage.messages.forEach(function (message) {
        message.has_read = true;
     });
 }

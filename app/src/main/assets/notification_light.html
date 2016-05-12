@@ -9,34 +9,32 @@
 </head>
 <body>
 
-<div id="list">
-    <div class="message" v-for="message of messages">
-        <div class="item">
-            <div class="title">
-                <div class="avatar-container" v-on:click="openUser(message.author.loginname)">
-                    <img class="avatar" v-bind:src="message.author.avatar_url">
-                </div>
-                <div class="info-container">
-                    <div class="line">
-                        <div class="loginname text-primary">
+<div id="page">
+    <div class="cell" v-for="message of messages">
+        <div class="main">
+            <div class="top-container">
+                <img class="avatar" v-bind:src="message.author.avatar_url" v-on:click="openUser(message.author.loginname)">
+                <div class="info">
+                    <div class="line1">
+                        <span class="loginname text-primary">
                             {{message.author.loginname}}
-                        </div>
-                        <div class="time" v-bind:class="{'text-secondary': message.has_read, 'text-accent': !message.has_read}">
+                        </span>
+                        <span class="time" v-bind:class="{'text-secondary': message.has_read, 'text-accent': !message.has_read}">
                             {{message.create_at | recentlyTimeText}}
-                        </div>
+                        </span>
                     </div>
-                    <div class="line">
-                        <div class="action text-secondary">
+                    <div class="line2">
+                        <span class="action text-secondary">
                             {{message | messageAction}}
-                        </div>
+                        </span>
                         <div class="badge-dot" v-if="!message.has_read"></div>
                     </div>
                 </div>
             </div>
-            <div class="content" v-if="message.reply && message.reply.id">
+            <div class="markdown-container" v-if="message.reply && message.reply.id">
                 {{{message.reply.rendered_content}}}
             </div>
-            <div class="reference"  v-on:click="openTopic(message.topic.id)">
+            <div class="reference-container"  v-on:click="openTopic(message.topic.id)">
                 <div class="topic-title text-secondary">话题：{{message.topic.title}}</div>
             </div>
         </div>
