@@ -66,4 +66,11 @@ public final class SettingShared {
         SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_RENDER_COMPAT, enable);
     }
 
+    /**
+     * 检测是否真正启用兼容模式
+     */
+    public static boolean isReallyEnableTopicRenderCompat(Context context) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH && isEnableTopicRenderCompat(context);
+    }
+
 }
