@@ -10,7 +10,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.util.ThemeUtils;
-import org.cnodejs.android.md.display.widget.ContentWebView;
+import org.cnodejs.android.md.display.widget.PreviewWebView;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.BindView;
@@ -29,8 +29,8 @@ public class MarkdownPreviewActivity extends StatusBarActivity {
     @BindView(R.id.markdown_preview_toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.markdown_preview_web_content)
-    protected ContentWebView webContent;
+    @BindView(R.id.markdown_preview_web_preview)
+    protected PreviewWebView webPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +41,13 @@ public class MarkdownPreviewActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        webContent.loadRenderedContent(FormatUtils.renderMarkdown(getIntent().getStringExtra(EXTRA_MARKDOWN)));
+        webPreview.loadRenderedContent(FormatUtils.renderMarkdown(getIntent().getStringExtra(EXTRA_MARKDOWN)));
     }
 
     @Override
     public void onBackPressed() {
-        if (webContent.canGoBack()) {
-            webContent.goBack();
+        if (webPreview.canGoBack()) {
+            webPreview.goBack();
         } else {
             super.onBackPressed();
         }
