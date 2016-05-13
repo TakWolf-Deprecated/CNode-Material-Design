@@ -14,7 +14,6 @@ import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.util.ActivityUtils;
 import org.cnodejs.android.md.display.util.RefreshUtils;
 import org.cnodejs.android.md.display.util.ThemeUtils;
-import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.INotificationView;
 import org.cnodejs.android.md.display.widget.NotificationWebView;
 import org.cnodejs.android.md.model.entity.Message;
@@ -29,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NotificationCompatActivity extends StatusBarActivity implements INotificationView, IBackToContentTopView, Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class NotificationCompatActivity extends StatusBarActivity implements INotificationView, Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.notification_compat_toolbar)
     protected Toolbar toolbar;
@@ -55,7 +54,7 @@ public class NotificationCompatActivity extends StatusBarActivity implements INo
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.notification);
         toolbar.setOnMenuItemClickListener(this);
-        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
+        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(webNotification));
 
         notificationPresenter = new NotificationPresenter(this, this);
 
@@ -106,11 +105,6 @@ public class NotificationCompatActivity extends StatusBarActivity implements INo
         } else {
             return true;
         }
-    }
-
-    @Override
-    public void backToContentTop() {
-        webNotification.backToContentTop();
     }
 
 }

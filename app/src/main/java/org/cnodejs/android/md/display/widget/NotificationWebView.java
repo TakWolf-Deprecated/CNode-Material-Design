@@ -9,12 +9,13 @@ import android.util.AttributeSet;
 
 import org.cnodejs.android.md.display.listener.ImageJavascriptInterface;
 import org.cnodejs.android.md.display.listener.NotificationJavascriptInterface;
+import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.model.util.EntityUtils;
 
 import java.util.List;
 
-public class NotificationWebView extends CNodeWebView {
+public class NotificationWebView extends CNodeWebView implements IBackToContentTopView {
 
     private static final String LIGHT_THEME_PATH = "file:///android_asset/notification_light.html";
     private static final String DARK_THEME_PATH = "file:///android_asset/notification_dark.html";
@@ -47,6 +48,7 @@ public class NotificationWebView extends CNodeWebView {
         loadUrl(isDarkTheme() ? DARK_THEME_PATH : LIGHT_THEME_PATH);
     }
 
+    @Override
     public void backToContentTop() {
         loadUrl("" +
                 "javascript:\n" +
