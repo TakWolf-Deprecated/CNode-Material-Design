@@ -30,6 +30,7 @@ import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
+import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
 import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
@@ -131,7 +132,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     public boolean onGetTopicResultOk(@NonNull Result.Data<TopicWithReply> result) {
         if (ActivityUtils.isAlive(this)) {
             topic = result.getData();
-            webTopic.updateTopic(result.getData());
+            webTopic.updateTopicAndAccessToken(result.getData(), LoginShared.getAccessToken(this));
             iconNoData.setVisibility(View.GONE);
             return false;
         } else {

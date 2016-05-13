@@ -12,6 +12,7 @@ import org.cnodejs.android.md.display.listener.TopicJavascriptInterface;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
+import org.cnodejs.android.md.model.util.EntityUtils;
 
 public class TopicWebView extends CNodeWebView implements IBackToContentTopView {
 
@@ -46,34 +47,36 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
     public void backToContentTop() {
         loadUrl("" +
                 "javascript:\n" +
-                "(function () {\n" +
-                "    $('body').scrollTop(0);\n" +
-                "})();"
+                "$('body').scrollTop(0);"
         );
     }
 
-    public void updateTopic(@NonNull TopicWithReply topic) {
-
-        // TODO
-
+    public void updateTopicAndAccessToken(@NonNull TopicWithReply topic, String accessToken) {
+        loadUrl("" +
+                "javascript:\n" +
+                "updateTopicAndAccessToken({accessToken: " + accessToken + ", topic: " + EntityUtils.gson.toJson(topic) + "});"
+        );
     }
 
     public void updateTopicCollect(boolean isCollect) {
-
-        // TODO
-
+        loadUrl("" +
+                "javascript:\n" +
+                "updateTopicCollect(" + isCollect + ");"
+        );
     }
 
     public void updateReply(@NonNull Reply reply) {
-
-        // TODO
-
+        loadUrl("" +
+                "javascript:\n" +
+                "updateReply(" + EntityUtils.gson.toJson(reply) + ");"
+        );
     }
 
     public void appendReply(@NonNull Reply reply) {
-
-        // TODO
-
+        loadUrl("" +
+                "javascript:\n" +
+                "appendReply(" + EntityUtils.gson.toJson(reply) + ");"
+        );
     }
 
 }

@@ -52,9 +52,7 @@ public class NotificationWebView extends CNodeWebView implements IBackToContentT
     public void backToContentTop() {
         loadUrl("" +
                 "javascript:\n" +
-                "(function () {\n" +
-                "    $('body').scrollTop(0);\n" +
-                "})();"
+                "$('body').scrollTop(0);"
         );
     }
 
@@ -64,18 +62,14 @@ public class NotificationWebView extends CNodeWebView implements IBackToContentT
         }
         loadUrl("" +
                 "javascript:\n" +
-                "(function () {\n" +
-                "    updateMessages(" + EntityUtils.gson.toJson(messageList) + ");\n" +
-                "})();"
+                "updateMessages(" + EntityUtils.gson.toJson(messageList) + ");"
         );
     }
 
     public void markAllMessageRead() {
         loadUrl("" +
                 "javascript:\n" +
-                "(function () {\n" +
-                "    markAllMessageRead();\n" +
-                "})();"
+                "markAllMessageRead();"
         );
     }
 
