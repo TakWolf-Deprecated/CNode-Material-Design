@@ -29,19 +29,19 @@ public final class FormatUtils {
     private static final long YEAR = 12 * MONTH;
 
     public static String getRecentlyTimeText(@NonNull DateTime dateTime) {
-        long diff = new DateTime().getMillis() - dateTime.getMillis();
-        if (diff > YEAR) {
-            return (diff / YEAR) + "年前";
-        } else if (diff > MONTH) {
-            return (diff / MONTH) + "个月前";
-        } else if (diff > WEEK) {
-            return (diff / WEEK) + "周前";
-        } else if (diff > DAY) {
-            return (diff / DAY) + "天前";
-        } else if (diff > HOUR) {
-            return (diff / HOUR) + "小时前";
-        } else if (diff > MINUTE) {
-            return (diff / MINUTE) + "分钟前";
+        long offset = new DateTime().getMillis() - dateTime.getMillis();
+        if (offset > YEAR) {
+            return (offset / YEAR) + "年前";
+        } else if (offset > MONTH) {
+            return (offset / MONTH) + "个月前";
+        } else if (offset > WEEK) {
+            return (offset / WEEK) + "周前";
+        } else if (offset > DAY) {
+            return (offset / DAY) + "天前";
+        } else if (offset > HOUR) {
+            return (offset / HOUR) + "小时前";
+        } else if (offset > MINUTE) {
+            return (offset / MINUTE) + "分钟前";
         } else {
             return "刚刚";
         }
