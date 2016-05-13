@@ -58,7 +58,7 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
         }
         loadUrl("" +
                 "javascript:\n" +
-                "updateTopicAndAccessToken({accessToken: " + accessToken + ", topic: " + EntityUtils.gson.toJson(topic) + "});"
+                "updateTopicAndAccessToken(" + EntityUtils.gson.toJson(topic) + ", '" + accessToken + "');"
         );
     }
 
