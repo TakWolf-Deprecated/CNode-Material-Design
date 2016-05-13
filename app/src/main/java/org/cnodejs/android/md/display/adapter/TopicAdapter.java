@@ -3,6 +3,7 @@ package org.cnodejs.android.md.display.adapter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,7 +111,6 @@ public class TopicAdapter extends BaseAdapter {
         private final ITopicItemReplyPresenter topicItemReplyPresenter;
 
         private Reply reply;
-        private int position = -1;
 
         public ViewHolder(@NonNull View itemView) {
             ButterKnife.bind(this, itemView);
@@ -118,7 +118,6 @@ public class TopicAdapter extends BaseAdapter {
         }
 
         public void update(int position) {
-            this.position = position;
             reply = replyList.get(position);
             updateReplyViews(reply, position, positionMap.get(reply.getReplyId()));
         }
@@ -159,7 +158,7 @@ public class TopicAdapter extends BaseAdapter {
                 if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
                     ToastUtils.with(activity).show(R.string.can_not_up_yourself_reply);
                 } else {
-                    topicItemReplyPresenter.upReplyAsyncTask(reply, position);
+                    topicItemReplyPresenter.upReplyAsyncTask(reply);
                 }
             }
         }
@@ -172,9 +171,9 @@ public class TopicAdapter extends BaseAdapter {
         }
 
         @Override
-        public boolean onUpReplyResultOk(@NonNull Reply reply, int position) {
+        public boolean onUpReplyResultOk(@NonNull Reply reply) {
             if (ActivityUtils.isAlive(activity)) {
-                if (position == this.position) {
+                if (TextUtils.equals(reply.getId(), this.reply.getId())) {
                     updateUpViews(reply);
                 }
                 return false;

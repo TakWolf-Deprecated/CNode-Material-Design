@@ -54,7 +54,7 @@ public final class TopicJavascriptInterface {
     @JavascriptInterface
     public void upReply(String replyJson) {
         Reply reply = EntityUtils.gson.fromJson(replyJson, Reply.class);
-        topicItemReplyPresenter.upReplyAsyncTask(reply, 0);
+        topicItemReplyPresenter.upReplyAsyncTask(reply);
     }
 
     @JavascriptInterface
