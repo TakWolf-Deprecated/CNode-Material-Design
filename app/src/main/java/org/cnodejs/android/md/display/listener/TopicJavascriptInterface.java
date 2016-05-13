@@ -33,16 +33,12 @@ public final class TopicJavascriptInterface {
 
     @JavascriptInterface
     public void onScrollUp() {
-        if (!fabReply.isShown()) {
-            fabReply.show(true);
-        }
+        fabReply.show(true);
     }
 
     @JavascriptInterface
     public void onScrollDown() {
-        if (fabReply.isShown()) {
-            fabReply.hide(true);
-        }
+        fabReply.hide(true);
     }
 
     @JavascriptInterface
