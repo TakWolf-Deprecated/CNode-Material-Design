@@ -132,7 +132,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     public boolean onGetTopicResultOk(@NonNull Result.Data<TopicWithReply> result) {
         if (ActivityUtils.isAlive(this)) {
             topic = result.getData();
-            webTopic.updateTopicAndAccessToken(result.getData(), LoginShared.getAccessToken(this));
+            webTopic.updateTopicAndUserId(result.getData(), LoginShared.getId(this));
             iconNoData.setVisibility(View.GONE);
             return false;
         } else {

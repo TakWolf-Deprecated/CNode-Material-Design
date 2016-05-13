@@ -51,14 +51,14 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
         );
     }
 
-    public void updateTopicAndAccessToken(@NonNull TopicWithReply topic, String accessToken) {
+    public void updateTopicAndUserId(@NonNull TopicWithReply topic, String userId) {
         topic.getRenderedContent(); // 确保Html渲染
         for (Reply reply : topic.getReplyList()) {
             reply.getRenderedContent();
         }
         loadUrl("" +
                 "javascript:\n" +
-                "updateTopicAndAccessToken(" + EntityUtils.gson.toJson(topic) + ", '" + accessToken + "');"
+                "updateTopicAndUserId(" + EntityUtils.gson.toJson(topic) + ", '" + userId + "');"
         );
     }
 
