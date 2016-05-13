@@ -44,12 +44,12 @@ var vmPage = new Vue({
     },
     methods: {
         
-        openTopic: function (topic_id) {
-            window.notificationBridge.openTopic(topic_id);
+        openTopic: function (topicId) {
+            window.notificationBridge.openTopic(topicId);
         },
         
-        openUser: function (loginname) {
-            window.notificationBridge.openUser(loginname);
+        openUser: function (loginName) {
+            window.notificationBridge.openUser(loginName);
         }
         
     }
