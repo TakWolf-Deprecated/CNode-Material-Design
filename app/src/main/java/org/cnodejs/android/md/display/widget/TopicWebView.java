@@ -52,6 +52,10 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
     }
 
     public void updateTopicAndAccessToken(@NonNull TopicWithReply topic, String accessToken) {
+        topic.getRenderedContent(); // 确保Html渲染
+        for (Reply reply : topic.getReplyList()) {
+            reply.getRenderedContent();
+        }
         loadUrl("" +
                 "javascript:\n" +
                 "updateTopicAndAccessToken({accessToken: " + accessToken + ", topic: " + EntityUtils.gson.toJson(topic) + "});"
@@ -66,6 +70,7 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
     }
 
     public void updateReply(@NonNull Reply reply) {
+        reply.getRenderedContent(); // 确保Html渲染
         loadUrl("" +
                 "javascript:\n" +
                 "updateReply(" + EntityUtils.gson.toJson(reply) + ");"
@@ -73,6 +78,7 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
     }
 
     public void appendReply(@NonNull Reply reply) {
+        reply.getRenderedContent(); // 确保Html渲染
         loadUrl("" +
                 "javascript:\n" +
                 "appendReply(" + EntityUtils.gson.toJson(reply) + ");"
