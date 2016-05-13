@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 
 import org.cnodejs.android.md.display.listener.ImageJavascriptInterface;
@@ -71,8 +72,13 @@ public class ContentWebView extends CNodeWebView {
         addJavascriptInterface(ImageJavascriptInterface.with(context), ImageJavascriptInterface.NAME);
     }
 
+    @NonNull
+    protected String getThemeCssHtmlSlice(boolean isDarkTheme) {
+        return isDarkTheme ? DARK_THEME_CSS : LIGHT_THEME_CSS;
+    }
+
     public void loadRenderedContent(String data) {
-        data = HTML_0 + (isDarkTheme() ? DARK_THEME_CSS : LIGHT_THEME_CSS) + HTML_1 + data + "\n" + HTML_2;
+        data = HTML_0 + getThemeCssHtmlSlice(isDarkTheme()) + HTML_1 + data + "\n" + HTML_2;
         loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
     }
 
