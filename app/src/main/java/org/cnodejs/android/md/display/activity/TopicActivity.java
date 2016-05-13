@@ -23,7 +23,6 @@ import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.display.util.RefreshUtils;
 import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
-import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
@@ -68,7 +67,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     private final Map<String, Integer> positionMap = new HashMap<>();
 
     private ITopicReplyView topicReplyView;
-    private ITopicHeaderView topicHeaderView;
+    private TopicHeaderViewHolder topicHeaderView;
     private TopicAdapter adapter;
 
     private ITopicPresenter topicPresenter;

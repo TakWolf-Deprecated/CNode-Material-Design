@@ -123,6 +123,31 @@ public class TopicAdapter extends BaseAdapter {
             updateReplyViews(reply, position, positionMap.get(reply.getReplyId()));
         }
 
+        public void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
+            Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            tvLoginName.setText(reply.getAuthor().getLoginName());
+            tvIndex.setText(position + 1 + "楼");
+            tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
+            updateUpViews(reply);
+            if (targetPosition == null) {
+                tvTargetPosition.setVisibility(View.GONE);
+            } else {
+                tvTargetPosition.setVisibility(View.VISIBLE);
+                tvTargetPosition.setText("回复：" + (targetPosition + 1) + "楼");
+            }
+
+            // 这里直接使用WebView，有性能问题
+            webContent.loadRenderedContent(reply.getRenderedContent());
+
+            iconDeepLine.setVisibility(position == replyList.size() - 1 ? View.GONE : View.VISIBLE);
+            iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
+        }
+
+        public void updateUpViews(@NonNull Reply reply) {
+            btnUps.setText(String.valueOf(reply.getUpList().size()));
+            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
+        }
+
         @OnClick(R.id.topic_item_reply_img_avatar)
         protected void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar, reply.getAuthor().getAvatarUrl());
@@ -144,33 +169,6 @@ public class TopicAdapter extends BaseAdapter {
             if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
                 topicReplyView.onAt(reply, positionMap.get(reply.getId()));
             }
-        }
-
-        @Override
-        public void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
-            Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-            tvLoginName.setText(reply.getAuthor().getLoginName());
-            tvIndex.setText(position + 1 + "楼");
-            tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
-            updateUpViews(reply);
-            if (targetPosition == null) {
-                tvTargetPosition.setVisibility(View.GONE);
-            } else {
-                tvTargetPosition.setVisibility(View.VISIBLE);
-                tvTargetPosition.setText("回复：" + (targetPosition + 1) + "楼");
-            }
-
-            // 这里直接使用WebView，有性能问题
-            webContent.loadRenderedContent(reply.getRenderedContent());
-
-            iconDeepLine.setVisibility(position == replyList.size() - 1 ? View.GONE : View.VISIBLE);
-            iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
-        }
-
-        @Override
-        public void updateUpViews(@NonNull Reply reply) {
-            btnUps.setText(String.valueOf(reply.getUpList().size()));
-            btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
         }
 
         @Override
