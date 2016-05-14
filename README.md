@@ -69,6 +69,12 @@
 
 - [Material design icons](https://github.com/google/material-design-icons)
 
+- [CNodeMD Page Render Compat](https://github.com/TakWolf/CNodeMD-Page-Render-Compat)
+
+- [Vue.js](http://cn.vuejs.org)
+
+- [jQuery](https://jquery.com)
+
 - [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
 
 ## Author ##
