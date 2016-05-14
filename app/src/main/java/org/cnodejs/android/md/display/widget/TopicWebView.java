@@ -81,7 +81,8 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
         reply.getRenderedContent(); // 确保Html渲染
         loadUrl("" +
                 "javascript:\n" +
-                "appendReply(" + EntityUtils.gson.toJson(reply) + ");"
+                "appendReply(" + EntityUtils.gson.toJson(reply) + ");\n" +
+                "$('body').animate({scrollTop: $('body')[0].scrollHeight}, 400);"
         );
     }
 
