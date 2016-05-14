@@ -25,7 +25,7 @@ public class TopicItemReplyPresenter implements ITopicItemReplyPresenter {
     }
 
     @Override
-    public void upReplyAsyncTask(@NonNull final Reply reply, final int position) {
+    public void upReplyAsyncTask(@NonNull final Reply reply) {
         Call<Result.UpReply> call = ApiClient.service.upReply(reply.getId(), LoginShared.getAccessToken(activity));
         call.enqueue(new DefaultToastCallback<Result.UpReply>(activity) {
 
@@ -36,7 +36,7 @@ public class TopicItemReplyPresenter implements ITopicItemReplyPresenter {
                 } else if (result.getAction() == Reply.UpAction.down) {
                     reply.getUpList().remove(LoginShared.getId(activity));
                 }
-                return topicItemReplyView.onUpReplyResultOk(reply, position);
+                return topicItemReplyView.onUpReplyResultOk(reply);
             }
 
         });

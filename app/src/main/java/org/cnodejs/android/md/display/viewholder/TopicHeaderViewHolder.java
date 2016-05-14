@@ -105,7 +105,6 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
         }
     }
 
-    @Override
     public void updateViews(@Nullable Topic topic, boolean isCollect, int replyCount) {
         this.topic = topic;
         this.isCollect = isCollect;
@@ -133,12 +132,10 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
         }
     }
 
-    @Override
     public void updateViews(@NonNull TopicWithReply topic) {
         updateViews(topic, topic.isCollect(), topic.getReplyList().size());
     }
 
-    @Override
     public void updateReplyCount(int replyCount) {
         layoutNoReply.setVisibility(replyCount > 0 ? View.GONE : View.VISIBLE);
         layoutReplyCount.setVisibility(replyCount > 0 ? View.VISIBLE : View.GONE);
@@ -150,8 +147,10 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
         if (ActivityUtils.isAlive(activity)) {
             isCollect = true;
             btnFavorite.setImageResource(R.drawable.ic_favorite_theme_24dp);
+            return false;
+        } else {
+            return true;
         }
-        return false;
     }
 
     @Override
@@ -159,8 +158,10 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
         if (ActivityUtils.isAlive(activity)) {
             isCollect = false;
             btnFavorite.setImageResource(R.drawable.ic_favorite_outline_grey600_24dp);
+            return false;
+        } else {
+            return true;
         }
-        return false;
     }
 
 }

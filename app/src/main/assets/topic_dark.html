@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title>话题</title>
+    <link type="text/css" rel="stylesheet" href="css/topic_dark.css">
+    <link type="text/css" rel="stylesheet" href="css/markdown_dark.css">
+</head>
+<body>
+
+<div id="page">
+    <div v-if="topic.id">
+        <div class="header">
+            <img class="tab-good" src="img/tab_ic_good.png" v-if="topic.good">
+            <h1 class="title text-primary">
+                {{topic.title}}
+            </h1>
+            <div class="top-container">
+                <table>
+                    <tr>
+                        <td class="left">
+                            <img class="avatar" v-bind:src="topic.author.avatar_url" v-on:click="openUser(topic.author.loginname)">
+                        </td>
+                        <td class="center">
+                            <div class="line1">
+                                <span v-bind:class="{'tag-accent': topic.top, 'tag-normal': !topic.top}">{{topic | tabName}}</span>
+                                <span class="loginname text-primary">{{topic.author.loginname}}</span>
+                            </div>
+                            <div class="line2">
+                                <span class="create-time text-secondary">{{topic.create_at | recentlyTimeText}}创建</span>
+                                <span class="dot text-secondary">•</span>
+                                <span class="visit-count text-secondary">{{topic.visit_count}}次浏览</span>
+                            </div>
+                        </td>
+                        <td class="right">
+                            <img class="icon-button" v-bind:src="topic.is_collect ? 'img/ic_favorite_theme_24px.svg' : 'img/ic_favorite_outline_grey_24px.svg'" v-on:click="collectTopic(topic)">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="markdown-container">
+                {{{topic.rendered_content}}}
+            </div>
+        </div>
+        <div class="item-gap"></div>
+        <div class="list">
+            <div v-if="topic.replies.length <= 0">
+                <div class="no-reply text-secondary">
+                    暂无回复
+                </div>
+            </div>
+            <div v-if="topic.replies.length > 0">
+                <div class="reply-count text-primary">
+                    {{topic.replies.length}}条回复
+                </div>
+                <div class="deep-line"></div>
+                <div class="cell" v-for="(position, reply) of topic.replies">
+                    <div class="main">
+                        <div class="top-container">
+                            <table>
+                                <tr>
+                                    <td class="left">
+                                        <img class="avatar" v-bind:src="reply.author.avatar_url" v-on:click="openUser(reply.author.loginname)">
+                                    </td>
+                                    <td class="center">
+                                        <div class="line1">
+                                            <span class="loginname text-primary">{{reply.author.loginname}}</span>
+                                        </div>
+                                        <div class="line2">
+                                            <span class="index text-accent">{{position + 1}}楼</span>
+                                            <span class="dot text-secondary">•</span>
+                                            <span class="create-time text-secondary">{{reply.create_at | recentlyTimeText}}</span>
+                                        </div>
+                                    </td>
+                                    <td class="right1">
+                                        <img class="icon-button" v-bind:src="reply.ups.indexOf(userId) === -1 ? 'img/ic_thumb_up_grey_24px.svg' : 'img/ic_thumb_up_theme_24px.svg'" v-on:click="upReply(reply)">
+                                    </td>
+                                    <td class="right2">
+                                        <span class="up-count icon-text text-secondary">{{reply.ups.length}}</span>
+                                    </td>
+                                    <td class="right3">
+                                        <img class="icon-button" src="img/ic_reply_grey_24px.svg" v-on:click="at(reply, positionMap)">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="target-position text-accent" v-if="reply.reply_id">
+                            回复：{{positionMap[reply.reply_id] + 1}}楼
+                        </div>
+                        <div class="markdown-container">
+                            {{{reply.rendered_content}}}
+                        </div>
+                    </div>
+                    <div class="deep-line" v-if="position !== (topic.replies.length - 1)"></div>
+                </div>
+            </div>
+        </div>
+        <div class="item-gap"></div>
+    </div>
+</div>
+
+<script src="js/jquery-2.2.3.min.js"></script>
+<script src="js/vue-1.0.22.min.js"></script>
+<script src="js/topic.js"></script>
+
+</body>
+</html>

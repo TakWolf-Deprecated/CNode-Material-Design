@@ -6,6 +6,6 @@ import org.cnodejs.android.md.model.entity.Reply;
 
 public interface ITopicItemReplyPresenter {
 
-    void upReplyAsyncTask(@NonNull Reply reply, int position);
+    void upReplyAsyncTask(@NonNull Reply reply);
 
 }

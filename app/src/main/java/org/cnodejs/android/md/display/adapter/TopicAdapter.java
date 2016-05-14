@@ -3,6 +3,7 @@ package org.cnodejs.android.md.display.adapter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,7 +111,6 @@ public class TopicAdapter extends BaseAdapter {
         private final ITopicItemReplyPresenter topicItemReplyPresenter;
 
         private Reply reply;
-        private int position = -1;
 
         public ViewHolder(@NonNull View itemView) {
             ButterKnife.bind(this, itemView);
@@ -118,35 +118,10 @@ public class TopicAdapter extends BaseAdapter {
         }
 
         public void update(int position) {
-            this.position = position;
             reply = replyList.get(position);
             updateReplyViews(reply, position, positionMap.get(reply.getReplyId()));
         }
 
-        @OnClick(R.id.topic_item_reply_img_avatar)
-        protected void onBtnAvatarClick() {
-            UserDetailActivity.startWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar, reply.getAuthor().getAvatarUrl());
-        }
-
-        @OnClick(R.id.topic_item_reply_btn_ups)
-        protected void onBtnUpsClick() {
-            if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
-                if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
-                    ToastUtils.with(activity).show(R.string.can_not_up_yourself_reply);
-                } else {
-                    topicItemReplyPresenter.upReplyAsyncTask(reply, position);
-                }
-            }
-        }
-
-        @OnClick(R.id.topic_item_reply_btn_at)
-        protected void onBtnAtClick() {
-            if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
-                topicReplyView.onAt(reply, positionMap.get(reply.getId()));
-            }
-        }
-
-        @Override
         public void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
             Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
@@ -167,16 +142,38 @@ public class TopicAdapter extends BaseAdapter {
             iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
         }
 
-        @Override
         public void updateUpViews(@NonNull Reply reply) {
             btnUps.setText(String.valueOf(reply.getUpList().size()));
             btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
         }
 
+        @OnClick(R.id.topic_item_reply_img_avatar)
+        protected void onBtnAvatarClick() {
+            UserDetailActivity.startWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar, reply.getAuthor().getAvatarUrl());
+        }
+
+        @OnClick(R.id.topic_item_reply_btn_ups)
+        protected void onBtnUpsClick() {
+            if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
+                if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
+                    ToastUtils.with(activity).show(R.string.can_not_up_yourself_reply);
+                } else {
+                    topicItemReplyPresenter.upReplyAsyncTask(reply);
+                }
+            }
+        }
+
+        @OnClick(R.id.topic_item_reply_btn_at)
+        protected void onBtnAtClick() {
+            if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
+                topicReplyView.onAt(reply, positionMap.get(reply.getId()));
+            }
+        }
+
         @Override
-        public boolean onUpReplyResultOk(@NonNull Reply reply, int position) {
+        public boolean onUpReplyResultOk(@NonNull Reply reply) {
             if (ActivityUtils.isAlive(activity)) {
-                if (position == this.position) {
+                if (TextUtils.equals(reply.getId(), this.reply.getId())) {
                     updateUpViews(reply);
                 }
                 return false;
