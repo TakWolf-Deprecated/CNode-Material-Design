@@ -56,7 +56,7 @@ var vmPage = new Vue({
 });
 
 vmPage.$watch('messages', function () {
-    $('.markdown-text img').click(function () {
+    $('.markdown-text img').unbind('click').click(function () {
         var img = $(this);
         if (img.parent('a').length <= 0) {
             window.imageBridge.openImage(img.attr('src'));
