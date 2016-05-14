@@ -59,7 +59,7 @@ body {
     width: 100%;
     height: auto;
     background-color: #ffffff;
-    box-shadow: 0 2px 2px #aaaaaa;
+    box-shadow: 0 1px 2px #aaaaaa;
 }
 
 .header .tab-good {
@@ -131,7 +131,7 @@ body {
     width: 100%;
     height: auto;
     background-color: #ffffff;
-    box-shadow: 0 2px 2px #aaaaaa;
+    box-shadow: 0 1px 2px #aaaaaa;
 }
 
 .list .no-reply {
