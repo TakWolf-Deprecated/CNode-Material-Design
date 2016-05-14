@@ -12,6 +12,7 @@ import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
 import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
+import org.cnodejs.android.md.util.HandlerUtils;
 
 public final class TopicJavascriptInterface {
 
@@ -58,9 +59,16 @@ public final class TopicJavascriptInterface {
     }
 
     @JavascriptInterface
-    public void at(String targetJson, int targetPosition) {
-        Reply target = EntityUtils.gson.fromJson(targetJson, Reply.class);
-        topicReplyView.onAt(target, targetPosition);
+    public void at(String targetJson, final int targetPosition) {
+        final Reply target = EntityUtils.gson.fromJson(targetJson, Reply.class);
+        HandlerUtils.post(new Runnable() {
+
+            @Override
+            public void run() {
+                topicReplyView.onAt(target, targetPosition);
+            }
+
+        });
     }
 
     @JavascriptInterface
