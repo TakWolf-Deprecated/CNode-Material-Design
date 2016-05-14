@@ -147,6 +147,31 @@ http://google.github.io/material-design-icons
 We have made these icons available for you to incorporate them into your products under the Creative Common Attribution 4.0 International License (CC-BY 4.0). Feel free to remix and re-share these icons and documentation in your products. We'd love attribution in your app's about screen, but it's not required. The only thing we ask is that you not re-sell the icons themselves.
 
 ====================================
+CNodeMD Page Render Compat
+====================================
+https://github.com/TakWolf/CNodeMD-Page-Render-Compat
+
+Copyright 2015-2016 TakWolf
+
+Licensed under the Apache License, Version 2.0 (the "License").
+
+====================================
+Vue.js
+====================================
+http://cn.vuejs.org
+
+Copyright (c) 2013-2016 Evan You
+
+The MIT License (MIT).
+
+====================================
+jQuery
+====================================
+https://jquery.com
+
+The MIT License (MIT).
+
+====================================
 github-markdown-css
 ====================================
 https://github.com/sindresorhus/github-markdown-css
