@@ -48,14 +48,6 @@ public class NotificationWebView extends CNodeWebView implements IBackToContentT
         loadUrl(isDarkTheme() ? DARK_THEME_PATH : LIGHT_THEME_PATH);
     }
 
-    @Override
-    public void backToContentTop() {
-        loadUrl("" +
-                "javascript:\n" +
-                "$('body').scrollTop(0);"
-        );
-    }
-
     public void updateMessageList(@NonNull List<Message> messageList) {
         for (Message message : messageList) {
             message.getReply().getRenderedContent(); // 确保Html渲染
@@ -70,6 +62,14 @@ public class NotificationWebView extends CNodeWebView implements IBackToContentT
         loadUrl("" +
                 "javascript:\n" +
                 "markAllMessageRead();"
+        );
+    }
+
+    @Override
+    public void backToContentTop() {
+        loadUrl("" +
+                "javascript:\n" +
+                "$('body').scrollTop(0);"
         );
     }
 

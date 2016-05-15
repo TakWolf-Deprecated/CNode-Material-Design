@@ -63,14 +63,6 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
         loadUrl(isDarkTheme() ? DARK_THEME_PATH : LIGHT_THEME_PATH);
     }
 
-    @Override
-    public void backToContentTop() {
-        loadUrl("" +
-                "javascript:\n" +
-                "$('body').scrollTop(0);"
-        );
-    }
-
     public void updateTopicAndUserId(@NonNull TopicWithReply topic, String userId) {
         topic.getRenderedContent(); // 确保Html渲染
         for (Reply reply : topic.getReplyList()) {
@@ -103,6 +95,14 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
                 "javascript:\n" +
                 "appendReply(" + EntityUtils.gson.toJson(reply) + ");\n" +
                 "$('body').animate({scrollTop: $('body')[0].scrollHeight}, 400);"
+        );
+    }
+
+    @Override
+    public void backToContentTop() {
+        loadUrl("" +
+                "javascript:\n" +
+                "$('body').scrollTop(0);"
         );
     }
 
