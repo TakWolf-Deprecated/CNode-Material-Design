@@ -52,9 +52,9 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
         if (fabReply != null) {
-            if (t - oldt > 0) {
+            if (t - oldt > 4) {
                 fabReply.hide(true);
-            } else if (t - oldt < 0) {
+            } else if (t - oldt < -4) {
                 fabReply.show(true);
             }
         }
