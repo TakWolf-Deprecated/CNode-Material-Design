@@ -88,6 +88,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
 
         topicReplyView = TopicReplyDialog.createWithAutoTheme(this, topicId, this);
 
+        webTopic.setFabReply(fabReply);
         webTopic.setBridgeAndLoadPage(new TopicJavascriptInterface(this, topicReplyView, topicHeaderPresenter, topicItemReplyPresenter));
 
         RefreshUtils.initOnCreate(refreshLayout, this);

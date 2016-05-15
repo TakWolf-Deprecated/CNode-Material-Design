@@ -7,6 +7,8 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import org.cnodejs.android.md.display.listener.ImageJavascriptInterface;
 import org.cnodejs.android.md.display.listener.TopicJavascriptInterface;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
@@ -18,6 +20,8 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
 
     private static final String LIGHT_THEME_PATH = "file:///android_asset/topic_light.html";
     private static final String DARK_THEME_PATH = "file:///android_asset/topic_dark.html";
+
+    private FloatingActionButton fabReply;
 
     public TopicWebView(Context context) {
         super(context);
@@ -34,6 +38,22 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public TopicWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public void setFabReply(FloatingActionButton fabReply) {
+        this.fabReply = fabReply;
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if (fabReply != null) {
+            if (t - oldt > 0) {
+                fabReply.hide(true);
+            } else if (t - oldt < 0) {
+                fabReply.show(true);
+            }
+        }
     }
 
     @SuppressLint("AddJavascriptInterface")
