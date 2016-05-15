@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.webkit.JavascriptInterface;
 
-import com.melnykov.fab.FloatingActionButton;
-
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.model.entity.Reply;
@@ -19,27 +17,15 @@ public final class TopicJavascriptInterface {
     public static final String NAME = "topicBridge";
 
     private final Context context;
-    private final FloatingActionButton fabReply;
     private final ITopicReplyView topicReplyView;
     private final ITopicHeaderPresenter topicHeaderPresenter;
     private final ITopicItemReplyPresenter topicItemReplyPresenter;
 
-    public TopicJavascriptInterface(@NonNull Context context, @NonNull FloatingActionButton fabReply, @NonNull ITopicReplyView topicReplyView, @NonNull ITopicHeaderPresenter topicHeaderPresenter, @NonNull ITopicItemReplyPresenter topicItemReplyPresenter) {
+    public TopicJavascriptInterface(@NonNull Context context, @NonNull ITopicReplyView topicReplyView, @NonNull ITopicHeaderPresenter topicHeaderPresenter, @NonNull ITopicItemReplyPresenter topicItemReplyPresenter) {
         this.context = context;
-        this.fabReply = fabReply;
         this.topicReplyView = topicReplyView;
         this.topicHeaderPresenter = topicHeaderPresenter;
         this.topicItemReplyPresenter = topicItemReplyPresenter;
-    }
-
-    @JavascriptInterface
-    public void onScrollUp() {
-        fabReply.show(true);
-    }
-
-    @JavascriptInterface
-    public void onScrollDown() {
-        fabReply.hide(true);
     }
 
     @JavascriptInterface
