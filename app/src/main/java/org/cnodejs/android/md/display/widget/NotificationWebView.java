@@ -85,12 +85,7 @@ public class NotificationWebView extends CNodeWebView implements IBackToContentT
 
     @Override
     public void backToContentTop() {
-        if (pageLoaded) {
-            loadUrl("" +
-                    "javascript:\n" +
-                    "$('body').scrollTop(0);"
-            );
-        }
+        scrollTo(0, 0);
     }
 
 }

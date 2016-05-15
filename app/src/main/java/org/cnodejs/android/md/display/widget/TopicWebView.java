@@ -125,12 +125,7 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
 
     @Override
     public void backToContentTop() {
-        if (pageLoaded) {
-            loadUrl("" +
-                    "javascript:\n" +
-                    "$('body').scrollTop(0);"
-            );
-        }
+        scrollTo(0, 0);
     }
 
 }
