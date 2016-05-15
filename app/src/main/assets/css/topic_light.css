@@ -66,8 +66,8 @@ body {
     position: absolute;
     width: auto;
     height: 40px;
-    padding: 16px;
-    right: 0;
+    top: 16px;
+    right: 16px;
 }
 
 .header .title {
