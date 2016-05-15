@@ -1,18 +1,4 @@
 
-$(document).ready(function () {
-    var lastScrollTop = $(document).scrollTop();
-    $(document).scroll(function () {
-        var nowScrollTop = $(this).scrollTop();
-        var offset = nowScrollTop - lastScrollTop;
-        lastScrollTop = nowScrollTop;
-        if (offset > 0) {
-            window.topicBridge.onScrollDown();
-        } else {
-            window.topicBridge.onScrollUp();
-        }
-    });
-});
-
 var MINUTE = 60 * 1000;
 var HOUR = 60 * MINUTE;
 var DAY = 24 * HOUR;

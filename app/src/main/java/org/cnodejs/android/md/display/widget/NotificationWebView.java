@@ -20,6 +20,9 @@ public class NotificationWebView extends CNodeWebView implements IBackToContentT
     private static final String LIGHT_THEME_PATH = "file:///android_asset/notification_light.html";
     private static final String DARK_THEME_PATH = "file:///android_asset/notification_dark.html";
 
+    private boolean pageLoaded = false;
+    private List<Message> messageList = null;
+
     public NotificationWebView(Context context) {
         super(context);
         init(context, null, 0, 0);
@@ -49,28 +52,40 @@ public class NotificationWebView extends CNodeWebView implements IBackToContentT
     }
 
     @Override
-    public void backToContentTop() {
-        loadUrl("" +
-                "javascript:\n" +
-                "$('body').scrollTop(0);"
-        );
+    protected void onPageFinished(String url) {
+        pageLoaded = true;
+        if (messageList != null) {
+            updateMessageList(messageList);
+            messageList = null;
+        }
     }
 
     public void updateMessageList(@NonNull List<Message> messageList) {
-        for (Message message : messageList) {
-            message.getReply().getRenderedContent(); // 确保Html渲染
+        if (pageLoaded) {
+            for (Message message : messageList) {
+                message.getReply().getRenderedContent(); // 确保Html渲染
+            }
+            loadUrl("" +
+                    "javascript:\n" +
+                    "updateMessages(" + EntityUtils.gson.toJson(messageList) + ");"
+            );
+        } else {
+            this.messageList = messageList;
         }
-        loadUrl("" +
-                "javascript:\n" +
-                "updateMessages(" + EntityUtils.gson.toJson(messageList) + ");"
-        );
     }
 
     public void markAllMessageRead() {
-        loadUrl("" +
-                "javascript:\n" +
-                "markAllMessageRead();"
-        );
+        if (pageLoaded) {
+            loadUrl("" +
+                    "javascript:\n" +
+                    "markAllMessageRead();"
+            );
+        }
+    }
+
+    @Override
+    public void backToContentTop() {
+        scrollTo(0, 0);
     }
 
 }

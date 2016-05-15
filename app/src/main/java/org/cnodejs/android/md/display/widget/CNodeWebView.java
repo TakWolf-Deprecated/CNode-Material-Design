@@ -14,7 +14,7 @@ import org.cnodejs.android.md.display.util.Navigator;
 
 public abstract class CNodeWebView extends WebView {
 
-    private static final WebViewClient webViewClient = new WebViewClient() {
+    private final WebViewClient webViewClient = new WebViewClient() {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView webView, String url) {
@@ -22,6 +22,11 @@ public abstract class CNodeWebView extends WebView {
                 Navigator.openInBrowser(webView.getContext(), url);
             }
             return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            CNodeWebView.this.onPageFinished(url);
         }
 
     };
@@ -61,5 +66,7 @@ public abstract class CNodeWebView extends WebView {
     public boolean isDarkTheme() {
         return darkTheme;
     }
+
+    protected void onPageFinished(String url) {}
 
 }
