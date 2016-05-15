@@ -23,6 +23,10 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
 
     private FloatingActionButton fabReply;
 
+    private boolean pageLoaded = false;
+    private TopicWithReply topic = null;
+    private String userId = null;
+
     public TopicWebView(Context context) {
         super(context);
     }
@@ -63,47 +67,70 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
         loadUrl(isDarkTheme() ? DARK_THEME_PATH : LIGHT_THEME_PATH);
     }
 
-    public void updateTopicAndUserId(@NonNull TopicWithReply topic, String userId) {
-        topic.getRenderedContent(); // 确保Html渲染
-        for (Reply reply : topic.getReplyList()) {
-            reply.getRenderedContent();
+    @Override
+    protected void onPageFinished(String url) {
+        pageLoaded = true;
+        if (topic != null) {
+            updateTopicAndUserId(topic, userId);
+            topic = null;
+            userId = null;
         }
-        loadUrl("" +
-                "javascript:\n" +
-                "updateTopicAndUserId(" + EntityUtils.gson.toJson(topic) + ", '" + userId + "');"
-        );
+    }
+
+    public void updateTopicAndUserId(@NonNull TopicWithReply topic, String userId) {
+        if (pageLoaded) {
+            topic.getRenderedContent(); // 确保Html渲染
+            for (Reply reply : topic.getReplyList()) {
+                reply.getRenderedContent(); // 确保Html渲染
+            }
+            loadUrl("" +
+                    "javascript:\n" +
+                    "updateTopicAndUserId(" + EntityUtils.gson.toJson(topic) + ", '" + userId + "');"
+            );
+        } else {
+            this.topic = topic;
+            this.userId = userId;
+        }
     }
 
     public void updateTopicCollect(boolean isCollect) {
-        loadUrl("" +
-                "javascript:\n" +
-                "updateTopicCollect(" + isCollect + ");"
-        );
+        if (pageLoaded) {
+            loadUrl("" +
+                    "javascript:\n" +
+                    "updateTopicCollect(" + isCollect + ");"
+            );
+        }
     }
 
     public void updateReply(@NonNull Reply reply) {
-        reply.getRenderedContent(); // 确保Html渲染
-        loadUrl("" +
-                "javascript:\n" +
-                "updateReply(" + EntityUtils.gson.toJson(reply) + ");"
-        );
+        if (pageLoaded) {
+            reply.getRenderedContent(); // 确保Html渲染
+            loadUrl("" +
+                    "javascript:\n" +
+                    "updateReply(" + EntityUtils.gson.toJson(reply) + ");"
+            );
+        }
     }
 
     public void appendReply(@NonNull Reply reply) {
-        reply.getRenderedContent(); // 确保Html渲染
-        loadUrl("" +
-                "javascript:\n" +
-                "appendReply(" + EntityUtils.gson.toJson(reply) + ");\n" +
-                "$('body').animate({scrollTop: $('body')[0].scrollHeight}, 400);"
-        );
+        if (pageLoaded) {
+            reply.getRenderedContent(); // 确保Html渲染
+            loadUrl("" +
+                    "javascript:\n" +
+                    "appendReply(" + EntityUtils.gson.toJson(reply) + ");\n" +
+                    "$('body').animate({scrollTop: $('body')[0].scrollHeight}, 400);"
+            );
+        }
     }
 
     @Override
     public void backToContentTop() {
-        loadUrl("" +
-                "javascript:\n" +
-                "$('body').scrollTop(0);"
-        );
+        if (pageLoaded) {
+            loadUrl("" +
+                    "javascript:\n" +
+                    "$('body').scrollTop(0);"
+            );
+        }
     }
 
 }
