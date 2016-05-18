@@ -39,7 +39,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="markdown-container">
+            <div class="markdown-container" v-on:click="openImageProxy($event)">
                 {{{topic.rendered_content}}}
             </div>
         </div>
@@ -88,7 +88,7 @@
                         <div class="target-position text-accent" v-if="reply.reply_id">
                             回复：{{positionMap[reply.reply_id] + 1}}楼
                         </div>
-                        <div class="markdown-container">
+                        <div class="markdown-container" v-on:click="openImageProxy($event)">
                             {{{reply.rendered_content}}}
                         </div>
                     </div>
@@ -100,7 +100,6 @@
     </div>
 </div>
 
-<script src="js/jquery-2.2.3.min.js"></script>
 <script src="js/vue-1.0.22.min.js"></script>
 <script src="js/topic.js"></script>
 

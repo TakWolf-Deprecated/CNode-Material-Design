@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="markdown-container" v-if="message.reply && message.reply.id">
+            <div class="markdown-container" v-if="message.reply && message.reply.id" v-on:click="openImageProxy($event)">
                 {{{message.reply.rendered_content}}}
             </div>
             <div class="reference-container"  v-on:click="openTopic(message.topic.id)">
@@ -42,7 +42,6 @@
     </div>
 </div>
 
-<script src="js/jquery-2.2.3.min.js"></script>
 <script src="js/vue-1.0.22.min.js"></script>
 <script src="js/notification.js"></script>
 
