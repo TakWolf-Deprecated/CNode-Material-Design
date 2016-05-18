@@ -118,7 +118,9 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
             loadUrl("" +
                     "javascript:\n" +
                     "appendReply(" + EntityUtils.gson.toJson(reply) + ");\n" +
-                    "$('body').animate({scrollTop: $('body')[0].scrollHeight}, 400);"
+                    "setTimeout(function () {\n" +
+                    "    window.scrollTo(0, document.body.clientHeight);\n" +
+                    "}, 100);"
             );
         }
     }
