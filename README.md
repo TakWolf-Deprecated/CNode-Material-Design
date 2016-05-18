@@ -73,8 +73,6 @@
 
 - [Vue.js](http://cn.vuejs.org)
 
-- [jQuery](https://jquery.com)
-
 - [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
 
 ## Author ##
