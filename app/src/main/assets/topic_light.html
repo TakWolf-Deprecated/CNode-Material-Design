@@ -20,7 +20,7 @@
                 <table>
                     <tr>
                         <td class="left">
-                            <img class="avatar" v-bind:src="topic.author.avatar_url" v-on:click="openUser(topic.author.loginname)">
+                            <img class="avatar" v-bind:src="topic.author.avatar_url | avatarCompat" v-on:click="openUser(topic.author.loginname)">
                         </td>
                         <td class="center">
                             <div class="line1">
@@ -61,7 +61,7 @@
                             <table>
                                 <tr>
                                     <td class="left">
-                                        <img class="avatar" v-bind:src="reply.author.avatar_url" v-on:click="openUser(reply.author.loginname)">
+                                        <img class="avatar" v-bind:src="reply.author.avatar_url | avatarCompat" v-on:click="openUser(reply.author.loginname)">
                                     </td>
                                     <td class="center">
                                         <div class="line1">

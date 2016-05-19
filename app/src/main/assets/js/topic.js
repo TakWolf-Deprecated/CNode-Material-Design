@@ -25,6 +25,14 @@ Vue.filter('recentlyTimeText', function (time) {
     }
 });
 
+Vue.filter('avatarCompat', function (url) {
+    if (url && url.indexOf('//gravatar.com/avatar/') === 0) {
+        return 'http:' + url;
+    } else {
+        return url;
+    }
+});
+
 Vue.filter('tabName', function (topic) {
     if (topic.top) {
         return '置顶';
