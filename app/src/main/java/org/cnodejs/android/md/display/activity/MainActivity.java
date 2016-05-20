@@ -21,7 +21,7 @@ import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.MainAdapter;
-import org.cnodejs.android.md.display.base.DrawerLayoutActivity;
+import org.cnodejs.android.md.display.base.FullLayoutActivity;
 import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
@@ -51,7 +51,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends DrawerLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
+public class MainActivity extends FullLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
     private static final int PAGE_LIMIT = 20;
 
