@@ -137,8 +137,8 @@ public final class FormatUtils {
 
     public static String handleHtml(String html) {
         if (!TextUtils.isEmpty(html)) {
-            html = html.replace("<a href=\"" + ApiDefine.USER_PATH_PREFIX, "<a href=\"" + ApiDefine.USER_LINK_URL_PREFIX); // 替换@用户协议
-            html = html.replace("<img src=\"//", "<img src=\"https://"); // 替换缩略URL引用路径为https协议
+            html = html.replace(" href=\"" + ApiDefine.USER_PATH_PREFIX, " href=\"" + ApiDefine.USER_LINK_URL_PREFIX); // 替换@用户协议
+            html = html.replace(" src=\"//", " src=\"https://"); // 替换缩略URL引用路径为https协议
         }
         return html;
     }
