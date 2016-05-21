@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textColor="@color/text_color_light"
+                    android:textColor="@color/text_secondary_dark"
                     android:textSize="14sp"
                     tools:text="积分：0" />
 
@@ -80,7 +80,7 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:text="@string/logout"
-                android:textColor="@color/text_color_light"
+                android:textColor="@color/text_secondary_dark"
                 android:textSize="14sp"
                 android:background="@drawable/button_transparent_image" />
 
