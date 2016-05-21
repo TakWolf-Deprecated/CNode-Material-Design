@@ -13,7 +13,7 @@
         <item name="widgetBackgroundDark">@color/selectable_item_background_general_light_pressed</item>
         <item name="widgetBackgroundTitle">@android:color/white</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_light</item>
-        <item name="mainNavItemTextColor">@color/main_nav_item_text_color_light</item>
+        <item name="navigationItemTextColor">@color/navigation_item_text_light</item>
         <item name="referenceText">@color/reference_text_light</item>
         <item name="referenceBackground">@drawable/reference_background_light</item>
         <item name="darkMode">false</item>
@@ -35,7 +35,7 @@
         <item name="widgetBackgroundDark">@color/selectable_item_background_general_dark_pressed</item>
         <item name="widgetBackgroundTitle">@color/color_primary</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_dark</item>
-        <item name="mainNavItemTextColor">@color/main_nav_item_text_color_dark</item>
+        <item name="navigationItemTextColor">@color/navigation_item_text_dark</item>
         <item name="referenceText">@color/reference_text_dark</item>
         <item name="referenceBackground">@drawable/reference_background_dark</item>
         <item name="darkMode">true</item>
@@ -146,7 +146,7 @@
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:drawablePadding">32dp</item>
-        <item name="android:textColor">?attr/mainNavItemTextColor</item>
+        <item name="android:textColor">?attr/navigationItemTextColor</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">?attr/selectableItemBackgroundGeneral</item>
