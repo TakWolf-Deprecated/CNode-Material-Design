@@ -9,8 +9,8 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowBackground">@color/window_background_light</item>
         <item name="android:listDivider">@color/list_divider_light</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_light_normal</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_light_pressed</item>
+        <item name="widgetBackground">@color/selectable_item_background_general_normal_light</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_light</item>
         <item name="widgetBackgroundTitle">@android:color/white</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_light</item>
         <item name="navigationItemTextColor">@color/navigation_item_text_light</item>
@@ -31,8 +31,8 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowBackground">@color/window_background_dark</item>
         <item name="android:listDivider">@color/list_divider_dark</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_dark_normal</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_dark_pressed</item>
+        <item name="widgetBackground">@color/selectable_item_background_general_normal_dark</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_dark</item>
         <item name="widgetBackgroundTitle">@color/color_primary</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_dark</item>
         <item name="navigationItemTextColor">@color/navigation_item_text_dark</item>
@@ -56,8 +56,8 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:listDivider">@color/list_divider_light</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_light_normal</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_light_pressed</item>
+        <item name="widgetBackground">@color/selectable_item_background_general_normal_light</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_light</item>
         <item name="widgetBackgroundTitle">@android:color/white</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_light</item>
     </style>
@@ -80,8 +80,8 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:listDivider">@color/list_divider_dark</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_dark_normal</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_dark_pressed</item>
+        <item name="widgetBackground">@color/selectable_item_background_general_normal_dark</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_dark</item>
         <item name="widgetBackgroundTitle">@color/color_primary</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_dark</item>
     </style>
