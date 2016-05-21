@@ -6,8 +6,8 @@
     <attr name="widgetBackgroundTitle" format="color|reference" />
     <attr name="selectableItemBackgroundGeneral" format="color|reference" />
     <attr name="mainNavItemTextColor" format="color|reference" />
-    <attr name="referenceBackgroundNormal" format="color|reference" />
-    <attr name="referenceBackgroundAccent" format="color|reference" />
+    <attr name="referenceText" format="color|reference" />
+    <attr name="referenceBackground" format="color|reference" />
     <attr name="darkMode" format="boolean" />
 
     <declare-styleable name="ScrimInsetsScrollView">

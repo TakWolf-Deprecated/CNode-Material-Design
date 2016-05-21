@@ -98,7 +98,7 @@
         android:padding="12dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp"
-        android:background="?attr/referenceBackgroundNormal"
+        android:background="?attr/referenceBackground"
         tools:text="原话题：这里是话题的标题" />
 
     <View style="@style/AppWidget.DeepLine" />

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -112,8 +113,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public class NormalViewHolder extends ViewHolder {
 
-        @BindView(R.id.main_item_tv_tab)
-        protected TextView tvTab;
+        @BindView(R.id.main_item_ctv_tab)
+        protected CheckedTextView ctvTab;
 
         @BindView(R.id.main_item_tv_title)
         protected TextView tvTitle;
@@ -151,9 +152,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             topic = topicList.get(position);
 
             tvTitle.setText(topic.getTitle());
-            tvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
-            tvTab.setBackgroundDrawable(ResUtils.getThemeAttrDrawable(activity, topic.isTop() ? R.attr.referenceBackgroundAccent : R.attr.referenceBackgroundNormal));
-            tvTab.setTextColor(topic.isTop() ? Color.WHITE : ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+            ctvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
+            ctvTab.setChecked(topic.isTop());
             Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvAuthor.setText(topic.getAuthor().getLoginName());
             tvCreateTime.setText(activity.getString(R.string.create_at_$) + topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss"));

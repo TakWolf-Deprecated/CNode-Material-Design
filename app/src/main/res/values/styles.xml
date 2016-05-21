@@ -14,8 +14,8 @@
         <item name="widgetBackgroundTitle">@android:color/white</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_light</item>
         <item name="mainNavItemTextColor">@color/main_nav_item_text_color_light</item>
-        <item name="referenceBackgroundNormal">@drawable/reference_background_light</item>
-        <item name="referenceBackgroundAccent">@drawable/reference_background_accent</item>
+        <item name="referenceText">@color/reference_text_light</item>
+        <item name="referenceBackground">@drawable/reference_background_light</item>
         <item name="darkMode">false</item>
     </style>
 
@@ -36,8 +36,8 @@
         <item name="widgetBackgroundTitle">@color/color_primary</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_dark</item>
         <item name="mainNavItemTextColor">@color/main_nav_item_text_color_dark</item>
-        <item name="referenceBackgroundNormal">@drawable/reference_background_dark</item>
-        <item name="referenceBackgroundAccent">@drawable/reference_background_accent</item>
+        <item name="referenceText">@color/reference_text_dark</item>
+        <item name="referenceBackground">@drawable/reference_background_dark</item>
         <item name="darkMode">true</item>
     </style>
 
