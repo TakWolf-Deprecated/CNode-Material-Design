@@ -145,8 +145,8 @@
                 android:drawableLeft="@drawable/ic_notifications_grey600_24dp"
                 android:text="@string/notification" />
 
-            <TextView style="@style/AppWidget.NavigationItemBadger"
-                android:id="@+id/main_nav_tv_badger_notification"
+            <TextView style="@style/AppWidget.NavigationItemBadge"
+                android:id="@+id/main_nav_tv_badge_notification"
                 tools:text="99+" />
 
         </FrameLayout>

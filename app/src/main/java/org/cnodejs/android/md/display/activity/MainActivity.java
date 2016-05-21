@@ -76,8 +76,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @BindView(R.id.main_nav_tv_score)
     protected TextView tvScore;
 
-    @BindView(R.id.main_nav_tv_badger_notification)
-    protected TextView tvBadgerNotification;
+    @BindView(R.id.main_nav_tv_badge_notification)
+    protected TextView tvBadgeNotification;
 
     @BindView(R.id.main_nav_btn_logout)
     protected View btnLogout;
@@ -331,7 +331,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LoginShared.logout(MainActivity.this);
-                        tvBadgerNotification.setText(null); // 未读消息清空
+                        tvBadgeNotification.setText(null); // 未读消息清空
                         updateUserInfoViews();
                     }
 
@@ -483,7 +483,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @Override
     public void updateMessageCountViews(@NonNull Result.Data<Integer> result) {
         if (ActivityUtils.isAlive(this)) {
-            tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
+            tvBadgeNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
         }
     }
 
