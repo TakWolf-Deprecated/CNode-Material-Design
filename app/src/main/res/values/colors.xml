@@ -8,9 +8,15 @@
     <color name="window_background_light">#ffeeeeee</color>
     <color name="window_background_dark">#ff303030</color>
 
-    <color name="text_color_light">#b3ffffff</color>
-    <color name="text_color_dark">#de000000</color>
-    
+    <color name="text_primary_light">#de000000</color>
+    <color name="text_primary_dark">#ffffffff</color>
+    <color name="text_primary_disabled_light">#39000000</color>
+    <color name="text_primary_disabled_dark">#4Dffffff</color>
+    <color name="text_secondary_light">#8a000000</color>
+    <color name="text_secondary_dark">#b3ffffff</color>
+    <color name="text_secondary_disabled_light">#24000000</color>
+    <color name="text_secondary_disabled_dark">#36ffffff</color>
+
     <color name="list_divider_light">#ffe0e0e0</color>
     <color name="list_divider_dark">#ff666666</color>
 
