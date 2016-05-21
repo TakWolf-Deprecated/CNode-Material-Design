@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_primary"
+            android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <ImageView
