@@ -16,7 +16,7 @@
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_primary"
+        android:background="?attr/colorPrimary"
         android:elevation="@dimen/app_bar_elevation"
         app:navigationIcon="@drawable/ic_menu_white_24dp"
         app:title="@string/tab_all"
@@ -58,9 +58,9 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_mode_edit_white_24dp"
-            app:fab_colorNormal="@color/fab_color_primary"
-            app:fab_colorPressed="@color/fab_color_primary_dark"
-            app:fab_colorRipple="@color/fab_color_accent" />
+            app:fab_colorNormal="@color/button_normal"
+            app:fab_colorPressed="@color/button_pressed"
+            app:fab_colorRipple="@color/button_ripple" />
 
     </FrameLayout>
 

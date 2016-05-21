@@ -21,7 +21,7 @@ import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.MainAdapter;
-import org.cnodejs.android.md.display.base.DrawerLayoutActivity;
+import org.cnodejs.android.md.display.base.FullLayoutActivity;
 import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
@@ -51,7 +51,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends DrawerLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
+public class MainActivity extends FullLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
     private static final int PAGE_LIMIT = 20;
 
@@ -76,8 +76,8 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     @BindView(R.id.main_nav_tv_score)
     protected TextView tvScore;
 
-    @BindView(R.id.main_nav_tv_badger_notification)
-    protected TextView tvBadgerNotification;
+    @BindView(R.id.main_nav_tv_badge_notification)
+    protected TextView tvBadgeNotification;
 
     @BindView(R.id.main_nav_btn_logout)
     protected View btnLogout;
@@ -331,7 +331,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LoginShared.logout(MainActivity.this);
-                        tvBadgerNotification.setText(null); // 未读消息清空
+                        tvBadgeNotification.setText(null); // 未读消息清空
                         updateUserInfoViews();
                     }
 
@@ -483,7 +483,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     @Override
     public void updateMessageCountViews(@NonNull Result.Data<Integer> result) {
         if (ActivityUtils.isAlive(this)) {
-            tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
+            tvBadgeNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
         }
     }
 

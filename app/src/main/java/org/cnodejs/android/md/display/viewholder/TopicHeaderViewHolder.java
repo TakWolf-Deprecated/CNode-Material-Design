@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,8 +46,8 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
     @BindView(R.id.topic_header_img_avatar)
     protected ImageView imgAvatar;
 
-    @BindView(R.id.topic_header_tv_tab)
-    protected TextView tvTab;
+    @BindView(R.id.topic_header_ctv_tab)
+    protected CheckedTextView ctvTab;
 
     @BindView(R.id.topic_header_tv_login_name)
     protected TextView tvLoginName;
@@ -114,9 +115,8 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
 
             tvTitle.setText(topic.getTitle());
             Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-            tvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
-            tvTab.setBackgroundDrawable(ResUtils.getThemeAttrDrawable(activity, topic.isTop() ? R.attr.referenceBackgroundAccent : R.attr.referenceBackgroundNormal));
-            tvTab.setTextColor(topic.isTop() ? Color.WHITE : ResUtils.getThemeAttrColor(activity, android.R.attr.textColorSecondary));
+            ctvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
+            ctvTab.setChecked(topic.isTop());
             tvLoginName.setText(topic.getAuthor().getLoginName());
             tvCreateTime.setText(FormatUtils.getRecentlyTimeText(topic.getCreateAt()) + "创建");
             tvVisitCount.setText(topic.getVisitCount() + "次浏览");

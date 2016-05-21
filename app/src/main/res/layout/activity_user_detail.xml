@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_primary"
+            android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <ImageView
@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:textColor="@color/text_color_light"
+                    android:textColor="@color/text_secondary_dark"
                     android:textSize="14sp"
                     tools:text="TakWolf@github.com" />
 
@@ -111,7 +111,7 @@
             android:id="@+id/user_detail_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/text_color_light"
+            app:tabTextColor="@color/text_secondary_dark"
             app:tabSelectedTextColor="@android:color/white"
             app:tabBackground="?attr/selectableItemBackground" />
 

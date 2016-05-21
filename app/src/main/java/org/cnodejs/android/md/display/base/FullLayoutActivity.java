@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 import org.cnodejs.android.md.util.ResUtils;
 
-public abstract class DrawerLayoutActivity extends BaseActivity {
+public abstract class FullLayoutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
