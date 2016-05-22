@@ -65,6 +65,8 @@
 
 - [MarkdownPapers](http://markdown.tautua.org)
 
+- [jsoup](https://jsoup.org)
+
 - [Google I/O Android App - ScrimInsetsViews](https://github.com/google/iosched/blob/master/android/src/main/java/com/google/samples/apps/iosched/ui/widget/ScrimInsetsScrollView.java)
 
 - [Material design icons](https://github.com/google/material-design-icons)
