@@ -131,6 +131,13 @@ http://markdown.tautua.org
 Licensed under the Apache License, Version 2.0 (the "License").
 
 ====================================
+jsoup
+====================================
+https://jsoup.org
+
+Under the liberal MIT license.
+
+====================================
 Google I/O Android App - ScrimInsetsViews
 ====================================
 https://github.com/google/iosched/blob/master/android/src/main/java/com/google/samples/apps/iosched/ui/widget/ScrimInsetsScrollView.java
