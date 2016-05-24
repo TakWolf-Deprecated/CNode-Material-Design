@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import org.cnodejs.android.md.util.codec.DES3;
-import org.cnodejs.android.md.util.codec.Digest;
+import org.cnodejs.android.md.util.Digest;
 import org.cnodejs.android.md.model.util.EntityUtils;
 
 import java.lang.reflect.Type;
@@ -27,11 +27,11 @@ public final class SharedWrapper {
     }
 
     private String getDigestKey(@NonNull String key) {
-        return Digest.MD5.getMessage(key);
+        return Digest.MD5.getHex(key);
     }
 
     private String getSecretKey() {
-        return Digest.SHA256.getMessage(DeviceInfo.getDeviceToken(context));
+        return Digest.SHA256.getHex(DeviceInfo.getDeviceToken(context));
     }
 
     private String get(@NonNull String key, @Nullable String defValue) {

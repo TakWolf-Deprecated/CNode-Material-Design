@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import org.cnodejs.android.md.util.codec.Digest;
+import org.cnodejs.android.md.util.Digest;
 
 import java.util.UUID;
 
@@ -20,11 +20,11 @@ public final class DeviceInfo {
         if (TextUtils.isEmpty(deviceToken)) {
             synchronized (DeviceInfo.class) {
                 if (TextUtils.isEmpty(deviceToken)) {
-                    deviceToken = context.getSharedPreferences(Digest.MD5.getMessage(TAG), Context.MODE_PRIVATE).getString(KEY_DEVICE_TOKEN, null);
+                    deviceToken = context.getSharedPreferences(Digest.MD5.getHex(TAG), Context.MODE_PRIVATE).getString(KEY_DEVICE_TOKEN, null);
                 }
                 if (TextUtils.isEmpty(deviceToken)) {
-                    deviceToken = Digest.MD5.getMessage(UUID.randomUUID().toString());
-                    context.getSharedPreferences(Digest.MD5.getMessage(TAG), Context.MODE_PRIVATE).edit().putString(KEY_DEVICE_TOKEN, deviceToken).apply();
+                    deviceToken = Digest.MD5.getHex(UUID.randomUUID().toString());
+                    context.getSharedPreferences(Digest.MD5.getHex(TAG), Context.MODE_PRIVATE).edit().putString(KEY_DEVICE_TOKEN, deviceToken).apply();
                 }
             }
         }
