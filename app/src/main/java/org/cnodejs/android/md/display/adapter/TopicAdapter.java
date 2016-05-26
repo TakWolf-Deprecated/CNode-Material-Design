@@ -136,7 +136,7 @@ public class TopicAdapter extends BaseAdapter {
             }
 
             // 这里直接使用WebView，有性能问题
-            webContent.loadRenderedContent(reply.getRenderedContent());
+            webContent.loadRenderedContent(reply.getContentHtml());
 
             iconDeepLine.setVisibility(position == replyList.size() - 1 ? View.GONE : View.VISIBLE);
             iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);

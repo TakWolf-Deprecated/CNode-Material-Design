@@ -40,7 +40,7 @@
                 </table>
             </div>
             <div class="markdown-container" v-on:click="openImageProxy($event)">
-                {{{topic.rendered_content}}}
+                {{{topic.content_html}}}
             </div>
         </div>
         <div class="item-gap"></div>
@@ -89,7 +89,7 @@
                             回复：{{positionMap[reply.reply_id] + 1}}楼
                         </div>
                         <div class="markdown-container" v-on:click="openImageProxy($event)">
-                            {{{reply.rendered_content}}}
+                            {{{reply.content_html}}}
                         </div>
                     </div>
                     <div class="deep-line" v-if="position !== (topic.replies.length - 1)"></div>

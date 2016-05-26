@@ -79,9 +79,9 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
 
     public void updateTopicAndUserId(@NonNull TopicWithReply topic, String userId) {
         if (pageLoaded) {
-            topic.getRenderedContent(); // 确保Html渲染
+            topic.getContentHtml(); // 确保Html渲染
             for (Reply reply : topic.getReplyList()) {
-                reply.getRenderedContent(); // 确保Html渲染
+                reply.getContentHtml(); // 确保Html渲染
             }
             loadUrl("" +
                     "javascript:\n" +
@@ -104,7 +104,7 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
 
     public void updateReply(@NonNull Reply reply) {
         if (pageLoaded) {
-            reply.getRenderedContent(); // 确保Html渲染
+            reply.getContentHtml(); // 确保Html渲染
             loadUrl("" +
                     "javascript:\n" +
                     "updateReply(" + EntityUtils.gson.toJson(reply) + ");"
@@ -114,7 +114,7 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
 
     public void appendReply(@NonNull Reply reply) {
         if (pageLoaded) {
-            reply.getRenderedContent(); // 确保Html渲染
+            reply.getContentHtml(); // 确保Html渲染
             loadUrl("" +
                     "javascript:\n" +
                     "appendReply(" + EntityUtils.gson.toJson(reply) + ");\n" +

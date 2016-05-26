@@ -101,12 +101,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 } else {
                     tvAction.setText("在回复中@了您");
                     webContent.setVisibility(View.VISIBLE);
-                    webContent.loadRenderedContent(message.getReply().getRenderedContent());  // 这里直接使用WebView，有性能问题
+                    webContent.loadRenderedContent(message.getReply().getContentHtml());  // 这里直接使用WebView，有性能问题
                 }
             } else {
                 tvAction.setText("回复了您的话题");
                 webContent.setVisibility(View.VISIBLE);
-                webContent.loadRenderedContent(message.getReply().getRenderedContent());  // 这里直接使用WebView，有性能问题
+                webContent.loadRenderedContent(message.getReply().getContentHtml());  // 这里直接使用WebView，有性能问题
             }
         }
 

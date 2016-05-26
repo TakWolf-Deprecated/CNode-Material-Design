@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="markdown-container" v-if="message.reply && message.reply.id" v-on:click="openImageProxy($event)">
-                {{{message.reply.rendered_content}}}
+                {{{message.reply.content_html}}}
             </div>
             <div class="reference-container"  v-on:click="openTopic(message.topic.id)">
                 <div class="topic-title text-secondary">话题：{{message.topic.title}}</div>

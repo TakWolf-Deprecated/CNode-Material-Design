@@ -63,7 +63,7 @@ public class NotificationWebView extends CNodeWebView implements IBackToContentT
     public void updateMessageList(@NonNull List<Message> messageList) {
         if (pageLoaded) {
             for (Message message : messageList) {
-                message.getReply().getRenderedContent(); // 确保Html渲染
+                message.getReply().getContentHtml(); // 确保Html渲染
             }
             loadUrl("" +
                     "javascript:\n" +
