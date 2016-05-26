@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.util;
 
+import android.support.annotation.NonNull;
+
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,11 +15,11 @@ public final class Digest {
 
     private final String algorithm;
 
-    private Digest(String algorithm) {
+    private Digest(@NonNull String algorithm) {
         this.algorithm = algorithm;
     }
 
-    public byte[] getRaw(byte[] data) {
+    public byte[] getRaw(@NonNull byte[] data) {
         try {
             return MessageDigest.getInstance(algorithm).digest(data);
         } catch (NoSuchAlgorithmException e) {
@@ -25,11 +27,11 @@ public final class Digest {
         }
     }
 
-    public byte[] getRaw(String data) {
+    public byte[] getRaw(@NonNull String data) {
         return getRaw(data.getBytes(CHARSET_UTF_8));
     }
 
-    public String getHex(byte[] data) {
+    public String getHex(@NonNull byte[] data) {
         StringBuilder sb = new StringBuilder();
         for (byte b : getRaw(data)) {
             sb.append(String.format("%02x", 0xFF & b));
@@ -37,7 +39,7 @@ public final class Digest {
         return sb.toString();
     }
 
-    public String getHex(String data) {
+    public String getHex(@NonNull String data) {
         return getHex(data.getBytes(CHARSET_UTF_8));
     }
 
