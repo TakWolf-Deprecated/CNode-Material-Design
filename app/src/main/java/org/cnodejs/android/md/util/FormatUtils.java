@@ -161,7 +161,9 @@ public final class FormatUtils {
         // 确保body第一个子节点为div，并且class=markdown-text
         if (document.body().childNodeSize() == 0 || !document.body().child(0).tagName().equalsIgnoreCase("div")) {
             Element div = document.createElement("div").attr("class", "markdown-text");
-            div.html(document.body().html());
+            for (Element element : document.body().children()) {
+                div.appendChild(element);
+            }
             document.body().empty().appendChild(div);
         } else {
             document.body().child(0).attr("class", "markdown-text");
