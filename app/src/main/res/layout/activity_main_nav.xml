@@ -7,7 +7,7 @@
     android:layout_gravity="start"
     android:background="?attr/widgetBackground"
     android:scrollbars="none"
-    app:appInsetForeground="#44000000">
+    app:appInsetForeground="@color/translucent_status">
 
     <LinearLayout
         android:layout_width="match_parent"
