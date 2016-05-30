@@ -129,8 +129,7 @@ public final class FormatUtils {
         // 保证text不为null
         text = TextUtils.isEmpty(text) ? "" : text;
         // 解析@协议
-        text = " " + text;
-        text = text.replaceAll(" @([a-zA-Z0-9_-]+)", "\\[@$1\\]\\(" + ApiDefine.USER_PATH_PREFIX + "$1\\)").trim();
+        text = text.replaceAll("@([\\w\\-]+)\\b(?![\\]\\<\\.])", "[@$1](" + ApiDefine.USER_PATH_PREFIX + "$1)");
         // 渲染markdown
         try {
             StringWriter out = new StringWriter();
