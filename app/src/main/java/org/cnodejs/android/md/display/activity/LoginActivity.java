@@ -7,18 +7,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.base.StatusBarActivity;
+import org.cnodejs.android.md.display.base.FullLayoutActivity;
 import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
 import org.cnodejs.android.md.display.listener.DialogCancelCallListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.view.ILoginView;
 import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.display.util.ToastUtils;
+import org.cnodejs.android.md.display.view.ILoginView;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
@@ -30,7 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 
-public class LoginActivity extends StatusBarActivity implements ILoginView {
+public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     public static final int REQUEST_LOGIN = FormatUtils.createRequestCode();
 
@@ -61,6 +62,9 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
     @BindView(R.id.login_toolbar)
     protected Toolbar toolbar;
 
+    @BindView(R.id.login_adapt_status_bar)
+    protected View adaptStatusBar;
+
     @BindView(R.id.login_edt_access_token)
     protected MaterialEditText edtAccessToken;
 
@@ -70,10 +74,12 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        adaptStatusBar(adaptStatusBar);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
