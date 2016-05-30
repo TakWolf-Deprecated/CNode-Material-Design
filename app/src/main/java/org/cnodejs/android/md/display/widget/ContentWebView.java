@@ -16,7 +16,7 @@ public class ContentWebView extends CNodeWebView {
             "<html>\n" +
             "<head>\n" +
             "<meta charset=\"UTF-8\">\n" +
-            "<meta name=\"viewport\" content=\"width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1\">\n";
+            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no\">\n";
 
     private static final String LIGHT_THEME_CSS = "" +
             "<link type=\"text/css\" rel=\"stylesheet\" href=\"" + "file:///android_asset/css/content_light.css" + "\">\n" +
@@ -28,20 +28,22 @@ public class ContentWebView extends CNodeWebView {
 
     private static final String HTML_1 = "" +
             "</head>\n" +
-            "<body>\n";
+            "<body>\n" +
+            "<div id=\"markdown-container\">\n";
 
     private static final String HTML_2 = "" +
+            "</div>\n" +
             "<script>\n" +
             "(function() {\n" +
-            "    var objs = document.getElementsByTagName('img');\n" +
-            "    for (var i = 0; i < objs.length; i++) {\n" +
-            "        objs[i].onclick = function() {\n" +
-            "            if (this.parentNode.nodeName !== 'A') {\n" +
-            "                window." + ImageJavascriptInterface.NAME + ".openImage(this.src);\n" +
+            "    var markdownContainer = document.getElementById('markdown-container');\n" +
+            "    markdownContainer.onclick = function (event) {\n" +
+            "        if (event.target.nodeName === 'IMG') {\n" +
+            "            if (event.target.parentNode.nodeName !== 'A') {\n" +
+            "                window." + ImageJavascriptInterface.NAME + ".openImage(event.target.src);\n" +
             "            }\n" +
-            "        };\n" +
-            "    }\n" +
-            "})();" +
+            "        }\n" +
+            "    };\n" +
+            "})();\n" +
             "</script>\n" +
             "</body>\n" +
             "</html>";

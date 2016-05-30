@@ -129,8 +129,11 @@ public final class FormatUtils {
         // 保证text不为null
         text = TextUtils.isEmpty(text) ? "" : text;
         // 解析@协议
-        text = " " + text;
-        text = text.replaceAll(" @([a-zA-Z0-9_-]+)", "\\[@$1\\]\\(" + ApiDefine.USER_PATH_PREFIX + "$1\\)").trim();
+        text = text.replaceAll("@([\\w\\-]+)\\b(?![\\]\\<\\.])", "[@$1](" + ApiDefine.USER_PATH_PREFIX + "$1)");
+        // 解析裸链接
+        text = text + " ";
+        text = text.replaceAll("((http|https|ftp)://[\\w\\-.:/?=&#%]+)(\\s)", "[$1]($1)$3");
+        text = text.trim();
         // 渲染markdown
         try {
             StringWriter out = new StringWriter();
@@ -156,12 +159,14 @@ public final class FormatUtils {
     public static String handleHtml(String html) {
         // 保证html不为null
         html = TextUtils.isEmpty(html) ? "" : html;
-        // 过滤xss，这里会自动补全@用户协议和七牛图片地址，但是会清除class和style属性
+        // 过滤xss，这里会自动补全用户链接地址和七牛图片地址，但是会清除class和style属性
         Document document = cleaner.clean(Jsoup.parseBodyFragment(html, ApiDefine.HOST_BASE_URL));
         // 确保body第一个子节点为div，并且class=markdown-text
         if (document.body().childNodeSize() == 0 || !document.body().child(0).tagName().equalsIgnoreCase("div")) {
             Element div = document.createElement("div").attr("class", "markdown-text");
-            div.html(document.body().html());
+            for (Element element : document.body().children()) {
+                div.appendChild(element);
+            }
             document.body().empty().appendChild(div);
         } else {
             document.body().child(0).attr("class", "markdown-text");

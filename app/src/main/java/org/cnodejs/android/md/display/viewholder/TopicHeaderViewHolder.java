@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.display.viewholder;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -26,7 +25,6 @@ import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicHeaderPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.ResUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -123,7 +121,7 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
             btnFavorite.setImageResource(isCollect ? R.drawable.ic_favorite_theme_24dp : R.drawable.ic_favorite_outline_grey600_24dp);
 
             // 这里直接使用WebView，有性能问题
-            webContent.loadRenderedContent(topic.getRenderedContent());
+            webContent.loadRenderedContent(topic.getContentHtml());
 
             updateReplyCount(replyCount);
         } else {

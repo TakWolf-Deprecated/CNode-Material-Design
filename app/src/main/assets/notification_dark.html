@@ -2,7 +2,7 @@
 <html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>消息</title>
     <link type="text/css" rel="stylesheet" href="css/notification_dark.css">
     <link type="text/css" rel="stylesheet" href="css/markdown_dark.css">
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="markdown-container" v-if="message.reply && message.reply.id" v-on:click="openImageProxy($event)">
-                {{{message.reply.rendered_content}}}
+                {{{message.reply.content_html}}}
             </div>
             <div class="reference-container"  v-on:click="openTopic(message.topic.id)">
                 <div class="topic-title text-secondary">话题：{{message.topic.title}}</div>
@@ -42,7 +42,7 @@
     </div>
 </div>
 
-<script src="js/vue-1.0.22.min.js"></script>
+<script src="js/vue.min.js"></script>
 <script src="js/notification.js"></script>
 
 </body>
