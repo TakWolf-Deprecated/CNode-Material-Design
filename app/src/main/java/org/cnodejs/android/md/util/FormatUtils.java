@@ -130,6 +130,10 @@ public final class FormatUtils {
         text = TextUtils.isEmpty(text) ? "" : text;
         // 解析@协议
         text = text.replaceAll("@([\\w\\-]+)\\b(?![\\]\\<\\.])", "[@$1](" + ApiDefine.USER_PATH_PREFIX + "$1)");
+        // 解析裸链接
+        text = text + " ";
+        text = text.replaceAll("((http|https|ftp)://[\\w\\-.:/?=&#%]+)(\\s)", "[$1]($1)$3");
+        text = text.trim();
         // 渲染markdown
         try {
             StringWriter out = new StringWriter();
