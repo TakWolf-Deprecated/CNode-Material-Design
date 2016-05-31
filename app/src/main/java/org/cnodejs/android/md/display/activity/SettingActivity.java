@@ -18,25 +18,25 @@ import butterknife.OnClick;
 
 public class SettingActivity extends StatusBarActivity {
 
-    @BindView(R.id.setting_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.setting_switch_notification)
+    @BindView(R.id.switch_notification)
     protected SwitchCompat switchNotification;
 
-    @BindView(R.id.setting_switch_theme_dark)
+    @BindView(R.id.switch_theme_dark)
     protected SwitchCompat switchThemeDark;
 
-    @BindView(R.id.setting_switch_topic_draft)
+    @BindView(R.id.switch_topic_draft)
     protected SwitchCompat switchTopicDraft;
 
-    @BindView(R.id.setting_switch_topic_sign)
+    @BindView(R.id.switch_topic_sign)
     protected SwitchCompat switchTopicSign;
 
-    @BindView(R.id.setting_btn_modify_topic_sign)
+    @BindView(R.id.btn_modify_topic_sign)
     protected TextView btnModifyTopicSign;
 
-    @BindView(R.id.setting_switch_topic_render_compat)
+    @BindView(R.id.switch_topic_render_compat)
     protected SwitchCompat switchTopicRenderCompat;
 
     @Override
@@ -56,38 +56,38 @@ public class SettingActivity extends StatusBarActivity {
         switchTopicRenderCompat.setChecked(SettingShared.isEnableTopicRenderCompat(this));
     }
 
-    @OnClick(R.id.setting_btn_notification)
+    @OnClick(R.id.btn_notification)
     protected void onBtnNotificationClick() {
         switchNotification.toggle();
         SettingShared.setEnableNotification(this, switchNotification.isChecked());
     }
 
-    @OnClick(R.id.setting_btn_theme_dark)
+    @OnClick(R.id.btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         switchThemeDark.toggle();
         SettingShared.setEnableThemeDark(this, switchThemeDark.isChecked());
         ThemeUtils.notifyThemeApply(this, false);
     }
 
-    @OnClick(R.id.setting_btn_topic_draft)
+    @OnClick(R.id.btn_topic_draft)
     protected void onBtnTopicDraftClick() {
         switchTopicDraft.toggle();
         SettingShared.setEnableTopicDraft(this, switchTopicDraft.isChecked());
     }
 
-    @OnClick(R.id.setting_btn_topic_sign)
+    @OnClick(R.id.btn_topic_sign)
     protected void onBtnTopicSignClick() {
         switchTopicSign.toggle();
         SettingShared.setEnableTopicSign(this, switchTopicSign.isChecked());
         btnModifyTopicSign.setEnabled(switchTopicSign.isChecked());
     }
 
-    @OnClick(R.id.setting_btn_modify_topic_sign)
+    @OnClick(R.id.btn_modify_topic_sign)
     protected void onBtnModifyTopicSignClick() {
         startActivity(new Intent(this, ModifyTopicSignActivity.class));
     }
 
-    @OnClick(R.id.setting_btn_topic_render_compat)
+    @OnClick(R.id.btn_topic_render_compat)
     protected void onBtnTopicRenderCompatClick() {
         switchTopicRenderCompat.toggle();
         SettingShared.setEnableTopicRenderCompat(this, switchTopicRenderCompat.isChecked());

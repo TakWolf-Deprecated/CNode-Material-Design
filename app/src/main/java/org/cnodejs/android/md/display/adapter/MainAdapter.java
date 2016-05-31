@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.display.adapter;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import org.cnodejs.android.md.display.activity.UserDetailActivity;
 import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.util.ResUtils;
 
 import java.util.List;
 
@@ -92,10 +90,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public class LoadMoreViewHolder extends ViewHolder {
 
-        @BindView(R.id.item_load_more_icon_loading)
+        @BindView(R.id.icon_loading)
         protected View iconLoading;
 
-        @BindView(R.id.item_load_more_icon_finish)
+        @BindView(R.id.icon_finish)
         protected View iconFinish;
 
         protected LoadMoreViewHolder(@NonNull View itemView) {
@@ -113,31 +111,31 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public class NormalViewHolder extends ViewHolder {
 
-        @BindView(R.id.main_item_ctv_tab)
+        @BindView(R.id.ctv_tab)
         protected CheckedTextView ctvTab;
 
-        @BindView(R.id.main_item_tv_title)
+        @BindView(R.id.tv_title)
         protected TextView tvTitle;
 
-        @BindView(R.id.main_item_img_avatar)
+        @BindView(R.id.img_avatar)
         protected ImageView imgAvatar;
 
-        @BindView(R.id.main_item_tv_author)
+        @BindView(R.id.tv_author)
         protected TextView tvAuthor;
 
-        @BindView(R.id.main_item_tv_create_time)
+        @BindView(R.id.tv_create_time)
         protected TextView tvCreateTime;
 
-        @BindView(R.id.main_item_tv_reply_count)
+        @BindView(R.id.tv_reply_count)
         protected TextView tvReplyCount;
 
-        @BindView(R.id.main_item_tv_visit_count)
+        @BindView(R.id.tv_visit_count)
         protected TextView tvVisitCount;
 
-        @BindView(R.id.main_item_tv_last_reply_time)
+        @BindView(R.id.tv_last_reply_time)
         protected TextView tvLastReplyTime;
 
-        @BindView(R.id.main_item_icon_good)
+        @BindView(R.id.icon_good)
         protected View iconGood;
 
         private Topic topic;
@@ -163,12 +161,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
         }
 
-        @OnClick(R.id.main_item_img_avatar)
+        @OnClick(R.id.img_avatar)
         protected void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
         }
 
-        @OnClick(R.id.main_item_btn_item)
+        @OnClick(R.id.btn_item)
         protected void onBtnItemClick() {
             Navigator.TopicWithAutoCompat.start(activity, topic);
         }

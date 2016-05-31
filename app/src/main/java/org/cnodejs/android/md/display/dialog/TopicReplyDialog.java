@@ -37,16 +37,16 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
         );
     }
 
-    @BindView(R.id.editor_bar_layout_root)
+    @BindView(R.id.layout_editor_bar)
     protected ViewGroup editorBar;
 
-    @BindView(R.id.dialog_topic_reply_layout_target)
+    @BindView(R.id.layout_target)
     protected ViewGroup layoutTarget;
 
-    @BindView(R.id.dialog_topic_reply_tv_target)
+    @BindView(R.id.tv_target)
     protected TextView tvTarget;
 
-    @BindView(R.id.dialog_topic_reply_edt_content)
+    @BindView(R.id.edt_content)
     protected EditText edtContent;
 
     private final String topicId;
@@ -82,17 +82,17 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
         getWindow().setGravity(Gravity.BOTTOM);
     }
 
-    @OnClick(R.id.dialog_topic_reply_btn_tool_close)
+    @OnClick(R.id.btn_tool_close)
     protected void onBtnToolCloseClick() {
         dismissReplyWindow();
     }
 
-    @OnClick(R.id.dialog_topic_reply_btn_tool_send)
+    @OnClick(R.id.btn_tool_send)
     protected void onBtnToolSendClick() {
         topicReplyPresenter.replyTopicAsyncTask(topicId, edtContent.getText().toString().trim(), targetId);
     }
 
-    @OnClick(R.id.dialog_topic_reply_btn_clear_target)
+    @OnClick(R.id.btn_clear_target)
     protected void onBtnClearTargetClick() {
         targetId = null;
         layoutTarget.setVisibility(View.GONE);

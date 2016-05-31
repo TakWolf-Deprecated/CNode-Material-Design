@@ -7,26 +7,26 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/login_layout_top"
+        android:layout_alignBottom="@+id/layout_top"
         android:src="@drawable/login_header_bg"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true" />
 
     <LinearLayout
-        android:id="@+id/login_layout_top"
+        android:id="@+id/layout_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="56dp">
 
         <View
-            android:id="@+id/login_adapt_status_bar"
+            android:id="@+id/adapt_status_bar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/translucent_status" />
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/login_toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#01000000"
@@ -57,7 +57,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_layout_top"
+        android:layout_below="@+id/layout_top"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
@@ -74,7 +74,7 @@
             android:gravity="center_horizontal">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/login_edt_access_token"
+                android:id="@+id/edt_access_token"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -96,7 +96,7 @@
                 android:orientation="horizontal">
 
                 <Button style="@style/AppWidget.Button.Stroke"
-                    android:id="@+id/login_btn_qrcode"
+                    android:id="@+id/btn_qrcode"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
                     android:layout_weight="1"
@@ -104,7 +104,7 @@
                     android:text="@string/open_qrcode" />
 
                 <Button style="@style/AppWidget.Button"
-                    android:id="@+id/login_btn_login"
+                    android:id="@+id/btn_login"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
                     android:layout_weight="1"
@@ -114,7 +114,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/login_btn_login_tip"
+                android:id="@+id/btn_login_tip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"

@@ -52,16 +52,16 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.user_detail_item_img_avatar)
+        @BindView(R.id.img_avatar)
         protected ImageView imgAvatar;
 
-        @BindView(R.id.user_detail_item_tv_title)
+        @BindView(R.id.tv_title)
         protected TextView tvTitle;
 
-        @BindView(R.id.user_detail_item_tv_login_name)
+        @BindView(R.id.tv_login_name)
         protected TextView tvLoginName;
 
-        @BindView(R.id.user_detail_item_tv_last_reply_time)
+        @BindView(R.id.tv_last_reply_time)
         protected TextView tvLastReplyTime;
 
         private TopicSimple topic;
@@ -80,12 +80,12 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
             tvLastReplyTime.setText(FormatUtils.getRecentlyTimeText(topic.getLastReplyAt()));
         }
 
-        @OnClick(R.id.user_detail_item_img_avatar)
+        @OnClick(R.id.img_avatar)
         protected void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
         }
 
-        @OnClick(R.id.user_detail_item_btn_item)
+        @OnClick(R.id.btn_item)
         protected void onBtnItemClick() {
             Navigator.TopicWithAutoCompat.start(activity, topic.getId());
         }

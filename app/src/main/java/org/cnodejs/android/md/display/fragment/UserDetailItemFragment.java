@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class UserDetailItemFragment extends Fragment {
 
-    @BindView(R.id.user_detail_fragment_recycler_view)
+    @BindView(R.id.recycler_view)
     protected RecyclerView recyclerView;
 
     private UserDetailItemAdapter adapter;

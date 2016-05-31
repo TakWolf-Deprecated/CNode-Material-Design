@@ -33,16 +33,16 @@ import butterknife.ButterKnife;
 
 public class NotificationActivity extends StatusBarActivity implements INotificationView, IBackToContentTopView, Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.notification_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.notification_refresh_layout)
+    @BindView(R.id.refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.notification_recycler_view)
+    @BindView(R.id.recycler_view)
     protected RecyclerView recyclerView;
 
-    @BindView(R.id.notification_icon_no_data)
+    @BindView(R.id.icon_no_data)
     protected View iconNoData;
 
     private NotificationAdapter adapter;

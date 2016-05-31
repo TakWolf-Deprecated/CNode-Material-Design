@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/topic_compat_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -21,7 +21,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/topic_compat_icon_no_data"
+            android:id="@+id/icon_no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -33,12 +33,12 @@
             android:gravity="center" />
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/topic_compat_refresh_layout"
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <org.cnodejs.android.md.display.widget.TopicWebView
-                android:id="@+id/topic_compat_web_topic"
+                android:id="@+id/web_topic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:darkTheme="?attr/darkMode" />
@@ -46,7 +46,7 @@
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/topic_compat_fab_reply"
+            android:id="@+id/fab_reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

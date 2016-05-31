@@ -32,43 +32,43 @@ import butterknife.OnClick;
 
 public class TopicHeaderViewHolder implements ITopicHeaderView {
 
-    @BindView(R.id.topic_header_layout_content)
+    @BindView(R.id.layout_content)
     protected ViewGroup layoutContent;
 
-    @BindView(R.id.topic_header_icon_good)
+    @BindView(R.id.icon_good)
     protected View iconGood;
 
-    @BindView(R.id.topic_header_tv_title)
+    @BindView(R.id.tv_title)
     protected TextView tvTitle;
 
-    @BindView(R.id.topic_header_img_avatar)
+    @BindView(R.id.img_avatar)
     protected ImageView imgAvatar;
 
-    @BindView(R.id.topic_header_ctv_tab)
+    @BindView(R.id.ctv_tab)
     protected CheckedTextView ctvTab;
 
-    @BindView(R.id.topic_header_tv_login_name)
+    @BindView(R.id.tv_login_name)
     protected TextView tvLoginName;
 
-    @BindView(R.id.topic_header_tv_create_time)
+    @BindView(R.id.tv_create_time)
     protected TextView tvCreateTime;
 
-    @BindView(R.id.topic_header_tv_visit_count)
+    @BindView(R.id.tv_visit_count)
     protected TextView tvVisitCount;
 
-    @BindView(R.id.topic_header_btn_favorite)
+    @BindView(R.id.btn_favorite)
     protected ImageView btnFavorite;
 
-    @BindView(R.id.topic_header_web_content)
+    @BindView(R.id.web_content)
     protected ContentWebView webContent;
 
-    @BindView(R.id.topic_header_layout_no_reply)
+    @BindView(R.id.layout_no_reply)
     protected ViewGroup layoutNoReply;
 
-    @BindView(R.id.topic_header_layout_reply_count)
+    @BindView(R.id.layout_reply_count)
     protected ViewGroup layoutReplyCount;
 
-    @BindView(R.id.topic_header_tv_reply_count)
+    @BindView(R.id.tv_reply_count)
     protected TextView tvReplyCount;
 
     private final Activity activity;
@@ -86,12 +86,12 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
         this.topicHeaderPresenter = new TopicHeaderPresenter(activity, this);
     }
 
-    @OnClick(R.id.topic_header_img_avatar)
+    @OnClick(R.id.img_avatar)
     protected void onBtnAvatarClick() {
         UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
     }
 
-    @OnClick(R.id.topic_header_btn_favorite)
+    @OnClick(R.id.btn_favorite)
     protected void onBtnFavoriteClick() {
         if (topic != null) {
             if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {

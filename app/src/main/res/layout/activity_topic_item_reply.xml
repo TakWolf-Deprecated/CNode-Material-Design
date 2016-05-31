@@ -20,7 +20,7 @@
             android:paddingRight="16dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/topic_item_reply_img_avatar"
+                android:id="@+id/img_avatar"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
                 android:layout_centerVertical="true"
@@ -34,14 +34,14 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/topic_item_reply_img_avatar"
-                android:layout_toRightOf="@+id/topic_item_reply_img_avatar"
-                android:layout_toStartOf="@+id/topic_item_reply_layout_icon"
-                android:layout_toLeftOf="@+id/topic_item_reply_layout_icon"
+                android:layout_toEndOf="@+id/img_avatar"
+                android:layout_toRightOf="@+id/img_avatar"
+                android:layout_toStartOf="@+id/layout_icon"
+                android:layout_toLeftOf="@+id/layout_icon"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/topic_item_reply_tv_login_name"
+                    android:id="@+id/tv_login_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="?android:attr/textColorPrimary"
@@ -55,7 +55,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/topic_item_reply_tv_index"
+                        android:id="@+id/tv_index"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/color_accent"
@@ -74,7 +74,7 @@
                         android:singleLine="true" />
 
                     <TextView
-                        android:id="@+id/topic_item_reply_tv_create_time"
+                        android:id="@+id/tv_create_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="?android:attr/textColorSecondary"
@@ -87,7 +87,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/topic_item_reply_layout_icon"
+                android:id="@+id/layout_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -97,7 +97,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/topic_item_reply_btn_ups"
+                    android:id="@+id/btn_ups"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
@@ -111,7 +111,7 @@
                     tools:text="12" />
 
                 <ImageView
-                    android:id="@+id/topic_item_reply_btn_at"
+                    android:id="@+id/btn_at"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
@@ -124,7 +124,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/topic_item_reply_tv_target_position"
+            android:id="@+id/tv_target_position"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
@@ -135,7 +135,7 @@
             tools:text="回复：1楼" />
 
         <org.cnodejs.android.md.display.widget.ContentWebView
-            android:id="@+id/topic_item_reply_web_content"
+            android:id="@+id/web_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -144,9 +144,9 @@
     </LinearLayout>
 
     <View style="@style/AppWidget.DeepLine"
-        android:id="@+id/topic_item_reply_icon_deep_line" />
+        android:id="@+id/icon_deep_line" />
 
     <View style="@style/AppWidget.ShadowGap"
-        android:id="@+id/topic_item_reply_icon_shadow_gap" />
+        android:id="@+id/icon_shadow_gap" />
 
 </LinearLayout>

@@ -6,14 +6,14 @@
     android:orientation="vertical">
 
     <View
-        android:id="@+id/main_center_adapt_status_bar"
+        android:id="@+id/center_adapt_status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorPrimaryDark"
         android:elevation="@dimen/app_bar_elevation" />
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/main_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -28,7 +28,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/main_icon_no_data"
+            android:id="@+id/icon_no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -40,19 +40,19 @@
             android:gravity="center" />
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/main_refresh_layout"
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/main_recycler_view"
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/main_fab_create_topic"
+            android:id="@+id/fab_create_topic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

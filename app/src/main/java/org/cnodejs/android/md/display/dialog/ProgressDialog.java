@@ -21,7 +21,7 @@ public class ProgressDialog extends AppCompatDialog {
         return new ProgressDialog(activity, SettingShared.isEnableThemeDark(activity) ? R.style.AppDialogDark_Alert : R.style.AppDialogLight_Alert);
     }
 
-    @BindView(R.id.dialog_progress_tv_message)
+    @BindView(R.id.tv_message)
     protected TextView tvMessage;
 
     private ProgressDialog(@NonNull Activity activity, int theme) {

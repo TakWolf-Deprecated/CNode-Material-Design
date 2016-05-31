@@ -16,10 +16,10 @@ import butterknife.ButterKnife;
 
 public class ModifyTopicSignActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
-    @BindView(R.id.modify_topic_sign_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.modify_topic_sign_edt_content)
+    @BindView(R.id.edt_content)
     protected EditText edtContent;
 
     @Override

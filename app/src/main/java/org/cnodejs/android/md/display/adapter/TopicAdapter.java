@@ -81,31 +81,31 @@ public class TopicAdapter extends BaseAdapter {
 
     public class ViewHolder implements ITopicItemReplyView {
 
-        @BindView(R.id.topic_item_reply_img_avatar)
+        @BindView(R.id.img_avatar)
         protected ImageView imgAvatar;
 
-        @BindView(R.id.topic_item_reply_tv_login_name)
+        @BindView(R.id.tv_login_name)
         protected TextView tvLoginName;
 
-        @BindView(R.id.topic_item_reply_tv_index)
+        @BindView(R.id.tv_index)
         protected TextView tvIndex;
 
-        @BindView(R.id.topic_item_reply_tv_create_time)
+        @BindView(R.id.tv_create_time)
         protected TextView tvCreateTime;
 
-        @BindView(R.id.topic_item_reply_btn_ups)
+        @BindView(R.id.btn_ups)
         protected TextView btnUps;
 
-        @BindView(R.id.topic_item_reply_tv_target_position)
+        @BindView(R.id.tv_target_position)
         protected TextView tvTargetPosition;
 
-        @BindView(R.id.topic_item_reply_web_content)
+        @BindView(R.id.web_content)
         protected ContentWebView webContent;
 
-        @BindView(R.id.topic_item_reply_icon_deep_line)
+        @BindView(R.id.icon_deep_line)
         protected View iconDeepLine;
 
-        @BindView(R.id.topic_item_reply_icon_shadow_gap)
+        @BindView(R.id.icon_shadow_gap)
         protected View iconShadowGap;
 
         private final ITopicItemReplyPresenter topicItemReplyPresenter;
@@ -147,12 +147,12 @@ public class TopicAdapter extends BaseAdapter {
             btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
         }
 
-        @OnClick(R.id.topic_item_reply_img_avatar)
+        @OnClick(R.id.img_avatar)
         protected void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar, reply.getAuthor().getAvatarUrl());
         }
 
-        @OnClick(R.id.topic_item_reply_btn_ups)
+        @OnClick(R.id.btn_ups)
         protected void onBtnUpsClick() {
             if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
                 if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
@@ -163,7 +163,7 @@ public class TopicAdapter extends BaseAdapter {
             }
         }
 
-        @OnClick(R.id.topic_item_reply_btn_at)
+        @OnClick(R.id.btn_at)
         protected void onBtnAtClick() {
             if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
                 topicReplyView.onAt(reply, positionMap.get(reply.getId()));

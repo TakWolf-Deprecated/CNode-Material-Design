@@ -18,7 +18,7 @@
             app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/create_topic_toolbar"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
@@ -49,7 +49,7 @@
                     android:textSize="16sp" />
 
                 <Spinner
-                    android:id="@+id/create_topic_spn_tab"
+                    android:id="@+id/spn_tab"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/app_bar_size"
                     android:entries="@array/tabs" />
@@ -59,7 +59,7 @@
             <View style="@style/AppWidget.DeepLine" />
 
             <EditText
-                android:id="@+id/create_topic_edt_title"
+                android:id="@+id/edt_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -92,7 +92,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <EditText
-            android:id="@+id/create_topic_edt_content"
+            android:id="@+id/edt_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"

@@ -70,31 +70,31 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         context.startActivity(intent);
     }
 
-    @BindView(R.id.user_detail_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.user_detail_tab_layout)
+    @BindView(R.id.tab_layout)
     protected TabLayout tabLayout;
 
-    @BindView(R.id.user_detail_view_pager)
+    @BindView(R.id.view_pager)
     protected ViewPager viewPager;
 
-    @BindView(R.id.user_detail_img_avatar)
+    @BindView(R.id.img_avatar)
     protected ImageView imgAvatar;
 
-    @BindView(R.id.user_detail_tv_login_name)
+    @BindView(R.id.tv_login_name)
     protected TextView tvLoginName;
 
-    @BindView(R.id.user_detail_tv_github_username)
+    @BindView(R.id.tv_github_username)
     protected TextView tvGithubUsername;
 
-    @BindView(R.id.user_detail_tv_create_time)
+    @BindView(R.id.tv_create_time)
     protected TextView tvCreateTime;
 
-    @BindView(R.id.user_detail_tv_score)
+    @BindView(R.id.tv_score)
     protected TextView tvScore;
 
-    @BindView(R.id.user_detail_progress_wheel)
+    @BindView(R.id.progress_wheel)
     protected ProgressWheel progressWheel;
 
     private UserDetailAdapter adapter;
@@ -155,7 +155,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     @Override
     protected void onSaveInstanceState(Bundle outState) {}
 
-    @OnClick(R.id.user_detail_img_avatar)
+    @OnClick(R.id.img_avatar)
     protected void onBtnAvatarClick() {
         if (!loading) {
             userDetailPresenter.getUserAsyncTask(loginName);
@@ -163,7 +163,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         }
     }
 
-    @OnClick(R.id.user_detail_tv_github_username)
+    @OnClick(R.id.tv_github_username)
     protected void onBtnGithubUsernameClick() {
         if (!TextUtils.isEmpty(githubUsername)) {
             Navigator.openInBrowser(this, "https://github.com/" + githubUsername);

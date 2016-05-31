@@ -44,19 +44,19 @@ import butterknife.OnClick;
 
 public class TopicCompatActivity extends StatusBarActivity implements ITopicView, ITopicHeaderView, ITopicItemReplyView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
-    @BindView(R.id.topic_compat_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.topic_compat_refresh_layout)
+    @BindView(R.id.refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.topic_compat_web_topic)
+    @BindView(R.id.web_topic)
     protected TopicWebView webTopic;
 
-    @BindView(R.id.topic_compat_icon_no_data)
+    @BindView(R.id.icon_no_data)
     protected View iconNoData;
 
-    @BindView(R.id.topic_compat_fab_reply)
+    @BindView(R.id.fab_reply)
     protected FloatingActionButton fabReply;
 
     private String topicId;
@@ -113,7 +113,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
         topicPresenter.getTopicAsyncTask(topicId);
     }
 
-    @OnClick(R.id.topic_compat_fab_reply)
+    @OnClick(R.id.fab_reply)
     protected void onBtnReplyClick() {
         if (topic != null && LoginActivity.startForResultWithAccessTokenCheck(this)) {
             topicReplyView.showReplyWindow();

@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <uk.co.senab.photoview.PhotoView
-        android:id="@+id/image_preview_photo_view"
+        android:id="@+id/photo_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="@dimen/app_bar_size"
@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/image_preview_toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#cc303030"
@@ -34,7 +34,7 @@
             android:layout_height="match_parent">
 
             <com.pnikosis.materialishprogress.ProgressWheel
-                android:id="@+id/image_preview_progress_wheel"
+                android:id="@+id/progress_wheel"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/notification_item_btn_item"
+    android:id="@+id/btn_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackgroundGeneral"
@@ -18,7 +18,7 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/notification_item_img_avatar"
+            android:id="@+id/img_avatar"
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:src="@drawable/image_placeholder" />
@@ -35,17 +35,17 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/notification_item_tv_from"
+                    android:id="@+id/tv_from"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/notification_item_tv_time"
-                    android:layout_toLeftOf="@+id/notification_item_tv_time"
+                    android:layout_toStartOf="@+id/tv_time"
+                    android:layout_toLeftOf="@+id/tv_time"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="16sp"
                     tools:text="TakWolf" />
 
                 <TextView
-                    android:id="@+id/notification_item_tv_time"
+                    android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -62,7 +62,7 @@
                 android:layout_marginTop="4dp">
 
                 <TextView
-                    android:id="@+id/notification_item_tv_action"
+                    android:id="@+id/tv_action"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="?android:attr/textColorSecondary"
@@ -70,7 +70,7 @@
                     tools:text="回复了您的话题" />
 
                 <View style="@style/AppWidget.BadgeDot"
-                    android:id="@+id/notification_item_badge_read"
+                    android:id="@+id/badge_read"
                     android:layout_gravity="center|end"
                     android:layout_marginEnd="4dp"
                     android:layout_marginRight="4dp" />
@@ -82,7 +82,7 @@
     </LinearLayout>
 
     <org.cnodejs.android.md.display.widget.ContentWebView
-        android:id="@+id/notification_item_web_content"
+        android:id="@+id/web_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -91,7 +91,7 @@
         app:darkTheme="?attr/darkMode" />
 
     <TextView
-        android:id="@+id/notification_item_tv_topic_title"
+        android:id="@+id/tv_topic_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
