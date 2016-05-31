@@ -46,19 +46,19 @@ import butterknife.OnClick;
 
 public class TopicActivity extends StatusBarActivity implements ITopicView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
-    @BindView(R.id.topic_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.topic_refresh_layout)
+    @BindView(R.id.refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.topic_list_view)
+    @BindView(R.id.list_view)
     protected ListView listView;
 
-    @BindView(R.id.topic_icon_no_data)
+    @BindView(R.id.icon_no_data)
     protected View iconNoData;
 
-    @BindView(R.id.topic_fab_reply)
+    @BindView(R.id.fab_reply)
     protected FloatingActionButton fabReply;
 
     private String topicId;
@@ -124,7 +124,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         topicPresenter.getTopicAsyncTask(topicId);
     }
 
-    @OnClick(R.id.topic_fab_reply)
+    @OnClick(R.id.fab_reply)
     protected void onBtnReplyClick() {
         if (topic != null && LoginActivity.startForResultWithAccessTokenCheck(this)) {
             topicReplyView.showReplyWindow();

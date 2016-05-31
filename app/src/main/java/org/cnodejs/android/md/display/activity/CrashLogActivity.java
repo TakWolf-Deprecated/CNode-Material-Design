@@ -23,10 +23,10 @@ import butterknife.ButterKnife;
 
 public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
-    @BindView(R.id.crash_log_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.crash_log_tv_info)
+    @BindView(R.id.tv_info)
     protected TextView tvInfo;
 
     private String crashLog;

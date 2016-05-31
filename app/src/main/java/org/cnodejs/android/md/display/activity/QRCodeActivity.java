@@ -79,13 +79,13 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
         activity.startActivityForResult(new Intent(activity, QRCodeActivity.class), REQUEST_QRCODE);
     }
 
-    @BindView(R.id.qrcode_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.qrcode_qr_view)
+    @BindView(R.id.qr_view)
     protected QRCodeReaderView qrCodeReaderView;
 
-    @BindView(R.id.qrcode_icon_line)
+    @BindView(R.id.icon_line)
     protected View iconLine;
 
     @Override

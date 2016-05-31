@@ -56,62 +56,62 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     private static final int PAGE_LIMIT = 20;
 
     // 抽屉导航布局
-    @BindView(R.id.main_drawer_layout)
+    @BindView(R.id.drawer_layout)
     protected DrawerLayout drawerLayout;
 
     // 状态栏
-    @BindView(R.id.main_center_adapt_status_bar)
+    @BindView(R.id.center_adapt_status_bar)
     protected View centerAdaptStatusBar;
 
-    @BindView(R.id.main_nav_adapt_status_bar)
+    @BindView(R.id.nav_adapt_status_bar)
     protected View navAdaptStatusBar;
 
     // 导航部分的个人信息
-    @BindView(R.id.main_nav_img_avatar)
+    @BindView(R.id.img_avatar)
     protected ImageView imgAvatar;
 
-    @BindView(R.id.main_nav_tv_login_name)
+    @BindView(R.id.tv_login_name)
     protected TextView tvLoginName;
 
-    @BindView(R.id.main_nav_tv_score)
+    @BindView(R.id.tv_score)
     protected TextView tvScore;
 
-    @BindView(R.id.main_nav_tv_badge_notification)
+    @BindView(R.id.badge_nav_notification)
     protected TextView tvBadgeNotification;
 
-    @BindView(R.id.main_nav_btn_logout)
+    @BindView(R.id.btn_logout)
     protected View btnLogout;
 
-    @BindView(R.id.main_nav_btn_theme_dark)
+    @BindView(R.id.btn_theme_dark)
     protected ImageView imgThemeDark;
 
-    @BindView(R.id.main_nav_img_top_background)
+    @BindView(R.id.img_nav_top_background)
     protected ImageView imgTopBackground;
 
     // 主要导航项
     @BindViews({
-            R.id.main_nav_btn_all,
-            R.id.main_nav_btn_good,
-            R.id.main_nav_btn_share,
-            R.id.main_nav_btn_ask,
-            R.id.main_nav_btn_job
+            R.id.btn_nav_all,
+            R.id.btn_nav_good,
+            R.id.btn_nav_share,
+            R.id.btn_nav_ask,
+            R.id.btn_nav_job
     })
     protected List<CheckedTextView> navMainItemList;
 
     // 内容部分
-    @BindView(R.id.main_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.main_refresh_layout)
+    @BindView(R.id.refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.main_recycler_view)
+    @BindView(R.id.recycler_view)
     protected RecyclerView recyclerView;
 
-    @BindView(R.id.main_icon_no_data)
+    @BindView(R.id.icon_no_data)
     protected View iconNoData;
 
-    @BindView(R.id.main_fab_create_topic)
+    @BindView(R.id.fab_create_topic)
     protected FloatingActionButton fabCreateTopic;
 
     // 当前版块，默认为all
@@ -186,19 +186,19 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
             for (CheckedTextView navItem : navMainItemList) {
                 if (navItem.isChecked()) {
                     switch (navItem.getId()) {
-                        case R.id.main_nav_btn_all:
+                        case R.id.btn_nav_all:
                             newTab = TabType.all;
                             break;
-                        case R.id.main_nav_btn_good:
+                        case R.id.btn_nav_good:
                             newTab = TabType.good;
                             break;
-                        case R.id.main_nav_btn_share:
+                        case R.id.btn_nav_share:
                             newTab = TabType.share;
                             break;
-                        case R.id.main_nav_btn_ask:
+                        case R.id.btn_nav_ask:
                             newTab = TabType.ask;
                             break;
-                        case R.id.main_nav_btn_job:
+                        case R.id.btn_nav_job:
                             newTab = TabType.job;
                             break;
                         default:
@@ -251,11 +251,11 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
      * 主导航项单击事件
      */
     @OnClick({
-            R.id.main_nav_btn_all,
-            R.id.main_nav_btn_good,
-            R.id.main_nav_btn_share,
-            R.id.main_nav_btn_ask,
-            R.id.main_nav_btn_job
+            R.id.btn_nav_all,
+            R.id.btn_nav_good,
+            R.id.btn_nav_share,
+            R.id.btn_nav_ask,
+            R.id.btn_nav_job
     })
     public void onNavigationMainItemClick(CheckedTextView itemView) {
         for (CheckedTextView navItem : navMainItemList) {
@@ -269,23 +269,23 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
      */
 
     @OnClick({
-            R.id.main_nav_btn_notification,
-            R.id.main_nav_btn_setting,
-            R.id.main_nav_btn_about
+            R.id.btn_nav_notification,
+            R.id.btn_nav_setting,
+            R.id.btn_nav_about
     })
     public void onNavigationItemOtherClick(View itemView) {
         switch (itemView.getId()) {
-            case R.id.main_nav_btn_notification:
+            case R.id.btn_nav_notification:
                 if (LoginActivity.startForResultWithAccessTokenCheck(this)) {
                     notificationAction.startDelayed();
                     drawerLayout.closeDrawers();
                 }
                 break;
-            case R.id.main_nav_btn_setting:
+            case R.id.btn_nav_setting:
                 settingAction.startDelayed();
                 drawerLayout.closeDrawers();
                 break;
-            case R.id.main_nav_btn_about:
+            case R.id.btn_nav_about:
                 aboutAction.startDelayed();
                 drawerLayout.closeDrawers();
                 break;
@@ -322,7 +322,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     /**
      * 注销按钮
      */
-    @OnClick(R.id.main_nav_btn_logout)
+    @OnClick(R.id.btn_logout)
     protected void onBtnLogoutClick() {
         AlertDialogUtils.createBuilderWithAutoTheme(this)
                 .setMessage(R.string.logout_tip)
@@ -343,7 +343,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     /**
      * 主题按钮
      */
-    @OnClick(R.id.main_nav_btn_theme_dark)
+    @OnClick(R.id.btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
         ThemeUtils.notifyThemeApply(this, false);
@@ -352,7 +352,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     /**
      * 用户信息按钮
      */
-    @OnClick(R.id.main_nav_layout_info)
+    @OnClick(R.id.layout_info)
     protected void onBtnInfoClick() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             LoginActivity.startForResult(this);
@@ -364,7 +364,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     /**
      * 发帖按钮
      */
-    @OnClick(R.id.main_fab_create_topic)
+    @OnClick(R.id.fab_create_topic)
     protected void onBtnCreateTopicClick() {
         if (LoginActivity.startForResultWithAccessTokenCheck(this)) {
             startActivity(new Intent(this, CreateTopicActivity.class));

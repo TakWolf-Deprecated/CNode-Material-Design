@@ -45,7 +45,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.activity_notification_item, parent, false));
+        return new ViewHolder(inflater.inflate(R.layout.item_notification, parent, false));
     }
 
     @Override
@@ -55,25 +55,25 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.notification_item_img_avatar)
+        @BindView(R.id.img_avatar)
         protected ImageView imgAvatar;
 
-        @BindView(R.id.notification_item_tv_from)
+        @BindView(R.id.tv_from)
         protected TextView tvFrom;
 
-        @BindView(R.id.notification_item_tv_time)
+        @BindView(R.id.tv_time)
         protected TextView tvTime;
 
-        @BindView(R.id.notification_item_tv_action)
+        @BindView(R.id.tv_action)
         protected TextView tvAction;
 
-        @BindView(R.id.notification_item_badge_read)
+        @BindView(R.id.badge_read)
         protected View badgeRead;
 
-        @BindView(R.id.notification_item_web_content)
+        @BindView(R.id.web_content)
         protected ContentWebView webContent;
 
-        @BindView(R.id.notification_item_tv_topic_title)
+        @BindView(R.id.tv_topic_title)
         protected TextView tvTopicTitle;
 
         private Message message;
@@ -110,12 +110,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             }
         }
 
-        @OnClick(R.id.notification_item_img_avatar)
+        @OnClick(R.id.img_avatar)
         protected void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, message.getAuthor().getLoginName(), imgAvatar, message.getAuthor().getAvatarUrl());
         }
 
-        @OnClick(R.id.notification_item_btn_item)
+        @OnClick(R.id.btn_item)
         protected void onBtnItemClick() {
             Navigator.TopicWithAutoCompat.start(activity, message.getTopic().getId());
         }

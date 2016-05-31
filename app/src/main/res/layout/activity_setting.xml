@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/setting_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -37,7 +37,7 @@
                 android:textSize="14sp" />
 
             <RelativeLayout
-                android:id="@+id/setting_btn_notification"
+                android:id="@+id/btn_notification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -46,8 +46,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/setting_switch_notification"
-                    android:layout_toLeftOf="@+id/setting_switch_notification"
+                    android:layout_toStartOf="@+id/switch_notification"
+                    android:layout_toLeftOf="@+id/switch_notification"
                     android:orientation="vertical">
 
                     <TextView
@@ -68,7 +68,7 @@
                 </LinearLayout>
 
                 <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/setting_switch_notification"
+                    android:id="@+id/switch_notification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -90,7 +90,7 @@
                 android:textSize="14sp" />
 
             <RelativeLayout
-                android:id="@+id/setting_btn_theme_dark"
+                android:id="@+id/btn_theme_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
@@ -100,8 +100,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/setting_switch_theme_dark"
-                    android:layout_toLeftOf="@+id/setting_switch_theme_dark"
+                    android:layout_toStartOf="@+id/switch_theme_dark"
+                    android:layout_toLeftOf="@+id/switch_theme_dark"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
                     android:text="@string/theme_dark"
@@ -109,7 +109,7 @@
                     android:textSize="16sp" />
 
                 <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/setting_switch_theme_dark"
+                    android:id="@+id/switch_theme_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -131,7 +131,7 @@
                 android:textSize="14sp" />
 
             <RelativeLayout
-                android:id="@+id/setting_btn_topic_draft"
+                android:id="@+id/btn_topic_draft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -140,8 +140,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/setting_switch_topic_draft"
-                    android:layout_toLeftOf="@+id/setting_switch_topic_draft"
+                    android:layout_toStartOf="@+id/switch_topic_draft"
+                    android:layout_toLeftOf="@+id/switch_topic_draft"
                     android:orientation="vertical">
 
                     <TextView
@@ -162,7 +162,7 @@
                 </LinearLayout>
 
                 <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/setting_switch_topic_draft"
+                    android:id="@+id/switch_topic_draft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -176,7 +176,7 @@
             <View style="@style/AppWidget.DeepLine" />
 
             <RelativeLayout
-                android:id="@+id/setting_btn_topic_sign"
+                android:id="@+id/btn_topic_sign"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -185,8 +185,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/setting_switch_topic_sign"
-                    android:layout_toLeftOf="@+id/setting_switch_topic_sign"
+                    android:layout_toStartOf="@+id/switch_topic_sign"
+                    android:layout_toLeftOf="@+id/switch_topic_sign"
                     android:orientation="vertical">
 
                     <TextView
@@ -207,7 +207,7 @@
                 </LinearLayout>
 
                 <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/setting_switch_topic_sign"
+                    android:id="@+id/switch_topic_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -221,7 +221,7 @@
             <View style="@style/AppWidget.DeepLine" />
 
             <TextView
-                android:id="@+id/setting_btn_modify_topic_sign"
+                android:id="@+id/btn_modify_topic_sign"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -233,7 +233,7 @@
             <View style="@style/AppWidget.DeepLine" />
 
             <RelativeLayout
-                android:id="@+id/setting_btn_topic_render_compat"
+                android:id="@+id/btn_topic_render_compat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -242,8 +242,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/setting_switch_topic_render_compat"
-                    android:layout_toLeftOf="@+id/setting_switch_topic_render_compat"
+                    android:layout_toStartOf="@+id/switch_topic_render_compat"
+                    android:layout_toLeftOf="@+id/switch_topic_render_compat"
                     android:orientation="vertical">
 
                     <TextView
@@ -264,7 +264,7 @@
                 </LinearLayout>
 
                 <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/setting_switch_topic_render_compat"
+                    android:id="@+id/switch_topic_render_compat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

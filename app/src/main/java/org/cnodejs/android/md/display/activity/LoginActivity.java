@@ -59,13 +59,13 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         }
     }
 
-    @BindView(R.id.login_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.login_adapt_status_bar)
+    @BindView(R.id.adapt_status_bar)
     protected View adaptStatusBar;
 
-    @BindView(R.id.login_edt_access_token)
+    @BindView(R.id.edt_access_token)
     protected MaterialEditText edtAccessToken;
 
     protected ProgressDialog progressDialog;
@@ -89,12 +89,12 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         loginPresenter = new LoginPresenter(this, this);
     }
 
-    @OnClick(R.id.login_btn_login)
+    @OnClick(R.id.btn_login)
     protected void onBtnLoginClick() {
         loginPresenter.loginAsyncTask(edtAccessToken.getText().toString().trim());
     }
 
-    @OnClick(R.id.login_btn_qrcode)
+    @OnClick(R.id.btn_qrcode)
     protected void onBtnQrcodeClick() {
         QRCodeActivity.startForResultWithPermissionCheck(this);
     }
@@ -117,7 +117,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         }
     }
 
-    @OnClick(R.id.login_btn_login_tip)
+    @OnClick(R.id.btn_login_tip)
     protected void onBtnLoginTipClick() {
         AlertDialogUtils.createBuilderWithAutoTheme(this)
                 .setMessage(R.string.how_to_get_access_token_tip_content)

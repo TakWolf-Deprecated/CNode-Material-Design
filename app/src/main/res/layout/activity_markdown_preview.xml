@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/markdown_preview_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -17,7 +17,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <org.cnodejs.android.md.display.widget.PreviewWebView
-        android:id="@+id/markdown_preview_web_preview"
+        android:id="@+id/web_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:darkTheme="?attr/darkMode" />

@@ -26,10 +26,10 @@ public class MarkdownPreviewActivity extends StatusBarActivity {
         activity.startActivity(intent);
     }
 
-    @BindView(R.id.markdown_preview_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.markdown_preview_web_preview)
+    @BindView(R.id.web_preview)
     protected PreviewWebView webPreview;
 
     @Override
