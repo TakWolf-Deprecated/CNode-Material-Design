@@ -80,7 +80,7 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
     public TopicHeaderViewHolder(@NonNull Activity activity, @NonNull ListView listView) {
         this.activity = activity;
         LayoutInflater inflater = LayoutInflater.from(activity);
-        View headerView = inflater.inflate(R.layout.activity_topic_header, listView, false);
+        View headerView = inflater.inflate(R.layout.item_topic_header, listView, false);
         ButterKnife.bind(this, headerView);
         listView.addHeaderView(headerView, null, false);
         this.topicHeaderPresenter = new TopicHeaderPresenter(activity, this);

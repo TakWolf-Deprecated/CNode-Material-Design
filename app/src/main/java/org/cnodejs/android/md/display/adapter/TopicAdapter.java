@@ -69,7 +69,7 @@ public class TopicAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.activity_topic_item_reply, parent, false);
+            convertView = inflater.inflate(R.layout.item_topic_reply, parent, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {

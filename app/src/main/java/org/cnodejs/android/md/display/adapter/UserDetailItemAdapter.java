@@ -42,7 +42,7 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.activity_user_detail_item, parent, false));
+        return new ViewHolder(inflater.inflate(R.layout.item_user_detail, parent, false));
     }
 
     @Override

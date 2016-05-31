@@ -67,9 +67,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_LOAD_MORE:
-                return new LoadMoreViewHolder(inflater.inflate(R.layout.activity_item_load_more, parent, false));
+                return new LoadMoreViewHolder(inflater.inflate(R.layout.item_load_more, parent, false));
             default: // TYPE_NORMAL
-                return new NormalViewHolder(inflater.inflate(R.layout.activity_main_item, parent, false));
+                return new NormalViewHolder(inflater.inflate(R.layout.item_main, parent, false));
         }
     }
 
