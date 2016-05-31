@@ -79,7 +79,7 @@
             android:scrollbars="none"
             android:background="?attr/widgetBackground">
 
-            <include layout="@layout/activity_editor_bar" />
+            <include layout="@layout/widget_editor_bar" />
 
         </HorizontalScrollView>
 

@@ -36,7 +36,7 @@
             android:layout_marginRight="1dp"
             android:scrollbars="none">
 
-            <include layout="@layout/activity_editor_bar" />
+            <include layout="@layout/widget_editor_bar" />
 
         </HorizontalScrollView>
 
