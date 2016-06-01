@@ -99,7 +99,7 @@
                 <Button style="@style/AppWidget.Button.Stroke"
                     android:id="@+id/btn_qrcode"
                     android:layout_width="0dp"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:layout_margin="8dp"
                     android:text="@string/open_qrcode" />
@@ -107,7 +107,7 @@
                 <Button style="@style/AppWidget.Button"
                     android:id="@+id/btn_login"
                     android:layout_width="0dp"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:layout_margin="8dp"
                     android:text="@string/login" />
