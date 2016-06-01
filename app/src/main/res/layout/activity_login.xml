@@ -80,6 +80,7 @@
                 android:layout_margin="8dp"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
+                android:textSize="16sp"
                 android:hint="@string/access_token_$"
                 android:inputType="text"
                 android:maxLength="36"
