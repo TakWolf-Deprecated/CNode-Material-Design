@@ -17,6 +17,7 @@ import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
 import org.cnodejs.android.md.display.listener.DialogCancelCallListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.util.DisplayUtils;
 import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.display.util.ToastUtils;
 import org.cnodejs.android.md.display.view.ILoginView;
@@ -79,7 +80,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        adaptStatusBar(adaptStatusBar);
+        DisplayUtils.adaptStatusBar(this, adaptStatusBar);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
