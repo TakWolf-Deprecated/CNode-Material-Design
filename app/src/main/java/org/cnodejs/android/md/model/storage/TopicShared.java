@@ -14,9 +14,9 @@ public final class TopicShared {
         return TAG + "@" + LoginShared.getId(context);
     }
 
-    private static final String KEY_DRAFT_TAB_POSITION = "draft_tab_position";
-    private static final String KEY_DRAFT_TITLE = "draft_title";
-    private static final String KEY_DRAFT_CONTENT = "draft_content";
+    private static final String KEY_DRAFT_TAB_POSITION = "draftTabPosition";
+    private static final String KEY_DRAFT_TITLE = "draftTitle";
+    private static final String KEY_DRAFT_CONTENT = "draftContent";
 
     public static void clear(@NonNull Context context) {
         SharedWrapper.with(context, getSharedName(context)).clear();
