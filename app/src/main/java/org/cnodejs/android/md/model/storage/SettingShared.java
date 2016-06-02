@@ -11,12 +11,13 @@ public final class SettingShared {
 
     private static final String TAG = "SettingShared";
 
-    private static final String KEY_ENABLE_NOTIFICATION = "enable_notification";
-    private static final String KEY_ENABLE_THEME_DARK = "enable_theme_dark";
-    private static final String KEY_ENABLE_TOPIC_DRAFT = "enable_topic_draft";
-    private static final String KEY_ENABLE_TOPIC_SIGN = "enable_topic_sign";
-    private static final String KEY_TOPIC_SIGN_CONTENT = "topic_sign_content";
-    private static final String KEY_ENABLE_TOPIC_RENDER_COMPAT = "enable_topic_render_compat";
+    private static final String KEY_ENABLE_NOTIFICATION = "enableNotification";
+    private static final String KEY_ENABLE_THEME_DARK = "enableThemeDark";
+    private static final String KEY_ENABLE_TOPIC_DRAFT = "enableTopicDraft";
+    private static final String KEY_ENABLE_TOPIC_SIGN = "enableTopicSign";
+    private static final String KEY_TOPIC_SIGN_CONTENT = "topicSignContent";
+    private static final String KEY_ENABLE_TOPIC_RENDER_COMPAT = "enableTopicRenderCompat";
+    private static final String KEY_SHOW_TOPIC_RENDER_COMPAT_TIP = "showTopicRenderCompatTip";
 
     public static final String DEFAULT_TOPIC_SIGN_CONTENT = "来自酷炫的 [CNodeMD](https://github.com/TakWolf/CNode-Material-Design)";
 
@@ -73,6 +74,14 @@ public final class SettingShared {
      */
     public static boolean isReallyEnableTopicRenderCompat(@NonNull Context context) {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH && isEnableTopicRenderCompat(context);
+    }
+
+    public static boolean isShowTopicRenderCompatTip(@NonNull Context context) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH && SharedWrapper.with(context, TAG).getBoolean(KEY_SHOW_TOPIC_RENDER_COMPAT_TIP, true);
+    }
+
+    public static void markShowTopicRenderCompatTip(@NonNull Context context) {
+        SharedWrapper.with(context, TAG).setBoolean(KEY_SHOW_TOPIC_RENDER_COMPAT_TIP, false);
     }
 
 }

@@ -13,10 +13,10 @@ public final class LoginShared {
 
     private static final String TAG = "LoginShared";
 
-    private static final String KEY_ACCESS_TOKEN = "access_token";
+    private static final String KEY_ACCESS_TOKEN = "accessToken";
     private static final String KEY_ID = "id";
-    private static final String KEY_LOGIN_NAME = "login_name";
-    private static final String KEY_AVATAR_URL = "avatar_url";
+    private static final String KEY_LOGIN_NAME = "loginName";
+    private static final String KEY_AVATAR_URL = "avatarUrl";
     private static final String KEY_SCORE = "score";
 
     private static String accessToken;
