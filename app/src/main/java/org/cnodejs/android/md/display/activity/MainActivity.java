@@ -26,6 +26,7 @@ import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.display.listener.RecyclerViewLoadMoreListener;
+import org.cnodejs.android.md.display.util.DisplayUtils;
 import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.IMainView;
@@ -135,8 +136,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        adaptStatusBar(centerAdaptStatusBar);
-        adaptStatusBar(navAdaptStatusBar);
+        DisplayUtils.adaptStatusBar(this, centerAdaptStatusBar);
+        DisplayUtils.adaptStatusBar(this, navAdaptStatusBar);
 
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
         drawerLayout.addDrawerListener(drawerListener);
