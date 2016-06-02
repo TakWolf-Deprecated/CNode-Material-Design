@@ -57,7 +57,7 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
         }
     }
 
-    public static void startForResultWithPermissionHandle(@NonNull final Activity activity, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public static void startForResultWithPermissionHandle(@NonNull final Activity activity) {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             AlertDialogUtils.createBuilderWithAutoTheme(activity)
                     .setMessage(R.string.qrcode_permission_denied_tip)

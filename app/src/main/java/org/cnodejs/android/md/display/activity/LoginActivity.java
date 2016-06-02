@@ -104,7 +104,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == QRCodeActivity.PERMISSIONS_REQUEST_QRCODE) {
-            QRCodeActivity.startForResultWithPermissionHandle(this, permissions, grantResults);
+            QRCodeActivity.startForResultWithPermissionHandle(this);
         }
     }
 
