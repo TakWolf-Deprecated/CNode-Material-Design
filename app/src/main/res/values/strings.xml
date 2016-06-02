@@ -103,7 +103,7 @@
     <string name="modify_topic_sign_hint">来点酷炫的，不要写太多字喔&#8230;</string>
     <string name="default_topic_sign">默认尾巴</string>
     <string name="topic_render_compat">渲染兼容模式</string>
-    <string name="topic_render_compat_summary">如果页面渲染出现问题，请开启这个功能</string>
+    <string name="topic_render_compat_summary">使用WebView代替原生组件进行渲染</string>
 
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="share">分享</string>
