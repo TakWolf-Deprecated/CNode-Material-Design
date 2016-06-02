@@ -15,6 +15,7 @@ import com.melnykov.fab.FloatingActionButton;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.TopicAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
+import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.dialog.TopicReplyDialog;
 import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
@@ -31,6 +32,7 @@ import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
+import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
@@ -78,6 +80,14 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);
+
+        if (SettingShared.isShowTopicRenderCompatTip(this)) {
+            SettingShared.markShowTopicRenderCompatTip(this);
+            AlertDialogUtils.createBuilderWithAutoTheme(this)
+                    .setMessage(R.string.topic_render_compat_tip)
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
+        }
 
         topicId = getIntent().getStringExtra(Navigator.TopicWithAutoCompat.EXTRA_TOPIC_ID);
 

@@ -104,6 +104,7 @@
     <string name="default_topic_sign">默认尾巴</string>
     <string name="topic_render_compat">渲染兼容模式</string>
     <string name="topic_render_compat_summary">使用WebView代替原生组件进行渲染</string>
+    <string name="topic_render_compat_tip">当前使用原生组件来渲染内容。在设置中开启「渲染兼容模式」选项之后，将会使用WebView来渲染内容。</string>
 
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="share">分享</string>
