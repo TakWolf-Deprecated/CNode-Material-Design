@@ -10,7 +10,7 @@
     <color name="list_divider_light">#ffe0e0e0</color>
     <color name="list_divider_dark">#ff666666</color>
 
-    <color name="translucent_status">#44000000</color>
+    <color name="translucent_status">#66000000</color>
 
     <color name="text_primary_light">#de000000</color>
     <color name="text_primary_dark">#ffffffff</color>
