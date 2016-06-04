@@ -7,30 +7,32 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.base.StatusBarActivity;
+import org.cnodejs.android.md.display.base.FullLayoutActivity;
 import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
 import org.cnodejs.android.md.display.listener.DialogCancelCallListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.view.ILoginView;
+import org.cnodejs.android.md.display.util.DisplayUtils;
 import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.display.util.ToastUtils;
+import org.cnodejs.android.md.display.view.ILoginView;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
 import org.cnodejs.android.md.presenter.implement.LoginPresenter;
 import org.cnodejs.android.md.util.FormatUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 
-public class LoginActivity extends StatusBarActivity implements ILoginView {
+public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     public static final int REQUEST_LOGIN = FormatUtils.createRequestCode();
 
@@ -58,10 +60,13 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
         }
     }
 
-    @Bind(R.id.login_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.login_edt_access_token)
+    @BindView(R.id.adapt_status_bar)
+    protected View adaptStatusBar;
+
+    @BindView(R.id.edt_access_token)
     protected MaterialEditText edtAccessToken;
 
     protected ProgressDialog progressDialog;
@@ -70,10 +75,12 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        DisplayUtils.adaptStatusBar(this, adaptStatusBar);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
@@ -83,12 +90,12 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
         loginPresenter = new LoginPresenter(this, this);
     }
 
-    @OnClick(R.id.login_btn_login)
+    @OnClick(R.id.btn_login)
     protected void onBtnLoginClick() {
         loginPresenter.loginAsyncTask(edtAccessToken.getText().toString().trim());
     }
 
-    @OnClick(R.id.login_btn_qrcode)
+    @OnClick(R.id.btn_qrcode)
     protected void onBtnQrcodeClick() {
         QRCodeActivity.startForResultWithPermissionCheck(this);
     }
@@ -97,7 +104,7 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == QRCodeActivity.PERMISSIONS_REQUEST_QRCODE) {
-            QRCodeActivity.startForResultWithPermissionHandle(this, permissions, grantResults);
+            QRCodeActivity.startForResultWithPermissionHandle(this);
         }
     }
 
@@ -111,7 +118,7 @@ public class LoginActivity extends StatusBarActivity implements ILoginView {
         }
     }
 
-    @OnClick(R.id.login_btn_login_tip)
+    @OnClick(R.id.btn_login_tip)
     protected void onBtnLoginTipClick() {
         AlertDialogUtils.createBuilderWithAutoTheme(this)
                 .setMessage(R.string.how_to_get_access_token_tip_content)

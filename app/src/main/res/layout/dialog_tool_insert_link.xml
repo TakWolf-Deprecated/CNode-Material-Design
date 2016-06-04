@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/dialog_tool_insert_link_edt_title"
+        android:id="@+id/edt_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -24,7 +24,7 @@
         app:met_floatingLabelTextColor="?android:attr/textColorSecondary" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/dialog_tool_insert_link_edt_link"
+        android:id="@+id/edt_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

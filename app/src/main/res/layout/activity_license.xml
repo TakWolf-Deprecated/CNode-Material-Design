@@ -7,10 +7,10 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/license_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_primary"
+        android:background="?attr/colorPrimary"
         android:elevation="@dimen/app_bar_elevation"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/open_source_license"
@@ -23,7 +23,7 @@
         android:background="?attr/widgetBackground">
 
         <TextView
-            android:id="@+id/license_tv_license"
+            android:id="@+id/tv_license"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"

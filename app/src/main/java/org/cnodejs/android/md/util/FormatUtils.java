@@ -6,6 +6,11 @@ import android.text.TextUtils;
 
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.joda.time.DateTime;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.safety.Cleaner;
+import org.jsoup.safety.Whitelist;
 import org.tautua.markdownpapers.Markdown;
 import org.tautua.markdownpapers.parser.ParseException;
 
@@ -29,19 +34,19 @@ public final class FormatUtils {
     private static final long YEAR = 12 * MONTH;
 
     public static String getRecentlyTimeText(@NonNull DateTime dateTime) {
-        long diff = new DateTime().getMillis() - dateTime.getMillis();
-        if (diff > YEAR) {
-            return (diff / YEAR) + "年前";
-        } else if (diff > MONTH) {
-            return (diff / MONTH) + "个月前";
-        } else if (diff > WEEK) {
-            return (diff / WEEK) + "周前";
-        } else if (diff > DAY) {
-            return (diff / DAY) + "天前";
-        } else if (diff > HOUR) {
-            return (diff / HOUR) + "小时前";
-        } else if (diff > MINUTE) {
-            return (diff / MINUTE) + "分钟前";
+        long offset = new DateTime().getMillis() - dateTime.getMillis();
+        if (offset > YEAR) {
+            return (offset / YEAR) + "年前";
+        } else if (offset > MONTH) {
+            return (offset / MONTH) + "个月前";
+        } else if (offset > WEEK) {
+            return (offset / WEEK) + "周前";
+        } else if (offset > DAY) {
+            return (offset / DAY) + "天前";
+        } else if (offset > HOUR) {
+            return (offset / HOUR) + "小时前";
+        } else if (offset > MINUTE) {
+            return (offset / MINUTE) + "分钟前";
         } else {
             return "刚刚";
         }
@@ -113,16 +118,22 @@ public final class FormatUtils {
 
     /**
      * CNode兼容性的Markdown转换
-     * 最外层包裹 <div class="markdown-text"></div> 以保证和服务端渲染同步
+     * '@'协议转换为'/user/'相对路径
+     * 最外层包裹'<div class="markdown-text"></div>'
+     * 以保证和服务端渲染同步
      */
+
     private static final Markdown md = new Markdown();
 
     public static String renderMarkdown(String text) {
         // 保证text不为null
         text = TextUtils.isEmpty(text) ? "" : text;
         // 解析@协议
-        text = " " + text;
-        text = text.replaceAll(" @([a-zA-Z0-9_-]+)", "\\[@$1\\]\\(" + ApiDefine.USER_LINK_URL_PREFIX + "$1\\)").trim();
+        text = text.replaceAll("@([\\w\\-]+)\\b(?![\\]\\<\\.])", "[@$1](" + ApiDefine.USER_PATH_PREFIX + "$1)");
+        // 解析裸链接
+        text = text + " ";
+        text = text.replaceAll("((http|https|ftp)://[\\w\\-.:/?=&#%]+)(\\s)", "[$1]($1)$3");
+        text = text.trim();
         // 渲染markdown
         try {
             StringWriter out = new StringWriter();
@@ -135,12 +146,33 @@ public final class FormatUtils {
         return "<div class=\"markdown-text\">" + text + "</div>";
     }
 
+    /**
+     * CNode兼容性的Html处理
+     * 过滤xss
+     * 替换用户链接为绝对地址
+     * 修复部分图片链接前缀
+     * 最外层包裹'<div class="markdown-text"></div>'
+     */
+
+    private static final Cleaner cleaner = new Cleaner(Whitelist.relaxed().addAttributes("*", "class"));
+
     public static String handleHtml(String html) {
-        if (!TextUtils.isEmpty(html)) {
-            html = html.replace("<a href=\"" + ApiDefine.USER_PATH_PREFIX, "<a href=\"" + ApiDefine.USER_LINK_URL_PREFIX); // 替换@用户协议
-            html = html.replace("<img src=\"//", "<img src=\"https://"); // 替换缩略URL引用路径为https协议
+        // 保证html不为null
+        html = TextUtils.isEmpty(html) ? "" : html;
+        // 过滤xss，这里会自动补全用户链接地址和七牛图片地址，但是会清除class和style属性
+        Document document = cleaner.clean(Jsoup.parseBodyFragment(html, ApiDefine.HOST_BASE_URL));
+        // 确保body第一个子节点为div，并且class=markdown-text
+        if (document.body().childNodeSize() == 0 || !document.body().child(0).tagName().equalsIgnoreCase("div")) {
+            Element div = document.createElement("div").attr("class", "markdown-text");
+            for (Element element : document.body().children()) {
+                div.appendChild(element);
+            }
+            document.body().empty().appendChild(div);
+        } else {
+            document.body().child(0).attr("class", "markdown-text");
         }
-        return html;
+        // 返回body
+        return document.body().html();
     }
 
 }

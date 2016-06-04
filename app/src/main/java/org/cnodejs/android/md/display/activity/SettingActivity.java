@@ -12,29 +12,32 @@ import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.model.storage.SettingShared;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SettingActivity extends StatusBarActivity {
 
-    @Bind(R.id.setting_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.setting_switch_notification)
+    @BindView(R.id.switch_notification)
     protected SwitchCompat switchNotification;
 
-    @Bind(R.id.setting_switch_theme_dark)
+    @BindView(R.id.switch_theme_dark)
     protected SwitchCompat switchThemeDark;
 
-    @Bind(R.id.setting_switch_new_topic_draft)
-    protected SwitchCompat switchNewTopicDraft;
+    @BindView(R.id.switch_topic_draft)
+    protected SwitchCompat switchTopicDraft;
 
-    @Bind(R.id.setting_switch_topic_sign)
+    @BindView(R.id.switch_topic_sign)
     protected SwitchCompat switchTopicSign;
 
-    @Bind(R.id.setting_btn_modify_topic_sign)
+    @BindView(R.id.btn_modify_topic_sign)
     protected TextView btnModifyTopicSign;
+
+    @BindView(R.id.switch_topic_render_compat)
+    protected SwitchCompat switchTopicRenderCompat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,40 +50,47 @@ public class SettingActivity extends StatusBarActivity {
 
         switchNotification.setChecked(SettingShared.isEnableNotification(this));
         switchThemeDark.setChecked(SettingShared.isEnableThemeDark(this));
-        switchNewTopicDraft.setChecked(SettingShared.isEnableNewTopicDraft(this));
+        switchTopicDraft.setChecked(SettingShared.isEnableTopicDraft(this));
         switchTopicSign.setChecked(SettingShared.isEnableTopicSign(this));
         btnModifyTopicSign.setEnabled(SettingShared.isEnableTopicSign(this));
+        switchTopicRenderCompat.setChecked(SettingShared.isEnableTopicRenderCompat(this));
     }
 
-    @OnClick(R.id.setting_btn_notification)
+    @OnClick(R.id.btn_notification)
     protected void onBtnNotificationClick() {
         switchNotification.toggle();
         SettingShared.setEnableNotification(this, switchNotification.isChecked());
     }
 
-    @OnClick(R.id.setting_btn_theme_dark)
+    @OnClick(R.id.btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         switchThemeDark.toggle();
         SettingShared.setEnableThemeDark(this, switchThemeDark.isChecked());
         ThemeUtils.notifyThemeApply(this, false);
     }
 
-    @OnClick(R.id.setting_btn_new_topic_draft)
-    protected void onBtnNewTopicDraftClick() {
-        switchNewTopicDraft.toggle();
-        SettingShared.setEnableNewTopicDraft(this, switchNewTopicDraft.isChecked());
+    @OnClick(R.id.btn_topic_draft)
+    protected void onBtnTopicDraftClick() {
+        switchTopicDraft.toggle();
+        SettingShared.setEnableTopicDraft(this, switchTopicDraft.isChecked());
     }
 
-    @OnClick(R.id.setting_btn_topic_sign)
+    @OnClick(R.id.btn_topic_sign)
     protected void onBtnTopicSignClick() {
         switchTopicSign.toggle();
         SettingShared.setEnableTopicSign(this, switchTopicSign.isChecked());
         btnModifyTopicSign.setEnabled(switchTopicSign.isChecked());
     }
 
-    @OnClick(R.id.setting_btn_modify_topic_sign)
+    @OnClick(R.id.btn_modify_topic_sign)
     protected void onBtnModifyTopicSignClick() {
         startActivity(new Intent(this, ModifyTopicSignActivity.class));
+    }
+
+    @OnClick(R.id.btn_topic_render_compat)
+    protected void onBtnTopicRenderCompatClick() {
+        switchTopicRenderCompat.toggle();
+        SettingShared.setEnableTopicRenderCompat(this, switchTopicRenderCompat.isChecked());
     }
 
 }

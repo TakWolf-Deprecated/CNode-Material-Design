@@ -12,7 +12,7 @@ import android.widget.TextView;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.storage.SettingShared;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ProgressDialog extends AppCompatDialog {
@@ -21,7 +21,7 @@ public class ProgressDialog extends AppCompatDialog {
         return new ProgressDialog(activity, SettingShared.isEnableThemeDark(activity) ? R.style.AppDialogDark_Alert : R.style.AppDialogLight_Alert);
     }
 
-    @Bind(R.id.dialog_progress_tv_message)
+    @BindView(R.id.tv_message)
     protected TextView tvMessage;
 
     private ProgressDialog(@NonNull Activity activity, int theme) {

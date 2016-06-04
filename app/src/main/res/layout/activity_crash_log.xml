@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/crash_log_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_primary"
+        android:background="?attr/colorPrimary"
         android:elevation="@dimen/app_bar_elevation"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/app_crash"
@@ -35,7 +35,7 @@
                 android:textColor="?android:attr/textColorPrimary" />
 
             <TextView
-                android:id="@+id/crash_log_tv_info"
+                android:id="@+id/tv_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"

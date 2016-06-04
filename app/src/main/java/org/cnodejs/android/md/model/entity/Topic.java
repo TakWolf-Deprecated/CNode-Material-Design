@@ -2,6 +2,7 @@ package org.cnodejs.android.md.model.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.joda.time.DateTime;
 
@@ -49,6 +50,7 @@ public class Topic extends TopicSimple {
 
     public void setContent(String content) {
         this.content = content;
+        contentHtml = null; // 清除已经处理的Html渲染缓存
     }
 
     public boolean isGood() {
@@ -95,17 +97,18 @@ public class Topic extends TopicSimple {
      * Html渲染缓存
      */
 
-    private String handleContent = null;
+    @SerializedName("content_html")
+    private String contentHtml;
 
-    public String getHandleContent() {
-        if (handleContent == null) {
-            handleContent = FormatUtils.handleHtml(getContent());
+    public String getContentHtml() {
+        if (contentHtml == null) {
+            if (ApiDefine.MD_RENDER) {
+                contentHtml = FormatUtils.handleHtml(content);
+            } else {
+                contentHtml = FormatUtils.handleHtml(FormatUtils.renderMarkdown(content));
+            }
         }
-        return handleContent;
-    }
-
-    public void setHandleContent(String content) {
-        handleContent = content;
+        return contentHtml;
     }
 
 }

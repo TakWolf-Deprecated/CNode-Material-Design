@@ -6,35 +6,20 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/markdown_preview_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_primary"
+        android:background="?attr/colorPrimary"
         android:elevation="@dimen/app_bar_elevation"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/markdown_preview"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <ScrollView
+    <org.cnodejs.android.md.display.widget.PreviewWebView
+        android:id="@+id/web_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/widgetBackground">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <org.cnodejs.android.md.display.widget.CNodeWebView
-                android:id="@+id/markdown_preview_web_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:cssPath="?attr/markdownCssPath" />
-
-        </LinearLayout>
-
-    </ScrollView>
+        app:darkTheme="?attr/darkMode" />
 
 </LinearLayout>

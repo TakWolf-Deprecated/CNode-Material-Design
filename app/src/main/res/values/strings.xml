@@ -95,13 +95,16 @@
     <string name="receive_notification_summary">开启也没用，这功能压根没做</string>
     <string name="theme">主题</string>
     <string name="theme_dark">夜间模式</string>
-    <string name="new_topic_draft">保存草稿</string>
-    <string name="new_topic_draft_summary">没有发布的话题内容会被保存</string>
+    <string name="topic_draft">保存草稿</string>
+    <string name="topic_draft_summary">没有发布的话题内容会被保存</string>
     <string name="topic_sign">话题小尾巴</string>
     <string name="topic_sign_summary">开启后可以自定义</string>
     <string name="modify_topic_sign">设置小尾巴</string>
-    <string name="modify_topic_sign_hint">来点炫酷的，不要写太多字喔&#8230;</string>
+    <string name="modify_topic_sign_hint">来点酷炫的，不要写太多字喔&#8230;</string>
     <string name="default_topic_sign">默认尾巴</string>
+    <string name="topic_render_compat">渲染兼容模式</string>
+    <string name="topic_render_compat_summary">使用WebView代替原生组件进行渲染</string>
+    <string name="topic_render_compat_tip">当前使用原生组件来渲染内容。在设置中开启「渲染兼容模式」选项之后，将会使用WebView来渲染内容。</string>
 
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="share">分享</string>
@@ -122,7 +125,6 @@
     <string name="app_crash">程序崩溃</string>
     <string name="crash_log_tip">非常抱歉，程序运行过程中出现了一个无法避免的错误。您可以将该问题发送给开发者，此举将有助于改善应用体验。由此给您带来的诸多不便，我们深表歉意，敬请谅解。</string>
 
-    <string name="theme_css_path_light">file:///android_asset/cnode_light.css</string>
-    <string name="theme_css_path_dark">file:///android_asset/cnode_dark.css</string>
+    <string name="invalid_link">无效的链接</string>
 
 </resources>

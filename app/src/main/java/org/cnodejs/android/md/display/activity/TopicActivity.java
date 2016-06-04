@@ -1,7 +1,5 @@
 package org.cnodejs.android.md.display.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,75 +15,52 @@ import com.melnykov.fab.FloatingActionButton;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.TopicAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
+import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.dialog.TopicReplyDialog;
 import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.util.ActivityUtils;
+import org.cnodejs.android.md.display.util.Navigator;
+import org.cnodejs.android.md.display.util.RefreshUtils;
+import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
-import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.display.view.ITopicView;
 import org.cnodejs.android.md.display.viewholder.TopicHeaderViewHolder;
-import org.cnodejs.android.md.display.util.ActivityUtils;
-import org.cnodejs.android.md.display.util.RefreshUtils;
-import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
+import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
-import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.display.util.Navigator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class TopicActivity extends StatusBarActivity implements ITopicView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
-    private static final String EXTRA_TOPIC_ID = "topicId";
-    private static final String EXTRA_TOPIC = "topic";
-
-    public static void start(@NonNull Activity activity, @NonNull Topic topic) {
-        Intent intent = new Intent(activity, TopicActivity.class);
-        intent.putExtra(EXTRA_TOPIC_ID, topic.getId());
-        intent.putExtra(EXTRA_TOPIC, EntityUtils.gson.toJson(topic));
-        activity.startActivity(intent);
-    }
-
-    public static void start(@NonNull Activity activity, String topicId) {
-        Intent intent = new Intent(activity, TopicActivity.class);
-        intent.putExtra(EXTRA_TOPIC_ID, topicId);
-        activity.startActivity(intent);
-    }
-
-    public static void start(@NonNull Context context, String topicId) {
-        Intent intent = new Intent(context, TopicActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(EXTRA_TOPIC_ID, topicId);
-        context.startActivity(intent);
-    }
-
-    @Bind(R.id.topic_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.topic_refresh_layout)
+    @BindView(R.id.refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
-    @Bind(R.id.topic_list_view)
+    @BindView(R.id.list_view)
     protected ListView listView;
 
-    @Bind(R.id.topic_icon_no_data)
+    @BindView(R.id.icon_no_data)
     protected View iconNoData;
 
-    @Bind(R.id.topic_fab_reply)
+    @BindView(R.id.fab_reply)
     protected FloatingActionButton fabReply;
 
     private String topicId;
@@ -94,7 +69,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     private final Map<String, Integer> positionMap = new HashMap<>();
 
     private ITopicReplyView topicReplyView;
-    private ITopicHeaderView topicHeaderView;
+    private TopicHeaderViewHolder topicHeaderView;
     private TopicAdapter adapter;
 
     private ITopicPresenter topicPresenter;
@@ -106,16 +81,18 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         setContentView(R.layout.activity_topic);
         ButterKnife.bind(this);
 
-        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_TOPIC_ID))) {
-            topicId = getIntent().getStringExtra(EXTRA_TOPIC_ID);
-        } else if (FormatUtils.isTopicLinkUrl(getIntent().getDataString())) {
-            topicId = getIntent().getData().getPath().replace(ApiDefine.TOPIC_PATH_PREFIX, "");
-        } else {
-            topicId = "";
+        if (SettingShared.isShowTopicRenderCompatTip(this)) {
+            SettingShared.markShowTopicRenderCompatTip(this);
+            AlertDialogUtils.createBuilderWithAutoTheme(this)
+                    .setMessage(R.string.topic_render_compat_tip)
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
         }
 
-        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_TOPIC))) {
-            topic = EntityUtils.gson.fromJson(getIntent().getStringExtra(EXTRA_TOPIC), Topic.class);
+        topicId = getIntent().getStringExtra(Navigator.TopicWithAutoCompat.EXTRA_TOPIC_ID);
+
+        if (!TextUtils.isEmpty(getIntent().getStringExtra(Navigator.TopicWithAutoCompat.EXTRA_TOPIC))) {
+            topic = EntityUtils.gson.fromJson(getIntent().getStringExtra(Navigator.TopicWithAutoCompat.EXTRA_TOPIC), Topic.class);
         }
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
@@ -157,7 +134,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         topicPresenter.getTopicAsyncTask(topicId);
     }
 
-    @OnClick(R.id.topic_fab_reply)
+    @OnClick(R.id.fab_reply)
     protected void onBtnReplyClick() {
         if (topic != null && LoginActivity.startForResultWithAccessTokenCheck(this)) {
             topicReplyView.showReplyWindow();

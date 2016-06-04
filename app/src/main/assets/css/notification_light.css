@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #eeeeee;
+}
+
+.text-primary {
+    color: #212121;
+}
+
+.text-secondary {
+    color: #757575;
+}
+
+.text-accent {
+    color: #80bd01;
+}
+
+.deep-line {
+    width: 100%;
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+.cell {
+    width: 100%;
+    height: auto;
+}
+
+.cell .main {
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+}
+
+.cell .main .top-container {
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.cell .main .top-container .avatar {
+    float: left;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #eeeeee;
+}
+
+.cell .main .top-container .info {
+    width: auto;
+    height: 44px;
+    margin-left: 60px;
+}
+
+.cell .main .top-container .info .line1 {
+}
+
+.cell .main .top-container .info .line1 .loginname {
+    font-size: 16px;
+}
+
+.cell .main .top-container .info .line1 .time {
+    float: right;
+    font-size: 14px;
+}
+
+.cell .main .top-container .info .line2 {
+    margin-top: 4px;
+}
+
+.cell .main .top-container .info .line2 .action {
+    font-size: 14px;
+}
+
+.cell .main .top-container .info .line2 .badge-dot {
+    float: right;
+    width: 8px;
+    height: 8px;
+    margin-top: 4px;
+    margin-right: 4px;
+    background-color: #ff7a00;
+    border-radius: 50%;
+}
+
+.cell .main .markdown-container {
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.cell .main .reference-container {
+    padding: 16px;
+}
+
+.cell .main .reference-container .topic-title {
+    padding: 12px;
+    font-size: 14px;
+    background-color: #eeeeee;
+    border-radius: 4px;
+}

@@ -10,10 +10,10 @@ import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.display.util.Navigator;
+import org.cnodejs.android.md.display.util.ThemeUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -21,10 +21,10 @@ public class AboutActivity extends StatusBarActivity {
 
     public static final String VERSION_TEXT = BuildConfig.VERSION_NAME + "-build-" + BuildConfig.VERSION_CODE;
 
-    @Bind(R.id.about_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.about_tv_version)
+    @BindView(R.id.tv_version)
     protected TextView tvVersion;
 
     @Override
@@ -39,32 +39,32 @@ public class AboutActivity extends StatusBarActivity {
         tvVersion.setText(VERSION_TEXT);
     }
 
-    @OnClick(R.id.about_btn_version)
+    @OnClick(R.id.btn_version)
     protected void onBtnVersionClick() {
         // nothing to do
     }
 
-    @OnClick(R.id.about_btn_open_source_url)
+    @OnClick(R.id.btn_open_source_url)
     protected void onBtnOpenSourceUrlClick() {
         Navigator.openInBrowser(this, getString(R.string.open_source_url_content));
     }
 
-    @OnClick(R.id.about_btn_about_cnode)
+    @OnClick(R.id.btn_about_cnode)
     protected void onBtnAboutCNodeClick() {
         Navigator.openInBrowser(this, getString(R.string.about_cnode_content));
     }
 
-    @OnClick(R.id.about_btn_about_author)
+    @OnClick(R.id.btn_about_author)
     protected void onBtnAboutAuthorClick() {
         Navigator.openInBrowser(this, getString(R.string.about_author_content));
     }
 
-    @OnClick(R.id.about_btn_open_in_market)
+    @OnClick(R.id.btn_open_in_market)
     protected void onBtnOpenInMarketClick() {
         Navigator.openInMarket(this);
     }
 
-    @OnClick(R.id.about_btn_advice_feedback)
+    @OnClick(R.id.btn_advice_feedback)
     protected void onBtnAdviceFeedbackClick() {
         Navigator.openEmail(
                 this,
@@ -74,7 +74,7 @@ public class AboutActivity extends StatusBarActivity {
         );
     }
 
-    @OnClick(R.id.about_btn_open_source_license)
+    @OnClick(R.id.btn_open_source_license)
     protected void onBtnOpenSourceLicenseClick() {
         startActivity(new Intent(this, LicenseActivity.class));
     }

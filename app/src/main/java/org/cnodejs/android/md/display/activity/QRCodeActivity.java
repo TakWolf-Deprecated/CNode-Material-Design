@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresPermission;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
@@ -24,7 +25,7 @@ import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.util.FormatUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
@@ -56,10 +57,8 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
         }
     }
 
-    public static void startForResultWithPermissionHandle(@NonNull final Activity activity, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            startForResult(activity);
-        } else {
+    public static void startForResultWithPermissionHandle(@NonNull final Activity activity) {
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             AlertDialogUtils.createBuilderWithAutoTheme(activity)
                     .setMessage(R.string.qrcode_permission_denied_tip)
                     .setPositiveButton(R.string.confirm, null)
@@ -72,20 +71,23 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
 
                     })
                     .show();
+        } else {
+            startForResult(activity);
         }
     }
 
+    @RequiresPermission(Manifest.permission.CAMERA)
     private static void startForResult(@NonNull Activity activity) {
         activity.startActivityForResult(new Intent(activity, QRCodeActivity.class), REQUEST_QRCODE);
     }
 
-    @Bind(R.id.qrcode_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.qrcode_qr_view)
+    @BindView(R.id.qr_view)
     protected QRCodeReaderView qrCodeReaderView;
 
-    @Bind(R.id.qrcode_icon_line)
+    @BindView(R.id.icon_line)
     protected View iconLine;
 
     @Override

@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/topic_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_primary"
+        android:background="?attr/colorPrimary"
         android:elevation="@dimen/app_bar_elevation"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/topic"
@@ -21,7 +21,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/topic_icon_no_data"
+            android:id="@+id/icon_no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -33,12 +33,12 @@
             android:gravity="center" />
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/topic_refresh_layout"
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ListView
-                android:id="@+id/topic_list_view"
+                android:id="@+id/list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:listSelector="@android:color/transparent"
@@ -48,15 +48,15 @@
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/topic_fab_reply"
+            android:id="@+id/fab_reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_reply_white_24dp"
-            app:fab_colorNormal="@color/fab_color_primary"
-            app:fab_colorPressed="@color/fab_color_primary_dark"
-            app:fab_colorRipple="@color/fab_color_accent" />
+            app:fab_colorNormal="@color/button_normal"
+            app:fab_colorPressed="@color/button_pressed"
+            app:fab_colorRipple="@color/button_ripple" />
         
     </FrameLayout>
     

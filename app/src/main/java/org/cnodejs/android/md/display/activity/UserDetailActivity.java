@@ -25,22 +25,21 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.UserDetailAdapter;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.view.IUserDetailView;
 import org.cnodejs.android.md.display.util.ActivityUtils;
+import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.display.util.ThemeUtils;
 import org.cnodejs.android.md.display.util.ToastUtils;
+import org.cnodejs.android.md.display.view.IUserDetailView;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
 import org.cnodejs.android.md.presenter.implement.UserDetailPresenter;
-import org.cnodejs.android.md.util.FormatUtils;
-import org.cnodejs.android.md.display.util.Navigator;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -71,31 +70,31 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         context.startActivity(intent);
     }
 
-    @Bind(R.id.user_detail_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.user_detail_tab_layout)
+    @BindView(R.id.tab_layout)
     protected TabLayout tabLayout;
 
-    @Bind(R.id.user_detail_view_pager)
+    @BindView(R.id.view_pager)
     protected ViewPager viewPager;
 
-    @Bind(R.id.user_detail_img_avatar)
+    @BindView(R.id.img_avatar)
     protected ImageView imgAvatar;
 
-    @Bind(R.id.user_detail_tv_login_name)
+    @BindView(R.id.tv_login_name)
     protected TextView tvLoginName;
 
-    @Bind(R.id.user_detail_tv_github_username)
+    @BindView(R.id.tv_github_username)
     protected TextView tvGithubUsername;
 
-    @Bind(R.id.user_detail_tv_create_time)
+    @BindView(R.id.tv_create_time)
     protected TextView tvCreateTime;
 
-    @Bind(R.id.user_detail_tv_score)
+    @BindView(R.id.tv_score)
     protected TextView tvScore;
 
-    @Bind(R.id.user_detail_progress_wheel)
+    @BindView(R.id.progress_wheel)
     protected ProgressWheel progressWheel;
 
     private UserDetailAdapter adapter;
@@ -125,14 +124,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         viewPager.setOffscreenPageLimit(adapter.getCount());
         tabLayout.setupWithViewPager(viewPager);
 
-        if (!TextUtils.isEmpty(getIntent().getStringExtra(EXTRA_LOGIN_NAME))) {
-            loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
-        } else if (FormatUtils.isUserLinkUrl(getIntent().getDataString())) {
-            loginName = getIntent().getData().getPath().replace(ApiDefine.USER_PATH_PREFIX, "");
-        } else {
-            loginName = "";
-        }
-
+        loginName = getIntent().getStringExtra(EXTRA_LOGIN_NAME);
         tvLoginName.setText(loginName);
 
         String avatarUrl = getIntent().getStringExtra(EXTRA_AVATAR_URL);
@@ -163,7 +155,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     @Override
     protected void onSaveInstanceState(Bundle outState) {}
 
-    @OnClick(R.id.user_detail_img_avatar)
+    @OnClick(R.id.img_avatar)
     protected void onBtnAvatarClick() {
         if (!loading) {
             userDetailPresenter.getUserAsyncTask(loginName);
@@ -171,7 +163,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         }
     }
 
-    @OnClick(R.id.user_detail_tv_github_username)
+    @OnClick(R.id.tv_github_username)
     protected void onBtnGithubUsernameClick() {
         if (!TextUtils.isEmpty(githubUsername)) {
             Navigator.openInBrowser(this, "https://github.com/" + githubUsername);

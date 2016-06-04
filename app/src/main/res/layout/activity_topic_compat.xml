@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="@dimen/app_bar_elevation"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        app:title="@string/topic"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/icon_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/ic_no_data"
+            android:drawablePadding="16dp"
+            android:text="@string/no_data"
+            android:textColor="#ffbababa"
+            android:textSize="16sp"
+            android:gravity="center" />
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <org.cnodejs.android.md.display.widget.TopicWebView
+                android:id="@+id/web_topic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:darkTheme="?attr/darkMode" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <com.melnykov.fab.FloatingActionButton
+            android:id="@+id/fab_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_reply_white_24dp"
+            app:fab_colorNormal="@color/button_normal"
+            app:fab_colorPressed="@color/button_pressed"
+            app:fab_colorRipple="@color/button_ripple" />
+
+    </FrameLayout>
+
+</LinearLayout>

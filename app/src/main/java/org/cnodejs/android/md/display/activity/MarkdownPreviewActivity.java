@@ -9,11 +9,11 @@ import android.support.v7.widget.Toolbar;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.display.widget.CNodeWebView;
 import org.cnodejs.android.md.display.util.ThemeUtils;
+import org.cnodejs.android.md.display.widget.PreviewWebView;
 import org.cnodejs.android.md.util.FormatUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MarkdownPreviewActivity extends StatusBarActivity {
@@ -26,11 +26,11 @@ public class MarkdownPreviewActivity extends StatusBarActivity {
         activity.startActivity(intent);
     }
 
-    @Bind(R.id.markdown_preview_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.markdown_preview_web_view)
-    protected CNodeWebView cnodeWebView;
+    @BindView(R.id.web_preview)
+    protected PreviewWebView webPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +41,14 @@ public class MarkdownPreviewActivity extends StatusBarActivity {
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
-        cnodeWebView.loadRenderedContent(FormatUtils.renderMarkdown(getIntent().getStringExtra(EXTRA_MARKDOWN)));
+        String markdown = getIntent().getStringExtra(EXTRA_MARKDOWN);
+        webPreview.loadRenderedContent(FormatUtils.handleHtml(FormatUtils.renderMarkdown(markdown)));
     }
 
     @Override
     public void onBackPressed() {
-        if (cnodeWebView.canGoBack()) {
-            cnodeWebView.goBack();
+        if (webPreview.canGoBack()) {
+            webPreview.goBack();
         } else {
             super.onBackPressed();
         }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btn_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackgroundGeneral"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/image_placeholder" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/tv_time"
+                    android:layout_toLeftOf="@+id/tv_time"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp"
+                    tools:text="TakWolf" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="14sp"
+                    tools:text="1天前" />
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:id="@+id/tv_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="14sp"
+                    tools:text="回复了您的话题" />
+
+                <View style="@style/AppWidget.BadgeDot"
+                    android:id="@+id/badge_read"
+                    android:layout_gravity="center|end"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <org.cnodejs.android.md.display.widget.ContentWebView
+        android:id="@+id/web_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        app:darkTheme="?attr/darkMode" />
+
+    <TextView
+        android:id="@+id/tv_topic_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="14sp"
+        android:background="?attr/referenceBackground"
+        tools:text="原话题：这里是话题的标题" />
+
+    <View style="@style/AppWidget.DeepLine" />
+
+</LinearLayout>

@@ -21,11 +21,13 @@ import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.adapter.MainAdapter;
-import org.cnodejs.android.md.display.base.DrawerLayoutActivity;
+import org.cnodejs.android.md.display.base.FullLayoutActivity;
 import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.display.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.display.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.display.listener.RecyclerViewLoadMoreListener;
+import org.cnodejs.android.md.display.util.DisplayUtils;
+import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
 import org.cnodejs.android.md.display.view.IMainView;
 import org.cnodejs.android.md.display.util.ActivityUtils;
@@ -45,71 +47,72 @@ import org.cnodejs.android.md.util.HandlerUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends DrawerLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
+public class MainActivity extends FullLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
 
     private static final int PAGE_LIMIT = 20;
 
     // 抽屉导航布局
-    @Bind(R.id.main_drawer_layout)
+    @BindView(R.id.drawer_layout)
     protected DrawerLayout drawerLayout;
 
     // 状态栏
-    @Bind(R.id.main_center_adapt_status_bar)
+    @BindView(R.id.center_adapt_status_bar)
     protected View centerAdaptStatusBar;
 
-    @Bind(R.id.main_nav_adapt_status_bar)
+    @BindView(R.id.nav_adapt_status_bar)
     protected View navAdaptStatusBar;
 
     // 导航部分的个人信息
-    @Bind(R.id.main_nav_img_avatar)
+    @BindView(R.id.img_avatar)
     protected ImageView imgAvatar;
 
-    @Bind(R.id.main_nav_tv_login_name)
+    @BindView(R.id.tv_login_name)
     protected TextView tvLoginName;
 
-    @Bind(R.id.main_nav_tv_score)
+    @BindView(R.id.tv_score)
     protected TextView tvScore;
 
-    @Bind(R.id.main_nav_tv_badger_notification)
-    protected TextView tvBadgerNotification;
+    @BindView(R.id.badge_nav_notification)
+    protected TextView tvBadgeNotification;
 
-    @Bind(R.id.main_nav_btn_logout)
+    @BindView(R.id.btn_logout)
     protected View btnLogout;
 
-    @Bind(R.id.main_nav_btn_theme_dark)
+    @BindView(R.id.btn_theme_dark)
     protected ImageView imgThemeDark;
 
-    @Bind(R.id.main_nav_img_top_background)
+    @BindView(R.id.img_nav_top_background)
     protected ImageView imgTopBackground;
 
     // 主要导航项
-    @Bind({
-            R.id.main_nav_btn_all,
-            R.id.main_nav_btn_good,
-            R.id.main_nav_btn_share,
-            R.id.main_nav_btn_ask,
-            R.id.main_nav_btn_job
+    @BindViews({
+            R.id.btn_nav_all,
+            R.id.btn_nav_good,
+            R.id.btn_nav_share,
+            R.id.btn_nav_ask,
+            R.id.btn_nav_job
     })
     protected List<CheckedTextView> navMainItemList;
 
     // 内容部分
-    @Bind(R.id.main_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.main_refresh_layout)
+    @BindView(R.id.refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
-    @Bind(R.id.main_recycler_view)
+    @BindView(R.id.recycler_view)
     protected RecyclerView recyclerView;
 
-    @Bind(R.id.main_icon_no_data)
+    @BindView(R.id.icon_no_data)
     protected View iconNoData;
 
-    @Bind(R.id.main_fab_create_topic)
+    @BindView(R.id.fab_create_topic)
     protected FloatingActionButton fabCreateTopic;
 
     // 当前版块，默认为all
@@ -133,8 +136,8 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        adaptStatusBar(centerAdaptStatusBar);
-        adaptStatusBar(navAdaptStatusBar);
+        DisplayUtils.adaptStatusBar(this, centerAdaptStatusBar);
+        DisplayUtils.adaptStatusBar(this, navAdaptStatusBar);
 
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
         drawerLayout.addDrawerListener(drawerListener);
@@ -184,19 +187,19 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
             for (CheckedTextView navItem : navMainItemList) {
                 if (navItem.isChecked()) {
                     switch (navItem.getId()) {
-                        case R.id.main_nav_btn_all:
+                        case R.id.btn_nav_all:
                             newTab = TabType.all;
                             break;
-                        case R.id.main_nav_btn_good:
+                        case R.id.btn_nav_good:
                             newTab = TabType.good;
                             break;
-                        case R.id.main_nav_btn_share:
+                        case R.id.btn_nav_share:
                             newTab = TabType.share;
                             break;
-                        case R.id.main_nav_btn_ask:
+                        case R.id.btn_nav_ask:
                             newTab = TabType.ask;
                             break;
-                        case R.id.main_nav_btn_job:
+                        case R.id.btn_nav_job:
                             newTab = TabType.job;
                             break;
                         default:
@@ -222,7 +225,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
 
     @Override
     public void onRefresh() {
-        mainPresenter.refreshTopicListAsyncTask(currentTab, PAGE_LIMIT, true);
+        mainPresenter.refreshTopicListAsyncTask(currentTab, PAGE_LIMIT);
     }
 
     @Override
@@ -230,7 +233,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
         if (adapter.canLoadMore()) {
             adapter.setLoading(true);
             adapter.notifyItemChanged(adapter.getItemCount() - 1);
-            mainPresenter.loadMoreTopicListAsyncTask(currentTab, currentPage, PAGE_LIMIT, true);
+            mainPresenter.loadMoreTopicListAsyncTask(currentTab, currentPage, PAGE_LIMIT);
         }
     }
 
@@ -249,11 +252,11 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
      * 主导航项单击事件
      */
     @OnClick({
-            R.id.main_nav_btn_all,
-            R.id.main_nav_btn_good,
-            R.id.main_nav_btn_share,
-            R.id.main_nav_btn_ask,
-            R.id.main_nav_btn_job
+            R.id.btn_nav_all,
+            R.id.btn_nav_good,
+            R.id.btn_nav_share,
+            R.id.btn_nav_ask,
+            R.id.btn_nav_job
     })
     public void onNavigationMainItemClick(CheckedTextView itemView) {
         for (CheckedTextView navItem : navMainItemList) {
@@ -267,23 +270,23 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
      */
 
     @OnClick({
-            R.id.main_nav_btn_notification,
-            R.id.main_nav_btn_setting,
-            R.id.main_nav_btn_about
+            R.id.btn_nav_notification,
+            R.id.btn_nav_setting,
+            R.id.btn_nav_about
     })
     public void onNavigationItemOtherClick(View itemView) {
         switch (itemView.getId()) {
-            case R.id.main_nav_btn_notification:
+            case R.id.btn_nav_notification:
                 if (LoginActivity.startForResultWithAccessTokenCheck(this)) {
                     notificationAction.startDelayed();
                     drawerLayout.closeDrawers();
                 }
                 break;
-            case R.id.main_nav_btn_setting:
+            case R.id.btn_nav_setting:
                 settingAction.startDelayed();
                 drawerLayout.closeDrawers();
                 break;
-            case R.id.main_nav_btn_about:
+            case R.id.btn_nav_about:
                 aboutAction.startDelayed();
                 drawerLayout.closeDrawers();
                 break;
@@ -300,7 +303,11 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
 
         @Override
         public void run() {
-            startActivity(new Intent(MainActivity.this, gotoClz));
+            if (gotoClz == NotificationActivity.class) {
+                Navigator.NotificationWithAutoCompat.start(MainActivity.this);
+            } else {
+                startActivity(new Intent(MainActivity.this, gotoClz));
+            }
         }
 
         public void startDelayed() {
@@ -316,7 +323,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     /**
      * 注销按钮
      */
-    @OnClick(R.id.main_nav_btn_logout)
+    @OnClick(R.id.btn_logout)
     protected void onBtnLogoutClick() {
         AlertDialogUtils.createBuilderWithAutoTheme(this)
                 .setMessage(R.string.logout_tip)
@@ -325,7 +332,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LoginShared.logout(MainActivity.this);
-                        tvBadgerNotification.setText(null); // 未读消息清空
+                        tvBadgeNotification.setText(null); // 未读消息清空
                         updateUserInfoViews();
                     }
 
@@ -337,7 +344,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     /**
      * 主题按钮
      */
-    @OnClick(R.id.main_nav_btn_theme_dark)
+    @OnClick(R.id.btn_theme_dark)
     protected void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
         ThemeUtils.notifyThemeApply(this, false);
@@ -346,7 +353,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     /**
      * 用户信息按钮
      */
-    @OnClick(R.id.main_nav_layout_info)
+    @OnClick(R.id.layout_info)
     protected void onBtnInfoClick() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             LoginActivity.startForResult(this);
@@ -358,7 +365,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     /**
      * 发帖按钮
      */
-    @OnClick(R.id.main_fab_create_topic)
+    @OnClick(R.id.fab_create_topic)
     protected void onBtnCreateTopicClick() {
         if (LoginActivity.startForResultWithAccessTokenCheck(this)) {
             startActivity(new Intent(this, CreateTopicActivity.class));
@@ -477,7 +484,7 @@ public class MainActivity extends DrawerLayoutActivity implements IMainView, IBa
     @Override
     public void updateMessageCountViews(@NonNull Result.Data<Integer> result) {
         if (ActivityUtils.isAlive(this)) {
-            tvBadgerNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
+            tvBadgeNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
         }
     }
 

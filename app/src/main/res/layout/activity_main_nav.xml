@@ -7,7 +7,7 @@
     android:layout_gravity="start"
     android:background="?attr/widgetBackground"
     android:scrollbars="none"
-    app:appInsetForeground="#44000000">
+    app:appInsetForeground="@color/translucent_status">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,38 +17,38 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_primary">
+            android:background="?attr/colorPrimary">
 
             <ImageView
-                android:id="@+id/main_nav_img_top_background"
+                android:id="@+id/img_nav_top_background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignBottom="@+id/main_nav_layout_info"
+                android:layout_alignBottom="@+id/layout_info"
                 android:src="@drawable/main_nav_header_bg"
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true" />
 
             <View
-                android:id="@+id/main_nav_adapt_status_bar"
+                android:id="@+id/nav_adapt_status_bar"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
 
             <LinearLayout
-                android:id="@+id/main_nav_layout_info"
+                android:id="@+id/layout_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/main_nav_adapt_status_bar"
+                android:layout_below="@+id/nav_adapt_status_bar"
                 android:padding="16dp"
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/main_nav_img_avatar"
+                    android:id="@+id/img_avatar"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:src="@drawable/image_placeholder" />
 
                 <TextView
-                    android:id="@+id/main_nav_tv_login_name"
+                    android:id="@+id/tv_login_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -57,40 +57,40 @@
                     tools:text="TakWolf" />
 
                 <TextView
-                    android:id="@+id/main_nav_tv_score"
+                    android:id="@+id/tv_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textColor="@color/text_color_light"
+                    android:textColor="@color/text_secondary_dark"
                     android:textSize="14sp"
                     tools:text="积分：0" />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/main_nav_btn_logout"
+                android:id="@+id/btn_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignBottom="@+id/main_nav_layout_info"
+                android:layout_alignBottom="@+id/layout_info"
                 android:layout_margin="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:text="@string/logout"
-                android:textColor="@color/text_color_light"
+                android:textColor="@color/text_secondary_dark"
                 android:textSize="14sp"
                 android:background="@drawable/button_transparent_image" />
 
             <ImageView
-                android:id="@+id/main_nav_btn_theme_dark"
+                android:id="@+id/btn_theme_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/main_nav_layout_info"
+                android:layout_alignTop="@+id/layout_info"
                 android:layout_margin="16dp"
                 android:padding="16dp"
                 android:src="@drawable/ic_brightness_3_white_24dp"
@@ -103,32 +103,32 @@
         <View style="@style/AppWidget.ItemGap" />
 
         <CheckedTextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/main_nav_btn_all"
+            android:id="@+id/btn_nav_all"
             android:drawableStart="@drawable/main_nav_ic_all"
             android:drawableLeft="@drawable/main_nav_ic_all"
             android:text="@string/tab_all"
             android:checked="true" />
 
         <CheckedTextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/main_nav_btn_good"
+            android:id="@+id/btn_nav_good"
             android:drawableStart="@drawable/main_nav_ic_good"
             android:drawableLeft="@drawable/main_nav_ic_good"
             android:text="@string/tab_good" />
 
         <CheckedTextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/main_nav_btn_share"
+            android:id="@+id/btn_nav_share"
             android:drawableStart="@drawable/main_nav_ic_share"
             android:drawableLeft="@drawable/main_nav_ic_share"
             android:text="@string/tab_share" />
 
         <CheckedTextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/main_nav_btn_ask"
+            android:id="@+id/btn_nav_ask"
             android:drawableStart="@drawable/main_nav_ic_ask"
             android:drawableLeft="@drawable/main_nav_ic_ask"
             android:text="@string/tab_ask" />
 
         <CheckedTextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/main_nav_btn_job"
+            android:id="@+id/btn_nav_job"
             android:drawableStart="@drawable/main_nav_ic_job"
             android:drawableLeft="@drawable/main_nav_ic_job"
             android:text="@string/tab_job" />
@@ -140,25 +140,25 @@
             android:layout_height="wrap_content">
 
             <TextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/main_nav_btn_notification"
+                android:id="@+id/btn_nav_notification"
                 android:drawableStart="@drawable/ic_notifications_grey600_24dp"
                 android:drawableLeft="@drawable/ic_notifications_grey600_24dp"
                 android:text="@string/notification" />
 
-            <TextView style="@style/AppWidget.NavigationItemBadger"
-                android:id="@+id/main_nav_tv_badger_notification"
+            <TextView style="@style/AppWidget.NavigationItemBadge"
+                android:id="@+id/badge_nav_notification"
                 tools:text="99+" />
 
         </FrameLayout>
 
         <TextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/main_nav_btn_setting"
+            android:id="@+id/btn_nav_setting"
             android:drawableStart="@drawable/ic_settings_grey600_24dp"
             android:drawableLeft="@drawable/ic_settings_grey600_24dp"
             android:text="@string/setting" />
 
         <TextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/main_nav_btn_about"
+            android:id="@+id/btn_nav_about"
             android:drawableStart="@drawable/ic_info_grey600_24dp"
             android:drawableLeft="@drawable/ic_info_grey600_24dp"
             android:text="@string/about" />

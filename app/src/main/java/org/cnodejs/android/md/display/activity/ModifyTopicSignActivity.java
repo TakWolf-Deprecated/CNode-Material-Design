@@ -11,15 +11,15 @@ import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.util.ThemeUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ModifyTopicSignActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
-    @Bind(R.id.modify_topic_sign_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.modify_topic_sign_edt_content)
+    @BindView(R.id.edt_content)
     protected EditText edtContent;
 
     @Override

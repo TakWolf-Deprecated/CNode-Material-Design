@@ -9,14 +9,14 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowBackground">@color/window_background_light</item>
         <item name="android:listDivider">@color/list_divider_light</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_light_normal</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_light_pressed</item>
+        <item name="widgetBackground">@color/selectable_item_background_general_normal_light</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_light</item>
         <item name="widgetBackgroundTitle">@android:color/white</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_light</item>
-        <item name="mainNavItemTextColor">@color/main_nav_item_text_color_light</item>
-        <item name="referenceBackgroundNormal">@drawable/reference_background_light</item>
-        <item name="referenceBackgroundAccent">@drawable/reference_background_accent</item>
-        <item name="markdownCssPath">@string/theme_css_path_light</item>
+        <item name="navigationItemTextColor">@color/navigation_item_text_light</item>
+        <item name="referenceText">@color/reference_text_light</item>
+        <item name="referenceBackground">@drawable/reference_background_light</item>
+        <item name="darkMode">false</item>
     </style>
 
     <style name="AppThemeLight" parent="BaseAppThemeLight" />
@@ -31,14 +31,14 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowBackground">@color/window_background_dark</item>
         <item name="android:listDivider">@color/list_divider_dark</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_dark_normal</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_dark_pressed</item>
+        <item name="widgetBackground">@color/selectable_item_background_general_normal_dark</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_dark</item>
         <item name="widgetBackgroundTitle">@color/color_primary</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_dark</item>
-        <item name="mainNavItemTextColor">@color/main_nav_item_text_color_dark</item>
-        <item name="referenceBackgroundNormal">@drawable/reference_background_dark</item>
-        <item name="referenceBackgroundAccent">@drawable/reference_background_accent</item>
-        <item name="markdownCssPath">@string/theme_css_path_dark</item>
+        <item name="navigationItemTextColor">@color/navigation_item_text_dark</item>
+        <item name="referenceText">@color/reference_text_dark</item>
+        <item name="referenceBackground">@drawable/reference_background_dark</item>
+        <item name="darkMode">true</item>
     </style>
 
     <style name="AppThemeDark" parent="BaseAppThemeDark" />
@@ -56,8 +56,8 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:listDivider">@color/list_divider_light</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_light_normal</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_light_pressed</item>
+        <item name="widgetBackground">@color/selectable_item_background_general_normal_light</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_light</item>
         <item name="widgetBackgroundTitle">@android:color/white</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_light</item>
     </style>
@@ -80,8 +80,8 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:listDivider">@color/list_divider_dark</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_dark_normal</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_dark_pressed</item>
+        <item name="widgetBackground">@color/selectable_item_background_general_normal_dark</item>
+        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_dark</item>
         <item name="widgetBackgroundTitle">@color/color_primary</item>
         <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_dark</item>
     </style>
@@ -132,6 +132,13 @@
         <item name="android:background">@drawable/gap_shadow_opposite</item>
     </style>
 
+    <!-- Badge Dot -->
+    <style name="AppWidget.BadgeDot">
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:background">@drawable/badge_dot</item>
+    </style>
+
     <!-- Navigation -->
     <style name="AppWidget.NavigationItem">
         <item name="android:layout_width">match_parent</item>
@@ -139,13 +146,13 @@
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:drawablePadding">32dp</item>
-        <item name="android:textColor">?attr/mainNavItemTextColor</item>
+        <item name="android:textColor">?attr/navigationItemTextColor</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">?attr/selectableItemBackgroundGeneral</item>
     </style>
 
-    <style name="AppWidget.NavigationItemBadger">
+    <style name="AppWidget.NavigationItemBadge">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_gravity">end</item>
@@ -165,7 +172,7 @@
     <!-- Button -->
     <style name="AppWidget.Button">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:background">@drawable/button_image</item>
     </style>
 

@@ -15,12 +15,12 @@ import org.cnodejs.android.md.display.adapter.UserDetailItemAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class UserDetailItemFragment extends Fragment {
 
-    @Bind(R.id.user_detail_fragment_recycler_view)
+    @BindView(R.id.recycler_view)
     protected RecyclerView recyclerView;
 
     private UserDetailItemAdapter adapter;
@@ -28,7 +28,7 @@ public class UserDetailItemFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_user_detail_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_user_detail_item, container, false);
     }
 
     @Override

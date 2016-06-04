@@ -6,7 +6,7 @@ import android.webkit.JavascriptInterface;
 
 import org.cnodejs.android.md.display.activity.ImagePreviewActivity;
 
-public class ImageJavascriptInterface {
+public final class ImageJavascriptInterface {
 
     private volatile static ImageJavascriptInterface singleton;
 
@@ -21,7 +21,7 @@ public class ImageJavascriptInterface {
         return singleton;
     }
 
-    public static final String NAME = "imageInterface";
+    public static final String NAME = "imageBridge";
 
     private final Context context;
 

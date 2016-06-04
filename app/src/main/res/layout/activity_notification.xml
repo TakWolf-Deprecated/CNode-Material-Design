@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/notification_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_primary"
+        android:background="?attr/colorPrimary"
         android:elevation="@dimen/app_bar_elevation"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/notification"
@@ -21,7 +21,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/notification_icon_no_data"
+            android:id="@+id/icon_no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -33,12 +33,12 @@
             android:gravity="center" />
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/notification_refresh_layout"
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/notification_recycler_view"
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

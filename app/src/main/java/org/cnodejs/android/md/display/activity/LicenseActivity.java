@@ -13,15 +13,15 @@ import org.cnodejs.android.md.util.ResUtils;
 
 import java.io.IOException;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LicenseActivity extends StatusBarActivity {
 
-    @Bind(R.id.license_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.license_tv_license)
+    @BindView(R.id.tv_license)
     protected TextView tvLicense;
 
     @Override

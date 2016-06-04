@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid
-        android:color="@color/fab_color_primary_dark" />
+        android:color="@color/button_pressed" />
     <corners
         android:topLeftRadius="@dimen/button_corner_radius"
         android:topRightRadius="@dimen/button_corner_radius"

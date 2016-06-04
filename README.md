@@ -37,7 +37,7 @@
 
 ## Credits ##
 
-- [Butter Knife](https://github.com/JakeWharton/butterknife)
+- [Butter Knife](http://jakewharton.github.io/butterknife)
 
 - [Gson](https://github.com/google/gson)
 
@@ -65,9 +65,15 @@
 
 - [MarkdownPapers](http://markdown.tautua.org)
 
+- [jsoup](https://jsoup.org)
+
 - [Google I/O Android App - ScrimInsetsViews](https://github.com/google/iosched/blob/master/android/src/main/java/com/google/samples/apps/iosched/ui/widget/ScrimInsetsScrollView.java)
 
 - [Material design icons](https://github.com/google/material-design-icons)
+
+- [CNodeMD Page Render Compat](https://github.com/TakWolf/CNodeMD-Page-Render-Compat)
+
+- [Vue.js](http://cn.vuejs.org)
 
 - [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
 

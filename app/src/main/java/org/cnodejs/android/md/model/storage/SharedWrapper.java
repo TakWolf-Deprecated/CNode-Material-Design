@@ -2,136 +2,182 @@ package org.cnodejs.android.md.model.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.text.TextUtils;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Base64;
+import android.util.Log;
 
-import org.cnodejs.android.md.util.codec.DES3;
-import org.cnodejs.android.md.util.codec.Digest;
+import com.google.gson.JsonParseException;
+
 import org.cnodejs.android.md.model.util.EntityUtils;
+import org.cnodejs.android.md.util.Crypt;
+import org.cnodejs.android.md.util.Digest;
 
 import java.lang.reflect.Type;
+import java.nio.charset.Charset;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 
 public final class SharedWrapper {
 
-    public static SharedWrapper with(Context context, String name) {
-        return new SharedWrapper(context, name);
+    private static final String TAG = "SharedWrapper";
+    private static final Charset CHARSET_UTF_8 = Charset.forName("UTF-8");
+
+    private static SecretKey secretSingleton = null;
+    private static IvParameterSpec ivSingleton = null;
+
+    public static SharedWrapper with(@NonNull Context context, @NonNull String name) {
+        if (secretSingleton == null || ivSingleton == null) {
+            synchronized (SharedWrapper.class) {
+                if (secretSingleton == null) {
+                    secretSingleton = Crypt.AES.generateSecret(Digest.SHA256.getRaw(DeviceInfo.getDeviceToken(context)));
+                }
+                if (ivSingleton == null) {
+                    ivSingleton = Crypt.AES.generateIV(Digest.MD5.getRaw(DeviceInfo.getDeviceToken(context)));
+                }
+            }
+        }
+        return new SharedWrapper(context, name, secretSingleton, ivSingleton);
     }
 
-    private final Context context;
     private final SharedPreferences sp;
+    private final SecretKey secret;
+    private final IvParameterSpec iv;
 
-    private SharedWrapper(Context context, String name) {
-        this.context = context.getApplicationContext();
-        sp = context.getSharedPreferences(getDigestKey(name), Context.MODE_PRIVATE);
+    private SharedWrapper(@NonNull Context context, @NonNull String name, @NonNull SecretKey secret, @NonNull IvParameterSpec iv) {
+        sp = context.getSharedPreferences(Digest.MD5.getHex(name), Context.MODE_PRIVATE);
+        this.secret = secret;
+        this.iv = iv;
     }
 
-    private String getDigestKey(String key) {
-        return Digest.MD5.getMessage(key);
-    }
-
-    private String getSecretKey() {
-        return Digest.SHA256.getMessage(DeviceInfo.getDeviceToken(context));
-    }
-
-    private String get(String key, String defValue) {
-        try {
-            String value = DES3.decrypt(getSecretKey(), sp.getString(getDigestKey(key), ""));
-            if (TextUtils.isEmpty(value)) {
-                return defValue;
-            } else {
-                return value;
-            }
-        } catch (Exception e) {
+    private String get(@NonNull String key, @Nullable String defValue) {
+        String target = sp.getString(Digest.MD5.getHex(key), null);
+        if (target == null) {
             return defValue;
-        }
-    }
-
-    private void set(String key, String value) {
-        SharedPreferences.Editor editor = sp.edit();
-        try {
-            editor.putString(getDigestKey(key), DES3.encrypt(getSecretKey(), value));
-        } catch (Exception e) {
-            editor.putString(getDigestKey(key), "");
-        }
-        editor.apply();
-    }
-
-    public String getString(String key, String defValue) {
-        return get(key, defValue);
-    }
-
-    public void setString(String key, String value) {
-        set(key, value);
-    }
-
-    public boolean getBoolean(String key, boolean defValue) {
-        return Boolean.parseBoolean(get(key, Boolean.toString(defValue)));
-    }
-
-    public void setBoolean(String key, boolean value) {
-        set(key, Boolean.toString(value));
-    }
-
-    public float getFloat(String key, float defValue) {
-        return Float.parseFloat(get(key, Float.toString(defValue)));
-    }
-
-    public void setFloat(String key, float value) {
-        set(key, Float.toString(value));
-    }
-
-    public int getInt(String key, int defValue) {
-        return Integer.parseInt(get(key, Integer.toString(defValue)));
-    }
-
-    public void setInt(String key, int value) {
-        set(key, Integer.toString(value));
-    }
-
-    public long getLong(String key, long defValue) {
-        return Long.parseLong(get(key, Long.toString(defValue)));
-    }
-
-    public void setLong(String key, long value) {
-        set(key, Long.toString(value));
-    }
-
-    public <T>T getObject(String key, Class<T> clz) {
-        String json = get(key, null);
-        if (json == null) {
-            return null;
         } else {
             try {
-                return EntityUtils.gson.fromJson(json, clz);
-            } catch (Exception e) {
-                return null;
+                return new String(Crypt.AES.decrypt(secret, iv, Base64.decode(target, Base64.DEFAULT)), CHARSET_UTF_8);
+            } catch (Crypt.CryptException e) {
+                Log.e(TAG, "value decrypt error at key :" + key, e);
+                return defValue;
             }
         }
     }
 
-    public <T>T getObject(String key, Type typeOfT) {
-        String json = get(key, null);
-        if (json == null) {
-            return null;
-        } else {
-            try {
-                return EntityUtils.gson.fromJson(json, typeOfT);
-            } catch (Exception e) {
-                return null;
-            }
-        }
-    }
-
-    public void setObject(String key, Object value) {
+    private void set(@NonNull String key, @Nullable String value) {
+        String target;
         if (value == null) {
-            set(key, "");
+            target = null;
         } else {
-            String json = EntityUtils.gson.toJson(value);
-            set(key, json);
+            try {
+                target = Base64.encodeToString(Crypt.AES.encrypt(secret, iv, value.getBytes(CHARSET_UTF_8)), Base64.DEFAULT);
+            } catch (Crypt.CryptException e) {
+                Log.e(TAG, "value encrypt error at key :" + key, e);
+                target = null;
+            }
         }
+        sp.edit().putString(Digest.MD5.getHex(key), target).apply();
     }
 
     public void clear() {
         sp.edit().clear().apply();
+    }
+
+    public String getString(@NonNull String key, @Nullable String defValue) {
+        return get(key, defValue);
+    }
+
+    public void setString(@NonNull String key, @Nullable String value) {
+        set(key, value);
+    }
+
+    public boolean getBoolean(@NonNull String key, boolean defValue) {
+        String value = get(key, null);
+        if ("true".equalsIgnoreCase(value) || "false".equalsIgnoreCase(value)) {
+            return Boolean.parseBoolean(value);
+        } else {
+            if (value != null) {
+                Log.e(TAG, "parse boolean error -> " + key + " : " + value);
+            }
+            return defValue;
+        }
+    }
+
+    public void setBoolean(@NonNull String key, boolean value) {
+        set(key, Boolean.toString(value));
+    }
+
+    public float getFloat(@NonNull String key, float defValue) {
+        String value = get(key, null);
+        if (value == null) {
+            return defValue;
+        } else {
+            try {
+                return Float.parseFloat(value);
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "parse float error -> " + key + " : " + value);
+                return defValue;
+            }
+        }
+    }
+
+    public void setFloat(@NonNull String key, float value) {
+        set(key, Float.toString(value));
+    }
+
+    public int getInt(@NonNull String key, int defValue) {
+        String value = get(key, null);
+        if (value == null) {
+            return defValue;
+        } else {
+            try {
+                return Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "parse int error -> " + key + " : " + value);
+                return defValue;
+            }
+        }
+    }
+
+    public void setInt(@NonNull String key, int value) {
+        set(key, Integer.toString(value));
+    }
+
+    public long getLong(@NonNull String key, long defValue) {
+        String value = get(key, null);
+        if (value == null) {
+            return defValue;
+        } else {
+            try {
+                return Long.parseLong(value);
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "parse long error -> " + key + " : " + value);
+                return defValue;
+            }
+        }
+    }
+
+    public void setLong(@NonNull String key, long value) {
+        set(key, Long.toString(value));
+    }
+
+    public <T>T getObject(@NonNull String key, @NonNull Type typeOfT) {
+        String value = get(key, null);
+        if (value == null) {
+            return null;
+        } else {
+            try {
+                return EntityUtils.gson.fromJson(value, typeOfT);
+            } catch (JsonParseException e) {
+                Log.e(TAG, "parse object error -> " + key + " : " + value);
+                return null;
+            }
+        }
+    }
+
+    public void setObject(@NonNull String key, @Nullable Object value) {
+        set(key, value == null ? null : EntityUtils.gson.toJson(value));
     }
 
 }

@@ -7,31 +7,37 @@
 
     <color name="window_background_light">#ffeeeeee</color>
     <color name="window_background_dark">#ff303030</color>
-
-    <color name="text_color_light">#b3ffffff</color>
-    <color name="text_color_dark">#de000000</color>
-    
     <color name="list_divider_light">#ffe0e0e0</color>
     <color name="list_divider_dark">#ff666666</color>
 
-    <color name="selectable_item_background_general_light_normal">@android:color/white</color>
-    <color name="selectable_item_background_general_light_pressed">#ffeeeeee</color>
-    <color name="selectable_item_background_general_light_accent">#ffcccccc</color>
-    <color name="selectable_item_background_general_dark_normal">#ff3c3c3c</color>
-    <color name="selectable_item_background_general_dark_pressed">#ff444444</color>
-    <color name="selectable_item_background_general_dark_accent">#ff666666</color>
+    <color name="translucent_status">#66000000</color>
 
-    <color name="fab_color_primary">@color/color_accent</color>
-    <color name="fab_color_primary_dark">#ff48bd06</color>
-    <color name="fab_color_accent">#99ffffff</color>
+    <color name="text_primary_light">#de000000</color>
+    <color name="text_primary_dark">#ffffffff</color>
+    <color name="text_primary_disabled_light">#39000000</color>
+    <color name="text_primary_disabled_dark">#4dffffff</color>
+    <color name="text_secondary_light">#8a000000</color>
+    <color name="text_secondary_dark">#b3ffffff</color>
+    <color name="text_secondary_disabled_light">#24000000</color>
+    <color name="text_secondary_disabled_dark">#36ffffff</color>
+
+    <color name="selectable_item_background_general_normal_light">@android:color/white</color>
+    <color name="selectable_item_background_general_pressed_light">#ffeeeeee</color>
+    <color name="selectable_item_background_general_ripple_light">#ffcccccc</color>
+    <color name="selectable_item_background_general_normal_dark">#ff3c3c3c</color>
+    <color name="selectable_item_background_general_pressed_dark">#ff444444</color>
+    <color name="selectable_item_background_general_ripple_dark">#ff666666</color>
+
+    <color name="button_normal">@color/color_accent</color>
+    <color name="button_pressed">#ff48bd06</color>
+    <color name="button_ripple">#99ffffff</color>
+    <color name="button_stroke_normal">#ffffffff</color>
+    <color name="button_stroke_pressed">#ffeeeeee</color>
+    <color name="button_stroke_ripple">#3301ee15</color>
 
     <color name="red_light">#ffff4444</color>
     <color name="green_light">#ff99cc00</color>
     <color name="blue_light">#ff33b5e5</color>
     <color name="orange_light">#ffffbb33</color>
-
-    <color name="button_stroke_solid_normal">#ffffffff</color>
-    <color name="button_stroke_solid_pressed">#ffeeeeee</color>
-    <color name="button_stroke_solid_accent">#3301ee15</color>
 
 </resources>

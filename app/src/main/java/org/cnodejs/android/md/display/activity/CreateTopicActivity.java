@@ -12,6 +12,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.dialog.ProgressDialog;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
+import org.cnodejs.android.md.display.util.Navigator;
 import org.cnodejs.android.md.display.view.ICreateTopicView;
 import org.cnodejs.android.md.display.widget.EditorBarHandler;
 import org.cnodejs.android.md.display.util.ThemeUtils;
@@ -23,24 +24,24 @@ import org.cnodejs.android.md.model.storage.TopicShared;
 import org.cnodejs.android.md.presenter.contract.ICreateTopicPresenter;
 import org.cnodejs.android.md.presenter.implement.CreateTopicPresenter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CreateTopicActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener, ICreateTopicView {
 
-    @Bind(R.id.create_topic_toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.create_topic_spn_tab)
+    @BindView(R.id.spn_tab)
     protected Spinner spnTab;
 
-    @Bind(R.id.create_topic_edt_title)
+    @BindView(R.id.edt_title)
     protected EditText edtTitle;
 
-    @Bind(R.id.editor_bar_layout_root)
+    @BindView(R.id.layout_editor_bar)
     protected ViewGroup editorBar;
 
-    @Bind(R.id.create_topic_edt_content)
+    @BindView(R.id.edt_content)
     protected EditText edtContent;
 
     private ProgressDialog progressDialog;
@@ -68,11 +69,11 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
         new EditorBarHandler(this, editorBar, edtContent);
 
         // 载入草稿
-        if (SettingShared.isEnableNewTopicDraft(this)) {
-            spnTab.setSelection(TopicShared.getNewTopicTabPosition(this));
-            edtContent.setText(TopicShared.getNewTopicContent(this));
+        if (SettingShared.isEnableTopicDraft(this)) {
+            spnTab.setSelection(TopicShared.getDraftTabPosition(this));
+            edtContent.setText(TopicShared.getDraftContent(this));
             edtContent.setSelection(edtContent.length());
-            edtTitle.setText(TopicShared.getNewTopicTitle(this));
+            edtTitle.setText(TopicShared.getDraftTitle(this));
             edtTitle.setSelection(edtTitle.length()); // 这个必须最后调用
         }
 
@@ -85,10 +86,10 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
     @Override
     protected void onPause() {
         super.onPause();
-        if (SettingShared.isEnableNewTopicDraft(this) && saveTopicDraft) {
-            TopicShared.setNewTopicTabPosition(this, spnTab.getSelectedItemPosition());
-            TopicShared.setNewTopicTitle(this, edtTitle.getText().toString());
-            TopicShared.setNewTopicContent(this, edtContent.getText().toString());
+        if (SettingShared.isEnableTopicDraft(this) && saveTopicDraft) {
+            TopicShared.setDraftTabPosition(this, spnTab.getSelectedItemPosition());
+            TopicShared.setDraftTitle(this, edtTitle.getText().toString());
+            TopicShared.setDraftContent(this, edtContent.getText().toString());
         }
     }
 
@@ -138,7 +139,7 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
         saveTopicDraft = false;
         TopicShared.clear(this);
         ToastUtils.with(this).show(R.string.post_success);
-        TopicActivity.start(this, result.getTopicId());
+        Navigator.TopicWithAutoCompat.start(this, result.getTopicId());
         finish();
         return false;
     }

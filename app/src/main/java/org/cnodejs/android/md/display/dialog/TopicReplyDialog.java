@@ -22,7 +22,7 @@ import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.ITopicReplyPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicReplyPresenter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -37,16 +37,16 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
         );
     }
 
-    @Bind(R.id.editor_bar_layout_root)
+    @BindView(R.id.layout_editor_bar)
     protected ViewGroup editorBar;
 
-    @Bind(R.id.dialog_topic_reply_layout_target)
+    @BindView(R.id.layout_target)
     protected ViewGroup layoutTarget;
 
-    @Bind(R.id.dialog_topic_reply_tv_target)
+    @BindView(R.id.tv_target)
     protected TextView tvTarget;
 
-    @Bind(R.id.dialog_topic_reply_edt_content)
+    @BindView(R.id.edt_content)
     protected EditText edtContent;
 
     private final String topicId;
@@ -82,17 +82,17 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
         getWindow().setGravity(Gravity.BOTTOM);
     }
 
-    @OnClick(R.id.dialog_topic_reply_btn_tool_close)
+    @OnClick(R.id.btn_tool_close)
     protected void onBtnToolCloseClick() {
         dismissReplyWindow();
     }
 
-    @OnClick(R.id.dialog_topic_reply_btn_tool_send)
+    @OnClick(R.id.btn_tool_send)
     protected void onBtnToolSendClick() {
         topicReplyPresenter.replyTopicAsyncTask(topicId, edtContent.getText().toString().trim(), targetId);
     }
 
-    @OnClick(R.id.dialog_topic_reply_btn_clear_target)
+    @OnClick(R.id.btn_clear_target)
     protected void onBtnClearTargetClick() {
         targetId = null;
         layoutTarget.setVisibility(View.GONE);
@@ -113,7 +113,7 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
         targetId = target.getId();
         layoutTarget.setVisibility(View.VISIBLE);
         tvTarget.setText("回复：" + (targetPosition + 1) + "楼");
-        edtContent.getText().insert(edtContent.getSelectionEnd(), " @" + target.getAuthor().getLoginName() + " ");
+        edtContent.getText().insert(edtContent.getSelectionEnd(), "@" + target.getAuthor().getLoginName() + " ");
         showReplyWindow();
     }
 

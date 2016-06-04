@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <com.dlazaro66.qrcodereaderview.QRCodeReaderView
-        android:id="@+id/qrcode_qr_view"
+        android:id="@+id/qr_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/qrcode_toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#cc303030"
@@ -31,18 +31,18 @@
             android:layout_height="match_parent">
 
             <View
-                android:id="@+id/qrcode_icon_mark_top"
+                android:id="@+id/icon_mark_top"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/qrcode_icon_center"
+                android:layout_above="@+id/icon_center"
                 android:background="#88000000" />
 
             <View
-                android:id="@+id/qrcode_icon_mark_bottom"
+                android:id="@+id/icon_mark_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
-                android:layout_below="@+id/qrcode_icon_center"
+                android:layout_below="@+id/icon_center"
                 android:background="#88000000" />
 
             <View
@@ -50,10 +50,10 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
-                android:layout_toStartOf="@+id/qrcode_icon_center"
-                android:layout_toLeftOf="@+id/qrcode_icon_center"
-                android:layout_below="@+id/qrcode_icon_mark_top"
-                android:layout_above="@+id/qrcode_icon_mark_bottom"
+                android:layout_toStartOf="@+id/icon_center"
+                android:layout_toLeftOf="@+id/icon_center"
+                android:layout_below="@+id/icon_mark_top"
+                android:layout_above="@+id/icon_mark_bottom"
                 android:background="#88000000" />
 
             <View
@@ -61,14 +61,14 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/qrcode_icon_center"
-                android:layout_toRightOf="@+id/qrcode_icon_center"
-                android:layout_below="@+id/qrcode_icon_mark_top"
-                android:layout_above="@+id/qrcode_icon_mark_bottom"
+                android:layout_toEndOf="@+id/icon_center"
+                android:layout_toRightOf="@+id/icon_center"
+                android:layout_below="@+id/icon_mark_top"
+                android:layout_above="@+id/icon_mark_bottom"
                 android:background="#88000000" />
 
             <LinearLayout
-                android:id="@+id/qrcode_icon_center"
+                android:id="@+id/icon_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/qrcode_icon_line"
+                        android:id="@+id/icon_line"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/qrcode_line"
@@ -106,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/qrcode_icon_center"
+                android:layout_below="@+id/icon_center"
                 android:layout_marginTop="-48dp"
                 android:text="@string/qrcode_tip"
                 android:textColor="@android:color/white"

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/widgetBackground">
+
+    <LinearLayout
+        android:id="@+id/btn_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackgroundGeneral"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckedTextView
+                android:id="@+id/ctv_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="?attr/referenceText"
+                android:textSize="12sp"
+                android:background="?attr/referenceBackground"
+                tools:text="置顶"
+                tools:checked="true" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                android:singleLine="true"
+                tools:text="话题的标题" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/image_placeholder" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_author"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/tv_reply_count"
+                        android:layout_toLeftOf="@+id/tv_reply_count"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="12sp"
+                        android:singleLine="true"
+                        tools:text="TakWolf" />
+
+                    <TextView
+                        android:id="@+id/tv_reply_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/icon_slash"
+                        android:layout_toLeftOf="@+id/icon_slash"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/color_accent"
+                        android:textSize="12sp"
+                        android:singleLine="true"
+                        tools:text="18" />
+
+                    <TextView
+                        android:id="@+id/icon_slash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/tv_visit_count"
+                        android:layout_toLeftOf="@+id/tv_visit_count"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:text="@string/$slash"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="12sp"
+                        android:singleLine="true" />
+
+                    <TextView
+                        android:id="@+id/tv_visit_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="12sp"
+                        android:singleLine="true"
+                        tools:text="205" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_create_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/tv_last_reply_time"
+                        android:layout_toLeftOf="@+id/tv_last_reply_time"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="12sp"
+                        android:singleLine="true"
+                        tools:text="创建于：2015-1-1 19:20:15" />
+
+                    <TextView
+                        android:id="@+id/tv_last_reply_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="12sp"
+                        android:singleLine="true"
+                        tools:text="2分前" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/icon_good"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        android:src="@drawable/tab_ic_good"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true" />
+
+    <View style="@style/AppWidget.DeepLine"
+        android:layout_gravity="bottom" />
+
+</FrameLayout>

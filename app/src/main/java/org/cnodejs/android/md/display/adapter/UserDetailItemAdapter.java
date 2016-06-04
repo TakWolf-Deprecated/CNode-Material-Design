@@ -12,14 +12,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.TopicSimple;
-import org.cnodejs.android.md.display.activity.TopicActivity;
 import org.cnodejs.android.md.display.activity.UserDetailActivity;
+import org.cnodejs.android.md.display.util.Navigator;
+import org.cnodejs.android.md.model.entity.TopicSimple;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -42,7 +42,7 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.activity_user_detail_item, parent, false));
+        return new ViewHolder(inflater.inflate(R.layout.item_user_detail, parent, false));
     }
 
     @Override
@@ -52,16 +52,16 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.user_detail_item_img_avatar)
+        @BindView(R.id.img_avatar)
         protected ImageView imgAvatar;
 
-        @Bind(R.id.user_detail_item_tv_title)
+        @BindView(R.id.tv_title)
         protected TextView tvTitle;
 
-        @Bind(R.id.user_detail_item_tv_login_name)
+        @BindView(R.id.tv_login_name)
         protected TextView tvLoginName;
 
-        @Bind(R.id.user_detail_item_tv_last_reply_time)
+        @BindView(R.id.tv_last_reply_time)
         protected TextView tvLastReplyTime;
 
         private TopicSimple topic;
@@ -80,14 +80,14 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
             tvLastReplyTime.setText(FormatUtils.getRecentlyTimeText(topic.getLastReplyAt()));
         }
 
-        @OnClick(R.id.user_detail_item_img_avatar)
+        @OnClick(R.id.img_avatar)
         protected void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
         }
 
-        @OnClick(R.id.user_detail_item_btn_item)
+        @OnClick(R.id.btn_item)
         protected void onBtnItemClick() {
-            TopicActivity.start(activity, topic.getId());
+            Navigator.TopicWithAutoCompat.start(activity, topic.getId());
         }
 
     }

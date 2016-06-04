@@ -14,33 +14,33 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_primary"
+            android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignBottom="@+id/user_detail_layout_info"
+                android:layout_alignBottom="@+id/layout_info"
                 android:src="@drawable/user_detail_header_bg"
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true" />
 
             <LinearLayout
-                android:id="@+id/user_detail_layout_info"
+                android:id="@+id/layout_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/user_detail_img_avatar"
+                    android:id="@+id/img_avatar"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:layout_marginTop="24dp"
                     android:src="@drawable/image_placeholder" />
 
                 <TextView
-                    android:id="@+id/user_detail_tv_login_name"
+                    android:id="@+id/tv_login_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -49,11 +49,11 @@
                     tools:text="TakWolf" />
 
                 <TextView
-                    android:id="@+id/user_detail_tv_github_username"
+                    android:id="@+id/tv_github_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:textColor="@color/text_color_light"
+                    android:textColor="@color/text_secondary_dark"
                     android:textSize="14sp"
                     tools:text="TakWolf@github.com" />
 
@@ -64,7 +64,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/user_detail_tv_create_time"
+                        android:id="@+id/tv_create_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
@@ -73,7 +73,7 @@
                         tools:text="注册时间：2015-1-1 10:10:10" />
 
                     <TextView
-                        android:id="@+id/user_detail_tv_score"
+                        android:id="@+id/tv_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -86,7 +86,7 @@
             </LinearLayout>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/user_detail_toolbar"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#01000000"
@@ -95,7 +95,7 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             <com.pnikosis.materialishprogress.ProgressWheel
-                android:id="@+id/user_detail_progress_wheel"
+                android:id="@+id/progress_wheel"
                 android:layout_width="108dp"
                 android:layout_height="108dp"
                 android:layout_marginTop="18dp"
@@ -108,17 +108,17 @@
         </RelativeLayout>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/user_detail_tab_layout"
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/text_color_light"
+            app:tabTextColor="@color/text_secondary_dark"
             app:tabSelectedTextColor="@android:color/white"
             app:tabBackground="?attr/selectableItemBackground" />
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/user_detail_view_pager"
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

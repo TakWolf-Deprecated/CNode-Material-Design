@@ -1,9 +1,8 @@
 package org.cnodejs.android.md.model.entity;
 
-import android.text.TextUtils;
-
 import com.google.gson.annotations.SerializedName;
 
+import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.joda.time.DateTime;
 
@@ -53,6 +52,7 @@ public class Reply {
 
     public void setContent(String content) {
         this.content = content;
+        contentHtml = null; // 清除已经处理的Html渲染缓存
     }
 
     public List<String> getUpList() {
@@ -83,21 +83,27 @@ public class Reply {
      * Html渲染缓存
      */
 
-    private String handleContent = null;
+    @SerializedName("content_html")
+    private String contentHtml;
 
-    public String getHandleContent() {
-        if (handleContent == null) {
-            handleContent = FormatUtils.handleHtml(getContent());
+    public String getContentHtml() {
+        if (contentHtml == null) {
+            if (ApiDefine.MD_RENDER) {
+                contentHtml = FormatUtils.handleHtml(content);
+            } else {
+                contentHtml = FormatUtils.handleHtml(FormatUtils.renderMarkdown(content));
+            }
         }
-        return handleContent;
+        return contentHtml;
     }
 
-    public void setHandleContent(String content) {
-        handleContent = content;
-    }
-
-    public boolean isEmptyContent() {
-        return TextUtils.isEmpty(getContent()) || TextUtils.equals(getContent(), "<div class=\"markdown-text\"></div>");
+    public void setContentFromLocal(String content) {
+        if (ApiDefine.MD_RENDER) {
+            this.content = FormatUtils.renderMarkdown(content);
+        } else {
+            this.content = content;
+        }
+        contentHtml = null; // 清除已经处理的Html渲染缓存
     }
 
 }
