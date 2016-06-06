@@ -162,7 +162,7 @@ public final class SharedWrapper {
         set(key, Long.toString(value));
     }
 
-    public <T>T getObject(@NonNull String key, @NonNull Type typeOfT) {
+    public <T> T getObject(@NonNull String key, @NonNull Type typeOfT) {
         String value = get(key, null);
         if (value == null) {
             return null;

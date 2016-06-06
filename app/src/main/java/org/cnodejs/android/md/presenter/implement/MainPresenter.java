@@ -110,7 +110,7 @@ public class MainPresenter implements IMainPresenter {
     public void getMessageCountAsyncTask() {
         final String accessToken = LoginShared.getAccessToken(activity);
         if (!TextUtils.isEmpty(accessToken)) {
-            Call<Result.Data<Integer>> call =  ApiClient.service.getMessageCount(accessToken);
+            Call<Result.Data<Integer>> call = ApiClient.service.getMessageCount(accessToken);
             call.enqueue(new CallbackAdapter<Result.Data<Integer>>() {
 
                 @Override

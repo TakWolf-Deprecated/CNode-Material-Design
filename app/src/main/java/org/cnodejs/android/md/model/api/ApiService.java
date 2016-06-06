@@ -37,7 +37,7 @@ public interface ApiService {
             @Query("accesstoken") String accessToken,
             @Query("mdrender") Boolean mdrender
     );
-    
+
     @POST("topics")
     @FormUrlEncoded
     Call<Result.CreateTopic> createTopic(
