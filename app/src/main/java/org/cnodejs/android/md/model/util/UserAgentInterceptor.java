@@ -1,6 +1,6 @@
 package org.cnodejs.android.md.model.util;
 
-import android.text.TextUtils;
+import android.support.annotation.NonNull;
 
 import java.io.IOException;
 
@@ -12,10 +12,7 @@ public class UserAgentInterceptor implements Interceptor {
 
     private final String userAgent;
 
-    public UserAgentInterceptor(String userAgent) {
-        if (TextUtils.isEmpty(userAgent)) {
-            throw new IllegalArgumentException("userAgent is null.");
-        }
+    public UserAgentInterceptor(@NonNull String userAgent) {
         this.userAgent = userAgent;
     }
 
