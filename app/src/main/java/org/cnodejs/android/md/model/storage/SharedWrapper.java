@@ -10,7 +10,7 @@ import android.util.Log;
 import com.google.gson.JsonParseException;
 
 import org.cnodejs.android.md.model.util.EntityUtils;
-import org.cnodejs.android.md.util.Crypt;
+import org.cnodejs.android.md.util.Crypto;
 import org.cnodejs.android.md.util.Digest;
 
 import java.lang.reflect.Type;
@@ -31,10 +31,10 @@ public final class SharedWrapper {
         if (secretSingleton == null || ivSingleton == null) {
             synchronized (SharedWrapper.class) {
                 if (secretSingleton == null) {
-                    secretSingleton = Crypt.AES.generateSecret(Digest.SHA256.getRaw(DeviceInfo.getDeviceToken(context)));
+                    secretSingleton = Crypto.AES.generateSecret(Digest.SHA256.getRaw(DeviceInfo.getDeviceToken(context)));
                 }
                 if (ivSingleton == null) {
-                    ivSingleton = Crypt.AES.generateIV(Digest.MD5.getRaw(DeviceInfo.getDeviceToken(context)));
+                    ivSingleton = Crypto.AES.generateIV(Digest.MD5.getRaw(DeviceInfo.getDeviceToken(context)));
                 }
             }
         }
@@ -57,8 +57,8 @@ public final class SharedWrapper {
             return defValue;
         } else {
             try {
-                return new String(Crypt.AES.decrypt(secret, iv, Base64.decode(target, Base64.DEFAULT)), CHARSET_UTF_8);
-            } catch (Crypt.CryptException e) {
+                return new String(Crypto.AES.decrypt(secret, iv, Base64.decode(target, Base64.DEFAULT)), CHARSET_UTF_8);
+            } catch (Crypto.CryptoException e) {
                 Log.e(TAG, "value decrypt error at key :" + key, e);
                 return defValue;
             }
@@ -71,8 +71,8 @@ public final class SharedWrapper {
             target = null;
         } else {
             try {
-                target = Base64.encodeToString(Crypt.AES.encrypt(secret, iv, value.getBytes(CHARSET_UTF_8)), Base64.DEFAULT);
-            } catch (Crypt.CryptException e) {
+                target = Base64.encodeToString(Crypto.AES.encrypt(secret, iv, value.getBytes(CHARSET_UTF_8)), Base64.DEFAULT);
+            } catch (Crypto.CryptoException e) {
                 Log.e(TAG, "value encrypt error at key :" + key, e);
                 target = null;
             }
@@ -162,7 +162,7 @@ public final class SharedWrapper {
         set(key, Long.toString(value));
     }
 
-    public <T>T getObject(@NonNull String key, @NonNull Type typeOfT) {
+    public <T> T getObject(@NonNull String key, @NonNull Type typeOfT) {
         String value = get(key, null);
         if (value == null) {
             return null;
