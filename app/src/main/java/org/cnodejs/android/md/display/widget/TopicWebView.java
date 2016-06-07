@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 
 import com.melnykov.fab.FloatingActionButton;
 
+import org.cnodejs.android.md.display.listener.FormatJavascriptInterface;
 import org.cnodejs.android.md.display.listener.ImageJavascriptInterface;
 import org.cnodejs.android.md.display.listener.TopicJavascriptInterface;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
@@ -63,6 +64,7 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
     @SuppressLint("AddJavascriptInterface")
     public void setBridgeAndLoadPage(@NonNull TopicJavascriptInterface topicBridge) {
         addJavascriptInterface(ImageJavascriptInterface.with(getContext()), ImageJavascriptInterface.NAME);
+        addJavascriptInterface(FormatJavascriptInterface.instance, FormatJavascriptInterface.NAME);
         addJavascriptInterface(topicBridge, TopicJavascriptInterface.NAME);
         loadUrl(isDarkTheme() ? DARK_THEME_PATH : LIGHT_THEME_PATH);
     }

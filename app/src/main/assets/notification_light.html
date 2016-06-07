@@ -20,7 +20,7 @@
                             {{message.author.loginname}}
                         </span>
                         <span class="time" v-bind:class="{'text-secondary': message.has_read, 'text-accent': !message.has_read}">
-                            {{message.create_at | recentlyTimeText}}
+                            {{message.create_at | relativeTimeSpan}}
                         </span>
                     </div>
                     <div class="line2">
