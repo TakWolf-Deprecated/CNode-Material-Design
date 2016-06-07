@@ -83,7 +83,7 @@ public final class FormatUtils {
     /**
      * 获取菜单导航消息数目字符串
      */
-    public static String getNavigationDisplayCountText(int count) {
+    public static String getNavigationDisplayCountString(int count) {
         if (count > 99) {
             return "99+";
         } else if (count <= 0) {

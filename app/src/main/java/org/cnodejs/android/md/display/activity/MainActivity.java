@@ -484,7 +484,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @Override
     public void updateMessageCountViews(@NonNull Result.Data<Integer> result) {
         if (ActivityUtils.isAlive(this)) {
-            tvBadgeNotification.setText(FormatUtils.getNavigationDisplayCountText(result.getData()));
+            tvBadgeNotification.setText(FormatUtils.getNavigationDisplayCountString(result.getData()));
         }
     }
 
