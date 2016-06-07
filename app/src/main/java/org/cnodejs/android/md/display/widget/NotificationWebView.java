@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 
+import org.cnodejs.android.md.display.listener.FormatJavascriptInterface;
 import org.cnodejs.android.md.display.listener.ImageJavascriptInterface;
 import org.cnodejs.android.md.display.listener.NotificationJavascriptInterface;
 import org.cnodejs.android.md.display.view.IBackToContentTopView;
@@ -47,6 +48,7 @@ public class NotificationWebView extends CNodeWebView implements IBackToContentT
     @SuppressLint("AddJavascriptInterface")
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         addJavascriptInterface(ImageJavascriptInterface.with(context), ImageJavascriptInterface.NAME);
+        addJavascriptInterface(FormatJavascriptInterface.instance, FormatJavascriptInterface.NAME);
         addJavascriptInterface(NotificationJavascriptInterface.with(context), NotificationJavascriptInterface.NAME);
         loadUrl(isDarkTheme() ? DARK_THEME_PATH : LIGHT_THEME_PATH);
     }

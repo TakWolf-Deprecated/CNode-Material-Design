@@ -126,7 +126,7 @@ public class TopicAdapter extends BaseAdapter {
             Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             tvIndex.setText(position + 1 + "楼");
-            tvCreateTime.setText(FormatUtils.getRecentlyTimeText(reply.getCreateAt()));
+            tvCreateTime.setText(FormatUtils.getRelativeTimeSpanString(reply.getCreateAt()));
             updateUpViews(reply);
             if (targetPosition == null) {
                 tvTargetPosition.setVisibility(View.GONE);
