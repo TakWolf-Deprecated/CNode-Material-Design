@@ -8,7 +8,6 @@ import org.cnodejs.android.md.model.api.ApiDefine;
 import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.safety.Cleaner;
 import org.jsoup.safety.Whitelist;
 import org.tautua.markdownpapers.Markdown;
@@ -119,8 +118,9 @@ public final class FormatUtils {
     /**
      * CNode兼容性的Markdown转换
      * '@'协议转换为'/user/'相对路径
+     * 解析裸链接
      * 最外层包裹'<div class="markdown-text"></div>'
-     * 以保证和服务端渲染同步
+     * 尽可能的实现和服务端渲染相同的结果
      */
 
     private static final Markdown md = new Markdown();
@@ -149,28 +149,17 @@ public final class FormatUtils {
     /**
      * CNode兼容性的Html处理
      * 过滤xss
-     * 替换用户链接为绝对地址
-     * 修复部分图片链接前缀
-     * 最外层包裹'<div class="markdown-text"></div>'
+     * 保留div的class属性，但是会清除其他非白名单属性
+     * 通过baseUrl补全相对地址
      */
 
-    private static final Cleaner cleaner = new Cleaner(Whitelist.relaxed().addAttributes("*", "class"));
+    private static final Cleaner cleaner = new Cleaner(Whitelist.relaxed().addAttributes("div", "class")); // 主要目的是保留最外层div的markdown-text属性
 
     public static String handleHtml(String html) {
         // 保证html不为null
         html = TextUtils.isEmpty(html) ? "" : html;
-        // 过滤xss，这里会自动补全用户链接地址和七牛图片地址，但是会清除class和style属性
+        // 过滤xss
         Document document = cleaner.clean(Jsoup.parseBodyFragment(html, ApiDefine.HOST_BASE_URL));
-        // 确保body第一个子节点为div，并且class=markdown-text
-        if (document.body().childNodeSize() == 0 || !document.body().child(0).tagName().equalsIgnoreCase("div")) {
-            Element div = document.createElement("div").attr("class", "markdown-text");
-            for (Element element : document.body().children()) {
-                div.appendChild(element);
-            }
-            document.body().empty().appendChild(div);
-        } else {
-            document.body().child(0).attr("class", "markdown-text");
-        }
         // 返回body
         return document.body().html();
     }
