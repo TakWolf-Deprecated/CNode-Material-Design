@@ -116,7 +116,7 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
             ctvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
             ctvTab.setChecked(topic.isTop());
             tvLoginName.setText(topic.getAuthor().getLoginName());
-            tvCreateTime.setText(FormatUtils.getRecentlyTimeText(topic.getCreateAt()) + "创建");
+            tvCreateTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getCreateAt()) + "创建");
             tvVisitCount.setText(topic.getVisitCount() + "次浏览");
             btnFavorite.setImageResource(isCollect ? R.drawable.ic_favorite_theme_24dp : R.drawable.ic_favorite_outline_grey600_24dp);
 

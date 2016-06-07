@@ -77,7 +77,7 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
             tvTitle.setText(topic.getTitle());
             Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(topic.getAuthor().getLoginName());
-            tvLastReplyTime.setText(FormatUtils.getRecentlyTimeText(topic.getLastReplyAt()));
+            tvLastReplyTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getLastReplyAt()));
         }
 
         @OnClick(R.id.img_avatar)

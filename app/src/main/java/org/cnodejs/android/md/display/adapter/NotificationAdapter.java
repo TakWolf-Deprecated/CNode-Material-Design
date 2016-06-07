@@ -88,7 +88,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             Glide.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
-            tvTime.setText(FormatUtils.getRecentlyTimeText(message.getCreateAt()));
+            tvTime.setText(FormatUtils.getRelativeTimeSpanString(message.getCreateAt()));
             tvTime.setTextColor(ResUtils.getThemeAttrColor(activity, message.isRead() ? android.R.attr.textColorSecondary : R.attr.colorAccent));
             badgeRead.setVisibility(message.isRead() ? View.GONE : View.VISIBLE);
             tvTopicTitle.setText("话题：" + message.getTopic().getTitle());

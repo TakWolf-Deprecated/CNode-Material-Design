@@ -32,7 +32,7 @@ public final class FormatUtils {
     private static final long MONTH = 31 * DAY;
     private static final long YEAR = 12 * MONTH;
 
-    public static String getRecentlyTimeText(@NonNull DateTime dateTime) {
+    public static String getRelativeTimeSpanString(@NonNull DateTime dateTime) {
         long offset = new DateTime().getMillis() - dateTime.getMillis();
         if (offset > YEAR) {
             return (offset / YEAR) + "年前";
