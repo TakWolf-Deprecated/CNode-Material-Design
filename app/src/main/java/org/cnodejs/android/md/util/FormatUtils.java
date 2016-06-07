@@ -33,7 +33,7 @@ public final class FormatUtils {
     private static final long YEAR = 12 * MONTH;
 
     public static String getRelativeTimeSpanString(@NonNull DateTime dateTime) {
-        long offset = new DateTime().getMillis() - dateTime.getMillis();
+        long offset = System.currentTimeMillis() - dateTime.getMillis();
         if (offset > YEAR) {
             return (offset / YEAR) + "年前";
         } else if (offset > MONTH) {
