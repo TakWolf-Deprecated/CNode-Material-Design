@@ -6,10 +6,10 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.display.base.StatusBarActivity;
 import org.cnodejs.android.md.display.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.display.util.ThemeUtils;
+import org.cnodejs.android.md.model.storage.SettingShared;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

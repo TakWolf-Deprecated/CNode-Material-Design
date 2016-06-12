@@ -10,9 +10,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.display.activity.MarkdownPreviewActivity;
 import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
+import org.cnodejs.android.md.model.storage.SettingShared;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

@@ -13,7 +13,6 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.ITopicReplyPresenter;
-import org.cnodejs.android.md.util.FormatUtils;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;

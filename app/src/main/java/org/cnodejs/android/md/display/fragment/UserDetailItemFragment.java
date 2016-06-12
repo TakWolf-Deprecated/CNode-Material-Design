@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.TopicSimple;
 import org.cnodejs.android.md.display.adapter.UserDetailItemAdapter;
+import org.cnodejs.android.md.model.entity.TopicSimple;
 
 import java.util.ArrayList;
 import java.util.List;
