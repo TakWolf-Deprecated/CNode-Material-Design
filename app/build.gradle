@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'android-apt'
 
 // 根据日期自动生成build号
 def calendar = Calendar.getInstance();
