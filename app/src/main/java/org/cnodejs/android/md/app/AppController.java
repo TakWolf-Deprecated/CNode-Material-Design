@@ -8,8 +8,9 @@ import com.umeng.analytics.MobclickAgent;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.cnodejs.android.md.BuildConfig;
+import org.cnodejs.android.md.display.activity.CrashLogActivity;
 
-public class AppController extends Application {
+public class AppController extends Application implements Thread.UncaughtExceptionHandler {
 
     private static Context context;
 
@@ -27,11 +28,17 @@ public class AppController extends Application {
 
         // 配置全局异常捕获
         if (!BuildConfig.DEBUG) {
-            Thread.setDefaultUncaughtExceptionHandler(new AppExceptionHandler(this));
+            Thread.setDefaultUncaughtExceptionHandler(this);
         }
 
         // 友盟设置调试模式
         MobclickAgent.setDebugMode(BuildConfig.DEBUG);
+    }
+
+    @Override
+    public void uncaughtException(Thread thread, Throwable e) {
+        CrashLogActivity.start(this, e);
+        System.exit(1);
     }
 
 }

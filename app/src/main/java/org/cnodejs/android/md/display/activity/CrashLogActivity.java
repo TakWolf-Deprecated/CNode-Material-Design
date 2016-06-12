@@ -1,8 +1,10 @@
 package org.cnodejs.android.md.display.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -23,6 +25,17 @@ import butterknife.ButterKnife;
 
 public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
+    private static final String EXTRA_E = "e";
+
+    public static void start(@NonNull Context context, @NonNull Throwable e) {
+        Intent intent = new Intent(context, CrashLogActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(EXTRA_E, e);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
@@ -42,11 +55,8 @@ public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMen
         toolbar.inflateMenu(R.menu.crash_log);
         toolbar.setOnMenuItemClickListener(this);
 
-        //接收异常对象
-        Intent intent = getIntent();
-        Throwable e = (Throwable) intent.getSerializableExtra("e");
+        Throwable e = (Throwable) getIntent().getSerializableExtra(EXTRA_E);
 
-        //构建字符串
         StringBuilder sb = new StringBuilder();
         sb.append("生产厂商：\n");
         sb.append(Build.MANUFACTURER).append("\n\n");
@@ -72,7 +82,7 @@ public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMen
         printWriter.close();
         sb.append(writer.toString());
         crashLog = sb.toString();
-        //显示信息
+
         tvInfo.setText(crashLog);
     }
 
