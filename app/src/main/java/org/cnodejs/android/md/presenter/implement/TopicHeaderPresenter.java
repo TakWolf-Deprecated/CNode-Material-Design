@@ -3,12 +3,12 @@ package org.cnodejs.android.md.presenter.implement;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
+import org.cnodejs.android.md.ui.view.ITopicHeaderView;
 
 import retrofit2.Call;
 import retrofit2.Response;

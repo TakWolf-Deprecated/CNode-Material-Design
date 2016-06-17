@@ -3,11 +3,11 @@ package org.cnodejs.android.md.presenter.implement;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import org.cnodejs.android.md.display.view.ILoginView;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
+import org.cnodejs.android.md.ui.view.ILoginView;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import retrofit2.Call;

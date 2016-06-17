@@ -5,11 +5,11 @@ import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.display.activity.LoginActivity;
-import org.cnodejs.android.md.display.dialog.AlertDialogUtils;
-import org.cnodejs.android.md.display.util.ActivityUtils;
-import org.cnodejs.android.md.display.util.ToastUtils;
 import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.ui.activity.LoginActivity;
+import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
+import org.cnodejs.android.md.ui.util.ActivityUtils;
+import org.cnodejs.android.md.ui.util.ToastUtils;
 
 import retrofit2.Response;
 

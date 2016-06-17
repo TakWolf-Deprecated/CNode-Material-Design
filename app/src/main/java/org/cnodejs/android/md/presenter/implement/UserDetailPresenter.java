@@ -3,7 +3,6 @@ package org.cnodejs.android.md.presenter.implement;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import org.cnodejs.android.md.display.view.IUserDetailView;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.CallbackAdapter;
 import org.cnodejs.android.md.model.api.DefaultToastCallback;
@@ -11,6 +10,7 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
+import org.cnodejs.android.md.ui.view.IUserDetailView;
 import org.cnodejs.android.md.util.HandlerUtils;
 
 import java.util.List;

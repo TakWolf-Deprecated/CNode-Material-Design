@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import org.cnodejs.android.md.display.view.IMainView;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.api.CallbackAdapter;
@@ -14,6 +13,7 @@ import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
+import org.cnodejs.android.md.ui.view.IMainView;
 
 import java.util.List;
 

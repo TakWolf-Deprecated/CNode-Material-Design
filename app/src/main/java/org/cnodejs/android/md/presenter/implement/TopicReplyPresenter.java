@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import org.cnodejs.android.md.display.view.ITopicReplyView;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Author;
@@ -13,6 +12,7 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.ITopicReplyPresenter;
+import org.cnodejs.android.md.ui.view.ITopicReplyView;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;

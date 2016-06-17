@@ -3,13 +3,13 @@ package org.cnodejs.android.md.presenter.implement;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import org.cnodejs.android.md.display.view.ITopicItemReplyView;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
+import org.cnodejs.android.md.ui.view.ITopicItemReplyView;
 
 import retrofit2.Call;
 import retrofit2.Response;

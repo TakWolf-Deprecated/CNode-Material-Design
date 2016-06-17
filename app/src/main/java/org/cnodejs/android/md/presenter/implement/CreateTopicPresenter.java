@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import org.cnodejs.android.md.display.view.ICreateTopicView;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultToastCallback;
 import org.cnodejs.android.md.model.entity.Result;
@@ -12,6 +11,7 @@ import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.ICreateTopicPresenter;
+import org.cnodejs.android.md.ui.view.ICreateTopicView;
 
 import retrofit2.Call;
 import retrofit2.Response;
