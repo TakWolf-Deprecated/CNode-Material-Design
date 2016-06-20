@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.CallbackAdapter;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
+import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
@@ -107,7 +107,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
     @Override
     public void getCollectTopicListAsyncTask(@NonNull String loginName) {
         Call<Result.Data<List<Topic>>> call = ApiClient.service.getCollectTopicList(loginName);
-        call.enqueue(new DefaultToastCallback<Result.Data<List<Topic>>>(activity) {
+        call.enqueue(new DefaultCallbackAdapter<Result.Data<List<Topic>>>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {

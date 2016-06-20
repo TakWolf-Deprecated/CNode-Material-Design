@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
+import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.storage.LoginShared;
@@ -38,7 +38,7 @@ public class CreateTopicPresenter implements ICreateTopicPresenter {
             }
             createTopicView.onCreateTopicStart();
             Call<Result.CreateTopic> call = ApiClient.service.createTopic(LoginShared.getAccessToken(activity), tab, title, content);
-            call.enqueue(new DefaultToastCallback<Result.CreateTopic>(activity) {
+            call.enqueue(new DefaultCallbackAdapter<Result.CreateTopic>(activity) {
 
                 @Override
                 public boolean onResultOk(Response<Result.CreateTopic> response, Result.CreateTopic result) {

@@ -13,11 +13,11 @@ import org.cnodejs.android.md.ui.util.ToastUtils;
 
 import retrofit2.Response;
 
-public class DefaultToastCallback<T extends Result> extends CallbackAdapter<T> {
+public class DefaultCallbackAdapter<T extends Result> extends CallbackAdapter<T> {
 
     private final Activity activity;
 
-    public DefaultToastCallback(@NonNull Activity activity) {
+    public DefaultCallbackAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

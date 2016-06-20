@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
+import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
 import org.cnodejs.android.md.ui.view.ILoginView;
@@ -30,7 +30,7 @@ public class LoginPresenter implements ILoginPresenter {
         } else {
             Call<Result.Login> call = ApiClient.service.accessToken(accessToken);
             loginView.onLoginStart(call);
-            call.enqueue(new DefaultToastCallback<Result.Login>(activity) {
+            call.enqueue(new DefaultCallbackAdapter<Result.Login>(activity) {
 
                 @Override
                 public boolean onResultOk(Response<Result.Login> response, Result.Login loginInfo) {

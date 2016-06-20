@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.ApiDefine;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
+import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.storage.LoginShared;
@@ -28,7 +28,7 @@ public class TopicPresenter implements ITopicPresenter {
     @Override
     public void getTopicAsyncTask(@NonNull String topicId) {
         Call<Result.Data<TopicWithReply>> call = ApiClient.service.getTopic(topicId, LoginShared.getAccessToken(activity), ApiDefine.MD_RENDER);
-        call.enqueue(new DefaultToastCallback<Result.Data<TopicWithReply>>(activity) {
+        call.enqueue(new DefaultCallbackAdapter<Result.Data<TopicWithReply>>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result.Data<TopicWithReply>> response, Result.Data<TopicWithReply> result) {
