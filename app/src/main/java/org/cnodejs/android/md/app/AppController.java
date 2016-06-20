@@ -8,7 +8,7 @@ import com.umeng.analytics.MobclickAgent;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.cnodejs.android.md.BuildConfig;
-import org.cnodejs.android.md.display.activity.CrashLogActivity;
+import org.cnodejs.android.md.ui.activity.CrashLogActivity;
 
 public class AppController extends Application implements Thread.UncaughtExceptionHandler {
 

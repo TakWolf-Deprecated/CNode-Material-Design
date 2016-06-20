@@ -16,7 +16,7 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <org.cnodejs.android.md.display.widget.PreviewWebView
+    <org.cnodejs.android.md.ui.widget.PreviewWebView
         android:id="@+id/web_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
