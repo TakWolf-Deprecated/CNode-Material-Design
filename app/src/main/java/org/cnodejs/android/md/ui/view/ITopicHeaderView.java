@@ -1,11 +1,9 @@
 package org.cnodejs.android.md.ui.view;
 
-import org.cnodejs.android.md.model.entity.Result;
-
 public interface ITopicHeaderView {
 
-    boolean onCollectTopicResultOk(Result result);
+    void onCollectTopicOk();
 
-    boolean onDecollectTopicResultOk(Result result);
+    void onDecollectTopicOk();
 
 }

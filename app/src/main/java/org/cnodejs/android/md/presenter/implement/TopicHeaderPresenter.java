@@ -25,12 +25,12 @@ public class TopicHeaderPresenter implements ITopicHeaderPresenter {
 
     @Override
     public void collectTopicAsyncTask(@NonNull String topicId) {
-        Call<Result> call = ApiClient.service.collectTopic(LoginShared.getAccessToken(activity), topicId);
-        call.enqueue(new DefaultCallbackAdapter<Result>(activity) {
+        ApiClient.service.collectTopic(LoginShared.getAccessToken(activity), topicId).enqueue(new DefaultCallbackAdapter<Result>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result> response, Result result) {
-                return topicHeaderView.onCollectTopicResultOk(result);
+                topicHeaderView.onCollectTopicOk();
+                return false;
             }
 
         });
@@ -38,12 +38,12 @@ public class TopicHeaderPresenter implements ITopicHeaderPresenter {
 
     @Override
     public void decollectTopicAsyncTask(@NonNull String topicId) {
-        Call<Result> call = ApiClient.service.decollectTopic(LoginShared.getAccessToken(activity), topicId);
-        call.enqueue(new DefaultCallbackAdapter<Result>(activity) {
+        ApiClient.service.decollectTopic(LoginShared.getAccessToken(activity), topicId).enqueue(new DefaultCallbackAdapter<Result>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result> response, Result result) {
-                return topicHeaderView.onDecollectTopicResultOk(result);
+                topicHeaderView.onDecollectTopicOk();
+                return false;
             }
 
         });

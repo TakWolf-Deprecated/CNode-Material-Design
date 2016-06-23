@@ -152,22 +152,16 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     }
 
     @Override
-    public boolean onCollectTopicResultOk(Result result) {
+    public void onCollectTopicOk() {
         if (ActivityUtils.isAlive(this)) {
             webTopic.updateTopicCollect(true);
-            return false;
-        } else {
-            return true;
         }
     }
 
     @Override
-    public boolean onDecollectTopicResultOk(Result result) {
+    public void onDecollectTopicOk() {
         if (ActivityUtils.isAlive(this)) {
             webTopic.updateTopicCollect(false);
-            return false;
-        } else {
-            return true;
         }
     }
 
