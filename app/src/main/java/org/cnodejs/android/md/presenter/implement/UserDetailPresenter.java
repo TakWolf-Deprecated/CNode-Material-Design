@@ -3,6 +3,7 @@ package org.cnodejs.android.md.presenter.implement;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
+import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.CallbackAdapter;
 import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
@@ -15,13 +16,14 @@ import org.cnodejs.android.md.util.HandlerUtils;
 
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.Response;
 
 public class UserDetailPresenter implements IUserDetailPresenter {
 
     private final Activity activity;
     private final IUserDetailView userDetailView;
+
+    private boolean loading = false;
 
     public UserDetailPresenter(@NonNull Activity activity, @NonNull IUserDetailView userDetailView) {
         this.activity = activity;
@@ -30,91 +32,81 @@ public class UserDetailPresenter implements IUserDetailPresenter {
 
     @Override
     public void getUserAsyncTask(@NonNull String loginName) {
-        userDetailView.onGetUserStart();
-        Call<Result.Data<User>> call = ApiClient.service.getUser(loginName);
-        call.enqueue(new CallbackAdapter<Result.Data<User>>() {
+        if (!loading) {
+            loading = true;
+            userDetailView.onGetUserStart();
+            ApiClient.service.getUser(loginName).enqueue(new CallbackAdapter<Result.Data<User>>() {
 
-            private long startLoadingTime = System.currentTimeMillis();
+                private long startLoadingTime = System.currentTimeMillis();
 
-            private long getPostTime() {
-                long postTime = 1000 - (System.currentTimeMillis() - startLoadingTime);
-                if (postTime > 0) {
-                    return postTime;
-                } else {
-                    return 0;
+                private long getPostTime() {
+                    long postTime = 1000 - (System.currentTimeMillis() - startLoadingTime);
+                    if (postTime > 0) {
+                        return postTime;
+                    } else {
+                        return 0;
+                    }
                 }
-            }
 
-            @Override
-            public boolean onResultOk(Response<Result.Data<User>> response, final Result.Data<User> result) {
-                HandlerUtils.postDelayed(new Runnable() {
+                @Override
+                public boolean onResultOk(final Response<Result.Data<User>> response, final Result.Data<User> result) {
+                    HandlerUtils.postDelayed(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        if (!userDetailView.onGetUserResultOk(result)) {
+                        @Override
+                        public void run() {
+                            userDetailView.onGetUserOk(result.getData());
                             onFinish();
                         }
-                    }
 
-                }, getPostTime());
-                return true;
-            }
+                    }, getPostTime());
+                    return true;
+                }
 
-            @Override
-            public boolean onResultError(final Response<Result.Data<User>> response, final Result.Error error) {
-                HandlerUtils.postDelayed(new Runnable() {
+                @Override
+                public boolean onResultError(final Response<Result.Data<User>> response, final Result.Error error) {
+                    HandlerUtils.postDelayed(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        boolean interrupt;
-                        if (response.code() == 404) {
-                            interrupt = userDetailView.onGetUserResultError(error);
-                        } else {
-                            interrupt = userDetailView.onGetUserLoadError();
-                        }
-                        if (!interrupt) {
+                        @Override
+                        public void run() {
+                            userDetailView.onGetUserError(response.code() == 404 ? error.getErrorMessage() : activity.getString(R.string.data_load_faild_and_click_avatar_to_reload));
                             onFinish();
                         }
-                    }
 
-                }, getPostTime());
-                return true;
-            }
+                    }, getPostTime());
+                    return true;
+                }
 
-            @Override
-            public boolean onCallException(Throwable t, Result.Error error) {
-                HandlerUtils.postDelayed(new Runnable() {
+                @Override
+                public boolean onCallException(Throwable t, Result.Error error) {
+                    HandlerUtils.postDelayed(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        if (!userDetailView.onGetUserLoadError()) {
+                        @Override
+                        public void run() {
+                            userDetailView.onGetUserError(activity.getString(R.string.data_load_faild_and_click_avatar_to_reload));
                             onFinish();
                         }
-                    }
 
-                }, getPostTime());
-                return true;
-            }
+                    }, getPostTime());
+                    return true;
+                }
 
-            @Override
-            public void onFinish() {
-                userDetailView.onGetUserFinish();
-            }
+                @Override
+                public void onFinish() {
+                    userDetailView.onGetUserFinish();
+                    loading = false;
+                }
 
-        });
-    }
+            });
+            ApiClient.service.getCollectTopicList(loginName).enqueue(new DefaultCallbackAdapter<Result.Data<List<Topic>>>(activity) {
 
-    @Override
-    public void getCollectTopicListAsyncTask(@NonNull String loginName) {
-        Call<Result.Data<List<Topic>>> call = ApiClient.service.getCollectTopicList(loginName);
-        call.enqueue(new DefaultCallbackAdapter<Result.Data<List<Topic>>>(activity) {
+                @Override
+                public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
+                    userDetailView.onGetCollectTopicListOk(result.getData());
+                    return false;
+                }
 
-            @Override
-            public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                return userDetailView.onGetCollectTopicListResultOk(result);
-            }
-
-        });
+            });
+        }
     }
 
 }
