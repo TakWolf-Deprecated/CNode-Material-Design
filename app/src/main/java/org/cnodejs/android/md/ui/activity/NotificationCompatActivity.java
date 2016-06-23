@@ -10,7 +10,6 @@ import android.view.View;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.model.entity.Notification;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.presenter.contract.INotificationPresenter;
 import org.cnodejs.android.md.presenter.implement.NotificationPresenter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
@@ -79,31 +78,27 @@ public class NotificationCompatActivity extends StatusBarActivity implements INo
     }
 
     @Override
-    public boolean onGetMessagesResultOk(@NonNull Result.Data<Notification> result) {
+    public void onGetMessagesOk(@NonNull Notification notification) {
         if (ActivityUtils.isAlive(this)) {
             List<Message> messageList = new ArrayList<>();
-            messageList.addAll(result.getData().getHasNotReadMessageList());
-            messageList.addAll(result.getData().getHasReadMessageList());
+            messageList.addAll(notification.getHasNotReadMessageList());
+            messageList.addAll(notification.getHasReadMessageList());
             webNotification.updateMessageList(messageList);
             iconNoData.setVisibility(messageList.size() == 0 ? View.VISIBLE : View.GONE);
-            return false;
-        } else {
-            return true;
         }
     }
 
     @Override
     public void onGetMessagesFinish() {
-        refreshLayout.setRefreshing(false);
+        if (ActivityUtils.isAlive(this)) {
+            refreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
-    public boolean onMarkAllMessageReadResultOk() {
+    public void onMarkAllMessageReadOk() {
         if (ActivityUtils.isAlive(this)) {
             webNotification.markAllMessageRead();
-            return false;
-        } else {
-            return true;
         }
     }
 
