@@ -3,6 +3,7 @@ package org.cnodejs.android.md.presenter.implement;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
+import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
@@ -26,7 +27,7 @@ public class LoginPresenter implements ILoginPresenter {
     @Override
     public void loginAsyncTask(final String accessToken) {
         if (!FormatUtils.isAccessToken(accessToken)) {
-            loginView.onAccessTokenFormatError();
+            loginView.onAccessTokenError(activity.getString(R.string.access_token_format_error));
         } else {
             Call<Result.Login> call = ApiClient.service.accessToken(accessToken);
             loginView.onLoginStart(call);
@@ -34,12 +35,14 @@ public class LoginPresenter implements ILoginPresenter {
 
                 @Override
                 public boolean onResultOk(Response<Result.Login> response, Result.Login loginInfo) {
-                    return loginView.onLoginResultOk(accessToken, loginInfo);
+                    loginView.onLoginOk(accessToken, loginInfo);
+                    return false;
                 }
 
                 @Override
                 public boolean onResultErrorAuth(Response<Result.Login> response, Result.Error error) {
-                    return loginView.onLoginResultErrorAuth(error);
+                    loginView.onAccessTokenError(activity.getString(R.string.access_token_auth_error));
+                    return false;
                 }
 
                 @Override

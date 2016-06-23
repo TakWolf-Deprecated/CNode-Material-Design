@@ -127,31 +127,23 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     }
 
     @Override
-    public void onAccessTokenFormatError() {
-        edtAccessToken.setError(getString(R.string.access_token_format_error));
+    public void onAccessTokenError(@NonNull String message) {
+        edtAccessToken.setError(message);
         edtAccessToken.requestFocus();
+    }
+
+    @Override
+    public void onLoginOk(@NonNull String accessToken, @NonNull Result.Login loginInfo) {
+        LoginShared.login(this, accessToken, loginInfo);
+        ToastUtils.with(this).show(R.string.login_success);
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override
     public void onLoginStart(@NonNull Call<Result.Login> call) {
         progressDialog.setOnCancelListener(new DialogCancelCallListener(call));
         progressDialog.show();
-    }
-
-    @Override
-    public boolean onLoginResultOk(@NonNull String accessToken, @NonNull Result.Login loginInfo) {
-        LoginShared.login(this, accessToken, loginInfo);
-        ToastUtils.with(this).show(R.string.login_success);
-        setResult(RESULT_OK);
-        finish();
-        return false;
-    }
-
-    @Override
-    public boolean onLoginResultErrorAuth(@NonNull Result.Error error) {
-        edtAccessToken.setError(getString(R.string.access_token_auth_error));
-        edtAccessToken.requestFocus();
-        return false;
     }
 
     @Override
