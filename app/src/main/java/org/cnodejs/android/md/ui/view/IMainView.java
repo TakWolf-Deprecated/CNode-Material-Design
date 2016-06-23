@@ -2,7 +2,6 @@ package org.cnodejs.android.md.ui.view;
 
 import android.support.annotation.NonNull;
 
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
 
@@ -10,20 +9,20 @@ import java.util.List;
 
 public interface IMainView {
 
-    boolean onRefreshTopicListResultOk(@NonNull TabType tab, @NonNull Result.Data<List<Topic>> result);
+    boolean onRefreshTopicListOk(@NonNull TabType tab, @NonNull List<Topic> topicList);
 
-    boolean onRefreshTopicListResultErrorOrCallException(@NonNull TabType tab, @NonNull Result.Error error);
+    boolean onRefreshTopicListError(@NonNull TabType tab, @NonNull String message);
 
     void onRefreshTopicListFinish();
 
-    boolean onLoadMoreTopicListResultOk(@NonNull TabType tab, @NonNull Integer page, Result.Data<List<Topic>> result);
+    boolean onLoadMoreTopicListOk(@NonNull TabType tab, @NonNull Integer page, @NonNull List<Topic> topicList);
 
-    boolean onLoadMoreTopicListResultErrorOrCallException(@NonNull TabType tab, @NonNull Integer page, @NonNull Result.Error error);
+    boolean onLoadMoreTopicListError(@NonNull TabType tab, @NonNull Integer page, @NonNull String message);
 
     void onLoadMoreTopicListFinish();
 
     void updateUserInfoViews();
 
-    void updateMessageCountViews(@NonNull Result.Data<Integer> result);
+    void updateMessageCountViews(int count);
 
 }
