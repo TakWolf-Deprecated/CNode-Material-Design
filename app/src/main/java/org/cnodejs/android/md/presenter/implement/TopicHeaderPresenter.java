@@ -10,7 +10,6 @@ import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
 import org.cnodejs.android.md.ui.view.ITopicHeaderView;
 
-import retrofit2.Call;
 import retrofit2.Response;
 
 public class TopicHeaderPresenter implements ITopicHeaderPresenter {

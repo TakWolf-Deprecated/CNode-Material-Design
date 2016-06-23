@@ -20,7 +20,6 @@ import com.bumptech.glide.Glide;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.storage.LoginShared;

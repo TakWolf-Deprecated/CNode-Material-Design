@@ -15,7 +15,6 @@ import com.melnykov.fab.FloatingActionButton;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Reply;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.storage.SettingShared;
