@@ -118,25 +118,24 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
     }
 
     @Override
-    public void onContentEmptyError() {
-        ToastUtils.with(getContext()).show(R.string.content_empty_error_tip);
+    public void onContentError(@NonNull String message) {
+        ToastUtils.with(getContext()).show(message);
         edtContent.requestFocus();
     }
 
     @Override
-    public void onReplyTopicStart() {
-        progressDialog.show();
-    }
-
-    @Override
-    public boolean onReplyTopicResultOk(@NonNull Reply reply) {
+    public void onReplyTopicOk(@NonNull Reply reply) {
         topicView.appendReplyAndUpdateViews(reply);
         dismissReplyWindow();
         targetId = null;
         layoutTarget.setVisibility(View.GONE);
         edtContent.setText(null);
         ToastUtils.with(getContext()).show(R.string.post_success);
-        return false;
+    }
+
+    @Override
+    public void onReplyTopicStart() {
+        progressDialog.show();
     }
 
     @Override

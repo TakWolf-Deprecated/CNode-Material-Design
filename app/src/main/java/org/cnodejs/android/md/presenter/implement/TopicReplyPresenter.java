@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
 import org.cnodejs.android.md.model.entity.Author;
@@ -17,7 +18,6 @@ import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
 import retrofit2.Response;
 
 public class TopicReplyPresenter implements ITopicReplyPresenter {
@@ -33,7 +33,7 @@ public class TopicReplyPresenter implements ITopicReplyPresenter {
     @Override
     public void replyTopicAsyncTask(@NonNull String topicId, String content, final String targetId) {
         if (TextUtils.isEmpty(content)) {
-            topicReplyView.onContentEmptyError();
+            topicReplyView.onContentError(activity.getString(R.string.content_empty_error_tip));
         } else {
             final String finalContent;
             if (SettingShared.isEnableTopicSign(activity)) { // 添加小尾巴
@@ -42,8 +42,7 @@ public class TopicReplyPresenter implements ITopicReplyPresenter {
                 finalContent = content;
             }
             topicReplyView.onReplyTopicStart();
-            Call<Result.ReplyTopic> call = ApiClient.service.replyTopic(topicId, LoginShared.getAccessToken(activity), finalContent, targetId);
-            call.enqueue(new DefaultCallbackAdapter<Result.ReplyTopic>(activity) {
+            ApiClient.service.replyTopic(topicId, LoginShared.getAccessToken(activity), finalContent, targetId).enqueue(new DefaultCallbackAdapter<Result.ReplyTopic>(activity) {
 
                 @Override
                 public boolean onResultOk(Response<Result.ReplyTopic> response, Result.ReplyTopic result) {
@@ -57,7 +56,8 @@ public class TopicReplyPresenter implements ITopicReplyPresenter {
                     reply.setCreateAt(new DateTime());
                     reply.setUpList(new ArrayList<String>());
                     reply.setReplyId(targetId);
-                    return topicReplyView.onReplyTopicResultOk(reply);
+                    topicReplyView.onReplyTopicOk(reply);
+                    return false;
                 }
 
                 @Override

@@ -12,11 +12,11 @@ public interface ITopicReplyView {
 
     void onAt(@NonNull Reply target, @NonNull Integer targetPosition);
 
-    void onContentEmptyError();
+    void onContentError(@NonNull String message);
+
+    void onReplyTopicOk(@NonNull Reply reply);
 
     void onReplyTopicStart();
-
-    boolean onReplyTopicResultOk(@NonNull Reply reply);
 
     void onReplyTopicFinish();
 
