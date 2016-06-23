@@ -23,7 +23,6 @@ import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
@@ -104,8 +103,6 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     private String loginName;
     private String githubUsername;
 
-    private boolean loading = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
@@ -135,7 +132,6 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         userDetailPresenter = new UserDetailPresenter(this, this);
 
         userDetailPresenter.getUserAsyncTask(loginName);
-        userDetailPresenter.getCollectTopicListAsyncTask(loginName);
     }
 
     @Override
@@ -149,18 +145,12 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         }
     }
 
-    /**
-     * Activity被销毁的时候不保存Fragment
-     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {}
 
     @OnClick(R.id.img_avatar)
     protected void onBtnAvatarClick() {
-        if (!loading) {
-            userDetailPresenter.getUserAsyncTask(loginName);
-            userDetailPresenter.getCollectTopicListAsyncTask(loginName);
-        }
+        userDetailPresenter.getUserAsyncTask(loginName);
     }
 
     @OnClick(R.id.tv_github_username)
@@ -171,71 +161,49 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     }
 
     @Override
+    public void onGetUserOk(@NonNull User user) {
+        if (ActivityUtils.isAlive(this)) {
+            Glide.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            tvLoginName.setText(user.getLoginName());
+            if (TextUtils.isEmpty(user.getGithubUsername())) {
+                tvGithubUsername.setVisibility(View.INVISIBLE);
+                tvGithubUsername.setText(null);
+            } else {
+                tvGithubUsername.setVisibility(View.VISIBLE);
+                tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
+            }
+            tvCreateTime.setText(getString(R.string.register_time_$) + user.getCreateAt().toString("yyyy-MM-dd"));
+            tvScore.setText(getString(R.string.score_$) + user.getScore());
+            adapter.update(user);
+            githubUsername = user.getGithubUsername();
+        }
+    }
+
+    @Override
+    public void onGetCollectTopicListOk(@NonNull List<Topic> topicList) {
+        if (ActivityUtils.isAlive(this)) {
+            adapter.update(topicList);
+        }
+    }
+
+    @Override
+    public void onGetUserError(@NonNull String message) {
+        if (ActivityUtils.isAlive(this)) {
+            ToastUtils.with(this).show(message);
+        }
+    }
+
+    @Override
     public void onGetUserStart() {
-        loading = true;
-        progressWheel.spin();
-    }
-
-    @Override
-    public boolean onGetUserResultOk(@NonNull Result.Data<User> result) {
         if (ActivityUtils.isAlive(this)) {
-            updateUserInfoViews(result.getData());
-            adapter.update(result.getData());
-            githubUsername = result.getData().getGithubUsername();
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    @Override
-    public boolean onGetUserResultError(@NonNull Result.Error error) {
-        if (ActivityUtils.isAlive(this)) {
-            ToastUtils.with(this).show(error.getErrorMessage());
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    @Override
-    public boolean onGetUserLoadError() {
-        if (ActivityUtils.isAlive(this)) {
-            ToastUtils.with(this).show(R.string.data_load_faild_and_click_avatar_to_reload);
-            return false;
-        } else {
-            return true;
+            progressWheel.spin();
         }
     }
 
     @Override
     public void onGetUserFinish() {
-        progressWheel.stopSpinning();
-        loading = false;
-    }
-
-    @Override
-    public void updateUserInfoViews(@NonNull User user) {
-        Glide.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-        tvLoginName.setText(user.getLoginName());
-        if (TextUtils.isEmpty(user.getGithubUsername())) {
-            tvGithubUsername.setVisibility(View.INVISIBLE);
-            tvGithubUsername.setText(null);
-        } else {
-            tvGithubUsername.setVisibility(View.VISIBLE);
-            tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
-        }
-        tvCreateTime.setText(getString(R.string.register_time_$) + user.getCreateAt().toString("yyyy-MM-dd"));
-        tvScore.setText(getString(R.string.score_$) + user.getScore());
-    }
-
-    @Override
-    public boolean onGetCollectTopicListResultOk(@NonNull Result.Data<List<Topic>> result) {
         if (ActivityUtils.isAlive(this)) {
-            adapter.update(result.getData());
-            return false;
-        } else {
-            return true;
+            progressWheel.stopSpinning();
         }
     }
 

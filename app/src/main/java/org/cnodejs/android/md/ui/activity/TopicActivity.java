@@ -15,7 +15,6 @@ import com.melnykov.fab.FloatingActionButton;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Reply;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.storage.SettingShared;
@@ -151,12 +150,12 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     }
 
     @Override
-    public boolean onGetTopicResultOk(@NonNull Result.Data<TopicWithReply> result) {
+    public void onGetTopicOk(@NonNull TopicWithReply topic) {
         if (ActivityUtils.isAlive(this)) {
-            topic = result.getData();
-            topicHeaderView.updateViews(result.getData());
+            this.topic = topic;
+            topicHeaderView.updateViews(topic);
             replyList.clear();
-            replyList.addAll(result.getData().getReplyList());
+            replyList.addAll(topic.getReplyList());
             positionMap.clear();
             for (int n = 0; n < replyList.size(); n++) {
                 Reply reply = replyList.get(n);
@@ -164,15 +163,14 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
             }
             adapter.notifyDataSetChanged();
             iconNoData.setVisibility(View.GONE);
-            return false;
-        } else {
-            return true;
         }
     }
 
     @Override
     public void onGetTopicFinish() {
-        refreshLayout.setRefreshing(false);
+        if (ActivityUtils.isAlive(this)) {
+            refreshLayout.setRefreshing(false);
+        }
     }
 
     @Override

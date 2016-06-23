@@ -8,13 +8,11 @@ import retrofit2.Call;
 
 public interface ILoginView {
 
-    void onAccessTokenFormatError();
+    void onAccessTokenError(@NonNull String message);
+
+    void onLoginOk(@NonNull String accessToken, @NonNull Result.Login loginInfo);
 
     void onLoginStart(@NonNull Call<Result.Login> call);
-
-    boolean onLoginResultOk(@NonNull String accessToken, @NonNull Result.Login loginInfo);
-
-    boolean onLoginResultErrorAuth(@NonNull Result.Error error);
 
     void onLoginFinish();
 

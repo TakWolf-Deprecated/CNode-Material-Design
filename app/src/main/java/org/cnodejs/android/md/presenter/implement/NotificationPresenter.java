@@ -12,7 +12,6 @@ import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.INotificationPresenter;
 import org.cnodejs.android.md.ui.view.INotificationView;
 
-import retrofit2.Call;
 import retrofit2.Response;
 
 public class NotificationPresenter implements INotificationPresenter {
@@ -27,12 +26,12 @@ public class NotificationPresenter implements INotificationPresenter {
 
     @Override
     public void getMessagesAsyncTask() {
-        Call<Result.Data<Notification>> call = ApiClient.service.getMessages(LoginShared.getAccessToken(activity), ApiDefine.MD_RENDER);
-        call.enqueue(new DefaultCallbackAdapter<Result.Data<Notification>>(activity) {
+        ApiClient.service.getMessages(LoginShared.getAccessToken(activity), ApiDefine.MD_RENDER).enqueue(new DefaultCallbackAdapter<Result.Data<Notification>>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result.Data<Notification>> response, Result.Data<Notification> result) {
-                return notificationView.onGetMessagesResultOk(result);
+                notificationView.onGetMessagesOk(result.getData());
+                return false;
             }
 
             @Override
@@ -45,12 +44,12 @@ public class NotificationPresenter implements INotificationPresenter {
 
     @Override
     public void markAllMessageReadAsyncTask() {
-        Call<Result> call = ApiClient.service.markAllMessageRead(LoginShared.getAccessToken(activity));
-        call.enqueue(new DefaultCallbackAdapter<Result>(activity) {
+        ApiClient.service.markAllMessageRead(LoginShared.getAccessToken(activity)).enqueue(new DefaultCallbackAdapter<Result>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result> response, Result result) {
-                return notificationView.onMarkAllMessageReadResultOk();
+                notificationView.onMarkAllMessageReadOk();
+                return false;
             }
 
         });

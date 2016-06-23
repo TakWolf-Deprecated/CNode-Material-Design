@@ -13,7 +13,6 @@ import com.melnykov.fab.FloatingActionButton;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Reply;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.storage.LoginShared;
@@ -130,20 +129,19 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     }
 
     @Override
-    public boolean onGetTopicResultOk(@NonNull Result.Data<TopicWithReply> result) {
+    public void onGetTopicOk(@NonNull TopicWithReply topic) {
         if (ActivityUtils.isAlive(this)) {
-            topic = result.getData();
-            webTopic.updateTopicAndUserId(result.getData(), LoginShared.getId(this));
+            this.topic = topic;
+            webTopic.updateTopicAndUserId(topic, LoginShared.getId(this));
             iconNoData.setVisibility(View.GONE);
-            return false;
-        } else {
-            return true;
         }
     }
 
     @Override
     public void onGetTopicFinish() {
-        refreshLayout.setRefreshing(false);
+        if (ActivityUtils.isAlive(this)) {
+            refreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
@@ -152,32 +150,23 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     }
 
     @Override
-    public boolean onCollectTopicResultOk(Result result) {
+    public void onCollectTopicOk() {
         if (ActivityUtils.isAlive(this)) {
             webTopic.updateTopicCollect(true);
-            return false;
-        } else {
-            return true;
         }
     }
 
     @Override
-    public boolean onDecollectTopicResultOk(Result result) {
+    public void onDecollectTopicOk() {
         if (ActivityUtils.isAlive(this)) {
             webTopic.updateTopicCollect(false);
-            return false;
-        } else {
-            return true;
         }
     }
 
     @Override
-    public boolean onUpReplyResultOk(@NonNull Reply reply) {
+    public void onUpReplyOk(@NonNull Reply reply) {
         if (ActivityUtils.isAlive(this)) {
             webTopic.updateReply(reply);
-            return false;
-        } else {
-            return true;
         }
     }
 

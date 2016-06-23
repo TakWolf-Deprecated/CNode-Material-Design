@@ -12,7 +12,6 @@ import android.view.View;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.model.entity.Notification;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.presenter.contract.INotificationPresenter;
 import org.cnodejs.android.md.presenter.implement.NotificationPresenter;
 import org.cnodejs.android.md.ui.adapter.NotificationAdapter;
@@ -94,33 +93,29 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
     }
 
     @Override
-    public boolean onGetMessagesResultOk(@NonNull Result.Data<Notification> result) {
+    public void onGetMessagesOk(@NonNull Notification notification) {
         if (ActivityUtils.isAlive(this)) {
             messageList.clear();
-            messageList.addAll(result.getData().getHasNotReadMessageList());
-            messageList.addAll(result.getData().getHasReadMessageList());
+            messageList.addAll(notification.getHasNotReadMessageList());
+            messageList.addAll(notification.getHasReadMessageList());
             notifyDataSetChanged();
-            return false;
-        } else {
-            return true;
         }
     }
 
     @Override
     public void onGetMessagesFinish() {
-        refreshLayout.setRefreshing(false);
+        if (ActivityUtils.isAlive(this)) {
+            refreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
-    public boolean onMarkAllMessageReadResultOk() {
+    public void onMarkAllMessageReadOk() {
         if (ActivityUtils.isAlive(this)) {
             for (Message message : messageList) {
                 message.setRead(true);
             }
             notifyDataSetChanged();
-            return false;
-        } else {
-            return true;
         }
     }
 

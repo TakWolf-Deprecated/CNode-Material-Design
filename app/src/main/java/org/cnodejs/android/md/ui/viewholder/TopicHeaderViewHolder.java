@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
@@ -141,24 +140,18 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
     }
 
     @Override
-    public boolean onCollectTopicResultOk(Result result) {
+    public void onCollectTopicOk() {
         if (ActivityUtils.isAlive(activity)) {
             isCollect = true;
             btnFavorite.setImageResource(R.drawable.ic_favorite_theme_24dp);
-            return false;
-        } else {
-            return true;
         }
     }
 
     @Override
-    public boolean onDecollectTopicResultOk(Result result) {
+    public void onDecollectTopicOk() {
         if (ActivityUtils.isAlive(activity)) {
             isCollect = false;
             btnFavorite.setImageResource(R.drawable.ic_favorite_outline_grey600_24dp);
-            return false;
-        } else {
-            return true;
         }
     }
 

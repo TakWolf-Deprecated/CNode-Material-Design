@@ -17,7 +17,6 @@ import org.cnodejs.android.md.ui.view.IMainView;
 
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.Response;
 
 public class MainPresenter implements IMainPresenter {
@@ -32,22 +31,21 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void refreshTopicListAsyncTask(@NonNull final TabType tab, @NonNull Integer limit) {
-        Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, 1, limit, ApiDefine.MD_RENDER);
-        call.enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
+        ApiClient.service.getTopicList(tab, 1, limit, ApiDefine.MD_RENDER).enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
 
             @Override
             public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                return mainView.onRefreshTopicListResultOk(tab, result);
+                return mainView.onRefreshTopicListOk(tab, result.getData());
             }
 
             @Override
             public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
-                return mainView.onRefreshTopicListResultErrorOrCallException(tab, error);
+                return mainView.onRefreshTopicListError(tab, error.getErrorMessage());
             }
 
             @Override
             public boolean onCallException(Throwable t, Result.Error error) {
-                return mainView.onRefreshTopicListResultErrorOrCallException(tab, error);
+                return mainView.onRefreshTopicListError(tab, error.getErrorMessage());
             }
 
             @Override
@@ -60,22 +58,21 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void loadMoreTopicListAsyncTask(@NonNull final TabType tab, @NonNull final Integer page, @NonNull Integer limit) {
-        Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, page + 1, limit, ApiDefine.MD_RENDER);
-        call.enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
+        ApiClient.service.getTopicList(tab, page + 1, limit, ApiDefine.MD_RENDER).enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
 
             @Override
             public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                return mainView.onLoadMoreTopicListResultOk(tab, page, result);
+                return mainView.onLoadMoreTopicListOk(tab, page, result.getData());
             }
 
             @Override
             public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
-                return mainView.onLoadMoreTopicListResultErrorOrCallException(tab, page, error);
+                return mainView.onLoadMoreTopicListError(tab, page, error.getErrorMessage());
             }
 
             @Override
             public boolean onCallException(Throwable t, Result.Error error) {
-                return mainView.onLoadMoreTopicListResultErrorOrCallException(tab, page, error);
+                return mainView.onLoadMoreTopicListError(tab, page, error.getErrorMessage());
             }
 
             @Override
@@ -90,8 +87,7 @@ public class MainPresenter implements IMainPresenter {
     public void getUserAsyncTask() {
         final String accessToken = LoginShared.getAccessToken(activity);
         if (!TextUtils.isEmpty(accessToken)) {
-            Call<Result.Data<User>> call = ApiClient.service.getUser(LoginShared.getLoginName(activity));
-            call.enqueue(new CallbackAdapter<Result.Data<User>>() {
+            ApiClient.service.getUser(LoginShared.getLoginName(activity)).enqueue(new CallbackAdapter<Result.Data<User>>() {
 
                 @Override
                 public boolean onResultOk(Response<Result.Data<User>> response, Result.Data<User> result) {
@@ -110,13 +106,12 @@ public class MainPresenter implements IMainPresenter {
     public void getMessageCountAsyncTask() {
         final String accessToken = LoginShared.getAccessToken(activity);
         if (!TextUtils.isEmpty(accessToken)) {
-            Call<Result.Data<Integer>> call = ApiClient.service.getMessageCount(accessToken);
-            call.enqueue(new CallbackAdapter<Result.Data<Integer>>() {
+            ApiClient.service.getMessageCount(accessToken).enqueue(new CallbackAdapter<Result.Data<Integer>>() {
 
                 @Override
                 public boolean onResultOk(Response<Result.Data<Integer>> response, Result.Data<Integer> result) {
                     if (TextUtils.equals(accessToken, LoginShared.getAccessToken(activity))) {
-                        mainView.updateMessageCountViews(result);
+                        mainView.updateMessageCountViews(result.getData());
                     }
                     return false;
                 }

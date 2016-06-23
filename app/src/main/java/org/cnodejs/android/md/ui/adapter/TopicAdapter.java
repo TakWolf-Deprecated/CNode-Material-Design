@@ -171,14 +171,11 @@ public class TopicAdapter extends BaseAdapter {
         }
 
         @Override
-        public boolean onUpReplyResultOk(@NonNull Reply reply) {
+        public void onUpReplyOk(@NonNull Reply reply) {
             if (ActivityUtils.isAlive(activity)) {
                 if (TextUtils.equals(reply.getId(), this.reply.getId())) {
                     updateUpViews(reply);
                 }
-                return false;
-            } else {
-                return true;
             }
         }
 

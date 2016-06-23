@@ -3,14 +3,13 @@ package org.cnodejs.android.md.ui.view;
 import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.entity.Notification;
-import org.cnodejs.android.md.model.entity.Result;
 
 public interface INotificationView {
 
-    boolean onGetMessagesResultOk(@NonNull Result.Data<Notification> result);
+    void onGetMessagesOk(@NonNull Notification notification);
 
     void onGetMessagesFinish();
 
-    boolean onMarkAllMessageReadResultOk();
+    void onMarkAllMessageReadOk();
 
 }

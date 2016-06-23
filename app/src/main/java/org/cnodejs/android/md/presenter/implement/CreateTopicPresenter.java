@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
 import org.cnodejs.android.md.model.entity.Result;
@@ -13,7 +14,6 @@ import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.ICreateTopicPresenter;
 import org.cnodejs.android.md.ui.view.ICreateTopicView;
 
-import retrofit2.Call;
 import retrofit2.Response;
 
 public class CreateTopicPresenter implements ICreateTopicPresenter {
@@ -29,20 +29,20 @@ public class CreateTopicPresenter implements ICreateTopicPresenter {
     @Override
     public void createTopicAsyncTask(@NonNull TabType tab, String title, String content) {
         if (TextUtils.isEmpty(title) || title.length() < 10) {
-            createTopicView.onTitleEmptyError();
+            createTopicView.onTitleError(activity.getString(R.string.title_empty_error_tip));
         } else if (TextUtils.isEmpty(content)) {
-            createTopicView.onContentEmptyError();
+            createTopicView.onContentError(activity.getString(R.string.content_empty_error_tip));
         } else {
             if (SettingShared.isEnableTopicSign(activity)) { // 添加小尾巴
                 content += "\n\n" + SettingShared.getTopicSignContent(activity);
             }
             createTopicView.onCreateTopicStart();
-            Call<Result.CreateTopic> call = ApiClient.service.createTopic(LoginShared.getAccessToken(activity), tab, title, content);
-            call.enqueue(new DefaultCallbackAdapter<Result.CreateTopic>(activity) {
+            ApiClient.service.createTopic(LoginShared.getAccessToken(activity), tab, title, content).enqueue(new DefaultCallbackAdapter<Result.CreateTopic>(activity) {
 
                 @Override
                 public boolean onResultOk(Response<Result.CreateTopic> response, Result.CreateTopic result) {
-                    return createTopicView.onCreateTopicResultOk(result);
+                    createTopicView.onCreateTopicOk(result.getTopicId());
+                    return false;
                 }
 
                 @Override

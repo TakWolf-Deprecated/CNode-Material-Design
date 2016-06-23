@@ -11,7 +11,6 @@ import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
 import org.cnodejs.android.md.ui.view.ITopicItemReplyView;
 
-import retrofit2.Call;
 import retrofit2.Response;
 
 public class TopicItemReplyPresenter implements ITopicItemReplyPresenter {
@@ -26,8 +25,7 @@ public class TopicItemReplyPresenter implements ITopicItemReplyPresenter {
 
     @Override
     public void upReplyAsyncTask(@NonNull final Reply reply) {
-        Call<Result.UpReply> call = ApiClient.service.upReply(reply.getId(), LoginShared.getAccessToken(activity));
-        call.enqueue(new DefaultCallbackAdapter<Result.UpReply>(activity) {
+        ApiClient.service.upReply(reply.getId(), LoginShared.getAccessToken(activity)).enqueue(new DefaultCallbackAdapter<Result.UpReply>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result.UpReply> response, Result.UpReply result) {
@@ -36,7 +34,8 @@ public class TopicItemReplyPresenter implements ITopicItemReplyPresenter {
                 } else if (result.getAction() == Reply.UpAction.down) {
                     reply.getUpList().remove(LoginShared.getId(activity));
                 }
-                return topicItemReplyView.onUpReplyResultOk(reply);
+                topicItemReplyView.onUpReplyOk(reply);
+                return false;
             }
 
         });

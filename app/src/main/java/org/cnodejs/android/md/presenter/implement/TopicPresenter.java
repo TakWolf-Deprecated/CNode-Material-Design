@@ -12,7 +12,6 @@ import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.ui.view.ITopicView;
 
-import retrofit2.Call;
 import retrofit2.Response;
 
 public class TopicPresenter implements ITopicPresenter {
@@ -27,12 +26,12 @@ public class TopicPresenter implements ITopicPresenter {
 
     @Override
     public void getTopicAsyncTask(@NonNull String topicId) {
-        Call<Result.Data<TopicWithReply>> call = ApiClient.service.getTopic(topicId, LoginShared.getAccessToken(activity), ApiDefine.MD_RENDER);
-        call.enqueue(new DefaultCallbackAdapter<Result.Data<TopicWithReply>>(activity) {
+        ApiClient.service.getTopic(topicId, LoginShared.getAccessToken(activity), ApiDefine.MD_RENDER).enqueue(new DefaultCallbackAdapter<Result.Data<TopicWithReply>>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result.Data<TopicWithReply>> response, Result.Data<TopicWithReply> result) {
-                return topicView.onGetTopicResultOk(result);
+                topicView.onGetTopicOk(result.getData());
+                return false;
             }
 
             @Override

@@ -20,7 +20,6 @@ import com.bumptech.glide.Glide;
 import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.storage.LoginShared;
@@ -403,10 +402,10 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     }
 
     @Override
-    public boolean onRefreshTopicListResultOk(@NonNull TabType tab, @NonNull Result.Data<List<Topic>> result) {
-        if (currentTab == tab) {
-            topicList.clear();
-            topicList.addAll(result.getData());
+    public boolean onRefreshTopicListOk(@NonNull TabType tab, @NonNull List<Topic> topicList) {
+        if (ActivityUtils.isAlive(this) && currentTab == tab) {
+            this.topicList.clear();
+            this.topicList.addAll(topicList);
             notifyDataSetChanged();
             currentPage = 1;
             return false;
@@ -416,9 +415,9 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     }
 
     @Override
-    public boolean onRefreshTopicListResultErrorOrCallException(@NonNull TabType tab, @NonNull Result.Error error) {
-        if (currentTab == tab) {
-            ToastUtils.with(this).show(error.getErrorMessage());
+    public boolean onRefreshTopicListError(@NonNull TabType tab, @NonNull String message) {
+        if (ActivityUtils.isAlive(this) && currentTab == tab) {
+            ToastUtils.with(this).show(message);
             return false;
         } else {
             return true;
@@ -427,16 +426,18 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public void onRefreshTopicListFinish() {
-        refreshLayout.setRefreshing(false);
+        if (ActivityUtils.isAlive(this)) {
+            refreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
-    public boolean onLoadMoreTopicListResultOk(@NonNull TabType tab, @NonNull Integer page, Result.Data<List<Topic>> result) {
-        if (currentTab == tab && currentPage == page) {
-            if (result.getData().size() > 0) {
-                topicList.addAll(result.getData());
+    public boolean onLoadMoreTopicListOk(@NonNull TabType tab, @NonNull Integer page, @NonNull List<Topic> topicList) {
+        if (ActivityUtils.isAlive(this) && currentTab == tab && currentPage == page) {
+            if (topicList.size() > 0) {
+                this.topicList.addAll(topicList);
                 adapter.setLoading(false);
-                adapter.notifyItemRangeInserted(topicList.size() - result.getData().size(), result.getData().size());
+                adapter.notifyItemRangeInserted(this.topicList.size() - topicList.size(), topicList.size());
                 currentPage++;
                 return true;
             } else {
@@ -449,9 +450,9 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     }
 
     @Override
-    public boolean onLoadMoreTopicListResultErrorOrCallException(@NonNull TabType tab, @NonNull Integer page, @NonNull Result.Error error) {
-        if (currentTab == tab && currentPage == page) {
-            ToastUtils.with(this).show(error.getErrorMessage());
+    public boolean onLoadMoreTopicListError(@NonNull TabType tab, @NonNull Integer page, @NonNull String message) {
+        if (ActivityUtils.isAlive(this) && currentTab == tab && currentPage == page) {
+            ToastUtils.with(this).show(message);
             return false;
         } else {
             return true;
@@ -460,8 +461,10 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public void onLoadMoreTopicListFinish() {
-        adapter.setLoading(false);
-        adapter.notifyItemChanged(adapter.getItemCount() - 1);
+        if (ActivityUtils.isAlive(this)) {
+            adapter.setLoading(false);
+            adapter.notifyItemChanged(adapter.getItemCount() - 1);
+        }
     }
 
     @Override
@@ -482,9 +485,9 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     }
 
     @Override
-    public void updateMessageCountViews(@NonNull Result.Data<Integer> result) {
+    public void updateMessageCountViews(int count) {
         if (ActivityUtils.isAlive(this)) {
-            tvBadgeNotification.setText(FormatUtils.getNavigationDisplayCountString(result.getData()));
+            tvBadgeNotification.setText(FormatUtils.getNavigationDisplayCountString(count));
         }
     }
 
