@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.model.storage.TopicShared;
@@ -118,30 +117,29 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
     }
 
     @Override
-    public void onTitleEmptyError() {
-        ToastUtils.with(this).show(R.string.title_empty_error_tip);
+    public void onTitleError(@NonNull String message) {
+        ToastUtils.with(this).show(message);
         edtTitle.requestFocus();
     }
 
     @Override
-    public void onContentEmptyError() {
-        ToastUtils.with(this).show(R.string.content_empty_error_tip);
+    public void onContentError(@NonNull String message) {
+        ToastUtils.with(this).show(message);
         edtContent.requestFocus();
+    }
+
+    @Override
+    public void onCreateTopicOk(@NonNull String topicId) {
+        saveTopicDraft = false;
+        TopicShared.clear(this);
+        ToastUtils.with(this).show(R.string.post_success);
+        Navigator.TopicWithAutoCompat.start(this, topicId);
+        finish();
     }
 
     @Override
     public void onCreateTopicStart() {
         progressDialog.show();
-    }
-
-    @Override
-    public boolean onCreateTopicResultOk(@NonNull Result.CreateTopic result) {
-        saveTopicDraft = false;
-        TopicShared.clear(this);
-        ToastUtils.with(this).show(R.string.post_success);
-        Navigator.TopicWithAutoCompat.start(this, result.getTopicId());
-        finish();
-        return false;
     }
 
     @Override

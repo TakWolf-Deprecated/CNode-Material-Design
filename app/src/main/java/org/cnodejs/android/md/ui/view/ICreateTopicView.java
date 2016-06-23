@@ -2,17 +2,15 @@ package org.cnodejs.android.md.ui.view;
 
 import android.support.annotation.NonNull;
 
-import org.cnodejs.android.md.model.entity.Result;
-
 public interface ICreateTopicView {
 
-    void onTitleEmptyError();
+    void onTitleError(@NonNull String message);
 
-    void onContentEmptyError();
+    void onContentError(@NonNull String message);
+
+    void onCreateTopicOk(@NonNull String topicId);
 
     void onCreateTopicStart();
-
-    boolean onCreateTopicResultOk(@NonNull Result.CreateTopic result);
 
     void onCreateTopicFinish();
 
