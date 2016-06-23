@@ -6,6 +6,6 @@ import org.cnodejs.android.md.model.entity.Reply;
 
 public interface ITopicItemReplyView {
 
-    boolean onUpReplyResultOk(@NonNull Reply reply);
+    void onUpReplyOk(@NonNull Reply reply);
 
 }

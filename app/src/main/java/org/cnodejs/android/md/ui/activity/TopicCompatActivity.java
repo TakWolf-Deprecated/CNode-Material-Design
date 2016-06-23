@@ -166,12 +166,9 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     }
 
     @Override
-    public boolean onUpReplyResultOk(@NonNull Reply reply) {
+    public void onUpReplyOk(@NonNull Reply reply) {
         if (ActivityUtils.isAlive(this)) {
             webTopic.updateReply(reply);
-            return false;
-        } else {
-            return true;
         }
     }
 
