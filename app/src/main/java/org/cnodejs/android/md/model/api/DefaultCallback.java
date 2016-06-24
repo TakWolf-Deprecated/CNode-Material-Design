@@ -21,13 +21,13 @@ public class DefaultCallback<T extends Result> extends ForegroundCallback<T> {
     @Override
     public final boolean onResultError(Response<T> response, Result.Error error) {
         if (response.code() == 401) {
-            return onResultErrorAuth(response, error);
+            return onResultAuthError(response, error);
         } else {
-            return onResultErrorOther(response, error);
+            return onResultOtherError(response, error);
         }
     }
 
-    public boolean onResultErrorAuth(Response<T> response, Result.Error error) {
+    public boolean onResultAuthError(Response<T> response, Result.Error error) {
         AlertDialogUtils.createBuilderWithAutoTheme(getActivity())
                 .setMessage(R.string.access_token_out_of_date)
                 .setPositiveButton(R.string.relogin, new DialogInterface.OnClickListener() {
@@ -43,7 +43,7 @@ public class DefaultCallback<T extends Result> extends ForegroundCallback<T> {
         return false;
     }
 
-    public boolean onResultErrorOther(Response<T> response, Result.Error error) {
+    public boolean onResultOtherError(Response<T> response, Result.Error error) {
         ToastUtils.with(getActivity()).show(error.getErrorMessage());
         return false;
     }

@@ -40,7 +40,7 @@ public class LoginPresenter implements ILoginPresenter {
                 }
 
                 @Override
-                public boolean onResultErrorAuth(Response<Result.Login> response, Result.Error error) {
+                public boolean onResultAuthError(Response<Result.Login> response, Result.Error error) {
                     loginView.onAccessTokenError(activity.getString(R.string.access_token_auth_error));
                     return false;
                 }
