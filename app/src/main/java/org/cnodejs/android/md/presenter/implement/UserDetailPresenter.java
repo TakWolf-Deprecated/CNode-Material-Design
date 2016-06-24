@@ -11,6 +11,7 @@ import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
+import org.cnodejs.android.md.ui.util.ActivityUtils;
 import org.cnodejs.android.md.ui.view.IUserDetailView;
 import org.cnodejs.android.md.util.HandlerUtils;
 
@@ -54,8 +55,10 @@ public class UserDetailPresenter implements IUserDetailPresenter {
 
                         @Override
                         public void run() {
-                            userDetailView.onGetUserOk(result.getData());
-                            onFinish();
+                            if (ActivityUtils.isAlive(getActivity())) {
+                                userDetailView.onGetUserOk(result.getData());
+                                onFinish();
+                            }
                         }
 
                     }, getPostTime());
@@ -68,8 +71,10 @@ public class UserDetailPresenter implements IUserDetailPresenter {
 
                         @Override
                         public void run() {
-                            userDetailView.onGetUserError(response.code() == 404 ? error.getErrorMessage() : activity.getString(R.string.data_load_faild_and_click_avatar_to_reload));
-                            onFinish();
+                            if (ActivityUtils.isAlive(getActivity())) {
+                                userDetailView.onGetUserError(response.code() == 404 ? error.getErrorMessage() : activity.getString(R.string.data_load_faild_and_click_avatar_to_reload));
+                                onFinish();
+                            }
                         }
 
                     }, getPostTime());
@@ -82,8 +87,10 @@ public class UserDetailPresenter implements IUserDetailPresenter {
 
                         @Override
                         public void run() {
-                            userDetailView.onGetUserError(activity.getString(R.string.data_load_faild_and_click_avatar_to_reload));
-                            onFinish();
+                            if (ActivityUtils.isAlive(getActivity())) {
+                                userDetailView.onGetUserError(activity.getString(R.string.data_load_faild_and_click_avatar_to_reload));
+                                onFinish();
+                            }
                         }
 
                     }, getPostTime());
