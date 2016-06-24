@@ -15,7 +15,6 @@ import org.cnodejs.android.md.presenter.implement.NotificationPresenter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.ui.util.ActivityUtils;
 import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.INotificationView;
@@ -79,27 +78,21 @@ public class NotificationCompatActivity extends StatusBarActivity implements INo
 
     @Override
     public void onGetMessagesOk(@NonNull Notification notification) {
-        if (ActivityUtils.isAlive(this)) {
-            List<Message> messageList = new ArrayList<>();
-            messageList.addAll(notification.getHasNotReadMessageList());
-            messageList.addAll(notification.getHasReadMessageList());
-            webNotification.updateMessageList(messageList);
-            iconNoData.setVisibility(messageList.size() == 0 ? View.VISIBLE : View.GONE);
-        }
+        List<Message> messageList = new ArrayList<>();
+        messageList.addAll(notification.getHasNotReadMessageList());
+        messageList.addAll(notification.getHasReadMessageList());
+        webNotification.updateMessageList(messageList);
+        iconNoData.setVisibility(messageList.size() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void onGetMessagesFinish() {
-        if (ActivityUtils.isAlive(this)) {
-            refreshLayout.setRefreshing(false);
-        }
+        refreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onMarkAllMessageReadOk() {
-        if (ActivityUtils.isAlive(this)) {
-            webNotification.markAllMessageRead();
-        }
+        webNotification.markAllMessageRead();
     }
 
 }

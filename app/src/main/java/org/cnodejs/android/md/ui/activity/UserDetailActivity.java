@@ -30,7 +30,6 @@ import org.cnodejs.android.md.presenter.implement.UserDetailPresenter;
 import org.cnodejs.android.md.ui.adapter.UserDetailAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.ui.util.ActivityUtils;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
@@ -162,49 +161,39 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
 
     @Override
     public void onGetUserOk(@NonNull User user) {
-        if (ActivityUtils.isAlive(this)) {
-            Glide.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-            tvLoginName.setText(user.getLoginName());
-            if (TextUtils.isEmpty(user.getGithubUsername())) {
-                tvGithubUsername.setVisibility(View.INVISIBLE);
-                tvGithubUsername.setText(null);
-            } else {
-                tvGithubUsername.setVisibility(View.VISIBLE);
-                tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
-            }
-            tvCreateTime.setText(getString(R.string.register_time_$) + user.getCreateAt().toString("yyyy-MM-dd"));
-            tvScore.setText(getString(R.string.score_$) + user.getScore());
-            adapter.update(user);
-            githubUsername = user.getGithubUsername();
+        Glide.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+        tvLoginName.setText(user.getLoginName());
+        if (TextUtils.isEmpty(user.getGithubUsername())) {
+            tvGithubUsername.setVisibility(View.INVISIBLE);
+            tvGithubUsername.setText(null);
+        } else {
+            tvGithubUsername.setVisibility(View.VISIBLE);
+            tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
         }
+        tvCreateTime.setText(getString(R.string.register_time_$) + user.getCreateAt().toString("yyyy-MM-dd"));
+        tvScore.setText(getString(R.string.score_$) + user.getScore());
+        adapter.update(user);
+        githubUsername = user.getGithubUsername();
     }
 
     @Override
     public void onGetCollectTopicListOk(@NonNull List<Topic> topicList) {
-        if (ActivityUtils.isAlive(this)) {
-            adapter.update(topicList);
-        }
+        adapter.update(topicList);
     }
 
     @Override
     public void onGetUserError(@NonNull String message) {
-        if (ActivityUtils.isAlive(this)) {
-            ToastUtils.with(this).show(message);
-        }
+        ToastUtils.with(this).show(message);
     }
 
     @Override
     public void onGetUserStart() {
-        if (ActivityUtils.isAlive(this)) {
-            progressWheel.spin();
-        }
+        progressWheel.spin();
     }
 
     @Override
     public void onGetUserFinish() {
-        if (ActivityUtils.isAlive(this)) {
-            progressWheel.stopSpinning();
-        }
+        progressWheel.stopSpinning();
     }
 
 }

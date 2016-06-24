@@ -27,7 +27,6 @@ import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.dialog.TopicReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.ui.util.ActivityUtils;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
@@ -151,26 +150,22 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
 
     @Override
     public void onGetTopicOk(@NonNull TopicWithReply topic) {
-        if (ActivityUtils.isAlive(this)) {
-            this.topic = topic;
-            topicHeaderView.updateViews(topic);
-            replyList.clear();
-            replyList.addAll(topic.getReplyList());
-            positionMap.clear();
-            for (int n = 0; n < replyList.size(); n++) {
-                Reply reply = replyList.get(n);
-                positionMap.put(reply.getId(), n);
-            }
-            adapter.notifyDataSetChanged();
-            iconNoData.setVisibility(View.GONE);
+        this.topic = topic;
+        topicHeaderView.updateViews(topic);
+        replyList.clear();
+        replyList.addAll(topic.getReplyList());
+        positionMap.clear();
+        for (int n = 0; n < replyList.size(); n++) {
+            Reply reply = replyList.get(n);
+            positionMap.put(reply.getId(), n);
         }
+        adapter.notifyDataSetChanged();
+        iconNoData.setVisibility(View.GONE);
     }
 
     @Override
     public void onGetTopicFinish() {
-        if (ActivityUtils.isAlive(this)) {
-            refreshLayout.setRefreshing(false);
-        }
+        refreshLayout.setRefreshing(false);
     }
 
     @Override

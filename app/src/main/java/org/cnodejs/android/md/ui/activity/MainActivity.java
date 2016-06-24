@@ -32,7 +32,6 @@ import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.ui.listener.RecyclerViewLoadMoreListener;
-import org.cnodejs.android.md.ui.util.ActivityUtils;
 import org.cnodejs.android.md.ui.util.DisplayUtils;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.RefreshUtils;
@@ -403,7 +402,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public boolean onRefreshTopicListOk(@NonNull TabType tab, @NonNull List<Topic> topicList) {
-        if (ActivityUtils.isAlive(this) && currentTab == tab) {
+        if (currentTab == tab) {
             this.topicList.clear();
             this.topicList.addAll(topicList);
             notifyDataSetChanged();
@@ -416,7 +415,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public boolean onRefreshTopicListError(@NonNull TabType tab, @NonNull String message) {
-        if (ActivityUtils.isAlive(this) && currentTab == tab) {
+        if (currentTab == tab) {
             ToastUtils.with(this).show(message);
             return false;
         } else {
@@ -426,14 +425,12 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public void onRefreshTopicListFinish() {
-        if (ActivityUtils.isAlive(this)) {
-            refreshLayout.setRefreshing(false);
-        }
+        refreshLayout.setRefreshing(false);
     }
 
     @Override
     public boolean onLoadMoreTopicListOk(@NonNull TabType tab, @NonNull Integer page, @NonNull List<Topic> topicList) {
-        if (ActivityUtils.isAlive(this) && currentTab == tab && currentPage == page) {
+        if (currentTab == tab && currentPage == page) {
             if (topicList.size() > 0) {
                 this.topicList.addAll(topicList);
                 adapter.setLoading(false);
@@ -451,7 +448,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public boolean onLoadMoreTopicListError(@NonNull TabType tab, @NonNull Integer page, @NonNull String message) {
-        if (ActivityUtils.isAlive(this) && currentTab == tab && currentPage == page) {
+        if (currentTab == tab && currentPage == page) {
             ToastUtils.with(this).show(message);
             return false;
         } else {
@@ -461,34 +458,28 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public void onLoadMoreTopicListFinish() {
-        if (ActivityUtils.isAlive(this)) {
-            adapter.setLoading(false);
-            adapter.notifyItemChanged(adapter.getItemCount() - 1);
-        }
+        adapter.setLoading(false);
+        adapter.notifyItemChanged(adapter.getItemCount() - 1);
     }
 
     @Override
     public void updateUserInfoViews() {
-        if (ActivityUtils.isAlive(this)) {
-            if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-                Glide.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-                tvLoginName.setText(R.string.click_avatar_to_login);
-                tvScore.setText(null);
-                btnLogout.setVisibility(View.GONE);
-            } else {
-                Glide.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-                tvLoginName.setText(LoginShared.getLoginName(this));
-                tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
-                btnLogout.setVisibility(View.VISIBLE);
-            }
+        if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
+            Glide.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            tvLoginName.setText(R.string.click_avatar_to_login);
+            tvScore.setText(null);
+            btnLogout.setVisibility(View.GONE);
+        } else {
+            Glide.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            tvLoginName.setText(LoginShared.getLoginName(this));
+            tvScore.setText(getString(R.string.score_$) + LoginShared.getScore(this));
+            btnLogout.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     public void updateMessageCountViews(int count) {
-        if (ActivityUtils.isAlive(this)) {
-            tvBadgeNotification.setText(FormatUtils.getNavigationDisplayCountString(count));
-        }
+        tvBadgeNotification.setText(FormatUtils.getNavigationDisplayCountString(count));
     }
 
     @Override
