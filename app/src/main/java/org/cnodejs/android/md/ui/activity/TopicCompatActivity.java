@@ -27,7 +27,6 @@ import org.cnodejs.android.md.ui.dialog.TopicReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.listener.TopicJavascriptInterface;
-import org.cnodejs.android.md.ui.util.ActivityUtils;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
@@ -130,18 +129,14 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
 
     @Override
     public void onGetTopicOk(@NonNull TopicWithReply topic) {
-        if (ActivityUtils.isAlive(this)) {
-            this.topic = topic;
-            webTopic.updateTopicAndUserId(topic, LoginShared.getId(this));
-            iconNoData.setVisibility(View.GONE);
-        }
+        this.topic = topic;
+        webTopic.updateTopicAndUserId(topic, LoginShared.getId(this));
+        iconNoData.setVisibility(View.GONE);
     }
 
     @Override
     public void onGetTopicFinish() {
-        if (ActivityUtils.isAlive(this)) {
-            refreshLayout.setRefreshing(false);
-        }
+        refreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -151,23 +146,17 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
 
     @Override
     public void onCollectTopicOk() {
-        if (ActivityUtils.isAlive(this)) {
-            webTopic.updateTopicCollect(true);
-        }
+        webTopic.updateTopicCollect(true);
     }
 
     @Override
     public void onDecollectTopicOk() {
-        if (ActivityUtils.isAlive(this)) {
-            webTopic.updateTopicCollect(false);
-        }
+        webTopic.updateTopicCollect(false);
     }
 
     @Override
     public void onUpReplyOk(@NonNull Reply reply) {
-        if (ActivityUtils.isAlive(this)) {
-            webTopic.updateReply(reply);
-        }
+        webTopic.updateReply(reply);
     }
 
 }

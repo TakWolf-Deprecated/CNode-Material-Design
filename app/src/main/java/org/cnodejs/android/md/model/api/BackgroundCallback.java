@@ -6,7 +6,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CallbackAdapter<T extends Result> implements Callback<T> {
+public class BackgroundCallback<T extends Result> implements Callback<T>, CallbackLifecycle<T> {
 
     @Override
     public final void onResponse(Call<T> call, Response<T> response) {
@@ -34,22 +34,27 @@ public class CallbackAdapter<T extends Result> implements Callback<T> {
         }
     }
 
+    @Override
     public boolean onResultOk(Response<T> response, T result) {
         return false;
     }
 
+    @Override
     public boolean onResultError(Response<T> response, Result.Error error) {
         return false;
     }
 
+    @Override
     public boolean onCallCancel() {
         return false;
     }
 
+    @Override
     public boolean onCallException(Throwable t, Result.Error error) {
         return false;
     }
 
+    @Override
     public void onFinish() {}
 
 }

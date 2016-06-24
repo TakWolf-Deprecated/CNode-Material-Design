@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
+import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
@@ -24,7 +24,7 @@ public class TopicHeaderPresenter implements ITopicHeaderPresenter {
 
     @Override
     public void collectTopicAsyncTask(@NonNull String topicId) {
-        ApiClient.service.collectTopic(LoginShared.getAccessToken(activity), topicId).enqueue(new DefaultCallbackAdapter<Result>(activity) {
+        ApiClient.service.collectTopic(LoginShared.getAccessToken(activity), topicId).enqueue(new DefaultCallback<Result>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result> response, Result result) {
@@ -37,7 +37,7 @@ public class TopicHeaderPresenter implements ITopicHeaderPresenter {
 
     @Override
     public void decollectTopicAsyncTask(@NonNull String topicId) {
-        ApiClient.service.decollectTopic(LoginShared.getAccessToken(activity), topicId).enqueue(new DefaultCallbackAdapter<Result>(activity) {
+        ApiClient.service.decollectTopic(LoginShared.getAccessToken(activity), topicId).enqueue(new DefaultCallback<Result>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result> response, Result result) {

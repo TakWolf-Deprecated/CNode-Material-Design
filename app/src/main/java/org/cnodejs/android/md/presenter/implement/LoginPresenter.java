@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
+import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
 import org.cnodejs.android.md.ui.view.ILoginView;
@@ -31,7 +31,7 @@ public class LoginPresenter implements ILoginPresenter {
         } else {
             Call<Result.Login> call = ApiClient.service.accessToken(accessToken);
             loginView.onLoginStart(call);
-            call.enqueue(new DefaultCallbackAdapter<Result.Login>(activity) {
+            call.enqueue(new DefaultCallback<Result.Login>(activity) {
 
                 @Override
                 public boolean onResultOk(Response<Result.Login> response, Result.Login loginInfo) {
@@ -40,7 +40,7 @@ public class LoginPresenter implements ILoginPresenter {
                 }
 
                 @Override
-                public boolean onResultErrorAuth(Response<Result.Login> response, Result.Error error) {
+                public boolean onResultAuthError(Response<Result.Login> response, Result.Error error) {
                     loginView.onAccessTokenError(activity.getString(R.string.access_token_auth_error));
                     return false;
                 }

@@ -20,7 +20,6 @@ import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicHeaderPresenter;
 import org.cnodejs.android.md.ui.activity.LoginActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
-import org.cnodejs.android.md.ui.util.ActivityUtils;
 import org.cnodejs.android.md.ui.view.ITopicHeaderView;
 import org.cnodejs.android.md.ui.widget.ContentWebView;
 import org.cnodejs.android.md.util.FormatUtils;
@@ -141,18 +140,14 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
 
     @Override
     public void onCollectTopicOk() {
-        if (ActivityUtils.isAlive(activity)) {
-            isCollect = true;
-            btnFavorite.setImageResource(R.drawable.ic_favorite_theme_24dp);
-        }
+        isCollect = true;
+        btnFavorite.setImageResource(R.drawable.ic_favorite_theme_24dp);
     }
 
     @Override
     public void onDecollectTopicOk() {
-        if (ActivityUtils.isAlive(activity)) {
-            isCollect = false;
-            btnFavorite.setImageResource(R.drawable.ic_favorite_outline_grey600_24dp);
-        }
+        isCollect = false;
+        btnFavorite.setImageResource(R.drawable.ic_favorite_outline_grey600_24dp);
     }
 
 }

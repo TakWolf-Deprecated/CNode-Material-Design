@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.ApiDefine;
-import org.cnodejs.android.md.model.api.CallbackAdapter;
+import org.cnodejs.android.md.model.api.ForegroundCallback;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
@@ -31,7 +31,7 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void refreshTopicListAsyncTask(@NonNull final TabType tab, @NonNull Integer limit) {
-        ApiClient.service.getTopicList(tab, 1, limit, ApiDefine.MD_RENDER).enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
+        ApiClient.service.getTopicList(tab, 1, limit, ApiDefine.MD_RENDER).enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
@@ -58,7 +58,7 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void loadMoreTopicListAsyncTask(@NonNull final TabType tab, @NonNull final Integer page, @NonNull Integer limit) {
-        ApiClient.service.getTopicList(tab, page + 1, limit, ApiDefine.MD_RENDER).enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
+        ApiClient.service.getTopicList(tab, page + 1, limit, ApiDefine.MD_RENDER).enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
@@ -87,7 +87,7 @@ public class MainPresenter implements IMainPresenter {
     public void getUserAsyncTask() {
         final String accessToken = LoginShared.getAccessToken(activity);
         if (!TextUtils.isEmpty(accessToken)) {
-            ApiClient.service.getUser(LoginShared.getLoginName(activity)).enqueue(new CallbackAdapter<Result.Data<User>>() {
+            ApiClient.service.getUser(LoginShared.getLoginName(activity)).enqueue(new ForegroundCallback<Result.Data<User>>(activity) {
 
                 @Override
                 public boolean onResultOk(Response<Result.Data<User>> response, Result.Data<User> result) {
@@ -106,7 +106,7 @@ public class MainPresenter implements IMainPresenter {
     public void getMessageCountAsyncTask() {
         final String accessToken = LoginShared.getAccessToken(activity);
         if (!TextUtils.isEmpty(accessToken)) {
-            ApiClient.service.getMessageCount(accessToken).enqueue(new CallbackAdapter<Result.Data<Integer>>() {
+            ApiClient.service.getMessageCount(accessToken).enqueue(new ForegroundCallback<Result.Data<Integer>>(activity) {
 
                 @Override
                 public boolean onResultOk(Response<Result.Data<Integer>> response, Result.Data<Integer> result) {

@@ -20,7 +20,6 @@ import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicItemReplyPresenter;
 import org.cnodejs.android.md.ui.activity.LoginActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
-import org.cnodejs.android.md.ui.util.ActivityUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.ITopicItemReplyView;
 import org.cnodejs.android.md.ui.view.ITopicReplyView;
@@ -172,10 +171,8 @@ public class TopicAdapter extends BaseAdapter {
 
         @Override
         public void onUpReplyOk(@NonNull Reply reply) {
-            if (ActivityUtils.isAlive(activity)) {
-                if (TextUtils.equals(reply.getId(), this.reply.getId())) {
-                    updateUpViews(reply);
-                }
+            if (TextUtils.equals(reply.getId(), this.reply.getId())) {
+                updateUpViews(reply);
             }
         }
 
