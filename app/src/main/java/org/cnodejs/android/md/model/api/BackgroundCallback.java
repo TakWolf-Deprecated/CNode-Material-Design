@@ -6,7 +6,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CallbackAdapter<T extends Result> implements Callback<T>, CallbackLifecycle<T> {
+public class BackgroundCallback<T extends Result> implements Callback<T>, CallbackLifecycle<T> {
 
     @Override
     public final void onResponse(Call<T> call, Response<T> response) {
