@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
+import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
@@ -25,7 +25,7 @@ public class TopicItemReplyPresenter implements ITopicItemReplyPresenter {
 
     @Override
     public void upReplyAsyncTask(@NonNull final Reply reply) {
-        ApiClient.service.upReply(reply.getId(), LoginShared.getAccessToken(activity)).enqueue(new DefaultCallbackAdapter<Result.UpReply>(activity) {
+        ApiClient.service.upReply(reply.getId(), LoginShared.getAccessToken(activity)).enqueue(new DefaultCallback<Result.UpReply>(activity) {
 
             @Override
             public boolean onResultOk(Response<Result.UpReply> response, Result.UpReply result) {

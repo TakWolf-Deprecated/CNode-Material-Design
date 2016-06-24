@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.CallbackAdapter;
-import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
+import org.cnodejs.android.md.model.api.DefaultCallback;
+import org.cnodejs.android.md.model.api.ForegroundCallback;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
@@ -35,7 +35,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
         if (!loading) {
             loading = true;
             userDetailView.onGetUserStart();
-            ApiClient.service.getUser(loginName).enqueue(new CallbackAdapter<Result.Data<User>>() {
+            ApiClient.service.getUser(loginName).enqueue(new ForegroundCallback<Result.Data<User>>(activity) {
 
                 private long startLoadingTime = System.currentTimeMillis();
 
@@ -97,7 +97,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                 }
 
             });
-            ApiClient.service.getCollectTopicList(loginName).enqueue(new DefaultCallbackAdapter<Result.Data<List<Topic>>>(activity) {
+            ApiClient.service.getCollectTopicList(loginName).enqueue(new DefaultCallback<Result.Data<List<Topic>>>(activity) {
 
                 @Override
                 public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {

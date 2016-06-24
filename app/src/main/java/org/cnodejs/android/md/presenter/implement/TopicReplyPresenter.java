@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultCallbackAdapter;
+import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Author;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
@@ -42,7 +42,7 @@ public class TopicReplyPresenter implements ITopicReplyPresenter {
                 finalContent = content;
             }
             topicReplyView.onReplyTopicStart();
-            ApiClient.service.replyTopic(topicId, LoginShared.getAccessToken(activity), finalContent, targetId).enqueue(new DefaultCallbackAdapter<Result.ReplyTopic>(activity) {
+            ApiClient.service.replyTopic(topicId, LoginShared.getAccessToken(activity), finalContent, targetId).enqueue(new DefaultCallback<Result.ReplyTopic>(activity) {
 
                 @Override
                 public boolean onResultOk(Response<Result.ReplyTopic> response, Result.ReplyTopic result) {
