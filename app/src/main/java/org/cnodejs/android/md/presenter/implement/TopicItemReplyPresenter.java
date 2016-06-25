@@ -30,9 +30,9 @@ public class TopicItemReplyPresenter implements ITopicItemReplyPresenter {
             @Override
             public boolean onResultOk(Response<Result.UpReply> response, Result.UpReply result) {
                 if (result.getAction() == Reply.UpAction.up) {
-                    reply.getUpList().add(LoginShared.getId(activity));
+                    reply.getUpList().add(LoginShared.getId(getActivity()));
                 } else if (result.getAction() == Reply.UpAction.down) {
-                    reply.getUpList().remove(LoginShared.getId(activity));
+                    reply.getUpList().remove(LoginShared.getId(getActivity()));
                 }
                 topicItemReplyView.onUpReplyOk(reply);
                 return false;

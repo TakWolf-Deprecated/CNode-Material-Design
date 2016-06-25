@@ -91,8 +91,8 @@ public class MainPresenter implements IMainPresenter {
 
                 @Override
                 public boolean onResultOk(Response<Result.Data<User>> response, Result.Data<User> result) {
-                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(activity))) {
-                        LoginShared.update(activity, result.getData());
+                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(getActivity()))) {
+                        LoginShared.update(getActivity(), result.getData());
                         mainView.updateUserInfoViews();
                     }
                     return false;
@@ -110,7 +110,7 @@ public class MainPresenter implements IMainPresenter {
 
                 @Override
                 public boolean onResultOk(Response<Result.Data<Integer>> response, Result.Data<Integer> result) {
-                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(activity))) {
+                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(getActivity()))) {
                         mainView.updateMessageCountViews(result.getData());
                     }
                     return false;
