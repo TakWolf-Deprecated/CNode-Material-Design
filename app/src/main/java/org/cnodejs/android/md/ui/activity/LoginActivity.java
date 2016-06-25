@@ -69,7 +69,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     @BindView(R.id.edt_access_token)
     protected MaterialEditText edtAccessToken;
 
-    protected ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     private ILoginPresenter loginPresenter;
 
