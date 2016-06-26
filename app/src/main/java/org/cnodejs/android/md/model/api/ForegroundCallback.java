@@ -19,7 +19,7 @@ public class ForegroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @NonNull
-    public final Activity getActivity() {
+    protected final Activity getActivity() {
         return activity;
     }
 
