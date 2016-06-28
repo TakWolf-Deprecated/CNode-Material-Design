@@ -72,7 +72,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                         @Override
                         public void run() {
                             if (ActivityUtils.isAlive(getActivity())) {
-                                userDetailView.onGetUserError(response.code() == 404 ? error.getErrorMessage() : activity.getString(R.string.data_load_faild_and_click_avatar_to_reload));
+                                userDetailView.onGetUserError(response.code() == 404 ? error.getErrorMessage() : getActivity().getString(R.string.data_load_faild_and_click_avatar_to_reload));
                                 onFinish();
                             }
                         }
@@ -88,7 +88,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                         @Override
                         public void run() {
                             if (ActivityUtils.isAlive(getActivity())) {
-                                userDetailView.onGetUserError(activity.getString(R.string.data_load_faild_and_click_avatar_to_reload));
+                                userDetailView.onGetUserError(getActivity().getString(R.string.data_load_faild_and_click_avatar_to_reload));
                                 onFinish();
                             }
                         }

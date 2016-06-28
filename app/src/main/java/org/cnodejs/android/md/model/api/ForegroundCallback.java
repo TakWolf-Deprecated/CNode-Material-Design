@@ -18,7 +18,8 @@ public class ForegroundCallback<T extends Result> implements Callback<T>, Callba
         this.activity = activity;
     }
 
-    public final Activity getActivity() {
+    @NonNull
+    protected final Activity getActivity() {
         return activity;
     }
 
