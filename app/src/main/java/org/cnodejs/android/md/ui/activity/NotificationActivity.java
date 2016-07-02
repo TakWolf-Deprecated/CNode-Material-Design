@@ -66,8 +66,8 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
 
         notificationPresenter = new NotificationPresenter(this, this);
 
-        RefreshUtils.initOnCreate(refreshLayout, this);
-        RefreshUtils.refreshOnCreate(refreshLayout, this);
+        RefreshUtils.init(refreshLayout, this);
+        RefreshUtils.refresh(refreshLayout, this);
     }
 
     @Override

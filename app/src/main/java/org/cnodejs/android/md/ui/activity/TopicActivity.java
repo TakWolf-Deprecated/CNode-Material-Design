@@ -110,8 +110,8 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
 
         topicPresenter = new TopicPresenter(this, this);
 
-        RefreshUtils.initOnCreate(refreshLayout, this);
-        RefreshUtils.refreshOnCreate(refreshLayout, this);
+        RefreshUtils.init(refreshLayout, this);
+        RefreshUtils.refresh(refreshLayout, this);
     }
 
     @Override

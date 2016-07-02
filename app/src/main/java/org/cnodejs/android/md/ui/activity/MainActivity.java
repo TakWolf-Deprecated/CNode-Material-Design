@@ -150,8 +150,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
         imgTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
 
-        RefreshUtils.initOnCreate(refreshLayout, this);
-        RefreshUtils.refreshOnCreate(refreshLayout, this);
+        RefreshUtils.init(refreshLayout, this);
+        RefreshUtils.refresh(refreshLayout, this);
     }
 
     @Override
