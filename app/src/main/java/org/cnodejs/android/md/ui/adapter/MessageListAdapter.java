@@ -61,7 +61,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(position);
+        holder.update(messageList.get(position));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -94,8 +94,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             ButterKnife.bind(this, itemView);
         }
 
-        protected void update(int position) {
-            message = messageList.get(position);
+        protected void update(@NonNull Message message) {
+            this.message = message;
 
             Glide.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());

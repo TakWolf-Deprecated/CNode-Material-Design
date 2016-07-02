@@ -52,7 +52,7 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(position);
+        holder.update(topicSimpleList.get(position));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -76,8 +76,8 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
             ButterKnife.bind(this, itemView);
         }
 
-        protected void update(int position) {
-            topicSimple = topicSimpleList.get(position);
+        protected void update(@NonNull TopicSimple topicSimple) {
+            this.topicSimple = topicSimple;
 
             tvTitle.setText(topicSimple.getTitle());
             Glide.with(activity).load(topicSimple.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
