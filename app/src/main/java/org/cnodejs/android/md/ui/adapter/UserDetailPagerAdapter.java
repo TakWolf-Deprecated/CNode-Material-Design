@@ -13,7 +13,7 @@ import org.cnodejs.android.md.ui.fragment.UserDetailItemFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDetailAdapter extends FragmentPagerAdapter {
+public class UserDetailPagerAdapter extends FragmentPagerAdapter {
 
     private final List<UserDetailItemFragment> fmList = new ArrayList<>();
     private final String[] titles = {
@@ -22,7 +22,7 @@ public class UserDetailAdapter extends FragmentPagerAdapter {
             "话题收藏"
     };
 
-    public UserDetailAdapter(FragmentManager manager) {
+    public UserDetailPagerAdapter(@NonNull FragmentManager manager) {
         super(manager);
         fmList.add(new UserDetailItemFragment());
         fmList.add(new UserDetailItemFragment());

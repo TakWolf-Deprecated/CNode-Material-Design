@@ -27,7 +27,7 @@ import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
 import org.cnodejs.android.md.presenter.implement.UserDetailPresenter;
-import org.cnodejs.android.md.ui.adapter.UserDetailAdapter;
+import org.cnodejs.android.md.ui.adapter.UserDetailPagerAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
@@ -95,7 +95,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     @BindView(R.id.progress_wheel)
     protected ProgressWheel progressWheel;
 
-    private UserDetailAdapter adapter;
+    private UserDetailPagerAdapter adapter;
 
     private IUserDetailPresenter userDetailPresenter;
 
@@ -115,7 +115,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         toolbar.inflateMenu(R.menu.user_detail);
         toolbar.setOnMenuItemClickListener(this);
 
-        adapter = new UserDetailAdapter(getSupportFragmentManager());
+        adapter = new UserDetailPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
         tabLayout.setupWithViewPager(viewPager);
