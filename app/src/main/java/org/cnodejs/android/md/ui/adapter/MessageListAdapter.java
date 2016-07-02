@@ -20,22 +20,33 @@ import org.cnodejs.android.md.ui.widget.ContentWebView;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.ResUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
+public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.ViewHolder> {
 
     private final Activity activity;
     private final LayoutInflater inflater;
-    private final List<Message> messageList;
+    private final List<Message> messageList = new ArrayList<>();
 
-    public NotificationAdapter(@NonNull Activity activity, @NonNull List<Message> messageList) {
+    public MessageListAdapter(@NonNull Activity activity) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
-        this.messageList = messageList;
+    }
+
+    @NonNull
+    public List<Message> getMessageList() {
+        return messageList;
+    }
+
+    public void markAllMessageRead() {
+        for (Message message : messageList) {
+            message.setRead(true);
+        }
     }
 
     @Override
@@ -45,7 +56,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.item_notification, parent, false));
+        return new ViewHolder(inflater.inflate(R.layout.item_message, parent, false));
     }
 
     @Override
