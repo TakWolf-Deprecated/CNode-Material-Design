@@ -17,37 +17,42 @@ import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.util.FormatUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAdapter.ViewHolder> {
+public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleListAdapter.ViewHolder> {
 
     private final Activity activity;
     private final LayoutInflater inflater;
-    private final List<TopicSimple> topicList;
+    private final List<TopicSimple> topicSimpleList = new ArrayList<>();
 
-    public UserDetailItemAdapter(@NonNull Activity activity, @NonNull List<TopicSimple> topicList) {
+    public TopicSimpleListAdapter(@NonNull Activity activity) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
-        this.topicList = topicList;
+    }
+
+    @NonNull
+    public List<TopicSimple> getTopicSimpleList() {
+        return topicSimpleList;
     }
 
     @Override
     public int getItemCount() {
-        return topicList.size();
+        return topicSimpleList.size();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.item_user_detail, parent, false));
+        return new ViewHolder(inflater.inflate(R.layout.item_topic_simple, parent, false));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(position);
+        holder.update(topicSimpleList.get(position));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,30 +69,30 @@ public class UserDetailItemAdapter extends RecyclerView.Adapter<UserDetailItemAd
         @BindView(R.id.tv_last_reply_time)
         protected TextView tvLastReplyTime;
 
-        private TopicSimple topic;
+        private TopicSimple topicSimple;
 
         protected ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        protected void update(int position) {
-            topic = topicList.get(position);
+        protected void update(@NonNull TopicSimple topicSimple) {
+            this.topicSimple = topicSimple;
 
-            tvTitle.setText(topic.getTitle());
-            Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-            tvLoginName.setText(topic.getAuthor().getLoginName());
-            tvLastReplyTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getLastReplyAt()));
+            tvTitle.setText(topicSimple.getTitle());
+            Glide.with(activity).load(topicSimple.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            tvLoginName.setText(topicSimple.getAuthor().getLoginName());
+            tvLastReplyTime.setText(FormatUtils.getRelativeTimeSpanString(topicSimple.getLastReplyAt()));
         }
 
         @OnClick(R.id.img_avatar)
         protected void onBtnAvatarClick() {
-            UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
+            UserDetailActivity.startWithTransitionAnimation(activity, topicSimple.getAuthor().getLoginName(), imgAvatar, topicSimple.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.btn_item)
         protected void onBtnItemClick() {
-            Navigator.TopicWithAutoCompat.start(activity, topic.getId());
+            Navigator.TopicWithAutoCompat.start(activity, topicSimple.getId());
         }
 
     }

@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TopicHeaderViewHolder implements ITopicHeaderView {
+public class TopicHeader implements ITopicHeaderView {
 
     @BindView(R.id.layout_content)
     protected ViewGroup layoutContent;
@@ -75,10 +75,10 @@ public class TopicHeaderViewHolder implements ITopicHeaderView {
 
     private final ITopicHeaderPresenter topicHeaderPresenter;
 
-    public TopicHeaderViewHolder(@NonNull Activity activity, @NonNull ListView listView) {
+    public TopicHeader(@NonNull Activity activity, @NonNull ListView listView) {
         this.activity = activity;
         LayoutInflater inflater = LayoutInflater.from(activity);
-        View headerView = inflater.inflate(R.layout.item_topic_header, listView, false);
+        View headerView = inflater.inflate(R.layout.header_topic, listView, false);
         ButterKnife.bind(this, headerView);
         listView.addHeaderView(headerView, null, false);
         this.topicHeaderPresenter = new TopicHeaderPresenter(activity, this);

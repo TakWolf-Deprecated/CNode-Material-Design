@@ -13,74 +13,144 @@ import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
+import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.IMainView;
+import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
 
 import java.util.List;
 
+import retrofit2.Call;
 import retrofit2.Response;
 
 public class MainPresenter implements IMainPresenter {
 
+    private static final int PAGE_LIMIT = 20;
+
     private final Activity activity;
     private final IMainView mainView;
+
+    private TabType tab = TabType.all;
+    private Call<Result.Data<List<Topic>>> refreshCall = null;
+    private Call<Result.Data<List<Topic>>> loadMoreCall = null;
 
     public MainPresenter(@NonNull Activity activity, @NonNull IMainView mainView) {
         this.activity = activity;
         this.mainView = mainView;
     }
 
-    @Override
-    public void refreshTopicListAsyncTask(@NonNull final TabType tab, @NonNull Integer limit) {
-        ApiClient.service.getTopicList(tab, 1, limit, ApiDefine.MD_RENDER).enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
-
-            @Override
-            public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                return mainView.onRefreshTopicListOk(tab, result.getData());
+    private void cancelRefreshCall() {
+        if (refreshCall != null) {
+            if (!refreshCall.isCanceled()) {
+                refreshCall.cancel();
             }
+            refreshCall = null;
+        }
+    }
 
-            @Override
-            public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
-                return mainView.onRefreshTopicListError(tab, error.getErrorMessage());
+    private void cancelLoadMoreCall() {
+        if (loadMoreCall != null) {
+            if (!loadMoreCall.isCanceled()) {
+                loadMoreCall.cancel();
             }
-
-            @Override
-            public boolean onCallException(Throwable t, Result.Error error) {
-                return mainView.onRefreshTopicListError(tab, error.getErrorMessage());
-            }
-
-            @Override
-            public void onFinish() {
-                mainView.onRefreshTopicListFinish();
-            }
-
-        });
+            loadMoreCall = null;
+        }
     }
 
     @Override
-    public void loadMoreTopicListAsyncTask(@NonNull final TabType tab, @NonNull final Integer page, @NonNull Integer limit) {
-        ApiClient.service.getTopicList(tab, page + 1, limit, ApiDefine.MD_RENDER).enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
+    public void switchTab(@NonNull TabType tab) {
+        if (this.tab != tab) {
+            this.tab = tab;
+            cancelRefreshCall();
+            cancelLoadMoreCall();
+            mainView.onSwitchTabOk(tab);
+        }
+    }
 
-            @Override
-            public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                return mainView.onLoadMoreTopicListOk(tab, page, result.getData());
-            }
+    @Override
+    public void refreshTopicListAsyncTask() {
+        if (refreshCall == null) {
+            refreshCall = ApiClient.service.getTopicList(tab, 1, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            refreshCall.enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
 
-            @Override
-            public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
-                return mainView.onLoadMoreTopicListError(tab, page, error.getErrorMessage());
-            }
+                @Override
+                public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
+                    cancelLoadMoreCall();
+                    if (result.getData().size() > 0) {
+                        mainView.onRefreshTopicListOk(result.getData());
+                    }
+                    return false;
+                }
 
-            @Override
-            public boolean onCallException(Throwable t, Result.Error error) {
-                return mainView.onLoadMoreTopicListError(tab, page, error.getErrorMessage());
-            }
+                @Override
+                public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
+                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    return false;
+                }
 
-            @Override
-            public void onFinish() {
-                mainView.onLoadMoreTopicListFinish();
-            }
+                @Override
+                public boolean onCallException(Throwable t, Result.Error error) {
+                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    return false;
+                }
 
-        });
+                @Override
+                public boolean onCallCancel() {
+                    return true;
+                }
+
+                @Override
+                public void onFinish() {
+                    refreshCall = null;
+                    mainView.onRefreshTopicListFinish();
+                }
+
+            });
+        }
+    }
+
+    @Override
+    public void loadMoreTopicListAsyncTask(int page) {
+        if (loadMoreCall == null) {
+            loadMoreCall = ApiClient.service.getTopicList(tab, page, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            loadMoreCall.enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
+
+                @Override
+                public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
+                    if (result.getData().size() > 0) {
+                        mainView.onLoadMoreTopicListOk(result.getData());
+                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.endless);
+                    } else {
+                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.nomore);
+                    }
+                    return false;
+                }
+
+                @Override
+                public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
+                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.fail);
+                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    return false;
+                }
+
+                @Override
+                public boolean onCallException(Throwable t, Result.Error error) {
+                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.fail);
+                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    return false;
+                }
+
+                @Override
+                public boolean onCallCancel() {
+                    return true;
+                }
+
+                @Override
+                public void onFinish() {
+                    loadMoreCall = null;
+                }
+
+            });
+        }
     }
 
     @Override

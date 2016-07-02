@@ -4,22 +4,21 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
+import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
 
 import java.util.List;
 
 public interface IMainView {
 
-    boolean onRefreshTopicListOk(@NonNull TabType tab, @NonNull List<Topic> topicList);
+    void onSwitchTabOk(@NonNull TabType tab);
 
-    boolean onRefreshTopicListError(@NonNull TabType tab, @NonNull String message);
+    void onRefreshTopicListOk(@NonNull List<Topic> topicList);
 
     void onRefreshTopicListFinish();
 
-    boolean onLoadMoreTopicListOk(@NonNull TabType tab, @NonNull Integer page, @NonNull List<Topic> topicList);
+    void onLoadMoreTopicListOk(@NonNull List<Topic> topicList);
 
-    boolean onLoadMoreTopicListError(@NonNull TabType tab, @NonNull Integer page, @NonNull String message);
-
-    void onLoadMoreTopicListFinish();
+    void onLoadMoreTopicListFinish(@NonNull LoadMoreFooter.State state);
 
     void updateUserInfoViews();
 

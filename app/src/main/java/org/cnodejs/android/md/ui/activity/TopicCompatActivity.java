@@ -16,23 +16,23 @@ import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.storage.LoginShared;
+import org.cnodejs.android.md.presenter.contract.IReplyPresenter;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
-import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
+import org.cnodejs.android.md.presenter.implement.ReplyPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicHeaderPresenter;
-import org.cnodejs.android.md.presenter.implement.TopicItemReplyPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
-import org.cnodejs.android.md.ui.dialog.TopicReplyDialog;
+import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.listener.TopicJavascriptInterface;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
+import org.cnodejs.android.md.ui.view.ICreateReplyView;
+import org.cnodejs.android.md.ui.view.IReplyView;
 import org.cnodejs.android.md.ui.view.ITopicHeaderView;
-import org.cnodejs.android.md.ui.view.ITopicItemReplyView;
-import org.cnodejs.android.md.ui.view.ITopicReplyView;
 import org.cnodejs.android.md.ui.view.ITopicView;
 import org.cnodejs.android.md.ui.widget.TopicWebView;
 
@@ -40,7 +40,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TopicCompatActivity extends StatusBarActivity implements ITopicView, ITopicHeaderView, ITopicItemReplyView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
+public class TopicCompatActivity extends StatusBarActivity implements ITopicView, ITopicHeaderView, IReplyView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
@@ -60,11 +60,11 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     private String topicId;
     private Topic topic;
 
-    private ITopicReplyView topicReplyView;
+    private ICreateReplyView createReplyView;
 
     private ITopicPresenter topicPresenter;
     private ITopicHeaderPresenter topicHeaderPresenter;
-    private ITopicItemReplyPresenter topicItemReplyPresenter;
+    private IReplyPresenter replyPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,15 +82,15 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
 
         topicPresenter = new TopicPresenter(this, this);
         topicHeaderPresenter = new TopicHeaderPresenter(this, this);
-        topicItemReplyPresenter = new TopicItemReplyPresenter(this, this);
+        replyPresenter = new ReplyPresenter(this, this);
 
-        topicReplyView = TopicReplyDialog.createWithAutoTheme(this, topicId, this);
+        createReplyView = CreateReplyDialog.createWithAutoTheme(this, topicId, this);
 
         webTopic.setFabReply(fabReply);
-        webTopic.setBridgeAndLoadPage(new TopicJavascriptInterface(this, topicReplyView, topicHeaderPresenter, topicItemReplyPresenter));
+        webTopic.setBridgeAndLoadPage(new TopicJavascriptInterface(this, createReplyView, topicHeaderPresenter, replyPresenter));
 
-        RefreshUtils.initOnCreate(refreshLayout, this);
-        RefreshUtils.refreshOnCreate(refreshLayout, this);
+        RefreshUtils.init(refreshLayout, this);
+        RefreshUtils.refresh(refreshLayout, this);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     @OnClick(R.id.fab_reply)
     protected void onBtnReplyClick() {
         if (topic != null && LoginActivity.startForResultWithAccessTokenCheck(this)) {
-            topicReplyView.showReplyWindow();
+            createReplyView.showWindow();
         }
     }
 

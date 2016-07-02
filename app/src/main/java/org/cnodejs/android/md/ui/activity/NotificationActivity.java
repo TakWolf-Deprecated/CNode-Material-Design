@@ -10,11 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.presenter.contract.INotificationPresenter;
 import org.cnodejs.android.md.presenter.implement.NotificationPresenter;
-import org.cnodejs.android.md.ui.adapter.NotificationAdapter;
+import org.cnodejs.android.md.ui.adapter.MessageListAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
@@ -22,9 +21,6 @@ import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.INotificationView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,8 +39,7 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
     @BindView(R.id.icon_no_data)
     protected View iconNoData;
 
-    private NotificationAdapter adapter;
-    private List<Message> messageList = new ArrayList<>();
+    private MessageListAdapter adapter;
 
     private INotificationPresenter notificationPresenter;
 
@@ -61,13 +56,13 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NotificationAdapter(this, messageList);
+        adapter = new MessageListAdapter(this);
         recyclerView.setAdapter(adapter);
 
         notificationPresenter = new NotificationPresenter(this, this);
 
-        RefreshUtils.initOnCreate(refreshLayout, this);
-        RefreshUtils.refreshOnCreate(refreshLayout, this);
+        RefreshUtils.init(refreshLayout, this);
+        RefreshUtils.refresh(refreshLayout, this);
     }
 
     @Override
@@ -86,17 +81,13 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
         notificationPresenter.getMessagesAsyncTask();
     }
 
-    private void notifyDataSetChanged() {
-        adapter.notifyDataSetChanged();
-        iconNoData.setVisibility(messageList.size() == 0 ? View.VISIBLE : View.GONE);
-    }
-
     @Override
     public void onGetMessagesOk(@NonNull Notification notification) {
-        messageList.clear();
-        messageList.addAll(notification.getHasNotReadMessageList());
-        messageList.addAll(notification.getHasReadMessageList());
-        notifyDataSetChanged();
+        adapter.getMessageList().clear();
+        adapter.getMessageList().addAll(notification.getHasNotReadMessageList());
+        adapter.getMessageList().addAll(notification.getHasReadMessageList());
+        adapter.notifyDataSetChanged();
+        iconNoData.setVisibility(adapter.getMessageList().size() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -106,10 +97,8 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
 
     @Override
     public void onMarkAllMessageReadOk() {
-        for (Message message : messageList) {
-            message.setRead(true);
-        }
-        notifyDataSetChanged();
+        adapter.markAllMessageRead();
+        adapter.notifyDataSetChanged();
     }
 
     @Override

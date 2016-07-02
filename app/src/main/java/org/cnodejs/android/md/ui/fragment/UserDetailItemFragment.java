@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.TopicSimple;
-import org.cnodejs.android.md.ui.adapter.UserDetailItemAdapter;
+import org.cnodejs.android.md.ui.adapter.TopicSimpleListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +23,7 @@ public class UserDetailItemFragment extends Fragment {
     @BindView(R.id.recycler_view)
     protected RecyclerView recyclerView;
 
-    private UserDetailItemAdapter adapter;
-    private final List<TopicSimple> topicList = new ArrayList<>();
+    private TopicSimpleListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,13 +36,13 @@ public class UserDetailItemFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new UserDetailItemAdapter(getActivity(), topicList);
+        adapter = new TopicSimpleListAdapter(getActivity());
         recyclerView.setAdapter(adapter);
     }
 
-    public void notifyDataSetChanged(List<TopicSimple> topicList) {
-        this.topicList.clear();
-        this.topicList.addAll(topicList);
+    public void notifyDataSetChanged(List<TopicSimple> topicSimpleList) {
+        adapter.getTopicSimpleList().clear();
+        adapter.getTopicSimpleList().addAll(topicSimpleList);
         adapter.notifyDataSetChanged();
     }
 

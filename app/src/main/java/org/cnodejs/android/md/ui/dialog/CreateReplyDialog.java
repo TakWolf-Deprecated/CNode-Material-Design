@@ -15,10 +15,10 @@ import android.widget.TextView;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.storage.SettingShared;
-import org.cnodejs.android.md.presenter.contract.ITopicReplyPresenter;
-import org.cnodejs.android.md.presenter.implement.TopicReplyPresenter;
+import org.cnodejs.android.md.presenter.contract.ICreateReplyPresenter;
+import org.cnodejs.android.md.presenter.implement.CreateReplyPresenter;
 import org.cnodejs.android.md.ui.util.ToastUtils;
-import org.cnodejs.android.md.ui.view.ITopicReplyView;
+import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.cnodejs.android.md.ui.view.ITopicView;
 import org.cnodejs.android.md.ui.widget.EditorBarHandler;
 
@@ -26,10 +26,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView {
+public class CreateReplyDialog extends AppCompatDialog implements ICreateReplyView {
 
-    public static TopicReplyDialog createWithAutoTheme(@NonNull Activity activity, @NonNull String topicId, @NonNull ITopicView topicView) {
-        return new TopicReplyDialog(
+    public static CreateReplyDialog createWithAutoTheme(@NonNull Activity activity, @NonNull String topicId, @NonNull ITopicView topicView) {
+        return new CreateReplyDialog(
                 activity,
                 SettingShared.isEnableThemeDark(activity) ? R.style.AppDialogDark_TopicReply : R.style.AppDialogLight_TopicReply,
                 topicId,
@@ -52,11 +52,11 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
     private final String topicId;
     private final ITopicView topicView;
     private final ProgressDialog progressDialog;
-    private final ITopicReplyPresenter topicReplyPresenter;
+    private final ICreateReplyPresenter createReplyPresenter;
 
     private String targetId = null;
 
-    private TopicReplyDialog(@NonNull Activity activity, int theme, @NonNull String topicId, @NonNull ITopicView topicView) {
+    private CreateReplyDialog(@NonNull Activity activity, int theme, @NonNull String topicId, @NonNull ITopicView topicView) {
         super(activity, theme);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_topic_reply);
@@ -71,7 +71,7 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
 
         new EditorBarHandler(activity, editorBar, edtContent); // 创建editorBar
 
-        topicReplyPresenter = new TopicReplyPresenter(activity, this);
+        createReplyPresenter = new CreateReplyPresenter(activity, this);
     }
 
     @Override
@@ -84,12 +84,12 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
 
     @OnClick(R.id.btn_tool_close)
     protected void onBtnToolCloseClick() {
-        dismissReplyWindow();
+        dismissWindow();
     }
 
     @OnClick(R.id.btn_tool_send)
     protected void onBtnToolSendClick() {
-        topicReplyPresenter.replyTopicAsyncTask(topicId, edtContent.getText().toString().trim(), targetId);
+        createReplyPresenter.createReplyAsyncTask(topicId, edtContent.getText().toString().trim(), targetId);
     }
 
     @OnClick(R.id.btn_clear_target)
@@ -99,12 +99,12 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
     }
 
     @Override
-    public void showReplyWindow() {
+    public void showWindow() {
         show();
     }
 
     @Override
-    public void dismissReplyWindow() {
+    public void dismissWindow() {
         dismiss();
     }
 
@@ -114,7 +114,7 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
         layoutTarget.setVisibility(View.VISIBLE);
         tvTarget.setText("回复：" + (targetPosition + 1) + "楼");
         edtContent.getText().insert(edtContent.getSelectionEnd(), "@" + target.getAuthor().getLoginName() + " ");
-        showReplyWindow();
+        showWindow();
     }
 
     @Override
@@ -126,7 +126,7 @@ public class TopicReplyDialog extends AppCompatDialog implements ITopicReplyView
     @Override
     public void onReplyTopicOk(@NonNull Reply reply) {
         topicView.appendReplyAndUpdateViews(reply);
-        dismissReplyWindow();
+        dismissWindow();
         targetId = null;
         layoutTarget.setVisibility(View.GONE);
         edtContent.setText(null);

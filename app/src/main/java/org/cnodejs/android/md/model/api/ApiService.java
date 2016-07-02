@@ -76,7 +76,7 @@ public interface ApiService {
 
     @POST("topic/{topicId}/replies")
     @FormUrlEncoded
-    Call<Result.ReplyTopic> replyTopic(
+    Call<Result.ReplyTopic> createReply(
             @Path("topicId") String topicId,
             @Field("accesstoken") String accessToken,
             @Field("content") String content,

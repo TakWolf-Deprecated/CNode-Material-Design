@@ -8,12 +8,12 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.util.EntityUtils;
+import org.cnodejs.android.md.presenter.contract.IReplyPresenter;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
-import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
 import org.cnodejs.android.md.ui.activity.LoginActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.util.ToastUtils;
-import org.cnodejs.android.md.ui.view.ITopicReplyView;
+import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.cnodejs.android.md.util.HandlerUtils;
 
 public final class TopicJavascriptInterface {
@@ -21,15 +21,15 @@ public final class TopicJavascriptInterface {
     public static final String NAME = "topicBridge";
 
     private final Activity activity;
-    private final ITopicReplyView topicReplyView;
+    private final ICreateReplyView createReplyView;
     private final ITopicHeaderPresenter topicHeaderPresenter;
-    private final ITopicItemReplyPresenter topicItemReplyPresenter;
+    private final IReplyPresenter replyPresenter;
 
-    public TopicJavascriptInterface(@NonNull Activity activity, @NonNull ITopicReplyView topicReplyView, @NonNull ITopicHeaderPresenter topicHeaderPresenter, @NonNull ITopicItemReplyPresenter topicItemReplyPresenter) {
+    public TopicJavascriptInterface(@NonNull Activity activity, @NonNull ICreateReplyView createReplyView, @NonNull ITopicHeaderPresenter topicHeaderPresenter, @NonNull IReplyPresenter replyPresenter) {
         this.activity = activity;
-        this.topicReplyView = topicReplyView;
+        this.createReplyView = createReplyView;
         this.topicHeaderPresenter = topicHeaderPresenter;
-        this.topicItemReplyPresenter = topicItemReplyPresenter;
+        this.replyPresenter = replyPresenter;
     }
 
     @JavascriptInterface
@@ -53,7 +53,7 @@ public final class TopicJavascriptInterface {
             if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
                 ToastUtils.with(activity).show(R.string.can_not_up_yourself_reply);
             } else {
-                topicItemReplyPresenter.upReplyAsyncTask(reply);
+                replyPresenter.upReplyAsyncTask(reply);
             }
         }
     }
@@ -66,7 +66,7 @@ public final class TopicJavascriptInterface {
                 @Override
                 public void run() {
                     Reply target = EntityUtils.gson.fromJson(targetJson, Reply.class);
-                    topicReplyView.onAt(target, targetPosition);
+                    createReplyView.onAt(target, targetPosition);
                 }
 
             });

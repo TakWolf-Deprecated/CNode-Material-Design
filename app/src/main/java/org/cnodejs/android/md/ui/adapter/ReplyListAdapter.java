@@ -16,16 +16,18 @@ import com.bumptech.glide.Glide;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.storage.LoginShared;
-import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
-import org.cnodejs.android.md.presenter.implement.TopicItemReplyPresenter;
+import org.cnodejs.android.md.presenter.contract.IReplyPresenter;
+import org.cnodejs.android.md.presenter.implement.ReplyPresenter;
 import org.cnodejs.android.md.ui.activity.LoginActivity;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.util.ToastUtils;
-import org.cnodejs.android.md.ui.view.ITopicItemReplyView;
-import org.cnodejs.android.md.ui.view.ITopicReplyView;
+import org.cnodejs.android.md.ui.view.ICreateReplyView;
+import org.cnodejs.android.md.ui.view.IReplyView;
 import org.cnodejs.android.md.ui.widget.ContentWebView;
 import org.cnodejs.android.md.util.FormatUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,20 +35,38 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TopicAdapter extends BaseAdapter {
+public class ReplyListAdapter extends BaseAdapter {
 
     private final Activity activity;
     private final LayoutInflater inflater;
-    private final List<Reply> replyList;
-    private final Map<String, Integer> positionMap;
-    private final ITopicReplyView topicReplyView;
+    private final List<Reply> replyList = new ArrayList<>();
+    private final Map<String, Integer> positionMap = new HashMap<>();
+    private final ICreateReplyView createReplyView;
 
-    public TopicAdapter(@NonNull Activity activity, @NonNull List<Reply> replyList, @NonNull Map<String, Integer> positionMap, @NonNull ITopicReplyView topicReplyView) {
+    public ReplyListAdapter(@NonNull Activity activity, @NonNull ICreateReplyView createReplyView) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
-        this.replyList = replyList;
-        this.positionMap = positionMap;
-        this.topicReplyView = topicReplyView;
+        this.createReplyView = createReplyView;
+    }
+
+    @NonNull
+    public List<Reply> getReplyList() {
+        return replyList;
+    }
+
+    public void setReplyList(@NonNull List<Reply> replyList) {
+        this.replyList.clear();
+        this.replyList.addAll(replyList);
+        positionMap.clear();
+        for (int n = 0; n < replyList.size(); n++) {
+            Reply reply = replyList.get(n);
+            positionMap.put(reply.getId(), n);
+        }
+    }
+
+    public void addReply(@NonNull Reply reply) {
+        replyList.add(reply);
+        positionMap.put(reply.getId(), replyList.size() - 1);
     }
 
     @Override
@@ -68,7 +88,7 @@ public class TopicAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_topic_reply, parent, false);
+            convertView = inflater.inflate(R.layout.item_reply, parent, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
@@ -78,7 +98,7 @@ public class TopicAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public class ViewHolder implements ITopicItemReplyView {
+    public class ViewHolder implements IReplyView {
 
         @BindView(R.id.img_avatar)
         protected ImageView imgAvatar;
@@ -107,13 +127,13 @@ public class TopicAdapter extends BaseAdapter {
         @BindView(R.id.icon_shadow_gap)
         protected View iconShadowGap;
 
-        private final ITopicItemReplyPresenter topicItemReplyPresenter;
+        private final IReplyPresenter replyPresenter;
 
         private Reply reply;
 
         public ViewHolder(@NonNull View itemView) {
             ButterKnife.bind(this, itemView);
-            topicItemReplyPresenter = new TopicItemReplyPresenter(activity, this);
+            replyPresenter = new ReplyPresenter(activity, this);
         }
 
         public void update(int position) {
@@ -157,7 +177,7 @@ public class TopicAdapter extends BaseAdapter {
                 if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
                     ToastUtils.with(activity).show(R.string.can_not_up_yourself_reply);
                 } else {
-                    topicItemReplyPresenter.upReplyAsyncTask(reply);
+                    replyPresenter.upReplyAsyncTask(reply);
                 }
             }
         }
@@ -165,7 +185,7 @@ public class TopicAdapter extends BaseAdapter {
         @OnClick(R.id.btn_at)
         protected void onBtnAtClick() {
             if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
-                topicReplyView.onAt(reply, positionMap.get(reply.getId()));
+                createReplyView.onAt(reply, positionMap.get(reply.getId()));
             }
         }
 

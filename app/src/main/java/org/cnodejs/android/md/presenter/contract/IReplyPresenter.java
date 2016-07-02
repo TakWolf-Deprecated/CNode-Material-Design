@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.entity.Reply;
 
-public interface ITopicItemReplyPresenter {
+public interface IReplyPresenter {
 
     void upReplyAsyncTask(@NonNull Reply reply);
 

@@ -7,8 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,12 +24,11 @@ import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
 import org.cnodejs.android.md.presenter.implement.MainPresenter;
-import org.cnodejs.android.md.ui.adapter.MainAdapter;
+import org.cnodejs.android.md.ui.adapter.TopicListAdapter;
 import org.cnodejs.android.md.ui.base.FullLayoutActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
-import org.cnodejs.android.md.ui.listener.RecyclerViewLoadMoreListener;
 import org.cnodejs.android.md.ui.util.DisplayUtils;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.RefreshUtils;
@@ -39,10 +36,11 @@ import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.IMainView;
+import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
+import org.cnodejs.android.md.ui.widget.ListView;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.HandlerUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,9 +48,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends FullLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, RecyclerViewLoadMoreListener.OnLoadMoreListener {
-
-    private static final int PAGE_LIMIT = 20;
+public class MainActivity extends FullLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
 
     // 抽屉导航布局
     @BindView(R.id.drawer_layout)
@@ -104,8 +100,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @BindView(R.id.refresh_layout)
     protected SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.recycler_view)
-    protected RecyclerView recyclerView;
+    @BindView(R.id.list_view)
+    protected ListView listView;
 
     @BindView(R.id.icon_no_data)
     protected View iconNoData;
@@ -113,13 +109,13 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @BindView(R.id.fab_create_topic)
     protected FloatingActionButton fabCreateTopic;
 
-    // 当前版块，默认为all
-    private TabType currentTab = TabType.all;
-    private int currentPage = 0; // 从未加载
-    private final List<Topic> topicList = new ArrayList<>();
-    private MainAdapter adapter;
+    private LoadMoreFooter loadMoreFooter;
+    private TopicListAdapter adapter;
 
     private IMainPresenter mainPresenter;
+
+    // 当前分页位置
+    private int page = 0;
 
     // 首次按下返回键时间戳
     private long firstBackPressedTime = 0;
@@ -142,12 +138,10 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new MainAdapter(this, topicList);
-        recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(new RecyclerViewLoadMoreListener(linearLayoutManager, this, PAGE_LIMIT));
-        fabCreateTopic.attachToRecyclerView(recyclerView);
+        loadMoreFooter = new LoadMoreFooter(this, listView, this);
+        adapter = new TopicListAdapter(this);
+        listView.setAdapter(adapter);
+        fabCreateTopic.attachToListView(listView);
 
         mainPresenter = new MainPresenter(this, this);
 
@@ -156,8 +150,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
         imgTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
 
-        RefreshUtils.initOnCreate(refreshLayout, this);
-        RefreshUtils.refreshOnCreate(refreshLayout, this);
+        RefreshUtils.init(refreshLayout, this);
+        RefreshUtils.refresh(refreshLayout, this);
     }
 
     @Override
@@ -181,69 +175,44 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
         @Override
         public void onDrawerClosed(View drawerView) {
-            TabType newTab = TabType.all;
+            TabType tab = TabType.all;
             for (CheckedTextView navItem : navMainItemList) {
                 if (navItem.isChecked()) {
                     switch (navItem.getId()) {
                         case R.id.btn_nav_all:
-                            newTab = TabType.all;
+                            tab = TabType.all;
                             break;
                         case R.id.btn_nav_good:
-                            newTab = TabType.good;
+                            tab = TabType.good;
                             break;
                         case R.id.btn_nav_share:
-                            newTab = TabType.share;
+                            tab = TabType.share;
                             break;
                         case R.id.btn_nav_ask:
-                            newTab = TabType.ask;
+                            tab = TabType.ask;
                             break;
                         case R.id.btn_nav_job:
-                            newTab = TabType.job;
+                            tab = TabType.job;
                             break;
                         default:
-                            newTab = TabType.all;
-                            break;
+                            throw new AssertionError("Unknow tab.");
                     }
                     break;
                 }
             }
-            if (newTab != currentTab) {
-                currentTab = newTab;
-                currentPage = 0;
-                toolbar.setTitle(currentTab.getNameId());
-                topicList.clear();
-                notifyDataSetChanged();
-                refreshLayout.setRefreshing(true);
-                onRefresh();
-                fabCreateTopic.show(true);
-            }
+            mainPresenter.switchTab(tab);
         }
 
     };
 
     @Override
     public void onRefresh() {
-        mainPresenter.refreshTopicListAsyncTask(currentTab, PAGE_LIMIT);
+        mainPresenter.refreshTopicListAsyncTask();
     }
 
     @Override
     public void onLoadMore() {
-        if (adapter.canLoadMore()) {
-            adapter.setLoading(true);
-            adapter.notifyItemChanged(adapter.getItemCount() - 1);
-            mainPresenter.loadMoreTopicListAsyncTask(currentTab, currentPage, PAGE_LIMIT);
-        }
-    }
-
-    /**
-     * 更新列表
-     */
-    private void notifyDataSetChanged() {
-        if (topicList.size() < PAGE_LIMIT) {
-            adapter.setLoading(false);
-        }
-        adapter.notifyDataSetChanged();
-        iconNoData.setVisibility(topicList.size() == 0 ? View.VISIBLE : View.GONE);
+        mainPresenter.loadMoreTopicListAsyncTask(page + 1);
     }
 
     /**
@@ -401,26 +370,26 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     }
 
     @Override
-    public boolean onRefreshTopicListOk(@NonNull TabType tab, @NonNull List<Topic> topicList) {
-        if (currentTab == tab) {
-            this.topicList.clear();
-            this.topicList.addAll(topicList);
-            notifyDataSetChanged();
-            currentPage = 1;
-            return false;
-        } else {
-            return true;
-        }
+    public void onSwitchTabOk(@NonNull TabType tab) {
+        page = 0;
+        toolbar.setTitle(tab.getNameId());
+        adapter.getTopicList().clear();
+        adapter.notifyDataSetChanged();
+        loadMoreFooter.setState(LoadMoreFooter.State.disable);
+        iconNoData.setVisibility(View.VISIBLE);
+        fabCreateTopic.show(true);
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override
-    public boolean onRefreshTopicListError(@NonNull TabType tab, @NonNull String message) {
-        if (currentTab == tab) {
-            ToastUtils.with(this).show(message);
-            return false;
-        } else {
-            return true;
-        }
+    public void onRefreshTopicListOk(@NonNull List<Topic> topicList) {
+        adapter.getTopicList().clear();
+        adapter.getTopicList().addAll(topicList);
+        adapter.notifyDataSetChanged();
+        loadMoreFooter.setState(LoadMoreFooter.State.endless);
+        iconNoData.setVisibility(View.GONE);
+        page = 1;
     }
 
     @Override
@@ -429,37 +398,15 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     }
 
     @Override
-    public boolean onLoadMoreTopicListOk(@NonNull TabType tab, @NonNull Integer page, @NonNull List<Topic> topicList) {
-        if (currentTab == tab && currentPage == page) {
-            if (topicList.size() > 0) {
-                this.topicList.addAll(topicList);
-                adapter.setLoading(false);
-                adapter.notifyItemRangeInserted(this.topicList.size() - topicList.size(), topicList.size());
-                currentPage++;
-                return true;
-            } else {
-                ToastUtils.with(this).show(R.string.have_no_more_data);
-                return false;
-            }
-        } else {
-            return true;
-        }
+    public void onLoadMoreTopicListOk(@NonNull List<Topic> topicList) {
+        adapter.getTopicList().addAll(topicList);
+        adapter.notifyDataSetChanged();
+        page++;
     }
 
     @Override
-    public boolean onLoadMoreTopicListError(@NonNull TabType tab, @NonNull Integer page, @NonNull String message) {
-        if (currentTab == tab && currentPage == page) {
-            ToastUtils.with(this).show(message);
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    @Override
-    public void onLoadMoreTopicListFinish() {
-        adapter.setLoading(false);
-        adapter.notifyItemChanged(adapter.getItemCount() - 1);
+    public void onLoadMoreTopicListFinish(@NonNull LoadMoreFooter.State state) {
+        loadMoreFooter.setState(state);
     }
 
     @Override
@@ -484,7 +431,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public void backToContentTop() {
-        recyclerView.scrollToPosition(0);
+        listView.setSelection(0);
     }
 
 }
