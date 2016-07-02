@@ -25,13 +25,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainAdapter extends BaseAdapter {
+public class TopicListAdapter extends BaseAdapter {
 
     private final Activity activity;
     private final LayoutInflater inflater;
     private final List<Topic> topicList = new ArrayList<>();
 
-    public MainAdapter(@NonNull Activity activity) {
+    public TopicListAdapter(@NonNull Activity activity) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
     }
@@ -60,7 +60,7 @@ public class MainAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_main, parent, false);
+            convertView = inflater.inflate(R.layout.item_topic, parent, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {

@@ -24,7 +24,7 @@ import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
 import org.cnodejs.android.md.presenter.implement.MainPresenter;
-import org.cnodejs.android.md.ui.adapter.MainAdapter;
+import org.cnodejs.android.md.ui.adapter.TopicListAdapter;
 import org.cnodejs.android.md.ui.base.FullLayoutActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
@@ -110,7 +110,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     protected FloatingActionButton fabCreateTopic;
 
     private LoadMoreFooter loadMoreFooter;
-    private MainAdapter adapter;
+    private TopicListAdapter adapter;
 
     private IMainPresenter mainPresenter;
 
@@ -139,7 +139,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         loadMoreFooter = new LoadMoreFooter(this, listView, this);
-        adapter = new MainAdapter(this);
+        adapter = new TopicListAdapter(this);
         listView.setAdapter(adapter);
         fabCreateTopic.attachToListView(listView);
 
