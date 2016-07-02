@@ -75,7 +75,9 @@ public class MainPresenter implements IMainPresenter {
                 @Override
                 public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
                     cancelLoadMoreCall();
-                    mainView.onRefreshTopicListOk(result.getData());
+                    if (result.getData().size() > 0) {
+                        mainView.onRefreshTopicListOk(result.getData());
+                    }
                     return false;
                 }
 
@@ -114,8 +116,8 @@ public class MainPresenter implements IMainPresenter {
 
                 @Override
                 public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                    mainView.onLoadMoreTopicListOk(result.getData());
                     if (result.getData().size() > 0) {
+                        mainView.onLoadMoreTopicListOk(result.getData());
                         mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.endless);
                     } else {
                         mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.nomore);
