@@ -4,11 +4,11 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.entity.Reply;
 
-public interface ITopicReplyView {
+public interface ICreateReplyView {
 
-    void showReplyWindow();
+    void showWindow();
 
-    void dismissReplyWindow();
+    void dismissWindow();
 
     void onAt(@NonNull Reply target, @NonNull Integer targetPosition);
 

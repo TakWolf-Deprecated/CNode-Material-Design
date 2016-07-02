@@ -8,19 +8,19 @@ import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
-import org.cnodejs.android.md.presenter.contract.ITopicItemReplyPresenter;
-import org.cnodejs.android.md.ui.view.ITopicItemReplyView;
+import org.cnodejs.android.md.presenter.contract.IReplyPresenter;
+import org.cnodejs.android.md.ui.view.IReplyView;
 
 import retrofit2.Response;
 
-public class TopicItemReplyPresenter implements ITopicItemReplyPresenter {
+public class ReplyPresenter implements IReplyPresenter {
 
     private final Activity activity;
-    private final ITopicItemReplyView topicItemReplyView;
+    private final IReplyView replyView;
 
-    public TopicItemReplyPresenter(@NonNull Activity activity, @NonNull ITopicItemReplyView topicItemReplyView) {
+    public ReplyPresenter(@NonNull Activity activity, @NonNull IReplyView replyView) {
         this.activity = activity;
-        this.topicItemReplyView = topicItemReplyView;
+        this.replyView = replyView;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class TopicItemReplyPresenter implements ITopicItemReplyPresenter {
                 } else if (result.getAction() == Reply.UpAction.down) {
                     reply.getUpList().remove(LoginShared.getId(getActivity()));
                 }
-                topicItemReplyView.onUpReplyOk(reply);
+                replyView.onUpReplyOk(reply);
                 return false;
             }
 

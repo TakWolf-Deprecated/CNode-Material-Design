@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.entity.Reply;
 
-public interface ITopicItemReplyView {
+public interface IReplyView {
 
     void onUpReplyOk(@NonNull Reply reply);
 

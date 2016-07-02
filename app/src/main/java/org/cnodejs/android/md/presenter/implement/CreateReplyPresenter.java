@@ -12,28 +12,28 @@ import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
-import org.cnodejs.android.md.presenter.contract.ITopicReplyPresenter;
-import org.cnodejs.android.md.ui.view.ITopicReplyView;
+import org.cnodejs.android.md.presenter.contract.ICreateReplyPresenter;
+import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
 import retrofit2.Response;
 
-public class TopicReplyPresenter implements ITopicReplyPresenter {
+public class CreateReplyPresenter implements ICreateReplyPresenter {
 
     private final Activity activity;
-    private final ITopicReplyView topicReplyView;
+    private final ICreateReplyView createReplyView;
 
-    public TopicReplyPresenter(@NonNull Activity activity, @NonNull ITopicReplyView topicReplyView) {
+    public CreateReplyPresenter(@NonNull Activity activity, @NonNull ICreateReplyView createReplyView) {
         this.activity = activity;
-        this.topicReplyView = topicReplyView;
+        this.createReplyView = createReplyView;
     }
 
     @Override
-    public void replyTopicAsyncTask(@NonNull String topicId, String content, final String targetId) {
+    public void createReplyAsyncTask(@NonNull String topicId, String content, final String targetId) {
         if (TextUtils.isEmpty(content)) {
-            topicReplyView.onContentError(activity.getString(R.string.content_empty_error_tip));
+            createReplyView.onContentError(activity.getString(R.string.content_empty_error_tip));
         } else {
             final String finalContent;
             if (SettingShared.isEnableTopicSign(activity)) { // 添加小尾巴
@@ -41,8 +41,8 @@ public class TopicReplyPresenter implements ITopicReplyPresenter {
             } else {
                 finalContent = content;
             }
-            topicReplyView.onReplyTopicStart();
-            ApiClient.service.replyTopic(topicId, LoginShared.getAccessToken(activity), finalContent, targetId).enqueue(new DefaultCallback<Result.ReplyTopic>(activity) {
+            createReplyView.onReplyTopicStart();
+            ApiClient.service.createReply(topicId, LoginShared.getAccessToken(activity), finalContent, targetId).enqueue(new DefaultCallback<Result.ReplyTopic>(activity) {
 
                 @Override
                 public boolean onResultOk(Response<Result.ReplyTopic> response, Result.ReplyTopic result) {
@@ -56,13 +56,13 @@ public class TopicReplyPresenter implements ITopicReplyPresenter {
                     reply.setCreateAt(new DateTime());
                     reply.setUpList(new ArrayList<String>());
                     reply.setReplyId(targetId);
-                    topicReplyView.onReplyTopicOk(reply);
+                    createReplyView.onReplyTopicOk(reply);
                     return false;
                 }
 
                 @Override
                 public void onFinish() {
-                    topicReplyView.onReplyTopicFinish();
+                    createReplyView.onReplyTopicFinish();
                 }
 
             });

@@ -21,24 +21,19 @@ import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
-import org.cnodejs.android.md.ui.adapter.TopicAdapter;
+import org.cnodejs.android.md.ui.adapter.ReplyListAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
-import org.cnodejs.android.md.ui.dialog.TopicReplyDialog;
+import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
-import org.cnodejs.android.md.ui.view.ITopicReplyView;
+import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.cnodejs.android.md.ui.view.ITopicView;
-import org.cnodejs.android.md.ui.viewholder.TopicHeaderViewHolder;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.cnodejs.android.md.ui.viewholder.TopicHeader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,12 +58,10 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
 
     private String topicId;
     private Topic topic;
-    private final List<Reply> replyList = new ArrayList<>();
-    private final Map<String, Integer> positionMap = new HashMap<>();
 
-    private ITopicReplyView topicReplyView;
-    private TopicHeaderViewHolder topicHeaderView;
-    private TopicAdapter adapter;
+    private ICreateReplyView createReplyView;
+    private TopicHeader header;
+    private ReplyListAdapter adapter;
 
     private ITopicPresenter topicPresenter;
 
@@ -98,10 +91,10 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         toolbar.setOnMenuItemClickListener(this);
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
-        topicReplyView = TopicReplyDialog.createWithAutoTheme(this, topicId, this);
-        topicHeaderView = new TopicHeaderViewHolder(this, listView);
-        topicHeaderView.updateViews(topic, false, 0);
-        adapter = new TopicAdapter(this, replyList, positionMap, topicReplyView);
+        createReplyView = CreateReplyDialog.createWithAutoTheme(this, topicId, this);
+        header = new TopicHeader(this, listView);
+        header.updateViews(topic, false, 0);
+        adapter = new ReplyListAdapter(this, createReplyView);
         listView.setAdapter(adapter);
 
         iconNoData.setVisibility(topic == null ? View.VISIBLE : View.GONE);
@@ -135,7 +128,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     @OnClick(R.id.fab_reply)
     protected void onBtnReplyClick() {
         if (topic != null && LoginActivity.startForResultWithAccessTokenCheck(this)) {
-            topicReplyView.showReplyWindow();
+            createReplyView.showWindow();
         }
     }
 
@@ -151,14 +144,8 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     @Override
     public void onGetTopicOk(@NonNull TopicWithReply topic) {
         this.topic = topic;
-        topicHeaderView.updateViews(topic);
-        replyList.clear();
-        replyList.addAll(topic.getReplyList());
-        positionMap.clear();
-        for (int n = 0; n < replyList.size(); n++) {
-            Reply reply = replyList.get(n);
-            positionMap.put(reply.getId(), n);
-        }
+        header.updateViews(topic);
+        adapter.setReplyList(topic.getReplyList());
         adapter.notifyDataSetChanged();
         iconNoData.setVisibility(View.GONE);
     }
@@ -170,11 +157,10 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
 
     @Override
     public void appendReplyAndUpdateViews(@NonNull Reply reply) {
-        replyList.add(reply);
-        positionMap.put(reply.getId(), replyList.size() - 1);
-        topicHeaderView.updateReplyCount(replyList.size());
+        adapter.addReply(reply);
         adapter.notifyDataSetChanged();
-        listView.smoothScrollToPosition(replyList.size());
+        header.updateReplyCount(adapter.getReplyList().size());
+        listView.smoothScrollToPosition(adapter.getReplyList().size());
     }
 
     @Override
