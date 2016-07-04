@@ -75,9 +75,7 @@ public class MainPresenter implements IMainPresenter {
                 @Override
                 public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
                     cancelLoadMoreCall();
-                    if (result.getData().size() > 0) {
-                        mainView.onRefreshTopicListOk(result.getData());
-                    }
+                    mainView.onRefreshTopicListOk(result.getData());
                     return false;
                 }
 
