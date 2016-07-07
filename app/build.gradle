@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
-// 根据日期自动生成build号
-def calendar = Calendar.getInstance();
-def time = String.format("%d%02d%02d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
-
-// 读取local.properties文件
-def Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+String umengAppKey = System.getenv('CNODEMD_UMENG_APP_KEY')
+File localPropertiesFile = project.rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    Properties properties = new Properties()
+    properties.load(localPropertiesFile.newDataInputStream())
+    umengAppKey = properties.getProperty("umeng.appkey", umengAppKey)
+}
 
 android {
 
@@ -18,12 +18,12 @@ android {
         applicationId "org.cnodejs.android.md"
         minSdkVersion 9
         targetSdkVersion 24
-        versionCode Integer.parseInt(time)
+        versionCode Integer.parseInt(new Date().format("yyyyMMdd"))
         versionName "1.2.1-beta.1"
 
         manifestPlaceholders = [
                 UMENG_CHANNEL: "CNodeJS",
-                UMENG_APPKEY: properties.getProperty("umeng.appkey")
+                UMENG_APPKEY: umengAppKey
         ]
     }
 
@@ -39,6 +39,10 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/NOTICE.txt'
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
 }

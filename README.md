@@ -2,8 +2,9 @@
 
 # CNode Material Design #
 
+[![Build Status](https://travis-ci.org/TakWolf/CNode-Material-Design.svg?branch=master)](https://travis-ci.org/TakWolf/CNode-Material-Design)
 [![Release](https://img.shields.io/github/release/TakWolf/CNode-Material-Design.svg?style=flat)](https://github.com/TakWolf/CNode-Material-Design/releases/latest)
-[![Platform](https://img.shields.io/badge/platform-Android-green.svg?style=flat)](http://developer.android.com/index.html)
+[![Platform](https://img.shields.io/badge/platform-Android-green.svg?style=flat)](https://www.android.com)
 [![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
 [![License](https://img.shields.io/github/license/TakWolf/CNode-Material-Design.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
@@ -11,7 +12,7 @@
 
 [CNode社区](https://cnodejs.org) 第三方Android客户端，原生App，Material Design风格，支持夜间模式
 
-## Download ##
+## Downloads ##
 
 [![Google Play Store](art/git_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
@@ -35,7 +36,7 @@
 
 ![image](art/screenshot_s03.png) ![image](art/screenshot_s04.png)
 
-## Credits ##
+## Dependencies ##
 
 - [Butter Knife](http://jakewharton.github.io/butterknife)
 
