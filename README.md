@@ -12,7 +12,7 @@
 
 [CNode社区](https://cnodejs.org) 第三方Android客户端，原生App，Material Design风格，支持夜间模式
 
-## Download ##
+## Downloads ##
 
 [![Google Play Store](art/git_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
