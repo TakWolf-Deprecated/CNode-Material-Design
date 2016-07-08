@@ -34,21 +34,21 @@ public final class TopicJavascriptInterface {
 
     @JavascriptInterface
     public void collectTopic(String topicId) {
-        if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
+        if (LoginActivity.startForResultWithLoginCheck(activity)) {
             topicHeaderPresenter.collectTopicAsyncTask(topicId);
         }
     }
 
     @JavascriptInterface
     public void decollectTopic(String topicId) {
-        if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
+        if (LoginActivity.startForResultWithLoginCheck(activity)) {
             topicHeaderPresenter.decollectTopicAsyncTask(topicId);
         }
     }
 
     @JavascriptInterface
     public void upReply(String replyJson) {
-        if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
+        if (LoginActivity.startForResultWithLoginCheck(activity)) {
             Reply reply = EntityUtils.gson.fromJson(replyJson, Reply.class);
             if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
                 ToastUtils.with(activity).show(R.string.can_not_up_yourself_reply);
@@ -60,7 +60,7 @@ public final class TopicJavascriptInterface {
 
     @JavascriptInterface
     public void at(final String targetJson, final int targetPosition) {
-        if (LoginActivity.startForResultWithAccessTokenCheck(activity)) {
+        if (LoginActivity.startForResultWithLoginCheck(activity)) {
             HandlerUtils.post(new Runnable() {
 
                 @Override

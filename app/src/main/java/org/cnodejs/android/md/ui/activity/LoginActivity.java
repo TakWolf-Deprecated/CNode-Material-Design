@@ -46,8 +46,8 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     public static void startForResult(@NonNull Activity activity) {
         startForResult(activity, -1);
     }
-    
-    public static boolean startForResultWithAccessTokenCheck(@NonNull final Activity activity) {
+
+    public static boolean startForResultWithLoginCheck(@NonNull final Activity activity, final int actionCode) {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
             AlertDialogUtils.createBuilderWithAutoTheme(activity)
                     .setMessage(R.string.need_login_tip)
@@ -55,7 +55,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            startForResult(activity);
+                            startForResult(activity, actionCode);
                         }
 
                     })
@@ -65,6 +65,10 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         } else {
             return true;
         }
+    }
+
+    public static boolean startForResultWithLoginCheck(@NonNull Activity activity) {
+        return startForResultWithLoginCheck(activity, -1);
     }
 
     @BindView(R.id.toolbar)
