@@ -34,7 +34,7 @@ import retrofit2.Call;
 
 public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
-    public static final int REQUEST_LOGIN = FormatUtils.createRequestCode();
+    public static final int REQUEST_LOGIN = FormatUtils.getAutoIncrementInteger();
 
     public static void startForResult(@NonNull Activity activity) {
         activity.startActivityForResult(new Intent(activity, LoginActivity.class), REQUEST_LOGIN);

@@ -69,14 +69,14 @@ public final class FormatUtils {
     }
 
     /**
-     * 生成一个不重复的requestCode
+     * 生成自增Integer
      */
 
-    private static int requestCodeSeed = 0;
+    private static int integerSeed = 0;
 
-    public synchronized static int createRequestCode() {
-        requestCodeSeed++;
-        return requestCodeSeed;
+    public synchronized static int getAutoIncrementInteger() {
+        integerSeed++;
+        return integerSeed;
     }
 
     /**
