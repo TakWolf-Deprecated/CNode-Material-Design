@@ -31,8 +31,8 @@ import butterknife.ButterKnife;
 public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     private static final String[] PERMISSIONS = {Manifest.permission.CAMERA};
-    public static final int PERMISSIONS_REQUEST_QRCODE = FormatUtils.createRequestCode();
-    public static final int REQUEST_QRCODE = FormatUtils.createRequestCode();
+    public static final int PERMISSIONS_REQUEST_QRCODE = FormatUtils.getAutoIncrementInteger();
+    public static final int REQUEST_QRCODE = FormatUtils.getAutoIncrementInteger();
     public static final String EXTRA_QRCODE = "qrcode";
 
     public static void startForResultWithPermissionCheck(@NonNull final Activity activity) {

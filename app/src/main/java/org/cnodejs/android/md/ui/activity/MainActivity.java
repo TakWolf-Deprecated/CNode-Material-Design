@@ -244,7 +244,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     public void onNavigationItemOtherClick(View itemView) {
         switch (itemView.getId()) {
             case R.id.btn_nav_notification:
-                if (LoginActivity.startForResultWithAccessTokenCheck(this)) {
+                if (LoginActivity.startForResultWithLoginCheck(this)) {
                     notificationAction.startDelayed();
                     drawerLayout.closeDrawers();
                 }
@@ -334,7 +334,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
      */
     @OnClick(R.id.fab_create_topic)
     protected void onBtnCreateTopicClick() {
-        if (LoginActivity.startForResultWithAccessTokenCheck(this)) {
+        if (LoginActivity.startForResultWithLoginCheck(this)) {
             startActivity(new Intent(this, CreateTopicActivity.class));
         }
     }

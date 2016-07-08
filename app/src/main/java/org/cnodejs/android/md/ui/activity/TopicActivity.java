@@ -127,7 +127,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
 
     @OnClick(R.id.fab_reply)
     protected void onBtnReplyClick() {
-        if (topic != null && LoginActivity.startForResultWithAccessTokenCheck(this)) {
+        if (topic != null && LoginActivity.startForResultWithLoginCheck(this)) {
             createReplyView.showWindow();
         }
     }
