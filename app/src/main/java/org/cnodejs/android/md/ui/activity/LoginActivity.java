@@ -35,11 +35,18 @@ import retrofit2.Call;
 public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     public static final int REQUEST_LOGIN = FormatUtils.getAutoIncrementInteger();
+    public static final String EXTRA_ACTION_CODE = "actionCode";
 
-    public static void startForResult(@NonNull Activity activity) {
-        activity.startActivityForResult(new Intent(activity, LoginActivity.class), REQUEST_LOGIN);
+    public static void startForResult(@NonNull Activity activity, int actionCode) {
+        Intent intent = new Intent(activity, LoginActivity.class);
+        intent.putExtra(EXTRA_ACTION_CODE, actionCode);
+        activity.startActivityForResult(intent, REQUEST_LOGIN);
     }
 
+    public static void startForResult(@NonNull Activity activity) {
+        startForResult(activity, -1);
+    }
+    
     public static boolean startForResultWithAccessTokenCheck(@NonNull final Activity activity) {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
             AlertDialogUtils.createBuilderWithAutoTheme(activity)
@@ -69,6 +76,8 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     @BindView(R.id.edt_access_token)
     protected MaterialEditText edtAccessToken;
 
+    private int actionCode;
+
     private ProgressDialog progressDialog;
 
     private ILoginPresenter loginPresenter;
@@ -79,6 +88,8 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        actionCode = getIntent().getIntExtra(EXTRA_ACTION_CODE, -1);
 
         DisplayUtils.adaptStatusBar(this, adaptStatusBar);
 
@@ -136,7 +147,9 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     public void onLoginOk(@NonNull String accessToken, @NonNull Result.Login loginInfo) {
         LoginShared.login(this, accessToken, loginInfo);
         ToastUtils.with(this).show(R.string.login_success);
-        setResult(RESULT_OK);
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_ACTION_CODE, actionCode);
+        setResult(RESULT_OK, intent);
         finish();
     }
 
