@@ -30,6 +30,8 @@
 
 - [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
+- [酷安网](http://www.coolapk.com/apk/org.cnodejs.android.md)
+
 ## Screenshots ##
 
 ![Image](art/screenshot_s01.png) ![Image](art/screenshot_s02.png)
