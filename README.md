@@ -14,7 +14,7 @@
 
 ## Downloads ##
 
-[![Google Play Store](art/git_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
+[![Google Play](art/get_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
 - [Google Play](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
