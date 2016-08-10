@@ -12,7 +12,6 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.TopicSimple;
 import org.cnodejs.android.md.ui.adapter.TopicSimpleListAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
