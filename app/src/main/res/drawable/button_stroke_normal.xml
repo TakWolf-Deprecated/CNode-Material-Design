@@ -6,8 +6,5 @@
     <solid
         android:color="@color/button_stroke_normal" />
     <corners
-        android:topLeftRadius="@dimen/button_corner_radius"
-        android:topRightRadius="@dimen/button_corner_radius"
-        android:bottomRightRadius="@dimen/button_corner_radius"
-        android:bottomLeftRadius="@dimen/button_corner_radius" />
+        android:radius="@dimen/button_corner_radius" />
 </shape>

@@ -170,8 +170,8 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
             tvGithubUsername.setVisibility(View.VISIBLE);
             tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
         }
-        tvCreateTime.setText(getString(R.string.register_time_$) + user.getCreateAt().toString("yyyy-MM-dd"));
-        tvScore.setText(getString(R.string.score_$) + user.getScore());
+        tvCreateTime.setText(getString(R.string.register_time_$s, user.getCreateAt().toString("yyyy-MM-dd")));
+        tvScore.setText(getString(R.string.score_$d, user.getScore()));
         adapter.update(user);
         githubUsername = user.getGithubUsername();
     }

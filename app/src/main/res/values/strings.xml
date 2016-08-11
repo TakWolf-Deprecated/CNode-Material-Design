@@ -56,11 +56,21 @@
     <string name="cancel">取消</string>
     <string name="ok">好的</string>
 
-    <string name="create_at_$">创建于：</string>
-    <string name="score_$">积分：</string>
-    <string name="register_time_$">注册时间：</string>
+    <string name="topic_$s">话题：%s</string>
+    <string name="$d_floor">%d楼</string>
+    <string name="reply_$d_floor">回复：%d楼</string>
+    <string name="create_at_$s">创建于：%s</string>
+    <string name="score_$d">积分：%d</string>
+    <string name="register_time_$s">注册时间：%s</string>
+    <string name="$s_create">%s创建</string>
+    <string name="$d_count_visit">%d次浏览</string>
+    <string name="$d_count_reply">%d条回复</string>
     <string name="$slash">/</string>
     <string name="$dot">•</string>
+
+    <string name="at_you_in_topic">在话题中@了您</string>
+    <string name="at_you_in_reply">在回复中@了您</string>
+    <string name="reply_your_topic">回复了您的话题</string>
 
     <string name="access_token_$">Access Token :</string>
     <string name="open_qrcode">扫描二维码</string>

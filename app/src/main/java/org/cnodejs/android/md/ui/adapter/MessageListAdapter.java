@@ -102,20 +102,20 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             tvTime.setText(FormatUtils.getRelativeTimeSpanString(message.getCreateAt()));
             tvTime.setTextColor(ResUtils.getThemeAttrColor(activity, message.isRead() ? android.R.attr.textColorSecondary : R.attr.colorAccent));
             badgeRead.setVisibility(message.isRead() ? View.GONE : View.VISIBLE);
-            tvTopicTitle.setText("话题：" + message.getTopic().getTitle());
+            tvTopicTitle.setText(activity.getString(R.string.topic_$s, message.getTopic().getTitle()));
 
             // 判断通知类型
             if (message.getType() == Message.Type.at) {
                 if (message.getReply() == null || TextUtils.isEmpty(message.getReply().getId())) {
-                    tvAction.setText("在话题中@了您");
+                    tvAction.setText(R.string.at_you_in_topic);
                     webContent.setVisibility(View.GONE);
                 } else {
-                    tvAction.setText("在回复中@了您");
+                    tvAction.setText(R.string.at_you_in_reply);
                     webContent.setVisibility(View.VISIBLE);
                     webContent.loadRenderedContent(message.getReply().getContentHtml());  // 这里直接使用WebView，有性能问题
                 }
             } else {
-                tvAction.setText("回复了您的话题");
+                tvAction.setText(R.string.reply_your_topic);
                 webContent.setVisibility(View.VISIBLE);
                 webContent.loadRenderedContent(message.getReply().getContentHtml());  // 这里直接使用WebView，有性能问题
             }

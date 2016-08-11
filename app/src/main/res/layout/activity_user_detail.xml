@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:elevation="@dimen/app_bar_elevation">
+        android:elevation="@dimen/app_bar_elevation">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -111,9 +111,7 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/text_secondary_dark"
-            app:tabSelectedTextColor="@android:color/white"
-            app:tabBackground="?attr/selectableItemBackground" />
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     </android.support.design.widget.AppBarLayout>
 

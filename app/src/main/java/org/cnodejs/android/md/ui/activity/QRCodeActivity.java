@@ -100,7 +100,7 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
 
         qrCodeReaderView.setOnQRCodeReadListener(this);
 
-        iconLine.startAnimation(AnimationUtils.loadAnimation(this, R.anim.qrcode_line_anim));
+        iconLine.startAnimation(AnimationUtils.loadAnimation(this, R.anim.qrcode_scan_line));
     }
 
     @Override

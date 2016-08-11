@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_size"
         android:background="?attr/widgetBackgroundTitle"
-        android:elevation="@dimen/editor_bar_elevation">
+        android:elevation="@dimen/app_bar_elevation">
 
         <ImageView
             android:id="@+id/btn_tool_close"
@@ -62,6 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#8880bd01"
+        android:elevation="@dimen/shadow_gap_elevation"
         tools:visibility="visible">
 
         <TextView
