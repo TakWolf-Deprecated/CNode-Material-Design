@@ -74,25 +74,30 @@ public class LoadMoreFooter {
                 case disable:
                     iconLoading.setVisibility(View.GONE);
                     tvText.setVisibility(View.GONE);
+                    tvText.setClickable(false);
                     break;
                 case loading:
                     iconLoading.setVisibility(View.VISIBLE);
                     tvText.setVisibility(View.GONE);
+                    tvText.setClickable(false);
                     break;
                 case nomore:
                     iconLoading.setVisibility(View.GONE);
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_nomore);
+                    tvText.setClickable(false);
                     break;
                 case endless:
                     iconLoading.setVisibility(View.GONE);
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_endless);
+                    tvText.setClickable(true);
                     break;
                 case fail:
                     iconLoading.setVisibility(View.GONE);
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_fail);
+                    tvText.setClickable(true);
                     break;
                 default:
                     throw new AssertionError("Unknow state.");
