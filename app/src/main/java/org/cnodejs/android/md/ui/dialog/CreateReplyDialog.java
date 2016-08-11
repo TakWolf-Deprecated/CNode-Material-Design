@@ -59,7 +59,7 @@ public class CreateReplyDialog extends AppCompatDialog implements ICreateReplyVi
     private CreateReplyDialog(@NonNull Activity activity, int theme, @NonNull String topicId, @NonNull ITopicView topicView) {
         super(activity, theme);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.dialog_topic_reply);
+        setContentView(R.layout.dialog_create_reply);
         ButterKnife.bind(this);
 
         this.topicId = topicId;
