@@ -62,6 +62,9 @@
     <string name="create_at_$s">创建于：%s</string>
     <string name="score_$d">积分：%d</string>
     <string name="register_time_$s">注册时间：%s</string>
+    <string name="$s_create">%s创建</string>
+    <string name="$d_count_visit">%d次浏览</string>
+    <string name="$d_count_reply">%d条回复</string>
     <string name="$slash">/</string>
     <string name="$dot">•</string>
 
