@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="@dimen/app_bar_elevation"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/setting"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ScrollView
@@ -36,18 +36,19 @@
                 android:textColor="@color/color_accent"
                 android:textSize="14sp" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/btn_notification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:background="?attr/selectableItemBackgroundGeneral">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/switch_notification"
-                    android:layout_toLeftOf="@+id/switch_notification"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -71,13 +72,10 @@
                     android:id="@+id/switch_notification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:background="@null"
                     android:clickable="false" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -89,19 +87,20 @@
                 android:textColor="@color/color_accent"
                 android:textSize="14sp" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/btn_theme_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:background="?attr/selectableItemBackgroundGeneral">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/switch_theme_dark"
-                    android:layout_toLeftOf="@+id/switch_theme_dark"
+                    android:layout_weight="1"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
                     android:text="@string/theme_dark"
@@ -112,13 +111,10 @@
                     android:id="@+id/switch_theme_dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:background="@null"
                     android:clickable="false" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,18 +126,19 @@
                 android:textColor="@color/color_accent"
                 android:textSize="14sp" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/btn_topic_draft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:background="?attr/selectableItemBackgroundGeneral">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/switch_topic_draft"
-                    android:layout_toLeftOf="@+id/switch_topic_draft"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -165,28 +162,26 @@
                     android:id="@+id/switch_topic_draft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:background="@null"
                     android:clickable="false" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <View style="@style/AppWidget.DeepLine" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/btn_topic_sign"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:background="?attr/selectableItemBackgroundGeneral">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/switch_topic_sign"
-                    android:layout_toLeftOf="@+id/switch_topic_sign"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -210,13 +205,10 @@
                     android:id="@+id/switch_topic_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:background="@null"
                     android:clickable="false" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <View style="@style/AppWidget.DeepLine" />
 
@@ -232,18 +224,19 @@
 
             <View style="@style/AppWidget.DeepLine" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/btn_topic_render_compat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:background="?attr/selectableItemBackgroundGeneral">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/switch_topic_render_compat"
-                    android:layout_toLeftOf="@+id/switch_topic_render_compat"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -267,13 +260,10 @@
                     android:id="@+id/switch_topic_render_compat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:background="@null"
                     android:clickable="false" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <View style="@style/AppWidget.ItemGap" />
 

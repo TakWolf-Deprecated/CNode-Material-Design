@@ -7,7 +7,6 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         android:elevation="@dimen/app_bar_elevation">
 
         <LinearLayout
@@ -22,10 +21,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
-                android:elevation="@dimen/app_bar_elevation"
+                android:elevation="@dimen/shadow_gap_elevation"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                 app:title="@string/new_topic"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             <LinearLayout
@@ -91,16 +90,23 @@
         android:background="?attr/widgetBackgroundDark"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <EditText
-            android:id="@+id/edt_content"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:gravity="start"
-            android:hint="@string/create_topic_content_hint"
-            android:textSize="16sp"
-            android:minLines="10"
-            android:background="@android:color/transparent" />
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edt_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:gravity="start"
+                android:hint="@string/create_topic_content_hint"
+                android:textSize="16sp"
+                android:minLines="10"
+                android:background="@android:color/transparent" />
+
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
