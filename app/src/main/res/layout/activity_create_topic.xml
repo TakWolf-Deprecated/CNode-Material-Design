@@ -91,16 +91,23 @@
         android:background="?attr/widgetBackgroundDark"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <EditText
-            android:id="@+id/edt_content"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:gravity="start"
-            android:hint="@string/create_topic_content_hint"
-            android:textSize="16sp"
-            android:minLines="10"
-            android:background="@android:color/transparent" />
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edt_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:gravity="start"
+                android:hint="@string/create_topic_content_hint"
+                android:textSize="16sp"
+                android:minLines="10"
+                android:background="@android:color/transparent" />
+
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
