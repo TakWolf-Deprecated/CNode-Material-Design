@@ -53,9 +53,9 @@
         android:layout_height="wrap_content"
         android:background="#01000000"
         android:elevation="16dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/about"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 </android.support.design.widget.CoordinatorLayout>

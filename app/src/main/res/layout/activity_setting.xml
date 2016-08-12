@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="@dimen/app_bar_elevation"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/setting"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ScrollView
