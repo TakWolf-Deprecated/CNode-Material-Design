@@ -7,9 +7,10 @@
     android:animateLayoutChanges="true"
     android:background="?attr/widgetBackgroundDark">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_size"
+        android:orientation="horizontal"
         android:background="?attr/widgetBackgroundTitle"
         android:elevation="@dimen/app_bar_elevation">
 
@@ -19,42 +20,33 @@
             android:layout_height="@dimen/app_bar_size"
             android:src="@drawable/ic_close_grey600_24dp"
             android:scaleType="center"
+            android:adjustViewBounds="true"
             android:background="?attr/selectableItemBackground" />
 
-        <View style="@style/AppWidget.DeepLine.Vertical"
-            android:layout_toEndOf="@+id/btn_tool_close"
-            android:layout_toRightOf="@+id/btn_tool_close" />
+        <View style="@style/AppWidget.DeepLine.Vertical" />
 
         <HorizontalScrollView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/btn_tool_close"
-            android:layout_toRightOf="@+id/btn_tool_close"
-            android:layout_toStartOf="@+id/btn_tool_send"
-            android:layout_toLeftOf="@+id/btn_tool_send"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
+            android:layout_weight="1"
             android:scrollbars="none">
 
             <include layout="@layout/widget_editor_bar" />
 
         </HorizontalScrollView>
 
-        <View style="@style/AppWidget.DeepLine.Vertical"
-            android:layout_toStartOf="@+id/btn_tool_send"
-            android:layout_toLeftOf="@+id/btn_tool_send" />
+        <View style="@style/AppWidget.DeepLine.Vertical" />
 
         <ImageView
             android:id="@+id/btn_tool_send"
             android:layout_width="@dimen/app_bar_size"
             android:layout_height="@dimen/app_bar_size"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:src="@drawable/ic_send_grey600_24dp"
             android:scaleType="center"
+            android:adjustViewBounds="true"
             android:background="?attr/selectableItemBackground" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:visibility="gone"
