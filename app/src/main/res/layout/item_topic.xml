@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <CheckedTextView
                 android:id="@+id/ctv_tab"
@@ -51,8 +51,8 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_avatar"
@@ -67,17 +67,17 @@
                 android:layout_marginLeft="8dp"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:id="@+id/tv_author"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/tv_reply_count"
-                        android:layout_toLeftOf="@+id/tv_reply_count"
-                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
                         android:layout_marginEnd="4dp"
                         android:layout_marginRight="4dp"
                         android:textColor="?android:attr/textColorPrimary"
@@ -89,21 +89,14 @@
                         android:id="@+id/tv_reply_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/icon_slash"
-                        android:layout_toLeftOf="@+id/icon_slash"
-                        android:layout_centerVertical="true"
                         android:textColor="@color/color_accent"
                         android:textSize="12sp"
                         android:singleLine="true"
                         tools:text="18" />
 
                     <TextView
-                        android:id="@+id/icon_slash"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/tv_visit_count"
-                        android:layout_toLeftOf="@+id/tv_visit_count"
-                        android:layout_centerVertical="true"
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:text="@string/$slash"
@@ -115,28 +108,25 @@
                         android:id="@+id/tv_visit_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
                         android:singleLine="true"
                         tools:text="205" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp">
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:id="@+id/tv_create_time"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/tv_last_reply_time"
-                        android:layout_toLeftOf="@+id/tv_last_reply_time"
-                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
                         android:layout_marginEnd="4dp"
                         android:layout_marginRight="4dp"
                         android:textColor="?android:attr/textColorSecondary"
@@ -148,15 +138,12 @@
                         android:id="@+id/tv_last_reply_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
                         android:singleLine="true"
                         tools:text="2分前" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
