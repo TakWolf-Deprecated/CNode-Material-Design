@@ -387,12 +387,12 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         adapter.getTopicList().clear();
         adapter.getTopicList().addAll(topicList);
         adapter.notifyDataSetChanged();
-        if (adapter.getTopicList().size() > 0) {
-            loadMoreFooter.setState(LoadMoreFooter.State.endless);
-            iconNoData.setVisibility(View.GONE);
-        } else {
+        if (adapter.getTopicList().isEmpty()) {
             loadMoreFooter.setState(LoadMoreFooter.State.disable);
             iconNoData.setVisibility(View.VISIBLE);
+        } else {
+            loadMoreFooter.setState(LoadMoreFooter.State.endless);
+            iconNoData.setVisibility(View.GONE);
         }
         page = 1;
     }

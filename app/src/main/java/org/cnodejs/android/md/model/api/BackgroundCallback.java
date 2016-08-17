@@ -2,6 +2,7 @@ package org.cnodejs.android.md.model.api;
 
 import org.cnodejs.android.md.model.entity.Result;
 
+import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -12,9 +13,9 @@ public class BackgroundCallback<T extends Result> implements Callback<T>, Callba
     public final void onResponse(Call<T> call, Response<T> response) {
         boolean interrupt;
         if (response.isSuccessful()) {
-            interrupt = onResultOk(response, response.body());
+            interrupt = onResultOk(response.code(), response.headers(), response.body());
         } else {
-            interrupt = onResultError(response, Result.buildError(response));
+            interrupt = onResultError(response.code(), response.headers(), Result.buildError(response));
         }
         if (!interrupt) {
             onFinish();
@@ -35,12 +36,12 @@ public class BackgroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @Override
-    public boolean onResultOk(Response<T> response, T result) {
+    public boolean onResultOk(int code, Headers headers, T result) {
         return false;
     }
 
     @Override
-    public boolean onResultError(Response<T> response, Result.Error error) {
+    public boolean onResultError(int code, Headers headers, Result.Error error) {
         return false;
     }
 

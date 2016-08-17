@@ -2,13 +2,13 @@ package org.cnodejs.android.md.model.api;
 
 import org.cnodejs.android.md.model.entity.Result;
 
-import retrofit2.Response;
+import okhttp3.Headers;
 
-public interface CallbackLifecycle<T> {
+public interface CallbackLifecycle<T extends Result> {
 
-    boolean onResultOk(Response<T> response, T result);
+    boolean onResultOk(int code, Headers headers, T result);
 
-    boolean onResultError(Response<T> response, Result.Error error);
+    boolean onResultError(int code, Headers headers, Result.Error error);
 
     boolean onCallCancel();
 

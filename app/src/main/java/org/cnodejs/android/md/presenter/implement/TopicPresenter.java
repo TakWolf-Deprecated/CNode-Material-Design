@@ -12,7 +12,7 @@ import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.ui.view.ITopicView;
 
-import retrofit2.Response;
+import okhttp3.Headers;
 
 public class TopicPresenter implements ITopicPresenter {
 
@@ -29,7 +29,7 @@ public class TopicPresenter implements ITopicPresenter {
         ApiClient.service.getTopic(topicId, LoginShared.getAccessToken(activity), ApiDefine.MD_RENDER).enqueue(new DefaultCallback<Result.Data<TopicWithReply>>(activity) {
 
             @Override
-            public boolean onResultOk(Response<Result.Data<TopicWithReply>> response, Result.Data<TopicWithReply> result) {
+            public boolean onResultOk(int code, Headers headers, Result.Data<TopicWithReply> result) {
                 topicView.onGetTopicOk(result.getData());
                 return false;
             }

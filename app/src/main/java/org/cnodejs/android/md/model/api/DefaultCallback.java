@@ -10,7 +10,7 @@ import org.cnodejs.android.md.ui.activity.LoginActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 
-import retrofit2.Response;
+import okhttp3.Headers;
 
 public class DefaultCallback<T extends Result> extends ForegroundCallback<T> {
 
@@ -19,15 +19,15 @@ public class DefaultCallback<T extends Result> extends ForegroundCallback<T> {
     }
 
     @Override
-    public final boolean onResultError(Response<T> response, Result.Error error) {
-        if (response.code() == 401) {
-            return onResultAuthError(response, error);
+    public final boolean onResultError(int code, Headers headers, Result.Error error) {
+        if (code == 401) {
+            return onResultAuthError(code, headers, error);
         } else {
-            return onResultOtherError(response, error);
+            return onResultOtherError(code, headers, error);
         }
     }
 
-    public boolean onResultAuthError(Response<T> response, Result.Error error) {
+    public boolean onResultAuthError(int code, Headers headers, Result.Error error) {
         AlertDialogUtils.createBuilderWithAutoTheme(getActivity())
                 .setMessage(R.string.access_token_out_of_date)
                 .setPositiveButton(R.string.relogin, new DialogInterface.OnClickListener() {
@@ -43,7 +43,7 @@ public class DefaultCallback<T extends Result> extends ForegroundCallback<T> {
         return false;
     }
 
-    public boolean onResultOtherError(Response<T> response, Result.Error error) {
+    public boolean onResultOtherError(int code, Headers headers, Result.Error error) {
         ToastUtils.with(getActivity()).show(error.getErrorMessage());
         return false;
     }

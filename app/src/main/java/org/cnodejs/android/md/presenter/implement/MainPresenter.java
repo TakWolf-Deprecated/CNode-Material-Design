@@ -19,8 +19,8 @@ import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
 
 import java.util.List;
 
+import okhttp3.Headers;
 import retrofit2.Call;
-import retrofit2.Response;
 
 public class MainPresenter implements IMainPresenter {
 
@@ -73,14 +73,14 @@ public class MainPresenter implements IMainPresenter {
             refreshCall.enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
+                public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
                     cancelLoadMoreCall();
                     mainView.onRefreshTopicListOk(result.getData());
                     return false;
                 }
 
                 @Override
-                public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
+                public boolean onResultError(int code, Headers headers, Result.Error error) {
                     ToastUtils.with(getActivity()).show(error.getErrorMessage());
                     return false;
                 }
@@ -113,7 +113,7 @@ public class MainPresenter implements IMainPresenter {
             loadMoreCall.enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
+                public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
                     if (result.getData().size() > 0) {
                         mainView.onLoadMoreTopicListOk(result.getData());
                         mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.endless);
@@ -124,7 +124,7 @@ public class MainPresenter implements IMainPresenter {
                 }
 
                 @Override
-                public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
+                public boolean onResultError(int code, Headers headers, Result.Error error) {
                     mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.fail);
                     ToastUtils.with(getActivity()).show(error.getErrorMessage());
                     return false;
@@ -158,7 +158,7 @@ public class MainPresenter implements IMainPresenter {
             ApiClient.service.getUser(LoginShared.getLoginName(activity)).enqueue(new ForegroundCallback<Result.Data<User>>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.Data<User>> response, Result.Data<User> result) {
+                public boolean onResultOk(int code, Headers headers, Result.Data<User> result) {
                     if (TextUtils.equals(accessToken, LoginShared.getAccessToken(getActivity()))) {
                         LoginShared.update(getActivity(), result.getData());
                         mainView.updateUserInfoViews();
@@ -177,7 +177,7 @@ public class MainPresenter implements IMainPresenter {
             ApiClient.service.getMessageCount(accessToken).enqueue(new ForegroundCallback<Result.Data<Integer>>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.Data<Integer>> response, Result.Data<Integer> result) {
+                public boolean onResultOk(int code, Headers headers, Result.Data<Integer> result) {
                     if (TextUtils.equals(accessToken, LoginShared.getAccessToken(getActivity()))) {
                         mainView.updateMessageCountViews(result.getData());
                     }

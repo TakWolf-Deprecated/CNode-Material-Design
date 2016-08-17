@@ -11,7 +11,7 @@ import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.IReplyPresenter;
 import org.cnodejs.android.md.ui.view.IReplyView;
 
-import retrofit2.Response;
+import okhttp3.Headers;
 
 public class ReplyPresenter implements IReplyPresenter {
 
@@ -28,7 +28,7 @@ public class ReplyPresenter implements IReplyPresenter {
         ApiClient.service.upReply(reply.getId(), LoginShared.getAccessToken(activity)).enqueue(new DefaultCallback<Result.UpReply>(activity) {
 
             @Override
-            public boolean onResultOk(Response<Result.UpReply> response, Result.UpReply result) {
+            public boolean onResultOk(int code, Headers headers, Result.UpReply result) {
                 if (result.getAction() == Reply.UpAction.up) {
                     reply.getUpList().add(LoginShared.getId(getActivity()));
                 } else if (result.getAction() == Reply.UpAction.down) {

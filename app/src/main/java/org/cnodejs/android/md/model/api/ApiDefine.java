@@ -1,5 +1,9 @@
 package org.cnodejs.android.md.model.api;
 
+import android.os.Build;
+
+import org.cnodejs.android.md.BuildConfig;
+
 public final class ApiDefine {
 
     private ApiDefine() {}
@@ -10,6 +14,8 @@ public final class ApiDefine {
     public static final String USER_LINK_URL_PREFIX = HOST_BASE_URL + USER_PATH_PREFIX;
     public static final String TOPIC_PATH_PREFIX = "/topic/";
     public static final String TOPIC_LINK_URL_PREFIX = HOST_BASE_URL + TOPIC_PATH_PREFIX;
+
+    public static final String USER_AGENT = "CNodeMD/" + BuildConfig.VERSION_NAME + " (Android " + Build.VERSION.RELEASE + "; " + Build.MANUFACTURER + " - " + Build.MODEL + ")";
 
     public static final boolean MD_RENDER = true; // 使用服务端Markdown渲染可以轻微提升性能
 
