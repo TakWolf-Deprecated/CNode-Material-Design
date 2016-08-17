@@ -11,8 +11,8 @@ import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
 import org.cnodejs.android.md.ui.view.ILoginView;
 import org.cnodejs.android.md.util.FormatUtils;
 
+import okhttp3.Headers;
 import retrofit2.Call;
-import retrofit2.Response;
 
 public class LoginPresenter implements ILoginPresenter {
 
@@ -34,13 +34,13 @@ public class LoginPresenter implements ILoginPresenter {
             call.enqueue(new DefaultCallback<Result.Login>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.Login> response, Result.Login loginInfo) {
+                public boolean onResultOk(int code, Headers headers, Result.Login loginInfo) {
                     loginView.onLoginOk(accessToken, loginInfo);
                     return false;
                 }
 
                 @Override
-                public boolean onResultAuthError(Response<Result.Login> response, Result.Error error) {
+                public boolean onResultAuthError(int code, Headers headers, Result.Error error) {
                     loginView.onAccessTokenError(getActivity().getString(R.string.access_token_auth_error));
                     return false;
                 }

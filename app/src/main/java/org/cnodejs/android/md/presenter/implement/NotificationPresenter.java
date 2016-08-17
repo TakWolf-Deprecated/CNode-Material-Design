@@ -12,7 +12,7 @@ import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.INotificationPresenter;
 import org.cnodejs.android.md.ui.view.INotificationView;
 
-import retrofit2.Response;
+import okhttp3.Headers;
 
 public class NotificationPresenter implements INotificationPresenter {
 
@@ -29,7 +29,7 @@ public class NotificationPresenter implements INotificationPresenter {
         ApiClient.service.getMessages(LoginShared.getAccessToken(activity), ApiDefine.MD_RENDER).enqueue(new DefaultCallback<Result.Data<Notification>>(activity) {
 
             @Override
-            public boolean onResultOk(Response<Result.Data<Notification>> response, Result.Data<Notification> result) {
+            public boolean onResultOk(int code, Headers headers, Result.Data<Notification> result) {
                 notificationView.onGetMessagesOk(result.getData());
                 return false;
             }
@@ -47,7 +47,7 @@ public class NotificationPresenter implements INotificationPresenter {
         ApiClient.service.markAllMessageRead(LoginShared.getAccessToken(activity)).enqueue(new DefaultCallback<Result>(activity) {
 
             @Override
-            public boolean onResultOk(Response<Result> response, Result result) {
+            public boolean onResultOk(int code, Headers headers, Result result) {
                 notificationView.onMarkAllMessageReadOk();
                 return false;
             }

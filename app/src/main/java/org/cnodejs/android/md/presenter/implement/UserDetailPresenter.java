@@ -17,7 +17,7 @@ import org.cnodejs.android.md.util.HandlerUtils;
 
 import java.util.List;
 
-import retrofit2.Response;
+import okhttp3.Headers;
 
 public class UserDetailPresenter implements IUserDetailPresenter {
 
@@ -50,7 +50,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                 }
 
                 @Override
-                public boolean onResultOk(final Response<Result.Data<User>> response, final Result.Data<User> result) {
+                public boolean onResultOk(int code, Headers headers, final Result.Data<User> result) {
                     HandlerUtils.postDelayed(new Runnable() {
 
                         @Override
@@ -66,13 +66,13 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                 }
 
                 @Override
-                public boolean onResultError(final Response<Result.Data<User>> response, final Result.Error error) {
+                public boolean onResultError(final int code, Headers headers, final Result.Error error) {
                     HandlerUtils.postDelayed(new Runnable() {
 
                         @Override
                         public void run() {
                             if (ActivityUtils.isAlive(getActivity())) {
-                                userDetailView.onGetUserError(response.code() == 404 ? error.getErrorMessage() : getActivity().getString(R.string.data_load_faild_and_click_avatar_to_reload));
+                                userDetailView.onGetUserError(code == 404 ? error.getErrorMessage() : getActivity().getString(R.string.data_load_faild_and_click_avatar_to_reload));
                                 onFinish();
                             }
                         }
@@ -107,7 +107,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
             ApiClient.service.getCollectTopicList(loginName).enqueue(new DefaultCallback<Result.Data<List<Topic>>>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
+                public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
                     userDetailView.onGetCollectTopicListOk(result.getData());
                     return false;
                 }

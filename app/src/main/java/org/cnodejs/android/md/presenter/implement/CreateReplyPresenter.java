@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
-import retrofit2.Response;
+import okhttp3.Headers;
 
 public class CreateReplyPresenter implements ICreateReplyPresenter {
 
@@ -45,7 +45,7 @@ public class CreateReplyPresenter implements ICreateReplyPresenter {
             ApiClient.service.createReply(topicId, LoginShared.getAccessToken(activity), finalContent, targetId).enqueue(new DefaultCallback<Result.ReplyTopic>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.ReplyTopic> response, Result.ReplyTopic result) {
+                public boolean onResultOk(int code, Headers headers, Result.ReplyTopic result) {
                     Reply reply = new Reply();
                     reply.setId(result.getReplyId());
                     Author author = new Author();

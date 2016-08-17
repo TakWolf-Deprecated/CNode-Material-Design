@@ -14,7 +14,7 @@ import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.ICreateTopicPresenter;
 import org.cnodejs.android.md.ui.view.ICreateTopicView;
 
-import retrofit2.Response;
+import okhttp3.Headers;
 
 public class CreateTopicPresenter implements ICreateTopicPresenter {
 
@@ -40,7 +40,7 @@ public class CreateTopicPresenter implements ICreateTopicPresenter {
             ApiClient.service.createTopic(LoginShared.getAccessToken(activity), tab, title, content).enqueue(new DefaultCallback<Result.CreateTopic>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.CreateTopic> response, Result.CreateTopic result) {
+                public boolean onResultOk(int code, Headers headers, Result.CreateTopic result) {
                     createTopicView.onCreateTopicOk(result.getTopicId());
                     return false;
                 }
