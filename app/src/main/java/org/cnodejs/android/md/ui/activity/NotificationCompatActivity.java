@@ -82,7 +82,7 @@ public class NotificationCompatActivity extends StatusBarActivity implements INo
         messageList.addAll(notification.getHasNotReadMessageList());
         messageList.addAll(notification.getHasReadMessageList());
         webNotification.updateMessageList(messageList);
-        iconNoData.setVisibility(messageList.size() == 0 ? View.VISIBLE : View.GONE);
+        iconNoData.setVisibility(messageList.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     @Override

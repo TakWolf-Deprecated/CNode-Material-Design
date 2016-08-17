@@ -87,7 +87,7 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
         adapter.getMessageList().addAll(notification.getHasNotReadMessageList());
         adapter.getMessageList().addAll(notification.getHasReadMessageList());
         adapter.notifyDataSetChanged();
-        iconNoData.setVisibility(adapter.getMessageList().size() == 0 ? View.VISIBLE : View.GONE);
+        iconNoData.setVisibility(adapter.getMessageList().isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     @Override
