@@ -17,7 +17,7 @@ The preferred license for the Android Open Source Project is the Apache Software
 ====================================
 Butter Knife
 ====================================
-http://jakewharton.github.io/butterknife
+https://github.com/JakeWharton/butterknife
 
 Copyright 2013 Jake Wharton
 
@@ -49,14 +49,14 @@ Licensed under the Apache License, Version 2.0 (the "License").
 ====================================
 OkHttp
 ====================================
-http://square.github.io/okhttp
+https://github.com/square/okhttp
 
 Licensed under the Apache License, Version 2.0 (the "License").
 
 ====================================
 Retrofit
 ====================================
-http://square.github.io/retrofit
+https://github.com/square/retrofit
 
 Copyright 2013 Square, Inc.
 

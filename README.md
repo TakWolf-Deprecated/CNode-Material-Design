@@ -40,7 +40,7 @@
 
 ## Dependencies ##
 
-- [Butter Knife](http://jakewharton.github.io/butterknife)
+- [Butter Knife](https://github.com/JakeWharton/butterknife)
 
 - [Gson](https://github.com/google/gson)
 
@@ -48,9 +48,9 @@
 
 - [Joda-Time-Android](https://github.com/dlew/joda-time-android)
 
-- [OkHttp](http://square.github.io/okhttp)
+- [OkHttp](https://github.com/square/okhttp)
 
-- [Retrofit](http://square.github.io/retrofit)
+- [Retrofit](https://github.com/square/retrofit)
 
 - [Glide](https://github.com/bumptech/glide)
 
