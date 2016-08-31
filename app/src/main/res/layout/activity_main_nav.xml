@@ -28,10 +28,10 @@
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true" />
 
-            <View
+            <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
                 android:id="@+id/nav_adapt_status_bar"
                 android:layout_width="match_parent"
-                android:layout_height="0dp" />
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:id="@+id/layout_info"

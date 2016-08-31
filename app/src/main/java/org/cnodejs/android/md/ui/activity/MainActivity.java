@@ -29,7 +29,6 @@ import org.cnodejs.android.md.ui.base.FullLayoutActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
-import org.cnodejs.android.md.ui.util.DisplayUtils;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
@@ -53,13 +52,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     // 抽屉导航布局
     @BindView(R.id.drawer_layout)
     protected DrawerLayout drawerLayout;
-
-    // 状态栏
-    @BindView(R.id.center_adapt_status_bar)
-    protected View centerAdaptStatusBar;
-
-    @BindView(R.id.nav_adapt_status_bar)
-    protected View navAdaptStatusBar;
 
     // 导航部分的个人信息
     @BindView(R.id.img_avatar)
@@ -129,9 +121,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        DisplayUtils.adaptStatusBar(this, centerAdaptStatusBar);
-        DisplayUtils.adaptStatusBar(this, navAdaptStatusBar);
 
         drawerLayout.setDrawerShadow(R.drawable.navigation_drawer_shadow, GravityCompat.START);
         drawerLayout.addDrawerListener(drawerListener);

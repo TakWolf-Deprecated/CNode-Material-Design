@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
-        android:id="@+id/center_adapt_status_bar"
+    <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
         android:elevation="@dimen/app_bar_elevation" />
 
