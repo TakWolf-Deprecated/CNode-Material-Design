@@ -11,8 +11,7 @@ import java.util.List;
 
 public class ListView extends android.widget.ListView {
 
-    private OnScrollListener mScrollListener;
-    private List<OnScrollListener> mScrollListeners;
+    private final OnScrollListenerProxy scrollListenerProxy = new OnScrollListenerProxy();
 
     public ListView(Context context) {
         super(context);
@@ -36,57 +35,79 @@ public class ListView extends android.widget.ListView {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super.setOnScrollListener(new OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (mScrollListener != null) {
-                    mScrollListener.onScrollStateChanged(view, scrollState);
-                }
-                if (mScrollListeners != null && mScrollListeners.size() > 0) {
-                    for (OnScrollListener onScrollListener : mScrollListeners) {
-                        onScrollListener.onScrollStateChanged(view, scrollState);
-                    }
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (mScrollListener != null) {
-                    mScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
-                }
-                if (mScrollListeners != null && mScrollListeners.size() > 0) {
-                    for (OnScrollListener onScrollListener : mScrollListeners) {
-                        onScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
-                    }
-                }
-            }
-
-        });
+        super.setOnScrollListener(scrollListenerProxy);
     }
 
     @Override
+    @Deprecated
     public void setOnScrollListener(OnScrollListener listener) {
-        mScrollListener = listener;
+        scrollListenerProxy.setOnScrollListener(listener);
     }
 
     public void addOnScrollListener(OnScrollListener listener) {
-        if (mScrollListeners == null) {
-            mScrollListeners = new ArrayList<>();
-        }
-        mScrollListeners.add(listener);
+        scrollListenerProxy.addOnScrollListener(listener);
     }
 
     public void removeOnScrollListener(OnScrollListener listener) {
-        if (mScrollListeners != null) {
-            mScrollListeners.remove(listener);
-        }
+        scrollListenerProxy.removeOnScrollListener(listener);
     }
 
     public void clearOnScrollListeners() {
-        if (mScrollListeners != null) {
-            mScrollListeners.clear();
+        scrollListenerProxy.clearOnScrollListeners();
+    }
+
+    private static class OnScrollListenerProxy implements OnScrollListener {
+
+        private OnScrollListener scrollListener;
+        private List<OnScrollListener> scrollListenerList;
+
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+            if (scrollListener != null) {
+                scrollListener.onScrollStateChanged(view, scrollState);
+            }
+            if (scrollListenerList != null && scrollListenerList.size() > 0) {
+                for (OnScrollListener onScrollListener : scrollListenerList) {
+                    onScrollListener.onScrollStateChanged(view, scrollState);
+                }
+            }
         }
+
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            if (scrollListener != null) {
+                scrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+            }
+            if (scrollListenerList != null && scrollListenerList.size() > 0) {
+                for (OnScrollListener onScrollListener : scrollListenerList) {
+                    onScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+                }
+            }
+        }
+
+        public void setOnScrollListener(OnScrollListener listener) {
+            scrollListener = listener;
+        }
+
+        public void addOnScrollListener(OnScrollListener listener) {
+            if (scrollListenerList == null) {
+                scrollListenerList = new ArrayList<>();
+            }
+            scrollListenerList.add(listener);
+        }
+
+        public void removeOnScrollListener(OnScrollListener listener) {
+            if (scrollListenerList != null) {
+                scrollListenerList.remove(listener);
+            }
+        }
+
+        public void clearOnScrollListeners() {
+            if (scrollListenerList != null) {
+                scrollListenerList.clear();
+            }
+        }
+
     }
 
 }
