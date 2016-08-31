@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.View;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -21,7 +20,6 @@ import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.dialog.ProgressDialog;
 import org.cnodejs.android.md.ui.listener.DialogCancelCallListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.ui.util.DisplayUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.ILoginView;
@@ -74,9 +72,6 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @BindView(R.id.adapt_status_bar)
-    protected View adaptStatusBar;
-
     @BindView(R.id.edt_access_token)
     protected MaterialEditText edtAccessToken;
 
@@ -94,8 +89,6 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         ButterKnife.bind(this);
 
         actionCode = getIntent().getIntExtra(EXTRA_ACTION_CODE, -1);
-
-        DisplayUtils.adaptStatusBar(this, adaptStatusBar);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 

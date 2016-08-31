@@ -64,7 +64,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         holder.update(messageList.get(position));
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    protected class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.img_avatar)
         protected ImageView imgAvatar;

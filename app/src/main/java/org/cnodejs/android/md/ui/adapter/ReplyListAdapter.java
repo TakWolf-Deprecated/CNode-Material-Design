@@ -98,7 +98,7 @@ public class ReplyListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public class ViewHolder implements IReplyView {
+    protected class ViewHolder implements IReplyView {
 
         @BindView(R.id.img_avatar)
         protected ImageView imgAvatar;
@@ -131,17 +131,17 @@ public class ReplyListAdapter extends BaseAdapter {
 
         private Reply reply;
 
-        public ViewHolder(@NonNull View itemView) {
+        protected ViewHolder(@NonNull View itemView) {
             ButterKnife.bind(this, itemView);
             replyPresenter = new ReplyPresenter(activity, this);
         }
 
-        public void update(int position) {
+        protected void update(int position) {
             reply = replyList.get(position);
             updateReplyViews(reply, position, positionMap.get(reply.getReplyId()));
         }
 
-        public void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
+        protected void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
             Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             tvIndex.setText(activity.getString(R.string.$d_floor, position + 1));
@@ -161,7 +161,7 @@ public class ReplyListAdapter extends BaseAdapter {
             iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
         }
 
-        public void updateUpViews(@NonNull Reply reply) {
+        protected void updateUpViews(@NonNull Reply reply) {
             btnUps.setText(String.valueOf(reply.getUpList().size()));
             btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
         }
