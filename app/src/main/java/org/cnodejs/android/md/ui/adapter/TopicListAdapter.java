@@ -70,7 +70,7 @@ public class TopicListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public class ViewHolder {
+    protected class ViewHolder {
 
         @BindView(R.id.ctv_tab)
         protected CheckedTextView ctvTab;
