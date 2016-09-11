@@ -22,8 +22,8 @@ android {
         versionName "1.2.1-beta.1"
 
         manifestPlaceholders = [
-                UMENG_CHANNEL: "CNodeJS",
-                UMENG_APPKEY: umengAppKey
+                UMENG_APPKEY: umengAppKey,
+                UMENG_CHANNEL: "CNodeJS"
         ]
     }
 
