@@ -23,15 +23,12 @@ public class AppController extends Application implements Thread.UncaughtExcepti
         super.onCreate();
         context = this;
 
-        // 初始化JodaTimeAndroid
         JodaTimeAndroid.init(this);
 
-        // 配置全局异常捕获
         if (!BuildConfig.DEBUG) {
             Thread.setDefaultUncaughtExceptionHandler(this);
         }
 
-        // 友盟设置调试模式
         MobclickAgent.setDebugMode(BuildConfig.DEBUG);
     }
 
