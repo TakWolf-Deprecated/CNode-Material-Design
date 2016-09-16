@@ -18,7 +18,7 @@ public interface IMainView {
 
     void onLoadMoreTopicListOk(@NonNull List<Topic> topicList);
 
-    void onLoadMoreTopicListFinish(@NonNull LoadMoreFooter.State state);
+    void onLoadMoreTopicListFinish(@LoadMoreFooter.State int state);
 
     void updateUserInfoViews();
 
