@@ -17,7 +17,7 @@ import butterknife.OnClick;
 public class LoadMoreFooter {
 
     public enum State {
-        disable, loading, nomore, endless, fail
+        disable, loading, finished, endless, failed
     }
 
     public interface OnLoadMoreListener {
@@ -56,7 +56,7 @@ public class LoadMoreFooter {
     }
 
     private void checkLoadMore() {
-        if (getState() == State.endless || getState() == State.fail) {
+        if (getState() == State.endless || getState() == State.failed) {
             setState(State.loading);
             loadMoreListener.onLoadMore();
         }
@@ -81,7 +81,7 @@ public class LoadMoreFooter {
                     tvText.setVisibility(View.GONE);
                     tvText.setClickable(false);
                     break;
-                case nomore:
+                case finished:
                     iconLoading.setVisibility(View.GONE);
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_nomore);
@@ -93,7 +93,7 @@ public class LoadMoreFooter {
                     tvText.setText(R.string.load_more_endless);
                     tvText.setClickable(true);
                     break;
-                case fail:
+                case failed:
                     iconLoading.setVisibility(View.GONE);
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_fail);

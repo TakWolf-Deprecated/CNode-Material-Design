@@ -118,21 +118,21 @@ public class MainPresenter implements IMainPresenter {
                         mainView.onLoadMoreTopicListOk(result.getData());
                         mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.endless);
                     } else {
-                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.nomore);
+                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.finished);
                     }
                     return false;
                 }
 
                 @Override
                 public boolean onResultError(int code, Headers headers, Result.Error error) {
-                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.fail);
+                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.failed);
                     ToastUtils.with(getActivity()).show(error.getErrorMessage());
                     return false;
                 }
 
                 @Override
                 public boolean onCallException(Throwable t, Result.Error error) {
-                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.fail);
+                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.failed);
                     ToastUtils.with(getActivity()).show(error.getErrorMessage());
                     return false;
                 }
