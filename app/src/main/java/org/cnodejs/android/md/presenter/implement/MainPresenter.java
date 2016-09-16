@@ -116,23 +116,23 @@ public class MainPresenter implements IMainPresenter {
                 public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
                     if (result.getData().size() > 0) {
                         mainView.onLoadMoreTopicListOk(result.getData());
-                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.endless);
+                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_ENDLESS);
                     } else {
-                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.finished);
+                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_FINISHED);
                     }
                     return false;
                 }
 
                 @Override
                 public boolean onResultError(int code, Headers headers, Result.Error error) {
-                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.failed);
+                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_FAILED);
                     ToastUtils.with(getActivity()).show(error.getErrorMessage());
                     return false;
                 }
 
                 @Override
                 public boolean onCallException(Throwable t, Result.Error error) {
-                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.State.failed);
+                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_FAILED);
                     ToastUtils.with(getActivity()).show(error.getErrorMessage());
                     return false;
                 }
