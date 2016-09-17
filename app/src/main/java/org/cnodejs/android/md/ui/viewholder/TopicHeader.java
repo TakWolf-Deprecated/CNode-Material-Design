@@ -92,7 +92,7 @@ public class TopicHeader implements ITopicHeaderView {
     @OnClick(R.id.btn_favorite)
     protected void onBtnFavoriteClick() {
         if (topic != null) {
-            if (LoginActivity.startForResultWithLoginCheck(activity)) {
+            if (LoginActivity.checkLogin(activity)) {
                 if (isCollect) {
                     topicHeaderPresenter.decollectTopicAsyncTask(topic.getId());
                 } else {

@@ -173,7 +173,7 @@ public class ReplyListAdapter extends BaseAdapter {
 
         @OnClick(R.id.btn_ups)
         protected void onBtnUpsClick() {
-            if (LoginActivity.startForResultWithLoginCheck(activity)) {
+            if (LoginActivity.checkLogin(activity)) {
                 if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
                     ToastUtils.with(activity).show(R.string.can_not_up_yourself_reply);
                 } else {
@@ -184,7 +184,7 @@ public class ReplyListAdapter extends BaseAdapter {
 
         @OnClick(R.id.btn_at)
         protected void onBtnAtClick() {
-            if (LoginActivity.startForResultWithLoginCheck(activity)) {
+            if (LoginActivity.checkLogin(activity)) {
                 createReplyView.onAt(reply, positionMap.get(reply.getId()));
             }
         }

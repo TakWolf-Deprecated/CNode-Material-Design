@@ -33,19 +33,16 @@ import retrofit2.Call;
 public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     public static final int REQUEST_LOGIN = FormatUtils.generateRequestCode();
-    public static final String EXTRA_ACTION_CODE = "actionCode";
 
-    public static void startForResult(@NonNull Activity activity, int actionCode) {
-        Intent intent = new Intent(activity, LoginActivity.class);
-        intent.putExtra(EXTRA_ACTION_CODE, actionCode);
-        activity.startActivityForResult(intent, REQUEST_LOGIN);
+    public static void startForResult(@NonNull Activity activity, int requestCode) {
+        activity.startActivityForResult(new Intent(activity, LoginActivity.class), requestCode);
     }
 
     public static void startForResult(@NonNull Activity activity) {
-        startForResult(activity, -1);
+        startForResult(activity, REQUEST_LOGIN);
     }
 
-    public static boolean startForResultWithLoginCheck(@NonNull final Activity activity, final int actionCode) {
+    public static boolean checkLogin(@NonNull final Activity activity, final int requestCode) {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
             AlertDialogUtils.createBuilderWithAutoTheme(activity)
                     .setMessage(R.string.need_login_tip)
@@ -53,7 +50,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            startForResult(activity, actionCode);
+                            startForResult(activity, requestCode);
                         }
 
                     })
@@ -65,8 +62,8 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         }
     }
 
-    public static boolean startForResultWithLoginCheck(@NonNull Activity activity) {
-        return startForResultWithLoginCheck(activity, -1);
+    public static boolean checkLogin(@NonNull Activity activity) {
+        return checkLogin(activity, REQUEST_LOGIN);
     }
 
     @BindView(R.id.toolbar)
@@ -74,8 +71,6 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     @BindView(R.id.edt_access_token)
     protected MaterialEditText edtAccessToken;
-
-    private int actionCode;
 
     private ProgressDialog progressDialog;
 
@@ -87,8 +82,6 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
-        actionCode = getIntent().getIntExtra(EXTRA_ACTION_CODE, -1);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
@@ -144,9 +137,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     public void onLoginOk(@NonNull String accessToken, @NonNull Result.Login loginInfo) {
         LoginShared.login(this, accessToken, loginInfo);
         ToastUtils.with(this).show(R.string.login_success);
-        Intent intent = new Intent();
-        intent.putExtra(EXTRA_ACTION_CODE, actionCode);
-        setResult(RESULT_OK, intent);
+        setResult(RESULT_OK);
         finish();
     }
 
