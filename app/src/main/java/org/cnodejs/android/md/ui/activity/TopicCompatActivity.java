@@ -113,7 +113,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
 
     @OnClick(R.id.fab_reply)
     protected void onBtnReplyClick() {
-        if (topic != null && LoginActivity.startForResultWithLoginCheck(this)) {
+        if (topic != null && LoginActivity.checkLogin(this)) {
             createReplyView.showWindow();
         }
     }

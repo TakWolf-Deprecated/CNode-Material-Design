@@ -42,7 +42,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         startForResult(activity, REQUEST_LOGIN);
     }
 
-    public static boolean startForResultWithLoginCheck(@NonNull final Activity activity, final int requestCode) {
+    public static boolean checkLogin(@NonNull final Activity activity, final int requestCode) {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(activity))) {
             AlertDialogUtils.createBuilderWithAutoTheme(activity)
                     .setMessage(R.string.need_login_tip)
@@ -62,8 +62,8 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         }
     }
 
-    public static boolean startForResultWithLoginCheck(@NonNull Activity activity) {
-        return startForResultWithLoginCheck(activity, REQUEST_LOGIN);
+    public static boolean checkLogin(@NonNull Activity activity) {
+        return checkLogin(activity, REQUEST_LOGIN);
     }
 
     @BindView(R.id.toolbar)
