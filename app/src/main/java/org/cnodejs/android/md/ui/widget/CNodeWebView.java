@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.ui.widget;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -54,6 +55,7 @@ public abstract class CNodeWebView extends WebView {
         init(context, attrs, defStyleAttr, defStyleRes);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CNodeWebView, defStyleAttr, defStyleRes);
         darkTheme = a.getBoolean(R.styleable.CNodeWebView_darkTheme, false);
