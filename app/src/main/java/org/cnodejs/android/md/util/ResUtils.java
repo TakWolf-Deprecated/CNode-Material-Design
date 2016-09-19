@@ -2,7 +2,6 @@ package org.cnodejs.android.md.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -27,15 +26,6 @@ public final class ResUtils {
         TypedArray a = context.obtainStyledAttributes(null, new int[]{attr});
         try {
             return a.getColor(0, 0);
-        } finally {
-            a.recycle();
-        }
-    }
-
-    public static Drawable getThemeAttrDrawable(@NonNull Context context, @AttrRes int attr) {
-        TypedArray a = context.obtainStyledAttributes(null, new int[]{attr});
-        try {
-            return a.getDrawable(0);
         } finally {
             a.recycle();
         }
