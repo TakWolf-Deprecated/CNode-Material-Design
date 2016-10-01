@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/color_accent"
                         android:textSize="14sp"
-                        android:singleLine="true"
+                        android:maxLines="1"
                         tools:text="1楼" />
 
                     <TextView
@@ -68,7 +68,7 @@
                         android:text="@string/$dot"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="14sp"
-                        android:singleLine="true" />
+                        android:maxLines="1" />
 
                     <TextView
                         android:id="@+id/tv_create_time"
@@ -76,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="14sp"
-                        android:singleLine="true"
+                        android:maxLines="1"
                         tools:text="1小时前" />
 
                 </LinearLayout>

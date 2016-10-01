@@ -83,7 +83,7 @@
                 android:hint="@string/access_token_$"
                 android:inputType="text"
                 android:maxLength="36"
-                android:singleLine="true"
+                android:maxLines="1"
                 app:met_floatingLabel="highlight"
                 app:met_primaryColor="@color/color_accent"
                 app:met_textColor="?android:attr/textColorPrimary"

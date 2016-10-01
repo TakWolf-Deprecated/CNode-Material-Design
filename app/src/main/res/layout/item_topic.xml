@@ -40,7 +40,7 @@
                 android:layout_marginLeft="8dp"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp"
-                android:singleLine="true"
+                android:maxLines="1"
                 tools:text="话题的标题" />
 
         </LinearLayout>
@@ -82,7 +82,7 @@
                         android:layout_marginRight="4dp"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="12sp"
-                        android:singleLine="true"
+                        android:maxLines="1"
                         tools:text="TakWolf" />
 
                     <TextView
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/color_accent"
                         android:textSize="12sp"
-                        android:singleLine="true"
+                        android:maxLines="1"
                         tools:text="18" />
 
                     <TextView
@@ -102,7 +102,7 @@
                         android:text="@string/$slash"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
-                        android:singleLine="true" />
+                        android:maxLines="1" />
 
                     <TextView
                         android:id="@+id/tv_visit_count"
@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
-                        android:singleLine="true"
+                        android:maxLines="1"
                         tools:text="205" />
 
                 </LinearLayout>
@@ -131,7 +131,7 @@
                         android:layout_marginRight="4dp"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
-                        android:singleLine="true"
+                        android:maxLines="1"
                         tools:text="创建于：2015-1-1 19:20:15" />
 
                     <TextView
@@ -140,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
-                        android:singleLine="true"
+                        android:maxLines="1"
                         tools:text="2分前" />
 
                 </LinearLayout>

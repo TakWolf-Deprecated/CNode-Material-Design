@@ -64,7 +64,7 @@
                 android:padding="16dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:hint="@string/create_topic_title_hint"
                 android:background="?attr/widgetBackground" />
 

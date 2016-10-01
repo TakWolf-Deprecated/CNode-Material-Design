@@ -94,7 +94,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="?android:attr/textColorSecondary"
                             android:textSize="14sp"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             tools:text="2天前创建" />
 
                         <TextView
@@ -105,7 +105,7 @@
                             android:text="@string/$dot"
                             android:textColor="?android:attr/textColorSecondary"
                             android:textSize="14sp"
-                            android:singleLine="true" />
+                            android:maxLines="1" />
 
                         <TextView
                             android:id="@+id/tv_visit_count"
@@ -113,7 +113,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="?android:attr/textColorSecondary"
                             android:textSize="14sp"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             tools:text="115次浏览" />
 
                     </LinearLayout>
