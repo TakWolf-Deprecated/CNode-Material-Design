@@ -73,5 +73,5 @@ dependencies {
     compile 'org.tautua.markdownpapers:markdownpapers-core:1.4.4'
     compile 'org.jsoup:jsoup:1.9.2'
 
-    compile 'com.umeng.analytics:analytics:6.0.1'
+    compile 'com.umeng.analytics:analytics:6.0.3'
 }

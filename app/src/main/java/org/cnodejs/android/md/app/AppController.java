@@ -22,6 +22,7 @@ public class AppController extends Application implements Thread.UncaughtExcepti
         }
 
         MobclickAgent.setDebugMode(BuildConfig.DEBUG);
+        MobclickAgent.setCheckDevice(false);
     }
 
     @Override
