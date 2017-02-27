@@ -6,24 +6,24 @@ File localPropertiesFile = project.rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
     Properties properties = new Properties()
     properties.load(localPropertiesFile.newDataInputStream())
-    umengAppKey = properties.getProperty("umeng.appkey", umengAppKey)
+    umengAppKey = properties.getProperty('umeng.appkey', umengAppKey)
 }
 
 android {
 
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
-        applicationId "org.cnodejs.android.md"
+        applicationId 'org.cnodejs.android.md'
         minSdkVersion 9
         targetSdkVersion 25
-        versionCode Integer.parseInt(new Date().format("yyyyMMdd"))
-        versionName "1.2.1-beta.1"
+        versionCode Integer.parseInt(new Date().format('yyyyMMdd'))
+        versionName '1.2.1-beta.1'
 
         manifestPlaceholders = [
                 UMENG_APPKEY: umengAppKey,
-                UMENG_CHANNEL: "CNodeJS"
+                UMENG_CHANNEL: 'CNodeJS'
         ]
     }
 
