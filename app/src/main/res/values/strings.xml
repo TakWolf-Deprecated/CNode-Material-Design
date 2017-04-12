@@ -28,7 +28,6 @@
     <string name="logout">注销</string>
     <string name="need_login_tip">该操作需要登录账户。是否现在登录？</string>
     <string name="logout_tip">确定要注销吗？</string>
-    <string name="logging_in_$_">正在登录中&#8230;</string>
     <string name="login_success">登录成功</string>
     <string name="relogin">重新登录</string>
 
@@ -41,7 +40,6 @@
 
     <string name="topic">话题</string>
     <string name="new_topic">发布话题</string>
-    <string name="posting_$_">正在发布中&#8230;</string>
     <string name="post_success">发布成功</string>
     <string name="title_empty_error_tip">标题要求10字以上</string>
     <string name="content_empty_error_tip">内容不能为空</string>

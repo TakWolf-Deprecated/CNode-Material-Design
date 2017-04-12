@@ -61,7 +61,6 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
         toolbar.setOnMenuItemClickListener(this);
 
         progressDialog = ProgressDialog.createWithAutoTheme(this);
-        progressDialog.setMessage(R.string.posting_$_);
         progressDialog.setCancelable(false);
 
         // 创建EditorBar
