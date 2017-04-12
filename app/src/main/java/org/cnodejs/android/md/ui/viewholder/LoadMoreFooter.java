@@ -20,13 +20,13 @@ import butterknife.OnClick;
 
 public class LoadMoreFooter {
 
-    public static final int STATE_DISABLE = 0;
+    public static final int STATE_DISABLED = 0;
     public static final int STATE_LOADING = 1;
     public static final int STATE_FINISHED = 2;
     public static final int STATE_ENDLESS = 3;
     public static final int STATE_FAILED = 4;
 
-    @IntDef({STATE_DISABLE, STATE_LOADING, STATE_FINISHED, STATE_ENDLESS, STATE_FAILED})
+    @IntDef({STATE_DISABLED, STATE_LOADING, STATE_FINISHED, STATE_ENDLESS, STATE_FAILED})
     @Retention(RetentionPolicy.SOURCE)
     public @interface State {}
 
@@ -43,7 +43,7 @@ public class LoadMoreFooter {
     protected TextView tvText;
 
     @State
-    private int state = STATE_DISABLE;
+    private int state = STATE_DISABLED;
 
     private final OnLoadMoreListener loadMoreListener;
 
@@ -83,7 +83,7 @@ public class LoadMoreFooter {
         if (this.state != state) {
             this.state = state;
             switch (state) {
-                case STATE_DISABLE:
+                case STATE_DISABLED:
                     iconLoading.setVisibility(View.GONE);
                     tvText.setVisibility(View.GONE);
                     tvText.setClickable(false);
@@ -96,7 +96,7 @@ public class LoadMoreFooter {
                 case STATE_FINISHED:
                     iconLoading.setVisibility(View.GONE);
                     tvText.setVisibility(View.VISIBLE);
-                    tvText.setText(R.string.load_more_nomore);
+                    tvText.setText(R.string.load_more_finished);
                     tvText.setClickable(false);
                     break;
                 case STATE_ENDLESS:
@@ -108,11 +108,11 @@ public class LoadMoreFooter {
                 case STATE_FAILED:
                     iconLoading.setVisibility(View.GONE);
                     tvText.setVisibility(View.VISIBLE);
-                    tvText.setText(R.string.load_more_fail);
+                    tvText.setText(R.string.load_more_failed);
                     tvText.setClickable(true);
                     break;
                 default:
-                    throw new AssertionError("Unknow state.");
+                    throw new AssertionError("Unknow load more state.");
             }
         }
     }

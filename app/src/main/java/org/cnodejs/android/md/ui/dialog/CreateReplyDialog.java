@@ -66,7 +66,6 @@ public class CreateReplyDialog extends AppCompatDialog implements ICreateReplyVi
         this.topicView = topicView;
 
         progressDialog = ProgressDialog.createWithAutoTheme(activity);
-        progressDialog.setMessage(R.string.posting_$_);
         progressDialog.setCancelable(false);
 
         new EditorBarHandler(activity, editorBar, edtContent); // 创建editorBar

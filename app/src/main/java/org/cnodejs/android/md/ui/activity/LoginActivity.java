@@ -86,7 +86,6 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
         progressDialog = ProgressDialog.createWithAutoTheme(this);
-        progressDialog.setMessage(R.string.logging_in_$_);
 
         loginPresenter = new LoginPresenter(this, this);
     }

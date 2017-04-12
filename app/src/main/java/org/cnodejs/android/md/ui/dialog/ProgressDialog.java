@@ -2,12 +2,10 @@ package org.cnodejs.android.md.ui.dialog;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatDialog;
-import android.text.TextUtils;
-import android.view.View;
 import android.view.Window;
-import android.widget.TextView;
+
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.storage.SettingShared;
@@ -18,11 +16,11 @@ import butterknife.ButterKnife;
 public class ProgressDialog extends AppCompatDialog {
 
     public static ProgressDialog createWithAutoTheme(@NonNull Activity activity) {
-        return new ProgressDialog(activity, SettingShared.isEnableThemeDark(activity) ? R.style.AppDialogDark_Alert : R.style.AppDialogLight_Alert);
+        return new ProgressDialog(activity, SettingShared.isEnableThemeDark(activity) ? R.style.AppDialogDark : R.style.AppDialogLight);
     }
 
-    @BindView(R.id.tv_message)
-    protected TextView tvMessage;
+    @BindView(R.id.progress_wheel)
+    protected ProgressWheel progressWheel;
 
     private ProgressDialog(@NonNull Activity activity, int theme) {
         super(activity, theme);
@@ -31,14 +29,16 @@ public class ProgressDialog extends AppCompatDialog {
         ButterKnife.bind(this);
     }
 
-    public void setMessage(CharSequence text) {
-        tvMessage.setText(text);
-        tvMessage.setVisibility(TextUtils.isEmpty(text) ? View.GONE : View.VISIBLE);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        progressWheel.spin();
     }
 
-    public void setMessage(@StringRes int resId) {
-        tvMessage.setText(resId);
-        tvMessage.setVisibility(resId == 0 ? View.GONE : View.VISIBLE);
+    @Override
+    protected void onStop() {
+        super.onStop();
+        progressWheel.stopSpinning();
     }
 
 }
