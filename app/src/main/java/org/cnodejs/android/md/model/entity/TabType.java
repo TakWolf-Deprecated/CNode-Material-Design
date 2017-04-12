@@ -6,7 +6,7 @@ import org.cnodejs.android.md.R;
 
 public enum TabType {
 
-    all(R.string.tab_all),
+    all(R.string.app_name),
 
     good(R.string.tab_good),
 
