@@ -40,6 +40,7 @@
                 android:layout_marginLeft="8dp"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp"
+                android:ellipsize="end"
                 android:maxLines="1"
                 tools:text="话题的标题" />
 
