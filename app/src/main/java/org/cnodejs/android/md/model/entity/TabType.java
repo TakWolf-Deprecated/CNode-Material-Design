@@ -14,7 +14,9 @@ public enum TabType {
 
     ask(R.string.tab_ask),
 
-    job(R.string.tab_job);
+    job(R.string.tab_job),
+
+    unknown(R.string.tab_all);
 
     @StringRes
     private int nameId;
