@@ -2,8 +2,8 @@ package org.cnodejs.android.md.ui.dialog;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.annotation.StyleRes;
 import android.support.v7.app.AppCompatDialog;
-import android.view.Window;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
 
@@ -16,15 +16,14 @@ import butterknife.ButterKnife;
 public class ProgressDialog extends AppCompatDialog {
 
     public static ProgressDialog createWithAutoTheme(@NonNull Activity activity) {
-        return new ProgressDialog(activity, SettingShared.isEnableThemeDark(activity) ? R.style.AppDialogDark : R.style.AppDialogLight);
+        return new ProgressDialog(activity, SettingShared.isEnableThemeDark(activity) ? R.style.AppDialogDark_Progress : R.style.AppDialogLight_Progress);
     }
 
     @BindView(R.id.progress_wheel)
     protected ProgressWheel progressWheel;
 
-    private ProgressDialog(@NonNull Activity activity, int theme) {
+    private ProgressDialog(@NonNull Activity activity, @StyleRes int theme) {
         super(activity, theme);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_progress);
         ButterKnife.bind(this);
     }

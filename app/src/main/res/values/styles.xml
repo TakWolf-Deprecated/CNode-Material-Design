@@ -68,12 +68,17 @@
 
     <style name="AppDialogLight" parent="BaseAppDialogLight" />
 
+    <style name="AppDialogLight.Progress">
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppDialogLight.Alert">
         <item name="windowMinWidthMajor">@fraction/dialog_min_width_major</item>
         <item name="windowMinWidthMinor">@fraction/dialog_min_width_minor</item>
     </style>
 
     <style name="AppDialogLight.TopicReply">
+        <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowAnimationStyle">@style/AppAnim.BottomSheetDialog</item>
     </style>
@@ -93,12 +98,17 @@
 
     <style name="AppDialogDark" parent="BaseAppDialogDark" />
 
+    <style name="AppDialogDark.Progress">
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppDialogDark.Alert">
         <item name="windowMinWidthMajor">@fraction/dialog_min_width_major</item>
         <item name="windowMinWidthMinor">@fraction/dialog_min_width_minor</item>
     </style>
 
     <style name="AppDialogDark.TopicReply">
+        <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowAnimationStyle">@style/AppAnim.BottomSheetDialog</item>
     </style>

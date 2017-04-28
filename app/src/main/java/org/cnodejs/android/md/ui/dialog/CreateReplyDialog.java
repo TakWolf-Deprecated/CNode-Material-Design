@@ -3,11 +3,11 @@ package org.cnodejs.android.md.ui.dialog;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.StyleRes;
 import android.support.v7.app.AppCompatDialog;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -56,9 +56,8 @@ public class CreateReplyDialog extends AppCompatDialog implements ICreateReplyVi
 
     private String targetId = null;
 
-    private CreateReplyDialog(@NonNull Activity activity, int theme, @NonNull String topicId, @NonNull ITopicView topicView) {
+    private CreateReplyDialog(@NonNull Activity activity, @StyleRes int theme, @NonNull String topicId, @NonNull ITopicView topicView) {
         super(activity, theme);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_create_reply);
         ButterKnife.bind(this);
 
