@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoadMoreFooter {
+public class LoadMoreFooter implements AbsListView.OnScrollListener {
 
     public static final int STATE_DISABLED = 0;
     public static final int STATE_LOADING = 1;
@@ -50,28 +50,9 @@ public class LoadMoreFooter {
     public LoadMoreFooter(@NonNull Context context, @NonNull ListView listView, @NonNull OnLoadMoreListener loadMoreListener) {
         this.loadMoreListener = loadMoreListener;
         View footerView = LayoutInflater.from(context).inflate(R.layout.footer_load_more, listView, false);
-        ButterKnife.bind(this, footerView);
         listView.addFooterView(footerView, null, false);
-        listView.addOnScrollListener(new AbsListView.OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (view.getLastVisiblePosition() == view.getCount() - 1) {
-                    checkLoadMore();
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {}
-
-        });
-    }
-
-    private void checkLoadMore() {
-        if (getState() == STATE_ENDLESS || getState() == STATE_FAILED) {
-            setState(STATE_LOADING);
-            loadMoreListener.onLoadMore();
-        }
+        ButterKnife.bind(this, footerView);
+        listView.addOnScrollListener(this);
     }
 
     @State
@@ -117,9 +98,26 @@ public class LoadMoreFooter {
         }
     }
 
+    private void checkLoadMore() {
+        if (getState() == STATE_ENDLESS || getState() == STATE_FAILED) {
+            setState(STATE_LOADING);
+            loadMoreListener.onLoadMore();
+        }
+    }
+
     @OnClick(R.id.tv_text)
     protected void onBtnTextClick() {
         checkLoadMore();
     }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if (view.getLastVisiblePosition() == view.getCount() - 1) {
+            checkLoadMore();
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {}
 
 }
