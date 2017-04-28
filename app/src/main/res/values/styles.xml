@@ -2,6 +2,7 @@
 <resources>
 
     <!-- App Theme Light -->
+
     <style name="BaseAppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
@@ -24,6 +25,7 @@
     <style name="AppThemeLight.FitsStatusBar" />
 
     <!-- App Theme Dark -->
+
     <style name="BaseAppThemeDark" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
@@ -46,11 +48,13 @@
     <style name="AppThemeDark.FitsStatusBar" />
 
     <!-- App Theme Launch -->
+
     <style name="AppThemeLaunch" parent="BaseAppThemeLight">
         <item name="android:windowBackground">@color/color_primary</item>
     </style>
 
     <!-- App Dialog Light -->
+
     <style name="BaseAppDialogLight" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
@@ -75,6 +79,7 @@
     </style>
 
     <!-- App Dialog Dark -->
+
     <style name="BaseAppDialogDark" parent="Theme.AppCompat.Dialog">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
@@ -99,9 +104,11 @@
     </style>
 
     <!-- App Widget -->
+
     <style name="AppWidget" parent="Theme.AppCompat.Light" />
 
     <!-- Deep Line -->
+
     <style name="AppWidget.DeepLine">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
@@ -114,6 +121,7 @@
     </style>
 
     <!-- Gap -->
+
     <style name="AppWidget.ItemGap">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">8dp</item>
@@ -133,6 +141,7 @@
     </style>
 
     <!-- Badge Dot -->
+
     <style name="AppWidget.BadgeDot">
         <item name="android:layout_width">8dp</item>
         <item name="android:layout_height">8dp</item>
@@ -140,6 +149,7 @@
     </style>
 
     <!-- Navigation -->
+
     <style name="AppWidget.NavigationItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
@@ -170,6 +180,7 @@
     </style>
 
     <!-- Button -->
+
     <style name="AppWidget.Button">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">14sp</item>
@@ -182,6 +193,7 @@
     </style>
 
     <!-- App Animation -->
+
     <style name="AppAnim" parent="android:Animation" />
 
     <style name="AppAnim.BottomSheetDialog">
