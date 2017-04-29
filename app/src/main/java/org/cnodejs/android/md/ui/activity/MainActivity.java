@@ -267,7 +267,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         }
 
         public void startDelayed() {
-            HandlerUtils.postDelayed(this, 400);
+            HandlerUtils.handler.postDelayed(this, 400);
         }
 
     }

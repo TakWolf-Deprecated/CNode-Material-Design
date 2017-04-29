@@ -61,7 +61,7 @@ public final class TopicJavascriptInterface {
     @JavascriptInterface
     public void at(final String targetJson, final int targetPosition) {
         if (LoginActivity.checkLogin(activity)) {
-            HandlerUtils.post(new Runnable() {
+            HandlerUtils.handler.post(new Runnable() {
 
                 @Override
                 public void run() {
