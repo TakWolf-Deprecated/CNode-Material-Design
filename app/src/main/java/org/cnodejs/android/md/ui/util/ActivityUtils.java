@@ -28,7 +28,7 @@ public final class ActivityUtils {
     }
 
     public static void recreateDelayed(@NonNull final Activity activity) {
-        HandlerUtils.post(new Runnable() {
+        HandlerUtils.handler.post(new Runnable() {
 
             @Override
             public void run() {

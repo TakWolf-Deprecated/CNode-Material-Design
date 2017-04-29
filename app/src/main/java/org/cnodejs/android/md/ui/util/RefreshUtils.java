@@ -16,10 +16,10 @@ public final class RefreshUtils {
     }
 
     /**
-     * TODO refreshLayout无法直接在onCreate中设置刷新状态
+     * TODO SwipeRefreshLayout 无法直接在 onCreate 中设置刷新状态
      */
     public static void refresh(@NonNull final SwipeRefreshLayout refreshLayout, @NonNull final SwipeRefreshLayout.OnRefreshListener refreshListener) {
-        HandlerUtils.postDelayed(new Runnable() {
+        HandlerUtils.handler.postDelayed(new Runnable() {
 
             @Override
             public void run() {

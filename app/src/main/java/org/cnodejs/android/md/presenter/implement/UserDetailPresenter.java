@@ -51,7 +51,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
 
                 @Override
                 public boolean onResultOk(int code, Headers headers, final Result.Data<User> result) {
-                    HandlerUtils.postDelayed(new Runnable() {
+                    HandlerUtils.handler.postDelayed(new Runnable() {
 
                         @Override
                         public void run() {
@@ -67,7 +67,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
 
                 @Override
                 public boolean onResultError(final int code, Headers headers, final Result.Error error) {
-                    HandlerUtils.postDelayed(new Runnable() {
+                    HandlerUtils.handler.postDelayed(new Runnable() {
 
                         @Override
                         public void run() {
@@ -83,7 +83,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
 
                 @Override
                 public boolean onCallException(Throwable t, Result.Error error) {
-                    HandlerUtils.postDelayed(new Runnable() {
+                    HandlerUtils.handler.postDelayed(new Runnable() {
 
                         @Override
                         public void run() {
