@@ -20,7 +20,7 @@ import org.cnodejs.android.md.presenter.implement.CreateReplyPresenter;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.cnodejs.android.md.ui.view.ITopicView;
-import org.cnodejs.android.md.ui.widget.EditorBarHandler;
+import org.cnodejs.android.md.ui.viewholder.EditorBarViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,7 +67,7 @@ public class CreateReplyDialog extends AppCompatDialog implements ICreateReplyVi
         progressDialog = ProgressDialog.createWithAutoTheme(activity);
         progressDialog.setCancelable(false);
 
-        new EditorBarHandler(activity, editorBar, edtContent); // 创建editorBar
+        new EditorBarViewHolder(activity, editorBar, edtContent); // 创建editorBar
 
         createReplyPresenter = new CreateReplyPresenter(activity, this);
     }

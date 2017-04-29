@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.ui.widget;
+package org.cnodejs.android.md.ui.viewholder;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,13 +17,13 @@ import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EditorBarHandler {
+public class EditorBarViewHolder {
 
     private final Activity activity;
     private final EditText edtContent;
     private final InputMethodManager imm;
 
-    public EditorBarHandler(@NonNull Activity activity, @NonNull View editorBar, @NonNull EditText edtContent) {
+    public EditorBarViewHolder(@NonNull Activity activity, @NonNull View editorBar, @NonNull EditText edtContent) {
         this.activity = activity;
         this.edtContent = edtContent;
         imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);

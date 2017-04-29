@@ -21,7 +21,7 @@ import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.ICreateTopicView;
-import org.cnodejs.android.md.ui.widget.EditorBarHandler;
+import org.cnodejs.android.md.ui.viewholder.EditorBarViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +64,7 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
         progressDialog.setCancelable(false);
 
         // 创建EditorBar
-        new EditorBarHandler(this, editorBar, edtContent);
+        new EditorBarViewHolder(this, editorBar, edtContent);
 
         // 载入草稿
         if (SettingShared.isEnableTopicDraft(this)) {
