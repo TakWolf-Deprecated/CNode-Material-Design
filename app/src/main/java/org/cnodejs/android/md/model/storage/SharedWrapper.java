@@ -34,7 +34,7 @@ public final class SharedWrapper {
                     secretSingleton = Crypto.AES.generateSecret(Digest.SHA256.getRaw(DeviceInfo.getDeviceToken(context)));
                 }
                 if (ivSingleton == null) {
-                    ivSingleton = Crypto.AES.generateIV(Digest.MD5.getRaw(DeviceInfo.getDeviceToken(context)));
+                    ivSingleton = Crypto.AES.generateIv(Digest.MD5.getRaw(DeviceInfo.getDeviceToken(context)));
                 }
             }
         }
