@@ -12,9 +12,9 @@ import com.google.gson.JsonParseException;
 import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.util.Crypto;
 import org.cnodejs.android.md.util.Digest;
+import org.cnodejs.android.md.util.StandardCharsets;
 
 import java.lang.reflect.Type;
-import java.nio.charset.Charset;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
@@ -22,7 +22,6 @@ import javax.crypto.spec.IvParameterSpec;
 public final class SharedWrapper {
 
     private static final String TAG = "SharedWrapper";
-    private static final Charset CHARSET_UTF_8 = Charset.forName("UTF-8");
 
     private static SecretKey secretSingleton = null;
     private static IvParameterSpec ivSingleton = null;
@@ -57,7 +56,7 @@ public final class SharedWrapper {
             return defValue;
         } else {
             try {
-                return new String(Crypto.AES.decrypt(secret, iv, Base64.decode(target, Base64.DEFAULT)), CHARSET_UTF_8);
+                return new String(Crypto.AES.decrypt(secret, iv, Base64.decode(target, Base64.DEFAULT)), StandardCharsets.UTF_8);
             } catch (Crypto.CryptoException e) {
                 Log.e(TAG, "value decrypt error at key :" + key, e);
                 return defValue;
@@ -71,7 +70,7 @@ public final class SharedWrapper {
             target = null;
         } else {
             try {
-                target = Base64.encodeToString(Crypto.AES.encrypt(secret, iv, value.getBytes(CHARSET_UTF_8)), Base64.DEFAULT);
+                target = Base64.encodeToString(Crypto.AES.encrypt(secret, iv, value.getBytes(StandardCharsets.UTF_8)), Base64.DEFAULT);
             } catch (Crypto.CryptoException e) {
                 Log.e(TAG, "value encrypt error at key :" + key, e);
                 target = null;
