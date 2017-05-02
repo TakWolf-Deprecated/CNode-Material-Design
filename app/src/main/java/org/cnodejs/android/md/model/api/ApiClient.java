@@ -29,12 +29,12 @@ public final class ApiClient {
     private static Interceptor createUserAgentInterceptor() {
         return new Interceptor() {
 
-            private static final String NAME_USER_AGENT = "User-Agent";
+            private static final String HEADER_USER_AGENT = "User-Agent";
 
             @Override
             public Response intercept(Chain chain) throws IOException {
                 return chain.proceed(chain.request().newBuilder()
-                        .header(NAME_USER_AGENT, ApiDefine.USER_AGENT)
+                        .header(HEADER_USER_AGENT, ApiDefine.USER_AGENT)
                         .build());
             }
 
