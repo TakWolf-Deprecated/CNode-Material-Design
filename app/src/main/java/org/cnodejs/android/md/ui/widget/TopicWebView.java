@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.util.AttributeSet;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -28,20 +31,20 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
     private TopicWithReply topic = null;
     private String userId = null;
 
-    public TopicWebView(Context context) {
+    public TopicWebView(@NonNull Context context) {
         super(context);
     }
 
-    public TopicWebView(Context context, AttributeSet attrs) {
+    public TopicWebView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public TopicWebView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TopicWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public TopicWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public TopicWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

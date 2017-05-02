@@ -3,6 +3,10 @@ package org.cnodejs.android.md.ui.widget;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.AttrRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -10,20 +14,20 @@ import org.cnodejs.android.md.util.ResUtils;
 
 public class AdaptStatusBarView extends View {
 
-    public AdaptStatusBarView(Context context) {
+    public AdaptStatusBarView(@NonNull Context context) {
         super(context);
     }
 
-    public AdaptStatusBarView(Context context, AttributeSet attrs) {
+    public AdaptStatusBarView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public AdaptStatusBarView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AdaptStatusBarView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public AdaptStatusBarView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public AdaptStatusBarView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
