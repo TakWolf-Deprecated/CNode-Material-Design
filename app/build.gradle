@@ -72,5 +72,7 @@ dependencies {
     compile 'org.tautua.markdownpapers:markdownpapers-core:1.4.4'
     compile 'org.jsoup:jsoup:1.10.2'
 
+    compile 'org.cnodejs.android:oauth-login:0.0.1'
+
     compile 'com.umeng.analytics:analytics:6.1.0'
 }
