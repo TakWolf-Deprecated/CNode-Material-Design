@@ -54,6 +54,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.CardView
+        android:id="@+id/layout_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_top"
@@ -135,17 +136,20 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/btn_login_tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="@string/$_how_to_get_access_token_$"
-                android:textColor="@color/color_accent"
-                android:textSize="14sp" />
-
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/btn_login_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_card"
+        android:layout_centerHorizontal="true"
+        android:padding="8dp"
+        android:text="@string/$_how_to_get_access_token_$"
+        android:textColor="@color/color_accent"
+        android:textSize="14sp"
+        android:background="?attr/selectableItemBackground" />
 
 </RelativeLayout>
