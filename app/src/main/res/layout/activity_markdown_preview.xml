@@ -11,12 +11,12 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="@dimen/app_bar_elevation"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/markdown_preview"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <org.cnodejs.android.md.display.widget.PreviewWebView
+    <org.cnodejs.android.md.ui.widget.PreviewWebView
         android:id="@+id/web_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

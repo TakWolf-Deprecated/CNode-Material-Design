@@ -3,15 +3,14 @@ package org.cnodejs.android.md.presenter.implement;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import org.cnodejs.android.md.display.view.ITopicHeaderView;
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
+import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
+import org.cnodejs.android.md.ui.view.ITopicHeaderView;
 
-import retrofit2.Call;
-import retrofit2.Response;
+import okhttp3.Headers;
 
 public class TopicHeaderPresenter implements ITopicHeaderPresenter {
 
@@ -25,12 +24,12 @@ public class TopicHeaderPresenter implements ITopicHeaderPresenter {
 
     @Override
     public void collectTopicAsyncTask(@NonNull String topicId) {
-        Call<Result> call = ApiClient.service.collectTopic(LoginShared.getAccessToken(activity), topicId);
-        call.enqueue(new DefaultToastCallback<Result>(activity) {
+        ApiClient.service.collectTopic(LoginShared.getAccessToken(activity), topicId).enqueue(new DefaultCallback<Result>(activity) {
 
             @Override
-            public boolean onResultOk(Response<Result> response, Result result) {
-                return topicHeaderView.onCollectTopicResultOk(result);
+            public boolean onResultOk(int code, Headers headers, Result result) {
+                topicHeaderView.onCollectTopicOk();
+                return false;
             }
 
         });
@@ -38,12 +37,12 @@ public class TopicHeaderPresenter implements ITopicHeaderPresenter {
 
     @Override
     public void decollectTopicAsyncTask(@NonNull String topicId) {
-        Call<Result> call = ApiClient.service.decollectTopic(LoginShared.getAccessToken(activity), topicId);
-        call.enqueue(new DefaultToastCallback<Result>(activity) {
+        ApiClient.service.decollectTopic(LoginShared.getAccessToken(activity), topicId).enqueue(new DefaultCallback<Result>(activity) {
 
             @Override
-            public boolean onResultOk(Response<Result> response, Result result) {
-                return topicHeaderView.onDecollectTopicResultOk(result);
+            public boolean onResultOk(int code, Headers headers, Result result) {
+                topicHeaderView.onDecollectTopicOk();
+                return false;
             }
 
         });

@@ -6,6 +6,4 @@ public interface IUserDetailPresenter {
 
     void getUserAsyncTask(@NonNull String loginName);
 
-    void getCollectTopicListAsyncTask(@NonNull String loginName);
-
 }

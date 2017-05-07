@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="@dimen/app_bar_elevation"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:title="@string/notification"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <FrameLayout
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <org.cnodejs.android.md.display.widget.NotificationWebView
+            <org.cnodejs.android.md.ui.widget.NotificationWebView
                 android:id="@+id/web_notification"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -9,6 +9,7 @@ import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.util.FormatUtils;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
@@ -88,7 +89,7 @@ public class Result {
     public static Error buildError(@NonNull Throwable t) {
         Error error = new Error();
         error.success = false;
-        if (t instanceof UnknownHostException) {
+        if (t instanceof UnknownHostException || t instanceof ConnectException) {
             error.errorMessage = "网络无法连接";
         } else if (t instanceof SocketTimeoutException) {
             error.errorMessage = "网络访问超时";

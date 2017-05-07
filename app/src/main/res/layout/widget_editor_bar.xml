@@ -11,6 +11,7 @@
         android:layout_height="@dimen/app_bar_size"
         android:src="@drawable/ic_format_bold_grey600_24dp"
         android:scaleType="center"
+        android:adjustViewBounds="true"
         android:background="?attr/selectableItemBackground" />
 
     <ImageView
@@ -19,6 +20,7 @@
         android:layout_height="@dimen/app_bar_size"
         android:src="@drawable/ic_format_italic_grey600_24dp"
         android:scaleType="center"
+        android:adjustViewBounds="true"
         android:background="?attr/selectableItemBackground" />
 
     <ImageView
@@ -27,6 +29,7 @@
         android:layout_height="@dimen/app_bar_size"
         android:src="@drawable/ic_format_quote_grey600_24dp"
         android:scaleType="center"
+        android:adjustViewBounds="true"
         android:background="?attr/selectableItemBackground" />
 
     <ImageView
@@ -35,6 +38,7 @@
         android:layout_height="@dimen/app_bar_size"
         android:src="@drawable/ic_format_list_bulleted_grey600_24dp"
         android:scaleType="center"
+        android:adjustViewBounds="true"
         android:background="?attr/selectableItemBackground" />
 
     <ImageView
@@ -43,6 +47,7 @@
         android:layout_height="@dimen/app_bar_size"
         android:src="@drawable/ic_format_list_numbered_grey600_24dp"
         android:scaleType="center"
+        android:adjustViewBounds="true"
         android:background="?attr/selectableItemBackground" />
 
     <ImageView
@@ -51,6 +56,7 @@
         android:layout_height="@dimen/app_bar_size"
         android:src="@drawable/ic_insert_code_grey600_24dp"
         android:scaleType="center"
+        android:adjustViewBounds="true"
         android:background="?attr/selectableItemBackground" />
 
     <ImageView
@@ -59,6 +65,7 @@
         android:layout_height="@dimen/app_bar_size"
         android:src="@drawable/ic_insert_link_grey600_24dp"
         android:scaleType="center"
+        android:adjustViewBounds="true"
         android:background="?attr/selectableItemBackground" />
 
     <ImageView
@@ -67,6 +74,7 @@
         android:layout_height="@dimen/app_bar_size"
         android:src="@drawable/ic_insert_photo_grey600_24dp"
         android:scaleType="center"
+        android:adjustViewBounds="true"
         android:background="?attr/selectableItemBackground" />
 
     <ImageView
@@ -75,6 +83,7 @@
         android:layout_height="@dimen/app_bar_size"
         android:src="@drawable/ic_visibility_grey600_24dp"
         android:scaleType="center"
+        android:adjustViewBounds="true"
         android:background="?attr/selectableItemBackground" />
 
 </LinearLayout>

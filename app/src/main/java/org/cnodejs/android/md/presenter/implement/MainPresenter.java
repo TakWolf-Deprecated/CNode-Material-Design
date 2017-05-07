@@ -4,99 +4,163 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import org.cnodejs.android.md.display.view.IMainView;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.ApiDefine;
-import org.cnodejs.android.md.model.api.CallbackAdapter;
+import org.cnodejs.android.md.model.api.ForegroundCallback;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
+import org.cnodejs.android.md.ui.util.ToastUtils;
+import org.cnodejs.android.md.ui.view.IMainView;
+import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
 
 import java.util.List;
 
+import okhttp3.Headers;
 import retrofit2.Call;
-import retrofit2.Response;
 
 public class MainPresenter implements IMainPresenter {
 
+    private static final int PAGE_LIMIT = 20;
+
     private final Activity activity;
     private final IMainView mainView;
+
+    private TabType tab = TabType.all;
+    private Call<Result.Data<List<Topic>>> refreshCall = null;
+    private Call<Result.Data<List<Topic>>> loadMoreCall = null;
 
     public MainPresenter(@NonNull Activity activity, @NonNull IMainView mainView) {
         this.activity = activity;
         this.mainView = mainView;
     }
 
-    @Override
-    public void refreshTopicListAsyncTask(@NonNull final TabType tab, @NonNull Integer limit) {
-        Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, 1, limit, ApiDefine.MD_RENDER);
-        call.enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
-
-            @Override
-            public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                return mainView.onRefreshTopicListResultOk(tab, result);
+    private void cancelRefreshCall() {
+        if (refreshCall != null) {
+            if (!refreshCall.isCanceled()) {
+                refreshCall.cancel();
             }
+            refreshCall = null;
+        }
+    }
 
-            @Override
-            public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
-                return mainView.onRefreshTopicListResultErrorOrCallException(tab, error);
+    private void cancelLoadMoreCall() {
+        if (loadMoreCall != null) {
+            if (!loadMoreCall.isCanceled()) {
+                loadMoreCall.cancel();
             }
-
-            @Override
-            public boolean onCallException(Throwable t, Result.Error error) {
-                return mainView.onRefreshTopicListResultErrorOrCallException(tab, error);
-            }
-
-            @Override
-            public void onFinish() {
-                mainView.onRefreshTopicListFinish();
-            }
-
-        });
+            loadMoreCall = null;
+        }
     }
 
     @Override
-    public void loadMoreTopicListAsyncTask(@NonNull final TabType tab, @NonNull final Integer page, @NonNull Integer limit) {
-        Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, page + 1, limit, ApiDefine.MD_RENDER);
-        call.enqueue(new CallbackAdapter<Result.Data<List<Topic>>>() {
+    public void switchTab(@NonNull TabType tab) {
+        if (this.tab != tab) {
+            this.tab = tab;
+            cancelRefreshCall();
+            cancelLoadMoreCall();
+            mainView.onSwitchTabOk(tab);
+        }
+    }
 
-            @Override
-            public boolean onResultOk(Response<Result.Data<List<Topic>>> response, Result.Data<List<Topic>> result) {
-                return mainView.onLoadMoreTopicListResultOk(tab, page, result);
-            }
+    @Override
+    public void refreshTopicListAsyncTask() {
+        if (refreshCall == null) {
+            refreshCall = ApiClient.service.getTopicList(tab, 1, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            refreshCall.enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
 
-            @Override
-            public boolean onResultError(Response<Result.Data<List<Topic>>> response, Result.Error error) {
-                return mainView.onLoadMoreTopicListResultErrorOrCallException(tab, page, error);
-            }
+                @Override
+                public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
+                    cancelLoadMoreCall();
+                    mainView.onRefreshTopicListOk(result.getData());
+                    return false;
+                }
 
-            @Override
-            public boolean onCallException(Throwable t, Result.Error error) {
-                return mainView.onLoadMoreTopicListResultErrorOrCallException(tab, page, error);
-            }
+                @Override
+                public boolean onResultError(int code, Headers headers, Result.Error error) {
+                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    return false;
+                }
 
-            @Override
-            public void onFinish() {
-                mainView.onLoadMoreTopicListFinish();
-            }
+                @Override
+                public boolean onCallException(Throwable t, Result.Error error) {
+                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    return false;
+                }
 
-        });
+                @Override
+                public boolean onCallCancel() {
+                    return true;
+                }
+
+                @Override
+                public void onFinish() {
+                    refreshCall = null;
+                    mainView.onRefreshTopicListFinish();
+                }
+
+            });
+        }
+    }
+
+    @Override
+    public void loadMoreTopicListAsyncTask(int page) {
+        if (loadMoreCall == null) {
+            loadMoreCall = ApiClient.service.getTopicList(tab, page, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            loadMoreCall.enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
+
+                @Override
+                public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
+                    if (result.getData().size() > 0) {
+                        mainView.onLoadMoreTopicListOk(result.getData());
+                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_ENDLESS);
+                    } else {
+                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_FINISHED);
+                    }
+                    return false;
+                }
+
+                @Override
+                public boolean onResultError(int code, Headers headers, Result.Error error) {
+                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_FAILED);
+                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    return false;
+                }
+
+                @Override
+                public boolean onCallException(Throwable t, Result.Error error) {
+                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_FAILED);
+                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    return false;
+                }
+
+                @Override
+                public boolean onCallCancel() {
+                    return true;
+                }
+
+                @Override
+                public void onFinish() {
+                    loadMoreCall = null;
+                }
+
+            });
+        }
     }
 
     @Override
     public void getUserAsyncTask() {
         final String accessToken = LoginShared.getAccessToken(activity);
         if (!TextUtils.isEmpty(accessToken)) {
-            Call<Result.Data<User>> call = ApiClient.service.getUser(LoginShared.getLoginName(activity));
-            call.enqueue(new CallbackAdapter<Result.Data<User>>() {
+            ApiClient.service.getUser(LoginShared.getLoginName(activity)).enqueue(new ForegroundCallback<Result.Data<User>>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.Data<User>> response, Result.Data<User> result) {
-                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(activity))) {
-                        LoginShared.update(activity, result.getData());
+                public boolean onResultOk(int code, Headers headers, Result.Data<User> result) {
+                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(getActivity()))) {
+                        LoginShared.update(getActivity(), result.getData());
                         mainView.updateUserInfoViews();
                     }
                     return false;
@@ -110,13 +174,12 @@ public class MainPresenter implements IMainPresenter {
     public void getMessageCountAsyncTask() {
         final String accessToken = LoginShared.getAccessToken(activity);
         if (!TextUtils.isEmpty(accessToken)) {
-            Call<Result.Data<Integer>> call =  ApiClient.service.getMessageCount(accessToken);
-            call.enqueue(new CallbackAdapter<Result.Data<Integer>>() {
+            ApiClient.service.getMessageCount(accessToken).enqueue(new ForegroundCallback<Result.Data<Integer>>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.Data<Integer>> response, Result.Data<Integer> result) {
-                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(activity))) {
-                        mainView.updateMessageCountViews(result);
+                public boolean onResultOk(int code, Headers headers, Result.Data<Integer> result) {
+                    if (TextUtils.equals(accessToken, LoginShared.getAccessToken(getActivity()))) {
+                        mainView.updateMessageCountViews(result.getData());
                     }
                     return false;
                 }

@@ -3,17 +3,16 @@ package org.cnodejs.android.md.presenter.implement;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import org.cnodejs.android.md.display.view.INotificationView;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.ApiDefine;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
+import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.INotificationPresenter;
+import org.cnodejs.android.md.ui.view.INotificationView;
 
-import retrofit2.Call;
-import retrofit2.Response;
+import okhttp3.Headers;
 
 public class NotificationPresenter implements INotificationPresenter {
 
@@ -27,12 +26,12 @@ public class NotificationPresenter implements INotificationPresenter {
 
     @Override
     public void getMessagesAsyncTask() {
-        Call<Result.Data<Notification>> call = ApiClient.service.getMessages(LoginShared.getAccessToken(activity), ApiDefine.MD_RENDER);
-        call.enqueue(new DefaultToastCallback<Result.Data<Notification>>(activity) {
+        ApiClient.service.getMessages(LoginShared.getAccessToken(activity), ApiDefine.MD_RENDER).enqueue(new DefaultCallback<Result.Data<Notification>>(activity) {
 
             @Override
-            public boolean onResultOk(Response<Result.Data<Notification>> response, Result.Data<Notification> result) {
-                return notificationView.onGetMessagesResultOk(result);
+            public boolean onResultOk(int code, Headers headers, Result.Data<Notification> result) {
+                notificationView.onGetMessagesOk(result.getData());
+                return false;
             }
 
             @Override
@@ -45,12 +44,12 @@ public class NotificationPresenter implements INotificationPresenter {
 
     @Override
     public void markAllMessageReadAsyncTask() {
-        Call<Result> call = ApiClient.service.markAllMessageRead(LoginShared.getAccessToken(activity));
-        call.enqueue(new DefaultToastCallback<Result>(activity) {
+        ApiClient.service.markAllMessageRead(LoginShared.getAccessToken(activity)).enqueue(new DefaultCallback<Result>(activity) {
 
             @Override
-            public boolean onResultOk(Response<Result> response, Result result) {
-                return notificationView.onMarkAllMessageReadResultOk();
+            public boolean onResultOk(int code, Headers headers, Result result) {
+                notificationView.onMarkAllMessageReadOk();
+                return false;
             }
 
         });

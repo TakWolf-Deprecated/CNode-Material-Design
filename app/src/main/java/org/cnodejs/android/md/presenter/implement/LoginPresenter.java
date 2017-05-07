@@ -3,15 +3,16 @@ package org.cnodejs.android.md.presenter.implement;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import org.cnodejs.android.md.display.view.ILoginView;
+import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultToastCallback;
+import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
+import org.cnodejs.android.md.ui.view.ILoginView;
 import org.cnodejs.android.md.util.FormatUtils;
 
+import okhttp3.Headers;
 import retrofit2.Call;
-import retrofit2.Response;
 
 public class LoginPresenter implements ILoginPresenter {
 
@@ -26,20 +27,22 @@ public class LoginPresenter implements ILoginPresenter {
     @Override
     public void loginAsyncTask(final String accessToken) {
         if (!FormatUtils.isAccessToken(accessToken)) {
-            loginView.onAccessTokenFormatError();
+            loginView.onAccessTokenError(activity.getString(R.string.access_token_format_error));
         } else {
             Call<Result.Login> call = ApiClient.service.accessToken(accessToken);
             loginView.onLoginStart(call);
-            call.enqueue(new DefaultToastCallback<Result.Login>(activity) {
+            call.enqueue(new DefaultCallback<Result.Login>(activity) {
 
                 @Override
-                public boolean onResultOk(Response<Result.Login> response, Result.Login loginInfo) {
-                    return loginView.onLoginResultOk(accessToken, loginInfo);
+                public boolean onResultOk(int code, Headers headers, Result.Login loginInfo) {
+                    loginView.onLoginOk(accessToken, loginInfo);
+                    return false;
                 }
 
                 @Override
-                public boolean onResultErrorAuth(Response<Result.Login> response, Result.Error error) {
-                    return loginView.onLoginResultErrorAuth(error);
+                public boolean onResultAuthError(int code, Headers headers, Result.Error error) {
+                    loginView.onAccessTokenError(getActivity().getString(R.string.access_token_auth_error));
+                    return false;
                 }
 
                 @Override

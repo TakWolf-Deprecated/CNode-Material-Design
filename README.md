@@ -1,19 +1,20 @@
-![Banner](/art/banner-1024-500.png)
+![Banner](art/banner-1024-500.png)
 
 # CNode Material Design #
 
+[![Build Status](https://travis-ci.org/TakWolf/CNode-Material-Design.svg?branch=master)](https://travis-ci.org/TakWolf/CNode-Material-Design)
 [![Release](https://img.shields.io/github/release/TakWolf/CNode-Material-Design.svg?style=flat)](https://github.com/TakWolf/CNode-Material-Design/releases/latest)
-[![Platform](https://img.shields.io/badge/platform-Android-green.svg?style=flat)](http://developer.android.com/index.html)
+[![Platform](https://img.shields.io/badge/platform-Android-green.svg?style=flat)](https://www.android.com)
 [![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
 [![License](https://img.shields.io/github/license/TakWolf/CNode-Material-Design.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
-![Logo](/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+![Logo](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
-[CNode社区](https://cnodejs.org) 第三方Android客户端，原生App，Material Design风格，支持夜间模式
+[CNode社区](https://cnodejs.org)第三方Android客户端，原生App，Material Design风格，支持夜间模式
 
-## Download ##
+## Downloads ##
 
-[![Google Play Store](/art/git_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
+[![Google Play](art/get_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
 - [Google Play](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
@@ -29,15 +30,17 @@
 
 - [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
+- [酷安网](http://www.coolapk.com/apk/org.cnodejs.android.md)
+
 ## Screenshots ##
 
-![image](/art/screenshot_s01.png) ![image](/art/screenshot_s02.png)
+![Image](art/screenshot_s01.png) ![Image](art/screenshot_s02.png)
 
-![image](/art/screenshot_s03.png) ![image](/art/screenshot_s04.png)
+![Image](art/screenshot_s03.png) ![Image](art/screenshot_s04.png)
 
-## Credits ##
+## Dependencies ##
 
-- [Butter Knife](http://jakewharton.github.io/butterknife)
+- [Butter Knife](https://github.com/JakeWharton/butterknife)
 
 - [Gson](https://github.com/google/gson)
 
@@ -45,9 +48,9 @@
 
 - [Joda-Time-Android](https://github.com/dlew/joda-time-android)
 
-- [OkHttp](http://square.github.io/okhttp)
+- [OkHttp](https://github.com/square/okhttp)
 
-- [Retrofit](http://square.github.io/retrofit)
+- [Retrofit](https://github.com/square/retrofit)
 
 - [Glide](https://github.com/bumptech/glide)
 
@@ -67,11 +70,11 @@
 
 - [jsoup](https://jsoup.org)
 
-- [Google I/O Android App - ScrimInsetsViews](https://github.com/google/iosched/blob/master/android/src/main/java/com/google/samples/apps/iosched/ui/widget/ScrimInsetsScrollView.java)
-
-- [Material design icons](https://github.com/google/material-design-icons)
+- [CNode-OAuth-Login-Android](https://github.com/TakWolf/CNode-OAuth-Login-Android)
 
 - [CNodeMD Page Render Compat](https://github.com/TakWolf/CNodeMD-Page-Render-Compat)
+
+- [Material design icons](https://github.com/google/material-design-icons)
 
 - [Vue.js](http://cn.vuejs.org)
 
@@ -87,16 +90,18 @@ TakWolf
 
 ## License ##
 
-    Copyright 2015-2016 TakWolf
-    
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+```
+Copyright 2015 TakWolf
 
-        http://www.apache.org/licenses/LICENSE-2.0
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```

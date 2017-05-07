@@ -28,7 +28,6 @@
     <string name="logout">注销</string>
     <string name="need_login_tip">该操作需要登录账户。是否现在登录？</string>
     <string name="logout_tip">确定要注销吗？</string>
-    <string name="logging_in_$_">正在登录中&#8230;</string>
     <string name="login_success">登录成功</string>
     <string name="relogin">重新登录</string>
 
@@ -41,33 +40,46 @@
 
     <string name="topic">话题</string>
     <string name="new_topic">发布话题</string>
-    <string name="posting_$_">正在发布中&#8230;</string>
     <string name="post_success">发布成功</string>
     <string name="title_empty_error_tip">标题要求10字以上</string>
     <string name="content_empty_error_tip">内容不能为空</string>
 
     <string name="user_detail">用户资料</string>
-    
-    <string name="load_more">加载更多</string>
+
+    <string name="load_more_finished">已经到底啦</string>
+    <string name="load_more_endless">加载更多</string>
+    <string name="load_more_failed">加载失败，点击重试</string>
 
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
     <string name="ok">好的</string>
 
-    <string name="create_at_$">创建于：</string>
-    <string name="score_$">积分：</string>
-    <string name="register_time_$">注册时间：</string>
+    <string name="topic_$s">话题：%s</string>
+    <string name="$d_floor">%d楼</string>
+    <string name="reply_$d_floor">回复：%d楼</string>
+    <string name="create_at_$s">创建于：%s</string>
+    <string name="score_$d">积分：%d</string>
+    <string name="register_time_$s">注册时间：%s</string>
+    <string name="$s_create">%s创建</string>
+    <string name="$d_count_visit">%d次浏览</string>
+    <string name="$d_count_reply">%d条回复</string>
     <string name="$slash">/</string>
     <string name="$dot">•</string>
 
+    <string name="at_you_in_topic">在话题中@了您</string>
+    <string name="at_you_in_reply">在回复中@了您</string>
+    <string name="reply_your_topic">回复了您的话题</string>
+
     <string name="access_token_$">Access Token :</string>
-    <string name="open_qrcode">扫描二维码</string>
-    <string name="qrcode_request_permission_rationale_tip">二维码扫描组件需要相机权限才能工作，请确保在弹出的授权对话框中为应用授予相机权限。</string>
-    <string name="qrcode_permission_denied_tip">二维码扫描组件无法工作，请确保在设置中为应用授予了相机权限。</string>
+    <string name="qr_code_login">扫码登录</string>
+    <string name="github_login">GitHub登录</string>
+    <string name="scan_qr_code">扫描二维码</string>
+    <string name="qr_code_request_permission_rationale_tip">二维码扫描组件需要相机权限才能工作，请确保在弹出的授权对话框中为应用授予相机权限。</string>
+    <string name="qr_code_permission_denied_tip">二维码扫描组件无法工作，请确保在设置中为应用授予了相机权限。</string>
     <string name="open_permissions_request">打开授权</string>
     <string name="go_to_setting">去设置</string>
     <string name="can_not_open_camera">无法打开相机</string>
-    <string name="qrcode_tip">将二维码放入扫描框内</string>
+    <string name="qr_code_tip">将二维码放入扫描框内</string>
     <string name="$_how_to_get_access_token_$"><u>如何获取Access Token？</u></string>
     <string name="how_to_get_access_token_tip_content">在CNode社区网站端登录你的账户，然后在右上角找到「设置」按钮，点击进入后将页面滑动到最底部来查看你的Access Token。</string>
 

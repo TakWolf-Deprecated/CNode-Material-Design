@@ -6,9 +6,11 @@ import org.cnodejs.android.md.model.entity.TabType;
 
 public interface IMainPresenter {
 
-    void refreshTopicListAsyncTask(@NonNull TabType tab, @NonNull Integer limit);
+    void switchTab(@NonNull TabType tab);
 
-    void loadMoreTopicListAsyncTask(@NonNull TabType tab, @NonNull Integer page, @NonNull Integer limit);
+    void refreshTopicListAsyncTask();
+
+    void loadMoreTopicListAsyncTask(int page);
 
     void getUserAsyncTask();
 

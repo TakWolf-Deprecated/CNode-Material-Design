@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    android:background="?attr/widgetBackgroundDark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_size"
+        android:orientation="horizontal"
+        android:background="?attr/widgetBackgroundTitle"
+        android:elevation="@dimen/app_bar_elevation">
+
+        <ImageView
+            android:id="@+id/btn_tool_close"
+            android:layout_width="@dimen/app_bar_size"
+            android:layout_height="@dimen/app_bar_size"
+            android:src="@drawable/ic_close_grey600_24dp"
+            android:scaleType="center"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackground" />
+
+        <View style="@style/AppWidget.DeepLine.Vertical" />
+
+        <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+            <include layout="@layout/widget_editor_bar" />
+
+        </HorizontalScrollView>
+
+        <View style="@style/AppWidget.DeepLine.Vertical" />
+
+        <ImageView
+            android:id="@+id/btn_tool_send"
+            android:layout_width="@dimen/app_bar_size"
+            android:layout_height="@dimen/app_bar_size"
+            android:src="@drawable/ic_send_grey600_24dp"
+            android:scaleType="center"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackground" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/layout_target"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#8880bd01"
+        android:elevation="@dimen/shadow_gap_elevation"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_target"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            tools:text="回复：16楼" />
+
+        <ImageView
+            android:id="@+id/btn_clear_target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:padding="8dp"
+            android:src="@drawable/ic_close_white_18dp"
+            android:scaleType="center"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edt_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:gravity="start"
+                android:hint="@string/create_topic_content_hint"
+                android:textSize="16sp"
+                android:minLines="12"
+                android:background="@android:color/transparent" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
