@@ -31,9 +31,6 @@
     <color name="button_normal">@color/color_accent</color>
     <color name="button_pressed">#ff48bd06</color>
     <color name="button_ripple">#99ffffff</color>
-    <color name="button_stroke_normal">#ffffffff</color>
-    <color name="button_stroke_pressed">#ffeeeeee</color>
-    <color name="button_stroke_ripple">#3301ee15</color>
 
     <color name="red_light">#ffff4444</color>
     <color name="green_light">#ff99cc00</color>

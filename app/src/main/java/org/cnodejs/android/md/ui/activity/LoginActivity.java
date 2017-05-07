@@ -24,6 +24,7 @@ import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.ILoginView;
 import org.cnodejs.android.md.util.FormatUtils;
+import org.cnodejs.android.oauthlogin.CNodeOAuthLoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +34,9 @@ import retrofit2.Call;
 public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     public static final int REQUEST_LOGIN = FormatUtils.generateRequestCode();
+
+    private static final int REQUEST_QR_CODE_LOGIN = FormatUtils.generateRequestCode();
+    private static final int REQUEST_GITHUB_LOGIN = FormatUtils.generateRequestCode();
 
     public static void startForResult(@NonNull Activity activity, int requestCode) {
         activity.startActivityForResult(new Intent(activity, LoginActivity.class), requestCode);
@@ -95,26 +99,37 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
         loginPresenter.loginAsyncTask(edtAccessToken.getText().toString().trim());
     }
 
-    @OnClick(R.id.btn_qrcode)
-    protected void onBtnQrcodeClick() {
-        QRCodeActivity.startForResultWithPermissionCheck(this);
+    @OnClick(R.id.btn_qr_code_login)
+    protected void onBtnQrCodeLoginClick() {
+        ScanQRCodeActivity.startForResultWithPermissionCheck(this, REQUEST_QR_CODE_LOGIN);
+    }
+
+    @OnClick(R.id.btn_github_login)
+    protected void onBtnGithubLoginClick() {
+        startActivityForResult(new Intent(this, CNodeOAuthLoginActivity.class), REQUEST_GITHUB_LOGIN);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == QRCodeActivity.PERMISSIONS_REQUEST_QRCODE) {
-            QRCodeActivity.startForResultWithPermissionHandle(this);
+        if (requestCode == ScanQRCodeActivity.PERMISSIONS_REQUEST_QR_CODE) {
+            ScanQRCodeActivity.startForResultWithPermissionHandle(this, REQUEST_QR_CODE_LOGIN);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == QRCodeActivity.REQUEST_QRCODE && resultCode == RESULT_OK) {
-            edtAccessToken.setText(data.getStringExtra(QRCodeActivity.EXTRA_QRCODE));
-            edtAccessToken.setSelection(edtAccessToken.length());
-            onBtnLoginClick();
+        if (resultCode == RESULT_OK && data != null) {
+            if (requestCode == REQUEST_QR_CODE_LOGIN) {
+                edtAccessToken.setText(data.getStringExtra(ScanQRCodeActivity.EXTRA_QR_CODE));
+                edtAccessToken.setSelection(edtAccessToken.length());
+                onBtnLoginClick();
+            } else if (requestCode == REQUEST_GITHUB_LOGIN) {
+                edtAccessToken.setText(data.getStringExtra(CNodeOAuthLoginActivity.EXTRA_ACCESS_TOKEN));
+                edtAccessToken.setSelection(edtAccessToken.length());
+                onBtnLoginClick();
+            }
         }
     }
 
