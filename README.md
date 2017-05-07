@@ -70,9 +70,11 @@
 
 - [jsoup](https://jsoup.org)
 
-- [Material design icons](https://github.com/google/material-design-icons)
+- [CNode-OAuth-Login-Android](https://github.com/TakWolf/CNode-OAuth-Login-Android)
 
 - [CNodeMD Page Render Compat](https://github.com/TakWolf/CNodeMD-Page-Render-Compat)
+
+- [Material design icons](https://github.com/google/material-design-icons)
 
 - [Vue.js](http://cn.vuejs.org)
 

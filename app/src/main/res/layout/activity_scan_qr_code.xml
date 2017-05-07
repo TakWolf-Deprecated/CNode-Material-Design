@@ -23,7 +23,7 @@
             android:elevation="@dimen/app_bar_elevation"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-            app:title="@string/open_qrcode"
+            app:title="@string/scan_qr_code"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <RelativeLayout
@@ -82,14 +82,14 @@
                         android:id="@+id/icon_line"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/qrcode_line"
+                        android:src="@drawable/qr_code_line"
                         android:scaleType="center"
                         android:adjustViewBounds="true" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/qrcode_bg"
+                        android:src="@drawable/qr_code_bg"
                         android:scaleType="center"
                         android:adjustViewBounds="true" />
 
@@ -108,7 +108,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/icon_center"
                 android:layout_marginTop="-48dp"
-                android:text="@string/qrcode_tip"
+                android:text="@string/qr_code_tip"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 

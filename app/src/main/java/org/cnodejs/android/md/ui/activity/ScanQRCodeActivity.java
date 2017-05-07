@@ -28,39 +28,38 @@ import org.cnodejs.android.md.util.FormatUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
+public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     private static final String[] PERMISSIONS = {Manifest.permission.CAMERA};
-    public static final int PERMISSIONS_REQUEST_QRCODE = FormatUtils.generateRequestCode();
-    public static final int REQUEST_QRCODE = FormatUtils.generateRequestCode();
-    public static final String EXTRA_QRCODE = "qrcode";
+    public static final int PERMISSIONS_REQUEST_QR_CODE = FormatUtils.generateRequestCode();
+    public static final String EXTRA_QR_CODE = "qrCode";
 
-    public static void startForResultWithPermissionCheck(@NonNull final Activity activity) {
+    public static void startForResultWithPermissionCheck(@NonNull final Activity activity, int requestCode) {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA)) {
                 AlertDialogUtils.createBuilderWithAutoTheme(activity)
-                        .setMessage(R.string.qrcode_request_permission_rationale_tip)
+                        .setMessage(R.string.qr_code_request_permission_rationale_tip)
                         .setPositiveButton(R.string.open_permissions_request, new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_QRCODE);
+                                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_QR_CODE);
                             }
 
                         })
                         .show();
             } else {
-                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_QRCODE);
+                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_QR_CODE);
             }
         } else {
-            startForResult(activity);
+            startForResult(activity, requestCode);
         }
     }
 
-    public static void startForResultWithPermissionHandle(@NonNull final Activity activity) {
+    public static void startForResultWithPermissionHandle(@NonNull final Activity activity, int requestCode) {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             AlertDialogUtils.createBuilderWithAutoTheme(activity)
-                    .setMessage(R.string.qrcode_permission_denied_tip)
+                    .setMessage(R.string.qr_code_permission_denied_tip)
                     .setPositiveButton(R.string.confirm, null)
                     .setNeutralButton(R.string.go_to_setting, new DialogInterface.OnClickListener() {
 
@@ -72,13 +71,13 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
                     })
                     .show();
         } else {
-            startForResult(activity);
+            startForResult(activity, requestCode);
         }
     }
 
     @RequiresPermission(Manifest.permission.CAMERA)
-    private static void startForResult(@NonNull Activity activity) {
-        activity.startActivityForResult(new Intent(activity, QRCodeActivity.class), REQUEST_QRCODE);
+    private static void startForResult(@NonNull Activity activity, int requestCode) {
+        activity.startActivityForResult(new Intent(activity, ScanQRCodeActivity.class), requestCode);
     }
 
     @BindView(R.id.toolbar)
@@ -93,14 +92,14 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qrcode);
+        setContentView(R.layout.activity_scan_qr_code);
         ButterKnife.bind(this);
 
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
         qrCodeReaderView.setOnQRCodeReadListener(this);
 
-        iconLine.startAnimation(AnimationUtils.loadAnimation(this, R.anim.qrcode_scan_line));
+        iconLine.startAnimation(AnimationUtils.loadAnimation(this, R.anim.qr_code_scan_line));
     }
 
     @Override
@@ -118,7 +117,7 @@ public class QRCodeActivity extends StatusBarActivity implements QRCodeReaderVie
     @Override
     public void onQRCodeRead(String text, PointF[] points) {
         Intent intent = new Intent();
-        intent.putExtra(EXTRA_QRCODE, text);
+        intent.putExtra(EXTRA_QR_CODE, text);
         setResult(RESULT_OK, intent);
         finish();
     }

@@ -71,13 +71,15 @@
     <string name="reply_your_topic">回复了您的话题</string>
 
     <string name="access_token_$">Access Token :</string>
-    <string name="open_qrcode">扫描二维码</string>
-    <string name="qrcode_request_permission_rationale_tip">二维码扫描组件需要相机权限才能工作，请确保在弹出的授权对话框中为应用授予相机权限。</string>
-    <string name="qrcode_permission_denied_tip">二维码扫描组件无法工作，请确保在设置中为应用授予了相机权限。</string>
+    <string name="qr_code_login">扫码登录</string>
+    <string name="github_login">GitHub登录</string>
+    <string name="scan_qr_code">扫描二维码</string>
+    <string name="qr_code_request_permission_rationale_tip">二维码扫描组件需要相机权限才能工作，请确保在弹出的授权对话框中为应用授予相机权限。</string>
+    <string name="qr_code_permission_denied_tip">二维码扫描组件无法工作，请确保在设置中为应用授予了相机权限。</string>
     <string name="open_permissions_request">打开授权</string>
     <string name="go_to_setting">去设置</string>
     <string name="can_not_open_camera">无法打开相机</string>
-    <string name="qrcode_tip">将二维码放入扫描框内</string>
+    <string name="qr_code_tip">将二维码放入扫描框内</string>
     <string name="$_how_to_get_access_token_$"><u>如何获取Access Token？</u></string>
     <string name="how_to_get_access_token_tip_content">在CNode社区网站端登录你的账户，然后在右上角找到「设置」按钮，点击进入后将页面滑动到最底部来查看你的Access Token。</string>
 

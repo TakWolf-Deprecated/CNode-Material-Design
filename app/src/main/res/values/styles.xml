@@ -197,11 +197,6 @@
         <item name="android:background">@drawable/button_image</item>
     </style>
 
-    <style name="AppWidget.Button.Stroke">
-        <item name="android:textColor">@drawable/button_stroke_text_color</item>
-        <item name="android:background">@drawable/button_stroke_image</item>
-    </style>
-
     <!-- App Animation -->
 
     <style name="AppAnimation" parent="android:Animation" />

@@ -45,8 +45,8 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <activity
-            android:name="org.cnodejs.android.md.ui.activity.QRCodeActivity"
-            android:label="@string/open_qrcode"
+            android:name="org.cnodejs.android.md.ui.activity.ScanQRCodeActivity"
+            android:label="@string/scan_qr_code"
             android:screenOrientation="portrait"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
