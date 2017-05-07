@@ -33,7 +33,7 @@ public final class Crypto {
         return new SecretKeySpec(Arrays.copyOf(seed, secretLength), algorithm);
     }
 
-    public IvParameterSpec generateIV(@NonNull byte[] seed) {
+    public IvParameterSpec generateIv(@NonNull byte[] seed) {
         return new IvParameterSpec(Arrays.copyOf(seed, ivLength));
     }
 
@@ -43,17 +43,7 @@ public final class Crypto {
             cipher.init(Cipher.ENCRYPT_MODE, secret, iv);
             return cipher.doFinal(data);
         } catch (NoSuchAlgorithmException | InvalidKeyException | InvalidAlgorithmParameterException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException e) {
-            throw new CryptoException("Encrypt error", e);
-        }
-    }
-
-    public byte[] encrypt(@NonNull SecretKey secret, @NonNull byte[] data) throws CryptoException {
-        try {
-            Cipher cipher = Cipher.getInstance(algorithm + "/ECB/PKCS5Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, secret);
-            return cipher.doFinal(data);
-        } catch (NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException e) {
-            throw new CryptoException("Encrypt error", e);
+            throw new CryptoException("Encrypt error.", e);
         }
     }
 
@@ -63,17 +53,7 @@ public final class Crypto {
             cipher.init(Cipher.DECRYPT_MODE, secret, iv);
             return cipher.doFinal(data);
         } catch (NoSuchAlgorithmException | InvalidKeyException | InvalidAlgorithmParameterException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException e) {
-            throw new CryptoException("Decrypt error", e);
-        }
-    }
-
-    public byte[] decrypt(@NonNull SecretKey secret, @NonNull byte[] data) throws CryptoException {
-        try {
-            Cipher cipher = Cipher.getInstance(algorithm + "/ECB/PKCS5Padding");
-            cipher.init(Cipher.DECRYPT_MODE, secret);
-            return cipher.doFinal(data);
-        } catch (NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException e) {
-            throw new CryptoException("Decrypt error", e);
+            throw new CryptoException("Decrypt error.", e);
         }
     }
 

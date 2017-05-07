@@ -5,6 +5,10 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.annotation.AttrRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.webkit.WebView;
@@ -34,29 +38,29 @@ public abstract class CNodeWebView extends WebView {
 
     private boolean darkTheme;
 
-    public CNodeWebView(Context context) {
+    public CNodeWebView(@NonNull Context context) {
         super(context);
         init(context, null, 0, 0);
     }
 
-    public CNodeWebView(Context context, AttributeSet attrs) {
+    public CNodeWebView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs, 0, 0);
     }
 
-    public CNodeWebView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CNodeWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr, 0);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CNodeWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CNodeWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    private void init(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CNodeWebView, defStyleAttr, defStyleRes);
         darkTheme = a.getBoolean(R.styleable.CNodeWebView_darkTheme, false);
         a.recycle();

@@ -80,7 +80,7 @@
     <style name="AppDialogLight.TopicReply">
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowAnimationStyle">@style/AppAnim.BottomSheetDialog</item>
+        <item name="android:windowAnimationStyle">@style/AppAnimation.BottomSheet</item>
     </style>
 
     <!-- App Dialog Dark -->
@@ -110,7 +110,7 @@
     <style name="AppDialogDark.TopicReply">
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowAnimationStyle">@style/AppAnim.BottomSheetDialog</item>
+        <item name="android:windowAnimationStyle">@style/AppAnimation.BottomSheet</item>
     </style>
 
     <!-- App Widget -->
@@ -204,9 +204,9 @@
 
     <!-- App Animation -->
 
-    <style name="AppAnim" parent="android:Animation" />
+    <style name="AppAnimation" parent="android:Animation" />
 
-    <style name="AppAnim.BottomSheetDialog">
+    <style name="AppAnimation.BottomSheet">
         <item name="android:windowEnterAnimation">@anim/bottom_sheet_slide_in</item>
         <item name="android:windowExitAnimation">@anim/bottom_sheet_slide_out</item>
     </style>

@@ -3,7 +3,10 @@ package org.cnodejs.android.md.ui.widget;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.util.AttributeSet;
 
 public class PreviewWebView extends ContentWebView {
@@ -16,20 +19,20 @@ public class PreviewWebView extends ContentWebView {
             "<link type=\"text/css\" rel=\"stylesheet\" href=\"" + "file:///android_asset/css/preview_dark.css" + "\">\n" +
             "<link type=\"text/css\" rel=\"stylesheet\" href=\"" + "file:///android_asset/css/markdown_dark.css" + "\">\n";
 
-    public PreviewWebView(Context context) {
+    public PreviewWebView(@NonNull Context context) {
         super(context);
     }
 
-    public PreviewWebView(Context context, AttributeSet attrs) {
+    public PreviewWebView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public PreviewWebView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public PreviewWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public PreviewWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public PreviewWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

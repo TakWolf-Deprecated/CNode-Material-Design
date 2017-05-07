@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.util.AttributeSet;
 
 import org.cnodejs.android.md.ui.listener.ImageJavascriptInterface;
@@ -48,29 +51,29 @@ public class ContentWebView extends CNodeWebView {
             "</body>\n" +
             "</html>";
 
-    public ContentWebView(Context context) {
+    public ContentWebView(@NonNull Context context) {
         super(context);
-        init(context, null, 0, 0);
+        init(context);
     }
 
-    public ContentWebView(Context context, AttributeSet attrs) {
+    public ContentWebView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs, 0, 0);
+        init(context);
     }
 
-    public ContentWebView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ContentWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs, defStyleAttr, 0);
+        init(context);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public ContentWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ContentWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs, defStyleAttr, defStyleRes);
+        init(context);
     }
 
     @SuppressLint("AddJavascriptInterface")
-    private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    private void init(@NonNull Context context) {
         addJavascriptInterface(ImageJavascriptInterface.with(context), ImageJavascriptInterface.NAME);
     }
 

@@ -2,7 +2,6 @@ package org.cnodejs.android.md.util;
 
 import android.support.annotation.NonNull;
 
-import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -10,8 +9,6 @@ public final class Digest {
 
     public static final Digest MD5 = new Digest("MD5");
     public static final Digest SHA256 = new Digest("SHA-256");
-
-    private static final Charset CHARSET_UTF_8 = Charset.forName("UTF-8");
 
     private final String algorithm;
 
@@ -28,7 +25,7 @@ public final class Digest {
     }
 
     public byte[] getRaw(@NonNull String data) {
-        return getRaw(data.getBytes(CHARSET_UTF_8));
+        return getRaw(data.getBytes(StandardCharsets.UTF_8));
     }
 
     public String getHex(@NonNull byte[] data) {
@@ -40,7 +37,7 @@ public final class Digest {
     }
 
     public String getHex(@NonNull String data) {
-        return getHex(data.getBytes(CHARSET_UTF_8));
+        return getHex(data.getBytes(StandardCharsets.UTF_8));
     }
 
 }
