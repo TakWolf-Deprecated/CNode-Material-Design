@@ -121,7 +121,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LoginActivity.REQUEST_LOGIN && resultCode == RESULT_OK) {
+        if (requestCode == LoginActivity.REQUEST_DEFAULT && resultCode == RESULT_OK) {
             refreshLayout.setRefreshing(true);
             onRefresh();
         }

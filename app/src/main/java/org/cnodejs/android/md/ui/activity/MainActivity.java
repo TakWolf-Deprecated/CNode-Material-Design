@@ -334,7 +334,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LoginActivity.REQUEST_LOGIN && resultCode == RESULT_OK) {
+        if (requestCode == LoginActivity.REQUEST_DEFAULT && resultCode == RESULT_OK) {
             updateUserInfoViews();
             mainPresenter.getUserAsyncTask();
         }
