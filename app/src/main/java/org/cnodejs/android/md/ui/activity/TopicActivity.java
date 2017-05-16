@@ -135,7 +135,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LoginActivity.REQUEST_LOGIN && resultCode == RESULT_OK) {
+        if (requestCode == LoginActivity.REQUEST_DEFAULT && resultCode == RESULT_OK) {
             refreshLayout.setRefreshing(true);
             onRefresh();
         }

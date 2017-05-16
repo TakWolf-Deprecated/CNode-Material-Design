@@ -33,7 +33,7 @@ import retrofit2.Call;
 
 public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
-    public static final int REQUEST_LOGIN = FormatUtils.generateRequestCode();
+    public static final int REQUEST_DEFAULT = FormatUtils.generateRequestCode();
 
     private static final int REQUEST_QR_CODE_LOGIN = FormatUtils.generateRequestCode();
     private static final int REQUEST_GITHUB_LOGIN = FormatUtils.generateRequestCode();
@@ -43,7 +43,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     }
 
     public static void startForResult(@NonNull Activity activity) {
-        startForResult(activity, REQUEST_LOGIN);
+        startForResult(activity, REQUEST_DEFAULT);
     }
 
     public static boolean checkLogin(@NonNull final Activity activity, final int requestCode) {
@@ -67,7 +67,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     }
 
     public static boolean checkLogin(@NonNull Activity activity) {
-        return checkLogin(activity, REQUEST_LOGIN);
+        return checkLogin(activity, REQUEST_DEFAULT);
     }
 
     @BindView(R.id.toolbar)
@@ -112,7 +112,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == ScanQRCodeActivity.PERMISSIONS_REQUEST_QR_CODE) {
+        if (requestCode == ScanQRCodeActivity.PERMISSIONS_REQUEST_DEFAULT) {
             ScanQRCodeActivity.startForResultWithPermissionHandle(this, REQUEST_QR_CODE_LOGIN);
         }
     }

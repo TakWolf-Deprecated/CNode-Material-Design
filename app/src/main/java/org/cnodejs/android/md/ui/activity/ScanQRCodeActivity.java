@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     private static final String[] PERMISSIONS = {Manifest.permission.CAMERA};
-    public static final int PERMISSIONS_REQUEST_QR_CODE = FormatUtils.generateRequestCode();
+    public static final int PERMISSIONS_REQUEST_DEFAULT = FormatUtils.generateRequestCode();
     public static final String EXTRA_QR_CODE = "qrCode";
 
     public static void startForResultWithPermissionCheck(@NonNull final Activity activity, int requestCode) {
@@ -43,13 +43,13 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_QR_CODE);
+                                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_DEFAULT);
                             }
 
                         })
                         .show();
             } else {
-                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_QR_CODE);
+                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_DEFAULT);
             }
         } else {
             startForResult(activity, requestCode);
