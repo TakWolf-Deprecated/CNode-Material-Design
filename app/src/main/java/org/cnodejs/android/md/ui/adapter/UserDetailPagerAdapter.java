@@ -8,14 +8,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicSimple;
 import org.cnodejs.android.md.model.entity.User;
-import org.cnodejs.android.md.ui.fragment.UserDetailItemFragment;
+import org.cnodejs.android.md.ui.fragment.TopicSimpleListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDetailPagerAdapter extends FragmentPagerAdapter {
 
-    private final List<UserDetailItemFragment> fmList = new ArrayList<>();
+    private final List<TopicSimpleListFragment> fragmentList = new ArrayList<>();
     private final String[] titles = {
             "最近回复",
             "最新发布",
@@ -24,14 +24,14 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
 
     public UserDetailPagerAdapter(@NonNull FragmentManager manager) {
         super(manager);
-        fmList.add(new UserDetailItemFragment());
-        fmList.add(new UserDetailItemFragment());
-        fmList.add(new UserDetailItemFragment());
+        fragmentList.add(new TopicSimpleListFragment());
+        fragmentList.add(new TopicSimpleListFragment());
+        fragmentList.add(new TopicSimpleListFragment());
     }
 
     public void update(@NonNull User user) {
-        fmList.get(0).notifyDataSetChanged(user.getRecentReplyList());
-        fmList.get(1).notifyDataSetChanged(user.getRecentTopicList());
+        fragmentList.get(0).notifyDataSetChanged(user.getRecentReplyList());
+        fragmentList.get(1).notifyDataSetChanged(user.getRecentTopicList());
     }
 
     public void update(@NonNull List<Topic> topicList) {
@@ -39,17 +39,17 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
         for (Topic topic : topicList) {
             topicSimpleList.add(topic);
         }
-        fmList.get(2).notifyDataSetChanged(topicSimpleList);
+        fragmentList.get(2).notifyDataSetChanged(topicSimpleList);
     }
 
     @Override
     public Fragment getItem(int position) {
-        return fmList.get(position);
+        return fragmentList.get(position);
     }
 
     @Override
     public int getCount() {
-        return fmList.size();
+        return fragmentList.size();
     }
 
     @Override
