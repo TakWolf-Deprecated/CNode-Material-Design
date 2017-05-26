@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UserDetailItemFragment extends Fragment {
+public class TopicSimpleListFragment extends Fragment {
 
     @BindView(R.id.recycler_view)
     protected RecyclerView recyclerView;
@@ -26,7 +26,7 @@ public class UserDetailItemFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user_detail_item, container, false);
+        return inflater.inflate(R.layout.fragment_topic_simple_list, container, false);
     }
 
     @Override

@@ -129,7 +129,6 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         }
 
         userDetailPresenter = new UserDetailPresenter(this, this);
-
         userDetailPresenter.getUserAsyncTask(loginName);
     }
 
