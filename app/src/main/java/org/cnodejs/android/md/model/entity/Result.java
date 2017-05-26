@@ -10,6 +10,7 @@ import org.cnodejs.android.md.util.FormatUtils;
 
 import java.io.IOException;
 import java.net.ConnectException;
+import java.net.NoRouteToHostException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
@@ -91,6 +92,8 @@ public class Result {
         error.success = false;
         if (t instanceof UnknownHostException || t instanceof ConnectException) {
             error.errorMessage = "网络无法连接";
+        } else if (t instanceof NoRouteToHostException) {
+            error.errorMessage = "无法访问网络";
         } else if (t instanceof SocketTimeoutException) {
             error.errorMessage = "网络访问超时";
         } else if (t instanceof JsonSyntaxException) {
