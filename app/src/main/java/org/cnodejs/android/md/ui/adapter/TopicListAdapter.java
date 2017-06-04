@@ -70,42 +70,42 @@ public class TopicListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    protected class ViewHolder {
+    class ViewHolder {
 
         @BindView(R.id.ctv_tab)
-        protected CheckedTextView ctvTab;
+        CheckedTextView ctvTab;
 
         @BindView(R.id.tv_title)
-        protected TextView tvTitle;
+        TextView tvTitle;
 
         @BindView(R.id.img_avatar)
-        protected ImageView imgAvatar;
+        ImageView imgAvatar;
 
         @BindView(R.id.tv_author)
-        protected TextView tvAuthor;
+        TextView tvAuthor;
 
         @BindView(R.id.tv_create_time)
-        protected TextView tvCreateTime;
+        TextView tvCreateTime;
 
         @BindView(R.id.tv_reply_count)
-        protected TextView tvReplyCount;
+        TextView tvReplyCount;
 
         @BindView(R.id.tv_visit_count)
-        protected TextView tvVisitCount;
+        TextView tvVisitCount;
 
         @BindView(R.id.tv_last_reply_time)
-        protected TextView tvLastReplyTime;
+        TextView tvLastReplyTime;
 
         @BindView(R.id.icon_good)
-        protected View iconGood;
+        View iconGood;
 
         private Topic topic;
 
-        protected ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             ButterKnife.bind(this, itemView);
         }
 
-        protected void update(@NonNull Topic topic) {
+        void update(@NonNull Topic topic) {
             this.topic = topic;
 
             tvTitle.setText(topic.getTitle());
@@ -121,12 +121,12 @@ public class TopicListAdapter extends BaseAdapter {
         }
 
         @OnClick(R.id.img_avatar)
-        protected void onBtnAvatarClick() {
+        void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.btn_item)
-        protected void onBtnItemClick() {
+        void onBtnItemClick() {
             Navigator.TopicWithAutoCompat.start(activity, topic);
         }
 

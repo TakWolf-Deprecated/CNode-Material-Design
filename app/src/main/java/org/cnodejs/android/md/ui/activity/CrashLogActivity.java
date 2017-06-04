@@ -37,10 +37,10 @@ public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMen
     }
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.tv_info)
-    protected TextView tvInfo;
+    TextView tvInfo;
 
     private String crashLog;
 

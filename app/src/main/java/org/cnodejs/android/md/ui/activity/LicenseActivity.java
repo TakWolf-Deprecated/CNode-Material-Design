@@ -19,10 +19,10 @@ import butterknife.ButterKnife;
 public class LicenseActivity extends StatusBarActivity {
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.tv_license)
-    protected TextView tvLicense;
+    TextView tvLicense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

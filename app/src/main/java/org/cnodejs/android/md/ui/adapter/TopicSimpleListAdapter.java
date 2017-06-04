@@ -55,28 +55,28 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
         holder.update(topicSimpleList.get(position));
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.img_avatar)
-        protected ImageView imgAvatar;
+        ImageView imgAvatar;
 
         @BindView(R.id.tv_title)
-        protected TextView tvTitle;
+        TextView tvTitle;
 
         @BindView(R.id.tv_login_name)
-        protected TextView tvLoginName;
+        TextView tvLoginName;
 
         @BindView(R.id.tv_last_reply_time)
-        protected TextView tvLastReplyTime;
+        TextView tvLastReplyTime;
 
         private TopicSimple topicSimple;
 
-        protected ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        protected void update(@NonNull TopicSimple topicSimple) {
+        void update(@NonNull TopicSimple topicSimple) {
             this.topicSimple = topicSimple;
 
             tvTitle.setText(topicSimple.getTitle());
@@ -86,12 +86,12 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
         }
 
         @OnClick(R.id.img_avatar)
-        protected void onBtnAvatarClick() {
+        void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, topicSimple.getAuthor().getLoginName(), imgAvatar, topicSimple.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.btn_item)
-        protected void onBtnItemClick() {
+        void onBtnItemClick() {
             Navigator.TopicWithAutoCompat.start(activity, topicSimple.getId());
         }
 
