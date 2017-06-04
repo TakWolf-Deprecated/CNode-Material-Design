@@ -20,7 +20,7 @@ public class ProgressDialog extends AppCompatDialog {
     }
 
     @BindView(R.id.progress_wheel)
-    protected ProgressWheel progressWheel;
+    ProgressWheel progressWheel;
 
     private ProgressDialog(@NonNull Activity activity, @StyleRes int theme) {
         super(activity, theme);
