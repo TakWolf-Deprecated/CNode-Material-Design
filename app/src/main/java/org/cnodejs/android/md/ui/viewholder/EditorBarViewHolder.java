@@ -34,7 +34,7 @@ public class EditorBarViewHolder {
      * 加粗
      */
     @OnClick(R.id.btn_format_bold)
-    protected void onBtnFormatBoldClick() {
+    void onBtnFormatBoldClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "**string**");
         edtContent.setSelection(edtContent.getSelectionEnd() - 8, edtContent.getSelectionEnd() - 2);
@@ -45,7 +45,7 @@ public class EditorBarViewHolder {
      * 倾斜
      */
     @OnClick(R.id.btn_format_italic)
-    protected void onBtnFormatItalicClick() {
+    void onBtnFormatItalicClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "*string*");
         edtContent.setSelection(edtContent.getSelectionEnd() - 7, edtContent.getSelectionEnd() - 1);
@@ -56,7 +56,7 @@ public class EditorBarViewHolder {
      * 引用
      */
     @OnClick(R.id.btn_format_quote)
-    protected void onBtnFormatQuoteClick() {
+    void onBtnFormatQuoteClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n> ");
         edtContent.setSelection(edtContent.getSelectionEnd());
@@ -66,7 +66,7 @@ public class EditorBarViewHolder {
      * 无序列表
      */
     @OnClick(R.id.btn_format_list_bulleted)
-    protected void onBtnFormatListBulletedClick() {
+    void onBtnFormatListBulletedClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n- ");
         edtContent.setSelection(edtContent.getSelectionEnd());
@@ -76,7 +76,7 @@ public class EditorBarViewHolder {
      * 有序列表 FIXME 这里算法需要优化
      */
     @OnClick(R.id.btn_format_list_numbered)
-    protected void onBtnFormatListNumberedClick() {
+    void onBtnFormatListNumberedClick() {
         edtContent.requestFocus();
         // 查找向上最近一个\n
         for (int n = edtContent.getSelectionEnd() - 1; n >= 0; n--) {
@@ -102,7 +102,7 @@ public class EditorBarViewHolder {
      * 插入代码
      */
     @OnClick(R.id.btn_insert_code)
-    protected void onBtnInsertCodeClick() {
+    void onBtnInsertCodeClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), "\n\n```\n\n```\n ");
         edtContent.setSelection(edtContent.getSelectionEnd() - 6);
@@ -112,7 +112,7 @@ public class EditorBarViewHolder {
      * 插入链接
      */
     @OnClick(R.id.btn_insert_link)
-    protected void onBtnInsertLinkClick() {
+    void onBtnInsertLinkClick() {
         AlertDialogUtils.createBuilderWithAutoTheme(activity)
                 .setIcon(R.drawable.ic_insert_link_grey600_24dp)
                 .setTitle(R.string.add_link)
@@ -138,7 +138,7 @@ public class EditorBarViewHolder {
      * 插入图片
      */
     @OnClick(R.id.btn_insert_photo)
-    protected void onBtnInsertPhotoClick() {
+    void onBtnInsertPhotoClick() {
         edtContent.requestFocus();
         edtContent.getText().insert(edtContent.getSelectionEnd(), " ![Image](http://resource) ");
         edtContent.setSelection(edtContent.getSelectionEnd() - 10, edtContent.getSelectionEnd() - 2);
@@ -149,7 +149,7 @@ public class EditorBarViewHolder {
      * 预览
      */
     @OnClick(R.id.btn_preview)
-    protected void onBtnPreviewClick() {
+    void onBtnPreviewClick() {
         String content = edtContent.getText().toString();
         if (SettingShared.isEnableTopicSign(activity)) { // 添加小尾巴
             content += "\n\n" + SettingShared.getTopicSignContent(activity);

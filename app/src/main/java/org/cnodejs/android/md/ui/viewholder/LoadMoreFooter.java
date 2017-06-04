@@ -37,10 +37,10 @@ public class LoadMoreFooter implements AbsListView.OnScrollListener {
     }
 
     @BindView(R.id.icon_loading)
-    protected View iconLoading;
+    View iconLoading;
 
     @BindView(R.id.tv_text)
-    protected TextView tvText;
+    TextView tvText;
 
     @State
     private int state = STATE_DISABLED;
@@ -106,7 +106,7 @@ public class LoadMoreFooter implements AbsListView.OnScrollListener {
     }
 
     @OnClick(R.id.tv_text)
-    protected void onBtnTextClick() {
+    void onBtnTextClick() {
         checkLoadMore();
     }
 
