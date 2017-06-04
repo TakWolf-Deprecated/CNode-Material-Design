@@ -71,10 +71,10 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     }
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.edt_access_token)
-    protected MaterialEditText edtAccessToken;
+    MaterialEditText edtAccessToken;
 
     private ProgressDialog progressDialog;
 
@@ -95,17 +95,17 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     }
 
     @OnClick(R.id.btn_login)
-    protected void onBtnLoginClick() {
+    void onBtnLoginClick() {
         loginPresenter.loginAsyncTask(edtAccessToken.getText().toString().trim());
     }
 
     @OnClick(R.id.btn_qr_code_login)
-    protected void onBtnQrCodeLoginClick() {
+    void onBtnQrCodeLoginClick() {
         ScanQRCodeActivity.startForResultWithPermissionCheck(this, REQUEST_QR_CODE_LOGIN);
     }
 
     @OnClick(R.id.btn_github_login)
-    protected void onBtnGithubLoginClick() {
+    void onBtnGithubLoginClick() {
         startActivityForResult(new Intent(this, CNodeOAuthLoginActivity.class), REQUEST_GITHUB_LOGIN);
     }
 
@@ -134,7 +134,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     }
 
     @OnClick(R.id.btn_login_tip)
-    protected void onBtnLoginTipClick() {
+    void onBtnLoginTipClick() {
         AlertDialogUtils.createBuilderWithAutoTheme(this)
                 .setMessage(R.string.how_to_get_access_token_tip_content)
                 .setPositiveButton(R.string.confirm, null)

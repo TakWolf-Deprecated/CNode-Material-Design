@@ -81,13 +81,13 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
     }
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.qr_view)
-    protected QRCodeReaderView qrCodeReaderView;
+    QRCodeReaderView qrCodeReaderView;
 
     @BindView(R.id.icon_line)
-    protected View iconLine;
+    View iconLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

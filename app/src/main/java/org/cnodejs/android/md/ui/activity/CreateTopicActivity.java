@@ -29,19 +29,19 @@ import butterknife.ButterKnife;
 public class CreateTopicActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener, ICreateTopicView {
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.spn_tab)
-    protected Spinner spnTab;
+    Spinner spnTab;
 
     @BindView(R.id.edt_title)
-    protected EditText edtTitle;
+    EditText edtTitle;
 
     @BindView(R.id.layout_editor_bar)
-    protected ViewGroup editorBar;
+    ViewGroup editorBar;
 
     @BindView(R.id.edt_content)
-    protected EditText edtContent;
+    EditText edtContent;
 
     private ProgressDialog progressDialog;
 

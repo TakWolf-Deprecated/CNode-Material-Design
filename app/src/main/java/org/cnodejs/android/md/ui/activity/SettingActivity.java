@@ -19,25 +19,25 @@ import butterknife.OnClick;
 public class SettingActivity extends StatusBarActivity {
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.switch_notification)
-    protected SwitchCompat switchNotification;
+    SwitchCompat switchNotification;
 
     @BindView(R.id.switch_theme_dark)
-    protected SwitchCompat switchThemeDark;
+    SwitchCompat switchThemeDark;
 
     @BindView(R.id.switch_topic_draft)
-    protected SwitchCompat switchTopicDraft;
+    SwitchCompat switchTopicDraft;
 
     @BindView(R.id.switch_topic_sign)
-    protected SwitchCompat switchTopicSign;
+    SwitchCompat switchTopicSign;
 
     @BindView(R.id.btn_modify_topic_sign)
-    protected TextView btnModifyTopicSign;
+    TextView btnModifyTopicSign;
 
     @BindView(R.id.switch_topic_render_compat)
-    protected SwitchCompat switchTopicRenderCompat;
+    SwitchCompat switchTopicRenderCompat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,38 +57,38 @@ public class SettingActivity extends StatusBarActivity {
     }
 
     @OnClick(R.id.btn_notification)
-    protected void onBtnNotificationClick() {
+    void onBtnNotificationClick() {
         switchNotification.toggle();
         SettingShared.setEnableNotification(this, switchNotification.isChecked());
     }
 
     @OnClick(R.id.btn_theme_dark)
-    protected void onBtnThemeDarkClick() {
+    void onBtnThemeDarkClick() {
         switchThemeDark.toggle();
         SettingShared.setEnableThemeDark(this, switchThemeDark.isChecked());
         ThemeUtils.notifyThemeApply(this, false);
     }
 
     @OnClick(R.id.btn_topic_draft)
-    protected void onBtnTopicDraftClick() {
+    void onBtnTopicDraftClick() {
         switchTopicDraft.toggle();
         SettingShared.setEnableTopicDraft(this, switchTopicDraft.isChecked());
     }
 
     @OnClick(R.id.btn_topic_sign)
-    protected void onBtnTopicSignClick() {
+    void onBtnTopicSignClick() {
         switchTopicSign.toggle();
         SettingShared.setEnableTopicSign(this, switchTopicSign.isChecked());
         btnModifyTopicSign.setEnabled(switchTopicSign.isChecked());
     }
 
     @OnClick(R.id.btn_modify_topic_sign)
-    protected void onBtnModifyTopicSignClick() {
+    void onBtnModifyTopicSignClick() {
         startActivity(new Intent(this, ModifyTopicSignActivity.class));
     }
 
     @OnClick(R.id.btn_topic_render_compat)
-    protected void onBtnTopicRenderCompatClick() {
+    void onBtnTopicRenderCompatClick() {
         switchTopicRenderCompat.toggle();
         SettingShared.setEnableTopicRenderCompat(this, switchTopicRenderCompat.isChecked());
     }

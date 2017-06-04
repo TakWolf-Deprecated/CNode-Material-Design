@@ -32,13 +32,13 @@ public class ImagePreviewActivity extends StatusBarActivity {
     }
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.photo_view)
-    protected PhotoView photoView;
+    PhotoView photoView;
 
     @BindView(R.id.progress_wheel)
-    protected ProgressWheel progressWheel;
+    ProgressWheel progressWheel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -17,10 +17,10 @@ import butterknife.ButterKnife;
 public class ModifyTopicSignActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.edt_content)
-    protected EditText edtContent;
+    EditText edtContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

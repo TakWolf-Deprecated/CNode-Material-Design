@@ -27,10 +27,10 @@ public class MarkdownPreviewActivity extends StatusBarActivity {
     }
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.web_preview)
-    protected PreviewWebView webPreview;
+    PreviewWebView webPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
