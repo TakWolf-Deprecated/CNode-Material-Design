@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 public class TopicSimpleListFragment extends Fragment {
 
     @BindView(R.id.recycler_view)
-    protected RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
     private TopicSimpleListAdapter adapter;
 
