@@ -84,7 +84,7 @@ public final class Navigator {
         public static final String EXTRA_TOPIC = "topic";
 
         private static Class<?> getTargetClass(@NonNull Context context) {
-            return SettingShared.isReallyEnableTopicRenderCompat(context) ? TopicCompatActivity.class : TopicActivity.class;
+            return SettingShared.isEnableTopicRenderCompat(context) ? TopicCompatActivity.class : TopicActivity.class;
         }
 
         public static void start(@NonNull Activity activity, @NonNull Topic topic) {
@@ -114,7 +114,7 @@ public final class Navigator {
         private NotificationWithAutoCompat() {}
 
         private static Class<?> getTargetClass(@NonNull Context context) {
-            return SettingShared.isReallyEnableTopicRenderCompat(context) ? NotificationCompatActivity.class : NotificationActivity.class;
+            return SettingShared.isEnableTopicRenderCompat(context) ? NotificationCompatActivity.class : NotificationActivity.class;
         }
 
         public static void start(@NonNull Activity activity) {
