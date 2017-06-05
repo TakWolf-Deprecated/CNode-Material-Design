@@ -105,13 +105,13 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
     @Override
     protected void onResume() {
         super.onResume();
-        qrCodeReaderView.getCameraManager().startPreview();
+        qrCodeReaderView.startCamera();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        qrCodeReaderView.getCameraManager().stopPreview();
+        qrCodeReaderView.stopCamera();
     }
 
     @Override
@@ -121,25 +121,5 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
         setResult(RESULT_OK, intent);
         finish();
     }
-
-    @Override
-    public void cameraNotFound() {
-        AlertDialogUtils.createBuilderWithAutoTheme(this)
-                .setMessage(R.string.can_not_open_camera)
-                .setPositiveButton(R.string.confirm, null)
-                .setOnDismissListener(new DialogInterface.OnDismissListener() {
-
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        setResult(RESULT_CANCELED);
-                        finish();
-                    }
-
-                })
-                .show();
-    }
-
-    @Override
-    public void QRCodeNotFoundOnCamImage() {}
 
 }
