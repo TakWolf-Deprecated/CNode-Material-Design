@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.cnodejs.android.md.R;
@@ -18,7 +19,6 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import uk.co.senab.photoview.PhotoView;
 
 public class ImagePreviewActivity extends StatusBarActivity {
 
