@@ -40,7 +40,6 @@
 
         <activity
             android:name="org.cnodejs.android.md.ui.activity.LoginActivity"
-            android:launchMode="singleTask"
             android:label="@string/login"
             android:theme="@style/AppThemeLight.FitsStatusBar"
             android:screenOrientation="portrait"

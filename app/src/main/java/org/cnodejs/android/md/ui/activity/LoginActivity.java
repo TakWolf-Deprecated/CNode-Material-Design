@@ -39,7 +39,10 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     private static final int REQUEST_GITHUB_LOGIN = FormatUtils.generateRequestCode();
 
     public static void startForResult(@NonNull Activity activity, int requestCode) {
-        activity.startActivityForResult(new Intent(activity, LoginActivity.class), requestCode);
+        Intent intent = new Intent(activity, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        activity.startActivityForResult(intent, requestCode);
     }
 
     public static void startForResult(@NonNull Activity activity) {
