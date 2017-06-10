@@ -20,7 +20,7 @@ public final class ThemeUtils {
         if (delay) {
             ActivityUtils.recreateDelayed(activity);
         } else {
-            ActivityUtils.recreate(activity);
+            activity.recreate();
         }
     }
 

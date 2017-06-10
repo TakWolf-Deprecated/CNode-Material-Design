@@ -15,24 +15,12 @@ public final class ActivityUtils {
         return activity != null && !(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && activity.isDestroyed()) && !activity.isFinishing();
     }
 
-    public static void recreate(@NonNull Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            activity.recreate();
-        } else {
-            Intent intent = activity.getIntent();
-            intent.setClass(activity, activity.getClass());
-            activity.startActivity(intent);
-            activity.finish();
-            activity.overridePendingTransition(0, 0);
-        }
-    }
-
     public static void recreateDelayed(@NonNull final Activity activity) {
         HandlerUtils.handler.post(new Runnable() {
 
             @Override
             public void run() {
-                recreate(activity);
+                activity.recreate();
             }
 
         });
