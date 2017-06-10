@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.TextView;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
+
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.widget.ListView;
 
@@ -18,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoadMoreFooter implements AbsListView.OnScrollListener {
+public class LoadMoreFooter {
 
     public static final int STATE_DISABLED = 0;
     public static final int STATE_LOADING = 1;
@@ -36,8 +38,8 @@ public class LoadMoreFooter implements AbsListView.OnScrollListener {
 
     }
 
-    @BindView(R.id.icon_loading)
-    View iconLoading;
+    @BindView(R.id.progress_wheel)
+    ProgressWheel progressWheel;
 
     @BindView(R.id.tv_text)
     TextView tvText;
@@ -52,7 +54,19 @@ public class LoadMoreFooter implements AbsListView.OnScrollListener {
         View footerView = LayoutInflater.from(context).inflate(R.layout.footer_load_more, listView, false);
         listView.addFooterView(footerView, null, false);
         ButterKnife.bind(this, footerView);
-        listView.addOnScrollListener(this);
+        listView.addOnScrollListener(new AbsListView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (view.getLastVisiblePosition() == view.getCount() - 1) {
+                    checkLoadMore();
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {}
+
+        });
     }
 
     @State
@@ -65,29 +79,34 @@ public class LoadMoreFooter implements AbsListView.OnScrollListener {
             this.state = state;
             switch (state) {
                 case STATE_DISABLED:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.GONE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.GONE);
                     tvText.setClickable(false);
                     break;
                 case STATE_LOADING:
-                    iconLoading.setVisibility(View.VISIBLE);
+                    progressWheel.setVisibility(View.VISIBLE);
+                    progressWheel.spin();
                     tvText.setVisibility(View.GONE);
                     tvText.setClickable(false);
                     break;
                 case STATE_FINISHED:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.GONE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_finished);
                     tvText.setClickable(false);
                     break;
                 case STATE_ENDLESS:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.GONE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_endless);
                     tvText.setClickable(true);
                     break;
                 case STATE_FAILED:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.GONE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_failed);
                     tvText.setClickable(true);
@@ -109,15 +128,5 @@ public class LoadMoreFooter implements AbsListView.OnScrollListener {
     void onBtnTextClick() {
         checkLoadMore();
     }
-
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (view.getLastVisiblePosition() == view.getCount() - 1) {
-            checkLoadMore();
-        }
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {}
 
 }
