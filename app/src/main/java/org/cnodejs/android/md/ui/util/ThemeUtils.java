@@ -17,19 +17,15 @@ public final class ThemeUtils {
         return enable;
     }
 
-    public static void notifyThemeApply(@NonNull final Activity activity, boolean delay) {
-        if (delay) {
-            HandlerUtils.handler.post(new Runnable() {
+    public static void notifyThemeApply(@NonNull final Activity activity) {
+        HandlerUtils.handler.post(new Runnable() {
 
-                @Override
-                public void run() {
-                    activity.recreate();
-                }
+            @Override
+            public void run() {
+                activity.recreate();
+            }
 
-            });
-        } else {
-            activity.recreate();
-        }
+        });
     }
 
 }
