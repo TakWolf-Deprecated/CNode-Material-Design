@@ -80,28 +80,33 @@ public class LoadMoreFooter {
             switch (state) {
                 case STATE_DISABLED:
                     progressWheel.setVisibility(View.GONE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.GONE);
                     tvText.setClickable(false);
                     break;
                 case STATE_LOADING:
                     progressWheel.setVisibility(View.VISIBLE);
+                    progressWheel.spin();
                     tvText.setVisibility(View.GONE);
                     tvText.setClickable(false);
                     break;
                 case STATE_FINISHED:
                     progressWheel.setVisibility(View.GONE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_finished);
                     tvText.setClickable(false);
                     break;
                 case STATE_ENDLESS:
                     progressWheel.setVisibility(View.GONE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_endless);
                     tvText.setClickable(true);
                     break;
                 case STATE_FAILED:
                     progressWheel.setVisibility(View.GONE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_failed);
                     tvText.setClickable(true);
