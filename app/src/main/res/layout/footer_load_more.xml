@@ -8,7 +8,7 @@
 
     <com.pnikosis.materialishprogress.ProgressWheel
         android:visibility="gone"
-        android:id="@+id/icon_loading"
+        android:id="@+id/progress_wheel"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center"

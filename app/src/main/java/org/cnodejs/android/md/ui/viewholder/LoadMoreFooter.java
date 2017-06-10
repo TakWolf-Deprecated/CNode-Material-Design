@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.TextView;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
+
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.widget.ListView;
 
@@ -36,8 +38,8 @@ public class LoadMoreFooter {
 
     }
 
-    @BindView(R.id.icon_loading)
-    View iconLoading;
+    @BindView(R.id.progress_wheel)
+    ProgressWheel progressWheel;
 
     @BindView(R.id.tv_text)
     TextView tvText;
@@ -77,29 +79,29 @@ public class LoadMoreFooter {
             this.state = state;
             switch (state) {
                 case STATE_DISABLED:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.GONE);
                     tvText.setVisibility(View.GONE);
                     tvText.setClickable(false);
                     break;
                 case STATE_LOADING:
-                    iconLoading.setVisibility(View.VISIBLE);
+                    progressWheel.setVisibility(View.VISIBLE);
                     tvText.setVisibility(View.GONE);
                     tvText.setClickable(false);
                     break;
                 case STATE_FINISHED:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.GONE);
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_finished);
                     tvText.setClickable(false);
                     break;
                 case STATE_ENDLESS:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.GONE);
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_endless);
                     tvText.setClickable(true);
                     break;
                 case STATE_FAILED:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.GONE);
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_failed);
                     tvText.setClickable(true);
