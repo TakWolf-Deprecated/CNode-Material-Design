@@ -149,7 +149,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         mainPresenter.getMessageCountAsyncTask();
         // 判断是否需要切换主题
         if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
-            ThemeUtils.notifyThemeApply(this, true);
+            ThemeUtils.notifyThemeApply(this);
         }
     }
 
@@ -303,7 +303,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @OnClick(R.id.btn_theme_dark)
     void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
-        ThemeUtils.notifyThemeApply(this, false);
+        ThemeUtils.notifyThemeApply(this);
     }
 
     /**

@@ -66,7 +66,7 @@ public class SettingActivity extends StatusBarActivity {
     void onBtnThemeDarkClick() {
         switchThemeDark.toggle();
         SettingShared.setEnableThemeDark(this, switchThemeDark.isChecked());
-        ThemeUtils.notifyThemeApply(this, false);
+        ThemeUtils.notifyThemeApply(this);
     }
 
     @OnClick(R.id.btn_topic_draft)
