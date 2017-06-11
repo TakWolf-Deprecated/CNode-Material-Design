@@ -28,7 +28,6 @@ import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.listener.TopicJavascriptInterface;
 import org.cnodejs.android.md.ui.util.Navigator;
-import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.cnodejs.android.md.ui.view.IReplyView;
@@ -89,8 +88,10 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
         webTopic.setFabReply(fabReply);
         webTopic.setBridgeAndLoadPage(new TopicJavascriptInterface(this, createReplyView, topicHeaderPresenter, replyPresenter));
 
-        RefreshUtils.init(refreshLayout, this);
-        RefreshUtils.refresh(refreshLayout, this);
+        refreshLayout.setColorSchemeResources(R.color.color_accent);
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override

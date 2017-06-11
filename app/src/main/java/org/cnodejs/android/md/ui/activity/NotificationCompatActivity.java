@@ -15,7 +15,6 @@ import org.cnodejs.android.md.presenter.implement.NotificationPresenter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.INotificationView;
 import org.cnodejs.android.md.ui.widget.NotificationWebView;
@@ -56,8 +55,10 @@ public class NotificationCompatActivity extends StatusBarActivity implements INo
 
         notificationPresenter = new NotificationPresenter(this, this);
 
-        RefreshUtils.init(refreshLayout, this);
-        RefreshUtils.refresh(refreshLayout, this);
+        refreshLayout.setColorSchemeResources(R.color.color_accent);
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override

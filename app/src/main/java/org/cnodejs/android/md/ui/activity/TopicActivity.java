@@ -28,7 +28,6 @@ import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
-import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.ICreateReplyView;
@@ -103,8 +102,10 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
 
         topicPresenter = new TopicPresenter(this, this);
 
-        RefreshUtils.init(refreshLayout, this);
-        RefreshUtils.refresh(refreshLayout, this);
+        refreshLayout.setColorSchemeResources(R.color.color_accent);
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override
