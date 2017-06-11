@@ -32,9 +32,4 @@
     <color name="button_pressed">#ff48bd06</color>
     <color name="button_ripple">#99ffffff</color>
 
-    <color name="material_red">#f44336</color>
-    <color name="material_green">#4caf50</color>
-    <color name="material_blue">#2196f3</color>
-    <color name="material_yellow">#ffeb3b</color>
-
 </resources>

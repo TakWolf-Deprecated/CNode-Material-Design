@@ -30,7 +30,6 @@ import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
-import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
@@ -139,8 +138,10 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
         imgTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
 
-        RefreshUtils.init(refreshLayout, this);
-        RefreshUtils.refresh(refreshLayout, this);
+        refreshLayout.setColorSchemeResources(R.color.color_accent);
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override

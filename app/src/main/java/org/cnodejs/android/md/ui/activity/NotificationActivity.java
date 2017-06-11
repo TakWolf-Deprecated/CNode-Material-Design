@@ -3,8 +3,6 @@ package org.cnodejs.android.md.ui.activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,10 +15,10 @@ import org.cnodejs.android.md.ui.adapter.MessageListAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.INotificationView;
+import org.cnodejs.android.md.ui.widget.ListView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,8 +31,8 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
+    @BindView(R.id.list_view)
+    ListView listView;
 
     @BindView(R.id.icon_no_data)
     View iconNoData;
@@ -55,14 +53,15 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
         toolbar.setOnMenuItemClickListener(this);
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MessageListAdapter(this);
-        recyclerView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         notificationPresenter = new NotificationPresenter(this, this);
 
-        RefreshUtils.init(refreshLayout, this);
-        RefreshUtils.refresh(refreshLayout, this);
+        refreshLayout.setColorSchemeResources(R.color.color_accent);
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override
@@ -103,7 +102,7 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
 
     @Override
     public void backToContentTop() {
-        recyclerView.scrollToPosition(0);
+        listView.setSelection(0);
     }
 
 }
