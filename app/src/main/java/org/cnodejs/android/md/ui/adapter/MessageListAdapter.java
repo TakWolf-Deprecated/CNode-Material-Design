@@ -2,11 +2,11 @@ package org.cnodejs.android.md.ui.adapter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.ViewHolder> {
+public class MessageListAdapter extends BaseAdapter {
 
     private final Activity activity;
     private final LayoutInflater inflater;
@@ -50,21 +50,35 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     }
 
     @Override
-    public int getItemCount() {
+    public int getCount() {
         return messageList.size();
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.item_message, parent, false));
+    public Object getItem(int position) {
+        return messageList.get(position);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(messageList.get(position));
+    public long getItemId(int position) {
+        return position;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.item_message, parent, false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.update(messageList.get(position));
+        return convertView;
+    }
+
+    class ViewHolder {
 
         @BindView(R.id.img_avatar)
         ImageView imgAvatar;
@@ -90,7 +104,6 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         private Message message;
 
         ViewHolder(@NonNull View itemView) {
-            super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
