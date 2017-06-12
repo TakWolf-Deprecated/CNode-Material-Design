@@ -10,7 +10,7 @@
 
 ![Logo](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
-[CNode 社区](https://cnodejs.org)第三方 Android 客户端，原生 App，Material Design 风格，支持夜间模式
+[CNode 社区](https://cnodejs.org)第三方 Android 客户端，原生 App，Material Design 风格，支持夜间模式。
 
 ## Downloads ##
 
