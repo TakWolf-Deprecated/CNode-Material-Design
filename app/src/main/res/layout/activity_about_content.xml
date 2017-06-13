@@ -191,7 +191,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:padding="8dp"
-        android:text="@string/about_copyright"
+        android:text="@string/copyright"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
         android:gravity="center" />
