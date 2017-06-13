@@ -116,7 +116,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        enableThemeDark = ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
+        enableThemeDark = ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
