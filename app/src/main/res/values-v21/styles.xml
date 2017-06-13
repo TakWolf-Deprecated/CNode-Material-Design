@@ -8,19 +8,11 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
 
-    <style name="AppThemeLight.FitsStatusBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
     <!-- App Theme Dark -->
 
     <style name="AppThemeDark" parent="BaseAppThemeDark">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowContentTransitions">true</item>
-    </style>
-
-    <style name="AppThemeDark.FitsStatusBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
 </resources>

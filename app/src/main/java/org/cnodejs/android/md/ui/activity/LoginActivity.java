@@ -85,7 +85,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);

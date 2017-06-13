@@ -22,8 +22,6 @@
 
     <style name="AppThemeLight" parent="BaseAppThemeLight" />
 
-    <style name="AppThemeLight.FitsStatusBar" />
-
     <!-- App Theme Dark -->
 
     <style name="BaseAppThemeDark" parent="Theme.AppCompat.NoActionBar">
@@ -44,8 +42,6 @@
     </style>
 
     <style name="AppThemeDark" parent="BaseAppThemeDark" />
-
-    <style name="AppThemeDark.FitsStatusBar" />
 
     <!-- App Theme Launch -->
 

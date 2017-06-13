@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.ui.base;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,6 +40,12 @@ public abstract class StatusBarActivity extends BaseActivity {
             super.setContentView(rootView);
         } else {
             super.setContentView(layoutResId);
+        }
+    }
+
+    public void setFitsStatusBarMode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
 
