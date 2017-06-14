@@ -110,8 +110,8 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
 
     @Override
     protected void onPause() {
-        super.onPause();
         qrCodeReaderView.stopCamera();
+        super.onPause();
     }
 
     @Override
