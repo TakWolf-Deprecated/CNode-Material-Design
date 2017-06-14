@@ -23,8 +23,8 @@ public final class SharedWrapper {
 
     private static final String TAG = "SharedWrapper";
 
-    private static SecretKey secretSingleton = null;
-    private static IvParameterSpec ivSingleton = null;
+    private volatile static SecretKey secretSingleton = null;
+    private volatile static IvParameterSpec ivSingleton = null;
 
     public static SharedWrapper with(@NonNull Context context, @NonNull String name) {
         if (secretSingleton == null || ivSingleton == null) {

@@ -36,8 +36,8 @@ public class ProgressDialog extends AppCompatDialog {
 
     @Override
     protected void onStop() {
-        super.onStop();
         progressWheel.stopSpinning();
+        super.onStop();
     }
 
 }
