@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.melnykov.fab.FloatingActionButton;
+import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.TabType;
@@ -35,7 +37,6 @@ import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.IMainView;
 import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
-import org.cnodejs.android.md.ui.widget.ListView;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.HandlerUtils;
 
@@ -91,8 +92,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.list_view)
-    ListView listView;
+    @BindView(R.id.recycler_view)
+    HeaderAndFooterRecyclerView recyclerView;
 
     @BindView(R.id.icon_no_data)
     View iconNoData;
@@ -126,10 +127,11 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
-        loadMoreFooter = new LoadMoreFooter(this, listView, this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        loadMoreFooter = new LoadMoreFooter(this, recyclerView, this);
         adapter = new TopicListAdapter(this);
-        listView.setAdapter(adapter);
-        fabCreateTopic.attachToListView(listView);
+        recyclerView.setAdapter(adapter);
+        fabCreateTopic.attachToRecyclerView(recyclerView);
 
         mainPresenter = new MainPresenter(this, this);
 
@@ -426,7 +428,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public void backToContentTop() {
-        listView.setSelection(0);
+        recyclerView.scrollToPosition(0);
     }
 
 }

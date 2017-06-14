@@ -43,13 +43,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <org.cnodejs.android.md.ui.widget.ListView
-                android:id="@+id/list_view"
+            <com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:listSelector="@android:color/transparent"
-                android:cacheColorHint="@android:color/transparent"
-                android:divider="@android:color/transparent" />
+                android:layout_height="match_parent" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
