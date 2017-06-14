@@ -2,10 +2,10 @@ package org.cnodejs.android.md.ui.adapter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TopicListAdapter extends BaseAdapter {
+public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.ViewHolder> {
 
     private final Activity activity;
     private final LayoutInflater inflater;
@@ -42,35 +42,21 @@ public class TopicListAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return topicList.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return topicList.get(position);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(inflater.inflate(R.layout.item_topic, parent, false));
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_topic, parent, false);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.update(topicList.get(position));
-        return convertView;
     }
 
-    class ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.ctv_tab)
         CheckedTextView ctvTab;
@@ -102,6 +88,7 @@ public class TopicListAdapter extends BaseAdapter {
         private Topic topic;
 
         ViewHolder(@NonNull View itemView) {
+            super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
