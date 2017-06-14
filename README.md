@@ -54,6 +54,8 @@
 
 - [Glide](https://github.com/bumptech/glide)
 
+- [Android-HeaderAndFooterRecyclerView](https://github.com/TakWolf/Android-HeaderAndFooterRecyclerView)
+
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
 
 - [MaterialEditText](https://github.com/rengwuxian/MaterialEditText)
