@@ -365,45 +365,54 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     public void onSwitchTabOk(@NonNull TabType tab) {
         page = 0;
         toolbar.setTitle(tab.getNameId());
+        fabCreateTopic.show(true);
         adapter.getTopicList().clear();
         adapter.notifyDataSetChanged();
-        loadMoreFooter.setState(LoadMoreFooter.STATE_DISABLED);
         iconNoData.setVisibility(View.VISIBLE);
-        fabCreateTopic.show(true);
+        loadMoreFooter.setState(LoadMoreFooter.STATE_DISABLED);
         refreshLayout.setRefreshing(true);
         onRefresh();
     }
 
     @Override
     public void onRefreshTopicListOk(@NonNull List<Topic> topicList) {
+        page = 1;
         adapter.getTopicList().clear();
         adapter.getTopicList().addAll(topicList);
         adapter.notifyDataSetChanged();
-        if (adapter.getTopicList().isEmpty()) {
+        refreshLayout.setRefreshing(false);
+        if (topicList.isEmpty()) {
             loadMoreFooter.setState(LoadMoreFooter.STATE_DISABLED);
             iconNoData.setVisibility(View.VISIBLE);
         } else {
             loadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
             iconNoData.setVisibility(View.GONE);
         }
-        page = 1;
     }
 
     @Override
-    public void onRefreshTopicListFinish() {
+    public void onRefreshTopicListError(@NonNull String message) {
+        ToastUtils.with(this).show(message);
         refreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onLoadMoreTopicListOk(@NonNull List<Topic> topicList) {
-        adapter.getTopicList().addAll(topicList);
-        adapter.notifyDataSetChanged();
         page++;
+        int startPosition = adapter.getItemCount();
+        adapter.getTopicList().addAll(topicList);
+        adapter.notifyItemRangeInserted(startPosition, topicList.size());
+        if (topicList.isEmpty()) {
+            loadMoreFooter.setState(LoadMoreFooter.STATE_FINISHED);
+        } else {
+            loadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
+        }
     }
 
     @Override
-    public void onLoadMoreTopicListFinish(@LoadMoreFooter.State int state) {
-        loadMoreFooter.setState(state);
+    public void onLoadMoreTopicListError(@NonNull String message) {
+        ToastUtils.with(this).show(message);
+        loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
     }
 
     @Override

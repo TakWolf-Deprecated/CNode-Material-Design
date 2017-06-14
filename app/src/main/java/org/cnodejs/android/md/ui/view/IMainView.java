@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.model.entity.TabType;
 import org.cnodejs.android.md.model.entity.Topic;
-import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
 
 import java.util.List;
 
@@ -14,11 +13,11 @@ public interface IMainView {
 
     void onRefreshTopicListOk(@NonNull List<Topic> topicList);
 
-    void onRefreshTopicListFinish();
+    void onRefreshTopicListError(@NonNull String message);
 
     void onLoadMoreTopicListOk(@NonNull List<Topic> topicList);
 
-    void onLoadMoreTopicListFinish(@LoadMoreFooter.State int state);
+    void onLoadMoreTopicListError(@NonNull String message);
 
     void updateUserInfoViews();
 
