@@ -3,15 +3,16 @@ package org.cnodejs.android.md.ui.viewholder;
 import android.content.Context;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.TextView;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
+import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.widget.ListView;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -49,22 +50,26 @@ public class LoadMoreFooter {
 
     private final OnLoadMoreListener loadMoreListener;
 
-    public LoadMoreFooter(@NonNull Context context, @NonNull ListView listView, @NonNull OnLoadMoreListener loadMoreListener) {
+    public LoadMoreFooter(@NonNull Context context, @NonNull HeaderAndFooterRecyclerView recyclerView, @NonNull OnLoadMoreListener loadMoreListener) {
         this.loadMoreListener = loadMoreListener;
-        View footerView = LayoutInflater.from(context).inflate(R.layout.footer_load_more, listView, false);
-        listView.addFooterView(footerView, null, false);
+        View footerView = LayoutInflater.from(context).inflate(R.layout.footer_load_more, recyclerView.getFooterContainer(), false);
+        recyclerView.addFooterView(footerView);
         ButterKnife.bind(this, footerView);
-        listView.addOnScrollListener(new AbsListView.OnScrollListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (view.getLastVisiblePosition() == view.getCount() - 1) {
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
                     checkLoadMore();
                 }
             }
 
             @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {}
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
+                    checkLoadMore();
+                }
+            }
 
         });
     }
@@ -79,33 +84,35 @@ public class LoadMoreFooter {
             this.state = state;
             switch (state) {
                 case STATE_DISABLED:
-                    progressWheel.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.INVISIBLE);
                     progressWheel.stopSpinning();
-                    tvText.setVisibility(View.GONE);
+                    tvText.setVisibility(View.INVISIBLE);
+                    tvText.setText(null);
                     tvText.setClickable(false);
                     break;
                 case STATE_LOADING:
                     progressWheel.setVisibility(View.VISIBLE);
                     progressWheel.spin();
-                    tvText.setVisibility(View.GONE);
+                    tvText.setVisibility(View.INVISIBLE);
+                    tvText.setText(null);
                     tvText.setClickable(false);
                     break;
                 case STATE_FINISHED:
-                    progressWheel.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.INVISIBLE);
                     progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_finished);
                     tvText.setClickable(false);
                     break;
                 case STATE_ENDLESS:
-                    progressWheel.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.INVISIBLE);
                     progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
-                    tvText.setText(R.string.load_more_endless);
+                    tvText.setText(null);
                     tvText.setClickable(true);
                     break;
                 case STATE_FAILED:
-                    progressWheel.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.INVISIBLE);
                     progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_failed);
