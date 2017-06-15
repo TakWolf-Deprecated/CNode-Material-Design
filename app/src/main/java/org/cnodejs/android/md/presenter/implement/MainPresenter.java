@@ -72,9 +72,6 @@ public class MainPresenter implements IMainPresenter {
 
                 @Override
                 public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
-                    for (Topic topic : result.getData()) {
-                        topic.markSureHandleContent();
-                    }
                     cancelLoadMoreCall();
                     mainView.onRefreshTopicListOk(result.getData());
                     return false;
@@ -114,9 +111,6 @@ public class MainPresenter implements IMainPresenter {
 
                 @Override
                 public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
-                    for (Topic topic : result.getData()) {
-                        topic.markSureHandleContent();
-                    }
                     mainView.onLoadMoreTopicListOk(result.getData());
                     return false;
                 }
