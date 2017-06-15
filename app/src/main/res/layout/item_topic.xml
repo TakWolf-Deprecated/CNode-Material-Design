@@ -1,72 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/widgetBackground">
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/btn_item"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:background="?attr/selectableItemBackgroundGeneral"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <CheckedTextView
-                android:id="@+id/ctv_tab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:textColor="?attr/referenceText"
-                android:textSize="12sp"
-                android:background="?attr/referenceBackground"
-                tools:text="置顶"
-                tools:checked="true" />
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="16sp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                tools:text="话题的标题" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_avatar"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/image_placeholder" />
+            android:orientation="vertical"
+            android:background="?attr/widgetBackground">
 
             <LinearLayout
+                android:id="@+id/btn_topic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:orientation="vertical">
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -74,17 +29,22 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-                    <TextView
-                        android:id="@+id/tv_author"
-                        android:layout_width="0dp"
+                    <CheckedTextView
+                        android:id="@+id/ctv_tab"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginRight="4dp"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:textColor="?attr/referenceText"
                         android:textSize="12sp"
-                        android:maxLines="1"
-                        tools:text="TakWolf" />
+                        android:background="?attr/referenceBackground"
+                        tools:text="置顶"
+                        tools:checked="true" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/tv_reply_count"
@@ -114,26 +74,15 @@
                         android:maxLines="1"
                         tools:text="205" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
                     <TextView
-                        android:id="@+id/tv_create_time"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
+                        android:text="@string/$dot"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
-                        android:maxLines="1"
-                        tools:text="创建于：2015-1-1 19:20:15" />
+                        android:maxLines="1" />
 
                     <TextView
                         android:id="@+id/tv_last_reply_time"
@@ -146,23 +95,88 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    tools:text="话题的标题" />
+
+                <TextView
+                    android:id="@+id/tv_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="14sp"
+                    android:maxLines="4"
+                    android:ellipsize="end"
+                    tools:text="摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要" />
+
+            </LinearLayout>
+
+            <View style="@style/AppWidget.DeepLine"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp" />
+
+            <LinearLayout
+                android:id="@+id/btn_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_avatar"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/image_placeholder" />
+
+                <TextView
+                    android:id="@+id/tv_author"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    tools:text="TakWolf" />
+
+                <TextView
+                    android:id="@+id/tv_create_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    tools:text="创建于：2015-1-1 19:20:15" />
+
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/icon_good"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_margin="16dp"
+            android:src="@drawable/tab_ic_good"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true" />
 
-    <ImageView
-        android:id="@+id/icon_good"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="end"
-        android:layout_margin="16dp"
-        android:src="@drawable/tab_ic_good"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true" />
+    </FrameLayout>
 
-    <View style="@style/AppWidget.DeepLine"
-        android:layout_gravity="bottom" />
+    <View style="@style/AppWidget.ShadowGap" />
 
-</FrameLayout>
+</LinearLayout>
