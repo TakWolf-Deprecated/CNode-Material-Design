@@ -13,9 +13,7 @@ import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
-import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.IMainView;
-import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
 
 import java.util.List;
 
@@ -74,6 +72,9 @@ public class MainPresenter implements IMainPresenter {
 
                 @Override
                 public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
+                    for (Topic topic : result.getData()) {
+                        topic.markSureHandleContent();
+                    }
                     cancelLoadMoreCall();
                     mainView.onRefreshTopicListOk(result.getData());
                     return false;
@@ -81,13 +82,13 @@ public class MainPresenter implements IMainPresenter {
 
                 @Override
                 public boolean onResultError(int code, Headers headers, Result.Error error) {
-                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    mainView.onRefreshTopicListError(error.getErrorMessage());
                     return false;
                 }
 
                 @Override
                 public boolean onCallException(Throwable t, Result.Error error) {
-                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    mainView.onRefreshTopicListError(error.getErrorMessage());
                     return false;
                 }
 
@@ -99,7 +100,6 @@ public class MainPresenter implements IMainPresenter {
                 @Override
                 public void onFinish() {
                     refreshCall = null;
-                    mainView.onRefreshTopicListFinish();
                 }
 
             });
@@ -114,26 +114,22 @@ public class MainPresenter implements IMainPresenter {
 
                 @Override
                 public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
-                    if (result.getData().size() > 0) {
-                        mainView.onLoadMoreTopicListOk(result.getData());
-                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_ENDLESS);
-                    } else {
-                        mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_FINISHED);
+                    for (Topic topic : result.getData()) {
+                        topic.markSureHandleContent();
                     }
+                    mainView.onLoadMoreTopicListOk(result.getData());
                     return false;
                 }
 
                 @Override
                 public boolean onResultError(int code, Headers headers, Result.Error error) {
-                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_FAILED);
-                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    mainView.onLoadMoreTopicListError(error.getErrorMessage());
                     return false;
                 }
 
                 @Override
                 public boolean onCallException(Throwable t, Result.Error error) {
-                    mainView.onLoadMoreTopicListFinish(LoadMoreFooter.STATE_FAILED);
-                    ToastUtils.with(getActivity()).show(error.getErrorMessage());
+                    mainView.onLoadMoreTopicListError(error.getErrorMessage());
                     return false;
                 }
 

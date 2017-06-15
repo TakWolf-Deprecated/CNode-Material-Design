@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.joda.time.DateTime;
+import org.jsoup.nodes.Document;
 
 public class Topic extends TopicSimple {
 
@@ -50,7 +51,7 @@ public class Topic extends TopicSimple {
 
     public void setContent(String content) {
         this.content = content;
-        contentHtml = null; // 清除已经处理的Html渲染缓存
+        cleanContentCache();
     }
 
     public boolean isGood() {
@@ -100,15 +101,39 @@ public class Topic extends TopicSimple {
     @SerializedName("content_html")
     private String contentHtml;
 
-    public String getContentHtml() {
-        if (contentHtml == null) {
+    @SerializedName("content_summary")
+    private String contentSummary;
+
+    public void markSureHandleContent() {
+        if (contentHtml == null || contentSummary == null) {
+            Document document;
             if (ApiDefine.MD_RENDER) {
-                contentHtml = FormatUtils.handleHtml(content);
+                document = FormatUtils.handleHtml(content);
             } else {
-                contentHtml = FormatUtils.handleHtml(FormatUtils.renderMarkdown(content));
+                document = FormatUtils.handleHtml(FormatUtils.renderMarkdown(content));
+            }
+            if (contentHtml == null) {
+                contentHtml = document.body().html();
+            }
+            if (contentSummary == null) {
+                contentSummary = document.body().text();
             }
         }
+    }
+
+    public void cleanContentCache() {
+        contentHtml = null;
+        contentSummary = null;
+    }
+
+    public String getContentHtml() {
+        markSureHandleContent();
         return contentHtml;
+    }
+
+    public String getContentSummary() {
+        markSureHandleContent();
+        return contentSummary;
     }
 
 }

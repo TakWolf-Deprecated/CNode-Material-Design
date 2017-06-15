@@ -3,31 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/widgetBackground">
+    android:layout_height="wrap_content">
 
     <com.pnikosis.materialishprogress.ProgressWheel
-        android:visibility="gone"
+        android:visibility="invisible"
         android:id="@+id/progress_wheel"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-        app:matProg_barColor="@color/color_accent"
+        app:matProg_barColor="?attr/colorAccent"
         app:matProg_progressIndeterminate="true"
         app:matProg_barWidth="3dp"
         tools:visibility="visible" />
 
     <TextView
-        android:visibility="gone"
+        android:visibility="invisible"
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:text="@string/load_more_endless"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp"
         android:gravity="center"
         android:background="?attr/selectableItemBackground"
+        tools:text="加载状态"
         tools:visibility="visible" />
 
 </FrameLayout>

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/widgetBackground"
     android:orientation="vertical">
 
     <LinearLayout
@@ -70,6 +69,10 @@
 
     </LinearLayout>
 
-    <View style="@style/AppWidget.DeepLine" />
+    <View style="@style/AppWidget.DeepLine"
+        android:id="@+id/icon_deep_line" />
+
+    <View style="@style/AppWidget.ShadowGap"
+        android:id="@+id/icon_shadow_gap" />
 
 </LinearLayout>

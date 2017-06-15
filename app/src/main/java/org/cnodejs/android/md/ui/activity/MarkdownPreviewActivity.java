@@ -42,7 +42,7 @@ public class MarkdownPreviewActivity extends StatusBarActivity {
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
 
         String markdown = getIntent().getStringExtra(EXTRA_MARKDOWN);
-        webPreview.loadRenderedContent(FormatUtils.handleHtml(FormatUtils.renderMarkdown(markdown)));
+        webPreview.loadRenderedContent(FormatUtils.handleHtml(FormatUtils.renderMarkdown(markdown)).body().html());
     }
 
     @Override
