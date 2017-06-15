@@ -116,7 +116,7 @@ public class Topic extends TopicSimple {
                 contentHtml = document.body().html();
             }
             if (contentSummary == null) {
-                contentSummary = document.body().text();
+                contentSummary = document.body().text().trim();
             }
         }
     }
