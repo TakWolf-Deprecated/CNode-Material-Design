@@ -62,8 +62,6 @@
 
 - [materialish-progress](https://github.com/pnikosis/materialish-progress)
 
-- [FloatingActionButton](https://github.com/makovkastar/FloatingActionButton)
-
 - [QRCodeReaderView](https://github.com/dlazaro66/QRCodeReaderView)
 
 - [PhotoView](https://github.com/chrisbanes/PhotoView)
