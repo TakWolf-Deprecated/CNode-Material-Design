@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Notification;
@@ -18,7 +19,6 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.INotificationView;
-import org.cnodejs.android.md.ui.widget.ListView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
