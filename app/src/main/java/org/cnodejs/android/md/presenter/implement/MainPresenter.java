@@ -68,7 +68,8 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public void refreshTopicListAsyncTask() {
         if (refreshCall == null) {
-            refreshCall = ApiClient.service.getTopicList(tab, 1, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            final Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, 1, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            refreshCall = call;
             refreshCall.enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
 
                 @Override
@@ -77,9 +78,11 @@ public class MainPresenter implements IMainPresenter {
 
                         @Override
                         public void onHandleTopicListFinishListener(@NonNull List<Topic> topicList) {
-                            cancelLoadMoreCall();
-                            mainView.onRefreshTopicListOk(topicList);
-                            onFinish();
+                            if (call == refreshCall) {
+                                cancelLoadMoreCall();
+                                mainView.onRefreshTopicListOk(topicList);
+                                onFinish();
+                            }
                         }
 
                     });
@@ -115,7 +118,8 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public void loadMoreTopicListAsyncTask(int page) {
         if (loadMoreCall == null) {
-            loadMoreCall = ApiClient.service.getTopicList(tab, page, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            final Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, page, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            loadMoreCall = call;
             loadMoreCall.enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
 
                 @Override
@@ -124,8 +128,10 @@ public class MainPresenter implements IMainPresenter {
 
                         @Override
                         public void onHandleTopicListFinishListener(@NonNull List<Topic> topicList) {
-                            mainView.onLoadMoreTopicListOk(topicList);
-                            onFinish();
+                            if (call == loadMoreCall) {
+                                mainView.onLoadMoreTopicListOk(topicList);
+                                onFinish();
+                            }
                         }
 
                     });
