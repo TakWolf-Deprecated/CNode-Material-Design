@@ -47,16 +47,13 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <com.melnykov.fab.FloatingActionButton
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_reply_white_24dp"
-            app:fab_colorNormal="@color/button_normal"
-            app:fab_colorPressed="@color/button_pressed"
-            app:fab_colorRipple="@color/button_ripple" />
+            android:src="@drawable/ic_reply_white_24dp" />
         
     </FrameLayout>
     

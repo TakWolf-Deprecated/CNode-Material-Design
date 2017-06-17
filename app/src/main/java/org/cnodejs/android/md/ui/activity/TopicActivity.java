@@ -3,14 +3,13 @@ package org.cnodejs.android.md.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-
-import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
