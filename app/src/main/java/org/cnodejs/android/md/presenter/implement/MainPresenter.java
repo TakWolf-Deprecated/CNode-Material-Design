@@ -14,6 +14,7 @@ import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
 import org.cnodejs.android.md.ui.view.IMainView;
+import org.cnodejs.android.md.util.HandlerUtils;
 
 import java.util.List;
 
@@ -72,9 +73,17 @@ public class MainPresenter implements IMainPresenter {
 
                 @Override
                 public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
-                    cancelLoadMoreCall();
-                    mainView.onRefreshTopicListOk(result.getData());
-                    return false;
+                    handleTopicList(result.getData(), new OnHandleTopicListFinishListener() {
+
+                        @Override
+                        public void onHandleTopicListFinishListener(@NonNull List<Topic> topicList) {
+                            cancelLoadMoreCall();
+                            mainView.onRefreshTopicListOk(topicList);
+                            onFinish();
+                        }
+
+                    });
+                    return true;
                 }
 
                 @Override
@@ -111,8 +120,16 @@ public class MainPresenter implements IMainPresenter {
 
                 @Override
                 public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
-                    mainView.onLoadMoreTopicListOk(result.getData());
-                    return false;
+                    handleTopicList(result.getData(), new OnHandleTopicListFinishListener() {
+
+                        @Override
+                        public void onHandleTopicListFinishListener(@NonNull List<Topic> topicList) {
+                            mainView.onLoadMoreTopicListOk(topicList);
+                            onFinish();
+                        }
+
+                    });
+                    return true;
                 }
 
                 @Override
@@ -176,6 +193,37 @@ public class MainPresenter implements IMainPresenter {
 
             });
         }
+    }
+
+    private void handleTopicList(@NonNull final List<Topic> topicList, @NonNull final OnHandleTopicListFinishListener listener) {
+        if (topicList.isEmpty()) {
+            listener.onHandleTopicListFinishListener(topicList);
+        } else {
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    for (Topic topic : topicList) {
+                        topic.markSureHandleContent();
+                    }
+                    HandlerUtils.handler.post(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            listener.onHandleTopicListFinishListener(topicList);
+                        }
+
+                    });
+                }
+
+            }).start();
+        }
+    }
+
+    private interface OnHandleTopicListFinishListener {
+
+        void onHandleTopicListFinishListener(@NonNull List<Topic> topicList);
+
     }
 
 }
