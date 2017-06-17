@@ -24,6 +24,7 @@ import org.cnodejs.android.md.presenter.implement.TopicPresenter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
+import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.listener.TopicJavascriptInterface;
 import org.cnodejs.android.md.ui.util.Navigator;
@@ -84,7 +85,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
 
         createReplyView = CreateReplyDialog.createWithAutoTheme(this, topicId, this);
 
-        webTopic.setFabReply(fabReply);
+        webTopic.addOnScrollListener(new FloatingActionButtonBehaviorListener.ForWebView(fabReply));
         webTopic.setBridgeAndLoadPage(new TopicJavascriptInterface(this, createReplyView, topicHeaderPresenter, replyPresenter));
 
         refreshLayout.setColorSchemeResources(R.color.color_accent);

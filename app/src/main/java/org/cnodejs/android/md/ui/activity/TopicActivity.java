@@ -25,6 +25,7 @@ import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
+import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
@@ -94,10 +95,9 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         header.updateViews(topic, false, 0);
         adapter = new ReplyListAdapter(this, createReplyView);
         listView.setAdapter(adapter);
+        listView.setOnScrollListener(new FloatingActionButtonBehaviorListener.ForListView(fabReply));
 
         iconNoData.setVisibility(topic == null ? View.VISIBLE : View.GONE);
-
-        fabReply.attachToListView(listView);
 
         topicPresenter = new TopicPresenter(this, this);
 

@@ -30,6 +30,7 @@ import org.cnodejs.android.md.ui.adapter.TopicListAdapter;
 import org.cnodejs.android.md.ui.base.FullLayoutActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
+import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
@@ -131,7 +132,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         loadMoreFooter = new LoadMoreFooter(this, recyclerView, this);
         adapter = new TopicListAdapter(this);
         recyclerView.setAdapter(adapter);
-        fabCreateTopic.attachToRecyclerView(recyclerView);
+        recyclerView.addOnScrollListener(new FloatingActionButtonBehaviorListener.ForRecyclerView(fabCreateTopic));
 
         mainPresenter = new MainPresenter(this, this);
 
@@ -365,7 +366,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     public void onSwitchTabOk(@NonNull TabType tab) {
         page = 0;
         toolbar.setTitle(tab.getNameId());
-        fabCreateTopic.show(true);
+        fabCreateTopic.show();
         adapter.getTopicList().clear();
         adapter.notifyDataSetChanged();
         iconNoData.setVisibility(View.VISIBLE);
