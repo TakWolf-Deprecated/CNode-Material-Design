@@ -439,6 +439,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @Override
     public void backToContentTop() {
         recyclerView.scrollToPosition(0);
+        fabCreateTopic.show();
     }
 
 }
