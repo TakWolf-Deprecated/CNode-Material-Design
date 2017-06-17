@@ -3,12 +3,11 @@ package org.cnodejs.android.md.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-
-import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
@@ -25,6 +24,7 @@ import org.cnodejs.android.md.presenter.implement.TopicPresenter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
+import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.listener.TopicJavascriptInterface;
 import org.cnodejs.android.md.ui.util.Navigator;
@@ -85,7 +85,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
 
         createReplyView = CreateReplyDialog.createWithAutoTheme(this, topicId, this);
 
-        webTopic.setFabReply(fabReply);
+        webTopic.addOnScrollListener(new FloatingActionButtonBehaviorListener.ForWebView(fabReply));
         webTopic.setBridgeAndLoadPage(new TopicJavascriptInterface(this, createReplyView, topicHeaderPresenter, replyPresenter));
 
         refreshLayout.setColorSchemeResources(R.color.color_accent);

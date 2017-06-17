@@ -17,6 +17,9 @@ import android.webkit.WebViewClient;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.util.Navigator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class CNodeWebView extends WebView {
 
     private final WebViewClient webViewClient = new WebViewClient() {
@@ -37,6 +40,7 @@ public abstract class CNodeWebView extends WebView {
     };
 
     private boolean darkTheme;
+    private List<OnScrollListener> onScrollListenerList;
 
     public CNodeWebView(@NonNull Context context) {
         super(context);
@@ -74,5 +78,40 @@ public abstract class CNodeWebView extends WebView {
     }
 
     protected void onPageFinished(String url) {}
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if (onScrollListenerList != null && onScrollListenerList.size() > 0) {
+            for (OnScrollListener onScrollListener : onScrollListenerList) {
+                onScrollListener.onScrollChanged(l, t, oldl, oldt);
+            }
+        }
+    }
+
+    public void addOnScrollListener(OnScrollListener listener) {
+        if (onScrollListenerList == null) {
+            onScrollListenerList = new ArrayList<>();
+        }
+        onScrollListenerList.add(listener);
+    }
+
+    public void removeOnScrollListener(OnScrollListener listener) {
+        if (onScrollListenerList != null) {
+            onScrollListenerList.remove(listener);
+        }
+    }
+
+    public void clearOnScrollListeners() {
+        if (onScrollListenerList != null) {
+            onScrollListenerList.clear();
+        }
+    }
+
+    public interface OnScrollListener {
+
+        void onScrollChanged(int l, int t, int oldl, int oldt);
+
+    }
 
 }

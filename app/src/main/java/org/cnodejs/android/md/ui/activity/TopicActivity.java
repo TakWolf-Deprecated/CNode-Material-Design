@@ -3,14 +3,13 @@ package org.cnodejs.android.md.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-
-import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
@@ -26,6 +25,7 @@ import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
+import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
@@ -95,10 +95,9 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         header.updateViews(topic, false, 0);
         adapter = new ReplyListAdapter(this, createReplyView);
         listView.setAdapter(adapter);
+        listView.setOnScrollListener(new FloatingActionButtonBehaviorListener.ForListView(fabReply));
 
         iconNoData.setVisibility(topic == null ? View.VISIBLE : View.GONE);
-
-        fabReply.attachToListView(listView);
 
         topicPresenter = new TopicPresenter(this, this);
 

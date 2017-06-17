@@ -9,5 +9,6 @@
 
     <dimen name="button_corner_radius">2dp</dimen>
     <dimen name="reference_corner_radius">4dp</dimen>
+    <dimen name="fab_margin">4dp</dimen>
 
 </resources>
