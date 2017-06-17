@@ -14,6 +14,7 @@ import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
 import org.cnodejs.android.md.ui.view.IMainView;
+import org.cnodejs.android.md.util.HandlerUtils;
 
 import java.util.List;
 
@@ -67,14 +68,25 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public void refreshTopicListAsyncTask() {
         if (refreshCall == null) {
-            refreshCall = ApiClient.service.getTopicList(tab, 1, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            final Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, 1, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            refreshCall = call;
             refreshCall.enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
 
                 @Override
                 public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
-                    cancelLoadMoreCall();
-                    mainView.onRefreshTopicListOk(result.getData());
-                    return false;
+                    handleTopicList(result.getData(), new OnHandleTopicListFinishListener() {
+
+                        @Override
+                        public void onHandleTopicListFinishListener(@NonNull List<Topic> topicList) {
+                            if (call == refreshCall) {
+                                cancelLoadMoreCall();
+                                mainView.onRefreshTopicListOk(topicList);
+                                onFinish();
+                            }
+                        }
+
+                    });
+                    return true;
                 }
 
                 @Override
@@ -106,13 +118,24 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public void loadMoreTopicListAsyncTask(int page) {
         if (loadMoreCall == null) {
-            loadMoreCall = ApiClient.service.getTopicList(tab, page, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            final Call<Result.Data<List<Topic>>> call = ApiClient.service.getTopicList(tab, page, PAGE_LIMIT, ApiDefine.MD_RENDER);
+            loadMoreCall = call;
             loadMoreCall.enqueue(new ForegroundCallback<Result.Data<List<Topic>>>(activity) {
 
                 @Override
                 public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
-                    mainView.onLoadMoreTopicListOk(result.getData());
-                    return false;
+                    handleTopicList(result.getData(), new OnHandleTopicListFinishListener() {
+
+                        @Override
+                        public void onHandleTopicListFinishListener(@NonNull List<Topic> topicList) {
+                            if (call == loadMoreCall) {
+                                mainView.onLoadMoreTopicListOk(topicList);
+                                onFinish();
+                            }
+                        }
+
+                    });
+                    return true;
                 }
 
                 @Override
@@ -176,6 +199,37 @@ public class MainPresenter implements IMainPresenter {
 
             });
         }
+    }
+
+    private void handleTopicList(@NonNull final List<Topic> topicList, @NonNull final OnHandleTopicListFinishListener listener) {
+        if (topicList.isEmpty()) {
+            listener.onHandleTopicListFinishListener(topicList);
+        } else {
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    for (Topic topic : topicList) {
+                        topic.markSureHandleContent();
+                    }
+                    HandlerUtils.handler.post(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            listener.onHandleTopicListFinishListener(topicList);
+                        }
+
+                    });
+                }
+
+            }).start();
+        }
+    }
+
+    private interface OnHandleTopicListFinishListener {
+
+        void onHandleTopicListFinishListener(@NonNull List<Topic> topicList);
+
     }
 
 }
