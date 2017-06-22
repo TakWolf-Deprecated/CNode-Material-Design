@@ -73,8 +73,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @BindView(R.id.btn_theme_dark)
     ImageView imgThemeDark;
 
-    @BindView(R.id.img_nav_top_background)
-    ImageView imgTopBackground;
+    @BindView(R.id.nav_top_background)
+    View navTopBackground;
 
     // 主要导航项
     @BindViews({
@@ -139,7 +139,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         updateUserInfoViews();
 
         imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
-        imgTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
+        navTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
 
         refreshLayout.setColorSchemeResources(R.color.color_accent);
         refreshLayout.setOnRefreshListener(this);

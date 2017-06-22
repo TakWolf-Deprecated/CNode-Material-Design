@@ -28,8 +28,4 @@
     <color name="selectable_item_background_general_pressed_dark">#ff444444</color>
     <color name="selectable_item_background_general_ripple_dark">#ff666666</color>
 
-    <color name="button_normal">@color/color_accent</color>
-    <color name="button_pressed">#ff48bd06</color>
-    <color name="button_ripple">#99ffffff</color>
-
 </resources>

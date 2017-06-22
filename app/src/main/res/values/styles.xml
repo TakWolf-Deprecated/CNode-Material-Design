@@ -185,14 +185,6 @@
         <item name="android:layout_marginBottom">8dp</item>
     </style>
 
-    <!-- Button -->
-
-    <style name="AppWidget.Button">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:background">@drawable/button_image</item>
-    </style>
-
     <!-- App Animation -->
 
     <style name="AppAnimation" parent="android:Animation" />

@@ -22,83 +22,91 @@
                 android:background="?attr/colorPrimary">
 
                 <ImageView
-                    android:id="@+id/img_nav_top_background"
+                    android:id="@+id/nav_top_background"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignBottom="@+id/layout_info"
+                    android:layout_alignBottom="@+id/nav_top_foreground"
                     android:src="@drawable/main_nav_header_bg"
                     android:scaleType="centerCrop"
                     android:adjustViewBounds="true" />
 
-                <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
-                    android:id="@+id/nav_adapt_status_bar"
+                <RelativeLayout
+                    android:id="@+id/nav_top_foreground"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <LinearLayout
-                    android:id="@+id/layout_info"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/nav_adapt_status_bar"
-                    android:padding="16dp"
-                    android:orientation="vertical">
+                    android:background="#01000000">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/img_avatar"
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:src="@drawable/image_placeholder" />
+                    <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
+                        android:id="@+id/nav_adapt_status_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                    <TextView
-                        android:id="@+id/tv_login_name"
+                    <LinearLayout
+                        android:id="@+id/layout_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp"
-                        tools:text="TakWolf" />
+                        android:layout_below="@+id/nav_adapt_status_bar"
+                        android:padding="16dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_score"
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/img_avatar"
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:src="@drawable/image_placeholder" />
+
+                        <TextView
+                            android:id="@+id/tv_login_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp"
+                            tools:text="TakWolf" />
+
+                        <TextView
+                            android:id="@+id/tv_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:textColor="@color/text_secondary_dark"
+                            android:textSize="14sp"
+                            tools:text="积分：0" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btn_theme_dark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignTop="@+id/layout_info"
+                        android:layout_margin="24dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_brightness_3_white_24dp"
+                        android:scaleType="center"
+                        android:adjustViewBounds="true"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+
+                    <TextView
+                        android:id="@+id/btn_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBottom="@+id/layout_info"
+                        android:layout_margin="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:text="@string/logout"
                         android:textColor="@color/text_secondary_dark"
                         android:textSize="14sp"
-                        tools:text="积分：0" />
+                        android:background="?attr/selectableItemBackground" />
 
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/btn_logout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignBottom="@+id/layout_info"
-                    android:layout_margin="16dp"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="@string/logout"
-                    android:textColor="@color/text_secondary_dark"
-                    android:textSize="14sp"
-                    android:background="@drawable/button_transparent_image" />
-
-                <ImageView
-                    android:id="@+id/btn_theme_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignTop="@+id/layout_info"
-                    android:layout_margin="16dp"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_brightness_3_white_24dp"
-                    android:scaleType="center"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/button_transparent_image" />
+                </RelativeLayout>
 
             </RelativeLayout>
 
