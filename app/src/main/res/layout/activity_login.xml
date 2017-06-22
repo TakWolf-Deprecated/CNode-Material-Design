@@ -91,10 +91,10 @@
                 app:met_textColorHint="?android:attr/textColorHint"
                 app:met_floatingLabelTextColor="?android:attr/textColorSecondary" />
 
-            <Button style="@style/AppWidget.Button"
+            <Button style="@style/Widget.AppCompat.Button.Colored"
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/login" />
 
