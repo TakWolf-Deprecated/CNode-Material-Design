@@ -63,7 +63,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="-40dp"
         app:contentPadding="8dp"
-        app:cardCornerRadius="@dimen/button_corner_radius"
+        app:cardCornerRadius="2dp"
         app:cardElevation="@dimen/shadow_gap_elevation"
         app:cardBackgroundColor="?attr/widgetBackground">
 
