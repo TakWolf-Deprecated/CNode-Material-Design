@@ -3,6 +3,7 @@ package org.cnodejs.android.md.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
@@ -66,7 +67,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     private IReplyPresenter replyPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic_compat);

@@ -2,6 +2,7 @@ package org.cnodejs.android.md.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
     private boolean saveTopicDraft = true;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_topic);

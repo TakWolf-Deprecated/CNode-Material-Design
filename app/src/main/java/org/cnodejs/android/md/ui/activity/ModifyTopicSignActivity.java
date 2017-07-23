@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.ui.activity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -23,7 +24,7 @@ public class ModifyTopicSignActivity extends StatusBarActivity implements Toolba
     EditText edtContent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_topic_sign);
