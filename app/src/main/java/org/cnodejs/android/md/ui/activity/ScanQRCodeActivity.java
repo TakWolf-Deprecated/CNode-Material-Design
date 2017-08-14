@@ -40,7 +40,7 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA)) {
                 AlertDialogUtils.createBuilderWithAutoTheme(activity)
                         .setMessage(R.string.qr_code_request_permission_rationale_tip)
-                        .setPositiveButton(R.string.open_permissions_request, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.go_on, new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
