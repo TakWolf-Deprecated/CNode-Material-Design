@@ -54,7 +54,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         return replyList;
     }
 
-    public void setReplyList(@NonNull List<Reply> replyList) {
+    public void setReplyListAndNotify(@NonNull List<Reply> replyList) {
         this.replyList.clear();
         this.replyList.addAll(replyList);
         positionMap.clear();
@@ -62,11 +62,13 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
             Reply reply = replyList.get(n);
             positionMap.put(reply.getId(), n);
         }
+        notifyDataSetChanged();
     }
 
-    public void addReply(@NonNull Reply reply) {
+    public void appendReplyAndNotify(@NonNull Reply reply) {
         replyList.add(reply);
         positionMap.put(reply.getId(), replyList.size() - 1);
+        notifyItemInserted(replyList.size() - 1);
     }
 
     @Override
