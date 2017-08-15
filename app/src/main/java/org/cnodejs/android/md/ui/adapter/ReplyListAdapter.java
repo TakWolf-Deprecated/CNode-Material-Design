@@ -3,11 +3,11 @@ package org.cnodejs.android.md.ui.adapter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ReplyListAdapter extends BaseAdapter {
+public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.ViewHolder> {
 
     private final Activity activity;
     private final LayoutInflater inflater;
@@ -70,35 +70,21 @@ public class ReplyListAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return replyList.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return replyList.get(position);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(inflater.inflate(R.layout.item_reply, parent, false));
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_reply, parent, false);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.update(position);
-        return convertView;
     }
 
-    class ViewHolder implements IReplyView {
+    class ViewHolder extends RecyclerView.ViewHolder implements IReplyView {
 
         @BindView(R.id.img_avatar)
         ImageView imgAvatar;
@@ -132,6 +118,7 @@ public class ReplyListAdapter extends BaseAdapter {
         private Reply reply;
 
         ViewHolder(@NonNull View itemView) {
+            super(itemView);
             ButterKnife.bind(this, itemView);
             replyPresenter = new ReplyPresenter(activity, this);
         }

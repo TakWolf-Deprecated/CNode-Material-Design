@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Topic;
@@ -75,10 +75,10 @@ public class TopicHeader implements ITopicHeaderView {
 
     private final ITopicHeaderPresenter topicHeaderPresenter;
 
-    public TopicHeader(@NonNull Activity activity, @NonNull ListView listView) {
+    public TopicHeader(@NonNull Activity activity, @NonNull HeaderAndFooterRecyclerView recyclerView) {
         this.activity = activity;
-        View headerView = LayoutInflater.from(activity).inflate(R.layout.header_topic, listView, false);
-        listView.addHeaderView(headerView, null, false);
+        View headerView = LayoutInflater.from(activity).inflate(R.layout.header_topic, recyclerView.getHeaderContainer(), false);
+        recyclerView.addHeaderView(headerView);
         ButterKnife.bind(this, headerView);
         this.topicHeaderPresenter = new TopicHeaderPresenter(activity, this);
     }

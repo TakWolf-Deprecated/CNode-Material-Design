@@ -6,11 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
+
+import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
@@ -47,8 +49,8 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.list_view)
-    ListView listView;
+    @BindView(R.id.recycler_view)
+    HeaderAndFooterRecyclerView recyclerView;
 
     @BindView(R.id.icon_no_data)
     View iconNoData;
@@ -92,11 +94,13 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         createReplyView = CreateReplyDialog.createWithAutoTheme(this, topicId, this);
-        header = new TopicHeader(this, listView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        header = new TopicHeader(this, recyclerView);
         header.updateViews(topic, false, 0);
         adapter = new ReplyListAdapter(this, createReplyView);
-        listView.setAdapter(adapter);
-        listView.setOnScrollListener(new FloatingActionButtonBehaviorListener.ForListView(fabReply));
+        recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new FloatingActionButtonBehaviorListener.ForRecyclerView(fabReply));
 
         iconNoData.setVisibility(topic == null ? View.VISIBLE : View.GONE);
 
@@ -161,12 +165,12 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         adapter.addReply(reply);
         adapter.notifyDataSetChanged();
         header.updateReplyCount(adapter.getReplyList().size());
-        listView.smoothScrollToPosition(adapter.getReplyList().size());
+        recyclerView.smoothScrollToPosition(adapter.getReplyList().size());
     }
 
     @Override
     public void backToContentTop() {
-        listView.setSelection(0);
+        recyclerView.scrollToPosition(0);
     }
 
 }
