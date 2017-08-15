@@ -35,18 +35,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.ViewHolder> {
+public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.ViewHolder> implements IReplyView {
 
     private final Activity activity;
     private final LayoutInflater inflater;
     private final List<Reply> replyList = new ArrayList<>();
     private final Map<String, Integer> positionMap = new HashMap<>();
     private final ICreateReplyView createReplyView;
+    private final IReplyPresenter replyPresenter;
 
     public ReplyListAdapter(@NonNull Activity activity, @NonNull ICreateReplyView createReplyView) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
         this.createReplyView = createReplyView;
+        replyPresenter = new ReplyPresenter(activity, this);
     }
 
     @NonNull
@@ -72,6 +74,16 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
     }
 
     @Override
+    public void onUpReplyOk(@NonNull Reply reply) {
+        for (int position = 0; position < replyList.size(); position++) {
+            Reply replyAtPosition = replyList.get(position);
+            if (TextUtils.equals(reply.getId(), replyAtPosition.getId())) {
+                notifyItemChanged(position, reply);
+            }
+        }
+    }
+
+    @Override
     public int getItemCount() {
         return replyList.size();
     }
@@ -86,7 +98,21 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         holder.update(position);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements IReplyView {
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position);
+        } else {
+            for (Object payload : payloads) {
+                if (payload instanceof Reply) { // 更新点赞状态
+                    Reply reply = (Reply) payload;
+                    holder.updateUpViews(reply);
+                }
+            }
+        }
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.img_avatar)
         ImageView imgAvatar;
@@ -115,14 +141,11 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         @BindView(R.id.icon_shadow_gap)
         View iconShadowGap;
 
-        private final IReplyPresenter replyPresenter;
-
         private Reply reply;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            replyPresenter = new ReplyPresenter(activity, this);
         }
 
         void update(int position) {
@@ -175,13 +198,6 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         void onBtnAtClick() {
             if (LoginActivity.checkLogin(activity)) {
                 createReplyView.onAt(reply, positionMap.get(reply.getId()));
-            }
-        }
-
-        @Override
-        public void onUpReplyOk(@NonNull Reply reply) {
-            if (TextUtils.equals(reply.getId(), this.reply.getId())) {
-                updateUpViews(reply);
             }
         }
 
