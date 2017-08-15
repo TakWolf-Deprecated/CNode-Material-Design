@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
+
+import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Notification;
@@ -32,8 +34,8 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.list_view)
-    ListView listView;
+    @BindView(R.id.recycler_view)
+    HeaderAndFooterRecyclerView recyclerView;
 
     @BindView(R.id.icon_no_data)
     View iconNoData;
@@ -54,8 +56,9 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
         toolbar.setOnMenuItemClickListener(this);
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MessageListAdapter(this);
-        listView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
         notificationPresenter = new NotificationPresenter(this, this);
 
@@ -103,7 +106,7 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
 
     @Override
     public void backToContentTop() {
-        listView.setSelection(0);
+        recyclerView.scrollToPosition(0);
     }
 
 }
