@@ -3,7 +3,6 @@ package org.cnodejs.android.md.ui.listener;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
-import android.widget.AbsListView;
 
 import org.cnodejs.android.md.ui.widget.CNodeWebView;
 
@@ -29,45 +28,6 @@ public final class FloatingActionButtonBehaviorListener {
                 floatingActionButton.show();
             }
         }
-
-    }
-
-    public static class ForListView implements AbsListView.OnScrollListener {
-
-        private final FloatingActionButton floatingActionButton;
-
-        private int lastScrollY;
-        private int previousFirstVisibleItem;
-
-        public ForListView(@NonNull FloatingActionButton floatingActionButton) {
-            this.floatingActionButton = floatingActionButton;
-        }
-
-        @Override
-        public void onScroll(AbsListView listView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-            if (totalItemCount > 0) {
-                if (firstVisibleItem == previousFirstVisibleItem) {
-                    int newScrollY = listView.getChildCount() > 0 ? listView.getChildAt(0).getTop() : 0;
-                    if (newScrollY - lastScrollY < -SCROLL_THRESHOLD) {
-                        floatingActionButton.hide();
-                    } else if (newScrollY - lastScrollY > SCROLL_THRESHOLD) {
-                        floatingActionButton.show();
-                    }
-                    lastScrollY = newScrollY;
-                } else {
-                    if (firstVisibleItem > previousFirstVisibleItem) {
-                        floatingActionButton.hide();
-                    } else if (firstVisibleItem < previousFirstVisibleItem) {
-                        floatingActionButton.show();
-                    }
-                    lastScrollY = listView.getChildCount() > 0 ? listView.getChildAt(0).getTop() : 0;
-                    previousFirstVisibleItem = firstVisibleItem;
-                }
-            }
-        }
-
-        @Override
-        public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
     }
 
