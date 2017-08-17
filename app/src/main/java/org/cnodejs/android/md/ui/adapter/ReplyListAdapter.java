@@ -58,7 +58,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         return replyList;
     }
 
-    public void setReplyListAndNotify(String authorLoginName, @NonNull List<Reply> replyList) {
+    public void setReplyListWithNotify(String authorLoginName, @NonNull List<Reply> replyList) {
         this.authorLoginName = authorLoginName;
         this.replyList.clear();
         this.replyList.addAll(replyList);
@@ -70,7 +70,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         notifyDataSetChanged();
     }
 
-    public void appendReplyAndNotify(@NonNull Reply reply) {
+    public void appendReplyWithNotify(@NonNull Reply reply) {
         replyList.add(reply);
         positionMap.put(reply.getId(), replyList.size() - 1);
         notifyItemInserted(replyList.size() - 1);
