@@ -44,6 +44,8 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
     private final ICreateReplyView createReplyView;
     private final IReplyPresenter replyPresenter;
 
+    private String authorLoginName = null;
+
     public ReplyListAdapter(@NonNull Activity activity, @NonNull ICreateReplyView createReplyView) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
@@ -56,7 +58,8 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         return replyList;
     }
 
-    public void setReplyListAndNotify(@NonNull List<Reply> replyList) {
+    public void setReplyListWithNotify(String authorLoginName, @NonNull List<Reply> replyList) {
+        this.authorLoginName = authorLoginName;
         this.replyList.clear();
         this.replyList.addAll(replyList);
         positionMap.clear();
@@ -67,7 +70,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         notifyDataSetChanged();
     }
 
-    public void appendReplyAndNotify(@NonNull Reply reply) {
+    public void appendReplyWithNotify(@NonNull Reply reply) {
         replyList.add(reply);
         positionMap.put(reply.getId(), replyList.size() - 1);
         notifyItemInserted(replyList.size() - 1);
@@ -120,6 +123,9 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         @BindView(R.id.tv_login_name)
         TextView tvLoginName;
 
+        @BindView(R.id.icon_author)
+        View iconAuthor;
+
         @BindView(R.id.tv_index)
         TextView tvIndex;
 
@@ -156,6 +162,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
             Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
+            iconAuthor.setVisibility(TextUtils.equals(authorLoginName, reply.getAuthor().getLoginName()) ? View.VISIBLE : View.GONE);
             tvIndex.setText(activity.getString(R.string.$d_floor, position + 1));
             tvCreateTime.setText(FormatUtils.getRelativeTimeSpanString(reply.getCreateAt()));
             updateUpViews(reply);

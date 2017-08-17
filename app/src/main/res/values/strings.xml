@@ -54,6 +54,7 @@
     <string name="ok">好的</string>
     <string name="go_on">继续</string>
 
+    <string name="author">作者</string>
     <string name="topic_$s">话题：%s</string>
     <string name="$d_floor">%d楼</string>
     <string name="reply_$d_floor">回复：%d楼</string>
