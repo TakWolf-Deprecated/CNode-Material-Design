@@ -64,6 +64,7 @@
                                     <td class="center">
                                         <div class="line1">
                                             <span class="loginname text-primary">{{reply.author.loginname}}</span>
+                                            <span class="tag-accent" v-if="topic.author.loginname === reply.author.loginname">作者</span>
                                         </div>
                                         <div class="line2">
                                             <span class="index text-accent">{{position + 1}}楼</span>
