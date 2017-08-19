@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
@@ -51,9 +50,6 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
 
     @BindView(R.id.recycler_view)
     HeaderAndFooterRecyclerView recyclerView;
-
-    @BindView(R.id.icon_no_data)
-    View iconNoData;
 
     @BindView(R.id.fab_reply)
     FloatingActionButton fabReply;
@@ -102,8 +98,6 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new FloatingActionButtonBehaviorListener.ForRecyclerView(fabReply));
 
-        iconNoData.setVisibility(topic == null ? View.VISIBLE : View.GONE);
-
         topicPresenter = new TopicPresenter(this, this);
 
         refreshLayout.setColorSchemeResources(R.color.color_accent);
@@ -151,7 +145,6 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         this.topic = topic;
         header.updateViews(topic);
         adapter.setReplyListWithNotify(topic.getAuthor().getLoginName(), topic.getReplyList());
-        iconNoData.setVisibility(View.GONE);
     }
 
     @Override

@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Message;
@@ -36,9 +35,6 @@ public class NotificationCompatActivity extends StatusBarActivity implements INo
 
     @BindView(R.id.web_notification)
     NotificationWebView webNotification;
-
-    @BindView(R.id.icon_no_data)
-    View iconNoData;
 
     private INotificationPresenter notificationPresenter;
 
@@ -84,7 +80,6 @@ public class NotificationCompatActivity extends StatusBarActivity implements INo
         messageList.addAll(notification.getHasNotReadMessageList());
         messageList.addAll(notification.getHasReadMessageList());
         webNotification.updateMessageList(messageList);
-        iconNoData.setVisibility(messageList.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     @Override

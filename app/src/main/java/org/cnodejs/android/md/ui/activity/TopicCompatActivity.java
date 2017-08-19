@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
@@ -50,9 +49,6 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
 
     @BindView(R.id.web_topic)
     TopicWebView webTopic;
-
-    @BindView(R.id.icon_no_data)
-    View iconNoData;
 
     @BindView(R.id.fab_reply)
     FloatingActionButton fabReply;
@@ -133,7 +129,6 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     public void onGetTopicOk(@NonNull TopicWithReply topic) {
         this.topic = topic;
         webTopic.updateTopicAndUserId(topic, LoginShared.getId(this));
-        iconNoData.setVisibility(View.GONE);
     }
 
     @Override
