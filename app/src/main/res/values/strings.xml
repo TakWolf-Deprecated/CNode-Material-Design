@@ -31,8 +31,6 @@
     <string name="login_success">登录成功</string>
     <string name="relogin">重新登录</string>
 
-    <string name="no_data">暂无数据</string>
-    <string name="no_message">暂无消息</string>
     <string name="no_reply">暂无回复</string>
     <string name="data_load_faild_and_click_avatar_to_reload">数据加载失败，点击头像重试</string>
     <string name="have_no_more_data">已没有更多数据</string>

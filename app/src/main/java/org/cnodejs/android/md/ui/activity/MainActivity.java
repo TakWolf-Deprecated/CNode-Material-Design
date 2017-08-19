@@ -97,9 +97,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @BindView(R.id.recycler_view)
     HeaderAndFooterRecyclerView recyclerView;
 
-    @BindView(R.id.icon_no_data)
-    View iconNoData;
-
     @BindView(R.id.fab_create_topic)
     FloatingActionButton fabCreateTopic;
 
@@ -370,7 +367,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         fabCreateTopic.show();
         adapter.getTopicList().clear();
         adapter.notifyDataSetChanged();
-        iconNoData.setVisibility(View.VISIBLE);
         loadMoreFooter.setState(LoadMoreFooter.STATE_DISABLED);
         refreshLayout.setRefreshing(true);
         onRefresh();
@@ -383,13 +379,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         adapter.getTopicList().addAll(topicList);
         adapter.notifyDataSetChanged();
         refreshLayout.setRefreshing(false);
-        if (topicList.isEmpty()) {
-            loadMoreFooter.setState(LoadMoreFooter.STATE_DISABLED);
-            iconNoData.setVisibility(View.VISIBLE);
-        } else {
-            loadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
-            iconNoData.setVisibility(View.GONE);
-        }
+        loadMoreFooter.setState(topicList.isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
     }
 
     @Override

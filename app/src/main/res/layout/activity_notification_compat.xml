@@ -16,35 +16,17 @@
         app:title="@string/notification"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <FrameLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/icon_no_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableTop="@drawable/ic_no_data"
-            android:drawablePadding="16dp"
-            android:text="@string/no_message"
-            android:textColor="#ffbababa"
-            android:textSize="16sp"
-            android:gravity="center" />
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_layout"
+        <org.cnodejs.android.md.ui.widget.NotificationWebView
+            android:id="@+id/web_notification"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:darkTheme="?attr/darkMode" />
 
-            <org.cnodejs.android.md.ui.widget.NotificationWebView
-                android:id="@+id/web_notification"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:darkTheme="?attr/darkMode" />
-
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-    </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

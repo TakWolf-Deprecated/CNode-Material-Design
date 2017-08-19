@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
@@ -36,9 +35,6 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
 
     @BindView(R.id.recycler_view)
     HeaderAndFooterRecyclerView recyclerView;
-
-    @BindView(R.id.icon_no_data)
-    View iconNoData;
 
     private MessageListAdapter adapter;
 
@@ -90,7 +86,6 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
         adapter.getMessageList().addAll(notification.getHasNotReadMessageList());
         adapter.getMessageList().addAll(notification.getHasReadMessageList());
         adapter.notifyDataSetChanged();
-        iconNoData.setVisibility(adapter.getMessageList().isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     @Override

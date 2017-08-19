@@ -1,187 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_gravity="start"
-    android:background="?attr/widgetBackground">
+    android:scrollbars="none"
+    tools:background="?attr/widgetBackground">
 
-    <ScrollView
-        android:layout_height="match_parent"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:scrollbars="none">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="?attr/colorPrimary">
+
+            <ImageView
+                android:id="@+id/nav_top_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/nav_top_foreground"
+                android:src="@drawable/main_nav_header_bg"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true" />
 
             <RelativeLayout
+                android:id="@+id/nav_top_foreground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary">
+                android:background="#01000000">
 
-                <ImageView
-                    android:id="@+id/nav_top_background"
+                <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
+                    android:id="@+id/nav_adapt_status_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignBottom="@+id/nav_top_foreground"
-                    android:src="@drawable/main_nav_header_bg"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true" />
+                    android:layout_height="wrap_content" />
 
-                <RelativeLayout
-                    android:id="@+id/nav_top_foreground"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/layout_info"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#01000000">
+                    android:layout_below="@+id/nav_adapt_status_bar"
+                    android:padding="16dp"
+                    android:orientation="vertical">
 
-                    <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
-                        android:id="@+id/nav_adapt_status_bar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:id="@+id/layout_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/nav_adapt_status_bar"
-                        android:padding="16dp"
-                        android:orientation="vertical">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/img_avatar"
-                            android:layout_width="72dp"
-                            android:layout_height="72dp"
-                            android:src="@drawable/image_placeholder" />
-
-                        <TextView
-                            android:id="@+id/tv_login_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:textColor="@android:color/white"
-                            android:textSize="16sp"
-                            tools:text="TakWolf" />
-
-                        <TextView
-                            android:id="@+id/tv_score"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:textColor="@color/text_secondary_dark"
-                            android:textSize="14sp"
-                            tools:text="积分：0" />
-
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/btn_theme_dark"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignTop="@+id/layout_info"
-                        android:layout_margin="24dp"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_brightness_3_white_24dp"
-                        android:scaleType="center"
-                        android:adjustViewBounds="true"
-                        android:background="?attr/selectableItemBackgroundBorderless" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_avatar"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:src="@drawable/image_placeholder" />
 
                     <TextView
-                        android:id="@+id/btn_logout"
+                        android:id="@+id/tv_login_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignBottom="@+id/layout_info"
-                        android:layout_margin="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:paddingLeft="16dp"
-                        android:paddingRight="16dp"
-                        android:text="@string/logout"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        tools:text="TakWolf" />
+
+                    <TextView
+                        android:id="@+id/tv_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:textColor="@color/text_secondary_dark"
                         android:textSize="14sp"
-                        android:background="?attr/selectableItemBackground" />
+                        tools:text="积分：0" />
 
-                </RelativeLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/btn_theme_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/layout_info"
+                    android:layout_margin="24dp"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_brightness_3_white_24dp"
+                    android:scaleType="center"
+                    android:adjustViewBounds="true"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+
+                <TextView
+                    android:id="@+id/btn_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignBottom="@+id/layout_info"
+                    android:layout_margin="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/logout"
+                    android:textColor="@color/text_secondary_dark"
+                    android:textSize="14sp"
+                    android:background="?attr/selectableItemBackground" />
 
             </RelativeLayout>
 
-            <View style="@style/AppWidget.ItemGap" />
+        </RelativeLayout>
 
-            <CheckedTextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_all"
-                android:drawableStart="@drawable/main_nav_ic_all"
-                android:drawableLeft="@drawable/main_nav_ic_all"
-                android:text="@string/tab_all"
-                android:checked="true" />
+        <View style="@style/AppWidget.ItemGap" />
 
-            <CheckedTextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_good"
-                android:drawableStart="@drawable/main_nav_ic_good"
-                android:drawableLeft="@drawable/main_nav_ic_good"
-                android:text="@string/tab_good" />
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_all"
+            android:drawableStart="@drawable/main_nav_ic_all"
+            android:drawableLeft="@drawable/main_nav_ic_all"
+            android:text="@string/tab_all"
+            android:checked="true" />
 
-            <CheckedTextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_share"
-                android:drawableStart="@drawable/main_nav_ic_share"
-                android:drawableLeft="@drawable/main_nav_ic_share"
-                android:text="@string/tab_share" />
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_good"
+            android:drawableStart="@drawable/main_nav_ic_good"
+            android:drawableLeft="@drawable/main_nav_ic_good"
+            android:text="@string/tab_good" />
 
-            <CheckedTextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_ask"
-                android:drawableStart="@drawable/main_nav_ic_ask"
-                android:drawableLeft="@drawable/main_nav_ic_ask"
-                android:text="@string/tab_ask" />
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_share"
+            android:drawableStart="@drawable/main_nav_ic_share"
+            android:drawableLeft="@drawable/main_nav_ic_share"
+            android:text="@string/tab_share" />
 
-            <CheckedTextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_job"
-                android:drawableStart="@drawable/main_nav_ic_job"
-                android:drawableLeft="@drawable/main_nav_ic_job"
-                android:text="@string/tab_job" />
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_ask"
+            android:drawableStart="@drawable/main_nav_ic_ask"
+            android:drawableLeft="@drawable/main_nav_ic_ask"
+            android:text="@string/tab_ask" />
 
-            <View style="@style/AppWidget.NavigationItemDeepLineGap" />
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_job"
+            android:drawableStart="@drawable/main_nav_ic_job"
+            android:drawableLeft="@drawable/main_nav_ic_job"
+            android:text="@string/tab_job" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <View style="@style/AppWidget.NavigationItemDeepLineGap" />
 
-                <TextView style="@style/AppWidget.NavigationItem"
-                    android:id="@+id/btn_nav_notification"
-                    android:drawableStart="@drawable/ic_notifications_grey600_24dp"
-                    android:drawableLeft="@drawable/ic_notifications_grey600_24dp"
-                    android:text="@string/notification" />
-
-                <TextView style="@style/AppWidget.NavigationItemBadge"
-                    android:id="@+id/badge_nav_notification"
-                    tools:text="99+" />
-
-            </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_setting"
-                android:drawableStart="@drawable/ic_settings_grey600_24dp"
-                android:drawableLeft="@drawable/ic_settings_grey600_24dp"
-                android:text="@string/setting" />
+                android:id="@+id/btn_nav_notification"
+                android:drawableStart="@drawable/ic_notifications_grey600_24dp"
+                android:drawableLeft="@drawable/ic_notifications_grey600_24dp"
+                android:text="@string/notification" />
 
-            <TextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_about"
-                android:drawableStart="@drawable/ic_info_grey600_24dp"
-                android:drawableLeft="@drawable/ic_info_grey600_24dp"
-                android:text="@string/about" />
+            <TextView style="@style/AppWidget.NavigationItemBadge"
+                android:id="@+id/badge_nav_notification"
+                tools:text="99+" />
 
-            <View style="@style/AppWidget.ItemGap" />
+        </FrameLayout>
 
-        </LinearLayout>
+        <TextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_setting"
+            android:drawableStart="@drawable/ic_settings_grey600_24dp"
+            android:drawableLeft="@drawable/ic_settings_grey600_24dp"
+            android:text="@string/setting" />
 
-    </ScrollView>
+        <TextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_about"
+            android:drawableStart="@drawable/ic_info_grey600_24dp"
+            android:drawableLeft="@drawable/ic_info_grey600_24dp"
+            android:text="@string/about" />
 
-    <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/translucent_status" />
+        <View style="@style/AppWidget.ItemGap" />
 
-</FrameLayout>
+    </LinearLayout>
+
+</ScrollView>
