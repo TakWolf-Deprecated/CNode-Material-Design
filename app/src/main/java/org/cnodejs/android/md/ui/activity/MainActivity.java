@@ -51,11 +51,17 @@ import butterknife.OnClick;
 
 public class MainActivity extends FullLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
 
-    // 抽屉导航布局
+    /*
+     * 抽屉导航布局
+     */
+
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
-    // 导航部分的个人信息
+    /*
+     * 导航部分的个人信息
+     */
+
     @BindView(R.id.img_avatar)
     ImageView imgAvatar;
 
@@ -77,7 +83,10 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @BindView(R.id.nav_top_background)
     View navTopBackground;
 
-    // 主要导航项
+    /*
+     * 主要导航项
+     */
+
     @BindViews({
             R.id.btn_nav_all,
             R.id.btn_nav_good,
@@ -87,7 +96,10 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     })
     List<CheckedTextView> navMainItemList;
 
-    // 内容部分
+    /*
+     * 内容部分
+     */
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -105,13 +117,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     private IMainPresenter mainPresenter;
 
-    // 当前分页位置
     private int page = 0;
-
-    // 首次按下返回键时间戳
     private long firstBackPressedTime = 0;
-
-    // 是否启用夜间模式
     private boolean enableThemeDark;
 
     @Override
@@ -206,9 +213,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         mainPresenter.loadMoreTopicListAsyncTask(page + 1);
     }
 
-    /**
-     * 主导航项单击事件
-     */
     @OnClick({
             R.id.btn_nav_all,
             R.id.btn_nav_good,
@@ -222,10 +226,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         }
         drawerLayout.closeDrawers();
     }
-
-    /**
-     * 次要菜单导航
-     */
 
     @OnClick({
             R.id.btn_nav_notification,
@@ -278,9 +278,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     private OtherItemAction settingAction = new OtherItemAction(SettingActivity.class);
     private OtherItemAction aboutAction = new OtherItemAction(AboutActivity.class);
 
-    /**
-     * 注销按钮
-     */
     @OnClick(R.id.btn_logout)
     void onBtnLogoutClick() {
         AlertDialogUtils.createBuilderWithAutoTheme(this)
@@ -299,18 +296,12 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
                 .show();
     }
 
-    /**
-     * 主题按钮
-     */
     @OnClick(R.id.btn_theme_dark)
     void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
         ThemeUtils.notifyThemeApply(this);
     }
 
-    /**
-     * 用户信息按钮
-     */
     @OnClick(R.id.layout_info)
     void onBtnInfoClick() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
@@ -320,9 +311,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         }
     }
 
-    /**
-     * 发帖按钮
-     */
     @OnClick(R.id.fab_create_topic)
     void onBtnCreateTopicClick() {
         if (LoginActivity.checkLogin(this)) {
@@ -330,9 +318,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         }
     }
 
-    /**
-     * 判断登录是否成功
-     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -342,9 +327,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         }
     }
 
-    /**
-     * 返回键关闭导航
-     */
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
