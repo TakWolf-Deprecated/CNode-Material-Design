@@ -29,6 +29,7 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.listener.TopicJavascriptInterface;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
+import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.cnodejs.android.md.ui.view.IReplyView;
 import org.cnodejs.android.md.ui.view.ITopicHeaderView;
@@ -39,7 +40,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TopicCompatActivity extends StatusBarActivity implements ITopicView, ITopicHeaderView, IReplyView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
+public class TopicCompatActivity extends StatusBarActivity implements ITopicView, ITopicHeaderView, IReplyView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -74,7 +75,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.topic);
         toolbar.setOnMenuItemClickListener(this);
-        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(webTopic));
+        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         topicPresenter = new TopicPresenter(this, this);
         topicHeaderPresenter = new TopicHeaderPresenter(this, this);
@@ -154,6 +155,11 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     @Override
     public void onUpReplyOk(@NonNull Reply reply) {
         webTopic.updateReply(reply);
+    }
+
+    @Override
+    public void backToContentTop() {
+        webTopic.scrollTo(0, 0);
     }
 
 }
