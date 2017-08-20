@@ -16,9 +16,8 @@ import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.ui.listener.FormatJavascriptInterface;
 import org.cnodejs.android.md.ui.listener.ImageJavascriptInterface;
 import org.cnodejs.android.md.ui.listener.TopicJavascriptInterface;
-import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 
-public class TopicWebView extends CNodeWebView implements IBackToContentTopView {
+public class TopicWebView extends CNodeWebView {
 
     private static final String LIGHT_THEME_PATH = "file:///android_asset/topic_light.html";
     private static final String DARK_THEME_PATH = "file:///android_asset/topic_dark.html";
@@ -108,11 +107,6 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
                     "}, 100);"
             );
         }
-    }
-
-    @Override
-    public void backToContentTop() {
-        scrollTo(0, 0);
     }
 
 }
