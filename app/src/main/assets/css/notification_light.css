@@ -102,3 +102,7 @@ body {
     background-color: #eeeeee;
     border-radius: 4px;
 }
+
+[v-cloak] {
+    display: none;
+}
