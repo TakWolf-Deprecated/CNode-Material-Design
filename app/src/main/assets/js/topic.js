@@ -22,8 +22,10 @@ Vue.filter('tabName', function (topic) {
                 return '问答';
             case 'job':
                 return '招聘';
+            case 'dev':
+                return '测试';
             default:
-                return '全部';
+                return '未知';
         }
     }
 });
