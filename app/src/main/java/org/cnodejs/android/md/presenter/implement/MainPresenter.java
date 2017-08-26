@@ -8,7 +8,7 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.api.ForegroundCallback;
 import org.cnodejs.android.md.model.entity.Result;
-import org.cnodejs.android.md.model.entity.TabType;
+import org.cnodejs.android.md.model.entity.Tab;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.model.storage.LoginShared;
@@ -28,7 +28,7 @@ public class MainPresenter implements IMainPresenter {
     private final Activity activity;
     private final IMainView mainView;
 
-    private TabType tab = TabType.all;
+    private Tab tab = Tab.all;
     private Call<Result.Data<List<Topic>>> refreshCall = null;
     private Call<Result.Data<List<Topic>>> loadMoreCall = null;
 
@@ -56,7 +56,7 @@ public class MainPresenter implements IMainPresenter {
     }
 
     @Override
-    public void switchTab(@NonNull TabType tab) {
+    public void switchTab(@NonNull Tab tab) {
         if (this.tab != tab) {
             this.tab = tab;
             cancelRefreshCall();

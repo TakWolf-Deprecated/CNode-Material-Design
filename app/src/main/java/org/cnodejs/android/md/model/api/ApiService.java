@@ -2,7 +2,7 @@ package org.cnodejs.android.md.model.api;
 
 import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.Result;
-import org.cnodejs.android.md.model.entity.TabType;
+import org.cnodejs.android.md.model.entity.Tab;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.entity.User;
@@ -25,7 +25,7 @@ public interface ApiService {
 
     @GET("topics")
     Call<Result.Data<List<Topic>>> getTopicList(
-            @Query("tab") TabType tab,
+            @Query("tab") Tab tab,
             @Query("page") Integer page,
             @Query("limit") Integer limit,
             @Query("mdrender") Boolean mdrender
@@ -42,7 +42,7 @@ public interface ApiService {
     @FormUrlEncoded
     Call<Result.CreateTopic> createTopic(
             @Field("accesstoken") String accessToken,
-            @Field("tab") TabType tab,
+            @Field("tab") Tab tab,
             @Field("title") String title,
             @Field("content") String content
     );

@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.model.entity;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.cnodejs.android.md.model.api.ApiDefine;
@@ -12,7 +14,7 @@ public class Topic extends TopicSimple {
     @SerializedName("author_id")
     private String authorId;
 
-    private TabType tab;
+    private Tab tab;
 
     private String content;
 
@@ -37,11 +39,12 @@ public class Topic extends TopicSimple {
         this.authorId = authorId;
     }
 
-    public TabType getTab() {
-        return tab == null ? TabType.unknown : tab; // 接口中有些话题没有Tab属性，这里保证Tab不为空
+    @NonNull
+    public Tab getTab() {
+        return tab == null ? Tab.unknown : tab; // 接口中有些话题没有 Tab 属性，这里保证 Tab 不为空
     }
 
-    public void setTab(TabType tab) {
+    public void setTab(Tab tab) {
         this.tab = tab;
     }
 
