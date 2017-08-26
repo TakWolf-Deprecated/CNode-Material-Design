@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
+import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Tab;
 import org.cnodejs.android.md.model.entity.Topic;
@@ -92,9 +93,13 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
             R.id.btn_nav_good,
             R.id.btn_nav_share,
             R.id.btn_nav_ask,
-            R.id.btn_nav_job
+            R.id.btn_nav_job,
+            R.id.btn_nav_dev
     })
     List<CheckedTextView> navMainItemList;
+
+    @BindView(R.id.btn_nav_dev)
+    CheckedTextView navMainItemDev;
 
     /*
      * 内容部分
@@ -132,6 +137,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         drawerLayout.addDrawerListener(drawerListener);
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
+
+        navMainItemDev.setVisibility(BuildConfig.DEBUG ? View.VISIBLE : View.GONE);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         loadMoreFooter = new LoadMoreFooter(this, recyclerView, this);
@@ -192,6 +199,9 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
                         case R.id.btn_nav_job:
                             tab = Tab.job;
                             break;
+                        case R.id.btn_nav_dev:
+                            tab = Tab.dev;
+                            break;
                         default:
                             throw new AssertionError("Unknow tab.");
                     }
@@ -218,7 +228,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
             R.id.btn_nav_good,
             R.id.btn_nav_share,
             R.id.btn_nav_ask,
-            R.id.btn_nav_job
+            R.id.btn_nav_job,
+            R.id.btn_nav_dev
     })
     void onNavigationMainItemClick(CheckedTextView itemView) {
         for (CheckedTextView navItem : navMainItemList) {

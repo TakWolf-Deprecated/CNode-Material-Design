@@ -137,6 +137,12 @@
             android:drawableLeft="@drawable/main_nav_ic_job"
             android:text="@string/tab_job" />
 
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_dev"
+            android:drawableStart="@drawable/main_nav_ic_dev"
+            android:drawableLeft="@drawable/main_nav_ic_dev"
+            android:text="@string/tab_dev" />
+
         <View style="@style/AppWidget.NavigationItemDeepLineGap" />
 
         <FrameLayout
