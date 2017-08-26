@@ -15,6 +15,7 @@ import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.model.storage.TopicShared;
 import org.cnodejs.android.md.presenter.contract.ICreateTopicPresenter;
 import org.cnodejs.android.md.presenter.implement.CreateTopicPresenter;
+import org.cnodejs.android.md.ui.adapter.TabSpinnerAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.ProgressDialog;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
@@ -61,6 +62,8 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
         toolbar.inflateMenu(R.menu.create_topic);
         toolbar.setOnMenuItemClickListener(this);
 
+        spnTab.setAdapter(new TabSpinnerAdapter(this, Tab.getPublishableTabList()));
+
         progressDialog = ProgressDialog.createWithAutoTheme(this);
         progressDialog.setCancelable(false);
 
@@ -96,23 +99,10 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_send:
-                createTopicPresenter.createTopicAsyncTask(getTabByPosition(spnTab.getSelectedItemPosition()), edtTitle.getText().toString().trim(), edtContent.getText().toString().trim());
+                createTopicPresenter.createTopicAsyncTask((Tab) spnTab.getSelectedItem(), edtTitle.getText().toString().trim(), edtContent.getText().toString().trim());
                 return true;
             default:
                 return false;
-        }
-    }
-
-    private Tab getTabByPosition(int position) {
-        switch (position) {
-            case 0:
-                return Tab.share;
-            case 1:
-                return Tab.ask;
-            case 2:
-                return Tab.job;
-            default:
-                return Tab.share;
         }
     }
 
