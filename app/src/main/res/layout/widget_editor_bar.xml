@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_editor_bar"
     android:layout_width="wrap_content"
     android:layout_height="@dimen/app_bar_size"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:background="?attr/widgetBackground">
 
     <ImageView
         android:id="@+id/btn_format_bold"

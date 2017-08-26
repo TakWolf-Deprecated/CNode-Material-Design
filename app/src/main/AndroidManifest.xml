@@ -108,7 +108,8 @@
             android:name="org.cnodejs.android.md.ui.activity.ModifyTopicSignActivity"
             android:label="@string/modify_topic_sign"
             android:screenOrientation="portrait"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name="org.cnodejs.android.md.ui.activity.AboutActivity"
