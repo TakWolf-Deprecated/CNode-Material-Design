@@ -17,9 +17,10 @@
         app:title="@string/open_source_license"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
         android:background="?attr/widgetBackground">
 
         <TextView
@@ -32,6 +33,6 @@
             android:lineSpacingExtra="2dp"
             tools:text="这里是文档内容" />
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>
