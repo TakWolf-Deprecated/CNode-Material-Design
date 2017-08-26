@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.TabType;
+import org.cnodejs.android.md.model.entity.Tab;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.model.storage.TopicShared;
 import org.cnodejs.android.md.presenter.contract.ICreateTopicPresenter;
@@ -103,16 +103,16 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
         }
     }
 
-    private TabType getTabByPosition(int position) {
+    private Tab getTabByPosition(int position) {
         switch (position) {
             case 0:
-                return TabType.share;
+                return Tab.share;
             case 1:
-                return TabType.ask;
+                return Tab.ask;
             case 2:
-                return TabType.job;
+                return Tab.job;
             default:
-                return TabType.share;
+                return Tab.share;
         }
     }
 

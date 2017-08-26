@@ -4,11 +4,13 @@ import android.support.annotation.StringRes;
 
 import org.cnodejs.android.md.R;
 
-public enum TabType {
+public enum Tab {
 
     all(R.string.app_name),
 
     good(R.string.tab_good),
+
+    unknown(R.string.tab_unknown),
 
     share(R.string.tab_share),
 
@@ -16,12 +18,12 @@ public enum TabType {
 
     job(R.string.tab_job),
 
-    unknown(R.string.tab_all);
+    dev(R.string.tab_dev);
 
     @StringRes
-    private int nameId;
+    private final int nameId;
 
-    TabType(@StringRes int nameId) {
+    Tab(@StringRes int nameId) {
         this.nameId = nameId;
     }
 

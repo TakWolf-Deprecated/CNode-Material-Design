@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.TabType;
+import org.cnodejs.android.md.model.entity.Tab;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
@@ -173,24 +173,24 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
         @Override
         public void onDrawerClosed(View drawerView) {
-            TabType tab = TabType.all;
+            Tab tab = Tab.all;
             for (CheckedTextView navItem : navMainItemList) {
                 if (navItem.isChecked()) {
                     switch (navItem.getId()) {
                         case R.id.btn_nav_all:
-                            tab = TabType.all;
+                            tab = Tab.all;
                             break;
                         case R.id.btn_nav_good:
-                            tab = TabType.good;
+                            tab = Tab.good;
                             break;
                         case R.id.btn_nav_share:
-                            tab = TabType.share;
+                            tab = Tab.share;
                             break;
                         case R.id.btn_nav_ask:
-                            tab = TabType.ask;
+                            tab = Tab.ask;
                             break;
                         case R.id.btn_nav_job:
-                            tab = TabType.job;
+                            tab = Tab.job;
                             break;
                         default:
                             throw new AssertionError("Unknow tab.");
@@ -343,7 +343,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     }
 
     @Override
-    public void onSwitchTabOk(@NonNull TabType tab) {
+    public void onSwitchTabOk(@NonNull Tab tab) {
         page = 0;
         toolbar.setTitle(tab.getNameId());
         fabCreateTopic.show();
