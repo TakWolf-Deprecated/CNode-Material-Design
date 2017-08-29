@@ -3,14 +3,15 @@ package org.cnodejs.android.md.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
 
-import com.melnykov.fab.FloatingActionButton;
+import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
@@ -26,9 +27,9 @@ import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
+import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
-import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.ICreateReplyView;
@@ -42,19 +43,16 @@ import butterknife.OnClick;
 public class TopicActivity extends StatusBarActivity implements ITopicView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.refresh_layout)
-    protected SwipeRefreshLayout refreshLayout;
+    SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.list_view)
-    protected ListView listView;
-
-    @BindView(R.id.icon_no_data)
-    protected View iconNoData;
+    @BindView(R.id.recycler_view)
+    HeaderAndFooterRecyclerView recyclerView;
 
     @BindView(R.id.fab_reply)
-    protected FloatingActionButton fabReply;
+    FloatingActionButton fabReply;
 
     private String topicId;
     private Topic topic;
@@ -66,7 +64,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     private ITopicPresenter topicPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
@@ -92,19 +90,20 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         createReplyView = CreateReplyDialog.createWithAutoTheme(this, topicId, this);
-        header = new TopicHeader(this, listView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        header = new TopicHeader(this, recyclerView);
         header.updateViews(topic, false, 0);
         adapter = new ReplyListAdapter(this, createReplyView);
-        listView.setAdapter(adapter);
-
-        iconNoData.setVisibility(topic == null ? View.VISIBLE : View.GONE);
-
-        fabReply.attachToListView(listView);
+        recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new FloatingActionButtonBehaviorListener.ForRecyclerView(fabReply));
 
         topicPresenter = new TopicPresenter(this, this);
 
-        RefreshUtils.init(refreshLayout, this);
-        RefreshUtils.refresh(refreshLayout, this);
+        refreshLayout.setColorSchemeResources(R.color.color_accent);
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override
@@ -126,7 +125,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     }
 
     @OnClick(R.id.fab_reply)
-    protected void onBtnReplyClick() {
+    void onBtnReplyClick() {
         if (topic != null && LoginActivity.checkLogin(this)) {
             createReplyView.showWindow();
         }
@@ -135,7 +134,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LoginActivity.REQUEST_LOGIN && resultCode == RESULT_OK) {
+        if (requestCode == LoginActivity.REQUEST_DEFAULT && resultCode == RESULT_OK) {
             refreshLayout.setRefreshing(true);
             onRefresh();
         }
@@ -145,9 +144,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     public void onGetTopicOk(@NonNull TopicWithReply topic) {
         this.topic = topic;
         header.updateViews(topic);
-        adapter.setReplyList(topic.getReplyList());
-        adapter.notifyDataSetChanged();
-        iconNoData.setVisibility(View.GONE);
+        adapter.setReplyListWithNotify(topic.getAuthor().getLoginName(), topic.getReplyList());
     }
 
     @Override
@@ -157,15 +154,14 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
 
     @Override
     public void appendReplyAndUpdateViews(@NonNull Reply reply) {
-        adapter.addReply(reply);
-        adapter.notifyDataSetChanged();
+        adapter.appendReplyWithNotify(reply);
         header.updateReplyCount(adapter.getReplyList().size());
-        listView.smoothScrollToPosition(adapter.getReplyList().size());
+        recyclerView.smoothScrollToPosition(adapter.getReplyList().size());
     }
 
     @Override
     public void backToContentTop() {
-        listView.setSelection(0);
+        recyclerView.scrollToPosition(0);
     }
 
 }

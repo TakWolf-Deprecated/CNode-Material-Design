@@ -2,10 +2,10 @@ package org.cnodejs.android.md.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Message;
@@ -15,7 +15,6 @@ import org.cnodejs.android.md.presenter.implement.NotificationPresenter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.INotificationView;
 import org.cnodejs.android.md.ui.widget.NotificationWebView;
@@ -29,21 +28,18 @@ import butterknife.ButterKnife;
 public class NotificationCompatActivity extends StatusBarActivity implements INotificationView, Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.refresh_layout)
-    protected SwipeRefreshLayout refreshLayout;
+    SwipeRefreshLayout refreshLayout;
 
     @BindView(R.id.web_notification)
-    protected NotificationWebView webNotification;
-
-    @BindView(R.id.icon_no_data)
-    protected View iconNoData;
+    NotificationWebView webNotification;
 
     private INotificationPresenter notificationPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_compat);
@@ -56,8 +52,10 @@ public class NotificationCompatActivity extends StatusBarActivity implements INo
 
         notificationPresenter = new NotificationPresenter(this, this);
 
-        RefreshUtils.init(refreshLayout, this);
-        RefreshUtils.refresh(refreshLayout, this);
+        refreshLayout.setColorSchemeResources(R.color.color_accent);
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override
@@ -82,7 +80,6 @@ public class NotificationCompatActivity extends StatusBarActivity implements INo
         messageList.addAll(notification.getHasNotReadMessageList());
         messageList.addAll(notification.getHasReadMessageList());
         webNotification.updateMessageList(messageList);
-        iconNoData.setVisibility(messageList.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     @Override

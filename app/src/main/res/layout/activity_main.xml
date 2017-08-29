@@ -4,8 +4,32 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <include layout="@layout/activity_main_center" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <include layout="@layout/activity_main_nav" />
+        <include layout="@layout/activity_main_center" />
+
+        <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimaryDark" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_gravity="start"
+        android:background="?attr/widgetBackground">
+
+        <include layout="@layout/activity_main_nav" />
+
+        <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/translucent_status" />
+
+    </FrameLayout>
 
 </android.support.v4.widget.DrawerLayout>

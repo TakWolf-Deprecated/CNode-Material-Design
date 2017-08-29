@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -31,7 +32,7 @@ import butterknife.ButterKnife;
 public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     private static final String[] PERMISSIONS = {Manifest.permission.CAMERA};
-    public static final int PERMISSIONS_REQUEST_QR_CODE = FormatUtils.generateRequestCode();
+    public static final int PERMISSIONS_REQUEST_DEFAULT = FormatUtils.generateRequestCode();
     public static final String EXTRA_QR_CODE = "qrCode";
 
     public static void startForResultWithPermissionCheck(@NonNull final Activity activity, int requestCode) {
@@ -39,17 +40,17 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA)) {
                 AlertDialogUtils.createBuilderWithAutoTheme(activity)
                         .setMessage(R.string.qr_code_request_permission_rationale_tip)
-                        .setPositiveButton(R.string.open_permissions_request, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.go_on, new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_QR_CODE);
+                                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_DEFAULT);
                             }
 
                         })
                         .show();
             } else {
-                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_QR_CODE);
+                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_DEFAULT);
             }
         } else {
             startForResult(activity, requestCode);
@@ -81,16 +82,16 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
     }
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.qr_view)
-    protected QRCodeReaderView qrCodeReaderView;
+    QRCodeReaderView qrCodeReaderView;
 
     @BindView(R.id.icon_line)
-    protected View iconLine;
+    View iconLine;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_qr_code);
         ButterKnife.bind(this);
@@ -105,13 +106,13 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
     @Override
     protected void onResume() {
         super.onResume();
-        qrCodeReaderView.getCameraManager().startPreview();
+        qrCodeReaderView.startCamera();
     }
 
     @Override
     protected void onPause() {
+        qrCodeReaderView.stopCamera();
         super.onPause();
-        qrCodeReaderView.getCameraManager().stopPreview();
     }
 
     @Override
@@ -121,25 +122,5 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
         setResult(RESULT_OK, intent);
         finish();
     }
-
-    @Override
-    public void cameraNotFound() {
-        AlertDialogUtils.createBuilderWithAutoTheme(this)
-                .setMessage(R.string.can_not_open_camera)
-                .setPositiveButton(R.string.confirm, null)
-                .setOnDismissListener(new DialogInterface.OnDismissListener() {
-
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        setResult(RESULT_CANCELED);
-                        finish();
-                    }
-
-                })
-                .show();
-    }
-
-    @Override
-    public void QRCodeNotFoundOnCamImage() {}
 
 }

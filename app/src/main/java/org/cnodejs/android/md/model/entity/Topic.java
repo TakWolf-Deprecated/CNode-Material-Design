@@ -1,17 +1,20 @@
 package org.cnodejs.android.md.model.entity;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.joda.time.DateTime;
+import org.jsoup.nodes.Document;
 
 public class Topic extends TopicSimple {
 
     @SerializedName("author_id")
     private String authorId;
 
-    private TabType tab;
+    private Tab tab;
 
     private String content;
 
@@ -36,11 +39,12 @@ public class Topic extends TopicSimple {
         this.authorId = authorId;
     }
 
-    public TabType getTab() {
-        return tab == null ? TabType.unknown : tab; // 接口中有些话题没有Tab属性，这里保证Tab不为空
+    @NonNull
+    public Tab getTab() {
+        return tab == null ? Tab.unknown : tab; // 接口中有些话题没有 Tab 属性，这里保证 Tab 不为空
     }
 
-    public void setTab(TabType tab) {
+    public void setTab(Tab tab) {
         this.tab = tab;
     }
 
@@ -50,7 +54,7 @@ public class Topic extends TopicSimple {
 
     public void setContent(String content) {
         this.content = content;
-        contentHtml = null; // 清除已经处理的Html渲染缓存
+        cleanContentCache();
     }
 
     public boolean isGood() {
@@ -100,15 +104,39 @@ public class Topic extends TopicSimple {
     @SerializedName("content_html")
     private String contentHtml;
 
-    public String getContentHtml() {
-        if (contentHtml == null) {
+    @SerializedName("content_summary")
+    private String contentSummary;
+
+    public void markSureHandleContent() {
+        if (contentHtml == null || contentSummary == null) {
+            Document document;
             if (ApiDefine.MD_RENDER) {
-                contentHtml = FormatUtils.handleHtml(content);
+                document = FormatUtils.handleHtml(content);
             } else {
-                contentHtml = FormatUtils.handleHtml(FormatUtils.renderMarkdown(content));
+                document = FormatUtils.handleHtml(FormatUtils.renderMarkdown(content));
+            }
+            if (contentHtml == null) {
+                contentHtml = document.body().html();
+            }
+            if (contentSummary == null) {
+                contentSummary = document.body().text().trim();
             }
         }
+    }
+
+    public void cleanContentCache() {
+        contentHtml = null;
+        contentSummary = null;
+    }
+
+    public String getContentHtml() {
+        markSureHandleContent();
         return contentHtml;
+    }
+
+    public String getContentSummary() {
+        markSureHandleContent();
+        return contentSummary;
     }
 
 }

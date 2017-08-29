@@ -52,46 +52,54 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(topicSimpleList.get(position));
+        holder.update(topicSimpleList.get(position), position == topicSimpleList.size() - 1);
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.img_avatar)
-        protected ImageView imgAvatar;
+        ImageView imgAvatar;
 
         @BindView(R.id.tv_title)
-        protected TextView tvTitle;
+        TextView tvTitle;
 
         @BindView(R.id.tv_login_name)
-        protected TextView tvLoginName;
+        TextView tvLoginName;
 
         @BindView(R.id.tv_last_reply_time)
-        protected TextView tvLastReplyTime;
+        TextView tvLastReplyTime;
+
+        @BindView(R.id.icon_deep_line)
+        View iconDeepLine;
+
+        @BindView(R.id.icon_shadow_gap)
+        View iconShadowGap;
 
         private TopicSimple topicSimple;
 
-        protected ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        protected void update(@NonNull TopicSimple topicSimple) {
+        void update(@NonNull TopicSimple topicSimple, boolean isTheLast) {
             this.topicSimple = topicSimple;
 
             tvTitle.setText(topicSimple.getTitle());
             Glide.with(activity).load(topicSimple.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(topicSimple.getAuthor().getLoginName());
             tvLastReplyTime.setText(FormatUtils.getRelativeTimeSpanString(topicSimple.getLastReplyAt()));
+            iconDeepLine.setVisibility(isTheLast ? View.GONE : View.VISIBLE);
+            iconShadowGap.setVisibility(isTheLast ? View.VISIBLE : View.GONE);
         }
 
         @OnClick(R.id.img_avatar)
-        protected void onBtnAvatarClick() {
+        void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, topicSimple.getAuthor().getLoginName(), imgAvatar, topicSimple.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.btn_item)
-        protected void onBtnItemClick() {
+        void onBtnItemClick() {
             Navigator.TopicWithAutoCompat.start(activity, topicSimple.getId());
         }
 

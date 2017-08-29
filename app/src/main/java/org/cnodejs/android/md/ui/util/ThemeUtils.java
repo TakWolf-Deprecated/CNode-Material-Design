@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 
 import org.cnodejs.android.md.model.storage.SettingShared;
+import org.cnodejs.android.md.util.HandlerUtils;
 
 public final class ThemeUtils {
 
@@ -16,12 +17,15 @@ public final class ThemeUtils {
         return enable;
     }
 
-    public static void notifyThemeApply(@NonNull Activity activity, boolean delay) {
-        if (delay) {
-            ActivityUtils.recreateDelayed(activity);
-        } else {
-            ActivityUtils.recreate(activity);
-        }
+    public static void notifyThemeApply(@NonNull final Activity activity) {
+        HandlerUtils.handler.post(new Runnable() {
+
+            @Override
+            public void run() {
+                activity.recreate();
+            }
+
+        });
     }
 
 }

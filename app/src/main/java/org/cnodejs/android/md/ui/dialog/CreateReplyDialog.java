@@ -38,16 +38,16 @@ public class CreateReplyDialog extends AppCompatDialog implements ICreateReplyVi
     }
 
     @BindView(R.id.layout_editor_bar)
-    protected ViewGroup editorBar;
+    ViewGroup editorBar;
 
     @BindView(R.id.layout_target)
-    protected ViewGroup layoutTarget;
+    ViewGroup layoutTarget;
 
     @BindView(R.id.tv_target)
-    protected TextView tvTarget;
+    TextView tvTarget;
 
     @BindView(R.id.edt_content)
-    protected EditText edtContent;
+    EditText edtContent;
 
     private final String topicId;
     private final ITopicView topicView;
@@ -81,17 +81,17 @@ public class CreateReplyDialog extends AppCompatDialog implements ICreateReplyVi
     }
 
     @OnClick(R.id.btn_tool_close)
-    protected void onBtnToolCloseClick() {
+    void onBtnToolCloseClick() {
         dismissWindow();
     }
 
     @OnClick(R.id.btn_tool_send)
-    protected void onBtnToolSendClick() {
+    void onBtnToolSendClick() {
         createReplyPresenter.createReplyAsyncTask(topicId, edtContent.getText().toString().trim(), targetId);
     }
 
     @OnClick(R.id.btn_clear_target)
-    protected void onBtnClearTargetClick() {
+    void onBtnClearTargetClick() {
         targetId = null;
         layoutTarget.setVisibility(View.GONE);
     }

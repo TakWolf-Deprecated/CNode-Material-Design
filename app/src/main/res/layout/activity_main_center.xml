@@ -7,9 +7,7 @@
 
     <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimaryDark"
-        android:elevation="@dimen/app_bar_elevation" />
+        android:layout_height="wrap_content" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -22,48 +20,32 @@
         app:title="@string/app_name"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/icon_no_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableTop="@drawable/ic_no_data"
-            android:drawablePadding="16dp"
-            android:text="@string/no_data"
-            android:textColor="#ffbababa"
-            android:textSize="16sp"
-            android:gravity="center" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <org.cnodejs.android.md.ui.widget.ListView
-                android:id="@+id/list_view"
+            <com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:listSelector="@android:color/transparent"
-                android:cacheColorHint="@android:color/transparent"
-                android:divider="@android:color/transparent" />
+                android:scrollbars="vertical" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <com.melnykov.fab.FloatingActionButton
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_create_topic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_mode_edit_white_24dp"
-            app:fab_colorNormal="@color/button_normal"
-            app:fab_colorPressed="@color/button_pressed"
-            app:fab_colorRipple="@color/button_ripple" />
+            app:fabSize="normal" />
 
-    </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

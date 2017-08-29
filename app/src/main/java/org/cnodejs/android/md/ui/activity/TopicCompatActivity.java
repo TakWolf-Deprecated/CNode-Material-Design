@@ -3,12 +3,11 @@ package org.cnodejs.android.md.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-
-import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
@@ -25,11 +24,12 @@ import org.cnodejs.android.md.presenter.implement.TopicPresenter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
+import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.listener.TopicJavascriptInterface;
 import org.cnodejs.android.md.ui.util.Navigator;
-import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
+import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.cnodejs.android.md.ui.view.IReplyView;
 import org.cnodejs.android.md.ui.view.ITopicHeaderView;
@@ -40,22 +40,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TopicCompatActivity extends StatusBarActivity implements ITopicView, ITopicHeaderView, IReplyView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
+public class TopicCompatActivity extends StatusBarActivity implements ITopicView, ITopicHeaderView, IReplyView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.refresh_layout)
-    protected SwipeRefreshLayout refreshLayout;
+    SwipeRefreshLayout refreshLayout;
 
     @BindView(R.id.web_topic)
-    protected TopicWebView webTopic;
-
-    @BindView(R.id.icon_no_data)
-    protected View iconNoData;
+    TopicWebView webTopic;
 
     @BindView(R.id.fab_reply)
-    protected FloatingActionButton fabReply;
+    FloatingActionButton fabReply;
 
     private String topicId;
     private Topic topic;
@@ -67,7 +64,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     private IReplyPresenter replyPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic_compat);
@@ -78,7 +75,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.topic);
         toolbar.setOnMenuItemClickListener(this);
-        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(webTopic));
+        toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
         topicPresenter = new TopicPresenter(this, this);
         topicHeaderPresenter = new TopicHeaderPresenter(this, this);
@@ -86,11 +83,13 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
 
         createReplyView = CreateReplyDialog.createWithAutoTheme(this, topicId, this);
 
-        webTopic.setFabReply(fabReply);
+        webTopic.addOnScrollListener(new FloatingActionButtonBehaviorListener.ForWebView(fabReply));
         webTopic.setBridgeAndLoadPage(new TopicJavascriptInterface(this, createReplyView, topicHeaderPresenter, replyPresenter));
 
-        RefreshUtils.init(refreshLayout, this);
-        RefreshUtils.refresh(refreshLayout, this);
+        refreshLayout.setColorSchemeResources(R.color.color_accent);
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override
@@ -112,7 +111,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     }
 
     @OnClick(R.id.fab_reply)
-    protected void onBtnReplyClick() {
+    void onBtnReplyClick() {
         if (topic != null && LoginActivity.checkLogin(this)) {
             createReplyView.showWindow();
         }
@@ -121,7 +120,7 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LoginActivity.REQUEST_LOGIN && resultCode == RESULT_OK) {
+        if (requestCode == LoginActivity.REQUEST_DEFAULT && resultCode == RESULT_OK) {
             refreshLayout.setRefreshing(true);
             onRefresh();
         }
@@ -131,7 +130,6 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     public void onGetTopicOk(@NonNull TopicWithReply topic) {
         this.topic = topic;
         webTopic.updateTopicAndUserId(topic, LoginShared.getId(this));
-        iconNoData.setVisibility(View.GONE);
     }
 
     @Override
@@ -157,6 +155,11 @@ public class TopicCompatActivity extends StatusBarActivity implements ITopicView
     @Override
     public void onUpReplyOk(@NonNull Reply reply) {
         webTopic.updateReply(reply);
+    }
+
+    @Override
+    public void backToContentTop() {
+        webTopic.scrollTo(0, 0);
     }
 
 }

@@ -20,7 +20,7 @@ public class ProgressDialog extends AppCompatDialog {
     }
 
     @BindView(R.id.progress_wheel)
-    protected ProgressWheel progressWheel;
+    ProgressWheel progressWheel;
 
     private ProgressDialog(@NonNull Activity activity, @StyleRes int theme) {
         super(activity, theme);
@@ -36,8 +36,8 @@ public class ProgressDialog extends AppCompatDialog {
 
     @Override
     protected void onStop() {
-        super.onStop();
         progressWheel.stopSpinning();
+        super.onStop();
     }
 
 }

@@ -155,13 +155,11 @@ public final class FormatUtils {
 
     private static final Cleaner cleaner = new Cleaner(Whitelist.relaxed().addAttributes("div", "class")); // 主要目的是保留最外层div的markdown-text属性
 
-    public static String handleHtml(String html) {
+    public static Document handleHtml(String html) {
         // 保证html不为null
         html = TextUtils.isEmpty(html) ? "" : html;
         // 过滤xss
-        Document document = cleaner.clean(Jsoup.parseBodyFragment(html, ApiDefine.HOST_BASE_URL));
-        // 返回body
-        return document.body().html();
+        return cleaner.clean(Jsoup.parseBodyFragment(html, ApiDefine.HOST_BASE_URL));
     }
 
 }

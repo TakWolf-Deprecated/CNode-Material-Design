@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.cnodejs.android.md.R;
@@ -18,7 +20,6 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import uk.co.senab.photoview.PhotoView;
 
 public class ImagePreviewActivity extends StatusBarActivity {
 
@@ -32,16 +33,16 @@ public class ImagePreviewActivity extends StatusBarActivity {
     }
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.photo_view)
-    protected PhotoView photoView;
+    PhotoView photoView;
 
     @BindView(R.id.progress_wheel)
-    protected ProgressWheel progressWheel;
+    ProgressWheel progressWheel;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_preview);
         ButterKnife.bind(this);

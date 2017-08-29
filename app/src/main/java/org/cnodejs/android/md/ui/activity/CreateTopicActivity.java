@@ -2,6 +2,7 @@ package org.cnodejs.android.md.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -9,11 +10,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.TabType;
+import org.cnodejs.android.md.model.entity.Tab;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.model.storage.TopicShared;
 import org.cnodejs.android.md.presenter.contract.ICreateTopicPresenter;
 import org.cnodejs.android.md.presenter.implement.CreateTopicPresenter;
+import org.cnodejs.android.md.ui.adapter.TabSpinnerAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.ProgressDialog;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
@@ -29,19 +31,19 @@ import butterknife.ButterKnife;
 public class CreateTopicActivity extends StatusBarActivity implements Toolbar.OnMenuItemClickListener, ICreateTopicView {
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.spn_tab)
-    protected Spinner spnTab;
+    Spinner spnTab;
 
     @BindView(R.id.edt_title)
-    protected EditText edtTitle;
+    EditText edtTitle;
 
     @BindView(R.id.layout_editor_bar)
-    protected ViewGroup editorBar;
+    ViewGroup editorBar;
 
     @BindView(R.id.edt_content)
-    protected EditText edtContent;
+    EditText edtContent;
 
     private ProgressDialog progressDialog;
 
@@ -50,7 +52,7 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
     private boolean saveTopicDraft = true;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_topic);
@@ -59,6 +61,8 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
         toolbar.setNavigationOnClickListener(new NavigationFinishClickListener(this));
         toolbar.inflateMenu(R.menu.create_topic);
         toolbar.setOnMenuItemClickListener(this);
+
+        spnTab.setAdapter(new TabSpinnerAdapter(this, Tab.getPublishableTabList()));
 
         progressDialog = ProgressDialog.createWithAutoTheme(this);
         progressDialog.setCancelable(false);
@@ -95,23 +99,10 @@ public class CreateTopicActivity extends StatusBarActivity implements Toolbar.On
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_send:
-                createTopicPresenter.createTopicAsyncTask(getTabByPosition(spnTab.getSelectedItemPosition()), edtTitle.getText().toString().trim(), edtContent.getText().toString().trim());
+                createTopicPresenter.createTopicAsyncTask((Tab) spnTab.getSelectedItem(), edtTitle.getText().toString().trim(), edtContent.getText().toString().trim());
                 return true;
             default:
                 return false;
-        }
-    }
-
-    private TabType getTabByPosition(int position) {
-        switch (position) {
-            case 0:
-                return TabType.share;
-            case 1:
-                return TabType.ask;
-            case 2:
-                return TabType.job;
-            default:
-                return TabType.share;
         }
     }
 

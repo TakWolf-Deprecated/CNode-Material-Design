@@ -3,7 +3,7 @@ CNode Material Design
 ====================================
 https://github.com/TakWolf/CNode-Material-Design
 
-Copyright 2015-2016 TakWolf
+Copyright 2015 TakWolf
 
 Licensed under the Apache License, Version 2.0 (the "License").
 
@@ -70,6 +70,15 @@ https://github.com/bumptech/glide
 BSD, part MIT and Apache 2.0.
 
 ====================================
+Android-HeaderAndFooterRecyclerView
+====================================
+https://github.com/TakWolf/Android-HeaderAndFooterRecyclerView
+
+Copyright 2017 TakWolf
+
+Licensed under the Apache License, Version 2.0 (the "License").
+
+====================================
 CircleImageView
 ====================================
 https://github.com/hdodenhof/CircleImageView
@@ -95,15 +104,6 @@ https://github.com/pnikosis/materialish-progress
 Copyright 2014 Nico Hormazábal
 
 Licensed under the Apache License, Version 2.0 (the "License").
-
-====================================
-FloatingActionButton
-====================================
-https://github.com/makovkastar/FloatingActionButton
-
-Copyright (c) 2014 Oleksandr Melnykov
-
-The MIT License (MIT).
 
 ====================================
 QRCodeReaderView
@@ -142,6 +142,8 @@ CNode-OAuth-Login-Android
 ====================================
 https://github.com/TakWolf/CNode-OAuth-Login-Android
 
+Copyright 2017 TakWolf
+
 Licensed under the Apache License, Version 2.0 (the "License").
 
 ====================================
@@ -149,7 +151,7 @@ CNodeMD Page Render Compat
 ====================================
 https://github.com/TakWolf/CNodeMD-Page-Render-Compat
 
-Copyright 2015-2016 TakWolf
+Copyright 2016 TakWolf
 
 Licensed under the Apache License, Version 2.0 (the "License").
 
@@ -165,9 +167,9 @@ Vue.js
 ====================================
 http://cn.vuejs.org
 
-Copyright (c) 2013-2016 Evan You
+Copyright (c) 2013-present, Yuxi (Evan) You
 
-The MIT License (MIT).
+The MIT License.
 
 ====================================
 github-markdown-css

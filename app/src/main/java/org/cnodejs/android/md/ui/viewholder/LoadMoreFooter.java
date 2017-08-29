@@ -3,13 +3,16 @@ package org.cnodejs.android.md.ui.viewholder;
 import android.content.Context;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.TextView;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
+import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
+
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.widget.ListView;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -18,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoadMoreFooter implements AbsListView.OnScrollListener {
+public class LoadMoreFooter {
 
     public static final int STATE_DISABLED = 0;
     public static final int STATE_LOADING = 1;
@@ -36,23 +39,39 @@ public class LoadMoreFooter implements AbsListView.OnScrollListener {
 
     }
 
-    @BindView(R.id.icon_loading)
-    protected View iconLoading;
+    @BindView(R.id.progress_wheel)
+    ProgressWheel progressWheel;
 
     @BindView(R.id.tv_text)
-    protected TextView tvText;
+    TextView tvText;
 
     @State
     private int state = STATE_DISABLED;
 
     private final OnLoadMoreListener loadMoreListener;
 
-    public LoadMoreFooter(@NonNull Context context, @NonNull ListView listView, @NonNull OnLoadMoreListener loadMoreListener) {
+    public LoadMoreFooter(@NonNull Context context, @NonNull HeaderAndFooterRecyclerView recyclerView, @NonNull OnLoadMoreListener loadMoreListener) {
         this.loadMoreListener = loadMoreListener;
-        View footerView = LayoutInflater.from(context).inflate(R.layout.footer_load_more, listView, false);
-        listView.addFooterView(footerView, null, false);
+        View footerView = LayoutInflater.from(context).inflate(R.layout.footer_load_more, recyclerView.getFooterContainer(), false);
+        recyclerView.addFooterView(footerView);
         ButterKnife.bind(this, footerView);
-        listView.addOnScrollListener(this);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
+                    checkLoadMore();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
+                    checkLoadMore();
+                }
+            }
+
+        });
     }
 
     @State
@@ -65,29 +84,36 @@ public class LoadMoreFooter implements AbsListView.OnScrollListener {
             this.state = state;
             switch (state) {
                 case STATE_DISABLED:
-                    iconLoading.setVisibility(View.GONE);
-                    tvText.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.INVISIBLE);
+                    progressWheel.stopSpinning();
+                    tvText.setVisibility(View.INVISIBLE);
+                    tvText.setText(null);
                     tvText.setClickable(false);
                     break;
                 case STATE_LOADING:
-                    iconLoading.setVisibility(View.VISIBLE);
-                    tvText.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.VISIBLE);
+                    progressWheel.spin();
+                    tvText.setVisibility(View.INVISIBLE);
+                    tvText.setText(null);
                     tvText.setClickable(false);
                     break;
                 case STATE_FINISHED:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.INVISIBLE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_finished);
                     tvText.setClickable(false);
                     break;
                 case STATE_ENDLESS:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.INVISIBLE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
-                    tvText.setText(R.string.load_more_endless);
+                    tvText.setText(null);
                     tvText.setClickable(true);
                     break;
                 case STATE_FAILED:
-                    iconLoading.setVisibility(View.GONE);
+                    progressWheel.setVisibility(View.INVISIBLE);
+                    progressWheel.stopSpinning();
                     tvText.setVisibility(View.VISIBLE);
                     tvText.setText(R.string.load_more_failed);
                     tvText.setClickable(true);
@@ -106,18 +132,8 @@ public class LoadMoreFooter implements AbsListView.OnScrollListener {
     }
 
     @OnClick(R.id.tv_text)
-    protected void onBtnTextClick() {
+    void onBtnTextClick() {
         checkLoadMore();
     }
-
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (view.getLastVisiblePosition() == view.getCount() - 1) {
-            checkLoadMore();
-        }
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {}
 
 }

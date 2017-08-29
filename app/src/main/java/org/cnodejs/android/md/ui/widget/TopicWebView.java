@@ -1,16 +1,14 @@
 package org.cnodejs.android.md.ui.widget;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.StyleRes;
 import android.util.AttributeSet;
-
-import com.melnykov.fab.FloatingActionButton;
 
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
@@ -18,14 +16,11 @@ import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.ui.listener.FormatJavascriptInterface;
 import org.cnodejs.android.md.ui.listener.ImageJavascriptInterface;
 import org.cnodejs.android.md.ui.listener.TopicJavascriptInterface;
-import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 
-public class TopicWebView extends CNodeWebView implements IBackToContentTopView {
+public class TopicWebView extends CNodeWebView {
 
     private static final String LIGHT_THEME_PATH = "file:///android_asset/topic_light.html";
     private static final String DARK_THEME_PATH = "file:///android_asset/topic_dark.html";
-
-    private FloatingActionButton fabReply;
 
     private boolean pageLoaded = false;
     private TopicWithReply topic = null;
@@ -43,25 +38,9 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
         super(context, attrs, defStyleAttr);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public TopicWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
-    public void setFabReply(FloatingActionButton fabReply) {
-        this.fabReply = fabReply;
-    }
-
-    @Override
-    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        super.onScrollChanged(l, t, oldl, oldt);
-        if (fabReply != null) {
-            if (t - oldt > 4) {
-                fabReply.hide(true);
-            } else if (t - oldt < -4) {
-                fabReply.show(true);
-            }
-        }
     }
 
     @SuppressLint("AddJavascriptInterface")
@@ -128,11 +107,6 @@ public class TopicWebView extends CNodeWebView implements IBackToContentTopView 
                     "}, 100);"
             );
         }
-    }
-
-    @Override
-    public void backToContentTop() {
-        scrollTo(0, 0);
     }
 
 }

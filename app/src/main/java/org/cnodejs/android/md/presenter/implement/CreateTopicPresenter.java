@@ -8,7 +8,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Result;
-import org.cnodejs.android.md.model.entity.TabType;
+import org.cnodejs.android.md.model.entity.Tab;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.ICreateTopicPresenter;
@@ -27,7 +27,7 @@ public class CreateTopicPresenter implements ICreateTopicPresenter {
     }
 
     @Override
-    public void createTopicAsyncTask(@NonNull TabType tab, String title, String content) {
+    public void createTopicAsyncTask(@NonNull Tab tab, String title, String content) {
         if (TextUtils.isEmpty(title) || title.length() < 10) {
             createTopicView.onTitleError(activity.getString(R.string.title_empty_error_tip));
         } else if (TextUtils.isEmpty(content)) {

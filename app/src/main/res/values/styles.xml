@@ -22,8 +22,6 @@
 
     <style name="AppThemeLight" parent="BaseAppThemeLight" />
 
-    <style name="AppThemeLight.FitsStatusBar" />
-
     <!-- App Theme Dark -->
 
     <style name="BaseAppThemeDark" parent="Theme.AppCompat.NoActionBar">
@@ -44,8 +42,6 @@
     </style>
 
     <style name="AppThemeDark" parent="BaseAppThemeDark" />
-
-    <style name="AppThemeDark.FitsStatusBar" />
 
     <!-- App Theme Launch -->
 
@@ -187,14 +183,6 @@
     <style name="AppWidget.NavigationItemDeepLineGap" parent="AppWidget.DeepLine">
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginBottom">8dp</item>
-    </style>
-
-    <!-- Button -->
-
-    <style name="AppWidget.Button">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:background">@drawable/button_image</item>
     </style>
 
     <!-- App Animation -->

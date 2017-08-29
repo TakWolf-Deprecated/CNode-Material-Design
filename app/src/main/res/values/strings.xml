@@ -9,9 +9,11 @@
     <string name="tab_top">置顶</string>
     <string name="tab_all">全部</string>
     <string name="tab_good">精华</string>
+    <string name="tab_unknown">未知</string>
     <string name="tab_share">分享</string>
     <string name="tab_ask">问答</string>
     <string name="tab_job">招聘</string>
+    <string name="tab_dev">测试</string>
 
     <string name="notification">消息</string>
     <string name="setting">设置</string>
@@ -20,9 +22,9 @@
     <string name="click_avatar_to_login">点击头像登录</string>
     <string name="press_back_again_to_exit">再按一次退出</string>
 
-    <string name="access_token_auth_error">AccessToken验证错误</string>
-    <string name="access_token_format_error">AccessToken格式错误，应为UUID</string>
-    <string name="access_token_out_of_date">您的AccessToken已经过期，您可能需要重新登录账户。</string>
+    <string name="access_token_auth_error">Access Token 验证错误</string>
+    <string name="access_token_format_error">Access Token 格式错误，应为 UUID</string>
+    <string name="access_token_out_of_date">您的 Access Token 已经过期，您可能需要重新登录账户。</string>
 
     <string name="login">登录</string>
     <string name="logout">注销</string>
@@ -31,8 +33,6 @@
     <string name="login_success">登录成功</string>
     <string name="relogin">重新登录</string>
 
-    <string name="no_data">暂无数据</string>
-    <string name="no_message">暂无消息</string>
     <string name="no_reply">暂无回复</string>
     <string name="data_load_faild_and_click_avatar_to_reload">数据加载失败，点击头像重试</string>
     <string name="have_no_more_data">已没有更多数据</string>
@@ -47,13 +47,14 @@
     <string name="user_detail">用户资料</string>
 
     <string name="load_more_finished">已经到底啦</string>
-    <string name="load_more_endless">加载更多</string>
     <string name="load_more_failed">加载失败，点击重试</string>
 
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
     <string name="ok">好的</string>
+    <string name="go_on">继续</string>
 
+    <string name="author">作者</string>
     <string name="topic_$s">话题：%s</string>
     <string name="$d_floor">%d楼</string>
     <string name="reply_$d_floor">回复：%d楼</string>
@@ -76,12 +77,10 @@
     <string name="scan_qr_code">扫描二维码</string>
     <string name="qr_code_request_permission_rationale_tip">二维码扫描组件需要相机权限才能工作，请确保在弹出的授权对话框中为应用授予相机权限。</string>
     <string name="qr_code_permission_denied_tip">二维码扫描组件无法工作，请确保在设置中为应用授予了相机权限。</string>
-    <string name="open_permissions_request">打开授权</string>
     <string name="go_to_setting">去设置</string>
-    <string name="can_not_open_camera">无法打开相机</string>
     <string name="qr_code_tip">将二维码放入扫描框内</string>
-    <string name="$_how_to_get_access_token_$"><u>如何获取Access Token？</u></string>
-    <string name="how_to_get_access_token_tip_content">在CNode社区网站端登录你的账户，然后在右上角找到「设置」按钮，点击进入后将页面滑动到最底部来查看你的Access Token。</string>
+    <string name="$_how_to_get_access_token_$"><u>如何获取 Access Token ？</u></string>
+    <string name="how_to_get_access_token_tip_content">在CNode社区网站端登录你的账户，然后在右上角找到「设置」按钮，点击进入后将页面滑动到最底部来查看你的 Access Token 。</string>
 
     <string name="current_version">当前版本</string>
     <string name="open_source_url">项目开源主页</string>
@@ -95,7 +94,7 @@
     <string name="open_in_market">去商店评分</string>
     <string name="open_in_market_content">觉得赞就给个好评吧！</string>
     <string name="open_source_license">开放源代码许可</string>
-    <string name="about_copyright">Copyright © 2015&#8211;2016 TakWolf</string>
+    <string name="copyright">Copyright © 2015 TakWolf</string>
 
     <string name="no_market_install_in_system">系统中没有安装应用商店</string>
     <string name="no_browser_install_in_system">系统中没有安装浏览器</string>

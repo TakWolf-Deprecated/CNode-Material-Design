@@ -64,37 +64,37 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         holder.update(messageList.get(position));
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.img_avatar)
-        protected ImageView imgAvatar;
+        ImageView imgAvatar;
 
         @BindView(R.id.tv_from)
-        protected TextView tvFrom;
+        TextView tvFrom;
 
         @BindView(R.id.tv_time)
-        protected TextView tvTime;
+        TextView tvTime;
 
         @BindView(R.id.tv_action)
-        protected TextView tvAction;
+        TextView tvAction;
 
         @BindView(R.id.badge_read)
-        protected View badgeRead;
+        View badgeRead;
 
         @BindView(R.id.web_content)
-        protected ContentWebView webContent;
+        ContentWebView webContent;
 
         @BindView(R.id.tv_topic_title)
-        protected TextView tvTopicTitle;
+        TextView tvTopicTitle;
 
         private Message message;
 
-        protected ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        protected void update(@NonNull Message message) {
+        void update(@NonNull Message message) {
             this.message = message;
 
             Glide.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
@@ -122,12 +122,12 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         }
 
         @OnClick(R.id.img_avatar)
-        protected void onBtnAvatarClick() {
+        void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, message.getAuthor().getLoginName(), imgAvatar, message.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.btn_item)
-        protected void onBtnItemClick() {
+        void onBtnItemClick() {
             Navigator.TopicWithAutoCompat.start(activity, message.getTopic().getId());
         }
 

@@ -5,12 +5,12 @@
 [![Build Status](https://travis-ci.org/TakWolf/CNode-Material-Design.svg?branch=master)](https://travis-ci.org/TakWolf/CNode-Material-Design)
 [![Release](https://img.shields.io/github/release/TakWolf/CNode-Material-Design.svg?style=flat)](https://github.com/TakWolf/CNode-Material-Design/releases/latest)
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg?style=flat)](https://www.android.com)
-[![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=9)
+[![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
 [![License](https://img.shields.io/github/license/TakWolf/CNode-Material-Design.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 ![Logo](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
-[CNode社区](https://cnodejs.org)第三方Android客户端，原生App，Material Design风格，支持夜间模式
+[CNode 社区](https://cnodejs.org)第三方 Android 客户端，原生 App，Material Design 风格，支持夜间模式。
 
 ## Downloads ##
 
@@ -54,13 +54,13 @@
 
 - [Glide](https://github.com/bumptech/glide)
 
+- [Android-HeaderAndFooterRecyclerView](https://github.com/TakWolf/Android-HeaderAndFooterRecyclerView)
+
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
 
 - [MaterialEditText](https://github.com/rengwuxian/MaterialEditText)
 
 - [materialish-progress](https://github.com/pnikosis/materialish-progress)
-
-- [FloatingActionButton](https://github.com/makovkastar/FloatingActionButton)
 
 - [QRCodeReaderView](https://github.com/dlazaro66/QRCodeReaderView)
 

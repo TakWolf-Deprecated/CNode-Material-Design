@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
@@ -33,17 +34,20 @@ import retrofit2.Call;
 
 public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
-    public static final int REQUEST_LOGIN = FormatUtils.generateRequestCode();
+    public static final int REQUEST_DEFAULT = FormatUtils.generateRequestCode();
 
     private static final int REQUEST_QR_CODE_LOGIN = FormatUtils.generateRequestCode();
     private static final int REQUEST_GITHUB_LOGIN = FormatUtils.generateRequestCode();
 
     public static void startForResult(@NonNull Activity activity, int requestCode) {
-        activity.startActivityForResult(new Intent(activity, LoginActivity.class), requestCode);
+        Intent intent = new Intent(activity, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        activity.startActivityForResult(intent, requestCode);
     }
 
     public static void startForResult(@NonNull Activity activity) {
-        startForResult(activity, REQUEST_LOGIN);
+        startForResult(activity, REQUEST_DEFAULT);
     }
 
     public static boolean checkLogin(@NonNull final Activity activity, final int requestCode) {
@@ -67,22 +71,22 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     }
 
     public static boolean checkLogin(@NonNull Activity activity) {
-        return checkLogin(activity, REQUEST_LOGIN);
+        return checkLogin(activity, REQUEST_DEFAULT);
     }
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.edt_access_token)
-    protected MaterialEditText edtAccessToken;
+    MaterialEditText edtAccessToken;
 
     private ProgressDialog progressDialog;
 
     private ILoginPresenter loginPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
@@ -95,24 +99,24 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     }
 
     @OnClick(R.id.btn_login)
-    protected void onBtnLoginClick() {
+    void onBtnLoginClick() {
         loginPresenter.loginAsyncTask(edtAccessToken.getText().toString().trim());
     }
 
     @OnClick(R.id.btn_qr_code_login)
-    protected void onBtnQrCodeLoginClick() {
+    void onBtnQrCodeLoginClick() {
         ScanQRCodeActivity.startForResultWithPermissionCheck(this, REQUEST_QR_CODE_LOGIN);
     }
 
     @OnClick(R.id.btn_github_login)
-    protected void onBtnGithubLoginClick() {
+    void onBtnGithubLoginClick() {
         startActivityForResult(new Intent(this, CNodeOAuthLoginActivity.class), REQUEST_GITHUB_LOGIN);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == ScanQRCodeActivity.PERMISSIONS_REQUEST_QR_CODE) {
+        if (requestCode == ScanQRCodeActivity.PERMISSIONS_REQUEST_DEFAULT) {
             ScanQRCodeActivity.startForResultWithPermissionHandle(this, REQUEST_QR_CODE_LOGIN);
         }
     }
@@ -134,7 +138,7 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     }
 
     @OnClick(R.id.btn_login_tip)
-    protected void onBtnLoginTipClick() {
+    void onBtnLoginTipClick() {
         AlertDialogUtils.createBuilderWithAutoTheme(this)
                 .setMessage(R.string.how_to_get_access_token_tip_content)
                 .setPositiveButton(R.string.confirm, null)

@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Topic;
@@ -31,43 +31,43 @@ import butterknife.OnClick;
 public class TopicHeader implements ITopicHeaderView {
 
     @BindView(R.id.layout_content)
-    protected ViewGroup layoutContent;
+    ViewGroup layoutContent;
 
     @BindView(R.id.icon_good)
-    protected View iconGood;
+    View iconGood;
 
     @BindView(R.id.tv_title)
-    protected TextView tvTitle;
+    TextView tvTitle;
 
     @BindView(R.id.img_avatar)
-    protected ImageView imgAvatar;
+    ImageView imgAvatar;
 
     @BindView(R.id.ctv_tab)
-    protected CheckedTextView ctvTab;
+    CheckedTextView ctvTab;
 
     @BindView(R.id.tv_login_name)
-    protected TextView tvLoginName;
+    TextView tvLoginName;
 
     @BindView(R.id.tv_create_time)
-    protected TextView tvCreateTime;
+    TextView tvCreateTime;
 
     @BindView(R.id.tv_visit_count)
-    protected TextView tvVisitCount;
+    TextView tvVisitCount;
 
     @BindView(R.id.btn_favorite)
-    protected ImageView btnFavorite;
+    ImageView btnFavorite;
 
     @BindView(R.id.web_content)
-    protected ContentWebView webContent;
+    ContentWebView webContent;
 
     @BindView(R.id.layout_no_reply)
-    protected ViewGroup layoutNoReply;
+    ViewGroup layoutNoReply;
 
     @BindView(R.id.layout_reply_count)
-    protected ViewGroup layoutReplyCount;
+    ViewGroup layoutReplyCount;
 
     @BindView(R.id.tv_reply_count)
-    protected TextView tvReplyCount;
+    TextView tvReplyCount;
 
     private final Activity activity;
     private Topic topic;
@@ -75,21 +75,21 @@ public class TopicHeader implements ITopicHeaderView {
 
     private final ITopicHeaderPresenter topicHeaderPresenter;
 
-    public TopicHeader(@NonNull Activity activity, @NonNull ListView listView) {
+    public TopicHeader(@NonNull Activity activity, @NonNull HeaderAndFooterRecyclerView recyclerView) {
         this.activity = activity;
-        View headerView = LayoutInflater.from(activity).inflate(R.layout.header_topic, listView, false);
-        listView.addHeaderView(headerView, null, false);
+        View headerView = LayoutInflater.from(activity).inflate(R.layout.header_topic, recyclerView.getHeaderContainer(), false);
+        recyclerView.addHeaderView(headerView);
         ButterKnife.bind(this, headerView);
         this.topicHeaderPresenter = new TopicHeaderPresenter(activity, this);
     }
 
     @OnClick(R.id.img_avatar)
-    protected void onBtnAvatarClick() {
+    void onBtnAvatarClick() {
         UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
     }
 
     @OnClick(R.id.btn_favorite)
-    protected void onBtnFavoriteClick() {
+    void onBtnFavoriteClick() {
         if (topic != null) {
             if (LoginActivity.checkLogin(activity)) {
                 if (isCollect) {

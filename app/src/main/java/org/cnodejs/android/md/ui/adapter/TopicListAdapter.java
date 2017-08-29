@@ -2,10 +2,10 @@ package org.cnodejs.android.md.ui.adapter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TopicListAdapter extends BaseAdapter {
+public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.ViewHolder> {
 
     private final Activity activity;
     private final LayoutInflater inflater;
@@ -42,92 +42,83 @@ public class TopicListAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return topicList.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return topicList.get(position);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(inflater.inflate(R.layout.item_topic, parent, false));
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_topic, parent, false);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.update(topicList.get(position));
-        return convertView;
     }
 
-    protected class ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.ctv_tab)
-        protected CheckedTextView ctvTab;
-
-        @BindView(R.id.tv_title)
-        protected TextView tvTitle;
-
-        @BindView(R.id.img_avatar)
-        protected ImageView imgAvatar;
-
-        @BindView(R.id.tv_author)
-        protected TextView tvAuthor;
-
-        @BindView(R.id.tv_create_time)
-        protected TextView tvCreateTime;
+        CheckedTextView ctvTab;
 
         @BindView(R.id.tv_reply_count)
-        protected TextView tvReplyCount;
+        TextView tvReplyCount;
 
         @BindView(R.id.tv_visit_count)
-        protected TextView tvVisitCount;
+        TextView tvVisitCount;
 
         @BindView(R.id.tv_last_reply_time)
-        protected TextView tvLastReplyTime;
+        TextView tvLastReplyTime;
+
+        @BindView(R.id.tv_title)
+        TextView tvTitle;
+
+        @BindView(R.id.tv_summary)
+        TextView tvSummary;
+
+        @BindView(R.id.img_avatar)
+        ImageView imgAvatar;
+
+        @BindView(R.id.tv_author)
+        TextView tvAuthor;
+
+        @BindView(R.id.tv_create_time)
+        TextView tvCreateTime;
 
         @BindView(R.id.icon_good)
-        protected View iconGood;
+        View iconGood;
 
         private Topic topic;
 
-        protected ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
+            super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        protected void update(@NonNull Topic topic) {
+        void update(@NonNull Topic topic) {
             this.topic = topic;
 
-            tvTitle.setText(topic.getTitle());
             ctvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
             ctvTab.setChecked(topic.isTop());
-            Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
-            tvAuthor.setText(topic.getAuthor().getLoginName());
-            tvCreateTime.setText(activity.getString(R.string.create_at_$s, topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss")));
             tvReplyCount.setText(String.valueOf(topic.getReplyCount()));
             tvVisitCount.setText(String.valueOf(topic.getVisitCount()));
             tvLastReplyTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getLastReplyAt()));
+            tvTitle.setText(topic.getTitle());
+            tvSummary.setText(topic.getContentSummary());
+            Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            tvAuthor.setText(topic.getAuthor().getLoginName());
+            tvCreateTime.setText(activity.getString(R.string.create_at_$s, topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss")));
             iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
         }
 
-        @OnClick(R.id.img_avatar)
-        protected void onBtnAvatarClick() {
-            UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
+        @OnClick(R.id.btn_topic)
+        void onBtnTopicClick() {
+            Navigator.TopicWithAutoCompat.start(activity, topic);
         }
 
-        @OnClick(R.id.btn_item)
-        protected void onBtnItemClick() {
-            Navigator.TopicWithAutoCompat.start(activity, topic);
+        @OnClick(R.id.btn_user)
+        void onBtnUserClick() {
+            UserDetailActivity.startWithTransitionAnimation(activity, topic.getAuthor().getLoginName(), imgAvatar, topic.getAuthor().getAvatarUrl());
         }
 
     }

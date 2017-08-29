@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -69,31 +70,31 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     }
 
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.tab_layout)
-    protected TabLayout tabLayout;
+    TabLayout tabLayout;
 
     @BindView(R.id.view_pager)
-    protected ViewPager viewPager;
+    ViewPager viewPager;
 
     @BindView(R.id.img_avatar)
-    protected ImageView imgAvatar;
+    ImageView imgAvatar;
 
     @BindView(R.id.tv_login_name)
-    protected TextView tvLoginName;
+    TextView tvLoginName;
 
     @BindView(R.id.tv_github_username)
-    protected TextView tvGithubUsername;
+    TextView tvGithubUsername;
 
     @BindView(R.id.tv_create_time)
-    protected TextView tvCreateTime;
+    TextView tvCreateTime;
 
     @BindView(R.id.tv_score)
-    protected TextView tvScore;
+    TextView tvScore;
 
     @BindView(R.id.progress_wheel)
-    protected ProgressWheel progressWheel;
+    ProgressWheel progressWheel;
 
     private UserDetailPagerAdapter adapter;
 
@@ -103,7 +104,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     private String githubUsername;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
@@ -129,7 +130,6 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         }
 
         userDetailPresenter = new UserDetailPresenter(this, this);
-
         userDetailPresenter.getUserAsyncTask(loginName);
     }
 
@@ -148,12 +148,12 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
     protected void onSaveInstanceState(Bundle outState) {}
 
     @OnClick(R.id.img_avatar)
-    protected void onBtnAvatarClick() {
+    void onBtnAvatarClick() {
         userDetailPresenter.getUserAsyncTask(loginName);
     }
 
     @OnClick(R.id.tv_github_username)
-    protected void onBtnGithubUsernameClick() {
+    void onBtnGithubUsernameClick() {
         if (!TextUtils.isEmpty(githubUsername)) {
             Navigator.openInBrowser(this, "https://github.com/" + githubUsername);
         }

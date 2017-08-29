@@ -23,8 +23,8 @@ public final class SharedWrapper {
 
     private static final String TAG = "SharedWrapper";
 
-    private static SecretKey secretSingleton = null;
-    private static IvParameterSpec ivSingleton = null;
+    private volatile static SecretKey secretSingleton = null;
+    private volatile static IvParameterSpec ivSingleton = null;
 
     public static SharedWrapper with(@NonNull Context context, @NonNull String name) {
         if (secretSingleton == null || ivSingleton == null) {
@@ -58,7 +58,7 @@ public final class SharedWrapper {
             try {
                 return new String(Crypto.AES.decrypt(secret, iv, Base64.decode(target, Base64.DEFAULT)), StandardCharsets.UTF_8);
             } catch (Crypto.CryptoException e) {
-                Log.e(TAG, "value decrypt error at key :" + key, e);
+                Log.e(TAG, "Decrypt error at key :" + key, e);
                 return defValue;
             }
         }
@@ -72,7 +72,7 @@ public final class SharedWrapper {
             try {
                 target = Base64.encodeToString(Crypto.AES.encrypt(secret, iv, value.getBytes(StandardCharsets.UTF_8)), Base64.DEFAULT);
             } catch (Crypto.CryptoException e) {
-                Log.e(TAG, "value encrypt error at key :" + key, e);
+                Log.e(TAG, "Encrypt error at key :" + key, e);
                 target = null;
             }
         }
@@ -97,7 +97,7 @@ public final class SharedWrapper {
             return Boolean.parseBoolean(value);
         } else {
             if (value != null) {
-                Log.e(TAG, "parse boolean error -> " + key + " : " + value);
+                Log.e(TAG, "Parse boolean error -> " + key + " : " + value);
             }
             return defValue;
         }
@@ -115,7 +115,7 @@ public final class SharedWrapper {
             try {
                 return Float.parseFloat(value);
             } catch (NumberFormatException e) {
-                Log.e(TAG, "parse float error -> " + key + " : " + value);
+                Log.e(TAG, "Parse float error -> " + key + " : " + value);
                 return defValue;
             }
         }
@@ -133,7 +133,7 @@ public final class SharedWrapper {
             try {
                 return Integer.parseInt(value);
             } catch (NumberFormatException e) {
-                Log.e(TAG, "parse int error -> " + key + " : " + value);
+                Log.e(TAG, "Parse int error -> " + key + " : " + value);
                 return defValue;
             }
         }
@@ -151,7 +151,7 @@ public final class SharedWrapper {
             try {
                 return Long.parseLong(value);
             } catch (NumberFormatException e) {
-                Log.e(TAG, "parse long error -> " + key + " : " + value);
+                Log.e(TAG, "Parse long error -> " + key + " : " + value);
                 return defValue;
             }
         }
@@ -169,7 +169,7 @@ public final class SharedWrapper {
             try {
                 return EntityUtils.gson.fromJson(value, typeOfT);
             } catch (JsonParseException e) {
-                Log.e(TAG, "parse object error -> " + key + " : " + value);
+                Log.e(TAG, "Parse object error -> " + key + " : " + value);
                 return null;
             }
         }

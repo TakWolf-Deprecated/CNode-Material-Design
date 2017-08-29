@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div id="page">
+<div id="page" v-cloak>
     <div v-if="topic.id">
         <div class="header">
             <img class="tab-good" src="img/tab_ic_good.png" v-if="topic.good">
@@ -39,9 +39,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="markdown-container" v-on:click="openImageProxy($event)">
-                {{{topic.content_html}}}
-            </div>
+            <div class="markdown-container" v-html="topic.content_html" v-on:click="openImageProxy($event)"></div>
         </div>
         <div class="item-gap"></div>
         <div class="list">
@@ -55,7 +53,7 @@
                     {{topic.replies.length}}条回复
                 </div>
                 <div class="deep-line"></div>
-                <div class="cell" v-for="(position, reply) of topic.replies">
+                <div class="cell" v-for="(reply, position) in topic.replies">
                     <div class="main">
                         <div class="top-container">
                             <table>
@@ -66,6 +64,7 @@
                                     <td class="center">
                                         <div class="line1">
                                             <span class="loginname text-primary">{{reply.author.loginname}}</span>
+                                            <span class="tag-accent" v-if="topic.author.loginname === reply.author.loginname">作者</span>
                                         </div>
                                         <div class="line2">
                                             <span class="index text-accent">{{position + 1}}楼</span>
@@ -88,9 +87,7 @@
                         <div class="target-position text-accent" v-if="reply.reply_id">
                             回复：{{positionMap[reply.reply_id] + 1}}楼
                         </div>
-                        <div class="markdown-container" v-on:click="openImageProxy($event)">
-                            {{{reply.content_html}}}
-                        </div>
+                        <div class="markdown-container" v-html="reply.content_html" v-on:click="openImageProxy($event)"></div>
                     </div>
                     <div class="deep-line" v-if="position !== (topic.replies.length - 1)"></div>
                 </div>

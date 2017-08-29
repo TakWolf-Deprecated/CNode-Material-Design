@@ -4,9 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,10 +18,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.melnykov.fab.FloatingActionButton;
+import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
+import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.TabType;
+import org.cnodejs.android.md.model.entity.Tab;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
@@ -28,15 +32,14 @@ import org.cnodejs.android.md.ui.adapter.TopicListAdapter;
 import org.cnodejs.android.md.ui.base.FullLayoutActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
+import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
-import org.cnodejs.android.md.ui.util.RefreshUtils;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.IMainView;
 import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
-import org.cnodejs.android.md.ui.widget.ListView;
 import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.md.util.HandlerUtils;
 
@@ -49,75 +52,83 @@ import butterknife.OnClick;
 
 public class MainActivity extends FullLayoutActivity implements IMainView, IBackToContentTopView, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
 
-    // 抽屉导航布局
-    @BindView(R.id.drawer_layout)
-    protected DrawerLayout drawerLayout;
+    /*
+     * 抽屉导航布局
+     */
 
-    // 导航部分的个人信息
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+
+    /*
+     * 导航部分的个人信息
+     */
+
     @BindView(R.id.img_avatar)
-    protected ImageView imgAvatar;
+    ImageView imgAvatar;
 
     @BindView(R.id.tv_login_name)
-    protected TextView tvLoginName;
+    TextView tvLoginName;
 
     @BindView(R.id.tv_score)
-    protected TextView tvScore;
+    TextView tvScore;
 
     @BindView(R.id.badge_nav_notification)
-    protected TextView tvBadgeNotification;
+    TextView tvBadgeNotification;
 
     @BindView(R.id.btn_logout)
-    protected View btnLogout;
+    View btnLogout;
 
     @BindView(R.id.btn_theme_dark)
-    protected ImageView imgThemeDark;
+    ImageView imgThemeDark;
 
-    @BindView(R.id.img_nav_top_background)
-    protected ImageView imgTopBackground;
+    @BindView(R.id.nav_top_background)
+    View navTopBackground;
 
-    // 主要导航项
+    /*
+     * 主要导航项
+     */
+
     @BindViews({
             R.id.btn_nav_all,
             R.id.btn_nav_good,
             R.id.btn_nav_share,
             R.id.btn_nav_ask,
-            R.id.btn_nav_job
+            R.id.btn_nav_job,
+            R.id.btn_nav_dev
     })
-    protected List<CheckedTextView> navMainItemList;
+    List<CheckedTextView> navMainItemList;
 
-    // 内容部分
+    @BindView(R.id.btn_nav_dev)
+    CheckedTextView navMainItemDev;
+
+    /*
+     * 内容部分
+     */
+
     @BindView(R.id.toolbar)
-    protected Toolbar toolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.refresh_layout)
-    protected SwipeRefreshLayout refreshLayout;
+    SwipeRefreshLayout refreshLayout;
 
-    @BindView(R.id.list_view)
-    protected ListView listView;
-
-    @BindView(R.id.icon_no_data)
-    protected View iconNoData;
+    @BindView(R.id.recycler_view)
+    HeaderAndFooterRecyclerView recyclerView;
 
     @BindView(R.id.fab_create_topic)
-    protected FloatingActionButton fabCreateTopic;
+    FloatingActionButton fabCreateTopic;
 
     private LoadMoreFooter loadMoreFooter;
     private TopicListAdapter adapter;
 
     private IMainPresenter mainPresenter;
 
-    // 当前分页位置
     private int page = 0;
-
-    // 首次按下返回键时间戳
     private long firstBackPressedTime = 0;
-
-    // 是否启用夜间模式
     private boolean enableThemeDark;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        enableThemeDark = ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight_FitsStatusBar, R.style.AppThemeDark_FitsStatusBar);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        enableThemeDark = ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -127,20 +138,25 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
-        loadMoreFooter = new LoadMoreFooter(this, listView, this);
+        navMainItemDev.setVisibility(BuildConfig.DEBUG ? View.VISIBLE : View.GONE);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        loadMoreFooter = new LoadMoreFooter(this, recyclerView, this);
         adapter = new TopicListAdapter(this);
-        listView.setAdapter(adapter);
-        fabCreateTopic.attachToListView(listView);
+        recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new FloatingActionButtonBehaviorListener.ForRecyclerView(fabCreateTopic));
 
         mainPresenter = new MainPresenter(this, this);
 
         updateUserInfoViews();
 
         imgThemeDark.setImageResource(enableThemeDark ? R.drawable.ic_wb_sunny_white_24dp : R.drawable.ic_brightness_3_white_24dp);
-        imgTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
+        navTopBackground.setVisibility(enableThemeDark ? View.INVISIBLE : View.VISIBLE);
 
-        RefreshUtils.init(refreshLayout, this);
-        RefreshUtils.refresh(refreshLayout, this);
+        refreshLayout.setColorSchemeResources(R.color.color_accent);
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override
@@ -149,7 +165,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         mainPresenter.getMessageCountAsyncTask();
         // 判断是否需要切换主题
         if (SettingShared.isEnableThemeDark(this) != enableThemeDark) {
-            ThemeUtils.notifyThemeApply(this, true);
+            ThemeUtils.notifyThemeApply(this);
         }
     }
 
@@ -164,24 +180,27 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
         @Override
         public void onDrawerClosed(View drawerView) {
-            TabType tab = TabType.all;
+            Tab tab = Tab.all;
             for (CheckedTextView navItem : navMainItemList) {
                 if (navItem.isChecked()) {
                     switch (navItem.getId()) {
                         case R.id.btn_nav_all:
-                            tab = TabType.all;
+                            tab = Tab.all;
                             break;
                         case R.id.btn_nav_good:
-                            tab = TabType.good;
+                            tab = Tab.good;
                             break;
                         case R.id.btn_nav_share:
-                            tab = TabType.share;
+                            tab = Tab.share;
                             break;
                         case R.id.btn_nav_ask:
-                            tab = TabType.ask;
+                            tab = Tab.ask;
                             break;
                         case R.id.btn_nav_job:
-                            tab = TabType.job;
+                            tab = Tab.job;
+                            break;
+                        case R.id.btn_nav_dev:
+                            tab = Tab.dev;
                             break;
                         default:
                             throw new AssertionError("Unknow tab.");
@@ -204,33 +223,27 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         mainPresenter.loadMoreTopicListAsyncTask(page + 1);
     }
 
-    /**
-     * 主导航项单击事件
-     */
     @OnClick({
             R.id.btn_nav_all,
             R.id.btn_nav_good,
             R.id.btn_nav_share,
             R.id.btn_nav_ask,
-            R.id.btn_nav_job
+            R.id.btn_nav_job,
+            R.id.btn_nav_dev
     })
-    public void onNavigationMainItemClick(CheckedTextView itemView) {
+    void onNavigationMainItemClick(CheckedTextView itemView) {
         for (CheckedTextView navItem : navMainItemList) {
             navItem.setChecked(navItem.getId() == itemView.getId());
         }
         drawerLayout.closeDrawers();
     }
 
-    /**
-     * 次要菜单导航
-     */
-
     @OnClick({
             R.id.btn_nav_notification,
             R.id.btn_nav_setting,
             R.id.btn_nav_about
     })
-    public void onNavigationItemOtherClick(View itemView) {
+    void onNavigationItemOtherClick(View itemView) {
         switch (itemView.getId()) {
             case R.id.btn_nav_notification:
                 if (LoginActivity.checkLogin(this)) {
@@ -253,7 +266,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
         private Class gotoClz;
 
-        protected OtherItemAction(Class gotoClz) {
+        OtherItemAction(Class gotoClz) {
             this.gotoClz = gotoClz;
         }
 
@@ -266,7 +279,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
             }
         }
 
-        public void startDelayed() {
+        void startDelayed() {
             HandlerUtils.handler.postDelayed(this, 400);
         }
 
@@ -276,11 +289,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     private OtherItemAction settingAction = new OtherItemAction(SettingActivity.class);
     private OtherItemAction aboutAction = new OtherItemAction(AboutActivity.class);
 
-    /**
-     * 注销按钮
-     */
     @OnClick(R.id.btn_logout)
-    protected void onBtnLogoutClick() {
+    void onBtnLogoutClick() {
         AlertDialogUtils.createBuilderWithAutoTheme(this)
                 .setMessage(R.string.logout_tip)
                 .setPositiveButton(R.string.logout, new DialogInterface.OnClickListener() {
@@ -297,20 +307,14 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
                 .show();
     }
 
-    /**
-     * 主题按钮
-     */
     @OnClick(R.id.btn_theme_dark)
-    protected void onBtnThemeDarkClick() {
+    void onBtnThemeDarkClick() {
         SettingShared.setEnableThemeDark(this, !enableThemeDark);
-        ThemeUtils.notifyThemeApply(this, false);
+        ThemeUtils.notifyThemeApply(this);
     }
 
-    /**
-     * 用户信息按钮
-     */
     @OnClick(R.id.layout_info)
-    protected void onBtnInfoClick() {
+    void onBtnInfoClick() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
             LoginActivity.startForResult(this);
         } else {
@@ -318,31 +322,22 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         }
     }
 
-    /**
-     * 发帖按钮
-     */
     @OnClick(R.id.fab_create_topic)
-    protected void onBtnCreateTopicClick() {
+    void onBtnCreateTopicClick() {
         if (LoginActivity.checkLogin(this)) {
             startActivity(new Intent(this, CreateTopicActivity.class));
         }
     }
 
-    /**
-     * 判断登录是否成功
-     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LoginActivity.REQUEST_LOGIN && resultCode == RESULT_OK) {
+        if (requestCode == LoginActivity.REQUEST_DEFAULT && resultCode == RESULT_OK) {
             updateUserInfoViews();
             mainPresenter.getUserAsyncTask();
         }
     }
 
-    /**
-     * 返回键关闭导航
-     */
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -359,48 +354,50 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     }
 
     @Override
-    public void onSwitchTabOk(@NonNull TabType tab) {
+    public void onSwitchTabOk(@NonNull Tab tab) {
         page = 0;
         toolbar.setTitle(tab.getNameId());
+        fabCreateTopic.show();
         adapter.getTopicList().clear();
         adapter.notifyDataSetChanged();
         loadMoreFooter.setState(LoadMoreFooter.STATE_DISABLED);
-        iconNoData.setVisibility(View.VISIBLE);
-        fabCreateTopic.show(true);
         refreshLayout.setRefreshing(true);
         onRefresh();
     }
 
     @Override
     public void onRefreshTopicListOk(@NonNull List<Topic> topicList) {
+        page = 1;
         adapter.getTopicList().clear();
         adapter.getTopicList().addAll(topicList);
         adapter.notifyDataSetChanged();
-        if (adapter.getTopicList().isEmpty()) {
-            loadMoreFooter.setState(LoadMoreFooter.STATE_DISABLED);
-            iconNoData.setVisibility(View.VISIBLE);
-        } else {
-            loadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
-            iconNoData.setVisibility(View.GONE);
-        }
-        page = 1;
+        refreshLayout.setRefreshing(false);
+        loadMoreFooter.setState(topicList.isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
     }
 
     @Override
-    public void onRefreshTopicListFinish() {
+    public void onRefreshTopicListError(@NonNull String message) {
+        ToastUtils.with(this).show(message);
         refreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onLoadMoreTopicListOk(@NonNull List<Topic> topicList) {
-        adapter.getTopicList().addAll(topicList);
-        adapter.notifyDataSetChanged();
         page++;
+        int startPosition = adapter.getItemCount();
+        adapter.getTopicList().addAll(topicList);
+        adapter.notifyItemRangeInserted(startPosition, topicList.size());
+        if (topicList.isEmpty()) {
+            loadMoreFooter.setState(LoadMoreFooter.STATE_FINISHED);
+        } else {
+            loadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
+        }
     }
 
     @Override
-    public void onLoadMoreTopicListFinish(@LoadMoreFooter.State int state) {
-        loadMoreFooter.setState(state);
+    public void onLoadMoreTopicListError(@NonNull String message) {
+        ToastUtils.with(this).show(message);
+        loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
     }
 
     @Override
@@ -425,7 +422,8 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public void backToContentTop() {
-        listView.setSelection(0);
+        recyclerView.scrollToPosition(0);
+        fabCreateTopic.show();
     }
 
 }

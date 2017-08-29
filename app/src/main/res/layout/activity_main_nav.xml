@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_gravity="start"
-    android:background="?attr/widgetBackground">
+    tools:background="?attr/widgetBackground">
 
-    <ScrollView
-        android:layout_height="match_parent"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:scrollbars="none">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="?attr/colorPrimary">
+
+            <ImageView
+                android:id="@+id/nav_top_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/nav_top_foreground"
+                android:src="@drawable/main_nav_header_bg"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true" />
 
             <RelativeLayout
+                android:id="@+id/nav_top_foreground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary">
-
-                <ImageView
-                    android:id="@+id/img_nav_top_background"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignBottom="@+id/layout_info"
-                    android:src="@drawable/main_nav_header_bg"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true" />
+                android:background="#01000000">
 
                 <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
                     android:id="@+id/nav_adapt_status_bar"
@@ -69,6 +69,20 @@
 
                 </LinearLayout>
 
+                <ImageView
+                    android:id="@+id/btn_theme_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/layout_info"
+                    android:layout_margin="24dp"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_brightness_3_white_24dp"
+                    android:scaleType="center"
+                    android:adjustViewBounds="true"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+
                 <TextView
                     android:id="@+id/btn_logout"
                     android:layout_width="wrap_content"
@@ -84,96 +98,83 @@
                     android:text="@string/logout"
                     android:textColor="@color/text_secondary_dark"
                     android:textSize="14sp"
-                    android:background="@drawable/button_transparent_image" />
-
-                <ImageView
-                    android:id="@+id/btn_theme_dark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignTop="@+id/layout_info"
-                    android:layout_margin="16dp"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_brightness_3_white_24dp"
-                    android:scaleType="center"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/button_transparent_image" />
+                    android:background="?attr/selectableItemBackground" />
 
             </RelativeLayout>
 
-            <View style="@style/AppWidget.ItemGap" />
+        </RelativeLayout>
 
-            <CheckedTextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_all"
-                android:drawableStart="@drawable/main_nav_ic_all"
-                android:drawableLeft="@drawable/main_nav_ic_all"
-                android:text="@string/tab_all"
-                android:checked="true" />
+        <View style="@style/AppWidget.ItemGap" />
 
-            <CheckedTextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_good"
-                android:drawableStart="@drawable/main_nav_ic_good"
-                android:drawableLeft="@drawable/main_nav_ic_good"
-                android:text="@string/tab_good" />
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_all"
+            android:drawableStart="@drawable/main_nav_ic_all"
+            android:drawableLeft="@drawable/main_nav_ic_all"
+            android:text="@string/tab_all"
+            android:checked="true" />
 
-            <CheckedTextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_share"
-                android:drawableStart="@drawable/main_nav_ic_share"
-                android:drawableLeft="@drawable/main_nav_ic_share"
-                android:text="@string/tab_share" />
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_good"
+            android:drawableStart="@drawable/main_nav_ic_good"
+            android:drawableLeft="@drawable/main_nav_ic_good"
+            android:text="@string/tab_good" />
 
-            <CheckedTextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_ask"
-                android:drawableStart="@drawable/main_nav_ic_ask"
-                android:drawableLeft="@drawable/main_nav_ic_ask"
-                android:text="@string/tab_ask" />
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_share"
+            android:drawableStart="@drawable/main_nav_ic_share"
+            android:drawableLeft="@drawable/main_nav_ic_share"
+            android:text="@string/tab_share" />
 
-            <CheckedTextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_job"
-                android:drawableStart="@drawable/main_nav_ic_job"
-                android:drawableLeft="@drawable/main_nav_ic_job"
-                android:text="@string/tab_job" />
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_ask"
+            android:drawableStart="@drawable/main_nav_ic_ask"
+            android:drawableLeft="@drawable/main_nav_ic_ask"
+            android:text="@string/tab_ask" />
 
-            <View style="@style/AppWidget.NavigationItemDeepLineGap" />
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_job"
+            android:drawableStart="@drawable/main_nav_ic_job"
+            android:drawableLeft="@drawable/main_nav_ic_job"
+            android:text="@string/tab_job" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <CheckedTextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_dev"
+            android:drawableStart="@drawable/main_nav_ic_dev"
+            android:drawableLeft="@drawable/main_nav_ic_dev"
+            android:text="@string/tab_dev" />
 
-                <TextView style="@style/AppWidget.NavigationItem"
-                    android:id="@+id/btn_nav_notification"
-                    android:drawableStart="@drawable/ic_notifications_grey600_24dp"
-                    android:drawableLeft="@drawable/ic_notifications_grey600_24dp"
-                    android:text="@string/notification" />
+        <View style="@style/AppWidget.NavigationItemDeepLineGap" />
 
-                <TextView style="@style/AppWidget.NavigationItemBadge"
-                    android:id="@+id/badge_nav_notification"
-                    tools:text="99+" />
-
-            </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_setting"
-                android:drawableStart="@drawable/ic_settings_grey600_24dp"
-                android:drawableLeft="@drawable/ic_settings_grey600_24dp"
-                android:text="@string/setting" />
+                android:id="@+id/btn_nav_notification"
+                android:drawableStart="@drawable/ic_notifications_grey600_24dp"
+                android:drawableLeft="@drawable/ic_notifications_grey600_24dp"
+                android:text="@string/notification" />
 
-            <TextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_about"
-                android:drawableStart="@drawable/ic_info_grey600_24dp"
-                android:drawableLeft="@drawable/ic_info_grey600_24dp"
-                android:text="@string/about" />
+            <TextView style="@style/AppWidget.NavigationItemBadge"
+                android:id="@+id/badge_nav_notification"
+                tools:text="99+" />
 
-            <View style="@style/AppWidget.ItemGap" />
+        </FrameLayout>
 
-        </LinearLayout>
+        <TextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_setting"
+            android:drawableStart="@drawable/ic_settings_grey600_24dp"
+            android:drawableLeft="@drawable/ic_settings_grey600_24dp"
+            android:text="@string/setting" />
 
-    </ScrollView>
+        <TextView style="@style/AppWidget.NavigationItem"
+            android:id="@+id/btn_nav_about"
+            android:drawableStart="@drawable/ic_info_grey600_24dp"
+            android:drawableLeft="@drawable/ic_info_grey600_24dp"
+            android:text="@string/about" />
 
-    <org.cnodejs.android.md.ui.widget.AdaptStatusBarView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/translucent_status" />
+        <View style="@style/AppWidget.ItemGap" />
 
-</FrameLayout>
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -3,11 +3,11 @@ package org.cnodejs.android.md.ui.adapter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,18 +35,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ReplyListAdapter extends BaseAdapter {
+public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.ViewHolder> implements IReplyView {
 
     private final Activity activity;
     private final LayoutInflater inflater;
     private final List<Reply> replyList = new ArrayList<>();
     private final Map<String, Integer> positionMap = new HashMap<>();
     private final ICreateReplyView createReplyView;
+    private final IReplyPresenter replyPresenter;
+
+    private String authorLoginName = null;
 
     public ReplyListAdapter(@NonNull Activity activity, @NonNull ICreateReplyView createReplyView) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
         this.createReplyView = createReplyView;
+        replyPresenter = new ReplyPresenter(activity, this);
     }
 
     @NonNull
@@ -54,7 +58,8 @@ public class ReplyListAdapter extends BaseAdapter {
         return replyList;
     }
 
-    public void setReplyList(@NonNull List<Reply> replyList) {
+    public void setReplyListWithNotify(String authorLoginName, @NonNull List<Reply> replyList) {
+        this.authorLoginName = authorLoginName;
         this.replyList.clear();
         this.replyList.addAll(replyList);
         positionMap.clear();
@@ -62,88 +67,102 @@ public class ReplyListAdapter extends BaseAdapter {
             Reply reply = replyList.get(n);
             positionMap.put(reply.getId(), n);
         }
+        notifyDataSetChanged();
     }
 
-    public void addReply(@NonNull Reply reply) {
+    public void appendReplyWithNotify(@NonNull Reply reply) {
         replyList.add(reply);
         positionMap.put(reply.getId(), replyList.size() - 1);
+        notifyItemInserted(replyList.size() - 1);
     }
 
     @Override
-    public int getCount() {
+    public void onUpReplyOk(@NonNull Reply reply) {
+        for (int position = 0; position < replyList.size(); position++) {
+            Reply replyAtPosition = replyList.get(position);
+            if (TextUtils.equals(reply.getId(), replyAtPosition.getId())) {
+                notifyItemChanged(position, reply);
+            }
+        }
+    }
+
+    @Override
+    public int getItemCount() {
         return replyList.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return replyList.get(position);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(inflater.inflate(R.layout.item_reply, parent, false));
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_reply, parent, false);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.update(position);
-        return convertView;
     }
 
-    protected class ViewHolder implements IReplyView {
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position);
+        } else {
+            for (Object payload : payloads) {
+                if (payload instanceof Reply) { // 更新点赞状态
+                    Reply reply = (Reply) payload;
+                    holder.updateUpViews(reply);
+                }
+            }
+        }
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.img_avatar)
-        protected ImageView imgAvatar;
+        ImageView imgAvatar;
 
         @BindView(R.id.tv_login_name)
-        protected TextView tvLoginName;
+        TextView tvLoginName;
+
+        @BindView(R.id.icon_author)
+        View iconAuthor;
 
         @BindView(R.id.tv_index)
-        protected TextView tvIndex;
+        TextView tvIndex;
 
         @BindView(R.id.tv_create_time)
-        protected TextView tvCreateTime;
+        TextView tvCreateTime;
 
         @BindView(R.id.btn_ups)
-        protected TextView btnUps;
+        TextView btnUps;
 
         @BindView(R.id.tv_target_position)
-        protected TextView tvTargetPosition;
+        TextView tvTargetPosition;
 
         @BindView(R.id.web_content)
-        protected ContentWebView webContent;
+        ContentWebView webContent;
 
         @BindView(R.id.icon_deep_line)
-        protected View iconDeepLine;
+        View iconDeepLine;
 
         @BindView(R.id.icon_shadow_gap)
-        protected View iconShadowGap;
-
-        private final IReplyPresenter replyPresenter;
+        View iconShadowGap;
 
         private Reply reply;
 
-        protected ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
+            super(itemView);
             ButterKnife.bind(this, itemView);
-            replyPresenter = new ReplyPresenter(activity, this);
         }
 
-        protected void update(int position) {
+        void update(int position) {
             reply = replyList.get(position);
             updateReplyViews(reply, position, positionMap.get(reply.getReplyId()));
         }
 
-        protected void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
+        void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
             Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
+            iconAuthor.setVisibility(TextUtils.equals(authorLoginName, reply.getAuthor().getLoginName()) ? View.VISIBLE : View.GONE);
             tvIndex.setText(activity.getString(R.string.$d_floor, position + 1));
             tvCreateTime.setText(FormatUtils.getRelativeTimeSpanString(reply.getCreateAt()));
             updateUpViews(reply);
@@ -161,18 +180,18 @@ public class ReplyListAdapter extends BaseAdapter {
             iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
         }
 
-        protected void updateUpViews(@NonNull Reply reply) {
+        void updateUpViews(@NonNull Reply reply) {
             btnUps.setText(String.valueOf(reply.getUpList().size()));
             btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
         }
 
         @OnClick(R.id.img_avatar)
-        protected void onBtnAvatarClick() {
+        void onBtnAvatarClick() {
             UserDetailActivity.startWithTransitionAnimation(activity, reply.getAuthor().getLoginName(), imgAvatar, reply.getAuthor().getAvatarUrl());
         }
 
         @OnClick(R.id.btn_ups)
-        protected void onBtnUpsClick() {
+        void onBtnUpsClick() {
             if (LoginActivity.checkLogin(activity)) {
                 if (reply.getAuthor().getLoginName().equals(LoginShared.getLoginName(activity))) {
                     ToastUtils.with(activity).show(R.string.can_not_up_yourself_reply);
@@ -183,16 +202,9 @@ public class ReplyListAdapter extends BaseAdapter {
         }
 
         @OnClick(R.id.btn_at)
-        protected void onBtnAtClick() {
+        void onBtnAtClick() {
             if (LoginActivity.checkLogin(activity)) {
                 createReplyView.onAt(reply, positionMap.get(reply.getId()));
-            }
-        }
-
-        @Override
-        public void onUpReplyOk(@NonNull Reply reply) {
-            if (TextUtils.equals(reply.getId(), this.reply.getId())) {
-                updateUpViews(reply);
             }
         }
 

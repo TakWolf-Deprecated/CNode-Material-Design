@@ -50,8 +50,7 @@
                 <Spinner
                     android:id="@+id/spn_tab"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/app_bar_size"
-                    android:entries="@array/tabs" />
+                    android:layout_height="@dimen/app_bar_size" />
 
             </LinearLayout>
 
@@ -87,6 +86,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
         android:background="?attr/widgetBackgroundDark"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
