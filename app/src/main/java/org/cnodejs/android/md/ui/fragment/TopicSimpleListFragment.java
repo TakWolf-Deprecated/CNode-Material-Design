@@ -42,9 +42,7 @@ public class TopicSimpleListFragment extends Fragment {
     }
 
     public void notifyDataSetChanged(List<TopicSimple> topicSimpleList) {
-        adapter.getTopicSimpleList().clear();
-        adapter.getTopicSimpleList().addAll(topicSimpleList);
-        adapter.notifyDataSetChanged();
+        adapter.setTopicSimpleListWithNotify(topicSimpleList);
     }
 
 }
