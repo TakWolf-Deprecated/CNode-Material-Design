@@ -155,8 +155,8 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     @Override
     public void appendReplyAndUpdateViews(@NonNull Reply reply) {
         adapter.appendReplyWithNotify(reply);
-        header.updateReplyCount(adapter.getReplyList().size());
-        recyclerView.smoothScrollToPosition(adapter.getReplyList().size());
+        header.updateReplyCount(adapter.getItemCount());
+        recyclerView.smoothScrollToPosition(adapter.getItemCount());
     }
 
     @Override
