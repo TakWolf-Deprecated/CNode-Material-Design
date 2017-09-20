@@ -53,11 +53,6 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         replyPresenter = new ReplyPresenter(activity, this);
     }
 
-    @NonNull
-    public List<Reply> getReplyList() {
-        return replyList;
-    }
-
     public void setReplyListWithNotify(String authorLoginName, @NonNull List<Reply> replyList) {
         this.authorLoginName = authorLoginName;
         this.replyList.clear();
