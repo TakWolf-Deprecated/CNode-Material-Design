@@ -36,9 +36,21 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
         inflater = LayoutInflater.from(activity);
     }
 
-    @NonNull
-    public List<Topic> getTopicList() {
-        return topicList;
+    public void clearTopicListWithNotify() {
+        topicList.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setTopicListWithNotify(@NonNull List<Topic> topicList) {
+        this.topicList.clear();
+        this.topicList.addAll(topicList);
+        notifyDataSetChanged();
+    }
+
+    public void appendTopicListWithNotify(@NonNull List<Topic> topicList) {
+        int startPosition = this.topicList.size();
+        this.topicList.addAll(topicList);
+        notifyItemRangeInserted(startPosition, topicList.size());
     }
 
     @Override
