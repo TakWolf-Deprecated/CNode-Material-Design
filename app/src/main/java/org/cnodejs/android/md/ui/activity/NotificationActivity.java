@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.R;
+import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.presenter.contract.INotificationPresenter;
 import org.cnodejs.android.md.presenter.implement.NotificationPresenter;
@@ -21,6 +22,9 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.INotificationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,10 +86,10 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
 
     @Override
     public void onGetMessagesOk(@NonNull Notification notification) {
-        adapter.getMessageList().clear();
-        adapter.getMessageList().addAll(notification.getHasNotReadMessageList());
-        adapter.getMessageList().addAll(notification.getHasReadMessageList());
-        adapter.notifyDataSetChanged();
+        List<Message> messageList = new ArrayList<>();
+        messageList.addAll(notification.getHasNotReadMessageList());
+        messageList.addAll(notification.getHasReadMessageList());
+        adapter.setMessageListWithNotify(messageList);
     }
 
     @Override
@@ -95,8 +99,7 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
 
     @Override
     public void onMarkAllMessageReadOk() {
-        adapter.markAllMessageRead();
-        adapter.notifyDataSetChanged();
+        adapter.markAllMessageReadWithNotify();
     }
 
     @Override
