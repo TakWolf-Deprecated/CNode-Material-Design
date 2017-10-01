@@ -13,7 +13,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,7 +39,7 @@ import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.IMainView;
 import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
-import org.cnodejs.android.md.util.FormatUtils;
+import org.cnodejs.android.md.ui.widget.NavigationItem;
 import org.cnodejs.android.md.util.HandlerUtils;
 
 import java.util.List;
@@ -72,9 +71,6 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @BindView(R.id.tv_score)
     TextView tvScore;
 
-    @BindView(R.id.badge_nav_notification)
-    TextView tvBadgeNotification;
-
     @BindView(R.id.btn_logout)
     View btnLogout;
 
@@ -85,7 +81,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     View navTopBackground;
 
     /*
-     * 主要导航项
+     * 导航项
      */
 
     @BindViews({
@@ -96,10 +92,13 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
             R.id.btn_nav_job,
             R.id.btn_nav_dev
     })
-    List<CheckedTextView> navMainItemList;
+    List<NavigationItem> navMainItemList;
 
     @BindView(R.id.btn_nav_dev)
-    CheckedTextView navMainItemDev;
+    NavigationItem navItemDev;
+
+    @BindView(R.id.btn_nav_notification)
+    NavigationItem navItemNotification;
 
     /*
      * 内容部分
@@ -138,7 +137,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         toolbar.setNavigationOnClickListener(new NavigationOpenClickListener(drawerLayout));
         toolbar.setOnClickListener(new DoubleClickBackToContentTopListener(this));
 
-        navMainItemDev.setVisibility(BuildConfig.DEBUG ? View.VISIBLE : View.GONE);
+        navItemDev.setVisibility(BuildConfig.DEBUG ? View.VISIBLE : View.GONE);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         loadMoreFooter = new LoadMoreFooter(this, recyclerView, this);
@@ -181,7 +180,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         @Override
         public void onDrawerClosed(View drawerView) {
             Tab tab = Tab.all;
-            for (CheckedTextView navItem : navMainItemList) {
+            for (NavigationItem navItem : navMainItemList) {
                 if (navItem.isChecked()) {
                     switch (navItem.getId()) {
                         case R.id.btn_nav_all:
@@ -231,9 +230,9 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
             R.id.btn_nav_job,
             R.id.btn_nav_dev
     })
-    void onNavigationMainItemClick(CheckedTextView itemView) {
-        for (CheckedTextView navItem : navMainItemList) {
-            navItem.setChecked(navItem.getId() == itemView.getId());
+    void onMainNavigationItemClick(NavigationItem itemView) {
+        for (NavigationItem navItem : navMainItemList) {
+            navItem.setChecked(navItem == itemView);
         }
         drawerLayout.closeDrawers();
     }
@@ -243,7 +242,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
             R.id.btn_nav_setting,
             R.id.btn_nav_about
     })
-    void onNavigationItemOtherClick(View itemView) {
+    void onOtherNavigationItemClick(NavigationItem itemView) {
         switch (itemView.getId()) {
             case R.id.btn_nav_notification:
                 if (LoginActivity.checkLogin(this)) {
@@ -262,11 +261,11 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         }
     }
 
-    private class OtherItemAction implements Runnable {
+    private class OtherNavigationItemAction implements Runnable {
 
         private Class gotoClz;
 
-        OtherItemAction(Class gotoClz) {
+        OtherNavigationItemAction(Class gotoClz) {
             this.gotoClz = gotoClz;
         }
 
@@ -285,9 +284,9 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     }
 
-    private OtherItemAction notificationAction = new OtherItemAction(NotificationActivity.class);
-    private OtherItemAction settingAction = new OtherItemAction(SettingActivity.class);
-    private OtherItemAction aboutAction = new OtherItemAction(AboutActivity.class);
+    private OtherNavigationItemAction notificationAction = new OtherNavigationItemAction(NotificationActivity.class);
+    private OtherNavigationItemAction settingAction = new OtherNavigationItemAction(SettingActivity.class);
+    private OtherNavigationItemAction aboutAction = new OtherNavigationItemAction(AboutActivity.class);
 
     @OnClick(R.id.btn_logout)
     void onBtnLogoutClick() {
@@ -298,7 +297,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LoginShared.logout(MainActivity.this);
-                        tvBadgeNotification.setText(null); // 未读消息清空
+                        navItemNotification.setBadge(0); // 未读消息清空
                         updateUserInfoViews();
                     }
 
@@ -412,7 +411,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
 
     @Override
     public void updateMessageCountViews(int count) {
-        tvBadgeNotification.setText(FormatUtils.getNavigationDisplayCountString(count));
+        navItemNotification.setBadge(count);
     }
 
     @Override
