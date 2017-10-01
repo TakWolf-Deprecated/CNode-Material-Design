@@ -6,183 +6,207 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/btn_version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:orientation="vertical"
-        android:background="?attr/selectableItemBackgroundGeneral">
+        android:background="?attr/widgetBackground">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/btn_version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/current_version"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp" />
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:background="?attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/tv_version"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/current_version"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="14sp"
+                android:maxLines="1"
+                tools:text="0.0.0-alpha.0-build-0" />
+
+        </LinearLayout>
+
+        <View style="@style/AppWidget.DeepLine" />
+
+        <LinearLayout
+            android:id="@+id/btn_open_source_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp"
-            android:maxLines="1"
-            tools:text="0.0.0-alpha.0-build-0" />
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/open_source_url"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/open_source_url_content"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="14sp"
+                android:maxLines="1" />
+
+        </LinearLayout>
+
+        <View style="@style/AppWidget.DeepLine" />
+
+        <LinearLayout
+            android:id="@+id/btn_about_cnode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_cnode"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/about_cnode_content"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="14sp"
+                android:maxLines="1" />
+
+        </LinearLayout>
+
+        <View style="@style/AppWidget.DeepLine" />
+
+        <LinearLayout
+            android:id="@+id/btn_about_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_author"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/about_author_content"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="14sp"
+                android:maxLines="1" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <View style="@style/AppWidget.DeepLine" />
+    <View style="@style/AppWidget.ShadowGap" />
 
     <LinearLayout
-        android:id="@+id/btn_open_source_url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:orientation="vertical"
-        android:background="?attr/selectableItemBackgroundGeneral">
+        android:background="?attr/widgetBackground">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/btn_open_in_market"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/open_source_url"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp" />
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:background="?attr/selectableItemBackground">
 
-        <TextView
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/open_in_market"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/open_in_market_content"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="14sp"
+                android:maxLines="1" />
+
+        </LinearLayout>
+
+        <View style="@style/AppWidget.DeepLine" />
+
+        <LinearLayout
+            android:id="@+id/btn_advice_feedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/open_source_url_content"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp"
-            android:maxLines="1" />
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:background="?attr/selectableItemBackground">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/advice_feedback"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
 
-    <View style="@style/AppWidget.DeepLine" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/advice_feedback_content"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="14sp"
+                android:maxLines="1" />
 
-    <LinearLayout
-        android:id="@+id/btn_about_cnode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical"
-        android:background="?attr/selectableItemBackgroundGeneral">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_cnode"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/about_cnode_content"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp"
-            android:maxLines="1" />
-
-    </LinearLayout>
-
-    <View style="@style/AppWidget.DeepLine" />
-
-    <LinearLayout
-        android:id="@+id/btn_about_author"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical"
-        android:background="?attr/selectableItemBackgroundGeneral">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_author"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/about_author_content"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp"
-            android:maxLines="1" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <View style="@style/AppWidget.ShadowGap" />
 
     <LinearLayout
-        android:id="@+id/btn_open_in_market"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:orientation="vertical"
-        android:background="?attr/selectableItemBackgroundGeneral">
+        android:background="?attr/widgetBackground">
 
         <TextView
+            android:id="@+id/btn_open_source_license"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/open_in_market"
+            android:padding="16dp"
+            android:text="@string/open_source_license"
             android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/open_in_market_content"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp"
-            android:maxLines="1" />
+            android:textSize="16sp"
+            android:background="?attr/selectableItemBackground" />
 
     </LinearLayout>
-
-    <View style="@style/AppWidget.DeepLine" />
-
-    <LinearLayout
-        android:id="@+id/btn_advice_feedback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical"
-        android:background="?attr/selectableItemBackgroundGeneral">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/advice_feedback"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/advice_feedback_content"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp"
-            android:maxLines="1" />
-
-    </LinearLayout>
-
-    <View style="@style/AppWidget.ShadowGap" />
-
-    <TextView
-        android:id="@+id/btn_open_source_license"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="@string/open_source_license"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="16sp"
-        android:background="?attr/selectableItemBackgroundGeneral" />
 
     <View style="@style/AppWidget.ShadowGap" />
 

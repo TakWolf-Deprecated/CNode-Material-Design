@@ -161,7 +161,7 @@
         <item name="android:textColor">?attr/navigationItemTextColor</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:background">?attr/selectableItemBackgroundGeneral</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
     <style name="AppWidget.NavigationItemBadge">
