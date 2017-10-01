@@ -9,6 +9,14 @@
     <attr name="referenceBackground" format="color|reference" />
     <attr name="darkMode" format="boolean" />
 
+    <declare-styleable name="NavigationItem">
+        <attr name="android:checked" />
+        <attr name="iconNormal" format="reference" />
+        <attr name="iconChecked" format="reference" />
+        <attr name="title" format="string" />
+        <attr name="badge" format="integer" />
+    </declare-styleable>
+
     <declare-styleable name="CNodeWebView">
         <attr name="darkTheme" format="boolean" />
     </declare-styleable>
