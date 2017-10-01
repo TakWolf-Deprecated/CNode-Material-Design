@@ -18,7 +18,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 25
         versionCode Integer.parseInt(new Date().format('yyyyMMdd'))
-        versionName '1.4.1-beta.1'
+        versionName '1.4.1-dev.1'
 
         manifestPlaceholders = [
                 UMENG_APPKEY: umengAppKey,
