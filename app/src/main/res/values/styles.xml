@@ -15,7 +15,7 @@
         <item name="widgetBackgroundTitle">@android:color/white</item>
         <item name="referenceText">@color/reference_text_light</item>
         <item name="referenceBackground">@drawable/reference_background_light</item>
-        <item name="darkMode">false</item>
+        <item name="darkTheme">false</item>
     </style>
 
     <style name="AppThemeLight" parent="BaseAppThemeLight" />
@@ -34,7 +34,7 @@
         <item name="widgetBackgroundTitle">@color/color_primary</item>
         <item name="referenceText">@color/reference_text_dark</item>
         <item name="referenceBackground">@drawable/reference_background_dark</item>
-        <item name="darkMode">true</item>
+        <item name="darkTheme">true</item>
     </style>
 
     <style name="AppThemeDark" parent="BaseAppThemeDark" />

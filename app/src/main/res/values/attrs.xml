@@ -6,7 +6,7 @@
     <attr name="widgetBackgroundTitle" format="color|reference" />
     <attr name="referenceText" format="color|reference" />
     <attr name="referenceBackground" format="color|reference" />
-    <attr name="darkMode" format="boolean" />
+    <attr name="darkTheme" format="boolean" />
 
     <declare-styleable name="NavigationItem">
         <attr name="android:checked" />
@@ -17,7 +17,7 @@
     </declare-styleable>
 
     <declare-styleable name="CNodeWebView">
-        <attr name="darkTheme" format="boolean" />
+        <attr name="darkTheme" />
     </declare-styleable>
 
 </resources>
