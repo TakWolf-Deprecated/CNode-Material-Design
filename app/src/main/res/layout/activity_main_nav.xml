@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -106,72 +107,91 @@
 
         <View style="@style/AppWidget.ItemGap" />
 
-        <CheckedTextView style="@style/AppWidget.NavigationItem"
+        <org.cnodejs.android.md.ui.widget.NavigationItem
             android:id="@+id/btn_nav_all"
-            android:drawableStart="@drawable/main_nav_ic_all"
-            android:drawableLeft="@drawable/main_nav_ic_all"
-            android:text="@string/tab_all"
-            android:checked="true" />
-
-        <CheckedTextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/btn_nav_good"
-            android:drawableStart="@drawable/main_nav_ic_good"
-            android:drawableLeft="@drawable/main_nav_ic_good"
-            android:text="@string/tab_good" />
-
-        <CheckedTextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/btn_nav_share"
-            android:drawableStart="@drawable/main_nav_ic_share"
-            android:drawableLeft="@drawable/main_nav_ic_share"
-            android:text="@string/tab_share" />
-
-        <CheckedTextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/btn_nav_ask"
-            android:drawableStart="@drawable/main_nav_ic_ask"
-            android:drawableLeft="@drawable/main_nav_ic_ask"
-            android:text="@string/tab_ask" />
-
-        <CheckedTextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/btn_nav_job"
-            android:drawableStart="@drawable/main_nav_ic_job"
-            android:drawableLeft="@drawable/main_nav_ic_job"
-            android:text="@string/tab_job" />
-
-        <CheckedTextView style="@style/AppWidget.NavigationItem"
-            android:id="@+id/btn_nav_dev"
-            android:drawableStart="@drawable/main_nav_ic_dev"
-            android:drawableLeft="@drawable/main_nav_ic_dev"
-            android:text="@string/tab_dev" />
-
-        <View style="@style/AppWidget.NavigationItemDeepLineGap" />
-
-        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:checked="true"
+            app:iconNormal="@drawable/ic_forum_grey600_24dp"
+            app:iconChecked="@drawable/ic_forum_theme_24dp"
+            app:title="@string/tab_all" />
 
-            <TextView style="@style/AppWidget.NavigationItem"
-                android:id="@+id/btn_nav_notification"
-                android:drawableStart="@drawable/ic_notifications_grey600_24dp"
-                android:drawableLeft="@drawable/ic_notifications_grey600_24dp"
-                android:text="@string/notification" />
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_nav_good"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:iconNormal="@drawable/ic_thumb_up_grey600_24dp"
+            app:iconChecked="@drawable/ic_thumb_up_theme_24dp"
+            app:title="@string/tab_good" />
 
-            <TextView style="@style/AppWidget.NavigationItemBadge"
-                android:id="@+id/badge_nav_notification"
-                tools:text="99+" />
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_nav_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:iconNormal="@drawable/ic_share_grey600_24dp"
+            app:iconChecked="@drawable/ic_share_theme_24dp"
+            app:title="@string/tab_share" />
 
-        </FrameLayout>
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_nav_ask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:iconNormal="@drawable/ic_face_grey600_24dp"
+            app:iconChecked="@drawable/ic_face_theme_24dp"
+            app:title="@string/tab_ask" />
 
-        <TextView style="@style/AppWidget.NavigationItem"
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_nav_job"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:iconNormal="@drawable/ic_work_grey600_24dp"
+            app:iconChecked="@drawable/ic_work_theme_24dp"
+            app:title="@string/tab_job" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_nav_dev"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:iconNormal="@drawable/ic_bug_report_grey600_24dp"
+            app:iconChecked="@drawable/ic_bug_report_theme_24dp"
+            app:title="@string/tab_dev" />
+
+        <View style="@style/AppWidget.DeepLine"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_nav_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:iconNormal="@drawable/ic_notifications_grey600_24dp"
+            app:iconChecked="@drawable/ic_notifications_grey600_24dp"
+            app:title="@string/notification" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
             android:id="@+id/btn_nav_setting"
-            android:drawableStart="@drawable/ic_settings_grey600_24dp"
-            android:drawableLeft="@drawable/ic_settings_grey600_24dp"
-            android:text="@string/setting" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:iconNormal="@drawable/ic_settings_grey600_24dp"
+            app:iconChecked="@drawable/ic_settings_grey600_24dp"
+            app:title="@string/setting" />
 
-        <TextView style="@style/AppWidget.NavigationItem"
+        <org.cnodejs.android.md.ui.widget.NavigationItem
             android:id="@+id/btn_nav_about"
-            android:drawableStart="@drawable/ic_info_grey600_24dp"
-            android:drawableLeft="@drawable/ic_info_grey600_24dp"
-            android:text="@string/about" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:iconNormal="@drawable/ic_info_grey600_24dp"
+            app:iconChecked="@drawable/ic_info_grey600_24dp"
+            app:title="@string/about" />
 
         <View style="@style/AppWidget.ItemGap" />
 
