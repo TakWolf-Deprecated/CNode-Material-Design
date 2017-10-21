@@ -122,7 +122,7 @@
 
     <!-- Gap -->
 
-    <style name="AppWidget.ItemGap">
+    <style name="AppWidget.Gap">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">8dp</item>
     </style>

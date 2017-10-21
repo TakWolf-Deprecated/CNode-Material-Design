@@ -105,7 +105,7 @@
 
         </RelativeLayout>
 
-        <View style="@style/AppWidget.ItemGap" />
+        <Space style="@style/AppWidget.Gap" />
 
         <org.cnodejs.android.md.ui.widget.NavigationItem
             android:id="@+id/btn_nav_all"
@@ -193,7 +193,7 @@
             app:iconChecked="@drawable/ic_info_grey600_24dp"
             app:title="@string/about" />
 
-        <View style="@style/AppWidget.ItemGap" />
+        <Space style="@style/AppWidget.Gap" />
 
     </LinearLayout>
 

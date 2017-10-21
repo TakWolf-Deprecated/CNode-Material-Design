@@ -266,7 +266,7 @@
 
             </LinearLayout>
 
-            <View style="@style/AppWidget.ItemGap" />
+            <Space style="@style/AppWidget.Gap" />
 
         </LinearLayout>
 
