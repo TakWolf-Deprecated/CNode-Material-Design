@@ -266,8 +266,6 @@
 
             </LinearLayout>
 
-            <Space style="@style/AppWidget.Gap" />
-
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
