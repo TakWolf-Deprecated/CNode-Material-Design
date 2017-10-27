@@ -60,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
-                        android:text="@string/$slash"
+                        android:text="@string/_slash_"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
                         android:maxLines="1" />
@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
-                        android:text="@string/$dot"
+                        android:text="@string/_dot_"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp"
                         android:maxLines="1" />

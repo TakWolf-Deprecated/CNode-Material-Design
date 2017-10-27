@@ -104,7 +104,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             tvTime.setText(FormatUtils.getRelativeTimeSpanString(message.getCreateAt()));
             tvTime.setTextColor(ResUtils.getThemeAttrColor(activity, message.isRead() ? android.R.attr.textColorSecondary : R.attr.colorAccent));
             badgeRead.setVisibility(message.isRead() ? View.GONE : View.VISIBLE);
-            tvTopicTitle.setText(activity.getString(R.string.topic_$s, message.getTopic().getTitle()));
+            tvTopicTitle.setText(activity.getString(R.string.topic__, message.getTopic().getTitle()));
 
             // 判断通知类型
             if (message.getType() == Message.Type.at) {

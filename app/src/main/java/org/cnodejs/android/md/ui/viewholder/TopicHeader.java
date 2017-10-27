@@ -113,8 +113,8 @@ public class TopicHeader implements ITopicHeaderView {
             ctvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
             ctvTab.setChecked(topic.isTop());
             tvLoginName.setText(topic.getAuthor().getLoginName());
-            tvCreateTime.setText(activity.getString(R.string.$s_create, FormatUtils.getRelativeTimeSpanString(topic.getCreateAt())));
-            tvVisitCount.setText(activity.getString(R.string.$d_count_visit, topic.getVisitCount()));
+            tvCreateTime.setText(activity.getString(R.string.__create, FormatUtils.getRelativeTimeSpanString(topic.getCreateAt())));
+            tvVisitCount.setText(activity.getString(R.string.__count_visit, topic.getVisitCount()));
             btnFavorite.setImageResource(isCollect ? R.drawable.ic_favorite_theme_24dp : R.drawable.ic_favorite_outline_grey600_24dp);
 
             // 这里直接使用WebView，有性能问题
@@ -134,7 +134,7 @@ public class TopicHeader implements ITopicHeaderView {
     public void updateReplyCount(int replyCount) {
         layoutNoReply.setVisibility(replyCount > 0 ? View.GONE : View.VISIBLE);
         layoutReplyCount.setVisibility(replyCount > 0 ? View.VISIBLE : View.GONE);
-        tvReplyCount.setText(activity.getString(R.string.$d_count_reply, replyCount));
+        tvReplyCount.setText(activity.getString(R.string.__count_reply, replyCount));
     }
 
     @Override
