@@ -81,7 +81,7 @@
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:textSize="16sp"
-                android:hint="@string/access_token_$"
+                android:hint="@string/access_token__"
                 android:inputType="text"
                 android:maxLength="36"
                 android:maxLines="1"
@@ -147,7 +147,7 @@
         android:layout_below="@id/layout_card"
         android:layout_centerHorizontal="true"
         android:padding="8dp"
-        android:text="@string/$_how_to_get_access_token_$"
+        android:text="@string/_how_to_get_access_token_"
         android:textColor="@color/color_accent"
         android:textSize="14sp"
         android:background="?attr/selectableItemBackground" />
