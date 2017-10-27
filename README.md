@@ -22,15 +22,15 @@
 
 - [360手机助手](http://zhushou.360.cn/detail/index/soft_id/3060683)
 
-- [腾讯应用宝](http://android.myapp.com/myapp/detail.htm?apkName=org.cnodejs.android.md)
+- [应用宝](http://android.myapp.com/myapp/detail.htm?apkName=org.cnodejs.android.md)
 
-- [魅族Flyme应用中心](http://app.flyme.cn/apps/public/detail?package_name=org.cnodejs.android.md)
+- [魅族应用商店](http://app.flyme.cn/apps/public/detail?package_name=org.cnodejs.android.md)
 
 - [小米应用商店](http://app.mi.com/detail/118728)
 
 - [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
-- [酷安网](http://www.coolapk.com/apk/org.cnodejs.android.md)
+- [酷安](http://www.coolapk.com/apk/org.cnodejs.android.md)
 
 ## Screenshots ##
 
