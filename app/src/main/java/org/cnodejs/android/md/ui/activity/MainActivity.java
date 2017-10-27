@@ -404,7 +404,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         } else {
             Glide.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
-            tvScore.setText(getString(R.string.score_$d, LoginShared.getScore(this)));
+            tvScore.setText(getString(R.string.score__, LoginShared.getScore(this)));
             btnLogout.setVisibility(View.VISIBLE);
         }
     }
