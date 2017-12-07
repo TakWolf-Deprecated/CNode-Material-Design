@@ -3,7 +3,6 @@ package org.cnodejs.android.md.ui.viewholder;
 import android.content.Context;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,14 +58,14 @@ public class LoadMoreFooter {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
+                if (!recyclerView.canScrollVertically(1)) {
                     checkLoadMore();
                 }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
+                if (!recyclerView.canScrollVertically(1)) {
                     checkLoadMore();
                 }
             }
