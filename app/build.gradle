@@ -61,7 +61,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
 
-    implementation 'com.takwolf.android:hf-recyclerview:0.2.0'
+    implementation 'com.takwolf.android:hf-recyclerview:0.3.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation 'com.pnikosis:materialish-progress:1.7'
