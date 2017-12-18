@@ -73,5 +73,5 @@ dependencies {
 
     implementation 'org.cnodejs.android:oauth-login:0.1.0'
 
-    implementation 'com.umeng.analytics:analytics:6.1.2'
+    implementation 'com.umeng.analytics:analytics:6.1.3'
 }
