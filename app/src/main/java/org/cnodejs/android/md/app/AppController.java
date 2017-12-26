@@ -2,8 +2,6 @@ package org.cnodejs.android.md.app;
 
 import android.app.Application;
 
-import com.umeng.analytics.MobclickAgent;
-
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.cnodejs.android.md.BuildConfig;
@@ -20,9 +18,6 @@ public class AppController extends Application implements Thread.UncaughtExcepti
         if (!BuildConfig.DEBUG) {
             Thread.setDefaultUncaughtExceptionHandler(this);
         }
-
-        MobclickAgent.setDebugMode(BuildConfig.DEBUG);
-        MobclickAgent.setCheckDevice(false);
     }
 
     @Override
