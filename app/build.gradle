@@ -1,13 +1,5 @@
 apply plugin: 'com.android.application'
 
-String umengAppKey = System.getenv('CNODEMD_UMENG_APP_KEY')
-File localPropertiesFile = project.rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    Properties properties = new Properties()
-    properties.load(localPropertiesFile.newDataInputStream())
-    umengAppKey = properties.getProperty('umeng.appkey', umengAppKey)
-}
-
 android {
 
     compileSdkVersion 26
@@ -18,11 +10,6 @@ android {
         targetSdkVersion 26
         versionCode Integer.parseInt(new Date().format('yyyyMMdd'))
         versionName '1.4.1-dev.1'
-
-        manifestPlaceholders = [
-                UMENG_APPKEY: umengAppKey,
-                UMENG_CHANNEL: 'CNodeJS'
-        ]
     }
 
     buildTypes {
@@ -72,6 +59,4 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.11.2'
 
     implementation 'org.cnodejs.android:oauth-login:0.1.0'
-
-    implementation 'com.umeng.analytics:analytics:6.1.3'
 }
