@@ -10,10 +10,9 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Topic;
+import org.cnodejs.android.md.model.glide.GlideApp;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.util.FormatUtils;
@@ -117,7 +116,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
             tvLastReplyTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getLastReplyAt()));
             tvTitle.setText(topic.getTitle());
             tvSummary.setText(topic.getContentSummary());
-            Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvAuthor.setText(topic.getAuthor().getLoginName());
             tvCreateTime.setText(activity.getString(R.string.create_at__, topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss")));
             iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);

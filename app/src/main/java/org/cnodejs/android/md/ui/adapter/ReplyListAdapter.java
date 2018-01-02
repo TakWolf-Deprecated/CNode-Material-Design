@@ -11,10 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Reply;
+import org.cnodejs.android.md.model.glide.GlideApp;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.IReplyPresenter;
 import org.cnodejs.android.md.presenter.implement.ReplyPresenter;
@@ -155,7 +154,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         }
 
         void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
-            Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             iconAuthor.setVisibility(TextUtils.equals(authorLoginName, reply.getAuthor().getLoginName()) ? View.VISIBLE : View.GONE);
             tvIndex.setText(activity.getString(R.string.__floor, position + 1));

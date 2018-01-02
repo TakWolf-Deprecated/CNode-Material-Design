@@ -16,13 +16,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Tab;
 import org.cnodejs.android.md.model.entity.Topic;
+import org.cnodejs.android.md.model.glide.GlideApp;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
@@ -397,12 +397,12 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @Override
     public void updateUserInfoViews() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            Glide.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(R.string.click_avatar_to_login);
             tvScore.setText(null);
             btnLogout.setVisibility(View.GONE);
         } else {
-            Glide.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
             tvScore.setText(getString(R.string.score__, LoginShared.getScore(this)));
             btnLogout.setVisibility(View.VISIBLE);
