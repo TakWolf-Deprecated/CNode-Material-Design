@@ -126,7 +126,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
 
         String avatarUrl = getIntent().getStringExtra(EXTRA_AVATAR_URL);
         if (!TextUtils.isEmpty(avatarUrl)) {
-            GlideApp.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).into(imgAvatar);
         }
 
         userDetailPresenter = new UserDetailPresenter(this, this);
@@ -161,7 +161,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
 
     @Override
     public void onGetUserOk(@NonNull User user) {
-        GlideApp.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+        GlideApp.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
         tvLoginName.setText(user.getLoginName());
         if (TextUtils.isEmpty(user.getGithubUsername())) {
             tvGithubUsername.setVisibility(View.INVISIBLE);

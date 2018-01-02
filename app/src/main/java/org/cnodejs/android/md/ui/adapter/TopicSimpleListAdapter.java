@@ -86,7 +86,7 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
             this.topicSimple = topicSimple;
 
             tvTitle.setText(topicSimple.getTitle());
-            GlideApp.with(activity).load(topicSimple.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(topicSimple.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(topicSimple.getAuthor().getLoginName());
             tvLastReplyTime.setText(FormatUtils.getRelativeTimeSpanString(topicSimple.getLastReplyAt()));
             iconDeepLine.setVisibility(isTheLast ? View.GONE : View.VISIBLE);

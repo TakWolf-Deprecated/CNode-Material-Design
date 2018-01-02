@@ -56,7 +56,7 @@ public class ImagePreviewActivity extends StatusBarActivity {
 
     private void loadImageAsyncTask() {
         progressWheel.spin();
-        GlideApp.with(this).load(getIntent().getStringExtra(EXTRA_IMAGE_URL)).error(R.drawable.image_error).dontAnimate().listener(new RequestListener<Drawable>() {
+        GlideApp.with(this).load(getIntent().getStringExtra(EXTRA_IMAGE_URL)).error(R.drawable.image_error).listener(new RequestListener<Drawable>() {
 
             @Override
             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {

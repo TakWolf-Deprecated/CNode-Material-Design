@@ -154,7 +154,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         }
 
         void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
-            GlideApp.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             iconAuthor.setVisibility(TextUtils.equals(authorLoginName, reply.getAuthor().getLoginName()) ? View.VISIBLE : View.GONE);
             tvIndex.setText(activity.getString(R.string.__floor, position + 1));

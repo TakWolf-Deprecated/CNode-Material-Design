@@ -98,7 +98,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         void update(@NonNull Message message) {
             this.message = message;
 
-            GlideApp.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
             tvTime.setText(FormatUtils.getRelativeTimeSpanString(message.getCreateAt()));
             tvTime.setTextColor(ResUtils.getThemeAttrColor(activity, message.isRead() ? android.R.attr.textColorSecondary : R.attr.colorAccent));

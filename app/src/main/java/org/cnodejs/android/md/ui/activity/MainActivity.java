@@ -397,12 +397,12 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @Override
     public void updateUserInfoViews() {
         if (TextUtils.isEmpty(LoginShared.getAccessToken(this))) {
-            GlideApp.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(this).load(R.drawable.image_placeholder).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(R.string.click_avatar_to_login);
             tvScore.setText(null);
             btnLogout.setVisibility(View.GONE);
         } else {
-            GlideApp.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(this).load(LoginShared.getAvatarUrl(this)).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(LoginShared.getLoginName(this));
             tvScore.setText(getString(R.string.score__, LoginShared.getScore(this)));
             btnLogout.setVisibility(View.VISIBLE);

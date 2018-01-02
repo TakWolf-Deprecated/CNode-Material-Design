@@ -109,7 +109,7 @@ public class TopicHeader implements ITopicHeaderView {
             iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
 
             tvTitle.setText(topic.getTitle());
-            GlideApp.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             ctvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
             ctvTab.setChecked(topic.isTop());
             tvLoginName.setText(topic.getAuthor().getLoginName());
