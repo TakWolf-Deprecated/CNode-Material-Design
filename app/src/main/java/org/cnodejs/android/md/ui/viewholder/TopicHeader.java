@@ -10,12 +10,12 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
+import org.cnodejs.android.md.model.glide.GlideApp;
 import org.cnodejs.android.md.presenter.contract.ITopicHeaderPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicHeaderPresenter;
 import org.cnodejs.android.md.ui.activity.LoginActivity;
@@ -109,7 +109,7 @@ public class TopicHeader implements ITopicHeaderView {
             iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
 
             tvTitle.setText(topic.getTitle());
-            Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             ctvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
             ctvTab.setChecked(topic.isTop());
             tvLoginName.setText(topic.getAuthor().getLoginName());

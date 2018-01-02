@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.TopicSimple;
+import org.cnodejs.android.md.model.glide.GlideApp;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.util.FormatUtils;
@@ -87,7 +86,7 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
             this.topicSimple = topicSimple;
 
             tvTitle.setText(topicSimple.getTitle());
-            Glide.with(activity).load(topicSimple.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(topicSimple.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(topicSimple.getAuthor().getLoginName());
             tvLastReplyTime.setText(FormatUtils.getRelativeTimeSpanString(topicSimple.getLastReplyAt()));
             iconDeepLine.setVisibility(isTheLast ? View.GONE : View.VISIBLE);
