@@ -116,7 +116,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         toolbar.inflateMenu(R.menu.user_detail);
         toolbar.setOnMenuItemClickListener(this);
 
-        adapter = new UserDetailPagerAdapter(getSupportFragmentManager());
+        adapter = new UserDetailPagerAdapter(this, viewPager);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
         tabLayout.setupWithViewPager(viewPager);
