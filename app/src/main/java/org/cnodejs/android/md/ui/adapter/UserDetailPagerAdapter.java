@@ -37,9 +37,7 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
 
     public void update(@NonNull List<Topic> topicList) {
         List<TopicSimple> topicSimpleList = new ArrayList<>();
-        for (Topic topic : topicList) {
-            topicSimpleList.add(topic);
-        }
+        topicSimpleList.addAll(topicList);
         fragmentList.get(2).notifyDataSetChanged(topicSimpleList);
     }
 
