@@ -45,6 +45,9 @@
     <string name="content_empty_error_tip">内容不能为空</string>
 
     <string name="user_detail">用户资料</string>
+    <string name="recently_reply">最近回复</string>
+    <string name="latest_post">最新发布</string>
+    <string name="favorite_topics">收藏话题</string>
     <string name="navigation_badge_count_max">99+</string>
 
     <string name="load_more_finished">已经到底啦</string>
