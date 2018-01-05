@@ -144,9 +144,6 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {}
-
     @OnClick(R.id.img_avatar)
     void onBtnAvatarClick() {
         userDetailPresenter.getUserAsyncTask(loginName);
