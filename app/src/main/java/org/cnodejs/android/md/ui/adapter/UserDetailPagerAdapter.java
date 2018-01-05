@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicSimple;
 import org.cnodejs.android.md.model.entity.User;
@@ -18,15 +19,17 @@ import java.util.List;
 
 public class UserDetailPagerAdapter extends PagerAdapter {
 
-    private static final String[] TITLES = {
-            "最近回复",
-            "最新发布",
-            "话题收藏"
+    private static final int[] TITLE_IDS = {
+            R.string.recently_reply,
+            R.string.latest_post,
+            R.string.favorite_topics
     };
 
+    private final Activity activity;
     private final List<TopicSimpleListController> controllerList = new ArrayList<>();
 
     public UserDetailPagerAdapter(@NonNull Activity activity, @NonNull ViewPager viewPager) {
+        this.activity = activity;
         controllerList.add(new TopicSimpleListController(activity, viewPager));
         controllerList.add(new TopicSimpleListController(activity, viewPager));
         controllerList.add(new TopicSimpleListController(activity, viewPager));
@@ -51,7 +54,7 @@ public class UserDetailPagerAdapter extends PagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return TITLES[position];
+        return activity.getString(TITLE_IDS[position]);
     }
 
     @NonNull
