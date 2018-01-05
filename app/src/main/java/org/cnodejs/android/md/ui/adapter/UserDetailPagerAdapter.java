@@ -15,12 +15,12 @@ import java.util.List;
 
 public class UserDetailPagerAdapter extends FragmentPagerAdapter {
 
-    private static final String[] titles = {
+    private static final String[] TITLES = {
             "最近回复",
             "最新发布",
             "话题收藏"
     };
-    
+
     private final List<TopicSimpleListFragment> fragmentList = new ArrayList<>();
 
     public UserDetailPagerAdapter(@NonNull FragmentManager manager) {
@@ -53,7 +53,7 @@ public class UserDetailPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return titles[position];
+        return TITLES[position];
     }
 
 }
