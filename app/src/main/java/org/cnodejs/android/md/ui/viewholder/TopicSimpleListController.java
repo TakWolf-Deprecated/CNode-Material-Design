@@ -47,7 +47,7 @@ public class TopicSimpleListController {
         return contentView;
     }
 
-    public void notifyDataSetChanged(@NonNull List<TopicSimple> topicSimpleList) {
+    public void setTopicSimpleList(@NonNull List<TopicSimple> topicSimpleList) {
         adapter.setTopicSimpleListWithNotify(topicSimpleList);
     }
 
