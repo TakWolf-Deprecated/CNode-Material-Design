@@ -31,7 +31,7 @@ public class TopicSimpleListController {
     RecyclerView recyclerView;
 
     private final View contentView;
-    private TopicSimpleListAdapter adapter;
+    private final TopicSimpleListAdapter adapter;
 
     public TopicSimpleListController(@NonNull Activity activity, @NonNull ViewPager viewPager) {
         contentView = LayoutInflater.from(activity).inflate(R.layout.fragment_topic_simple_list, viewPager, false);
@@ -47,7 +47,7 @@ public class TopicSimpleListController {
         return contentView;
     }
 
-    public void notifyDataSetChanged(List<TopicSimple> topicSimpleList) {
+    public void setTopicSimpleList(@NonNull List<TopicSimple> topicSimpleList) {
         adapter.setTopicSimpleListWithNotify(topicSimpleList);
     }
 

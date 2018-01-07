@@ -36,14 +36,14 @@ public class UserDetailPagerAdapter extends PagerAdapter {
     }
 
     public void update(@NonNull User user) {
-        controllerList.get(0).notifyDataSetChanged(user.getRecentReplyList());
-        controllerList.get(1).notifyDataSetChanged(user.getRecentTopicList());
+        controllerList.get(0).setTopicSimpleList(user.getRecentReplyList());
+        controllerList.get(1).setTopicSimpleList(user.getRecentTopicList());
     }
 
     public void update(@NonNull List<Topic> topicList) {
         List<TopicSimple> topicSimpleList = new ArrayList<>();
         topicSimpleList.addAll(topicList);
-        controllerList.get(2).notifyDataSetChanged(topicSimpleList);
+        controllerList.get(2).setTopicSimpleList(topicSimpleList);
     }
 
     @Override
