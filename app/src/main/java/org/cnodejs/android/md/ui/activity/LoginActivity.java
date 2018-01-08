@@ -1,11 +1,14 @@
 package org.cnodejs.android.md.ui.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
@@ -24,7 +27,6 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.ILoginView;
-import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.oauthlogin.CNodeOAuthLoginActivity;
 
 import butterknife.BindView;
@@ -34,10 +36,11 @@ import retrofit2.Call;
 
 public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
-    public static final int REQUEST_DEFAULT = FormatUtils.generateRequestCode();
+    public static final int REQUEST_DEFAULT = 0;
 
-    private static final int REQUEST_QR_CODE_LOGIN = FormatUtils.generateRequestCode();
-    private static final int REQUEST_GITHUB_LOGIN = FormatUtils.generateRequestCode();
+    private static final int REQUEST_PERMISSIONS_QR_CODE = 0;
+    private static final int REQUEST_QR_CODE_LOGIN = 1;
+    private static final int REQUEST_GITHUB_LOGIN = 2;
 
     public static void startForResult(@NonNull Activity activity, int requestCode) {
         Intent intent = new Intent(activity, LoginActivity.class);
@@ -105,7 +108,11 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     @OnClick(R.id.btn_qr_code_login)
     void onBtnQrCodeLoginClick() {
-        ScanQRCodeActivity.startForResultWithPermissionCheck(this, REQUEST_QR_CODE_LOGIN);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ScanQRCodeActivity.requestPermissions(this, REQUEST_PERMISSIONS_QR_CODE);
+        } else {
+            ScanQRCodeActivity.startForResult(this, REQUEST_QR_CODE_LOGIN);
+        }
     }
 
     @OnClick(R.id.btn_github_login)
@@ -116,8 +123,12 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == ScanQRCodeActivity.PERMISSIONS_REQUEST_DEFAULT) {
-            ScanQRCodeActivity.startForResultWithPermissionHandle(this, REQUEST_QR_CODE_LOGIN);
+        if (requestCode == REQUEST_PERMISSIONS_QR_CODE) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ScanQRCodeActivity.onPermissionsDenied(this);
+            } else {
+                ScanQRCodeActivity.startForResult(this, REQUEST_QR_CODE_LOGIN);
+            }
         }
     }
 

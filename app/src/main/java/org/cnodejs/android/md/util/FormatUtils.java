@@ -16,7 +16,6 @@ import org.tautua.markdownpapers.parser.ParseException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public final class FormatUtils {
 
@@ -67,16 +66,6 @@ public final class FormatUtils {
                 return false;
             }
         }
-    }
-
-    /**
-     * 生成自增Integer
-     */
-
-    private static final AtomicInteger requestCodeSeed = new AtomicInteger(1);
-
-    public static int generateRequestCode() {
-        return requestCodeSeed.getAndIncrement();
     }
 
     /**
