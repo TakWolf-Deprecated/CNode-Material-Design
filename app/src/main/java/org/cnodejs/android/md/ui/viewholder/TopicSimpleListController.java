@@ -34,7 +34,7 @@ public class TopicSimpleListController {
     private final TopicSimpleListAdapter adapter;
 
     public TopicSimpleListController(@NonNull Activity activity, @NonNull ViewPager viewPager) {
-        contentView = LayoutInflater.from(activity).inflate(R.layout.fragment_topic_simple_list, viewPager, false);
+        contentView = LayoutInflater.from(activity).inflate(R.layout.controller_topic_simple_list, viewPager, false);
         ButterKnife.bind(this, contentView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
