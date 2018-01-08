@@ -1,11 +1,14 @@
 package org.cnodejs.android.md.ui.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
@@ -105,7 +108,9 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     @OnClick(R.id.btn_qr_code_login)
     void onBtnQrCodeLoginClick() {
-        if (ScanQRCodeActivity.checkPermissionBeforeStart(this, REQUEST_PERMISSIONS_QR_CODE)) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ScanQRCodeActivity.requestPermissions(this, REQUEST_PERMISSIONS_QR_CODE);
+        } else {
             ScanQRCodeActivity.startForResult(this, REQUEST_QR_CODE_LOGIN);
         }
     }
@@ -119,7 +124,9 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_PERMISSIONS_QR_CODE) {
-            if (ScanQRCodeActivity.checkPermissionOnResult(this)) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ScanQRCodeActivity.onPermissionsDenied(this);
+            } else {
                 ScanQRCodeActivity.startForResult(this, REQUEST_QR_CODE_LOGIN);
             }
         }
