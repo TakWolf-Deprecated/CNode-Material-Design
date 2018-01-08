@@ -31,10 +31,10 @@ import butterknife.ButterKnife;
 public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     private static final String[] PERMISSIONS = {Manifest.permission.CAMERA};
-    public static final int PERMISSIONS_REQUEST_DEFAULT = 0;
+
     public static final String EXTRA_QR_CODE = "qrCode";
 
-    public static void startForResultWithPermissionCheck(@NonNull final Activity activity, int requestCode) {
+    public static boolean checkPermissionBeforeStart(@NonNull final Activity activity, final int requestCode) {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA)) {
                 AlertDialogUtils.createBuilderWithAutoTheme(activity)
@@ -43,20 +43,21 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_DEFAULT);
+                                ActivityCompat.requestPermissions(activity, PERMISSIONS, requestCode);
                             }
 
                         })
                         .show();
             } else {
-                ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSIONS_REQUEST_DEFAULT);
+                ActivityCompat.requestPermissions(activity, PERMISSIONS, requestCode);
             }
+            return false;
         } else {
-            startForResult(activity, requestCode);
+            return true;
         }
     }
 
-    public static void startForResultWithPermissionHandle(@NonNull final Activity activity, int requestCode) {
+    public static boolean checkPermissionOnResult(@NonNull final Activity activity) {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             AlertDialogUtils.createBuilderWithAutoTheme(activity)
                     .setMessage(R.string.qr_code_permission_denied_tip)
@@ -70,13 +71,14 @@ public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReade
 
                     })
                     .show();
+            return false;
         } else {
-            startForResult(activity, requestCode);
+            return true;
         }
     }
 
     @RequiresPermission(Manifest.permission.CAMERA)
-    private static void startForResult(@NonNull Activity activity, int requestCode) {
+    public static void startForResult(@NonNull Activity activity, int requestCode) {
         activity.startActivityForResult(new Intent(activity, ScanQRCodeActivity.class), requestCode);
     }
 

@@ -35,8 +35,9 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     public static final int REQUEST_DEFAULT = 0;
 
-    private static final int REQUEST_QR_CODE_LOGIN = 0;
-    private static final int REQUEST_GITHUB_LOGIN = 1;
+    private static final int REQUEST_PERMISSIONS_QR_CODE = 0;
+    private static final int REQUEST_QR_CODE_LOGIN = 1;
+    private static final int REQUEST_GITHUB_LOGIN = 2;
 
     public static void startForResult(@NonNull Activity activity, int requestCode) {
         Intent intent = new Intent(activity, LoginActivity.class);
@@ -104,7 +105,9 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
     @OnClick(R.id.btn_qr_code_login)
     void onBtnQrCodeLoginClick() {
-        ScanQRCodeActivity.startForResultWithPermissionCheck(this, REQUEST_QR_CODE_LOGIN);
+        if (ScanQRCodeActivity.checkPermissionBeforeStart(this, REQUEST_PERMISSIONS_QR_CODE)) {
+            ScanQRCodeActivity.startForResult(this, REQUEST_QR_CODE_LOGIN);
+        }
     }
 
     @OnClick(R.id.btn_github_login)
@@ -115,8 +118,10 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == ScanQRCodeActivity.PERMISSIONS_REQUEST_DEFAULT) {
-            ScanQRCodeActivity.startForResultWithPermissionHandle(this, REQUEST_QR_CODE_LOGIN);
+        if (requestCode == REQUEST_PERMISSIONS_QR_CODE) {
+            if (ScanQRCodeActivity.checkPermissionOnResult(this)) {
+                ScanQRCodeActivity.startForResult(this, REQUEST_QR_CODE_LOGIN);
+            }
         }
     }
 
