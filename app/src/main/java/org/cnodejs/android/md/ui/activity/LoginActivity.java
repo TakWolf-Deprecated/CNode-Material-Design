@@ -24,7 +24,6 @@ import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.ILoginView;
-import org.cnodejs.android.md.util.FormatUtils;
 import org.cnodejs.android.oauthlogin.CNodeOAuthLoginActivity;
 
 import butterknife.BindView;
@@ -34,10 +33,10 @@ import retrofit2.Call;
 
 public class LoginActivity extends FullLayoutActivity implements ILoginView {
 
-    public static final int REQUEST_DEFAULT = FormatUtils.generateRequestCode();
+    public static final int REQUEST_DEFAULT = 0;
 
-    private static final int REQUEST_QR_CODE_LOGIN = FormatUtils.generateRequestCode();
-    private static final int REQUEST_GITHUB_LOGIN = FormatUtils.generateRequestCode();
+    private static final int REQUEST_QR_CODE_LOGIN = 0;
+    private static final int REQUEST_GITHUB_LOGIN = 1;
 
     public static void startForResult(@NonNull Activity activity, int requestCode) {
         Intent intent = new Intent(activity, LoginActivity.class);

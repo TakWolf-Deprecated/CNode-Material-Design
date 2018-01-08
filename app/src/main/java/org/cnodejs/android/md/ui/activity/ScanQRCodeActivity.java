@@ -24,7 +24,6 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
-import org.cnodejs.android.md.util.FormatUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +31,7 @@ import butterknife.ButterKnife;
 public class ScanQRCodeActivity extends StatusBarActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     private static final String[] PERMISSIONS = {Manifest.permission.CAMERA};
-    public static final int PERMISSIONS_REQUEST_DEFAULT = FormatUtils.generateRequestCode();
+    public static final int PERMISSIONS_REQUEST_DEFAULT = 0;
     public static final String EXTRA_QR_CODE = "qrCode";
 
     public static void startForResultWithPermissionCheck(@NonNull final Activity activity, int requestCode) {
