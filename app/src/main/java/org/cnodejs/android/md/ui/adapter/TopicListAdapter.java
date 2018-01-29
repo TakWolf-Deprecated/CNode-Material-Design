@@ -64,7 +64,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(topicList.get(position));
+        holder.bind(topicList.get(position));
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -106,7 +106,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
             ButterKnife.bind(this, itemView);
         }
 
-        void update(@NonNull Topic topic) {
+        void bind(@NonNull Topic topic) {
             this.topic = topic;
 
             ctvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());

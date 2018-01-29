@@ -92,7 +92,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(position);
+        holder.bind(position);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
             for (Object payload : payloads) {
                 if (payload instanceof Reply) { // 更新点赞状态
                     Reply reply = (Reply) payload;
-                    holder.updateUpViews(reply);
+                    holder.bindForUps(reply);
                 }
             }
         }
@@ -148,18 +148,18 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
             ButterKnife.bind(this, itemView);
         }
 
-        void update(int position) {
+        void bind(int position) {
             reply = replyList.get(position);
-            updateReplyViews(reply, position, positionMap.get(reply.getReplyId()));
-        }
 
-        void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
             GlideApp.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             iconAuthor.setVisibility(TextUtils.equals(authorLoginName, reply.getAuthor().getLoginName()) ? View.VISIBLE : View.GONE);
             tvIndex.setText(activity.getString(R.string.__floor, position + 1));
             tvCreateTime.setText(FormatUtils.getRelativeTimeSpanString(reply.getCreateAt()));
-            updateUpViews(reply);
+
+            bindForUps(reply);
+
+            Integer targetPosition = positionMap.get(reply.getReplyId());
             if (targetPosition == null) {
                 tvTargetPosition.setVisibility(View.GONE);
             } else {
@@ -174,7 +174,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
             iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
         }
 
-        void updateUpViews(@NonNull Reply reply) {
+        void bindForUps(@NonNull Reply reply) {
             btnUps.setText(String.valueOf(reply.getUpList().size()));
             btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
         }
