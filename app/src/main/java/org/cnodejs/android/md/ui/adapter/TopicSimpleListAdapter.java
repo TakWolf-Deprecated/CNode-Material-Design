@@ -34,7 +34,7 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
         inflater = LayoutInflater.from(activity);
     }
 
-    public void setTopicSimpleListWithNotify(@NonNull List<TopicSimple> topicSimpleList) {
+    public void setTopicSimpleListAndNotify(@NonNull List<TopicSimple> topicSimpleList) {
         this.topicSimpleList.clear();
         this.topicSimpleList.addAll(topicSimpleList);
         notifyDataSetChanged();
@@ -52,7 +52,7 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(topicSimpleList.get(position), position == topicSimpleList.size() - 1);
+        holder.bind(topicSimpleList.get(position), position == topicSimpleList.size() - 1);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,7 +82,7 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
             ButterKnife.bind(this, itemView);
         }
 
-        void update(@NonNull TopicSimple topicSimple, boolean isTheLast) {
+        void bind(@NonNull TopicSimple topicSimple, boolean isTheLast) {
             this.topicSimple = topicSimple;
 
             tvTitle.setText(topicSimple.getTitle());

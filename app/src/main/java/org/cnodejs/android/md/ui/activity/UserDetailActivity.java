@@ -169,13 +169,13 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         }
         tvCreateTime.setText(getString(R.string.register_time__, user.getCreateAt().toString("yyyy-MM-dd")));
         tvScore.setText(getString(R.string.score__, user.getScore()));
-        adapter.update(user);
+        adapter.setUser(user);
         githubUsername = user.getGithubUsername();
     }
 
     @Override
     public void onGetCollectTopicListOk(@NonNull List<Topic> topicList) {
-        adapter.update(topicList);
+        adapter.setCollectTopicList(topicList);
     }
 
     @Override

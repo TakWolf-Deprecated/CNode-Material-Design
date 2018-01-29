@@ -89,7 +89,7 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
         List<Message> messageList = new ArrayList<>();
         messageList.addAll(notification.getHasNotReadMessageList());
         messageList.addAll(notification.getHasReadMessageList());
-        adapter.setMessageListWithNotify(messageList);
+        adapter.setMessageListAndNotify(messageList);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class NotificationActivity extends StatusBarActivity implements INotifica
 
     @Override
     public void onMarkAllMessageReadOk() {
-        adapter.markAllMessageReadWithNotify();
+        adapter.markAllMessageReadAndNotify();
     }
 
     @Override

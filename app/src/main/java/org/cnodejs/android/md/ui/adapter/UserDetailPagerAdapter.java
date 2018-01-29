@@ -35,12 +35,12 @@ public class UserDetailPagerAdapter extends PagerAdapter {
         controllerList.add(new TopicSimpleListController(activity, viewPager));
     }
 
-    public void update(@NonNull User user) {
+    public void setUser(@NonNull User user) {
         controllerList.get(0).setTopicSimpleList(user.getRecentReplyList());
         controllerList.get(1).setTopicSimpleList(user.getRecentTopicList());
     }
 
-    public void update(@NonNull List<Topic> topicList) {
+    public void setCollectTopicList(@NonNull List<Topic> topicList) {
         List<TopicSimple> topicSimpleList = new ArrayList<>();
         topicSimpleList.addAll(topicList);
         controllerList.get(2).setTopicSimpleList(topicSimpleList);

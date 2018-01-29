@@ -62,7 +62,7 @@ public class TabSpinnerAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.update(tabList.get(position));
+        holder.bind(tabList.get(position));
         return convertView;
     }
 
@@ -75,7 +75,7 @@ public class TabSpinnerAdapter extends BaseAdapter {
             ButterKnife.bind(this, itemView);
         }
 
-        void update(@NonNull Tab tab) {
+        void bind(@NonNull Tab tab) {
             tvText.setText(tab.getNameId());
         }
 
