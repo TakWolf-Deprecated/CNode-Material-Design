@@ -37,13 +37,13 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         inflater = LayoutInflater.from(activity);
     }
 
-    public void setMessageListWithNotify(@NonNull List<Message> messageList) {
+    public void setMessageListAndNotify(@NonNull List<Message> messageList) {
         this.messageList.clear();
         this.messageList.addAll(messageList);
         notifyDataSetChanged();
     }
 
-    public void markAllMessageReadWithNotify() {
+    public void markAllMessageReadAndNotify() {
         for (Message message : messageList) {
             message.setRead(true);
         }

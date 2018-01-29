@@ -357,7 +357,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
         page = 0;
         toolbar.setTitle(tab.getNameId());
         fabCreateTopic.show();
-        adapter.clearTopicListWithNotify();
+        adapter.clearTopicListAndNotify();
         loadMoreFooter.setState(LoadMoreFooter.STATE_DISABLED);
         refreshLayout.setRefreshing(true);
         onRefresh();
@@ -366,7 +366,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @Override
     public void onRefreshTopicListOk(@NonNull List<Topic> topicList) {
         page = 1;
-        adapter.setTopicListWithNotify(topicList);
+        adapter.setTopicListAndNotify(topicList);
         refreshLayout.setRefreshing(false);
         loadMoreFooter.setState(topicList.isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
     }
@@ -380,7 +380,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     @Override
     public void onLoadMoreTopicListOk(@NonNull List<Topic> topicList) {
         page++;
-        adapter.appendTopicListWithNotify(topicList);
+        adapter.appendTopicListAndNotify(topicList);
         if (topicList.isEmpty()) {
             loadMoreFooter.setState(LoadMoreFooter.STATE_FINISHED);
         } else {

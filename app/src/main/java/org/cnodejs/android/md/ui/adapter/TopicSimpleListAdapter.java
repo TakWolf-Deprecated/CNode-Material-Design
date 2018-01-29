@@ -34,7 +34,7 @@ public class TopicSimpleListAdapter extends RecyclerView.Adapter<TopicSimpleList
         inflater = LayoutInflater.from(activity);
     }
 
-    public void setTopicSimpleListWithNotify(@NonNull List<TopicSimple> topicSimpleList) {
+    public void setTopicSimpleListAndNotify(@NonNull List<TopicSimple> topicSimpleList) {
         this.topicSimpleList.clear();
         this.topicSimpleList.addAll(topicSimpleList);
         notifyDataSetChanged();

@@ -48,7 +48,7 @@ public class TopicSimpleListController {
     }
 
     public void setTopicSimpleList(@NonNull List<TopicSimple> topicSimpleList) {
-        adapter.setTopicSimpleListWithNotify(topicSimpleList);
+        adapter.setTopicSimpleListAndNotify(topicSimpleList);
     }
 
 }
