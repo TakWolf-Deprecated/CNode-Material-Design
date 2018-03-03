@@ -12,9 +12,9 @@ import android.util.AttributeSet;
 
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.model.util.EntityUtils;
-import org.cnodejs.android.md.ui.listener.FormatJavascriptInterface;
-import org.cnodejs.android.md.ui.listener.ImageJavascriptInterface;
-import org.cnodejs.android.md.ui.listener.NotificationJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.FormatJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.ImageJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.NotificationJavascriptInterface;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 
 import java.util.List;

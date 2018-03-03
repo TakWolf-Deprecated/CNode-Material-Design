@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.ui.listener;
+package org.cnodejs.android.md.ui.jsbridge;
 
 import android.webkit.JavascriptInterface;
 

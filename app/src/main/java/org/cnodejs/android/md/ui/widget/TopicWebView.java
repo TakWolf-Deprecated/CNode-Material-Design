@@ -13,9 +13,9 @@ import android.util.AttributeSet;
 import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.entity.TopicWithReply;
 import org.cnodejs.android.md.model.util.EntityUtils;
-import org.cnodejs.android.md.ui.listener.FormatJavascriptInterface;
-import org.cnodejs.android.md.ui.listener.ImageJavascriptInterface;
-import org.cnodejs.android.md.ui.listener.TopicJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.FormatJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.ImageJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.TopicJavascriptInterface;
 
 public class TopicWebView extends CNodeWebView {
 

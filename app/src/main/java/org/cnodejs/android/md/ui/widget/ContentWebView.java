@@ -10,7 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.support.annotation.StyleRes;
 import android.util.AttributeSet;
 
-import org.cnodejs.android.md.ui.listener.ImageJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.ImageJavascriptInterface;
 
 public class ContentWebView extends CNodeWebView {
 
