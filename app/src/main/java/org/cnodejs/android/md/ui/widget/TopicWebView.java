@@ -45,8 +45,8 @@ public class TopicWebView extends CNodeWebView {
 
     @SuppressLint("AddJavascriptInterface")
     public void setBridgeAndLoadPage(@NonNull TopicJavascriptInterface topicBridge) {
-        addJavascriptInterface(ImageJavascriptInterface.with(getContext()), ImageJavascriptInterface.NAME);
-        addJavascriptInterface(FormatJavascriptInterface.instance, FormatJavascriptInterface.NAME);
+        addJavascriptInterface(new ImageJavascriptInterface(getContext()), ImageJavascriptInterface.NAME);
+        addJavascriptInterface(new FormatJavascriptInterface(), FormatJavascriptInterface.NAME);
         addJavascriptInterface(topicBridge, TopicJavascriptInterface.NAME);
         loadUrl(isDarkTheme() ? DARK_THEME_PATH : LIGHT_THEME_PATH);
     }
