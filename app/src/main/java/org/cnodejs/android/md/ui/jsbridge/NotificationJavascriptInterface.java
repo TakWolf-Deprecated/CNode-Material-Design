@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.ui.listener;
+package org.cnodejs.android.md.ui.jsbridge;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,24 +9,11 @@ import org.cnodejs.android.md.ui.util.Navigator;
 
 public final class NotificationJavascriptInterface {
 
-    private volatile static NotificationJavascriptInterface singleton;
-
-    public static NotificationJavascriptInterface with(@NonNull Context context) {
-        if (singleton == null) {
-            synchronized (NotificationJavascriptInterface.class) {
-                if (singleton == null) {
-                    singleton = new NotificationJavascriptInterface(context);
-                }
-            }
-        }
-        return singleton;
-    }
-
     public static final String NAME = "notificationBridge";
 
     private final Context context;
 
-    private NotificationJavascriptInterface(@NonNull Context context) {
+    public NotificationJavascriptInterface(@NonNull Context context) {
         this.context = context.getApplicationContext();
     }
 

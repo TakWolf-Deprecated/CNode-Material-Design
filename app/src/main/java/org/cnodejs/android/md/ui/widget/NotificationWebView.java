@@ -12,9 +12,9 @@ import android.util.AttributeSet;
 
 import org.cnodejs.android.md.model.entity.Message;
 import org.cnodejs.android.md.model.util.EntityUtils;
-import org.cnodejs.android.md.ui.listener.FormatJavascriptInterface;
-import org.cnodejs.android.md.ui.listener.ImageJavascriptInterface;
-import org.cnodejs.android.md.ui.listener.NotificationJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.FormatJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.ImageJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.NotificationJavascriptInterface;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 
 import java.util.List;
@@ -50,9 +50,9 @@ public class NotificationWebView extends CNodeWebView implements IBackToContentT
 
     @SuppressLint("AddJavascriptInterface")
     private void init(@NonNull Context context) {
-        addJavascriptInterface(ImageJavascriptInterface.with(context), ImageJavascriptInterface.NAME);
-        addJavascriptInterface(FormatJavascriptInterface.instance, FormatJavascriptInterface.NAME);
-        addJavascriptInterface(NotificationJavascriptInterface.with(context), NotificationJavascriptInterface.NAME);
+        addJavascriptInterface(new ImageJavascriptInterface(context), ImageJavascriptInterface.NAME);
+        addJavascriptInterface(new FormatJavascriptInterface(), FormatJavascriptInterface.NAME);
+        addJavascriptInterface(new NotificationJavascriptInterface(context), NotificationJavascriptInterface.NAME);
         loadUrl(isDarkTheme() ? DARK_THEME_PATH : LIGHT_THEME_PATH);
     }
 
