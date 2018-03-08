@@ -88,6 +88,14 @@ TakWolf
 
 [http://takwolf.com](http://takwolf.com)
 
+微信公众号：御宅程序员（otakuhacker）
+
+![WeiXin-MP](art/weixin-mp-qrcode.jpg)
+
+## Donate ##
+
+![Donate](art/donate-qrcode.png)
+
 ## License ##
 
 ```
