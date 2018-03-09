@@ -24,6 +24,13 @@ Copyright 2013 Jake Wharton
 Licensed under the Apache License, Version 2.0 (the "License").
 
 ====================================
+Glide
+====================================
+https://github.com/bumptech/glide
+
+BSD, part MIT and Apache 2.0.
+
+====================================
 Google Gson
 ====================================
 https://github.com/google/gson
@@ -61,13 +68,6 @@ https://github.com/square/retrofit
 Copyright 2013 Square, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License").
-
-====================================
-Glide
-====================================
-https://github.com/bumptech/glide
-
-BSD, part MIT and Apache 2.0.
 
 ====================================
 Android-HeaderAndFooterRecyclerView

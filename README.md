@@ -42,6 +42,8 @@
 
 - [Butter Knife](https://github.com/JakeWharton/butterknife)
 
+- [Glide](https://github.com/bumptech/glide)
+
 - [Gson](https://github.com/google/gson)
 
 - [Joda-Time](http://www.joda.org/joda-time)
@@ -51,8 +53,6 @@
 - [OkHttp](https://github.com/square/okhttp)
 
 - [Retrofit](https://github.com/square/retrofit)
-
-- [Glide](https://github.com/bumptech/glide)
 
 - [Android-HeaderAndFooterRecyclerView](https://github.com/TakWolf/Android-HeaderAndFooterRecyclerView)
 
