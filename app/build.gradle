@@ -47,8 +47,8 @@ dependencies {
     implementation 'net.danlew:android.joda:2.9.9.2'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
     implementation 'com.takwolf.android:hf-recyclerview:0.3.2'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
