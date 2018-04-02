@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.OkHttpHackUtils;
+import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -33,9 +35,9 @@ public final class ApiClient {
 
             @Override
             public Response intercept(Chain chain) throws IOException {
-                return chain.proceed(chain.request().newBuilder()
-                        .header(HEADER_USER_AGENT, ApiDefine.USER_AGENT)
-                        .build());
+                Request.Builder builder = chain.request().newBuilder();
+                OkHttpHackUtils.addRequestHeaderLenient(builder, HEADER_USER_AGENT, ApiDefine.USER_AGENT);
+                return chain.proceed(builder.build());
             }
 
         };
