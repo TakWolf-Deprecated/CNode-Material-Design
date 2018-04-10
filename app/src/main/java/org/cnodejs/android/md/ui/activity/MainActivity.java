@@ -28,7 +28,6 @@ import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
 import org.cnodejs.android.md.presenter.implement.MainPresenter;
 import org.cnodejs.android.md.ui.adapter.TopicListAdapter;
-import org.cnodejs.android.md.ui.base.FullLayoutActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.holder.LoadMoreFooter;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;

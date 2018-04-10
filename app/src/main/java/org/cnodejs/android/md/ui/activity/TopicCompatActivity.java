@@ -21,7 +21,6 @@ import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.ReplyPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicHeaderPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
-import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
 import org.cnodejs.android.md.ui.jsbridge.TopicJavascriptInterface;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;

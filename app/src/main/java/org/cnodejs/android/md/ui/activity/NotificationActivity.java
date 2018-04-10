@@ -16,7 +16,6 @@ import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.presenter.contract.INotificationPresenter;
 import org.cnodejs.android.md.presenter.implement.NotificationPresenter;
 import org.cnodejs.android.md.ui.adapter.MessageListAdapter;
-import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
