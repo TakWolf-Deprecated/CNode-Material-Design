@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.ui.viewholder;
+package org.cnodejs.android.md.ui.holder;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;

@@ -26,6 +26,7 @@ import org.cnodejs.android.md.ui.adapter.ReplyListAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
+import org.cnodejs.android.md.ui.holder.TopicHeader;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
@@ -34,7 +35,6 @@ import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.cnodejs.android.md.ui.view.ITopicView;
-import org.cnodejs.android.md.ui.viewholder.TopicHeader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

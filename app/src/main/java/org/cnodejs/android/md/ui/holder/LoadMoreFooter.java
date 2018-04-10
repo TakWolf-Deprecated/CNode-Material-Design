@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.ui.viewholder;
+package org.cnodejs.android.md.ui.holder;
 
 import android.content.Context;
 import android.support.annotation.IntDef;

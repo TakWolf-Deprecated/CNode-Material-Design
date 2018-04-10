@@ -18,12 +18,12 @@ import org.cnodejs.android.md.presenter.implement.CreateTopicPresenter;
 import org.cnodejs.android.md.ui.adapter.TabSpinnerAdapter;
 import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.ProgressDialog;
+import org.cnodejs.android.md.ui.holder.EditorBarViewHolder;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.ICreateTopicView;
-import org.cnodejs.android.md.ui.viewholder.EditorBarViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
