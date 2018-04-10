@@ -12,7 +12,7 @@ import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicSimple;
 import org.cnodejs.android.md.model.entity.User;
-import org.cnodejs.android.md.ui.viewholder.TopicSimpleListController;
+import org.cnodejs.android.md.ui.holder.TopicSimpleListController;
 
 import java.util.ArrayList;
 import java.util.List;

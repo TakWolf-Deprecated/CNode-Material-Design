@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.widget.PreviewWebView;

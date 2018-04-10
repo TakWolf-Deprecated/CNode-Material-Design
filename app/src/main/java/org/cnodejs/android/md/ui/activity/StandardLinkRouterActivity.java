@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.base.BaseActivity;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 

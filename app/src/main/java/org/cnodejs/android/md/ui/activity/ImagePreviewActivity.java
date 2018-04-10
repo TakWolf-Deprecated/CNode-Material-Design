@@ -17,7 +17,6 @@ import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.glide.GlideApp;
-import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 
 import butterknife.BindView;

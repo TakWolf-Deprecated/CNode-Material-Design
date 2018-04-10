@@ -28,8 +28,8 @@ import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.IMainPresenter;
 import org.cnodejs.android.md.presenter.implement.MainPresenter;
 import org.cnodejs.android.md.ui.adapter.TopicListAdapter;
-import org.cnodejs.android.md.ui.base.FullLayoutActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
+import org.cnodejs.android.md.ui.holder.LoadMoreFooter;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationOpenClickListener;
@@ -38,7 +38,6 @@ import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.IMainView;
-import org.cnodejs.android.md.ui.viewholder.LoadMoreFooter;
 import org.cnodejs.android.md.ui.widget.NavigationItem;
 import org.cnodejs.android.md.util.HandlerUtils;
 

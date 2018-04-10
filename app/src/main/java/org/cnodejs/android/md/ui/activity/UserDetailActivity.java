@@ -29,7 +29,6 @@ import org.cnodejs.android.md.model.glide.GlideApp;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
 import org.cnodejs.android.md.presenter.implement.UserDetailPresenter;
 import org.cnodejs.android.md.ui.adapter.UserDetailPagerAdapter;
-import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ThemeUtils;

@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.util.ToastUtils;

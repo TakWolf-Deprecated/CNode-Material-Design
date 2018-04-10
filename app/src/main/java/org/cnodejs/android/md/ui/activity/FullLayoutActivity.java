@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.ui.base;
+package org.cnodejs.android.md.ui.activity;
 
 import android.graphics.Color;
 import android.os.Build;
