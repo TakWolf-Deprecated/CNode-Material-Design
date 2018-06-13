@@ -6,7 +6,8 @@ public final class OkHttpHackUtils {
 
     private OkHttpHackUtils() {}
 
-    public static void addRequestHeaderLenient(@NonNull Request.Builder builder, @NonNull String name, @NonNull String value) {
+    public static void setRequestHeaderLenient(@NonNull Request.Builder builder, @NonNull String name, @NonNull String value) {
+        builder.headers.removeAll(name);
         builder.headers.addLenient(name, value);
     }
 
