@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.model.storage;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -62,7 +61,7 @@ public final class SettingShared {
     }
 
     public static boolean isEnableTopicRenderCompat(@NonNull Context context) {
-        return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_RENDER_COMPAT, Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP);
+        return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_RENDER_COMPAT, true);
     }
 
     public static void setEnableTopicRenderCompat(@NonNull Context context, boolean enable) {
