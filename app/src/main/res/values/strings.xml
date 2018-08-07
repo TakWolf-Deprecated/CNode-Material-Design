@@ -2,9 +2,8 @@
 <resources>
 
     <string name="app_name">CNode社区</string>
-
-    <string name="logo_url">cnodejs.org</string>
-    <string name="logo_slogan">Node.js专业中文社区</string>
+    <string name="app_domain">cnodejs.org</string>
+    <string name="app_slogan">Node.js专业中文社区</string>
 
     <string name="tab_top">置顶</string>
     <string name="tab_all">全部</string>
