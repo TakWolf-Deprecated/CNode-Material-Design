@@ -104,38 +104,54 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-                <TextView
+                <FrameLayout
                     android:id="@+id/btn_qr_code_login"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_margin="8dp"
                     android:padding="8dp"
-                    android:drawableStart="@drawable/ic_qrcode_grey600_24dp"
-                    android:drawableLeft="@drawable/ic_qrcode_grey600_24dp"
-                    android:drawablePadding="8dp"
-                    android:text="@string/qr_code_login"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="14sp"
-                    android:gravity="center_vertical"
-                    android:background="?attr/selectableItemBackground" />
+                    android:background="?attr/selectableItemBackground">
 
-                <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawableStart="@drawable/ic_qrcode_grey600_24dp"
+                        android:drawableLeft="@drawable/ic_qrcode_grey600_24dp"
+                        android:drawablePadding="8dp"
+                        android:text="@string/qr_code_login"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical" />
+
+                </FrameLayout>
+
+                <FrameLayout
                     android:id="@+id/btn_github_login"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_margin="8dp"
                     android:padding="8dp"
-                    android:drawableStart="@drawable/ic_github_grey600_24dp"
-                    android:drawableLeft="@drawable/ic_github_grey600_24dp"
-                    android:drawablePadding="8dp"
-                    android:text="@string/github_login"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="14sp"
-                    android:gravity="center_vertical"
-                    android:background="?attr/selectableItemBackground" />
+                    android:background="?attr/selectableItemBackground">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawableStart="@drawable/ic_github_grey600_24dp"
+                        android:drawableLeft="@drawable/ic_github_grey600_24dp"
+                        android:drawablePadding="8dp"
+                        android:text="@string/github_login"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical" />
+
+                </FrameLayout>
 
             </LinearLayout>
 
