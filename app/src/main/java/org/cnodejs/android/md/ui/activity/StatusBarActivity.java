@@ -1,6 +1,5 @@
 package org.cnodejs.android.md.ui.activity;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
