@@ -30,7 +30,6 @@ public class AboutActivity extends StatusBarActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
-        setFitsStatusBarMode();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
