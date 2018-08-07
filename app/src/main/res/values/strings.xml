@@ -2,9 +2,8 @@
 <resources>
 
     <string name="app_name">CNode社区</string>
-
-    <string name="logo_url">cnodejs.org</string>
-    <string name="logo_slogan">Node.js专业中文社区</string>
+    <string name="app_domain">cnodejs.org</string>
+    <string name="app_slogan">Node.js专业中文社区</string>
 
     <string name="tab_top">置顶</string>
     <string name="tab_all">全部</string>
@@ -22,8 +21,8 @@
     <string name="click_avatar_to_login">点击头像登录</string>
     <string name="press_back_again_to_exit">再按一次退出</string>
 
-    <string name="access_token_auth_error">Access Token 验证错误</string>
-    <string name="access_token_format_error">Access Token 格式错误，应为 UUID</string>
+    <string name="access_token_auth_error">Access Token 认证失败</string>
+    <string name="access_token_format_error">Access Token 格式错误</string>
     <string name="access_token_out_of_date">您的 Access Token 已经过期，您可能需要重新登录账户。</string>
 
     <string name="login">登录</string>
