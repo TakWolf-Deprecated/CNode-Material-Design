@@ -6,6 +6,7 @@
     <attr name="widgetBackgroundTitle" format="color|reference" />
     <attr name="referenceText" format="color|reference" />
     <attr name="referenceBackground" format="color|reference" />
+    <attr name="app_logo" format="reference" />
     <attr name="darkTheme" format="boolean" />
 
     <declare-styleable name="NavigationItem">

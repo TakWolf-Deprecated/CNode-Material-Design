@@ -20,16 +20,16 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:src="@drawable/logo"
+            android:layout_marginLeft="48dp"
+            android:layout_marginRight="48dp"
+            android:src="@drawable/logo_light"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/logo_url"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
@@ -37,10 +37,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="4dp"
             android:text="@string/logo_slogan"
             android:textColor="@android:color/white"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
