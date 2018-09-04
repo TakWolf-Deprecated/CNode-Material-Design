@@ -371,8 +371,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     }
 
     @Override
-    public void onRefreshTopicListError(@NonNull String message) {
-        ToastUtils.with(this).show(message);
+    public void onRefreshTopicListError() {
         refreshLayout.setRefreshing(false);
     }
 
@@ -388,8 +387,7 @@ public class MainActivity extends FullLayoutActivity implements IMainView, IBack
     }
 
     @Override
-    public void onLoadMoreTopicListError(@NonNull String message) {
-        ToastUtils.with(this).show(message);
+    public void onLoadMoreTopicListError() {
         loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
     }
 
