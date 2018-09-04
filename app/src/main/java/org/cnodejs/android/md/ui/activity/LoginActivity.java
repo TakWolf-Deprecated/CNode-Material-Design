@@ -15,7 +15,7 @@ import android.text.TextUtils;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.LoginResult;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
 import org.cnodejs.android.md.presenter.implement.LoginPresenter;
@@ -162,15 +162,15 @@ public class LoginActivity extends FullLayoutActivity implements ILoginView {
     }
 
     @Override
-    public void onLoginOk(@NonNull String accessToken, @NonNull Result.Login loginInfo) {
-        LoginShared.login(this, accessToken, loginInfo);
+    public void onLoginOk(@NonNull String accessToken, @NonNull LoginResult loginResult) {
+        LoginShared.login(this, accessToken, loginResult);
         ToastUtils.with(this).show(R.string.login_success);
         setResult(RESULT_OK);
         finish();
     }
 
     @Override
-    public void onLoginStart(@NonNull Call<Result.Login> call) {
+    public void onLoginStart(@NonNull Call<LoginResult> call) {
         progressDialog.setOnCancelListener(new DialogCancelCallListener(call));
         progressDialog.show();
     }

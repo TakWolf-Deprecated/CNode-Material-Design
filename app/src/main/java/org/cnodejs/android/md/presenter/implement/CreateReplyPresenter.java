@@ -9,7 +9,7 @@ import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Author;
 import org.cnodejs.android.md.model.entity.Reply;
-import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.ReplyTopicResult;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.ICreateReplyPresenter;
@@ -42,10 +42,10 @@ public class CreateReplyPresenter implements ICreateReplyPresenter {
                 finalContent = content;
             }
             createReplyView.onReplyTopicStart();
-            ApiClient.service.createReply(topicId, LoginShared.getAccessToken(activity), finalContent, targetId).enqueue(new DefaultCallback<Result.ReplyTopic>(activity) {
+            ApiClient.service.createReply(topicId, LoginShared.getAccessToken(activity), finalContent, targetId).enqueue(new DefaultCallback<ReplyTopicResult>(activity) {
 
                 @Override
-                public boolean onResultOk(int code, Headers headers, Result.ReplyTopic result) {
+                public boolean onResultOk(int code, Headers headers, ReplyTopicResult result) {
                     Reply reply = new Reply();
                     reply.setId(result.getReplyId());
                     Author author = new Author();

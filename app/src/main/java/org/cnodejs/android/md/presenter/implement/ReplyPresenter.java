@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.entity.Reply;
-import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.UpReplyResult;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.IReplyPresenter;
 import org.cnodejs.android.md.ui.view.IReplyView;
@@ -25,10 +25,10 @@ public class ReplyPresenter implements IReplyPresenter {
 
     @Override
     public void upReplyAsyncTask(@NonNull final Reply reply) {
-        ApiClient.service.upReply(reply.getId(), LoginShared.getAccessToken(activity)).enqueue(new DefaultCallback<Result.UpReply>(activity) {
+        ApiClient.service.upReply(reply.getId(), LoginShared.getAccessToken(activity)).enqueue(new DefaultCallback<UpReplyResult>(activity) {
 
             @Override
-            public boolean onResultOk(int code, Headers headers, Result.UpReply result) {
+            public boolean onResultOk(int code, Headers headers, UpReplyResult result) {
                 if (result.getAction() == Reply.UpAction.up) {
                     reply.getUpList().add(LoginShared.getId(getActivity()));
                 } else if (result.getAction() == Reply.UpAction.down) {

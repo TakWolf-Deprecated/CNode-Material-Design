@@ -6,7 +6,6 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 
 import org.cnodejs.android.md.model.util.EntityUtils;
-import org.cnodejs.android.md.util.FormatUtils;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -102,62 +101,6 @@ public class Result {
             error.errorMessage = "未知错误：" + t.getLocalizedMessage();
         }
         return error;
-    }
-
-    public static class Login extends Result {
-
-        private String id;
-
-        @SerializedName("loginname")
-        private String loginName;
-
-        @SerializedName("avatar_url")
-        private String avatarUrl;
-
-        public String getId() {
-            return id;
-        }
-
-        public String getLoginName() {
-            return loginName;
-        }
-
-        public String getAvatarUrl() { // 修复头像地址的历史遗留问题
-            return FormatUtils.getCompatAvatarUrl(avatarUrl);
-        }
-
-    }
-
-    public static class CreateTopic extends Result {
-
-        @SerializedName("topic_id")
-        private String topicId;
-
-        public String getTopicId() {
-            return topicId;
-        }
-
-    }
-
-    public static class ReplyTopic extends Result {
-
-        @SerializedName("reply_id")
-        private String replyId;
-
-        public String getReplyId() {
-            return replyId;
-        }
-
-    }
-
-    public static class UpReply extends Result {
-
-        private Reply.UpAction action;
-
-        public Reply.UpAction getAction() {
-            return action == null ? Reply.UpAction.down : action;
-        }
-
     }
 
 }

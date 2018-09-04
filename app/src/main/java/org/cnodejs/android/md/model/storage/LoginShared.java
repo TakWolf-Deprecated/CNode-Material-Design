@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.LoginResult;
 import org.cnodejs.android.md.model.entity.User;
 
 public final class LoginShared {
@@ -25,16 +25,16 @@ public final class LoginShared {
     private static String avatarUrl;
     private static Integer score;
 
-    public static void login(@NonNull Context context, @NonNull String accessToken, @NonNull Result.Login loginInfo) {
+    public static void login(@NonNull Context context, @NonNull String accessToken, @NonNull LoginResult loginResult) {
         SharedWrapper sharedWrapper = SharedWrapper.with(context, TAG);
         sharedWrapper.setString(KEY_ACCESS_TOKEN, accessToken);
-        sharedWrapper.setString(KEY_ID, loginInfo.getId());
-        sharedWrapper.setString(KEY_LOGIN_NAME, loginInfo.getLoginName());
-        sharedWrapper.setString(KEY_AVATAR_URL, loginInfo.getAvatarUrl());
+        sharedWrapper.setString(KEY_ID, loginResult.getId());
+        sharedWrapper.setString(KEY_LOGIN_NAME, loginResult.getLoginName());
+        sharedWrapper.setString(KEY_AVATAR_URL, loginResult.getAvatarUrl());
         LoginShared.accessToken = accessToken;
-        id = loginInfo.getId();
-        loginName = loginInfo.getLoginName();
-        avatarUrl = loginInfo.getAvatarUrl();
+        id = loginResult.getId();
+        loginName = loginResult.getLoginName();
+        avatarUrl = loginResult.getAvatarUrl();
     }
 
     public static void update(@NonNull Context context, @NonNull User user) {

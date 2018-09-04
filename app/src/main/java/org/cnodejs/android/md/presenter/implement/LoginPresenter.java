@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
 import org.cnodejs.android.md.model.api.DefaultCallback;
+import org.cnodejs.android.md.model.entity.LoginResult;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.presenter.contract.ILoginPresenter;
 import org.cnodejs.android.md.ui.view.ILoginView;
@@ -29,13 +30,13 @@ public class LoginPresenter implements ILoginPresenter {
         if (!FormatUtils.isAccessToken(accessToken)) {
             loginView.onAccessTokenError(activity.getString(R.string.access_token_format_error));
         } else {
-            Call<Result.Login> call = ApiClient.service.accessToken(accessToken);
+            Call<LoginResult> call = ApiClient.service.accessToken(accessToken);
             loginView.onLoginStart(call);
-            call.enqueue(new DefaultCallback<Result.Login>(activity) {
+            call.enqueue(new DefaultCallback<LoginResult>(activity) {
 
                 @Override
-                public boolean onResultOk(int code, Headers headers, Result.Login loginInfo) {
-                    loginView.onLoginOk(accessToken, loginInfo);
+                public boolean onResultOk(int code, Headers headers, LoginResult loginResult) {
+                    loginView.onLoginOk(accessToken, loginResult);
                     return false;
                 }
 
