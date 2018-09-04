@@ -1,6 +1,6 @@
 package org.cnodejs.android.md.model.entity;
 
-public abstract class Result {
+public class Result {
 
     private boolean success;
 
