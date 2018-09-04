@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultCallback;
+import org.cnodejs.android.md.model.api.SessionCallback;
 import org.cnodejs.android.md.model.entity.CreateTopicResult;
 import org.cnodejs.android.md.model.entity.Tab;
 import org.cnodejs.android.md.model.storage.LoginShared;
@@ -37,7 +37,7 @@ public class CreateTopicPresenter implements ICreateTopicPresenter {
                 content += "\n\n" + SettingShared.getTopicSignContent(activity);
             }
             createTopicView.onCreateTopicStart();
-            ApiClient.service.createTopic(LoginShared.getAccessToken(activity), tab, title, content).enqueue(new DefaultCallback<CreateTopicResult>(activity) {
+            ApiClient.service.createTopic(LoginShared.getAccessToken(activity), tab, title, content).enqueue(new SessionCallback<CreateTopicResult>(activity) {
 
                 @Override
                 public boolean onResultOk(int code, Headers headers, CreateTopicResult result) {

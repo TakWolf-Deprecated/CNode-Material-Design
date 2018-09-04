@@ -13,11 +13,11 @@ public interface IMainView {
 
     void onRefreshTopicListOk(@NonNull List<Topic> topicList);
 
-    void onRefreshTopicListError(@NonNull String message);
+    void onRefreshTopicListError();
 
     void onLoadMoreTopicListOk(@NonNull List<Topic> topicList);
 
-    void onLoadMoreTopicListError(@NonNull String message);
+    void onLoadMoreTopicListError();
 
     void updateUserInfoViews();
 

@@ -5,9 +5,9 @@ import android.support.annotation.NonNull;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiClient;
-import org.cnodejs.android.md.model.api.DefaultCallback;
 import org.cnodejs.android.md.model.api.ForegroundCallback;
-import org.cnodejs.android.md.model.entity.Result;
+import org.cnodejs.android.md.model.entity.DataResult;
+import org.cnodejs.android.md.model.entity.ErrorResult;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
@@ -36,7 +36,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
         if (!loading) {
             loading = true;
             userDetailView.onGetUserStart();
-            ApiClient.service.getUser(loginName).enqueue(new ForegroundCallback<Result.Data<User>>(activity) {
+            ApiClient.service.getUser(loginName).enqueue(new ForegroundCallback<DataResult<User>>(activity) {
 
                 private long startLoadingTime = System.currentTimeMillis();
 
@@ -50,12 +50,12 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                 }
 
                 @Override
-                public boolean onResultOk(int code, Headers headers, final Result.Data<User> result) {
+                public boolean onResultOk(int code, Headers headers, final DataResult<User> result) {
                     HandlerUtils.handler.postDelayed(new Runnable() {
 
                         @Override
                         public void run() {
-                            if (ActivityUtils.isAlive(getActivity())) {
+                            if (ActivityUtils.isAlive(activity)) {
                                 userDetailView.onGetUserOk(result.getData());
                                 onFinish();
                             }
@@ -66,13 +66,13 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                 }
 
                 @Override
-                public boolean onResultError(final int code, Headers headers, final Result.Error error) {
+                public boolean onResultError(final int code, Headers headers, final ErrorResult errorResult) {
                     HandlerUtils.handler.postDelayed(new Runnable() {
 
                         @Override
                         public void run() {
-                            if (ActivityUtils.isAlive(getActivity())) {
-                                userDetailView.onGetUserError(code == 404 ? error.getErrorMessage() : getActivity().getString(R.string.data_load_faild_and_click_avatar_to_reload));
+                            if (ActivityUtils.isAlive(activity)) {
+                                userDetailView.onGetUserError(code == 404 ? errorResult.getMessage() : activity.getString(R.string.data_load_faild_and_click_avatar_to_reload));
                                 onFinish();
                             }
                         }
@@ -82,13 +82,13 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                 }
 
                 @Override
-                public boolean onCallException(Throwable t, Result.Error error) {
+                public boolean onCallException(Throwable t, ErrorResult errorResult) {
                     HandlerUtils.handler.postDelayed(new Runnable() {
 
                         @Override
                         public void run() {
-                            if (ActivityUtils.isAlive(getActivity())) {
-                                userDetailView.onGetUserError(getActivity().getString(R.string.data_load_faild_and_click_avatar_to_reload));
+                            if (ActivityUtils.isAlive(activity)) {
+                                userDetailView.onGetUserError(activity.getString(R.string.data_load_faild_and_click_avatar_to_reload));
                                 onFinish();
                             }
                         }
@@ -104,10 +104,10 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                 }
 
             });
-            ApiClient.service.getCollectTopicList(loginName).enqueue(new DefaultCallback<Result.Data<List<Topic>>>(activity) {
+            ApiClient.service.getCollectTopicList(loginName).enqueue(new ForegroundCallback<DataResult<List<Topic>>>(activity) {
 
                 @Override
-                public boolean onResultOk(int code, Headers headers, Result.Data<List<Topic>> result) {
+                public boolean onResultOk(int code, Headers headers, DataResult<List<Topic>> result) {
                     userDetailView.onGetCollectTopicListOk(result.getData());
                     return false;
                 }
