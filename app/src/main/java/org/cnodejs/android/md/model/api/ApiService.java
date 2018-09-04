@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.model.api;
 
 import org.cnodejs.android.md.model.entity.CreateTopicResult;
+import org.cnodejs.android.md.model.entity.DataResult;
 import org.cnodejs.android.md.model.entity.LoginResult;
 import org.cnodejs.android.md.model.entity.Notification;
 import org.cnodejs.android.md.model.entity.ReplyTopicResult;
@@ -28,7 +29,7 @@ public interface ApiService {
     //=====
 
     @GET("topics")
-    Call<Result.Data<List<Topic>>> getTopicList(
+    Call<DataResult<List<Topic>>> getTopicList(
             @Query("tab") Tab tab,
             @Query("page") Integer page,
             @Query("limit") Integer limit,
@@ -36,7 +37,7 @@ public interface ApiService {
     );
 
     @GET("topic/{topicId}")
-    Call<Result.Data<TopicWithReply>> getTopic(
+    Call<DataResult<TopicWithReply>> getTopic(
             @Path("topicId") String topicId,
             @Query("accesstoken") String accessToken,
             @Query("mdrender") Boolean mdrender
@@ -70,7 +71,7 @@ public interface ApiService {
     );
 
     @GET("topic_collect/{loginName}")
-    Call<Result.Data<List<Topic>>> getCollectTopicList(
+    Call<DataResult<List<Topic>>> getCollectTopicList(
             @Path("loginName") String loginName
     );
 
@@ -99,7 +100,7 @@ public interface ApiService {
     //=====
 
     @GET("user/{loginName}")
-    Call<Result.Data<User>> getUser(
+    Call<DataResult<User>> getUser(
             @Path("loginName") String loginName
     );
 
@@ -114,12 +115,12 @@ public interface ApiService {
     //=========
 
     @GET("message/count")
-    Call<Result.Data<Integer>> getMessageCount(
+    Call<DataResult<Integer>> getMessageCount(
             @Query("accesstoken") String accessToken
     );
 
     @GET("messages")
-    Call<Result.Data<Notification>> getMessages(
+    Call<DataResult<Notification>> getMessages(
             @Query("accesstoken") String accessToken,
             @Query("mdrender") Boolean mdrender
     );
