@@ -39,7 +39,9 @@ public final class ResUtils {
         while ((line = reader.readLine()) != null) {
             sb.append(line).append("\n");
         }
-        sb.deleteCharAt(sb.length() - 1);
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
         reader.close();
         return sb.toString();
     }
