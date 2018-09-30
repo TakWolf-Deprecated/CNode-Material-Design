@@ -57,14 +57,14 @@ public class LoadMoreFooter {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 if (!recyclerView.canScrollVertically(1)) {
                     checkLoadMore();
                 }
             }
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (!recyclerView.canScrollVertically(1)) {
                     checkLoadMore();
                 }
