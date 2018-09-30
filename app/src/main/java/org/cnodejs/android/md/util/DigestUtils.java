@@ -5,29 +5,31 @@ import android.support.annotation.NonNull;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public final class Digest {
+public final class DigestUtils {
 
-    public static final Digest MD5 = new Digest("MD5");
-    public static final Digest SHA256 = new Digest("SHA-256");
+    public static final DigestUtils SHA256 = new DigestUtils("SHA-256");
 
     private final String algorithm;
 
-    private Digest(@NonNull String algorithm) {
+    private DigestUtils(@NonNull String algorithm) {
         this.algorithm = algorithm;
     }
 
+    @NonNull
     public byte[] getRaw(@NonNull byte[] data) {
         try {
             return MessageDigest.getInstance(algorithm).digest(data);
         } catch (NoSuchAlgorithmException e) {
-            throw new AssertionError(e);
+            throw new RuntimeException(e);
         }
     }
 
+    @NonNull
     public byte[] getRaw(@NonNull String data) {
         return getRaw(data.getBytes(StandardCharsets.UTF_8));
     }
 
+    @NonNull
     public String getHex(@NonNull byte[] data) {
         StringBuilder sb = new StringBuilder();
         for (byte b : getRaw(data)) {
@@ -36,6 +38,7 @@ public final class Digest {
         return sb.toString();
     }
 
+    @NonNull
     public String getHex(@NonNull String data) {
         return getHex(data.getBytes(StandardCharsets.UTF_8));
     }
