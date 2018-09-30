@@ -2,14 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="24dp">
+    android:layout_height="wrap_content">
 
     <com.pnikosis.materialishprogress.ProgressWheel
         android:id="@+id/progress_wheel"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
+        android:layout_margin="24dp"
         app:matProg_barColor="?attr/colorAccent"
         app:matProg_progressIndeterminate="true"
         app:matProg_barWidth="4dp" />
