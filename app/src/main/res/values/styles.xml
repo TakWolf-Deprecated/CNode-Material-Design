@@ -113,12 +113,12 @@
 
     <style name="AppWidget.DeepLine">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_height">@dimen/deep_line_width</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
     <style name="AppWidget.DeepLine.Vertical">
-        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_width">@dimen/deep_line_width</item>
         <item name="android:layout_height">match_parent</item>
     </style>
 
@@ -126,7 +126,7 @@
 
     <style name="AppWidget.Gap">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">8dp</item>
+        <item name="android:layout_height">@dimen/gap_size</item>
     </style>
 
     <style name="AppWidget.ShadowGap">
