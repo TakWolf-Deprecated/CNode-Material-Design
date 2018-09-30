@@ -14,7 +14,19 @@ public class LaunchActivity extends BaseActivity implements Runnable {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
+
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
+
         HandlerUtils.handler.postDelayed(this, 1000);
+    }
+
+    @Override
+    protected void onDestroy() {
+        HandlerUtils.handler.removeCallbacks(this);
+        super.onDestroy();
     }
 
     @Override
