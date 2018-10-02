@@ -20,7 +20,7 @@ public final class SharedUtils {
 
     @NonNull
     public static SharedPreferencesWrapper with(@NonNull Context context, @NonNull String name) {
-        return new SharedPreferencesWrapper(context.getSharedPreferences(DigestUtils.SHA256.getHex(name), Context.MODE_PRIVATE));
+        return new SharedPreferencesWrapper(context.getSharedPreferences(DigestUtils.sha256.getHex(name), Context.MODE_PRIVATE));
     }
 
     public static class SharedPreferencesWrapper {

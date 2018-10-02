@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 public final class DigestUtils {
 
-    public static final DigestUtils SHA256 = new DigestUtils("SHA-256");
+    public static final DigestUtils sha256 = new DigestUtils("SHA-256");
 
     private final String algorithm;
 
