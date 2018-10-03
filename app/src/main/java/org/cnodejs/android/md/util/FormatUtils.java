@@ -83,11 +83,11 @@ public final class FormatUtils {
      * 标准URL检测
      */
 
-    public static boolean isUserLinkUrl(@Nullable String url) {
+    public static boolean isUserLinkUrl(String url) {
         return !TextUtils.isEmpty(url) && url.startsWith(ApiDefine.USER_LINK_URL_PREFIX);
     }
 
-    public static boolean isTopicLinkUrl(@Nullable String url) {
+    public static boolean isTopicLinkUrl(String url) {
         return !TextUtils.isEmpty(url) && url.startsWith(ApiDefine.TOPIC_LINK_URL_PREFIX);
     }
 
