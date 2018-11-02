@@ -44,7 +44,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'net.danlew:android.joda:2.9.9.4'
+    implementation 'net.danlew:android.joda:2.10.1'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
