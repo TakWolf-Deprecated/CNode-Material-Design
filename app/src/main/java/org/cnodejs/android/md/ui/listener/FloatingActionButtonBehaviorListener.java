@@ -21,7 +21,7 @@ public final class FloatingActionButtonBehaviorListener {
         }
 
         @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
             if (dy > SCROLL_THRESHOLD) {
                 floatingActionButton.hide();
             } else if (dy < -SCROLL_THRESHOLD) {
