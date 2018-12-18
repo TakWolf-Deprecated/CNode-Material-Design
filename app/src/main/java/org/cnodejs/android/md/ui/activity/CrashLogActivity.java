@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -57,31 +58,20 @@ public class CrashLogActivity extends StatusBarActivity implements Toolbar.OnMen
 
         Throwable e = (Throwable) getIntent().getSerializableExtra(EXTRA_E);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("生产厂商：\n");
-        sb.append(Build.MANUFACTURER).append("\n\n");
-        sb.append("手机型号：\n");
-        sb.append(Build.MODEL).append("\n\n");
-        sb.append("系统版本：\n");
-        sb.append(Build.VERSION.RELEASE).append("\n\n");
-        sb.append("异常时间：\n");
-        sb.append(new DateTime()).append("\n\n");
-        sb.append("异常类型：\n");
-        sb.append(e.getClass().getName()).append("\n\n");
-        sb.append("异常信息：\n");
-        sb.append(e.getMessage()).append("\n\n");
-        sb.append("异常堆栈：\n");
-        Writer writer = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(writer);
-        e.printStackTrace(printWriter);
-        Throwable cause = e.getCause();
-        while (cause != null) {
-            cause.printStackTrace(printWriter);
-            cause = cause.getCause();
-        }
-        printWriter.close();
-        sb.append(writer.toString());
-        crashLog = sb.toString();
+        crashLog = "生产厂商：\n" +
+                Build.MANUFACTURER + "\n\n" +
+                "手机型号：\n" +
+                Build.MODEL + "\n\n" +
+                "系统版本：\n" +
+                Build.VERSION.RELEASE + "\n\n" +
+                "异常时间：\n" +
+                new DateTime() + "\n\n" +
+                "异常类型：\n" +
+                e.getClass().getName() + "\n\n" +
+                "异常信息：\n" +
+                e.getMessage() + "\n\n" +
+                "异常堆栈：\n" +
+                Log.getStackTraceString(e);
 
         tvInfo.setText(crashLog);
     }
