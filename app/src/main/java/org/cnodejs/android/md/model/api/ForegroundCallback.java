@@ -29,7 +29,7 @@ public class ForegroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @Override
-    public final void onResponse(Call<T> call, Response<T> response) {
+    public final void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
         Activity activity = getActivity();
         if (ActivityUtils.isAlive(activity)) {
             boolean interrupt;
@@ -45,7 +45,7 @@ public class ForegroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @Override
-    public final void onFailure(Call<T> call, Throwable t) {
+    public final void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
         Activity activity = getActivity();
         if (ActivityUtils.isAlive(activity)) {
             boolean interrupt;

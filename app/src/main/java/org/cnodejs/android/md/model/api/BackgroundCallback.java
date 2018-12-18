@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.model.api;
 
+import android.support.annotation.NonNull;
+
 import org.cnodejs.android.md.model.entity.ErrorResult;
 import org.cnodejs.android.md.model.entity.Result;
 
@@ -11,7 +13,7 @@ import retrofit2.Response;
 public class BackgroundCallback<T extends Result> implements Callback<T>, CallbackLifecycle<T> {
 
     @Override
-    public final void onResponse(Call<T> call, Response<T> response) {
+    public final void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
         boolean interrupt;
         if (response.isSuccessful()) {
             interrupt = onResultOk(response.code(), response.headers(), response.body());
@@ -24,7 +26,7 @@ public class BackgroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @Override
-    public final void onFailure(Call<T> call, Throwable t) {
+    public final void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
         boolean interrupt;
         if (call.isCanceled()) {
             interrupt = onCallCancel();
