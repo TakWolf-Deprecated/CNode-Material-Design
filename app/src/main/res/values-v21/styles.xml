@@ -6,6 +6,7 @@
     <style name="AppThemeLight" parent="BaseAppThemeLight">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
     </style>
 
     <!-- App Theme Dark -->
@@ -13,6 +14,7 @@
     <style name="AppThemeDark" parent="BaseAppThemeDark">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
     </style>
 
 </resources>

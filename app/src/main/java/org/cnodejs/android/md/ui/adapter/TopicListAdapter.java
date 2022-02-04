@@ -10,10 +10,9 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Topic;
+import org.cnodejs.android.md.model.glide.GlideApp;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.util.FormatUtils;
@@ -36,9 +35,21 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
         inflater = LayoutInflater.from(activity);
     }
 
-    @NonNull
-    public List<Topic> getTopicList() {
-        return topicList;
+    public void clearTopicListAndNotify() {
+        topicList.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setTopicListAndNotify(@NonNull List<Topic> topicList) {
+        this.topicList.clear();
+        this.topicList.addAll(topicList);
+        notifyDataSetChanged();
+    }
+
+    public void appendTopicListAndNotify(@NonNull List<Topic> topicList) {
+        int startPosition = this.topicList.size();
+        this.topicList.addAll(topicList);
+        notifyItemRangeInserted(startPosition, topicList.size());
     }
 
     @Override
@@ -46,14 +57,15 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
         return topicList.size();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(inflater.inflate(R.layout.item_topic, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(topicList.get(position));
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.bind(topicList.get(position));
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -95,7 +107,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
             ButterKnife.bind(this, itemView);
         }
 
-        void update(@NonNull Topic topic) {
+        void bind(@NonNull Topic topic) {
             this.topic = topic;
 
             ctvTab.setText(topic.isTop() ? R.string.tab_top : topic.getTab().getNameId());
@@ -105,9 +117,9 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
             tvLastReplyTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getLastReplyAt()));
             tvTitle.setText(topic.getTitle());
             tvSummary.setText(topic.getContentSummary());
-            Glide.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(topic.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvAuthor.setText(topic.getAuthor().getLoginName());
-            tvCreateTime.setText(activity.getString(R.string.create_at_$s, topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss")));
+            tvCreateTime.setText(activity.getString(R.string.create_at__, topic.getCreateAt().toString("yyyy-MM-dd HH:mm:ss")));
             iconGood.setVisibility(topic.isGood() ? View.VISIBLE : View.GONE);
         }
 

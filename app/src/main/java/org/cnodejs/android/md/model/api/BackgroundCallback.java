@@ -1,5 +1,8 @@
 package org.cnodejs.android.md.model.api;
 
+import android.support.annotation.NonNull;
+
+import org.cnodejs.android.md.model.entity.ErrorResult;
 import org.cnodejs.android.md.model.entity.Result;
 
 import okhttp3.Headers;
@@ -10,12 +13,12 @@ import retrofit2.Response;
 public class BackgroundCallback<T extends Result> implements Callback<T>, CallbackLifecycle<T> {
 
     @Override
-    public final void onResponse(Call<T> call, Response<T> response) {
+    public final void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
         boolean interrupt;
         if (response.isSuccessful()) {
             interrupt = onResultOk(response.code(), response.headers(), response.body());
         } else {
-            interrupt = onResultError(response.code(), response.headers(), Result.buildError(response));
+            interrupt = onResultError(response.code(), response.headers(), ErrorResult.from(response));
         }
         if (!interrupt) {
             onFinish();
@@ -23,12 +26,12 @@ public class BackgroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @Override
-    public final void onFailure(Call<T> call, Throwable t) {
+    public final void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
         boolean interrupt;
         if (call.isCanceled()) {
             interrupt = onCallCancel();
         } else {
-            interrupt = onCallException(t, Result.buildError(t));
+            interrupt = onCallException(t, ErrorResult.from(t));
         }
         if (!interrupt) {
             onFinish();
@@ -41,7 +44,7 @@ public class BackgroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @Override
-    public boolean onResultError(int code, Headers headers, Result.Error error) {
+    public boolean onResultError(int code, Headers headers, ErrorResult errorResult) {
         return false;
     }
 
@@ -51,7 +54,7 @@ public class BackgroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @Override
-    public boolean onCallException(Throwable t, Result.Error error) {
+    public boolean onCallException(Throwable t, ErrorResult errorResult) {
         return false;
     }
 

@@ -16,7 +16,6 @@ import org.tautua.markdownpapers.parser.ParseException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public final class FormatUtils {
 
@@ -70,29 +69,6 @@ public final class FormatUtils {
     }
 
     /**
-     * 生成自增Integer
-     */
-
-    private static final AtomicInteger requestCodeSeed = new AtomicInteger(1);
-
-    public static int generateRequestCode() {
-        return requestCodeSeed.getAndIncrement();
-    }
-
-    /**
-     * 获取菜单导航消息数目字符串
-     */
-    public static String getNavigationDisplayCountString(int count) {
-        if (count > 99) {
-            return "99+";
-        } else if (count <= 0) {
-            return "";
-        } else {
-            return String.valueOf(count);
-        }
-    }
-
-    /**
      * 修复头像地址的历史遗留问题
      */
     public static String getCompatAvatarUrl(String avatarUrl) {
@@ -107,11 +83,11 @@ public final class FormatUtils {
      * 标准URL检测
      */
 
-    public static boolean isUserLinkUrl(@Nullable String url) {
+    public static boolean isUserLinkUrl(String url) {
         return !TextUtils.isEmpty(url) && url.startsWith(ApiDefine.USER_LINK_URL_PREFIX);
     }
 
-    public static boolean isTopicLinkUrl(@Nullable String url) {
+    public static boolean isTopicLinkUrl(String url) {
         return !TextUtils.isEmpty(url) && url.startsWith(ApiDefine.TOPIC_LINK_URL_PREFIX);
     }
 
@@ -129,7 +105,7 @@ public final class FormatUtils {
         // 保证text不为null
         text = TextUtils.isEmpty(text) ? "" : text;
         // 解析@协议
-        text = text.replaceAll("@([\\w\\-]+)\\b(?![\\]\\<\\.])", "[@$1](" + ApiDefine.USER_PATH_PREFIX + "$1)");
+        text = text.replaceAll("@([\\w\\-]+)\\b(?![]<.])", "[@$1](" + ApiDefine.USER_PATH_PREFIX + "$1)");
         // 解析裸链接
         text = text + " ";
         text = text.replaceAll("((http|https|ftp)://[\\w\\-.:/?=&#%]+)(\\s)", "[$1]($1)$3");

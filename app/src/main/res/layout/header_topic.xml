@@ -102,7 +102,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="4dp"
                             android:layout_marginRight="4dp"
-                            android:text="@string/$dot"
+                            android:text="@string/_dot_"
                             android:textColor="?android:attr/textColorSecondary"
                             android:textSize="14sp"
                             android:maxLines="1" />
@@ -137,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:darkTheme="?attr/darkMode" />
+                app:darkTheme="?attr/darkTheme" />
 
         </LinearLayout>
 

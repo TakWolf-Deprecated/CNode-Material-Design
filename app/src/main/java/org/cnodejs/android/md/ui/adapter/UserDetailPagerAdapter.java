@@ -1,61 +1,80 @@
 package org.cnodejs.android.md.ui.adapter;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.annotation.Nullable;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.ViewGroup;
 
+import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.TopicSimple;
 import org.cnodejs.android.md.model.entity.User;
-import org.cnodejs.android.md.ui.fragment.TopicSimpleListFragment;
+import org.cnodejs.android.md.ui.holder.TopicSimpleListController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDetailPagerAdapter extends FragmentPagerAdapter {
+public class UserDetailPagerAdapter extends PagerAdapter {
 
-    private static final String[] titles = {
-            "最近回复",
-            "最新发布",
-            "话题收藏"
+    private static final int[] TITLE_IDS = {
+            R.string.recently_reply,
+            R.string.latest_post,
+            R.string.favorite_topics
     };
-    
-    private final List<TopicSimpleListFragment> fragmentList = new ArrayList<>();
 
-    public UserDetailPagerAdapter(@NonNull FragmentManager manager) {
-        super(manager);
-        fragmentList.add(new TopicSimpleListFragment());
-        fragmentList.add(new TopicSimpleListFragment());
-        fragmentList.add(new TopicSimpleListFragment());
+    private final Activity activity;
+    private final List<TopicSimpleListController> controllerList = new ArrayList<>();
+
+    public UserDetailPagerAdapter(@NonNull Activity activity, @NonNull ViewPager viewPager) {
+        this.activity = activity;
+        controllerList.add(new TopicSimpleListController(activity, viewPager));
+        controllerList.add(new TopicSimpleListController(activity, viewPager));
+        controllerList.add(new TopicSimpleListController(activity, viewPager));
     }
 
-    public void update(@NonNull User user) {
-        fragmentList.get(0).notifyDataSetChanged(user.getRecentReplyList());
-        fragmentList.get(1).notifyDataSetChanged(user.getRecentTopicList());
+    public void setUser(@NonNull User user) {
+        controllerList.get(0).setTopicSimpleList(user.getRecentReplyList());
+        controllerList.get(1).setTopicSimpleList(user.getRecentTopicList());
     }
 
-    public void update(@NonNull List<Topic> topicList) {
+    public void setCollectTopicList(@NonNull List<Topic> topicList) {
         List<TopicSimple> topicSimpleList = new ArrayList<>();
-        for (Topic topic : topicList) {
-            topicSimpleList.add(topic);
-        }
-        fragmentList.get(2).notifyDataSetChanged(topicSimpleList);
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-        return fragmentList.get(position);
+        topicSimpleList.addAll(topicList);
+        controllerList.get(2).setTopicSimpleList(topicSimpleList);
     }
 
     @Override
     public int getCount() {
-        return fragmentList.size();
+        return controllerList.size();
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return activity.getString(TITLE_IDS[position]);
+    }
+
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        TopicSimpleListController controller = controllerList.get(position);
+        container.addView(controller.getContentView());
+        return controller;
     }
 
     @Override
-    public CharSequence getPageTitle(int position) {
-        return titles[position];
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        TopicSimpleListController controller = TopicSimpleListController.assertType(object);
+        container.removeView(controller.getContentView());
+    }
+
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        TopicSimpleListController controller = TopicSimpleListController.assertType(object);
+        return view == controller.getContentView();
     }
 
 }

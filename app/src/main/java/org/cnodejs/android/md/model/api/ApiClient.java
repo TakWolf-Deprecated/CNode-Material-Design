@@ -1,5 +1,7 @@
 package org.cnodejs.android.md.model.api;
 
+import android.support.annotation.NonNull;
+
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.model.util.EntityUtils;
 
@@ -7,6 +9,8 @@ import java.io.IOException;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.OkHttpHackUtils;
+import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -26,21 +30,24 @@ public final class ApiClient {
             .build()
             .create(ApiService.class);
 
+    @NonNull
     private static Interceptor createUserAgentInterceptor() {
         return new Interceptor() {
 
             private static final String HEADER_USER_AGENT = "User-Agent";
 
+            @NonNull
             @Override
-            public Response intercept(Chain chain) throws IOException {
-                return chain.proceed(chain.request().newBuilder()
-                        .header(HEADER_USER_AGENT, ApiDefine.USER_AGENT)
-                        .build());
+            public Response intercept(@NonNull Chain chain) throws IOException {
+                Request.Builder builder = chain.request().newBuilder();
+                OkHttpHackUtils.setRequestHeaderLenient(builder, HEADER_USER_AGENT, ApiDefine.USER_AGENT);
+                return chain.proceed(builder.build());
             }
 
         };
     }
 
+    @NonNull
     private static Interceptor createHttpLoggingInterceptor() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);

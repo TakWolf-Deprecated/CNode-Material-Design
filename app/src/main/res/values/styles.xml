@@ -10,14 +10,13 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowBackground">@color/window_background_light</item>
         <item name="android:listDivider">@color/list_divider_light</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_normal_light</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_light</item>
+        <item name="widgetBackground">@color/widget_background_light</item>
+        <item name="widgetBackgroundDark">@color/widget_background_checked_light</item>
         <item name="widgetBackgroundTitle">@android:color/white</item>
-        <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_light</item>
-        <item name="navigationItemTextColor">@color/navigation_item_text_light</item>
         <item name="referenceText">@color/reference_text_light</item>
         <item name="referenceBackground">@drawable/reference_background_light</item>
-        <item name="darkMode">false</item>
+        <item name="app_logo">@drawable/logo_dark</item>
+        <item name="darkTheme">false</item>
     </style>
 
     <style name="AppThemeLight" parent="BaseAppThemeLight" />
@@ -31,14 +30,13 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowBackground">@color/window_background_dark</item>
         <item name="android:listDivider">@color/list_divider_dark</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_normal_dark</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_dark</item>
+        <item name="widgetBackground">@color/widget_background_dark</item>
+        <item name="widgetBackgroundDark">@color/widget_background_checked_dark</item>
         <item name="widgetBackgroundTitle">@color/color_primary</item>
-        <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_dark</item>
-        <item name="navigationItemTextColor">@color/navigation_item_text_dark</item>
         <item name="referenceText">@color/reference_text_dark</item>
         <item name="referenceBackground">@drawable/reference_background_dark</item>
-        <item name="darkMode">true</item>
+        <item name="app_logo">@drawable/logo_light</item>
+        <item name="darkTheme">true</item>
     </style>
 
     <style name="AppThemeDark" parent="BaseAppThemeDark" />
@@ -56,10 +54,9 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:listDivider">@color/list_divider_light</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_normal_light</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_light</item>
+        <item name="widgetBackground">@color/widget_background_light</item>
+        <item name="widgetBackgroundDark">@color/widget_background_checked_light</item>
         <item name="widgetBackgroundTitle">@android:color/white</item>
-        <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_light</item>
     </style>
 
     <style name="AppDialogLight" parent="BaseAppDialogLight" />
@@ -86,10 +83,9 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:listDivider">@color/list_divider_dark</item>
-        <item name="widgetBackground">@color/selectable_item_background_general_normal_dark</item>
-        <item name="widgetBackgroundDark">@color/selectable_item_background_general_pressed_dark</item>
+        <item name="widgetBackground">@color/widget_background_dark</item>
+        <item name="widgetBackgroundDark">@color/widget_background_checked_dark</item>
         <item name="widgetBackgroundTitle">@color/color_primary</item>
-        <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general_dark</item>
     </style>
 
     <style name="AppDialogDark" parent="BaseAppDialogDark" />
@@ -117,20 +113,20 @@
 
     <style name="AppWidget.DeepLine">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_height">@dimen/deep_line_width</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
     <style name="AppWidget.DeepLine.Vertical">
-        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_width">@dimen/deep_line_width</item>
         <item name="android:layout_height">match_parent</item>
     </style>
 
     <!-- Gap -->
 
-    <style name="AppWidget.ItemGap">
+    <style name="AppWidget.Gap">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">8dp</item>
+        <item name="android:layout_height">@dimen/gap_size</item>
     </style>
 
     <style name="AppWidget.ShadowGap">
@@ -152,37 +148,6 @@
         <item name="android:layout_width">8dp</item>
         <item name="android:layout_height">8dp</item>
         <item name="android:background">@drawable/badge_dot</item>
-    </style>
-
-    <!-- Navigation -->
-
-    <style name="AppWidget.NavigationItem">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:drawablePadding">32dp</item>
-        <item name="android:textColor">?attr/navigationItemTextColor</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:background">?attr/selectableItemBackgroundGeneral</item>
-    </style>
-
-    <style name="AppWidget.NavigationItemBadge">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_gravity">end</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:gravity">center_vertical</item>
-    </style>
-
-    <style name="AppWidget.NavigationItemDeepLineGap" parent="AppWidget.DeepLine">
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginBottom">8dp</item>
     </style>
 
     <!-- App Animation -->

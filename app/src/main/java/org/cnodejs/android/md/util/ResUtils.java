@@ -33,13 +33,15 @@ public final class ResUtils {
 
     public static String getRawString(@NonNull Context context, @RawRes int rawId) throws IOException {
         InputStream is = context.getResources().openRawResource(rawId);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
         StringBuilder sb = new StringBuilder();
         String line;
         while ((line = reader.readLine()) != null) {
             sb.append(line).append("\n");
         }
-        sb.deleteCharAt(sb.length() - 1);
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
         reader.close();
         return sb.toString();
     }

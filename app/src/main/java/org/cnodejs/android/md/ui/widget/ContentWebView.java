@@ -10,7 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.support.annotation.StyleRes;
 import android.util.AttributeSet;
 
-import org.cnodejs.android.md.ui.listener.ImageJavascriptInterface;
+import org.cnodejs.android.md.ui.jsbridge.ImageJavascriptInterface;
 
 public class ContentWebView extends CNodeWebView {
 
@@ -74,7 +74,7 @@ public class ContentWebView extends CNodeWebView {
 
     @SuppressLint("AddJavascriptInterface")
     private void init(@NonNull Context context) {
-        addJavascriptInterface(ImageJavascriptInterface.with(context), ImageJavascriptInterface.NAME);
+        addJavascriptInterface(new ImageJavascriptInterface(context), ImageJavascriptInterface.NAME);
     }
 
     @NonNull

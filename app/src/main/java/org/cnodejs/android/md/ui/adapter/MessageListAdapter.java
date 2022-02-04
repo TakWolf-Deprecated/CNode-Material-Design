@@ -10,10 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Message;
+import org.cnodejs.android.md.model.glide.GlideApp;
 import org.cnodejs.android.md.ui.activity.UserDetailActivity;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.widget.ContentWebView;
@@ -38,15 +37,17 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         inflater = LayoutInflater.from(activity);
     }
 
-    @NonNull
-    public List<Message> getMessageList() {
-        return messageList;
+    public void setMessageListAndNotify(@NonNull List<Message> messageList) {
+        this.messageList.clear();
+        this.messageList.addAll(messageList);
+        notifyDataSetChanged();
     }
 
-    public void markAllMessageRead() {
+    public void markAllMessageReadAndNotify() {
         for (Message message : messageList) {
             message.setRead(true);
         }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -54,14 +55,15 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         return messageList.size();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(inflater.inflate(R.layout.item_message, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(messageList.get(position));
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.bind(messageList.get(position));
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -94,15 +96,15 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             ButterKnife.bind(this, itemView);
         }
 
-        void update(@NonNull Message message) {
+        void bind(@NonNull Message message) {
             this.message = message;
 
-            Glide.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(message.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvFrom.setText(message.getAuthor().getLoginName());
             tvTime.setText(FormatUtils.getRelativeTimeSpanString(message.getCreateAt()));
             tvTime.setTextColor(ResUtils.getThemeAttrColor(activity, message.isRead() ? android.R.attr.textColorSecondary : R.attr.colorAccent));
             badgeRead.setVisibility(message.isRead() ? View.GONE : View.VISIBLE);
-            tvTopicTitle.setText(activity.getString(R.string.topic_$s, message.getTopic().getTitle()));
+            tvTopicTitle.setText(activity.getString(R.string.topic__, message.getTopic().getTitle()));
 
             // 判断通知类型
             if (message.getType() == Message.Type.at) {

@@ -4,14 +4,21 @@
     <attr name="widgetBackground" format="color|reference" />
     <attr name="widgetBackgroundDark" format="color|reference" />
     <attr name="widgetBackgroundTitle" format="color|reference" />
-    <attr name="selectableItemBackgroundGeneral" format="color|reference" />
-    <attr name="navigationItemTextColor" format="color|reference" />
     <attr name="referenceText" format="color|reference" />
     <attr name="referenceBackground" format="color|reference" />
-    <attr name="darkMode" format="boolean" />
+    <attr name="app_logo" format="reference" />
+    <attr name="darkTheme" format="boolean" />
+
+    <declare-styleable name="NavigationItem">
+        <attr name="android:checked" />
+        <attr name="iconNormal" format="reference" />
+        <attr name="iconChecked" format="reference" />
+        <attr name="title" format="string" />
+        <attr name="badge" format="integer" />
+    </declare-styleable>
 
     <declare-styleable name="CNodeWebView">
-        <attr name="darkTheme" format="boolean" />
+        <attr name="darkTheme" />
     </declare-styleable>
 
 </resources>

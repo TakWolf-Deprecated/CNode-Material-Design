@@ -25,7 +25,7 @@
             android:id="@+id/web_notification"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:darkTheme="?attr/darkMode" />
+            app:darkTheme="?attr/darkTheme" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

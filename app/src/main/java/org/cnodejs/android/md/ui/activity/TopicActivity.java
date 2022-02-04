@@ -23,9 +23,9 @@ import org.cnodejs.android.md.model.util.EntityUtils;
 import org.cnodejs.android.md.presenter.contract.ITopicPresenter;
 import org.cnodejs.android.md.presenter.implement.TopicPresenter;
 import org.cnodejs.android.md.ui.adapter.ReplyListAdapter;
-import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.dialog.AlertDialogUtils;
 import org.cnodejs.android.md.ui.dialog.CreateReplyDialog;
+import org.cnodejs.android.md.ui.holder.TopicHeader;
 import org.cnodejs.android.md.ui.listener.DoubleClickBackToContentTopListener;
 import org.cnodejs.android.md.ui.listener.FloatingActionButtonBehaviorListener;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
@@ -34,7 +34,6 @@ import org.cnodejs.android.md.ui.util.ThemeUtils;
 import org.cnodejs.android.md.ui.view.IBackToContentTopView;
 import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.cnodejs.android.md.ui.view.ITopicView;
-import org.cnodejs.android.md.ui.viewholder.TopicHeader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -144,7 +143,7 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
     public void onGetTopicOk(@NonNull TopicWithReply topic) {
         this.topic = topic;
         header.updateViews(topic);
-        adapter.setReplyListWithNotify(topic.getAuthor().getLoginName(), topic.getReplyList());
+        adapter.setReplyListAndNotify(topic.getAuthor().getLoginName(), topic.getReplyList());
     }
 
     @Override
@@ -154,9 +153,9 @@ public class TopicActivity extends StatusBarActivity implements ITopicView, IBac
 
     @Override
     public void appendReplyAndUpdateViews(@NonNull Reply reply) {
-        adapter.appendReplyWithNotify(reply);
-        header.updateReplyCount(adapter.getReplyList().size());
-        recyclerView.smoothScrollToPosition(adapter.getReplyList().size());
+        adapter.appendReplyAndNotify(reply);
+        header.updateReplyCount(adapter.getItemCount());
+        recyclerView.smoothScrollToPosition(adapter.getItemCount());
     }
 
     @Override

@@ -96,7 +96,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
-                app:darkTheme="?attr/darkMode" />
+                app:darkTheme="?attr/darkTheme" />
 
             <TextView
                 android:id="@+id/tv_topic_title"

@@ -2,9 +2,13 @@ package org.cnodejs.android.md.model.api;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import org.cnodejs.android.md.model.entity.ErrorResult;
 import org.cnodejs.android.md.model.entity.Result;
 import org.cnodejs.android.md.ui.util.ActivityUtils;
+
+import java.lang.ref.WeakReference;
 
 import okhttp3.Headers;
 import retrofit2.Call;
@@ -13,25 +17,26 @@ import retrofit2.Response;
 
 public class ForegroundCallback<T extends Result> implements Callback<T>, CallbackLifecycle<T> {
 
-    private final Activity activity;
+    private final WeakReference<Activity> activityWeakReference;
 
     public ForegroundCallback(@NonNull Activity activity) {
-        this.activity = activity;
+        activityWeakReference = new WeakReference<>(activity);
     }
 
-    @NonNull
+    @Nullable
     protected final Activity getActivity() {
-        return activity;
+        return activityWeakReference.get();
     }
 
     @Override
-    public final void onResponse(Call<T> call, Response<T> response) {
+    public final void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
+        Activity activity = getActivity();
         if (ActivityUtils.isAlive(activity)) {
             boolean interrupt;
             if (response.isSuccessful()) {
                 interrupt = onResultOk(response.code(), response.headers(), response.body());
             } else {
-                interrupt = onResultError(response.code(), response.headers(), Result.buildError(response));
+                interrupt = onResultError(response.code(), response.headers(), ErrorResult.from(response));
             }
             if (!interrupt) {
                 onFinish();
@@ -40,13 +45,14 @@ public class ForegroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @Override
-    public final void onFailure(Call<T> call, Throwable t) {
+    public final void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
+        Activity activity = getActivity();
         if (ActivityUtils.isAlive(activity)) {
             boolean interrupt;
             if (call.isCanceled()) {
                 interrupt = onCallCancel();
             } else {
-                interrupt = onCallException(t, Result.buildError(t));
+                interrupt = onCallException(t, ErrorResult.from(t));
             }
             if (!interrupt) {
                 onFinish();
@@ -60,7 +66,7 @@ public class ForegroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @Override
-    public boolean onResultError(int code, Headers headers, Result.Error error) {
+    public boolean onResultError(int code, Headers headers, ErrorResult errorResult) {
         return false;
     }
 
@@ -70,7 +76,7 @@ public class ForegroundCallback<T extends Result> implements Callback<T>, Callba
     }
 
     @Override
-    public boolean onCallException(Throwable t, Result.Error error) {
+    public boolean onCallException(Throwable t, ErrorResult errorResult) {
         return false;
     }
 

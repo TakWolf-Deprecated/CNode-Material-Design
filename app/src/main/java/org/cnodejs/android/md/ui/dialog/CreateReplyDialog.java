@@ -17,10 +17,10 @@ import org.cnodejs.android.md.model.entity.Reply;
 import org.cnodejs.android.md.model.storage.SettingShared;
 import org.cnodejs.android.md.presenter.contract.ICreateReplyPresenter;
 import org.cnodejs.android.md.presenter.implement.CreateReplyPresenter;
+import org.cnodejs.android.md.ui.holder.EditorBarViewHolder;
 import org.cnodejs.android.md.ui.util.ToastUtils;
 import org.cnodejs.android.md.ui.view.ICreateReplyView;
 import org.cnodejs.android.md.ui.view.ITopicView;
-import org.cnodejs.android.md.ui.viewholder.EditorBarViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,9 +75,11 @@ public class CreateReplyDialog extends AppCompatDialog implements ICreateReplyVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        getWindow().setGravity(Gravity.BOTTOM);
+        if (getWindow() != null) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+            getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            getWindow().setGravity(Gravity.BOTTOM);
+        }
     }
 
     @OnClick(R.id.btn_tool_close)
@@ -110,7 +112,7 @@ public class CreateReplyDialog extends AppCompatDialog implements ICreateReplyVi
     public void onAt(@NonNull Reply target, @NonNull Integer targetPosition) {
         targetId = target.getId();
         layoutTarget.setVisibility(View.VISIBLE);
-        tvTarget.setText(getContext().getString(R.string.reply_$d_floor, targetPosition + 1));
+        tvTarget.setText(getContext().getString(R.string.reply___floor, targetPosition + 1));
         edtContent.getText().insert(edtContent.getSelectionEnd(), "@" + target.getAuthor().getLoginName() + " ");
         showWindow();
     }

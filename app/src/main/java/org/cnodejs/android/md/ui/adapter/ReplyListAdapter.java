@@ -2,7 +2,6 @@ package org.cnodejs.android.md.ui.adapter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,10 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.entity.Reply;
+import org.cnodejs.android.md.model.glide.GlideApp;
 import org.cnodejs.android.md.model.storage.LoginShared;
 import org.cnodejs.android.md.presenter.contract.IReplyPresenter;
 import org.cnodejs.android.md.presenter.implement.ReplyPresenter;
@@ -53,12 +51,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         replyPresenter = new ReplyPresenter(activity, this);
     }
 
-    @NonNull
-    public List<Reply> getReplyList() {
-        return replyList;
-    }
-
-    public void setReplyListWithNotify(String authorLoginName, @NonNull List<Reply> replyList) {
+    public void setReplyListAndNotify(String authorLoginName, @NonNull List<Reply> replyList) {
         this.authorLoginName = authorLoginName;
         this.replyList.clear();
         this.replyList.addAll(replyList);
@@ -70,7 +63,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         notifyDataSetChanged();
     }
 
-    public void appendReplyWithNotify(@NonNull Reply reply) {
+    public void appendReplyAndNotify(@NonNull Reply reply) {
         replyList.add(reply);
         positionMap.put(reply.getId(), replyList.size() - 1);
         notifyItemInserted(replyList.size() - 1);
@@ -91,25 +84,26 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
         return replyList.size();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(inflater.inflate(R.layout.item_reply, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.update(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.bind(position);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull List<Object> payloads) {
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
         } else {
             for (Object payload : payloads) {
                 if (payload instanceof Reply) { // 更新点赞状态
                     Reply reply = (Reply) payload;
-                    holder.updateUpViews(reply);
+                    holder.bindForUps(reply);
                 }
             }
         }
@@ -154,23 +148,23 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
             ButterKnife.bind(this, itemView);
         }
 
-        void update(int position) {
+        void bind(int position) {
             reply = replyList.get(position);
-            updateReplyViews(reply, position, positionMap.get(reply.getReplyId()));
-        }
 
-        void updateReplyViews(@NonNull Reply reply, int position, @Nullable Integer targetPosition) {
-            Glide.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(activity).load(reply.getAuthor().getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
             tvLoginName.setText(reply.getAuthor().getLoginName());
             iconAuthor.setVisibility(TextUtils.equals(authorLoginName, reply.getAuthor().getLoginName()) ? View.VISIBLE : View.GONE);
-            tvIndex.setText(activity.getString(R.string.$d_floor, position + 1));
+            tvIndex.setText(activity.getString(R.string.__floor, position + 1));
             tvCreateTime.setText(FormatUtils.getRelativeTimeSpanString(reply.getCreateAt()));
-            updateUpViews(reply);
+
+            bindForUps(reply);
+
+            Integer targetPosition = positionMap.get(reply.getReplyId());
             if (targetPosition == null) {
                 tvTargetPosition.setVisibility(View.GONE);
             } else {
                 tvTargetPosition.setVisibility(View.VISIBLE);
-                tvTargetPosition.setText(activity.getString(R.string.reply_$d_floor, targetPosition + 1));
+                tvTargetPosition.setText(activity.getString(R.string.reply___floor, targetPosition + 1));
             }
 
             // 这里直接使用WebView，有性能问题
@@ -180,7 +174,7 @@ public class ReplyListAdapter extends RecyclerView.Adapter<ReplyListAdapter.View
             iconShadowGap.setVisibility(position == replyList.size() - 1 ? View.VISIBLE : View.GONE);
         }
 
-        void updateUpViews(@NonNull Reply reply) {
+        void bindForUps(@NonNull Reply reply) {
             btnUps.setText(String.valueOf(reply.getUpList().size()));
             btnUps.setCompoundDrawablesWithIntrinsicBounds(reply.getUpList().contains(LoginShared.getId(activity)) ? R.drawable.ic_thumb_up_theme_24dp : R.drawable.ic_thumb_up_grey600_24dp, 0, 0, 0);
         }

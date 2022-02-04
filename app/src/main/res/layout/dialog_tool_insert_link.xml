@@ -30,7 +30,7 @@
         android:layout_marginTop="16dp"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
-        android:text="@string/http_$"
+        android:text="@string/http__"
         android:hint="@string/link"
         android:inputType="text"
         android:maxLines="1"

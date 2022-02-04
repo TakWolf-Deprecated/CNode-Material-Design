@@ -1,9 +1,10 @@
 package org.cnodejs.android.md.model.storage;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import org.cnodejs.android.md.model.util.SharedUtils;
 
 public final class SettingShared {
 
@@ -22,59 +23,59 @@ public final class SettingShared {
     public static final String DEFAULT_TOPIC_SIGN_CONTENT = "来自酷炫的 [CNodeMD](https://github.com/TakWolf/CNode-Material-Design)";
 
     public static boolean isEnableNotification(@NonNull Context context) {
-        return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_NOTIFICATION, true);
+        return SharedUtils.with(context, TAG).getBoolean(KEY_ENABLE_NOTIFICATION, true);
     }
 
     public static void setEnableNotification(@NonNull Context context, boolean enable) {
-        SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_NOTIFICATION, enable);
+        SharedUtils.with(context, TAG).setBoolean(KEY_ENABLE_NOTIFICATION, enable);
     }
 
     public static boolean isEnableThemeDark(@NonNull Context context) {
-        return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_THEME_DARK, false);
+        return SharedUtils.with(context, TAG).getBoolean(KEY_ENABLE_THEME_DARK, false);
     }
 
     public static void setEnableThemeDark(@NonNull Context context, boolean enable) {
-        SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_THEME_DARK, enable);
+        SharedUtils.with(context, TAG).setBoolean(KEY_ENABLE_THEME_DARK, enable);
     }
 
     public static boolean isEnableTopicDraft(@NonNull Context context) {
-        return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_DRAFT, true);
+        return SharedUtils.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_DRAFT, true);
     }
 
     public static void setEnableTopicDraft(@NonNull Context context, boolean enable) {
-        SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_DRAFT, enable);
+        SharedUtils.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_DRAFT, enable);
     }
 
     public static boolean isEnableTopicSign(@NonNull Context context) {
-        return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_SIGN, true);
+        return SharedUtils.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_SIGN, true);
     }
 
     public static void setEnableTopicSign(@NonNull Context context, boolean enable) {
-        SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_SIGN, enable);
+        SharedUtils.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_SIGN, enable);
     }
 
     public static String getTopicSignContent(@NonNull Context context) {
-        return SharedWrapper.with(context, TAG).getString(KEY_TOPIC_SIGN_CONTENT, DEFAULT_TOPIC_SIGN_CONTENT);
+        return SharedUtils.with(context, TAG).getString(KEY_TOPIC_SIGN_CONTENT, DEFAULT_TOPIC_SIGN_CONTENT);
     }
 
     public static void setTopicSignContent(@NonNull Context context, @Nullable String content) {
-        SharedWrapper.with(context, TAG).setString(KEY_TOPIC_SIGN_CONTENT, content);
+        SharedUtils.with(context, TAG).setString(KEY_TOPIC_SIGN_CONTENT, content);
     }
 
     public static boolean isEnableTopicRenderCompat(@NonNull Context context) {
-        return SharedWrapper.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_RENDER_COMPAT, Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP);
+        return SharedUtils.with(context, TAG).getBoolean(KEY_ENABLE_TOPIC_RENDER_COMPAT, true);
     }
 
     public static void setEnableTopicRenderCompat(@NonNull Context context, boolean enable) {
-        SharedWrapper.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_RENDER_COMPAT, enable);
+        SharedUtils.with(context, TAG).setBoolean(KEY_ENABLE_TOPIC_RENDER_COMPAT, enable);
     }
 
     public static boolean isShowTopicRenderCompatTip(@NonNull Context context) {
-        return SharedWrapper.with(context, TAG).getBoolean(KEY_SHOW_TOPIC_RENDER_COMPAT_TIP, true);
+        return SharedUtils.with(context, TAG).getBoolean(KEY_SHOW_TOPIC_RENDER_COMPAT_TIP, true);
     }
 
     public static void markShowTopicRenderCompatTip(@NonNull Context context) {
-        SharedWrapper.with(context, TAG).setBoolean(KEY_SHOW_TOPIC_RENDER_COMPAT_TIP, false);
+        SharedUtils.with(context, TAG).setBoolean(KEY_SHOW_TOPIC_RENDER_COMPAT_TIP, false);
     }
 
 }

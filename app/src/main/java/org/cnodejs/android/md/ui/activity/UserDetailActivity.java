@@ -19,17 +19,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.cnodejs.android.md.R;
 import org.cnodejs.android.md.model.api.ApiDefine;
 import org.cnodejs.android.md.model.entity.Topic;
 import org.cnodejs.android.md.model.entity.User;
+import org.cnodejs.android.md.model.glide.GlideApp;
 import org.cnodejs.android.md.presenter.contract.IUserDetailPresenter;
 import org.cnodejs.android.md.presenter.implement.UserDetailPresenter;
 import org.cnodejs.android.md.ui.adapter.UserDetailPagerAdapter;
-import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
@@ -116,7 +115,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         toolbar.inflateMenu(R.menu.user_detail);
         toolbar.setOnMenuItemClickListener(this);
 
-        adapter = new UserDetailPagerAdapter(getSupportFragmentManager());
+        adapter = new UserDetailPagerAdapter(this, viewPager);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
         tabLayout.setupWithViewPager(viewPager);
@@ -126,7 +125,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
 
         String avatarUrl = getIntent().getStringExtra(EXTRA_AVATAR_URL);
         if (!TextUtils.isEmpty(avatarUrl)) {
-            Glide.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+            GlideApp.with(this).load(avatarUrl).placeholder(R.drawable.image_placeholder).into(imgAvatar);
         }
 
         userDetailPresenter = new UserDetailPresenter(this, this);
@@ -144,9 +143,6 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {}
-
     @OnClick(R.id.img_avatar)
     void onBtnAvatarClick() {
         userDetailPresenter.getUserAsyncTask(loginName);
@@ -161,7 +157,7 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
 
     @Override
     public void onGetUserOk(@NonNull User user) {
-        Glide.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).dontAnimate().into(imgAvatar);
+        GlideApp.with(this).load(user.getAvatarUrl()).placeholder(R.drawable.image_placeholder).into(imgAvatar);
         tvLoginName.setText(user.getLoginName());
         if (TextUtils.isEmpty(user.getGithubUsername())) {
             tvGithubUsername.setVisibility(View.INVISIBLE);
@@ -170,15 +166,15 @@ public class UserDetailActivity extends StatusBarActivity implements IUserDetail
             tvGithubUsername.setVisibility(View.VISIBLE);
             tvGithubUsername.setText(Html.fromHtml("<u>" + user.getGithubUsername() + "@github.com" + "</u>"));
         }
-        tvCreateTime.setText(getString(R.string.register_time_$s, user.getCreateAt().toString("yyyy-MM-dd")));
-        tvScore.setText(getString(R.string.score_$d, user.getScore()));
-        adapter.update(user);
+        tvCreateTime.setText(getString(R.string.register_time__, user.getCreateAt().toString("yyyy-MM-dd")));
+        tvScore.setText(getString(R.string.score__, user.getScore()));
+        adapter.setUser(user);
         githubUsername = user.getGithubUsername();
     }
 
     @Override
     public void onGetCollectTopicListOk(@NonNull List<Topic> topicList) {
-        adapter.update(topicList);
+        adapter.setCollectTopicList(topicList);
     }
 
     @Override

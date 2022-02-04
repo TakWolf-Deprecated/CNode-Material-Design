@@ -44,7 +44,7 @@
                 android:padding="16dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackgroundGeneral">
+                android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -96,7 +96,7 @@
                 android:paddingRight="16dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackgroundGeneral">
+                android:background="?attr/selectableItemBackground">
 
                 <TextView
                     android:layout_width="0dp"
@@ -134,7 +134,7 @@
                 android:padding="16dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackgroundGeneral">
+                android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -177,7 +177,7 @@
                 android:padding="16dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackgroundGeneral">
+                android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -221,7 +221,7 @@
                 android:text="@string/modify_topic_sign"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp"
-                android:background="?attr/selectableItemBackgroundGeneral" />
+                android:background="?attr/selectableItemBackground" />
 
             <View style="@style/AppWidget.DeepLine" />
 
@@ -232,7 +232,7 @@
                 android:padding="16dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackgroundGeneral">
+                android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -265,8 +265,6 @@
                     android:clickable="false" />
 
             </LinearLayout>
-
-            <View style="@style/AppWidget.ItemGap" />
 
         </LinearLayout>
 

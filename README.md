@@ -3,10 +3,10 @@
 # CNode Material Design #
 
 [![Build Status](https://travis-ci.org/TakWolf/CNode-Material-Design.svg?branch=master)](https://travis-ci.org/TakWolf/CNode-Material-Design)
-[![Release](https://img.shields.io/github/release/TakWolf/CNode-Material-Design.svg?style=flat)](https://github.com/TakWolf/CNode-Material-Design/releases/latest)
-[![Platform](https://img.shields.io/badge/platform-Android-green.svg?style=flat)](https://www.android.com)
-[![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
-[![License](https://img.shields.io/github/license/TakWolf/CNode-Material-Design.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
+[![Release](https://img.shields.io/github/release/TakWolf/CNode-Material-Design.svg)](https://github.com/TakWolf/CNode-Material-Design/releases/latest)
+[![Platform](https://img.shields.io/badge/platform-Android-green.svg)](https://www.android.com)
+[![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg)](https://android-arsenal.com/api?level=14)
+[![License](https://img.shields.io/github/license/TakWolf/CNode-Material-Design.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 ![Logo](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
@@ -22,15 +22,15 @@
 
 - [360手机助手](http://zhushou.360.cn/detail/index/soft_id/3060683)
 
-- [腾讯应用宝](http://android.myapp.com/myapp/detail.htm?apkName=org.cnodejs.android.md)
+- [应用宝](http://android.myapp.com/myapp/detail.htm?apkName=org.cnodejs.android.md)
 
-- [魅族Flyme应用中心](http://app.flyme.cn/apps/public/detail?package_name=org.cnodejs.android.md)
+- [魅族应用商店](http://app.flyme.cn/apps/public/detail?package_name=org.cnodejs.android.md)
 
 - [小米应用商店](http://app.mi.com/detail/118728)
 
 - [豌豆荚](http://www.wandoujia.com/apps/org.cnodejs.android.md)
 
-- [酷安网](http://www.coolapk.com/apk/org.cnodejs.android.md)
+- [酷安](http://www.coolapk.com/apk/org.cnodejs.android.md)
 
 ## Screenshots ##
 
@@ -42,6 +42,8 @@
 
 - [Butter Knife](https://github.com/JakeWharton/butterknife)
 
+- [Glide](https://github.com/bumptech/glide)
+
 - [Gson](https://github.com/google/gson)
 
 - [Joda-Time](http://www.joda.org/joda-time)
@@ -51,8 +53,6 @@
 - [OkHttp](https://github.com/square/okhttp)
 
 - [Retrofit](https://github.com/square/retrofit)
-
-- [Glide](https://github.com/bumptech/glide)
 
 - [Android-HeaderAndFooterRecyclerView](https://github.com/TakWolf/Android-HeaderAndFooterRecyclerView)
 
@@ -87,6 +87,10 @@ TakWolf
 [takwolf@foxmail.com](mailto:takwolf@foxmail.com)
 
 [http://takwolf.com](http://takwolf.com)
+
+## Donate ##
+
+![Donate](art/donate-qrcode.png)
 
 ## License ##
 

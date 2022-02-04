@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import org.cnodejs.android.md.BuildConfig;
 import org.cnodejs.android.md.R;
-import org.cnodejs.android.md.ui.base.StatusBarActivity;
 import org.cnodejs.android.md.ui.listener.NavigationFinishClickListener;
 import org.cnodejs.android.md.ui.util.Navigator;
 import org.cnodejs.android.md.ui.util.ThemeUtils;
@@ -31,7 +30,6 @@ public class AboutActivity extends StatusBarActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         ThemeUtils.configThemeBeforeOnCreate(this, R.style.AppThemeLight, R.style.AppThemeDark);
-        setFitsStatusBarMode();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);

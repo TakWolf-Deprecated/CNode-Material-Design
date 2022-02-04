@@ -2,9 +2,8 @@
 <resources>
 
     <string name="app_name">CNode社区</string>
-
-    <string name="logo_url">cnodejs.org</string>
-    <string name="logo_slogan">Node.js专业中文社区</string>
+    <string name="app_domain">cnodejs.org</string>
+    <string name="app_slogan">Node.js专业中文社区</string>
 
     <string name="tab_top">置顶</string>
     <string name="tab_all">全部</string>
@@ -22,8 +21,8 @@
     <string name="click_avatar_to_login">点击头像登录</string>
     <string name="press_back_again_to_exit">再按一次退出</string>
 
-    <string name="access_token_auth_error">Access Token 验证错误</string>
-    <string name="access_token_format_error">Access Token 格式错误，应为 UUID</string>
+    <string name="access_token_auth_error">Access Token 认证失败</string>
+    <string name="access_token_format_error">Access Token 格式错误</string>
     <string name="access_token_out_of_date">您的 Access Token 已经过期，您可能需要重新登录账户。</string>
 
     <string name="login">登录</string>
@@ -45,6 +44,10 @@
     <string name="content_empty_error_tip">内容不能为空</string>
 
     <string name="user_detail">用户资料</string>
+    <string name="recently_reply">最近回复</string>
+    <string name="latest_post">最新发布</string>
+    <string name="favorite_topics">收藏话题</string>
+    <string name="navigation_badge_count_max">99+</string>
 
     <string name="load_more_finished">已经到底啦</string>
     <string name="load_more_failed">加载失败，点击重试</string>
@@ -55,23 +58,23 @@
     <string name="go_on">继续</string>
 
     <string name="author">作者</string>
-    <string name="topic_$s">话题：%s</string>
-    <string name="$d_floor">%d楼</string>
-    <string name="reply_$d_floor">回复：%d楼</string>
-    <string name="create_at_$s">创建于：%s</string>
-    <string name="score_$d">积分：%d</string>
-    <string name="register_time_$s">注册时间：%s</string>
-    <string name="$s_create">%s创建</string>
-    <string name="$d_count_visit">%d次浏览</string>
-    <string name="$d_count_reply">%d条回复</string>
-    <string name="$slash">/</string>
-    <string name="$dot">•</string>
+    <string name="topic__">话题：%s</string>
+    <string name="__floor">%d楼</string>
+    <string name="reply___floor">回复：%d楼</string>
+    <string name="create_at__">创建于：%s</string>
+    <string name="score__">积分：%d</string>
+    <string name="register_time__">注册时间：%s</string>
+    <string name="__create">%s创建</string>
+    <string name="__count_visit">%d次浏览</string>
+    <string name="__count_reply">%d条回复</string>
+    <string name="_slash_">/</string>
+    <string name="_dot_">•</string>
 
     <string name="at_you_in_topic">在话题中@了您</string>
     <string name="at_you_in_reply">在回复中@了您</string>
     <string name="reply_your_topic">回复了您的话题</string>
 
-    <string name="access_token_$">Access Token :</string>
+    <string name="access_token__">Access Token :</string>
     <string name="qr_code_login">扫码登录</string>
     <string name="github_login">GitHub登录</string>
     <string name="scan_qr_code">扫描二维码</string>
@@ -79,7 +82,7 @@
     <string name="qr_code_permission_denied_tip">二维码扫描组件无法工作，请确保在设置中为应用授予了相机权限。</string>
     <string name="go_to_setting">去设置</string>
     <string name="qr_code_tip">将二维码放入扫描框内</string>
-    <string name="$_how_to_get_access_token_$"><u>如何获取 Access Token ？</u></string>
+    <string name="_how_to_get_access_token_"><u>如何获取 Access Token ？</u></string>
     <string name="how_to_get_access_token_tip_content">在CNode社区网站端登录你的账户，然后在右上角找到「设置」按钮，点击进入后将页面滑动到最底部来查看你的 Access Token 。</string>
 
     <string name="current_version">当前版本</string>
@@ -120,7 +123,7 @@
     <string name="open_in_browser">在浏览器中打开</string>
     <string name="share">分享</string>
     <string name="send">发送</string>
-    <string name="send_to_tab_$">发布到分类：</string>
+    <string name="send_to_tab__">发布到分类：</string>
 
     <string name="create_topic_title_hint">标题，字数10字以上</string>
     <string name="create_topic_content_hint">说点什么吧&#8230;</string>
@@ -128,7 +131,7 @@
     <string name="title">标题</string>
     <string name="add_link">添加连接</string>
     <string name="link">连接</string>
-    <string name="http_$">http://</string>
+    <string name="http__">http://</string>
 
     <string name="markdown_preview">Markdown预览</string>
     <string name="image_preview">查看图片</string>
