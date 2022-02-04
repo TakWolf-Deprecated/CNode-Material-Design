@@ -1,6 +1,6 @@
 ![Banner](art/banner-1024-500.png)
 
-# CNode Material Design #
+# CNode Material Design
 
 [![Build Status](https://travis-ci.org/TakWolf/CNode-Material-Design.svg?branch=master)](https://travis-ci.org/TakWolf/CNode-Material-Design)
 [![Release](https://img.shields.io/github/release/TakWolf/CNode-Material-Design.svg)](https://github.com/TakWolf/CNode-Material-Design/releases/latest)
@@ -12,7 +12,7 @@
 
 [CNode 社区](https://cnodejs.org)第三方 Android 客户端，原生 App，Material Design 风格，支持夜间模式。
 
-## Downloads ##
+## Downloads
 
 [![Google Play](art/get_it_on_google_play.png)](https://play.google.com/store/apps/details?id=org.cnodejs.android.md)
 
@@ -32,13 +32,13 @@
 
 - [酷安](http://www.coolapk.com/apk/org.cnodejs.android.md)
 
-## Screenshots ##
+## Screenshots
 
 ![Image](art/screenshot_s01.png) ![Image](art/screenshot_s02.png)
 
 ![Image](art/screenshot_s03.png) ![Image](art/screenshot_s04.png)
 
-## Dependencies ##
+## Dependencies
 
 - [Butter Knife](https://github.com/JakeWharton/butterknife)
 
@@ -80,19 +80,7 @@
 
 - [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
 
-## Author ##
-
-TakWolf
-
-[takwolf@foxmail.com](mailto:takwolf@foxmail.com)
-
-[http://takwolf.com](http://takwolf.com)
-
-## Donate ##
-
-![Donate](art/donate-qrcode.png)
-
-## License ##
+## License
 
 ```
 Copyright 2015 TakWolf
