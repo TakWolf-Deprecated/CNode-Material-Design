@@ -5,6 +5,12 @@
 [![License](https://img.shields.io/github/license/TakWolf/CNode-Material-Design)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Releases](https://img.shields.io/github/v/release/TakWolf/CNode-Material-Design)](https://github.com/TakWolf/CNode-Material-Design/releases)
 
+## Dependencies
+
+- [Android Jetpack](https://github.com/androidx/androidx)
+- [Material Components for Android](https://github.com/material-components/material-components-android)
+- [Java 8+ API desugaring support](https://developer.android.com/studio/write/java8-support#library-desugaring)
+
 ## License
 
 ```
