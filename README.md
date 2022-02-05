@@ -11,6 +11,15 @@
 - [Material Components for Android](https://github.com/material-components/material-components-android)
 - [Java 8+ API desugaring support](https://developer.android.com/studio/write/java8-support#library-desugaring)
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)
+- [Kotlin Symbol Processing API](https://github.com/google/ksp)
+- [Moshi](https://github.com/square/moshi)
+- [OkHttp](https://github.com/square/okhttp)
+- [Retrofit](https://github.com/square/retrofit)
+- [Coil](https://github.com/coil-kt/coil)
+- [HeaderAndFooterRecyclerView](https://github.com/TakWolf/Android-HeaderAndFooterRecyclerView)
+- [InsetsWidget](https://github.com/TakWolf/Android-InsetsWidget)
+- [CircleImageView](https://github.com/hdodenhof/CircleImageView)
+- [Live Event](https://github.com/hadilq/LiveEvent)
 
 ## License
 
