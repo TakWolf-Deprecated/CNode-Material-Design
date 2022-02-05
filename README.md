@@ -21,6 +21,10 @@
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
 - [Live Event](https://github.com/hadilq/LiveEvent)
 
+## Resources
+
+- [Material design icons](https://github.com/google/material-design-icons)
+
 ## License
 
 ```

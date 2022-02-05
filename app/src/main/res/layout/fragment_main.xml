@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.takwolf.android.insetswidget.InsetsFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:isw_insetsType="navigationBars"
+    app:isw_insetsPaddingBottom="false"
+    app:isw_insetsColorBottom="@color/translucent_black"
+    app:isw_insetsColorLeft="@android:color/black"
+    app:isw_insetsColorRight="@android:color/black">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/fragment_main_content" />
+
+        <com.takwolf.android.insetswidget.InsetsNestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="?attr/colorSurface"
+            app:isw_insetsType="statusBars"
+            app:isw_insetsPaddingTop="false"
+            app:isw_insetsColorTop="@color/translucent_black">
+
+            <include layout="@layout/fragment_main_nav" />
+
+        </com.takwolf.android.insetswidget.InsetsNestedScrollView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</com.takwolf.android.insetswidget.InsetsFrameLayout>
