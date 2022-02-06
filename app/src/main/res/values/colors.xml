@@ -4,4 +4,5 @@
     <color name="app_primary_variant">#ff222222</color>
     <color name="app_accent">#ff66cc33</color>
     <color name="translucent_black">#40000000</color>
+    <color name="text_secondary_white">#b3ffffff</color>
 </resources>
