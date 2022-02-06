@@ -5,21 +5,6 @@ import com.squareup.moshi.JsonClass
 import java.time.OffsetDateTime
 
 @JsonClass(generateAdapter = true)
-data class TopicInUser(
-    val id: String,
-    val author: Author,
-    val title: String,
-    @Json(name = "last_reply_at") val lastReplyAt: OffsetDateTime,
-)
-
-@JsonClass(generateAdapter = true)
-data class TopicInMessage(
-    val id: String,
-    val title: String,
-    @Json(name = "last_reply_at") val lastReplyAt: OffsetDateTime,
-)
-
-@JsonClass(generateAdapter = true)
 data class Topic(
     val id: String,
     @Json(name = "author_id") val authorId: String,
@@ -51,4 +36,19 @@ data class TopicWithReply(
     @Json(name = "last_reply_at") val lastReplyAt: OffsetDateTime,
     @Json(name = "is_collect") val isCollect: Boolean,
     val replies: List<Reply>,
+)
+
+@JsonClass(generateAdapter = true)
+data class TopicInUser(
+    val id: String,
+    val author: Author,
+    val title: String,
+    @Json(name = "last_reply_at") val lastReplyAt: OffsetDateTime,
+)
+
+@JsonClass(generateAdapter = true)
+data class TopicInMessage(
+    val id: String,
+    val title: String,
+    @Json(name = "last_reply_at") val lastReplyAt: OffsetDateTime,
 )
