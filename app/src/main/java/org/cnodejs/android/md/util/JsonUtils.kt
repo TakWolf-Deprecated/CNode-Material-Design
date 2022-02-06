@@ -3,7 +3,6 @@ package org.cnodejs.android.md.util
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.ToJson
-import org.cnodejs.android.md.model.entity.MessageType
 import org.cnodejs.android.md.model.entity.MessageTypeJsonAdapter
 import org.cnodejs.android.md.model.entity.TabJsonAdapter
 import org.cnodejs.android.md.model.entity.UpActionJsonAdapter

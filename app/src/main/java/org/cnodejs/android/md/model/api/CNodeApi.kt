@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.model.api
 
 import org.cnodejs.android.md.model.entity.*
-import retrofit2.Call
 import retrofit2.http.*
 
 interface CNodeApi {
