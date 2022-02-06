@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/fragment_main_content" />
+        <include layout="@layout/fragment_main_content"
+            android:id="@+id/content_layout" />
 
         <com.takwolf.android.insetswidget.InsetsNestedScrollView
             android:layout_width="match_parent"
@@ -26,7 +27,8 @@
             app:isw_insetsPaddingTop="false"
             app:isw_insetsColorTop="@color/translucent_black">
 
-            <include layout="@layout/fragment_main_nav" />
+            <include layout="@layout/fragment_main_nav"
+                android:id="@+id/nav_layout" />
 
         </com.takwolf.android.insetswidget.InsetsNestedScrollView>
 
