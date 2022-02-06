@@ -13,11 +13,15 @@ android {
         targetSdk = 31
         versionCode = 1
         versionName = "2.0.0"
+
+        buildConfigField("String", "API_BASE_URL", "\"https://cnodejs.org/api/v1/\"")
+        buildConfigField("String", "USER_AGENT_NAME", "\"CNodeMD\"")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {

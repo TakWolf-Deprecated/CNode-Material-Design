@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CNode 社区</string>
+
+    <string name="all">全部</string>
+    <string name="top">置顶</string>
+    <string name="tab_good">精华</string>
+    <string name="tab_share">分享</string>
+    <string name="tab_ask">问答</string>
+    <string name="tab_job">招聘</string>
+    <string name="tab_dev">测试</string>
+    <string name="tab_unknown">未知</string>
+
+    <string name="message">消息</string>
+    <string name="setting">设置</string>
+    <string name="about">关于</string>
+
+    <string name="login">登录</string>
     <string name="logout">注销</string>
+    <string name="need_login_tip">该操作需要登录账户。是否现在登录？</string>
+    <string name="logout_tip">确定要注销吗？</string>
+    <string name="login_success">登录成功</string>
 </resources>
