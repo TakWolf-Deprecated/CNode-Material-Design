@@ -5,4 +5,10 @@
     <fragment
         android:id="@+id/fragment_main"
         android:name="org.cnodejs.android.md.ui.fragment.MainFragment" />
+    <fragment
+        android:id="@+id/fragment_login"
+        android:name="org.cnodejs.android.md.ui.fragment.LoginFragment" />
+    <fragment
+        android:id="@+id/fragment_user_detail"
+        android:name="org.cnodejs.android.md.ui.fragment.UserDetailFragment" />
 </navigation>
