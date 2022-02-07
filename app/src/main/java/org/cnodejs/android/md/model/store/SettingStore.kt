@@ -16,8 +16,8 @@ class SettingStore(application: Application) : DataStoreWrapper(application, "se
     }
 
     fun setNightMode(enabled: Boolean) = runBlocking {
-        dataStore.edit { preferences ->
-            preferences[KEY_NIGHT_MODE] = enabled
+        dataStore.edit { mutablePreferences ->
+            mutablePreferences[KEY_NIGHT_MODE] = enabled
         }
     }
 }

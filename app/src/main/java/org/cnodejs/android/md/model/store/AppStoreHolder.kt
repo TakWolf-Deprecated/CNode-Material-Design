@@ -16,7 +16,7 @@ class AppStoreHolder private constructor(application: Application) {
         }
     }
 
-    val loginStore = LoginStore(application)
+    val accountStore = AccountStore(application)
     val settingStore = SettingStore(application)
     val draftStore = DraftStore(application)
 }
