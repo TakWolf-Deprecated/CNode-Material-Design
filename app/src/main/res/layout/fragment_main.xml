@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:isw_insetsType="navigationBars"
     app:isw_insetsPaddingBottom="false"
-    app:isw_insetsColorBottom="@color/translucent_black"
+    app:isw_insetsColorBottom="@color/translucent_system_bars"
     app:isw_insetsColorLeft="@android:color/black"
     app:isw_insetsColorRight="@android:color/black">
 
