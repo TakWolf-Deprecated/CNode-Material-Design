@@ -1,108 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.takwolf.android.insetswidget.InsetsNestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="?attr/colorSurface"
+    app:isw_insetsType="statusBars"
+    app:isw_insetsPaddingTop="false"
+    app:isw_insetsColorTop="@color/translucent_black">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/nav_top_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/main_nav_header_bg"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            app:layout_constrainedHeight="true"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:ignore="ContentDescription" />
-
-        <com.takwolf.android.insetswidget.InsetsSpace
-            android:id="@+id/status_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:isw_insetsType="statusBars"
-            tools:layout_height="24dp" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_login_avatar"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/image_placeholder"
-            app:layout_constraintTop_toBottomOf="@id/status_bar"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_login_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/img_login_avatar"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="TakWolf" />
-
-        <TextView
-            android:id="@+id/tv_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="16dp"
-            android:textColor="@color/text_secondary_white"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/tv_login_name"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="积分：100" />
-
-        <ImageView
-            android:id="@+id/btn_day_night"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="24dp"
-            android:padding="8dp"
-            android:src="@drawable/baseline_dark_mode_24"
-            android:scaleType="center"
-            android:adjustViewBounds="true"
-            app:layout_constraintTop_toBottomOf="@id/status_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/btn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:text="@string/logout"
-            android:textColor="@color/text_secondary_white"
-            android:textSize="14sp"
-            android:background="?attr/selectableItemBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1000dp"
-        android:layout_margin="16dp"
-        android:background="#ff0000" />
-
-    <com.takwolf.android.insetswidget.InsetsSpace
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:isw_insetsType="navigationBars" />
+        android:orientation="vertical">
 
-</LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_nav_header_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/main_nav_header_bg"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="@id/nav_header_foreground"
+                tools:ignore="ContentDescription" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/nav_header_foreground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#01000000"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.takwolf.android.insetswidget.InsetsSpace
+                    android:id="@+id/status_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:isw_insetsType="statusBars"
+                    tools:layout_height="24dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_login_avatar"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/image_placeholder"
+                    app:layout_constraintTop_toBottomOf="@id/status_bar"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_login_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toBottomOf="@id/img_login_avatar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="TakWolf" />
+
+                <TextView
+                    android:id="@+id/tv_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/text_secondary_white"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_login_name"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="积分：100" />
+
+                <ImageView
+                    android:id="@+id/btn_day_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="24dp"
+                    android:padding="8dp"
+                    android:src="@drawable/baseline_dark_mode_24"
+                    android:scaleType="center"
+                    android:adjustViewBounds="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:layout_constraintTop_toBottomOf="@id/status_bar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/btn_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/logout"
+                    android:textColor="@color/text_secondary_white"
+                    android:textSize="14sp"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.takwolf.android.insetswidget.InsetsSpace
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isw_insetsType="navigationBars" />
+
+    </LinearLayout>
+
+</com.takwolf.android.insetswidget.InsetsNestedScrollView>
