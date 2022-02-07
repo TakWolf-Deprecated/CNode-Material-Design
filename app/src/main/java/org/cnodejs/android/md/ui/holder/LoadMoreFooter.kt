@@ -3,6 +3,7 @@ package org.cnodejs.android.md.ui.holder
 import android.view.LayoutInflater
 import android.view.View
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
+import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FooterLoadMoreBinding
 
 class LoadMoreFooter(private val binding: FooterLoadMoreBinding) : com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter(binding.root) {
