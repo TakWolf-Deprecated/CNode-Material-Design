@@ -26,4 +26,6 @@
 
     <string name="load_more_finished">已经到底啦</string>
     <string name="load_more_failed">加载失败，点击重试</string>
+
+    <string name="score__d_">积分：%d</string>
 </resources>

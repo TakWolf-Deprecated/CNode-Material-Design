@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import coil.load
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMainBinding
+import org.cnodejs.android.md.util.OnDoubleClickListener
+import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.SettingViewModel
 
 class MainFragment : Fragment() {
@@ -18,19 +23,49 @@ class MainFragment : Fragment() {
     ): View {
         val binding = FragmentMainBinding.inflate(inflater, container, false)
 
+        val accountViewModel: AccountViewModel by activityViewModels()
         val settingViewModel: SettingViewModel by activityViewModels()
+
+        accountViewModel.accountData.observe(viewLifecycleOwner) { account ->
+            if (account == null) {
+                binding.navLayout.imgLoginAvatar.load(R.drawable.image_placeholder)
+                binding.navLayout.tvLoginName.setText(R.string.click_avatar_to_login)
+                binding.navLayout.tvScore.text = null
+                binding.navLayout.btnLogout.visibility = View.GONE
+            } else {
+                binding.navLayout.imgLoginAvatar.load(account.avatarUrl) {
+                    placeholder(R.drawable.image_placeholder)
+                }
+                binding.navLayout.tvLoginName.text = account.loginName
+                binding.navLayout.tvScore.text = getString(R.string.score__d_, account.score)
+                binding.navLayout.btnLogout.visibility = View.VISIBLE
+            }
+        }
 
         settingViewModel.nightModeData.observe(viewLifecycleOwner) {
             it?.let { isNightMode ->
                 if (isNightMode) {
                     binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_light_mode_24)
-                    binding.navLayout.imgNavHeaderBackground.setImageDrawable(null)
+                    binding.navLayout.imgNavHeaderBackground.visibility = View.GONE
                 } else {
                     binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_dark_mode_24)
-                    binding.navLayout.imgNavHeaderBackground.setImageResource(R.drawable.main_nav_header_bg)
+                    binding.navLayout.imgNavHeaderBackground.visibility = View.VISIBLE
                 }
             }
         }
+
+        binding.drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
+            // TODO
+        })
+
+        binding.contentLayout.toolbar.setNavigationOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+        binding.contentLayout.toolbar.setOnClickListener(object : OnDoubleClickListener(400) {
+            override fun onDoubleClick(v: View) {
+                binding.contentLayout.recyclerView.scrollToPosition(0)
+            }
+        })
 
         binding.navLayout.btnDayNight.setOnClickListener {
             settingViewModel.toggleNightMode()
