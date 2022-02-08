@@ -21,4 +21,8 @@ object NavUtils {
             extras,
         )
     }
+
+    fun back(fragment: Fragment) {
+        fragment.findNavController().navigateUp()
+    }
 }

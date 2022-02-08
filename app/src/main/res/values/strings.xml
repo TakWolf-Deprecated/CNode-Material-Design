@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CNode 社区</string>
+    <string name="app_domain">cnodejs.org</string>
 
     <string name="all">全部</string>
     <string name="top">置顶</string>
@@ -28,4 +29,8 @@
     <string name="load_more_failed">加载失败，点击重试</string>
 
     <string name="score__d_">积分：%d</string>
+
+    <string name="login_by_qr_code">扫码登录</string>
+    <string name="login_by_github">GitHub 登录</string>
+    <string name="_how_to_get_access_token_"><u>如何获取 AccessToken ？</u></string>
 </resources>

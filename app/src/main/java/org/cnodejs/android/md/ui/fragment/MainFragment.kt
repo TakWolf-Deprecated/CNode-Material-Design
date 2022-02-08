@@ -49,10 +49,10 @@ class MainFragment : Fragment() {
             it?.let { isNightMode ->
                 if (isNightMode) {
                     binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_light_mode_24)
-                    binding.navLayout.imgNavHeaderBackground.visibility = View.GONE
+                    binding.navLayout.imgNavHeaderBackground.setImageResource(R.drawable.login_header_bg)
                 } else {
                     binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_dark_mode_24)
-                    binding.navLayout.imgNavHeaderBackground.visibility = View.VISIBLE
+                    binding.navLayout.imgNavHeaderBackground.setImageResource(R.drawable.main_nav_header_bg)
                 }
             }
         }

@@ -18,17 +18,16 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/app_primary">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/img_nav_header_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/main_nav_header_bg"
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
                 app:layout_constraintBottom_toBottomOf="@id/nav_header_foreground"
+                tools:src="@drawable/main_nav_header_bg"
                 tools:ignore="ContentDescription" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
