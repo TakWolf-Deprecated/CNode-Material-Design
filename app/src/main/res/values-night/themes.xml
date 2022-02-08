@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.App" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="Base.Theme.App" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/app_primary</item>
-        <item name="colorPrimaryVariant">@color/app_primary_variant</item>
-        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
-
 </resources>

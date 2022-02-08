@@ -16,15 +16,17 @@
         app:isw_insetsType="statusBars"
         tools:layout_height="24dp" />
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/app_primary"
         android:elevation="@dimen/toolbar_elevation"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:theme="@style/ThemeOverlay.Material3.Dark"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
-        app:navigationIcon="@drawable/baseline_menu_24" />
+        app:navigationIcon="@drawable/baseline_menu_24"
+        app:title="@string/app_name"
+        app:titleCentered="true" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh_layout"

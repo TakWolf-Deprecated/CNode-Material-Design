@@ -2,9 +2,11 @@
 <resources>
     <color name="app_primary">#ff333333</color>
     <color name="app_primary_variant">#ff222222</color>
-    <color name="app_accent">#ff66cc33</color>
-
+    <color name="app_accent">#ff80bd01</color>
     <color name="translucent_system_bars">#60000000</color>
 
-    <color name="text_secondary_white">#b3ffffff</color>
+    <color name="background_light">#ffeeeeee</color>
+    <color name="surface_light">#ffffffff</color>
+    <color name="background_dark">@android:color/black</color>
+    <color name="surface_dark">#ff121212</color>
 </resources>
