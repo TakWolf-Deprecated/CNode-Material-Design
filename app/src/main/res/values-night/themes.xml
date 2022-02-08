@@ -2,6 +2,7 @@
 <resources>
     <style name="Base.Theme.App" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/app_primary</item>
+        <item name="colorAccent">@color/app_accent</item>
         <item name="android:colorBackground">@color/background_dark</item>
         <item name="colorSurface">@color/surface_dark</item>
         <item name="android:listDivider">@color/divider_on_dark</item>
