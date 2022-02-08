@@ -98,7 +98,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <FrameLayout
                     android:id="@+id/btn_login_by_qr_code"
@@ -106,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_margin="8dp"
+                    android:paddingVertical="8dp"
                     android:foreground="?attr/selectableItemBackground">
 
                     <TextView
@@ -128,6 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_margin="8dp"
+                    android:paddingVertical="8dp"
                     android:foreground="?attr/selectableItemBackground">
 
                     <TextView
@@ -139,7 +142,7 @@
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="14sp"
                         android:gravity="center"
-                        app:drawableStartCompat="@drawable/baseline_qr_code_scanner_24"
+                        app:drawableStartCompat="@drawable/ic_github_grey600_24dp"
                         app:drawableTint="?android:attr/textColorSecondary" />
 
                 </FrameLayout>
