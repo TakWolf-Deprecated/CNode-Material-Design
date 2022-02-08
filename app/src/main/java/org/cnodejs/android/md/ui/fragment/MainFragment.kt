@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.BundleCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -11,6 +12,8 @@ import androidx.fragment.app.activityViewModels
 import coil.load
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMainBinding
+import org.cnodejs.android.md.model.entity.Account
+import org.cnodejs.android.md.util.NavUtils
 import org.cnodejs.android.md.util.OnDoubleClickListener
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.SettingViewModel
@@ -26,19 +29,19 @@ class MainFragment : Fragment() {
         val accountViewModel: AccountViewModel by activityViewModels()
         val settingViewModel: SettingViewModel by activityViewModels()
 
-        accountViewModel.accountData.observe(viewLifecycleOwner) { account ->
-            if (account == null) {
-                binding.navLayout.imgLoginAvatar.load(R.drawable.image_placeholder)
-                binding.navLayout.tvLoginName.setText(R.string.click_avatar_to_login)
-                binding.navLayout.tvScore.text = null
-                binding.navLayout.btnLogout.visibility = View.GONE
-            } else {
+        accountViewModel.accountData.observe(viewLifecycleOwner) {
+            it?.also { account ->
                 binding.navLayout.imgLoginAvatar.load(account.avatarUrl) {
                     placeholder(R.drawable.image_placeholder)
                 }
                 binding.navLayout.tvLoginName.text = account.loginName
                 binding.navLayout.tvScore.text = getString(R.string.score__d_, account.score)
                 binding.navLayout.btnLogout.visibility = View.VISIBLE
+            } ?: run {
+                binding.navLayout.imgLoginAvatar.load(R.drawable.image_placeholder)
+                binding.navLayout.tvLoginName.setText(R.string.click_avatar_to_login)
+                binding.navLayout.tvScore.text = null
+                binding.navLayout.btnLogout.visibility = View.GONE
             }
         }
 
@@ -66,6 +69,17 @@ class MainFragment : Fragment() {
                 binding.contentLayout.recyclerView.scrollToPosition(0)
             }
         })
+
+        val onNavMyInfoClickListener = View.OnClickListener {
+            accountViewModel.accountData.value?.also { account ->
+                UserDetailFragment.open(this, account)
+            } ?: run {
+                LoginFragment.open(this)
+            }
+        }
+        binding.navLayout.imgLoginAvatar.setOnClickListener(onNavMyInfoClickListener)
+        binding.navLayout.tvLoginName.setOnClickListener(onNavMyInfoClickListener)
+        binding.navLayout.tvScore.setOnClickListener(onNavMyInfoClickListener)
 
         binding.navLayout.btnDayNight.setOnClickListener {
             settingViewModel.toggleNightMode()
