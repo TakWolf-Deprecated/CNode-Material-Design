@@ -7,6 +7,8 @@
 
     <color name="background_light">#ffeeeeee</color>
     <color name="surface_light">#ffffffff</color>
+    <color name="divider_on_light">#1f000000</color>
     <color name="background_dark">@android:color/black</color>
     <color name="surface_dark">#ff121212</color>
+    <color name="divider_on_dark">#1fFFFFFF</color>
 </resources>
