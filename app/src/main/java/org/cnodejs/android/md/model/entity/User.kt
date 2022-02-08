@@ -4,13 +4,31 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.time.OffsetDateTime
 
+interface IUser {
+    val loginName: String?
+    val avatarUrl: String?
+}
+
 @JsonClass(generateAdapter = true)
 data class User(
-    @Json(name = "loginname") val loginName: String,
-    @Json(name = "avatar_url") val avatarUrl: String,
+    @Json(name = "loginname") override val loginName: String,
+    @Json(name = "avatar_url") override val avatarUrl: String,
     val githubUsername: String,
     @Json(name = "create_at") val createAt: OffsetDateTime,
     val score: Int,
     @Json(name = "recent_topics") val recentTopics: List<TopicInUser>,
     @Json(name = "recent_replies") val recentReplies: List<TopicInUser>,
-)
+) : IUser
+
+@JsonClass(generateAdapter = true)
+data class Author(
+    @Json(name = "loginname") override val loginName: String?,
+    @Json(name = "avatar_url") override val avatarUrl: String?,
+) : IUser
+
+data class Account(
+    val id: String,
+    override val loginName: String,
+    override val avatarUrl: String?,
+    val score: Int,
+) : IUser

@@ -7,27 +7,28 @@ import com.squareup.moshi.ToJson
 import org.cnodejs.android.md.R
 
 @JsonClass(generateAdapter = false)
-enum class Tab(
-    val queryValue: String?,
-    @StringRes val titleResId: Int,
-) {
-    GOOD("good", R.string.tab_good),
-    SHARE("share", R.string.tab_share),
-    ASK("ask", R.string.tab_ask),
-    JOB("job", R.string.tab_job),
-    DEV("dev", R.string.tab_dev),
-    UNKNOWN(null, R.string.tab_unknown),
+enum class Tab(@StringRes val titleResId: Int) {
+    GOOD(R.string.tab_good),
+    SHARE(R.string.tab_share),
+    ASK(R.string.tab_ask),
+    JOB(R.string.tab_job),
+    DEV(R.string.tab_dev),
+    UNKNOWN(R.string.tab_unknown);
+
+    val queryValue: String?
+    get() {
+        return if (this == UNKNOWN) {
+            null
+        } else {
+            name.lowercase()
+        }
+    }
 }
 
 class TabJsonAdapter {
     @FromJson
     fun fromJson(tabString: String?): Tab {
-        for (tab in Tab.values()) {
-            if (tabString == tab.queryValue) {
-                return tab
-            }
-        }
-        return Tab.UNKNOWN
+        return tabString?.let { Tab.valueOf(it) } ?: Tab.UNKNOWN
     }
 
     @ToJson

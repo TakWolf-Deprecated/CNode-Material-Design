@@ -10,7 +10,7 @@ data class Topic(
     @Json(name = "author_id") val authorId: String,
     val author: Author,
     val title: String,
-    val tab: String,
+    val tab: Tab,
     val good: Boolean,
     val top: Boolean,
     val content: String,
