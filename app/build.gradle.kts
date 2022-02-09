@@ -76,6 +76,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation("io.coil-kt:coil:1.4.0")
     implementation("org.greenrobot:eventbus:3.3.1")
+    implementation("org.jsoup:jsoup:1.14.3")
+    implementation("io.noties.markwon:core:4.6.2")
     implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.2")
     implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:loadmorefooter:0.0.2")
     implementation("com.github.TakWolf.Android-InsetsWidget:insetswidget:0.0.1")

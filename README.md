@@ -17,6 +17,8 @@
 - [Retrofit](https://github.com/square/retrofit)
 - [Coil](https://github.com/coil-kt/coil)
 - [EventBus](https://github.com/greenrobot/EventBus)
+- [jsoup](https://github.com/jhy/jsoup)
+- [Markwon](https://github.com/noties/Markwon)
 - [HeaderAndFooterRecyclerView](https://github.com/TakWolf/Android-HeaderAndFooterRecyclerView)
 - [InsetsWidget](https://github.com/TakWolf/Android-InsetsWidget)
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
