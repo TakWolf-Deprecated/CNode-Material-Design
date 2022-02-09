@@ -85,6 +85,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edt_layout_access_token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="@string/access_token"
+                app:boxStrokeColor="@color/login_input_box_stroke"
+                app:hintTextColor="?attr/colorAccent"
+                app:endIconMode="clear_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="36"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_access_token"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textVisiblePassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_login"
