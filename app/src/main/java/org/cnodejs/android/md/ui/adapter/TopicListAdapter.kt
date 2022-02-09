@@ -10,9 +10,14 @@ import coil.load
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.ItemTopicBinding
 import org.cnodejs.android.md.model.entity.TopicWithSummary
+import org.cnodejs.android.md.ui.listener.OnTopicClickListener
+import org.cnodejs.android.md.ui.listener.OnUserClickListener
 import org.cnodejs.android.md.util.FormatUtils
 
 class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHolder>(TopicDiffItemCallback) {
+    var onTopicClickListener: OnTopicClickListener? = null
+    var onUserClickListener: OnUserClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemTopicBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
@@ -22,6 +27,26 @@ class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHold
     }
 
     class ViewHolder(private val binding: ItemTopicBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.layoutContent.setOnClickListener {
+                (bindingAdapter as TopicListAdapter?)?.let { adapter ->
+                    adapter.onTopicClickListener?.let { listener ->
+                        val topic = adapter.getItem(bindingAdapterPosition).topic
+                        listener.onTopicClick(topic)
+                    }
+                }
+            }
+
+            binding.layoutAuthor.setOnClickListener {
+                (bindingAdapter as TopicListAdapter?)?.let { adapter ->
+                    adapter.onUserClickListener?.let { listener ->
+                        val author = adapter.getItem(bindingAdapterPosition).topic.author
+                        listener.onUserClick(author)
+                    }
+                }
+            }
+        }
+
         fun bind(topicWithSummary: TopicWithSummary) {
             val topic = topicWithSummary.topic
             val resources = itemView.resources
