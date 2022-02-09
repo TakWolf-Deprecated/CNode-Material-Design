@@ -27,7 +27,7 @@
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
                 app:layout_constraintBottom_toBottomOf="@id/nav_header_foreground"
-                tools:src="@drawable/main_nav_header_bg"
+                tools:src="@drawable/nav_header_bg_light"
                 tools:ignore="ContentDescription" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
