@@ -21,12 +21,12 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    private fun onAccountChanged(event: AccountChangedEvent) {
+    fun onAccountChanged(event: AccountChangedEvent) {
         accountData.value = event.account
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    private fun onAccountUpdated(event: AccountUpdatedEvent) {
+    fun onAccountUpdated(event: AccountUpdatedEvent) {
         accountData.value = event.account
     }
 
