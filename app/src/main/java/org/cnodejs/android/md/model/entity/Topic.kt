@@ -2,7 +2,9 @@ package org.cnodejs.android.md.model.entity
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import org.cnodejs.android.md.util.HtmlUtils
 import java.time.OffsetDateTime
+import java.util.stream.Collectors
 
 @JsonClass(generateAdapter = true)
 data class Topic(
@@ -10,7 +12,7 @@ data class Topic(
     @Json(name = "author_id") val authorId: String,
     val author: Author,
     val title: String,
-    val tab: Tab,
+    val tab: Tab = Tab.UNKNOWN,
     val good: Boolean,
     val top: Boolean,
     val content: String,
@@ -20,13 +22,27 @@ data class Topic(
     @Json(name = "last_reply_at") val lastReplyAt: OffsetDateTime,
 )
 
+data class TopicWithSummary(val topic: Topic) {
+    companion object {
+        fun fromList(topics: List<Topic>): List<TopicWithSummary> {
+            return topics.stream()
+                .map { topic->
+                    TopicWithSummary(topic)
+                }
+                .collect(Collectors.toList())
+        }
+    }
+
+    val summary = HtmlUtils.getText(topic.content)
+}
+
 @JsonClass(generateAdapter = true)
 data class TopicWithReply(
     val id: String,
     @Json(name = "author_id") val authorId: String,
     val author: Author,
     val title: String,
-    val tab: String,
+    val tab: Tab = Tab.UNKNOWN,
     val good: Boolean,
     val top: Boolean,
     val content: String,

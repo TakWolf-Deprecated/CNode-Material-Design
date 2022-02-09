@@ -8,6 +8,7 @@ import org.cnodejs.android.md.R
 
 @JsonClass(generateAdapter = false)
 enum class Tab(@StringRes val titleResId: Int) {
+    ALL(R.string.app_name),
     GOOD(R.string.tab_good),
     SHARE(R.string.tab_share),
     ASK(R.string.tab_ask),
@@ -17,7 +18,7 @@ enum class Tab(@StringRes val titleResId: Int) {
 
     val queryValue: String?
     get() {
-        return if (this == UNKNOWN) {
+        return if (this == ALL || this == UNKNOWN) {
             null
         } else {
             name.lowercase()
@@ -27,8 +28,8 @@ enum class Tab(@StringRes val titleResId: Int) {
 
 class TabJsonAdapter {
     @FromJson
-    fun fromJson(tabString: String?): Tab {
-        return tabString?.let { Tab.valueOf(it) } ?: Tab.UNKNOWN
+    fun fromJson(tabString: String): Tab {
+        return Tab.valueOf(tabString.uppercase())
     }
 
     @ToJson
