@@ -4,12 +4,23 @@
         <item name="colorPrimary">@color/app_primary</item>
         <item name="colorAccent">@color/app_accent</item>
         <item name="android:colorControlActivated">@color/app_accent</item>
-        <item name="android:colorBackground">@color/background_light</item>
+        <item name="android:windowBackground">@color/background_light</item>
         <item name="colorSurface">@color/surface_light</item>
         <item name="android:listDivider">@color/divider_on_light</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="Base.Theme.App.Dialog" parent="Theme.Material3.Light.Dialog">
+        <item name="colorAccent">@color/app_accent</item>
+    </style>
+
     <style name="Theme.App" parent="Base.Theme.App" />
+
+    <style name="Theme.App.Dialog" parent="Base.Theme.App.Dialog" />
+
+    <style name="Theme.App.Dialog.Loading">
+        <item name="windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

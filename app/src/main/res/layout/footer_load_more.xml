@@ -13,7 +13,6 @@
         android:layout_height="32dp"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:indeterminateTint="?attr/colorAccent"
         android:visibility="invisible"
         tools:visibility="visible" />
 
