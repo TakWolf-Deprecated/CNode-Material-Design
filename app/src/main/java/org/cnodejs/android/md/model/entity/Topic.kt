@@ -2,7 +2,7 @@ package org.cnodejs.android.md.model.entity
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import org.cnodejs.android.md.util.HtmlUtils
+import org.cnodejs.android.md.util.FormatUtils
 import java.time.OffsetDateTime
 import java.util.stream.Collectors
 
@@ -33,7 +33,7 @@ data class TopicWithSummary(val topic: Topic) {
         }
     }
 
-    val summary = HtmlUtils.getText(topic.content)
+    val summary = FormatUtils.getHtmlSummary(topic.content)
 }
 
 @JsonClass(generateAdapter = true)
