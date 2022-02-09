@@ -6,9 +6,12 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import org.cnodejs.android.md.bus.AccountChangedEvent
+import org.cnodejs.android.md.bus.AccountUpdatedEvent
 import org.cnodejs.android.md.model.entity.Account
 import org.cnodejs.android.md.model.entity.LoginResult
 import org.cnodejs.android.md.model.entity.User
+import org.greenrobot.eventbus.EventBus
 
 class AccountStore(application: Application) : DataStoreWrapper(application, "account") {
     companion object {
@@ -27,12 +30,14 @@ class AccountStore(application: Application) : DataStoreWrapper(application, "ac
             mutablePreferences[KEY_AVATAR_URL] = loginResult.avatarUrl
             mutablePreferences[KEY_SCORE] = 0
         }
-        Account(
+        val account = Account(
             id = loginResult.id,
             loginName = loginResult.loginName,
             avatarUrl = loginResult.avatarUrl,
-            score = 0
+            score = 0,
         )
+        EventBus.getDefault().post(AccountChangedEvent(account))
+        account
     }
 
     fun update(user: User): Account? = runBlocking {
@@ -44,12 +49,14 @@ class AccountStore(application: Application) : DataStoreWrapper(application, "ac
                 mutablePreferences[KEY_AVATAR_URL] = user.avatarUrl
                 mutablePreferences[KEY_SCORE] = user.score
             }
-            Account(
+            val account = Account(
                 id = dataStore.data.first()[KEY_ID] ?: "",
                 loginName = user.loginName,
                 avatarUrl = user.avatarUrl,
                 score = user.score,
             )
+            EventBus.getDefault().post(AccountUpdatedEvent(account))
+            account
         }
     }
 
@@ -75,5 +82,6 @@ class AccountStore(application: Application) : DataStoreWrapper(application, "ac
         dataStore.edit { mutablePreferences ->
             mutablePreferences.clear()
         }
+        EventBus.getDefault().post(AccountChangedEvent(null))
     }
 }
