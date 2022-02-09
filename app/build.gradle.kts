@@ -14,7 +14,7 @@ android {
         versionCode = 1
         versionName = "2.0.0"
 
-        buildConfigField("String", "API_BASE_URL", "\"https://cnodejs.org/api/v1/\"")
+        buildConfigField("String", "HOST_BASE_URL", "\"https://cnodejs.org\"")
         buildConfigField("String", "USER_AGENT_NAME", "\"CNodeMD\"")
     }
 
