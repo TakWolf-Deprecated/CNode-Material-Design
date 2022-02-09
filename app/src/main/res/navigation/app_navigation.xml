@@ -11,4 +11,7 @@
     <fragment
         android:id="@+id/fragment_user_detail"
         android:name="org.cnodejs.android.md.ui.fragment.UserDetailFragment" />
+    <fragment
+        android:id="@+id/fragment_topic_detail"
+        android:name="org.cnodejs.android.md.ui.fragment.TopicDetailFragment" />
 </navigation>
