@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentTopicDetailBinding
 import org.cnodejs.android.md.model.entity.ITopic
 import org.cnodejs.android.md.util.NavUtils
+import org.cnodejs.android.md.vm.TopicDetailViewModel
 
-class TopicDetailFragment : Fragment() {
+class TopicDetailFragment : BaseFragment() {
     companion object {
         private const val KEY_TOPIC_ID = "topic_id"
 
@@ -32,7 +34,8 @@ class TopicDetailFragment : Fragment() {
     ): View {
         val binding = FragmentTopicDetailBinding.inflate(inflater, container, false)
 
-        // TODO
+        val topicDetailViewModel: TopicDetailViewModel by viewModels()
+        observeBaseLiveHolder(topicDetailViewModel.baseLiveHolder)
 
         return binding.root
     }

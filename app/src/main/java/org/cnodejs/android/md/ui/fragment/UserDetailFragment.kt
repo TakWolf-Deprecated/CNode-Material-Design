@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentUserDetailBinding
 import org.cnodejs.android.md.model.entity.IUser
 import org.cnodejs.android.md.util.NavUtils
+import org.cnodejs.android.md.vm.UserDetailViewModel
 
-class UserDetailFragment : Fragment() {
+class UserDetailFragment : BaseFragment() {
     companion object {
         private const val KEY_LOGIN_NAME = "login_name"
         private const val KEY_AVATAR_URL = "avatar_url"
@@ -37,7 +39,8 @@ class UserDetailFragment : Fragment() {
     ): View {
         val binding = FragmentUserDetailBinding.inflate(inflater, container, false)
 
-        // TODO
+        val userDetailViewModel: UserDetailViewModel by viewModels()
+        observeBaseLiveHolder(userDetailViewModel.baseLiveHolder)
 
         return binding.root
     }

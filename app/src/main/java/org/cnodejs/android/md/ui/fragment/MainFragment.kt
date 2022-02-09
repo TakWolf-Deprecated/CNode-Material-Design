@@ -16,6 +16,8 @@ import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMainBinding
 import org.cnodejs.android.md.ui.adapter.TopicListAdapter
 import org.cnodejs.android.md.ui.holder.LoadMoreFooter
+import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
+import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
 import org.cnodejs.android.md.util.OnDoubleClickListener
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MainViewModel
@@ -88,6 +90,8 @@ class MainFragment : BaseFragment() {
         binding.contentLayout.recyclerView.layoutManager = LinearLayoutManager(context)
         val loadMoreFooter = LoadMoreFooter.create(binding.contentLayout.recyclerView)
         val adapter = TopicListAdapter()
+        adapter.onTopicClickListener = TopicDetailNavigateListener(this)
+        adapter.onUserClickListener = UserDetailNavigateListener(this)
         mainViewModel.topicPagingLiveHolder.setupView(viewLifecycleOwner, adapter, binding.contentLayout.refreshLayout, loadMoreFooter)
         loadMoreFooter.addToRecyclerView(binding.contentLayout.recyclerView)
         binding.contentLayout.recyclerView.adapter = adapter
