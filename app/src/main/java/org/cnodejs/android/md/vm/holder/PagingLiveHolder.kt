@@ -1,13 +1,12 @@
-package org.cnodejs.android.md.vm
+package org.cnodejs.android.md.vm.holder
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-abstract class PagingViewModel<Entity, PagingParams>(application: Application) : ListViewModel<Entity>(application) {
+abstract class PagingLiveHolder<Entity, PagingParams>(private val viewModelScope: CoroutineScope) : ListLiveHolder<Entity>() {
     val refreshStateData = MutableLiveData(false)
     val loadMoreStateData = MutableLiveData(LoadMoreFooter.STATE_DISABLED)
     private var isRefreshDoing = false
@@ -31,9 +30,9 @@ abstract class PagingViewModel<Entity, PagingParams>(application: Application) :
     protected fun refreshSuccess(entities: List<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
         viewModelScope.launch(Dispatchers.Main) {
             version += 1
-            entitiesData.value = ArrayList(entities)
-            this@PagingViewModel.pagingParams = pagingParams
-            this@PagingViewModel.isFinished = isFinished
+            setList(entities)
+            this@PagingLiveHolder.pagingParams = pagingParams
+            this@PagingLiveHolder.isFinished = isFinished
             isRefreshDoing = false
             refreshStateData.value = false
             isLoadMoreDoing = false
@@ -63,12 +62,9 @@ abstract class PagingViewModel<Entity, PagingParams>(application: Application) :
     protected fun loadMoreSuccess(version: Int, addedEntities: List<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
         if (this.version == version) {
             viewModelScope.launch(Dispatchers.Main) {
-                entitiesData.value?.let { entities ->
-                    entities.addAll(addedEntities)
-                    entitiesData.value = entities
-                }
-                this@PagingViewModel.pagingParams = pagingParams
-                this@PagingViewModel.isFinished = isFinished
+                appendList(addedEntities)
+                this@PagingLiveHolder.pagingParams = pagingParams
+                this@PagingLiveHolder.isFinished = isFinished
                 isLoadMoreDoing = false
                 loadMoreStateData.value = if (isFinished) LoadMoreFooter.STATE_FINISHED else LoadMoreFooter.STATE_ENDLESS
             }
