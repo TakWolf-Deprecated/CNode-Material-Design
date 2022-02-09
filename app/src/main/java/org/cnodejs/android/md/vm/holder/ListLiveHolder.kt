@@ -1,6 +1,8 @@
 package org.cnodejs.android.md.vm.holder
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.ListAdapter
 
 abstract class ListLiveHolder<Entity> {
     val entitiesData: MutableLiveData<MutableList<Entity>?> = MutableLiveData()
@@ -21,5 +23,14 @@ abstract class ListLiveHolder<Entity> {
 
     fun clearList() {
         entitiesData.value = null
+    }
+}
+
+fun <Entity> ListLiveHolder<Entity>.setupView(
+    viewLifecycleOwner: LifecycleOwner,
+    adapter: ListAdapter<Entity, *>,
+) {
+    entitiesData.observe(viewLifecycleOwner) {
+        adapter.submitList(it?.let { entities -> ArrayList(entities) } ?: ArrayList())
     }
 }
