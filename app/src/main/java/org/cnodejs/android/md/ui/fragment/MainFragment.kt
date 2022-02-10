@@ -114,12 +114,16 @@ class MainFragment : BaseFragment() {
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val secondBackPressedTime = System.currentTimeMillis()
-                if (secondBackPressedTime - mainViewModel.firstBackPressedTime > 2000) {
-                    showToast(getString(R.string.press_back_again_to_exit))
-                    mainViewModel.firstBackPressedTime = secondBackPressedTime
+                if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
                 } else {
-                    requireActivity().finish()
+                    val secondBackPressedTime = System.currentTimeMillis()
+                    if (secondBackPressedTime - mainViewModel.firstBackPressedTime > 2000) {
+                        mainViewModel.firstBackPressedTime = secondBackPressedTime
+                        showToast(getString(R.string.press_back_again_to_exit))
+                    } else {
+                        requireActivity().finish()
+                    }
                 }
             }
         })
