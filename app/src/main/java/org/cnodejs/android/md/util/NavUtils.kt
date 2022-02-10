@@ -78,7 +78,7 @@ object NavUtils {
         fragment.findNavController().navigateUp()
     }
 
-    fun backTo(fragment: Fragment, @IdRes destId: Int, inclusive: Boolean = false) {
-        fragment.findNavController().popBackStack(destId, inclusive)
+    fun backTo(fragment: Fragment, @IdRes destId: Int, isPopDest: Boolean = false) {
+        fragment.findNavController().popBackStack(destId, isPopDest)
     }
 }
