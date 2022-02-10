@@ -22,9 +22,7 @@ import org.cnodejs.android.md.ui.adapter.TopicListAdapter
 import org.cnodejs.android.md.ui.dialog.LogoutAlertDialog
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
 import org.cnodejs.android.md.ui.holder.LoadMoreFooter
-import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
-import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
-import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
+import org.cnodejs.android.md.ui.listener.*
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MainViewModel
 import org.cnodejs.android.md.vm.SettingViewModel
@@ -121,6 +119,15 @@ class MainFragment : BaseFragment() {
         mainViewModel.topicPagingLiveHolder.setupView(viewLifecycleOwner, adapter, binding.contentLayout.refreshLayout, loadMoreFooter)
         loadMoreFooter.addToRecyclerView(binding.contentLayout.recyclerView)
         binding.contentLayout.recyclerView.adapter = adapter
+
+        binding.contentLayout.btnCreateTopic.setOnClickListener {
+            if (accountViewModel.isLogined()) {
+                // TODO
+            } else {
+                NeedLoginAlertDialog().show(childFragmentManager, null)
+            }
+        }
+        binding.contentLayout.btnCreateTopic.listenToRecyclerView(binding.contentLayout.recyclerView)
 
         val onNavMyInfoClickListener = View.OnClickListener {
             accountViewModel.accountData.value?.also { account ->
