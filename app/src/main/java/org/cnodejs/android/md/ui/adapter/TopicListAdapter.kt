@@ -59,7 +59,7 @@ class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHold
             binding.tvReplyTime.text = resources.getString(R.string.reply_at_s, FormatUtils.getRelativeTimeSpanString(resources, topic.lastReplyAt))
             binding.tvTitle.text = topic.title
             binding.tvSummary.text = topicWithSummary.summary
-            binding.imgAuthor.load(topic.author.getCompatAvatarUrl()) {
+            binding.imgAuthor.load(topic.author.avatarUrlCompat) {
                 placeholder(R.drawable.image_placeholder)
             }
             binding.imgAuthor.transitionName = "img_avatar_${bindingAdapterPosition}"

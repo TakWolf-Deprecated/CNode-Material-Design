@@ -56,7 +56,7 @@ class MainFragment : BaseFragment() {
 
         accountViewModel.accountData.observe(viewLifecycleOwner) {
             it?.also { account ->
-                binding.navLayout.imgAvatar.load(account.getCompatAvatarUrl()) {
+                binding.navLayout.imgAvatar.load(account.avatarUrlCompat) {
                     placeholder(R.drawable.image_placeholder)
                 }
                 binding.navLayout.tvLoginName.text = account.loginName
