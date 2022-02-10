@@ -16,6 +16,13 @@
         app:isw_insetsType="statusBars"
         tools:layout_height="24dp" />
 
+    <com.takwolf.android.insetswidget.InsetsSpace
+        android:id="@+id/navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:isw_insetsType="navigationBars" />
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -43,5 +50,17 @@
             android:scrollbars="vertical" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_create_topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/create_topic"
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_create_24"
+        app:tint="@android:color/white"
+        app:backgroundTint="?attr/colorAccent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
