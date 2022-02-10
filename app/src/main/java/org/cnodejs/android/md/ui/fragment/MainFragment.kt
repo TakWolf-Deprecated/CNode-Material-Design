@@ -22,9 +22,9 @@ import org.cnodejs.android.md.ui.adapter.TopicListAdapter
 import org.cnodejs.android.md.ui.dialog.LogoutAlertDialog
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
 import org.cnodejs.android.md.ui.holder.LoadMoreFooter
+import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
 import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
-import org.cnodejs.android.md.util.OnDoubleClickListener
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MainViewModel
 import org.cnodejs.android.md.vm.SettingViewModel
@@ -106,7 +106,7 @@ class MainFragment : BaseFragment() {
         binding.contentLayout.toolbar.setNavigationOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
-        binding.contentLayout.toolbar.setOnClickListener(object : OnDoubleClickListener(400) {
+        binding.contentLayout.toolbar.setOnClickListener(object : OnDoubleClickListener() {
             override fun onDoubleClick(v: View) {
                 binding.contentLayout.recyclerView.scrollToPosition(0)
             }
