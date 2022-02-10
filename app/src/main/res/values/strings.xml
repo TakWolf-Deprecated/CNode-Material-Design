@@ -15,13 +15,17 @@
     <string name="setting">设置</string>
     <string name="about">关于</string>
 
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="ok">好的</string>
+    <string name="go_on">继续</string>
     <string name="press_back_again_to_exit">再按一次退出</string>
-    <string name="click_avatar_to_login">点击头像登录</string>
     <string name="load_more_finished">已经到底啦</string>
     <string name="load_more_failed">加载失败，点击重试</string>
 
     <string name="login">登录</string>
     <string name="logout">注销</string>
+    <string name="click_avatar_to_login">点击头像登录</string>
     <string name="need_login_tip">该操作需要登录账户。是否现在登录？</string>
     <string name="access_token">AccessToken</string>
     <string name="login_by_qr_code">扫码登录</string>
@@ -29,6 +33,8 @@
     <string name="_how_to_get_access_token_"><u>如何获取 AccessToken ？</u></string>
     <string name="login_success">登录成功</string>
     <string name="logout_tip">确定要注销吗？</string>
+    <string name="access_token_out_of_date">AccessToken 已经失效，您需要重新登录账户。</string>
+    <string name="re_login">重新登录</string>
 
     <string name="d_days_ago">%d 天前</string>
     <string name="d_hours_ago">%d 小时前</string>
