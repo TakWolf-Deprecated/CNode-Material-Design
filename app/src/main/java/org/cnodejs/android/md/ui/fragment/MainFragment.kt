@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMainBinding
+import org.cnodejs.android.md.model.entity.Tab
 import org.cnodejs.android.md.ui.adapter.TopicListAdapter
 import org.cnodejs.android.md.ui.holder.LoadMoreFooter
 import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
@@ -33,6 +34,15 @@ class MainFragment : BaseFragment() {
         savedInstanceState: Bundle?,
     ): View {
         val binding = FragmentMainBinding.inflate(inflater, container, false)
+
+        val tabViews = arrayOf(
+            binding.navLayout.tabAll,
+            binding.navLayout.tabGood,
+            binding.navLayout.tabShare,
+            binding.navLayout.tabAsk,
+            binding.navLayout.tabJob,
+            binding.navLayout.tabDev,
+        )
 
         val accountViewModel: AccountViewModel by activityViewModels()
         val settingViewModel: SettingViewModel by activityViewModels()
@@ -72,7 +82,12 @@ class MainFragment : BaseFragment() {
         }
 
         mainViewModel.topicPagingLiveHolder.tabData.observe(viewLifecycleOwner) {
-            // TODO
+            it?.let { tab ->
+                binding.contentLayout.toolbar.setTitle(tab.titleId)
+                for (tabView in tabViews) {
+                    tabView.isChecked = tabView.id == tab.tabId
+                }
+            }
         }
 
         binding.drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
@@ -111,6 +126,30 @@ class MainFragment : BaseFragment() {
 
         binding.navLayout.btnDayNight.setOnClickListener {
             settingViewModel.toggleNightMode()
+        }
+
+        binding.navLayout.btnLogout.setOnClickListener {
+            // TODO
+        }
+
+        val onNavTabClickListener = View.OnClickListener { v: View ->
+            mainViewModel.topicPagingLiveHolder.switchTab(Tab.fromTabId(v.id))
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        for (tabView in tabViews) {
+            tabView.setOnClickListener(onNavTabClickListener)
+        }
+
+        binding.navLayout.btnMessage.setOnClickListener {
+            // TODO
+        }
+
+        binding.navLayout.btnSetting.setOnClickListener {
+            // TODO
+        }
+
+        binding.navLayout.btnAbout.setOnClickListener {
+            // TODO
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {

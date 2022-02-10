@@ -40,7 +40,7 @@ class TopicPagingLiveHolder(
 
     override suspend fun doRefresh(version: Int) {
         try {
-            val result = CNodeClient.api.getTopics(tab = getTab().queryValue, mdrender = true)
+            val result = CNodeClient.api.getTopics(getTab().queryValue, mdrender = true)
             val topics = TopicWithSummary.fromList(result.data)
             refreshSuccess(version, topics, 1, topics.isEmpty())
         } catch (e: Exception) {
@@ -55,7 +55,7 @@ class TopicPagingLiveHolder(
     override suspend fun doLoadMore(version: Int, pagingParams: Int) {
         try {
             val nextPage = pagingParams + 1
-            val result = CNodeClient.api.getTopics(page = nextPage, mdrender = true)
+            val result = CNodeClient.api.getTopics(getTab().queryValue, nextPage, mdrender = true)
             val topics = TopicWithSummary.fromList(result.data)
             loadMoreSuccess(version, topics, nextPage, topics.isEmpty())
         } catch (e: Exception) {

@@ -116,7 +116,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <org.cnodejs.android.md.ui.widget.NavigationItem
-            android:id="@+id/btn_tab_all"
+            android:id="@+id/tab_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
@@ -125,7 +125,7 @@
             tools:checked="true" />
 
         <org.cnodejs.android.md.ui.widget.NavigationItem
-            android:id="@+id/btn_tab_good"
+            android:id="@+id/tab_good"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
@@ -133,7 +133,7 @@
             app:title="@string/tab_good" />
 
         <org.cnodejs.android.md.ui.widget.NavigationItem
-            android:id="@+id/btn_tab_share"
+            android:id="@+id/tab_share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
@@ -141,7 +141,7 @@
             app:title="@string/tab_share" />
 
         <org.cnodejs.android.md.ui.widget.NavigationItem
-            android:id="@+id/btn_tab_ask"
+            android:id="@+id/tab_ask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
@@ -149,7 +149,7 @@
             app:title="@string/tab_ask" />
 
         <org.cnodejs.android.md.ui.widget.NavigationItem
-            android:id="@+id/btn_tab_job"
+            android:id="@+id/tab_job"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
@@ -157,7 +157,7 @@
             app:title="@string/tab_job" />
 
         <org.cnodejs.android.md.ui.widget.NavigationItem
-            android:id="@+id/btn_tab_dev"
+            android:id="@+id/tab_dev"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
@@ -177,7 +177,7 @@
             android:foreground="?attr/selectableItemBackground"
             app:icon="@drawable/baseline_notifications_24"
             app:title="@string/message"
-            app:badge="100" />
+            tools:badge="100" />
 
         <org.cnodejs.android.md.ui.widget.NavigationItem
             android:id="@+id/btn_setting"

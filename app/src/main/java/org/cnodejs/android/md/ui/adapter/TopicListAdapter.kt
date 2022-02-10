@@ -3,7 +3,6 @@ package org.cnodejs.android.md.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -58,7 +57,7 @@ class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHold
             } else {
                 binding.tvTop.visibility = View.GONE
                 binding.tvTab.visibility = View.VISIBLE
-                binding.tvTab.setText(topic.tab.titleResId)
+                binding.tvTab.setText(topic.tab.titleId)
             }
             binding.tvReplyAndVisitCount.text = resources.getString(R.string.d_reply_d_visit, topic.replyCount, topic.visitCount)
             binding.tvReplyTime.text = resources.getString(R.string.reply_at_s, FormatUtils.getRelativeTimeSpanString(resources, topic.lastReplyAt))
