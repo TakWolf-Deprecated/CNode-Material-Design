@@ -37,8 +37,4 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     fun isLogined(): Boolean {
         return accountData.value != null
     }
-
-    fun logout() {
-        accountStore.logout()
-    }
 }
