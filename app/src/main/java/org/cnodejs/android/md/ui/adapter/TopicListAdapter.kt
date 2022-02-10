@@ -30,7 +30,7 @@ class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHold
     class ViewHolder(private val binding: ItemTopicBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.layoutContent.setOnClickListener {
-                (bindingAdapter as TopicListAdapter?)?.let { adapter ->
+                (bindingAdapter as? TopicListAdapter)?.let { adapter ->
                     adapter.onTopicClickListener?.let { listener ->
                         val topic = adapter.getItem(bindingAdapterPosition).topic
                         listener.onTopicClick(topic)
@@ -39,7 +39,7 @@ class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHold
             }
 
             binding.layoutAuthor.setOnClickListener {
-                (bindingAdapter as TopicListAdapter?)?.let { adapter ->
+                (bindingAdapter as? TopicListAdapter)?.let { adapter ->
                     adapter.onUserClickListener?.let { listener ->
                         val author = adapter.getItem(bindingAdapterPosition).topic.author
                         listener.onUserClick(author, binding.imgAuthor)
