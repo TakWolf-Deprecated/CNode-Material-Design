@@ -6,6 +6,7 @@ import org.jsoup.Jsoup
 import java.time.Duration
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 object FormatUtils {
     private const val MINUTE = 60 * 1000L
@@ -36,6 +37,10 @@ object FormatUtils {
         }
     }
 
+    fun getHtmlSummary(html: String): String {
+        return Jsoup.parseBodyFragment(html).body().text().trim()
+    }
+
     fun getCompatAvatarUrl(url: String?): String? {
         return url?.let {
             if (it.startsWith("//gravatar.com/avatar/")) {
@@ -46,7 +51,12 @@ object FormatUtils {
         }
     }
 
-    fun getHtmlSummary(html: String): String {
-        return Jsoup.parseBodyFragment(html).body().text().trim()
+    fun isAccessToken(accessToken: String): Boolean {
+        return try {
+            UUID.fromString(accessToken)
+            true
+        } catch (_: Exception) {
+            false
+        }
     }
 }
