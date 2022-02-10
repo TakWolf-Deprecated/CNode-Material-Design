@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorInt
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -32,14 +33,14 @@ class MainFragment : BaseFragment() {
     ): View {
         val binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        val a = requireContext().obtainStyledAttributes(intArrayOf(android.R.attr.colorAccent))
-        @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)
-        a.recycle()
-
         val accountViewModel: AccountViewModel by activityViewModels()
         val settingViewModel: SettingViewModel by activityViewModels()
         val mainViewModel: MainViewModel by viewModels()
         observeBaseLiveHolder(mainViewModel.baseLiveHolder)
+
+        val a = requireContext().obtainStyledAttributes(intArrayOf(android.R.attr.colorAccent))
+        @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)
+        a.recycle()
 
         accountViewModel.accountData.observe(viewLifecycleOwner) {
             it?.also { account ->
@@ -110,6 +111,18 @@ class MainFragment : BaseFragment() {
         binding.navLayout.btnDayNight.setOnClickListener {
             settingViewModel.toggleNightMode()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val secondBackPressedTime = System.currentTimeMillis()
+                if (secondBackPressedTime - mainViewModel.firstBackPressedTime > 2000) {
+                    showToast(getString(R.string.press_back_again_to_exit))
+                    mainViewModel.firstBackPressedTime = secondBackPressedTime
+                } else {
+                    requireActivity().finish()
+                }
+            }
+        })
 
         return binding.root
     }

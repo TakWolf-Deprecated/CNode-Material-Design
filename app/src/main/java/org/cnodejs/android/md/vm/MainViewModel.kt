@@ -9,4 +9,6 @@ import org.cnodejs.android.md.vm.holder.TopicPagingLiveHolder
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     val baseLiveHolder = BaseLiveHolder()
     val topicPagingLiveHolder = TopicPagingLiveHolder(viewModelScope, baseLiveHolder)
+
+    var firstBackPressedTime = 0L
 }
