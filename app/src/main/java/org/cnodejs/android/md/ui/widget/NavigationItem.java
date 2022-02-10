@@ -3,6 +3,7 @@ package org.cnodejs.android.md.ui.widget;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.Checkable;
 import android.widget.FrameLayout;
 
 import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
@@ -23,6 +25,8 @@ public class NavigationItem extends FrameLayout implements Checkable {
 
     private ColorStateList contentColorNormal;
     private ColorStateList contentColorChecked;
+    @ColorInt
+    private int backgroundColorChecked;
 
     private boolean checked;
 
@@ -55,6 +59,7 @@ public class NavigationItem extends FrameLayout implements Checkable {
         });
         contentColorNormal = a.getColorStateList(0);
         contentColorChecked = a.getColorStateList(1);
+        backgroundColorChecked = contentColorNormal.withAlpha(24).getDefaultColor();
         a.recycle();
 
         a = context.obtainStyledAttributes(attrs, R.styleable.NavigationItem, defStyleAttr, defStyleRes);
@@ -72,10 +77,12 @@ public class NavigationItem extends FrameLayout implements Checkable {
             binding.imgIcon.setImageTintList(contentColorChecked);
             binding.tvTitle.setTextColor(contentColorChecked);
             binding.tvBadge.setTextColor(contentColorChecked);
+            binding.getRoot().setBackgroundColor(backgroundColorChecked);
         } else {
             binding.imgIcon.setImageTintList(contentColorNormal);
             binding.tvTitle.setTextColor(contentColorNormal);
             binding.tvBadge.setTextColor(contentColorNormal);
+            binding.getRoot().setBackground(null);
         }
     }
 
