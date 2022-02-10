@@ -1,16 +1,14 @@
 package org.cnodejs.android.md.ui.fragment
 
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import org.cnodejs.android.md.ui.dialog.LoadingDialog
+import org.cnodejs.android.md.ui.dialog.LoadingDialogFragment
 import org.cnodejs.android.md.vm.holder.BaseLiveHolder
 
 abstract class BaseFragment : Fragment() {
-    private var loadingDialog: LoadingDialog? = null
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        setLoadingVisible(false)
+    companion object {
+        private const val TAG_LOADING = "loading"
     }
 
     protected fun showToast(message: String) {
@@ -19,12 +17,11 @@ abstract class BaseFragment : Fragment() {
 
     private fun setLoadingVisible(visible: Boolean) {
         if (visible) {
-            loadingDialog ?: LoadingDialog(requireContext()).also { loadingDialog = it }.show()
-        } else {
-            loadingDialog?.apply {
-                dismiss()
-                loadingDialog = null
+            childFragmentManager.findFragmentByTag(TAG_LOADING) ?: run {
+                LoadingDialogFragment().show(childFragmentManager, TAG_LOADING)
             }
+        } else {
+            (childFragmentManager.findFragmentByTag(TAG_LOADING) as? DialogFragment)?.dismiss()
         }
     }
 
