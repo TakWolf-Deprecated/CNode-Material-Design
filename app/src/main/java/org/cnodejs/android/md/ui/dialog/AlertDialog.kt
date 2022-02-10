@@ -23,6 +23,7 @@ class NeedLoginAlertDialog : DialogFragment() {
 class HowToGetAccessTokenTipAlertDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext(), R.style.Theme_App_Dialog_Alert)
+            .setTitle(R.string.how_to_get_access_token)
             .setMessage(R.string.how_to_get_access_token_tip_content)
             .setPositiveButton(R.string.ok, null)
             .create()
