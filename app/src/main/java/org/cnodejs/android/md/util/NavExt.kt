@@ -39,7 +39,7 @@ enum class NavAnim(
 fun Fragment.navPush(
     @IdRes destId: Int,
     args: Bundle? = null,
-    anim: NavAnim = NavAnim.SLIDE,
+    anim: NavAnim = NavAnim.FADE,
     extras: FragmentNavigator.Extras? = null,
     isSingleTop: Boolean = false,
 ) {
