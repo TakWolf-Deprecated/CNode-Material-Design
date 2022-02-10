@@ -41,7 +41,7 @@ class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHold
                 (bindingAdapter as TopicListAdapter?)?.let { adapter ->
                     adapter.onUserClickListener?.let { listener ->
                         val author = adapter.getItem(bindingAdapterPosition).topic.author
-                        listener.onUserClick(author)
+                        listener.onUserClick(author, binding.imgAuthor)
                     }
                 }
             }

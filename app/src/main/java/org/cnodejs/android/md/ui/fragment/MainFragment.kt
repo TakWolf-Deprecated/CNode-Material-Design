@@ -99,7 +99,7 @@ class MainFragment : BaseFragment() {
 
         val onNavMyInfoClickListener = View.OnClickListener {
             accountViewModel.accountData.value?.also { account ->
-                UserDetailFragment.open(this, account)
+                UserDetailFragment.open(this, account, binding.navLayout.imgAvatar)
             } ?: run {
                 LoginFragment.open(this)
             }
