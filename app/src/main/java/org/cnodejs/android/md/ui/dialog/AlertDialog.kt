@@ -8,18 +8,6 @@ import org.cnodejs.android.md.R
 import org.cnodejs.android.md.model.store.AppStoreHolder
 import org.cnodejs.android.md.ui.fragment.LoginFragment
 
-class AuthInvalidAlertDialog : DialogFragment() {
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireContext(), R.style.Theme_App_Dialog_Alert)
-            .setMessage(R.string.access_token_out_of_date)
-            .setPositiveButton(R.string.re_login) { _, _ ->
-                LoginFragment.open(this)
-            }
-            .setNegativeButton(R.string.cancel, null)
-            .create()
-    }
-}
-
 class NeedLoginAlertDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext(), R.style.Theme_App_Dialog_Alert)
@@ -32,6 +20,15 @@ class NeedLoginAlertDialog : DialogFragment() {
     }
 }
 
+class HowToGetAccessTokenTipAlertDialog : DialogFragment() {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return AlertDialog.Builder(requireContext(), R.style.Theme_App_Dialog_Alert)
+            .setMessage(R.string.how_to_get_access_token_tip_content)
+            .setPositiveButton(R.string.ok, null)
+            .create()
+    }
+}
+
 class LogoutAlertDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext(), R.style.Theme_App_Dialog_Alert)
@@ -39,6 +36,18 @@ class LogoutAlertDialog : DialogFragment() {
             .setPositiveButton(R.string.logout) { _, _ ->
                 val accountStore = AppStoreHolder.getInstance(requireActivity().application).accountStore
                 accountStore.logout()
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .create()
+    }
+}
+
+class AuthInvalidAlertDialog : DialogFragment() {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return AlertDialog.Builder(requireContext(), R.style.Theme_App_Dialog_Alert)
+            .setMessage(R.string.access_token_out_of_date)
+            .setPositiveButton(R.string.re_login) { _, _ ->
+                LoginFragment.open(this)
             }
             .setNegativeButton(R.string.cancel, null)
             .create()
