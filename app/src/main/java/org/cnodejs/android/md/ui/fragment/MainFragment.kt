@@ -19,6 +19,8 @@ import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMainBinding
 import org.cnodejs.android.md.model.entity.Tab
 import org.cnodejs.android.md.ui.adapter.TopicListAdapter
+import org.cnodejs.android.md.ui.dialog.LogoutAlertDialog
+import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
 import org.cnodejs.android.md.ui.holder.LoadMoreFooter
 import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
@@ -136,7 +138,7 @@ class MainFragment : BaseFragment() {
         }
 
         binding.navLayout.btnLogout.setOnClickListener {
-            // TODO
+            LogoutAlertDialog().show(childFragmentManager, null)
         }
 
         val onNavTabClickListener = View.OnClickListener { v: View ->
@@ -148,7 +150,11 @@ class MainFragment : BaseFragment() {
         }
 
         binding.navLayout.btnMessage.setOnClickListener {
-            // TODO
+            if (accountViewModel.isLogined()) {
+                MessageListFragment.open(this)
+            } else {
+                NeedLoginAlertDialog().show(childFragmentManager, null)
+            }
         }
 
         binding.navLayout.btnSetting.setOnClickListener {
