@@ -35,6 +35,8 @@
     <string name="d_minutes_ago">%d 分钟前</string>
     <string name="just_now">刚刚</string>
 
+    <string name="navigation_badge_count_max">99+</string>
+
     <string name="score_d">积分：%d</string>
     <string name="d_reply_d_visit">%d 评论 / %d 阅读</string>
     <string name="reply_at_s">新评论：%s</string>

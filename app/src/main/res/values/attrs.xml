@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NavigationItem">
+        <attr name="icon" format="reference" />
+        <attr name="title" format="string" />
+        <attr name="badge" format="integer" />
+        <attr name="android:checked" />
+    </declare-styleable>
+</resources>
