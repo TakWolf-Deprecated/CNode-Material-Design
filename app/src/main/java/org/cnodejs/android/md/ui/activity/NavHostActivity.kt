@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.bus.AuthInvalidEvent
+import org.cnodejs.android.md.ui.dialog.AuthInvalidAlertDialog
 import org.cnodejs.android.md.vm.SettingViewModel
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -31,6 +32,6 @@ class NavHostActivity : AppCompatActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onAuthInvalid(event: AuthInvalidEvent) {
-        // TODO
+        AuthInvalidAlertDialog().show(supportFragmentManager, null)
     }
 }

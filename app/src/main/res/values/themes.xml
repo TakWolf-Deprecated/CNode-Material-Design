@@ -20,6 +20,8 @@
 
     <style name="Theme.App.Dialog" parent="Base.Theme.App.Dialog" />
 
+    <style name="Theme.App.Dialog.Alert" />
+
     <style name="Theme.App.Dialog.Loading">
         <item name="windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">false</item>
