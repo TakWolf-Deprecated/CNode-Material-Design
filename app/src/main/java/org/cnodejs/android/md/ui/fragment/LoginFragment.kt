@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentLoginBinding
+import org.cnodejs.android.md.ui.listener.NavBackOnClickListener
+import org.cnodejs.android.md.util.FormatUtils
 import org.cnodejs.android.md.util.navBack
 import org.cnodejs.android.md.util.navPush
 import org.cnodejs.android.md.vm.LoginViewModel
@@ -29,12 +31,30 @@ class LoginFragment : BaseFragment() {
         val loginViewModel: LoginViewModel by viewModels()
         observeBaseLiveHolder(loginViewModel.baseLiveHolder)
 
-        binding.toolbar.setNavigationOnClickListener {
+        loginViewModel.loginedEvent.observe(viewLifecycleOwner) {
+            showToast(R.string.login_success)
             navBack()
         }
 
+        loginViewModel.errorMessageEvent.observe(viewLifecycleOwner) {
+            it?.let { message ->
+                binding.edtLayoutAccessToken.error = message
+            }
+        }
+
+        binding.toolbar.setNavigationOnClickListener(NavBackOnClickListener(this))
+
         binding.btnLogin.setOnClickListener {
-            // TODO
+            val accessToken = (binding.edtAccessToken.text ?: "").trim().toString()
+            if (accessToken.isBlank()) {
+                binding.edtLayoutAccessToken.error = getString(R.string.please_input_access_token)
+                return@setOnClickListener
+            }
+            if (!FormatUtils.isAccessToken(accessToken)) {
+                binding.edtLayoutAccessToken.error = getString(R.string.access_token_format_error)
+                return@setOnClickListener
+            }
+            loginViewModel.login(accessToken)
         }
 
         binding.btnLoginByQrCode.setOnClickListener {

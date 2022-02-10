@@ -30,7 +30,10 @@
     <string name="access_token">AccessToken</string>
     <string name="login_by_qr_code">扫码登录</string>
     <string name="login_by_github">GitHub 登录</string>
+    <string name="please_input_access_token">请输入 AccessToken</string>
+    <string name="access_token_format_error">AccessToken 格式错误</string>
     <string name="_how_to_get_access_token_"><u>如何获取 AccessToken ？</u></string>
+    <string name="how_to_get_access_token_tip_content">在 CNode 社区网站端登录你的账户，然后在右上角找到「设置」按钮，点击进入后将页面滑动到最底部来查看你的 AccessToken 。</string>
     <string name="login_success">登录成功</string>
     <string name="logout_tip">确定要注销吗？</string>
     <string name="access_token_out_of_date">AccessToken 已经失效，您需要重新登录账户。</string>
