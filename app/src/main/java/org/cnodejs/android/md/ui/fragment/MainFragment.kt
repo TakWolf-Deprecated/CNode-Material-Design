@@ -122,7 +122,7 @@ class MainFragment : BaseFragment() {
 
         binding.contentLayout.btnCreateTopic.setOnClickListener {
             if (accountViewModel.isLogined()) {
-                // TODO
+                CreateTopicFragment.open(this)
             } else {
                 NeedLoginAlertDialog().show(childFragmentManager, null)
             }

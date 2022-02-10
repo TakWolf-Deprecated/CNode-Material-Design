@@ -15,6 +15,9 @@
         android:id="@+id/fragment_topic_detail"
         android:name="org.cnodejs.android.md.ui.fragment.TopicDetailFragment" />
     <fragment
+        android:id="@+id/fragment_create_topic"
+        android:name="org.cnodejs.android.md.ui.fragment.CreateTopicFragment" />
+    <fragment
         android:id="@+id/fragment_message_list"
         android:name="org.cnodejs.android.md.ui.fragment.MessageListFragment" />
     <fragment
