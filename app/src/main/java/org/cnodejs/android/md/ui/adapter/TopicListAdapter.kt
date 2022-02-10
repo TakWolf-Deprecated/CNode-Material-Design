@@ -3,6 +3,7 @@ package org.cnodejs.android.md.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -66,6 +67,7 @@ class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHold
             binding.imgAuthor.load(topic.author.getCompatAvatarUrl()) {
                 placeholder(R.drawable.image_placeholder)
             }
+            binding.imgAuthor.transitionName = "img_avatar_${bindingAdapterPosition}"
             binding.tvAuthor.text = topic.author.loginName
             binding.tvCreateTime.text = resources.getString(R.string.create_at_s, FormatUtils.getRelativeTimeSpanString(resources, topic.createAt))
         }
