@@ -14,4 +14,13 @@
     <fragment
         android:id="@+id/fragment_topic_detail"
         android:name="org.cnodejs.android.md.ui.fragment.TopicDetailFragment" />
+    <fragment
+        android:id="@+id/fragment_message_list"
+        android:name="org.cnodejs.android.md.ui.fragment.MessageListFragment" />
+    <fragment
+        android:id="@+id/fragment_setting"
+        android:name="org.cnodejs.android.md.ui.fragment.SettingFragment" />
+    <fragment
+        android:id="@+id/fragment_about"
+        android:name="org.cnodejs.android.md.ui.fragment.AboutFragment" />
 </navigation>

@@ -45,14 +45,14 @@ class MainFragment : BaseFragment() {
             binding.navLayout.tabDev,
         )
 
+        val a = requireContext().obtainStyledAttributes(intArrayOf(android.R.attr.colorAccent))
+        @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)
+        a.recycle()
+
         val accountViewModel: AccountViewModel by activityViewModels()
         val settingViewModel: SettingViewModel by activityViewModels()
         val mainViewModel: MainViewModel by viewModels()
         observeBaseLiveHolder(mainViewModel.baseLiveHolder)
-
-        val a = requireContext().obtainStyledAttributes(intArrayOf(android.R.attr.colorAccent))
-        @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)
-        a.recycle()
 
         accountViewModel.accountData.observe(viewLifecycleOwner) {
             it?.also { account ->
@@ -152,11 +152,11 @@ class MainFragment : BaseFragment() {
         }
 
         binding.navLayout.btnSetting.setOnClickListener {
-            // TODO
+            SettingFragment.open(this)
         }
 
         binding.navLayout.btnAbout.setOnClickListener {
-            // TODO
+            AboutFragment.open(this)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
