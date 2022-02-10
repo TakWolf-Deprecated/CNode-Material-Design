@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentTopicDetailBinding
 import org.cnodejs.android.md.model.entity.ITopic
+import org.cnodejs.android.md.util.NavAnim
 import org.cnodejs.android.md.util.navPush
 import org.cnodejs.android.md.vm.TopicDetailViewModel
 
@@ -19,7 +20,7 @@ class TopicDetailFragment : BaseFragment() {
         fun open(fragment: Fragment, topicId: String) {
             val args = Bundle()
             args.putString(KEY_TOPIC_ID, topicId)
-            fragment.navPush(R.id.fragment_topic_detail, args)
+            fragment.navPush(R.id.fragment_topic_detail, args, NavAnim.SLIDE)
         }
 
         fun open(fragment: Fragment, topic: ITopic) {
