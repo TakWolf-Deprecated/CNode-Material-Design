@@ -44,14 +44,14 @@ class MainFragment : BaseFragment() {
 
         accountViewModel.accountData.observe(viewLifecycleOwner) {
             it?.also { account ->
-                binding.navLayout.imgLoginAvatar.load(account.getCompatAvatarUrl()) {
+                binding.navLayout.imgAvatar.load(account.getCompatAvatarUrl()) {
                     placeholder(R.drawable.image_placeholder)
                 }
                 binding.navLayout.tvLoginName.text = account.loginName
                 binding.navLayout.tvScore.text = getString(R.string.score_d, account.score)
                 binding.navLayout.btnLogout.visibility = View.VISIBLE
             } ?: run {
-                binding.navLayout.imgLoginAvatar.load(R.drawable.image_placeholder)
+                binding.navLayout.imgAvatar.load(R.drawable.image_placeholder)
                 binding.navLayout.tvLoginName.setText(R.string.click_avatar_to_login)
                 binding.navLayout.tvScore.text = null
                 binding.navLayout.btnLogout.visibility = View.GONE
@@ -104,7 +104,7 @@ class MainFragment : BaseFragment() {
                 LoginFragment.open(this)
             }
         }
-        binding.navLayout.imgLoginAvatar.setOnClickListener(onNavMyInfoClickListener)
+        binding.navLayout.imgAvatar.setOnClickListener(onNavMyInfoClickListener)
         binding.navLayout.tvLoginName.setOnClickListener(onNavMyInfoClickListener)
         binding.navLayout.tvScore.setOnClickListener(onNavMyInfoClickListener)
 
