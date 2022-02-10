@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.ui.fragment
 
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import org.cnodejs.android.md.ui.dialog.LoadingDialog
@@ -13,6 +14,10 @@ abstract class BaseFragment : Fragment() {
 
     protected fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun showToast(@StringRes resId: Int) {
+        Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
     }
 
     private fun setLoadingVisible(visible: Boolean) {

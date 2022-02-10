@@ -180,7 +180,7 @@ class MainFragment : BaseFragment() {
                     val secondBackPressedTime = System.currentTimeMillis()
                     if (secondBackPressedTime - mainViewModel.firstBackPressedTime > 2000) {
                         mainViewModel.firstBackPressedTime = secondBackPressedTime
-                        showToast(getString(R.string.press_back_again_to_exit))
+                        showToast(R.string.press_back_again_to_exit)
                     } else {
                         requireActivity().finish()
                     }
