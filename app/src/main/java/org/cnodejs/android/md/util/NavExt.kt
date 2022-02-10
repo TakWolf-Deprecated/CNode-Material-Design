@@ -41,7 +41,15 @@ fun Fragment.navPush(
     args: Bundle? = null,
     anim: NavAnim = NavAnim.SLIDE,
     extras: FragmentNavigator.Extras? = null,
+    isSingleTop: Boolean = false,
 ) {
+    val controller = findNavController()
+    if (isSingleTop) {
+        val currentId = controller.currentDestination?.id ?: -1
+        if (currentId == destId) {
+            return
+        }
+    }
     val options = NavOptions.Builder()
         .apply {
             if (extras == null) {
@@ -49,7 +57,7 @@ fun Fragment.navPush(
             }
         }
         .build()
-    findNavController().navigate(destId, args, options, extras)
+    controller.navigate(destId, args, options, extras)
 }
 
 fun Fragment.navReplace(

@@ -16,7 +16,7 @@ import org.cnodejs.android.md.vm.LoginViewModel
 class LoginFragment : BaseFragment() {
     companion object {
         fun open(fragment: Fragment) {
-            fragment.navPush(R.id.fragment_login, anim = NavAnim.FADE)
+            fragment.navPush(R.id.fragment_login, anim = NavAnim.FADE, isSingleTop = true)
         }
     }
 
