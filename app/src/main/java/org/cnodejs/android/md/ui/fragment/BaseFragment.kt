@@ -3,7 +3,7 @@ package org.cnodejs.android.md.ui.fragment
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import org.cnodejs.android.md.ui.dialog.LoadingDialogFragment
+import org.cnodejs.android.md.ui.dialog.LoadingDialog
 import org.cnodejs.android.md.vm.holder.BaseLiveHolder
 
 abstract class BaseFragment : Fragment() {
@@ -18,7 +18,7 @@ abstract class BaseFragment : Fragment() {
     private fun setLoadingVisible(visible: Boolean) {
         if (visible) {
             childFragmentManager.findFragmentByTag(TAG_LOADING) ?: run {
-                LoadingDialogFragment().show(childFragmentManager, TAG_LOADING)
+                LoadingDialog().show(childFragmentManager, TAG_LOADING)
             }
         } else {
             (childFragmentManager.findFragmentByTag(TAG_LOADING) as? DialogFragment)?.dismiss()

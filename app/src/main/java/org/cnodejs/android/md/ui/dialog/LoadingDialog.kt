@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.DialogFragment
 import org.cnodejs.android.md.R
 
-class LoadingDialogFragment : DialogFragment() {
+class LoadingDialog : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isCancelable = false
