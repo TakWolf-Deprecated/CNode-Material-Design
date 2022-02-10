@@ -11,20 +11,22 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Base.Theme.App.Dialog" parent="Theme.Material3.Light.Dialog">
-        <item name="colorPrimary">@color/app_accent</item>
+    <style name="Base.Theme.App.Dialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/app_accent</item>
-        <item name="android:colorBackground">@color/surface_light</item>
+    </style>
+
+    <style name="Base.Theme.App.Dialog.Alert" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/app_accent</item>
     </style>
 
     <style name="Theme.App" parent="Base.Theme.App" />
 
     <style name="Theme.App.Dialog" parent="Base.Theme.App.Dialog" />
 
-    <style name="Theme.App.Dialog.Alert" />
-
     <style name="Theme.App.Dialog.Loading">
         <item name="windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
+    <style name="Theme.App.Dialog.Alert" parent="Base.Theme.App.Dialog.Alert" />
 </resources>
