@@ -8,13 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentLoginBinding
-import org.cnodejs.android.md.util.NavUtils
+import org.cnodejs.android.md.util.NavAnim
+import org.cnodejs.android.md.util.navBack
+import org.cnodejs.android.md.util.navPush
 import org.cnodejs.android.md.vm.LoginViewModel
 
 class LoginFragment : BaseFragment() {
     companion object {
         fun open(fragment: Fragment) {
-            NavUtils.push(fragment, R.id.fragment_login, anim = NavUtils.Anim.FADE)
+            fragment.navPush(R.id.fragment_login, anim = NavAnim.FADE)
         }
     }
 
@@ -29,7 +31,7 @@ class LoginFragment : BaseFragment() {
         observeBaseLiveHolder(loginViewModel.baseLiveHolder)
 
         binding.toolbar.setNavigationOnClickListener {
-            NavUtils.back(this)
+            navBack()
         }
 
         binding.btnLogin.setOnClickListener {
