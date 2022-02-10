@@ -9,6 +9,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorInt
 import androidx.core.view.GravityCompat
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -60,16 +61,16 @@ class MainFragment : BaseFragment() {
                 }
                 binding.navLayout.tvLoginName.text = account.loginName
                 binding.navLayout.tvScore.text = getString(R.string.score_d, account.score)
-                binding.navLayout.btnLogout.visibility = View.VISIBLE
+                binding.navLayout.btnLogout.isVisible = true
             } ?: run {
                 binding.navLayout.imgAvatar.load(R.drawable.image_placeholder)
                 binding.navLayout.tvLoginName.setText(R.string.click_avatar_to_login)
                 binding.navLayout.tvScore.text = null
-                binding.navLayout.btnLogout.visibility = View.GONE
+                binding.navLayout.btnLogout.isVisible = false
             }
         }
 
-        settingViewModel.nightModeData.observe(viewLifecycleOwner) {
+        settingViewModel.isNightModeData.observe(viewLifecycleOwner) {
             it?.let { isNightMode ->
                 if (isNightMode) {
                     binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_light_mode_24)
@@ -78,6 +79,12 @@ class MainFragment : BaseFragment() {
                     binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_dark_mode_24)
                     binding.navLayout.imgNavHeaderBackground.setImageResource(R.drawable.nav_header_bg_light)
                 }
+            }
+        }
+
+        settingViewModel.isDisplayTabDevData.observe(viewLifecycleOwner) {
+            it?.let { isDisplayTabDev ->
+                binding.navLayout.tabDev.isVisible = isDisplayTabDev
             }
         }
 

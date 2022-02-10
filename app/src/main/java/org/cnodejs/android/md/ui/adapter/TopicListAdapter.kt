@@ -3,6 +3,7 @@ package org.cnodejs.android.md.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -50,15 +51,10 @@ class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHold
         fun bind(topicWithSummary: TopicWithSummary) {
             val topic = topicWithSummary.topic
             val resources = itemView.resources
-            binding.imgGood.visibility = if (topic.isGood) View.VISIBLE else View.GONE
-            if (topic.isTop) {
-                binding.tvTop.visibility = View.VISIBLE
-                binding.tvTab.visibility = View.GONE
-            } else {
-                binding.tvTop.visibility = View.GONE
-                binding.tvTab.visibility = View.VISIBLE
-                binding.tvTab.setText(topic.tab.titleId)
-            }
+            binding.imgGood.isVisible = topic.isGood
+            binding.tvTop.isVisible = topic.isTop
+            binding.tvTab.isVisible = !topic.isTop
+            binding.tvTab.setText(topic.tab.titleId)
             binding.tvReplyAndVisitCount.text = resources.getString(R.string.d_reply_d_visit, topic.replyCount, topic.visitCount)
             binding.tvReplyTime.text = resources.getString(R.string.reply_at_s, FormatUtils.getRelativeTimeSpanString(resources, topic.lastReplyAt))
             binding.tvTitle.text = topic.title

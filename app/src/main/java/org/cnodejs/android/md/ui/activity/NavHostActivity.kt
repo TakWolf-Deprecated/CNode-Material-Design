@@ -17,7 +17,7 @@ class NavHostActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         val settingViewModel: SettingViewModel by viewModels()
-        settingViewModel.loadNightMode()
+        settingViewModel.loadNightModeConfig()
 
         EventBus.getDefault().register(this)
 

@@ -9,10 +9,11 @@ import org.cnodejs.android.md.model.store.AppStoreHolder
 class SettingViewModel(application: Application) : AndroidViewModel(application) {
     private val settingStore = AppStoreHolder.getInstance(application).settingStore
 
-    val nightModeData = MutableLiveData<Boolean>()
+    val isNightModeData = MutableLiveData<Boolean>()
+    val isDisplayTabDevData = MutableLiveData(settingStore.isDisplayTabDev())
 
-    fun loadNightMode() {
-        nightModeData.value = settingStore.isNightMode()
+    fun loadNightModeConfig() {
+        isNightModeData.value = settingStore.isNightMode()
     }
 
     fun toggleNightMode() {
@@ -23,5 +24,11 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+    }
+
+    fun toggleDisplayTabDev() {
+        val isDisplayTabDev = !settingStore.isDisplayTabDev()
+        settingStore.setDisplayTabDev(isDisplayTabDev)
+        isDisplayTabDevData.value = isDisplayTabDev
     }
 }
