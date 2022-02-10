@@ -18,7 +18,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
             <ImageView
                 android:id="@+id/img_nav_header_background"
@@ -114,9 +115,90 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_tab_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:icon="@drawable/baseline_forum_24"
+            app:title="@string/all"
+            tools:checked="true" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_tab_good"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:icon="@drawable/baseline_workspace_premium_24"
+            app:title="@string/tab_good" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_tab_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:icon="@drawable/baseline_lightbulb_24"
+            app:title="@string/tab_share" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_tab_ask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:icon="@drawable/baseline_school_24"
+            app:title="@string/tab_ask" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_tab_job"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:icon="@drawable/baseline_work_24"
+            app:title="@string/tab_job" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_tab_dev"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:icon="@drawable/baseline_bug_report_24"
+            app:title="@string/tab_dev" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            app:dividerColor="?android:attr/listDivider" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:icon="@drawable/baseline_notifications_24"
+            app:title="@string/message"
+            app:badge="100" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:icon="@drawable/baseline_settings_24"
+            app:title="@string/setting" />
+
+        <org.cnodejs.android.md.ui.widget.NavigationItem
+            android:id="@+id/btn_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            app:icon="@drawable/baseline_info_24"
+            app:title="@string/about" />
+
         <com.takwolf.android.insetswidget.InsetsSpace
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:isw_insetsType="navigationBars" />
 
     </LinearLayout>
