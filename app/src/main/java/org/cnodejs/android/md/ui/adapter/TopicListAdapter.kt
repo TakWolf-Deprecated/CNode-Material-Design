@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
@@ -13,7 +12,7 @@ import org.cnodejs.android.md.databinding.ItemTopicBinding
 import org.cnodejs.android.md.model.entity.TopicWithSummary
 import org.cnodejs.android.md.ui.listener.OnTopicClickListener
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
-import org.cnodejs.android.md.util.FormatUtils
+import org.cnodejs.android.md.util.timeSpanStringFromNow
 
 class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHolder>(TopicDiffItemCallback) {
     var onTopicClickListener: OnTopicClickListener? = null
@@ -56,7 +55,7 @@ class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHold
             binding.tvTab.isVisible = !topic.isTop
             binding.tvTab.setText(topic.tab.titleId)
             binding.tvReplyAndVisitCount.text = resources.getString(R.string.d_reply_d_visit, topic.replyCount, topic.visitCount)
-            binding.tvReplyTime.text = resources.getString(R.string.reply_at_s, FormatUtils.getRelativeTimeSpanString(resources, topic.lastReplyAt))
+            binding.tvReplyTime.text = resources.getString(R.string.reply_at_s, topic.lastReplyAt.timeSpanStringFromNow(resources))
             binding.tvTitle.text = topic.title
             binding.tvSummary.text = topicWithSummary.summary
             binding.imgAuthor.load(topic.author.avatarUrlCompat) {
@@ -64,7 +63,7 @@ class TopicListAdapter : ListAdapter<TopicWithSummary, TopicListAdapter.ViewHold
             }
             binding.imgAuthor.transitionName = "img_avatar_${bindingAdapterPosition}"
             binding.tvAuthor.text = topic.author.loginName
-            binding.tvCreateTime.text = resources.getString(R.string.create_at_s, FormatUtils.getRelativeTimeSpanString(resources, topic.createAt))
+            binding.tvCreateTime.text = resources.getString(R.string.create_at_s, topic.createAt.timeSpanStringFromNow(resources))
         }
     }
 }
