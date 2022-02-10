@@ -1,8 +1,8 @@
 package org.cnodejs.android.md.vm.holder
 
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.CoroutineScope
 import org.cnodejs.android.md.BuildConfig
 import org.cnodejs.android.md.model.api.CNodeClient
 import org.cnodejs.android.md.model.entity.ErrorResult
@@ -10,15 +10,17 @@ import org.cnodejs.android.md.model.entity.Tab
 import org.cnodejs.android.md.model.entity.TopicWithSummary
 
 class TopicPagingLiveHolder(
-    viewModelScope: CoroutineScope,
+    viewModel: AndroidViewModel,
     baseLiveHolder: BaseLiveHolder,
 ) : PagingLiveHolder<TopicWithSummary, Int>(
-    viewModelScope,
+    viewModel,
     baseLiveHolder,
 ) {
     companion object {
         private const val TAG = "TopicPagingLiveHolder"
     }
+
+    private val api = CNodeClient.getInstance(viewModel.getApplication()).api
 
     val tabData = MutableLiveData(Tab.ALL)
 
@@ -40,7 +42,7 @@ class TopicPagingLiveHolder(
 
     override suspend fun doRefresh(version: Int) {
         try {
-            val result = CNodeClient.api.getTopics(getTab().queryValue, mdrender = true)
+            val result = api.getTopics(getTab().queryValue, mdrender = true)
             val topics = TopicWithSummary.fromList(result.data)
             refreshSuccess(version, topics, 1, topics.isEmpty())
         } catch (e: Exception) {
@@ -55,7 +57,7 @@ class TopicPagingLiveHolder(
     override suspend fun doLoadMore(version: Int, pagingParams: Int) {
         try {
             val nextPage = pagingParams + 1
-            val result = CNodeClient.api.getTopics(getTab().queryValue, nextPage, mdrender = true)
+            val result = api.getTopics(getTab().queryValue, nextPage, mdrender = true)
             val topics = TopicWithSummary.fromList(result.data)
             loadMoreSuccess(version, topics, nextPage, topics.isEmpty())
         } catch (e: Exception) {

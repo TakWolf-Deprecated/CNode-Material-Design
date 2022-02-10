@@ -2,16 +2,17 @@ package org.cnodejs.android.md.vm.holder
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.ListAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 abstract class PagingLiveHolder<Entity, PagingParams>(
-    private val viewModelScope: CoroutineScope,
-    val baseLiveHolder: BaseLiveHolder,
+    private val viewModel: ViewModel,
+    private val baseLiveHolder: BaseLiveHolder,
 ) : ListLiveHolder<Entity>() {
     val refreshStateData = MutableLiveData(false)
     val loadMoreStateData = MutableLiveData(LoadMoreFooter.STATE_DISABLED)
@@ -27,7 +28,7 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
             refreshVersion += 1
             refreshStateData.value = true
             isRefreshDoing = true
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModel.viewModelScope.launch(Dispatchers.IO) {
                 doRefresh(refreshVersion)
             }
         }
@@ -37,7 +38,7 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
 
     protected fun refreshSuccess(version: Int, entities: List<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
         if (refreshVersion == version) {
-            viewModelScope.launch(Dispatchers.Main) {
+            viewModel.viewModelScope.launch(Dispatchers.Main) {
                 loadMoreVersion += 1
                 setList(entities)
                 this@PagingLiveHolder.pagingParams = pagingParams
@@ -52,7 +53,7 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
 
     protected fun refreshFailure(version: Int, message: String) {
         if (refreshVersion == version) {
-            viewModelScope.launch(Dispatchers.Main) {
+            viewModel.viewModelScope.launch(Dispatchers.Main) {
                 isRefreshDoing = false
                 refreshStateData.value = false
                 baseLiveHolder.showToast(message)
@@ -64,7 +65,7 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
         if (!isLoadMoreDoing && !isFinished) {
             loadMoreStateData.value = LoadMoreFooter.STATE_LOADING
             isLoadMoreDoing = true
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModel.viewModelScope.launch(Dispatchers.IO) {
                 doLoadMore(loadMoreVersion, pagingParams!!)
             }
         }
@@ -74,7 +75,7 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
 
     protected fun loadMoreSuccess(version: Int, addedEntities: List<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
         if (loadMoreVersion == version) {
-            viewModelScope.launch(Dispatchers.Main) {
+            viewModel.viewModelScope.launch(Dispatchers.Main) {
                 appendList(addedEntities)
                 this@PagingLiveHolder.pagingParams = pagingParams
                 this@PagingLiveHolder.isFinished = isFinished
@@ -86,7 +87,7 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
 
     protected fun loadMoreFailure(version: Int, message: String) {
         if (loadMoreVersion == version) {
-            viewModelScope.launch(Dispatchers.Main) {
+            viewModel.viewModelScope.launch(Dispatchers.Main) {
                 isLoadMoreDoing = false
                 loadMoreStateData.value = LoadMoreFooter.STATE_FAILED
                 baseLiveHolder.showToast(message)

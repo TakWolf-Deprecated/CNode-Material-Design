@@ -1,14 +1,33 @@
 package org.cnodejs.android.md.model.api
 
+import android.app.Application
+import androidx.annotation.GuardedBy
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.cnodejs.android.md.BuildConfig
+import org.cnodejs.android.md.bus.AuthInvalidEvent
+import org.cnodejs.android.md.model.store.AppStoreHolder
 import org.cnodejs.android.md.util.HttpUtils
 import org.cnodejs.android.md.util.JsonUtils
+import org.greenrobot.eventbus.EventBus
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object CNodeClient {
+class CNodeClient private constructor(application: Application) {
+    companion object {
+        private val lock = Any()
+
+        @GuardedBy("lock")
+        @Volatile
+        private var instance: CNodeClient? = null
+
+        fun getInstance(application: Application) = instance ?: synchronized(lock) {
+            instance ?: CNodeClient(application).also { instance = it }
+        }
+    }
+
+    private val accountStore = AppStoreHolder.getInstance(application).accountStore
+
     val api: CNodeApi
 
     init {
@@ -16,9 +35,14 @@ object CNodeClient {
             .baseUrl(CNodeDefine.API_BASE_URL)
             .client(OkHttpClient.Builder()
                 .addInterceptor { chain ->
-                    chain.proceed(chain.request().newBuilder()
+                    val response = chain.proceed(chain.request().newBuilder()
                         .header(HttpUtils.HEADER_USER_AGENT, CNodeDefine.USER_AGENT)
                         .build())
+                    if (response.code == 401 && accountStore.getAccessToken() != null) {
+                        accountStore.logout()
+                        EventBus.getDefault().post(AuthInvalidEvent)
+                    }
+                    response
                 }
                 .apply {
                     if (BuildConfig.DEBUG) {

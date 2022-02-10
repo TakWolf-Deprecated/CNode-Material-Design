@@ -20,6 +20,10 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
         EventBus.getDefault().register(this)
     }
 
+    override fun onCleared() {
+        EventBus.getDefault().unregister(this)
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onAccountChanged(event: AccountChangedEvent) {
         accountData.value = event.account
@@ -28,10 +32,6 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onAccountUpdated(event: AccountUpdatedEvent) {
         accountData.value = event.account
-    }
-
-    override fun onCleared() {
-        EventBus.getDefault().unregister(this)
     }
 
     fun isLogined(): Boolean {

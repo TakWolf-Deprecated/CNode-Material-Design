@@ -37,6 +37,7 @@ data class ErrorResult(
                 } catch (_: Exception) {}
                 return when (e.code()) {
                     400 -> withMessage("请求参数错误")
+                    401 -> withMessage("AccessToken 失效")
                     403 -> withMessage("无权限")
                     404 -> withMessage("资源不存在")
                     500 -> withMessage("服务器内部错误")
