@@ -44,15 +44,13 @@ object NavUtils {
         anim: Anim = Anim.SLIDE,
         extras: FragmentNavigator.Extras? = null,
     ) {
-        val options = if (extras == null) {
-            NavOptions.Builder()
-                .apply {
+        val options = NavOptions.Builder()
+            .apply {
+                if (extras == null) {
                     anim.applyToOptions(this)
                 }
-                .build()
-        } else {
-            null
-        }
+            }
+            .build()
         fragment.findNavController().navigate(destId, args, options, extras)
     }
 
