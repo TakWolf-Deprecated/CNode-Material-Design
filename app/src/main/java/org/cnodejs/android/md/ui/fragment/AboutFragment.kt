@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentAboutBinding
-import org.cnodejs.android.md.util.NavAnim
 import org.cnodejs.android.md.util.navPush
 
 class AboutFragment : Fragment() {
     companion object {
         fun open(fragment: Fragment) {
-            fragment.navPush(R.id.fragment_about, anim = NavAnim.FADE)
+            fragment.navPush(R.id.fragment_about)
         }
     }
 

@@ -12,7 +12,6 @@ import androidx.transition.TransitionInflater
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentUserDetailBinding
 import org.cnodejs.android.md.model.entity.IUser
-import org.cnodejs.android.md.util.NavAnim
 import org.cnodejs.android.md.util.navPush
 import org.cnodejs.android.md.vm.UserDetailViewModel
 
@@ -24,7 +23,7 @@ class UserDetailFragment : BaseFragment() {
         fun open(fragment: Fragment, loginName: String) {
             val args = Bundle()
             args.putString(KEY_LOGIN_NAME, loginName)
-            fragment.navPush(R.id.fragment_user_detail, args, NavAnim.FADE)
+            fragment.navPush(R.id.fragment_user_detail, args)
         }
 
         fun open(fragment: Fragment, user: IUser, imgAvatar: ImageView) {
