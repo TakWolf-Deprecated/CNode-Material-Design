@@ -9,7 +9,7 @@
     <string name="tab_share">分享</string>
     <string name="tab_ask">问答</string>
     <string name="tab_job">招聘</string>
-    <string name="tab_dev">测试</string>
+    <string name="tab_dev">客户端测试</string>
     <string name="tab_unknown">未知</string>
     <string name="message">消息</string>
     <string name="setting">设置</string>
