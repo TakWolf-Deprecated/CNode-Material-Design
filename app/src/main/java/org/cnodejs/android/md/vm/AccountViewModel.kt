@@ -41,6 +41,7 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onAccountChanged(event: AccountChangedEvent) {
         accountData.value = event.account
+        messageCountData.value = 0
         loadMyInfo()
     }
 
