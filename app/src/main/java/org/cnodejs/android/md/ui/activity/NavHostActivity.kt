@@ -32,6 +32,6 @@ class NavHostActivity : AppCompatActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onAuthInvalid(event: AuthInvalidEvent) {
-        AuthInvalidAlertDialog().show(supportFragmentManager, null)
+        AuthInvalidAlertDialog.show(supportFragmentManager)
     }
 }

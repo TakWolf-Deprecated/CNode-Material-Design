@@ -131,7 +131,7 @@ class MainFragment : BaseFragment() {
             if (accountViewModel.isLogined()) {
                 CreateTopicFragment.open(this)
             } else {
-                NeedLoginAlertDialog().show(childFragmentManager, null)
+                NeedLoginAlertDialog.show(childFragmentManager)
             }
         }
         binding.contentLayout.btnCreateTopic.listenToRecyclerView(binding.contentLayout.recyclerView)
@@ -152,7 +152,7 @@ class MainFragment : BaseFragment() {
         }
 
         binding.navLayout.btnLogout.setOnClickListener {
-            LogoutAlertDialog().show(childFragmentManager, null)
+            LogoutAlertDialog.show(childFragmentManager)
         }
 
         val onNavTabClickListener = View.OnClickListener { v: View ->
@@ -167,7 +167,7 @@ class MainFragment : BaseFragment() {
             if (accountViewModel.isLogined()) {
                 MessageListFragment.open(this)
             } else {
-                NeedLoginAlertDialog().show(childFragmentManager, null)
+                NeedLoginAlertDialog.show(childFragmentManager)
             }
         }
 

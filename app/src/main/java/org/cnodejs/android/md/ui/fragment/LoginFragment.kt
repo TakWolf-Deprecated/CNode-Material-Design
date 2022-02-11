@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentLoginBinding
-import org.cnodejs.android.md.ui.dialog.HowToGetAccessTokenTipAlertDialog
+import org.cnodejs.android.md.ui.dialog.HowToGetAccessTokenTipDialog
 import org.cnodejs.android.md.ui.listener.NavBackOnClickListener
 import org.cnodejs.android.md.util.FormatUtils
 import org.cnodejs.android.md.util.navBack
@@ -72,7 +72,7 @@ class LoginFragment : BaseFragment() {
         }
 
         binding.btnLoginTip.setOnClickListener {
-            HowToGetAccessTokenTipAlertDialog().show(childFragmentManager, null)
+            HowToGetAccessTokenTipDialog.show(childFragmentManager)
         }
 
         return binding.root
