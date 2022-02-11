@@ -9,7 +9,7 @@ import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentAboutBinding
 import org.cnodejs.android.md.util.navPush
 
-class AboutFragment : Fragment() {
+class AboutFragment : BaseFragment() {
     companion object {
         fun open(fragment: Fragment) {
             fragment.navPush(R.id.fragment_about)

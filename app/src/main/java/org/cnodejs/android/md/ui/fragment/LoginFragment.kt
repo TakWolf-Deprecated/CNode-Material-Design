@@ -31,7 +31,7 @@ class LoginFragment : BaseFragment() {
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         val loginViewModel: LoginViewModel by viewModels()
-        observeBaseLiveHolder(loginViewModel.baseLiveHolder)
+        observeViewModel(loginViewModel)
 
         loginViewModel.loginedEvent.observe(viewLifecycleOwner) {
             showToast(R.string.login_success)

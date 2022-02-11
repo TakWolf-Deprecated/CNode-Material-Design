@@ -11,7 +11,6 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
@@ -22,11 +21,12 @@ import org.cnodejs.android.md.ui.adapter.TopicListAdapter
 import org.cnodejs.android.md.ui.dialog.LogoutAlertDialog
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
 import org.cnodejs.android.md.ui.holder.LoadMoreFooter
-import org.cnodejs.android.md.ui.listener.*
+import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
+import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
+import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
+import org.cnodejs.android.md.ui.listener.listenToRecyclerView
 import org.cnodejs.android.md.util.loadAvatar
-import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MainViewModel
-import org.cnodejs.android.md.vm.SettingViewModel
 import org.cnodejs.android.md.vm.holder.setupView
 
 class MainFragment : BaseFragment() {
@@ -50,10 +50,8 @@ class MainFragment : BaseFragment() {
         @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)
         a.recycle()
 
-        val accountViewModel: AccountViewModel by activityViewModels()
-        val settingViewModel: SettingViewModel by activityViewModels()
         val mainViewModel: MainViewModel by viewModels()
-        observeBaseLiveHolder(mainViewModel.baseLiveHolder)
+        observeViewModel(mainViewModel)
 
         accountViewModel.accountData.observe(viewLifecycleOwner) {
             it?.also { account ->

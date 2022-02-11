@@ -3,10 +3,18 @@ package org.cnodejs.android.md.ui.fragment
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import org.cnodejs.android.md.ui.dialog.LoadingDialog
-import org.cnodejs.android.md.vm.holder.BaseLiveHolder
+import org.cnodejs.android.md.vm.AccountViewModel
+import org.cnodejs.android.md.vm.SettingViewModel
+import org.cnodejs.android.md.vm.holder.ILoadingViewModel
+import org.cnodejs.android.md.vm.holder.IToastViewModel
 
 abstract class BaseFragment : Fragment() {
+    protected val accountViewModel: AccountViewModel by activityViewModels()
+    protected val settingViewModel: SettingViewModel by activityViewModels()
+
     protected fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
@@ -15,19 +23,23 @@ abstract class BaseFragment : Fragment() {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
     }
 
-    protected fun observeBaseLiveHolder(holder: BaseLiveHolder) {
-        holder.toastEvent.observe(viewLifecycleOwner) {
-            it?.let { message ->
-                showToast(message)
+    protected fun observeViewModel(viewModel: ViewModel) {
+        if (viewModel is IToastViewModel) {
+            viewModel.toastLiveHolder.toastEvent.observe(viewLifecycleOwner) {
+                it?.let { message ->
+                    showToast(message)
+                }
             }
         }
 
-        holder.loadingCountData.observe(viewLifecycleOwner) {
-            it?.let { count ->
-                if (count > 0) {
-                    LoadingDialog.show(childFragmentManager)
-                } else {
-                    LoadingDialog.dismiss(childFragmentManager)
+        if (viewModel is ILoadingViewModel) {
+            viewModel.loadingLiveHolder.loadingCountData.observe(viewLifecycleOwner) {
+                it?.let { count ->
+                    if (count > 0) {
+                        LoadingDialog.show(childFragmentManager, viewModel.loadingLiveHolder.loadingDialogTag)
+                    } else {
+                        LoadingDialog.dismiss(childFragmentManager, viewModel.loadingLiveHolder.loadingDialogTag)
+                    }
                 }
             }
         }

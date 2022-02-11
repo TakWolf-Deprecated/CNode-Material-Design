@@ -51,7 +51,9 @@ class UserDetailFragment : BaseFragment() {
         val binding = FragmentUserDetailBinding.inflate(inflater, container, false)
 
         val userDetailViewModel: UserDetailViewModel by viewModels()
-        observeBaseLiveHolder(userDetailViewModel.baseLiveHolder)
+        observeViewModel(userDetailViewModel)
+
+        // TODO
 
         return binding.root
     }
