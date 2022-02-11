@@ -23,6 +23,7 @@ import org.cnodejs.android.md.ui.dialog.LogoutAlertDialog
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
 import org.cnodejs.android.md.ui.holder.LoadMoreFooter
 import org.cnodejs.android.md.ui.listener.*
+import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MainViewModel
 import org.cnodejs.android.md.vm.SettingViewModel
@@ -56,9 +57,7 @@ class MainFragment : BaseFragment() {
 
         accountViewModel.accountData.observe(viewLifecycleOwner) {
             it?.also { account ->
-                binding.navLayout.imgAvatar.load(account.avatarUrlCompat) {
-                    placeholder(R.drawable.image_placeholder)
-                }
+                binding.navLayout.imgAvatar.loadAvatar(account.avatarUrlCompat)
                 binding.navLayout.tvLoginName.text = account.loginName
                 binding.navLayout.tvScore.text = getString(R.string.score_d, account.score)
                 binding.navLayout.btnLogout.isVisible = true
