@@ -70,6 +70,12 @@ class MainFragment : BaseFragment() {
             }
         }
 
+        accountViewModel.messageCountData.observe(viewLifecycleOwner) {
+            it?.let { count ->
+                binding.navLayout.btnMessage.setBadge(count)
+            }
+        }
+
         settingViewModel.isNightModeData.observe(viewLifecycleOwner) {
             it?.let { isNightMode ->
                 if (isNightMode) {
@@ -98,7 +104,9 @@ class MainFragment : BaseFragment() {
         }
 
         binding.drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
-            // TODO
+            override fun onDrawerOpened(drawerView: View) {
+                accountViewModel.loadMyInfo()
+            }
         })
 
         binding.contentLayout.toolbar.setNavigationOnClickListener {

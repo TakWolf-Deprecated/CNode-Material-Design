@@ -64,6 +64,10 @@ class AccountStore(application: Application) : DataStoreWrapper(application, "ac
         dataStore.data.first()[KEY_ACCESS_TOKEN]
     }
 
+    fun requireAccessToken(): String {
+        return getAccessToken() ?: ""
+    }
+
     fun getAccount(): Account? = runBlocking {
         val preferences = dataStore.data.first()
         if (preferences[KEY_ACCESS_TOKEN] == null) {
