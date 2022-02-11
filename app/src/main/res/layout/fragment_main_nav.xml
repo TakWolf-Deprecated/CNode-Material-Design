@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:background="?attr/colorSurface"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     app:isw_insetsType="statusBars"
     app:isw_insetsPaddingTop="false"
     app:isw_insetsColorTop="@color/translucent_system_bars">
@@ -14,12 +16,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
             <ImageView
                 android:id="@+id/img_nav_header_background"
@@ -37,6 +43,8 @@
                 android:layout_height="wrap_content"
                 android:background="#01000000"
                 android:theme="@style/ThemeOverlay.Material3.Dark"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.takwolf.android.insetswidget.InsetsSpace
