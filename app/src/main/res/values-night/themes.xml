@@ -17,5 +17,6 @@
 
     <style name="Base.Theme.App.Dialog.Alert" parent="Theme.AppCompat.Dialog.Alert">
         <item name="colorAccent">@color/app_accent</item>
+        <item name="colorOnPrimary">@color/app_accent</item>
     </style>
 </resources>
