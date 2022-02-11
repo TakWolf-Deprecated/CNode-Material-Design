@@ -6,18 +6,23 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import org.cnodejs.android.md.R
+import java.util.*
 
 class LoadingDialog : DialogFragment() {
     companion object {
         private const val TAG = "LoadingDialog"
 
-        fun show(manager: FragmentManager) {
+        fun genTag(): String {
+            return "${TAG}-${UUID.randomUUID()}"
+        }
+
+        fun show(manager: FragmentManager, tag: String) {
             manager.findFragmentByTag(TAG) ?: run {
                 LoadingDialog().show(manager, TAG)
             }
         }
 
-        fun dismiss(manager: FragmentManager) {
+        fun dismiss(manager: FragmentManager, tag: String) {
             (manager.findFragmentByTag(TAG) as? DialogFragment)?.dismiss()
         }
     }
