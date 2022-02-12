@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
+import org.cnodejs.android.md.ui.dialog.BaseDialog
 import org.cnodejs.android.md.ui.dialog.LoadingDialog
 import org.cnodejs.android.md.util.NavControllerProvider
 import org.cnodejs.android.md.util.Navigator
@@ -43,7 +44,7 @@ abstract class BaseFragment : Fragment(), NavControllerProvider {
                     if (count > 0) {
                         LoadingDialog.show(childFragmentManager, viewModel.loadingLiveHolder.loadingDialogTag)
                     } else {
-                        LoadingDialog.dismiss(childFragmentManager, viewModel.loadingLiveHolder.loadingDialogTag)
+                        BaseDialog.dismiss(childFragmentManager, viewModel.loadingLiveHolder.loadingDialogTag)
                     }
                 }
             }
