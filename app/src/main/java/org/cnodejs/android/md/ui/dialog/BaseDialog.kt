@@ -6,5 +6,5 @@ import org.cnodejs.android.md.util.NavControllerProvider
 import org.cnodejs.android.md.util.Navigator
 
 abstract class BaseDialog : DialogFragment(), NavControllerProvider {
-    override val navigator: Navigator = Navigator(findNavController())
+    override val navigator: Navigator by lazy { Navigator(findNavController()) }
 }

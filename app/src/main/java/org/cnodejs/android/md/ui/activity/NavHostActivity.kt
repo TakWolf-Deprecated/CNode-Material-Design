@@ -16,7 +16,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 class NavHostActivity : AppCompatActivity(), NavControllerProvider {
-    override val navigator: Navigator = Navigator(findNavController(R.id.nav_host))
+    override val navigator: Navigator by lazy { Navigator(findNavController(R.id.nav_host)) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

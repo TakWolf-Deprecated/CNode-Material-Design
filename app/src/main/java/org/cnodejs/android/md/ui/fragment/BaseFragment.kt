@@ -15,7 +15,7 @@ import org.cnodejs.android.md.vm.holder.ILoadingViewModel
 import org.cnodejs.android.md.vm.holder.IToastViewModel
 
 abstract class BaseFragment : Fragment(), NavControllerProvider {
-    override val navigator: Navigator = Navigator(findNavController())
+    override val navigator: Navigator by lazy { Navigator(findNavController()) }
 
     protected val accountViewModel: AccountViewModel by activityViewModels()
     protected val settingViewModel: SettingViewModel by activityViewModels()
