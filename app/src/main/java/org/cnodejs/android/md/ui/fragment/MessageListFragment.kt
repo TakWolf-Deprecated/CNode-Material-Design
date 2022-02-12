@@ -17,6 +17,8 @@ class MessageListFragment : BaseFragment() {
         }
     }
 
+    private val messageListViewModel: MessageListViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,7 +26,6 @@ class MessageListFragment : BaseFragment() {
     ): View {
         val binding = FragmentMessageListBinding.inflate(inflater, container, false)
 
-        val messageListViewModel: MessageListViewModel by viewModels()
         observeViewModel(messageListViewModel)
 
         // TODO

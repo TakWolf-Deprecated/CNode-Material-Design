@@ -17,6 +17,8 @@ class CreateTopicFragment : BaseFragment() {
         }
     }
 
+    private val createTopicViewModel: CreateTopicViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,7 +26,6 @@ class CreateTopicFragment : BaseFragment() {
     ): View {
         val binding = FragmentCreateTopicBinding.inflate(inflater, container, false)
 
-        val createTopicViewModel: CreateTopicViewModel by viewModels()
         observeViewModel(createTopicViewModel)
 
         // TODO

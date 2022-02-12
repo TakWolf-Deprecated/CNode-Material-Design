@@ -21,6 +21,8 @@ class LoginFragment : BaseFragment() {
         }
     }
 
+    private val loginViewModel: LoginViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,7 +30,6 @@ class LoginFragment : BaseFragment() {
     ): View {
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        val loginViewModel: LoginViewModel by viewModels()
         observeViewModel(loginViewModel)
 
         loginViewModel.loginedEvent.observe(viewLifecycleOwner) {

@@ -27,6 +27,8 @@ class TopicDetailFragment : BaseFragment() {
         }
     }
 
+    private val topicDetailViewModel: TopicDetailViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,7 +36,6 @@ class TopicDetailFragment : BaseFragment() {
     ): View {
         val binding = FragmentTopicDetailBinding.inflate(inflater, container, false)
 
-        val topicDetailViewModel: TopicDetailViewModel by viewModels()
         observeViewModel(topicDetailViewModel)
 
         // TODO

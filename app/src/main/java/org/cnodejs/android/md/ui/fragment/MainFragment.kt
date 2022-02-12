@@ -33,6 +33,10 @@ import org.cnodejs.android.md.vm.SettingViewModel
 import org.cnodejs.android.md.vm.holder.setupView
 
 class MainFragment : BaseFragment() {
+    private val accountViewModel: AccountViewModel by activityViewModels()
+    private val settingViewModel: SettingViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,9 +57,6 @@ class MainFragment : BaseFragment() {
         @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)
         a.recycle()
 
-        val accountViewModel: AccountViewModel by activityViewModels()
-        val settingViewModel: SettingViewModel by activityViewModels()
-        val mainViewModel: MainViewModel by viewModels()
         observeViewModel(mainViewModel)
 
         accountViewModel.accountData.observe(viewLifecycleOwner) {

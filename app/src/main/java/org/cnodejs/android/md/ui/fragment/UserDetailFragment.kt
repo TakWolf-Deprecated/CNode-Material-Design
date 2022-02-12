@@ -37,6 +37,8 @@ class UserDetailFragment : BaseFragment() {
         }
     }
 
+    private val userDetailViewModel: UserDetailViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
@@ -49,7 +51,6 @@ class UserDetailFragment : BaseFragment() {
     ): View {
         val binding = FragmentUserDetailBinding.inflate(inflater, container, false)
 
-        val userDetailViewModel: UserDetailViewModel by viewModels()
         observeViewModel(userDetailViewModel)
 
         // TODO
