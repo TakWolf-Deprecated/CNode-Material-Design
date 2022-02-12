@@ -29,6 +29,7 @@ data class Author(
 ) : IUser
 
 data class Account(
+    val accessToken: String,
     val id: String,
     override val loginName: String,
     override val avatarUrl: String?,

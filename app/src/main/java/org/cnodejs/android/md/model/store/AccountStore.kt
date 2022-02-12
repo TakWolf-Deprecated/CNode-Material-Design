@@ -31,29 +31,31 @@ class AccountStore(application: Application) : DataStoreWrapper(application, "ac
             mutablePreferences[KEY_SCORE] = 0
         }
         val account = Account(
-            id = loginResult.id,
-            loginName = loginResult.loginName,
-            avatarUrl = loginResult.avatarUrl,
-            score = 0,
+            accessToken,
+            loginResult.id,
+            loginResult.loginName,
+            loginResult.avatarUrl,
+            0,
         )
         EventBus.getDefault().post(AccountChangedEvent(account))
         account
     }
 
     fun update(user: User): Account? = runBlocking {
-        val preferences = dataStore.data.first()
+        var preferences = dataStore.data.first()
         if (preferences[KEY_ACCESS_TOKEN] == null || preferences[KEY_LOGIN_NAME] != user.loginName) {
             null
         } else {
-            dataStore.edit { mutablePreferences ->
+            preferences = dataStore.edit { mutablePreferences ->
                 mutablePreferences[KEY_AVATAR_URL] = user.avatarUrl
                 mutablePreferences[KEY_SCORE] = user.score
             }
             val account = Account(
-                id = dataStore.data.first()[KEY_ID] ?: "",
-                loginName = user.loginName,
-                avatarUrl = user.avatarUrl,
-                score = user.score,
+                preferences[KEY_ACCESS_TOKEN]!!,
+                preferences[KEY_ID]!!,
+                user.loginName,
+                user.avatarUrl,
+                user.score,
             )
             EventBus.getDefault().post(AccountUpdatedEvent(account))
             account
@@ -64,20 +66,17 @@ class AccountStore(application: Application) : DataStoreWrapper(application, "ac
         dataStore.data.first()[KEY_ACCESS_TOKEN]
     }
 
-    fun requireAccessToken(): String {
-        return getAccessToken() ?: ""
-    }
-
     fun getAccount(): Account? = runBlocking {
         val preferences = dataStore.data.first()
         if (preferences[KEY_ACCESS_TOKEN] == null) {
             null
         } else {
             Account(
-                id = preferences[KEY_ID] ?: "",
-                loginName = preferences[KEY_LOGIN_NAME] ?: "",
-                avatarUrl = preferences[KEY_AVATAR_URL],
-                score = preferences[KEY_SCORE] ?: 0,
+                preferences[KEY_ACCESS_TOKEN]!!,
+                preferences[KEY_ID]!!,
+                preferences[KEY_LOGIN_NAME] ?: "",
+                preferences[KEY_AVATAR_URL],
+                preferences[KEY_SCORE] ?: 0,
             )
         }
     }

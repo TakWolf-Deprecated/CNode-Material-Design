@@ -60,10 +60,10 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     }
 
     private fun loadMyUserInfo() {
-        accountData.value?.loginName?.let { loginName ->
+        accountData.value?.let { account ->
             viewModelScope.launch(Dispatchers.IO) {
                 try {
-                    val result = api.getUser(loginName)
+                    val result = api.getUser(account.loginName)
                     accountStore.update(result.data)
                 } catch (e: Exception) {
                     if (BuildConfig.DEBUG) {
@@ -75,12 +75,12 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     }
 
     private fun loadMessageCount() {
-        accountData.value?.id?.let { accountId ->
+        accountData.value?.let { account ->
             viewModelScope.launch(Dispatchers.IO) {
                 try {
-                    val result = api.getMessagesCount(accountStore.requireAccessToken())
+                    val result = api.getMessagesCount(account.accessToken)
                     withContext(Dispatchers.Main) {
-                        if (accountData.value?.id == accountId) {
+                        if (accountData.value?.id == account.id) {
                             messageCountData.value = result.data
                         }
                     }
