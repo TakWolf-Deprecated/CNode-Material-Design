@@ -12,7 +12,7 @@ class AuthInvalidAlertDialog : BaseDialog() {
         private const val TAG = "AuthInvalidAlertDialog"
 
         fun show(manager: FragmentManager) {
-            manager.findFragmentByTag(TAG) ?: run {
+            find(manager, TAG) ?: run {
                 AuthInvalidAlertDialog().show(manager, TAG)
             }
         }

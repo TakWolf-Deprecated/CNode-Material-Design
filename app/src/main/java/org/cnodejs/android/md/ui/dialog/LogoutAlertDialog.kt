@@ -12,7 +12,7 @@ class LogoutAlertDialog : BaseDialog() {
         private const val TAG = "LogoutAlertDialog"
 
         fun show(manager: FragmentManager) {
-            manager.findFragmentByTag(TAG) ?: run {
+            find(manager, TAG) ?: run {
                 LogoutAlertDialog().show(manager, TAG)
             }
         }

@@ -12,7 +12,7 @@ class NeedLoginAlertDialog : BaseDialog() {
         private const val TAG = "NeedLoginAlertDialog"
 
         fun show(manager: FragmentManager) {
-            manager.findFragmentByTag(TAG) ?: run {
+            find(manager, TAG) ?: run {
                 NeedLoginAlertDialog().show(manager, TAG)
             }
         }

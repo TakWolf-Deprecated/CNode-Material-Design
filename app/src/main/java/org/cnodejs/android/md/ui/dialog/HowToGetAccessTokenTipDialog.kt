@@ -11,7 +11,7 @@ class HowToGetAccessTokenTipDialog : BaseDialog() {
         private const val TAG = "HowToGetAccessTokenTipDialog"
 
         fun show(manager: FragmentManager) {
-            manager.findFragmentByTag(TAG) ?: run {
+            find(manager, TAG) ?: run {
                 HowToGetAccessTokenTipDialog().show(manager, TAG)
             }
         }

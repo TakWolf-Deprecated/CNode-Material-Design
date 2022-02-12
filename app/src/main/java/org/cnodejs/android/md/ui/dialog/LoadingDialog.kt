@@ -3,7 +3,6 @@ package org.cnodejs.android.md.ui.dialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDialog
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import org.cnodejs.android.md.R
 import java.util.*
@@ -17,13 +16,9 @@ class LoadingDialog : BaseDialog() {
         }
 
         fun show(manager: FragmentManager, tag: String) {
-            manager.findFragmentByTag(TAG) ?: run {
-                LoadingDialog().show(manager, TAG)
+            find(manager, tag) ?: run {
+                LoadingDialog().show(manager, tag)
             }
-        }
-
-        fun dismiss(manager: FragmentManager, tag: String) {
-            (manager.findFragmentByTag(TAG) as? DialogFragment)?.dismiss()
         }
     }
 
