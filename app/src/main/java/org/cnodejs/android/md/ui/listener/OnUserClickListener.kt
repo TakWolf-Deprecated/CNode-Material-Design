@@ -4,13 +4,14 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import org.cnodejs.android.md.model.entity.IUser
 import org.cnodejs.android.md.ui.fragment.UserDetailFragment
+import org.cnodejs.android.md.util.Navigator
 
 interface OnUserClickListener {
     fun onUserClick(user: IUser, imgAvatar: ImageView)
 }
 
-class UserDetailNavigateListener(private val fragment: Fragment) : OnUserClickListener {
+class UserDetailNavigateListener(private val navigator: Navigator) : OnUserClickListener {
     override fun onUserClick(user: IUser, imgAvatar: ImageView) {
-        UserDetailFragment.open(fragment, user, imgAvatar)
+        UserDetailFragment.open(navigator, user, imgAvatar)
     }
 }

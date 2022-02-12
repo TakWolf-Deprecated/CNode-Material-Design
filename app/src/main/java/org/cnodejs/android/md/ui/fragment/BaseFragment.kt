@@ -5,13 +5,18 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import org.cnodejs.android.md.ui.dialog.LoadingDialog
+import org.cnodejs.android.md.util.NavControllerProvider
+import org.cnodejs.android.md.util.Navigator
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.SettingViewModel
 import org.cnodejs.android.md.vm.holder.ILoadingViewModel
 import org.cnodejs.android.md.vm.holder.IToastViewModel
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment(), NavControllerProvider {
+    override val navigator: Navigator = Navigator(findNavController())
+
     protected val accountViewModel: AccountViewModel by activityViewModels()
     protected val settingViewModel: SettingViewModel by activityViewModels()
 

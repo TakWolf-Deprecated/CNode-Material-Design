@@ -119,15 +119,15 @@ class MainFragment : BaseFragment() {
         binding.contentLayout.recyclerView.layoutManager = LinearLayoutManager(context)
         val loadMoreFooter = LoadMoreFooter.create(binding.contentLayout.recyclerView)
         val adapter = TopicListAdapter()
-        adapter.onTopicClickListener = TopicDetailNavigateListener(this)
-        adapter.onUserClickListener = UserDetailNavigateListener(this)
+        adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
+        adapter.onUserClickListener = UserDetailNavigateListener(navigator)
         mainViewModel.topicPagingLiveHolder.setupView(viewLifecycleOwner, adapter, binding.contentLayout.refreshLayout, loadMoreFooter)
         loadMoreFooter.addToRecyclerView(binding.contentLayout.recyclerView)
         binding.contentLayout.recyclerView.adapter = adapter
 
         binding.contentLayout.btnCreateTopic.setOnClickListener {
             if (accountViewModel.isLogined()) {
-                CreateTopicFragment.open(this)
+                CreateTopicFragment.open(navigator)
             } else {
                 NeedLoginAlertDialog.show(childFragmentManager)
             }
@@ -136,9 +136,9 @@ class MainFragment : BaseFragment() {
 
         val onNavMyInfoClickListener = View.OnClickListener {
             accountViewModel.accountData.value?.also { account ->
-                UserDetailFragment.open(this, account, binding.navLayout.imgAvatar)
+                UserDetailFragment.open(navigator, account, binding.navLayout.imgAvatar)
             } ?: run {
-                LoginFragment.open(this)
+                LoginFragment.open(navigator)
             }
         }
         binding.navLayout.imgAvatar.setOnClickListener(onNavMyInfoClickListener)
@@ -163,18 +163,18 @@ class MainFragment : BaseFragment() {
 
         binding.navLayout.btnMessage.setOnClickListener {
             if (accountViewModel.isLogined()) {
-                MessageListFragment.open(this)
+                MessageListFragment.open(navigator)
             } else {
                 NeedLoginAlertDialog.show(childFragmentManager)
             }
         }
 
         binding.navLayout.btnSetting.setOnClickListener {
-            SettingFragment.open(this)
+            SettingFragment.open(navigator)
         }
 
         binding.navLayout.btnAbout.setOnClickListener {
-            AboutFragment.open(this)
+            AboutFragment.open(navigator)
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {

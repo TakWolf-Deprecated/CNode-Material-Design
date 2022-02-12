@@ -1,15 +1,15 @@
 package org.cnodejs.android.md.ui.listener
 
-import androidx.fragment.app.Fragment
 import org.cnodejs.android.md.model.entity.ITopic
 import org.cnodejs.android.md.ui.fragment.TopicDetailFragment
+import org.cnodejs.android.md.util.Navigator
 
 interface OnTopicClickListener {
     fun onTopicClick(topic: ITopic)
 }
 
-class TopicDetailNavigateListener(private val fragment: Fragment) : OnTopicClickListener {
+class TopicDetailNavigateListener(private val navigator: Navigator) : OnTopicClickListener {
     override fun onTopicClick(topic: ITopic) {
-        TopicDetailFragment.open(fragment, topic)
+        TopicDetailFragment.open(navigator, topic)
     }
 }

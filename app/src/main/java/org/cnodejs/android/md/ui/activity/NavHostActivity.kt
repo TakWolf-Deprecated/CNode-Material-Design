@@ -4,15 +4,20 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.navigation.findNavController
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.bus.AuthInvalidEvent
 import org.cnodejs.android.md.ui.dialog.AuthInvalidAlertDialog
+import org.cnodejs.android.md.util.NavControllerProvider
+import org.cnodejs.android.md.util.Navigator
 import org.cnodejs.android.md.vm.SettingViewModel
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class NavHostActivity : AppCompatActivity() {
+class NavHostActivity : AppCompatActivity(), NavControllerProvider {
+    override val navigator: Navigator = Navigator(findNavController(R.id.nav_host))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)

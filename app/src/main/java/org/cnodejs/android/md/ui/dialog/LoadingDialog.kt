@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager
 import org.cnodejs.android.md.R
 import java.util.*
 
-class LoadingDialog : DialogFragment() {
+class LoadingDialog : BaseDialog() {
     companion object {
         private const val TAG = "LoadingDialog"
 

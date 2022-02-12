@@ -5,21 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentLoginBinding
 import org.cnodejs.android.md.ui.dialog.HowToGetAccessTokenTipDialog
 import org.cnodejs.android.md.ui.listener.NavBackOnClickListener
 import org.cnodejs.android.md.util.FormatUtils
-import org.cnodejs.android.md.util.navBack
-import org.cnodejs.android.md.util.navPush
+import org.cnodejs.android.md.util.Navigator
 import org.cnodejs.android.md.vm.LoginViewModel
 
 class LoginFragment : BaseFragment() {
     companion object {
-        fun open(fragment: Fragment) {
-            fragment.navPush(R.id.fragment_login, isSingleTop = true)
+        fun open(navigator: Navigator) {
+            navigator.push(R.id.fragment_login, isSingleTop = true)
         }
     }
 
@@ -35,7 +33,7 @@ class LoginFragment : BaseFragment() {
 
         loginViewModel.loginedEvent.observe(viewLifecycleOwner) {
             showToast(R.string.login_success)
-            navBack()
+            navigator.back()
         }
 
         loginViewModel.errorMessageEvent.observe(viewLifecycleOwner) {
@@ -44,7 +42,7 @@ class LoginFragment : BaseFragment() {
             }
         }
 
-        binding.toolbar.setNavigationOnClickListener(NavBackOnClickListener(this))
+        binding.toolbar.setNavigationOnClickListener(NavBackOnClickListener(navigator))
 
         binding.edtAccessToken.addTextChangedListener {
             binding.edtLayoutAccessToken.error = null
