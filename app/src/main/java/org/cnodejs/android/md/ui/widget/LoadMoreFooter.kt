@@ -1,4 +1,4 @@
-package org.cnodejs.android.md.ui.holder
+package org.cnodejs.android.md.ui.widget
 
 import android.view.LayoutInflater
 import android.view.View

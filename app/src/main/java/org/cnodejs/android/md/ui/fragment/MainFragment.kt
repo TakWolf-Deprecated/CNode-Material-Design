@@ -21,7 +21,7 @@ import org.cnodejs.android.md.model.entity.Tab
 import org.cnodejs.android.md.ui.adapter.TopicListAdapter
 import org.cnodejs.android.md.ui.dialog.LogoutAlertDialog
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
-import org.cnodejs.android.md.ui.holder.LoadMoreFooter
+import org.cnodejs.android.md.ui.widget.LoadMoreFooter
 import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
 import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
