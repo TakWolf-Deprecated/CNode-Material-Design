@@ -31,7 +31,8 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
 
     init {
         EventBus.getDefault().register(this)
-        loadMyInfo()
+        loadUser()
+        loadMessageCount()
     }
 
     override fun onCleared() {
@@ -42,24 +43,22 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     fun onAccountChanged(event: AccountChangedEvent) {
         accountData.value = event.account
         messageCountData.value = 0
-        loadMyInfo()
+        loadUser()
+        loadMessageCount()
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onAccountUpdated(event: AccountUpdatedEvent) {
-        accountData.value = event.account
+        if (accountData.value != null) {
+            accountData.value = event.account
+        }
     }
 
     fun isLogined(): Boolean {
         return accountData.value != null
     }
 
-    fun loadMyInfo() {
-        loadMyUserInfo()
-        loadMessageCount()
-    }
-
-    private fun loadMyUserInfo() {
+    fun loadUser() {
         accountData.value?.let { account ->
             viewModelScope.launch(Dispatchers.IO) {
                 try {
@@ -67,14 +66,14 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
                     accountStore.update(result.data)
                 } catch (e: Exception) {
                     if (BuildConfig.DEBUG) {
-                        Log.e(TAG, "loadMyUserInfo", e)
+                        Log.e(TAG, "loadUser", e)
                     }
                 }
             }
         }
     }
 
-    private fun loadMessageCount() {
+    fun loadMessageCount() {
         accountData.value?.let { account ->
             viewModelScope.launch(Dispatchers.IO) {
                 try {

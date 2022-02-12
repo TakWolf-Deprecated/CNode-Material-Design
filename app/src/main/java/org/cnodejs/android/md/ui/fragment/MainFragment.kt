@@ -102,7 +102,7 @@ class MainFragment : BaseFragment() {
 
         binding.drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
             override fun onDrawerOpened(drawerView: View) {
-                accountViewModel.loadMyInfo()
+                accountViewModel.loadMessageCount()
             }
         })
 
