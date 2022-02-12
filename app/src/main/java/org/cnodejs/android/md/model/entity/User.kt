@@ -35,3 +35,8 @@ data class Account(
     override val avatarUrl: String?,
     val score: Int,
 ) : IUser
+
+data class UserDetail(
+    val user: User,
+    val collectTopics: List<Topic>,
+)
