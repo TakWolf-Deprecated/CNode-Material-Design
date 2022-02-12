@@ -4,8 +4,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 
-open class ListLiveHolder<Entity> {
-    val entitiesData: MutableLiveData<MutableList<Entity>?> = MutableLiveData()
+open class ListLiveHolder<Entity>(entities: List<Entity>? = null) {
+    val entitiesData: MutableLiveData<MutableList<Entity>?> = MutableLiveData(entities?.let { ArrayList(it) })
 
     fun getList(): List<Entity> {
         return entitiesData.value?.let { entities -> ArrayList(entities) } ?: ArrayList()
