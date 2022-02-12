@@ -129,7 +129,7 @@
             android:id="@+id/img_author"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:src="@drawable/image_placeholder" />
+            tools:src="@drawable/image_placeholder" />
 
         <TextView
             android:id="@+id/tv_author"
