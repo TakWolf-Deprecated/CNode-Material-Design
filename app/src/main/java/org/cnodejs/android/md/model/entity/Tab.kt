@@ -17,8 +17,7 @@ enum class Tab(@StringRes val titleId: Int, @IdRes val tabId: Int) {
     DEV(R.string.tab_dev, R.id.tab_dev),
     UNKNOWN(R.string.tab_unknown, 0);
 
-    val queryValue: String?
-    get() {
+    val queryValue: String? get() {
         return if (this == ALL || this == UNKNOWN) {
             null
         } else {
