@@ -8,7 +8,7 @@ import org.cnodejs.android.md.vm.holder.TopicPagingLiveHolder
 
 class MainViewModel(application: Application) : AndroidViewModel(application), IToastViewModel {
     override val toastLiveHolder = ToastLiveHolder()
-    val topicPagingLiveHolder = TopicPagingLiveHolder(this, toastLiveHolder)
+    val topicsLiveHolder = TopicPagingLiveHolder(this, toastLiveHolder)
 
     var firstBackPressedTime = 0L
 }

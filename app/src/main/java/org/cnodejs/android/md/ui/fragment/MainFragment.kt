@@ -91,7 +91,7 @@ class MainFragment : BaseFragment() {
             }
         }
 
-        mainViewModel.topicPagingLiveHolder.tabData.observe(viewLifecycleOwner) {
+        mainViewModel.topicsLiveHolder.tabData.observe(viewLifecycleOwner) {
             it?.let { tab ->
                 binding.contentLayout.toolbar.setTitle(tab.titleId)
                 for (tabView in tabViews) {
@@ -121,7 +121,7 @@ class MainFragment : BaseFragment() {
         val adapter = TopicListAdapter()
         adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
         adapter.onUserClickListener = UserDetailNavigateListener(navigator)
-        mainViewModel.topicPagingLiveHolder.setupView(viewLifecycleOwner, adapter, binding.contentLayout.refreshLayout, loadMoreFooter)
+        mainViewModel.topicsLiveHolder.setupView(viewLifecycleOwner, adapter, binding.contentLayout.refreshLayout, loadMoreFooter)
         loadMoreFooter.addToRecyclerView(binding.contentLayout.recyclerView)
         binding.contentLayout.recyclerView.adapter = adapter
 
@@ -154,7 +154,7 @@ class MainFragment : BaseFragment() {
         }
 
         val onNavTabClickListener = View.OnClickListener { v: View ->
-            mainViewModel.topicPagingLiveHolder.switchTab(Tab.fromTabId(v.id))
+            mainViewModel.topicsLiveHolder.switchTab(Tab.fromTabId(v.id))
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
         for (tabView in tabViews) {
