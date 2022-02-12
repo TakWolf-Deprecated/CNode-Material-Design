@@ -27,10 +27,10 @@ open class ListLiveHolder<Entity> {
 }
 
 fun <Entity> ListLiveHolder<Entity>.setupView(
-    viewLifecycleOwner: LifecycleOwner,
+    owner: LifecycleOwner,
     adapter: ListAdapter<Entity, *>,
 ) {
-    entitiesData.observe(viewLifecycleOwner) {
+    entitiesData.observe(owner) {
         adapter.submitList(it?.let { entities -> ArrayList(entities) } ?: ArrayList())
     }
 }
