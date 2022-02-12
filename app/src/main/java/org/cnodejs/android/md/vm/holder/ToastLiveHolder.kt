@@ -11,5 +11,5 @@ class ToastLiveHolder {
 }
 
 interface IToastViewModel {
-    val toastLiveHolder: ToastLiveHolder
+    val toastHolder: ToastLiveHolder
 }

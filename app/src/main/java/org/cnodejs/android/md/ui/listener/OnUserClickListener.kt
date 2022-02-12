@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.ui.listener
 
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import org.cnodejs.android.md.model.entity.IUser
 import org.cnodejs.android.md.ui.fragment.UserDetailFragment
 import org.cnodejs.android.md.util.Navigator

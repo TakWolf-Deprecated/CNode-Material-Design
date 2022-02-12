@@ -11,10 +11,10 @@ import org.cnodejs.android.md.model.entity.TopicWithSummary
 
 class TopicPagingLiveHolder(
     viewModel: AndroidViewModel,
-    toastLiveHolder: ToastLiveHolder,
+    toastHolder: ToastLiveHolder,
 ) : PagingLiveHolder<TopicWithSummary, Int>(
     viewModel,
-    toastLiveHolder,
+    toastHolder,
 ) {
     companion object {
         private const val TAG = "TopicPagingLiveHolder"

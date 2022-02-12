@@ -5,6 +5,7 @@ import org.cnodejs.android.md.ui.dialog.LoadingDialog
 
 class LoadingLiveHolder {
     val loadingCountData = MutableLiveData(0)
+
     val loadingDialogTag = LoadingDialog.genTag()
 
     fun showLoading() {
@@ -19,5 +20,5 @@ class LoadingLiveHolder {
 }
 
 interface ILoadingViewModel {
-    val loadingLiveHolder: LoadingLiveHolder
+    val loadingHolder: LoadingLiveHolder
 }

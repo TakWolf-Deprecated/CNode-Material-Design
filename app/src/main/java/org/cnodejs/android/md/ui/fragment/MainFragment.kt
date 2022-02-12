@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
@@ -26,7 +27,9 @@ import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.listenToRecyclerView
 import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MainViewModel
+import org.cnodejs.android.md.vm.SettingViewModel
 import org.cnodejs.android.md.vm.holder.setupView
 
 class MainFragment : BaseFragment() {
@@ -50,6 +53,8 @@ class MainFragment : BaseFragment() {
         @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)
         a.recycle()
 
+        val accountViewModel: AccountViewModel by activityViewModels()
+        val settingViewModel: SettingViewModel by activityViewModels()
         val mainViewModel: MainViewModel by viewModels()
         observeViewModel(mainViewModel)
 
@@ -91,7 +96,7 @@ class MainFragment : BaseFragment() {
             }
         }
 
-        mainViewModel.topicsLiveHolder.tabData.observe(viewLifecycleOwner) {
+        mainViewModel.topicsHolder.tabData.observe(viewLifecycleOwner) {
             it?.let { tab ->
                 binding.contentLayout.toolbar.setTitle(tab.titleId)
                 for (tabView in tabViews) {
@@ -121,7 +126,7 @@ class MainFragment : BaseFragment() {
         val adapter = TopicListAdapter()
         adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
         adapter.onUserClickListener = UserDetailNavigateListener(navigator)
-        mainViewModel.topicsLiveHolder.setupView(viewLifecycleOwner, adapter, binding.contentLayout.refreshLayout, loadMoreFooter)
+        mainViewModel.topicsHolder.setupView(viewLifecycleOwner, adapter, binding.contentLayout.refreshLayout, loadMoreFooter)
         loadMoreFooter.addToRecyclerView(binding.contentLayout.recyclerView)
         binding.contentLayout.recyclerView.adapter = adapter
 
@@ -154,7 +159,7 @@ class MainFragment : BaseFragment() {
         }
 
         val onNavTabClickListener = View.OnClickListener { v: View ->
-            mainViewModel.topicsLiveHolder.switchTab(Tab.fromTabId(v.id))
+            mainViewModel.topicsHolder.switchTab(Tab.fromTabId(v.id))
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
         for (tabView in tabViews) {

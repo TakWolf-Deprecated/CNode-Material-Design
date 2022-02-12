@@ -12,10 +12,11 @@ import kotlinx.coroutines.launch
 
 abstract class PagingLiveHolder<Entity, PagingParams>(
     private val viewModel: ViewModel,
-    private val toastLiveHolder: ToastLiveHolder,
+    private val toastHolder: ToastLiveHolder,
 ) : ListLiveHolder<Entity>() {
     val refreshStateData = MutableLiveData(false)
     val loadMoreStateData = MutableLiveData(LoadMoreFooter.STATE_DISABLED)
+
     private var isRefreshDoing = false
     private var isLoadMoreDoing = false
     private var refreshVersion = 0
@@ -56,7 +57,7 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
             viewModel.viewModelScope.launch(Dispatchers.Main) {
                 isRefreshDoing = false
                 refreshStateData.value = false
-                toastLiveHolder.showToast(message)
+                toastHolder.showToast(message)
             }
         }
     }
@@ -90,7 +91,7 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
             viewModel.viewModelScope.launch(Dispatchers.Main) {
                 isLoadMoreDoing = false
                 loadMoreStateData.value = LoadMoreFooter.STATE_FAILED
-                toastLiveHolder.showToast(message)
+                toastHolder.showToast(message)
             }
         }
     }
