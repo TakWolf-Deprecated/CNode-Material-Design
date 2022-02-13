@@ -41,29 +41,23 @@ class AccountStore(application: Application) : DataStoreWrapper(application, "ac
         account
     }
 
-    fun update(user: User): Account? = runBlocking {
-        var preferences = dataStore.data.first()
-        if (preferences[KEY_ACCESS_TOKEN] == null || preferences[KEY_LOGIN_NAME] != user.loginName) {
-            null
-        } else {
-            preferences = dataStore.edit { mutablePreferences ->
-                mutablePreferences[KEY_AVATAR_URL] = user.avatarUrl
-                mutablePreferences[KEY_SCORE] = user.score
+    fun update(user: User) = runBlocking {
+        dataStore.edit { mutablePreferences ->
+            if (mutablePreferences[KEY_ACCESS_TOKEN] == null || mutablePreferences[KEY_LOGIN_NAME] != user.loginName) {
+                return@edit
             }
+            mutablePreferences[KEY_AVATAR_URL] = user.avatarUrl
+            mutablePreferences[KEY_SCORE] = user.score
+
             val account = Account(
-                preferences[KEY_ACCESS_TOKEN]!!,
-                preferences[KEY_ID]!!,
+                mutablePreferences[KEY_ACCESS_TOKEN]!!,
+                mutablePreferences[KEY_ID]!!,
                 user.loginName,
                 user.avatarUrl,
                 user.score,
             )
             EventBus.getDefault().post(AccountUpdatedEvent(account))
-            account
         }
-    }
-
-    fun getAccessToken(): String? = runBlocking {
-        dataStore.data.first()[KEY_ACCESS_TOKEN]
     }
 
     fun getAccount(): Account? = runBlocking {
@@ -79,6 +73,14 @@ class AccountStore(application: Application) : DataStoreWrapper(application, "ac
                 preferences[KEY_SCORE] ?: 0,
             )
         }
+    }
+
+    fun getAccessToken(): String? = runBlocking {
+        dataStore.data.first()[KEY_ACCESS_TOKEN]
+    }
+
+    fun getLoginName(): String? = runBlocking {
+        dataStore.data.first()[KEY_LOGIN_NAME]
     }
 
     fun logout() = runBlocking {

@@ -63,7 +63,9 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
             viewModelScope.launch(Dispatchers.IO) {
                 try {
                     val result = api.getUser(account.loginName)
-                    accountStore.update(result.data)
+                    if (accountStore.getLoginName() == result.data.loginName) {
+                        accountStore.update(result.data)
+                    }
                 } catch (e: Exception) {
                     if (BuildConfig.DEBUG) {
                         Log.e(TAG, "loadUser", e)
