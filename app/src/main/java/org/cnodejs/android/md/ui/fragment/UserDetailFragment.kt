@@ -42,6 +42,8 @@ class UserDetailFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+
+        userDetailViewModel.loginName = requireArguments().getString(KEY_LOGIN_NAME)
     }
 
     override fun onCreateView(
