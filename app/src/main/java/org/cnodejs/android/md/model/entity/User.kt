@@ -15,7 +15,7 @@ interface IUser {
 data class User(
     @Json(name = "loginname") override val loginName: String,
     @Json(name = "avatar_url") override val avatarUrl: String,
-    val githubUsername: String,
+    val githubUsername: String?,
     @Json(name = "create_at") val createAt: OffsetDateTime,
     val score: Int,
     @Json(name = "recent_topics") val recentTopics: List<TopicInUser>,
