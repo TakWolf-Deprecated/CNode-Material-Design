@@ -18,11 +18,12 @@ import org.greenrobot.eventbus.ThreadMode
 class NavHostActivity : AppCompatActivity(), NavControllerProvider {
     override val navigator: Navigator by lazy { Navigator(findNavController(R.id.nav_host)) }
 
+    private val settingViewModel: SettingViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        val settingViewModel: SettingViewModel by viewModels()
         settingViewModel.loadNightModeConfig()
 
         EventBus.getDefault().register(this)
