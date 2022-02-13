@@ -6,10 +6,16 @@ import org.cnodejs.android.md.ui.fragment.UserDetailFragment
 import org.cnodejs.android.md.util.Navigator
 
 interface OnUserClickListener {
+    fun onUserClick(loginName: String)
+
     fun onUserClick(user: IUser, imgAvatar: ImageView)
 }
 
 class UserDetailNavigateListener(private val navigator: Navigator) : OnUserClickListener {
+    override fun onUserClick(loginName: String) {
+        UserDetailFragment.open(navigator, loginName)
+    }
+
     override fun onUserClick(user: IUser, imgAvatar: ImageView) {
         UserDetailFragment.open(navigator, user, imgAvatar)
     }
