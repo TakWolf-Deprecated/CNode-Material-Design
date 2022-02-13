@@ -7,17 +7,17 @@ import org.cnodejs.android.md.BuildConfig
 import org.cnodejs.android.md.model.api.CNodeClient
 import org.cnodejs.android.md.model.entity.ErrorResult
 import org.cnodejs.android.md.model.entity.Tab
-import org.cnodejs.android.md.model.entity.TopicWithSummary
+import org.cnodejs.android.md.model.entity.TopicForHome
 
-class TopicPagingLiveHolder(
+class TopicForHomePagingLiveHolder(
     viewModel: AndroidViewModel,
     toastHolder: ToastLiveHolder,
-) : PagingLiveHolder<TopicWithSummary, Int>(
+) : PagingLiveHolder<TopicForHome, Int>(
     viewModel,
     toastHolder,
 ) {
     companion object {
-        private const val TAG = "TopicPagingLiveHolder"
+        private const val TAG = "TopicForHomePaging"
     }
 
     private val api = CNodeClient.getInstance(viewModel.getApplication()).api
@@ -42,8 +42,7 @@ class TopicPagingLiveHolder(
 
     override suspend fun doRefresh(version: Int) {
         try {
-            val result = api.getTopics(getTab().queryValue, mdrender = true)
-            val topics = TopicWithSummary.fromList(result.data)
+            val topics = api.getTopics(getTab().queryValue, mdrender = true).data
             refreshSuccess(version, topics, 1, topics.isEmpty())
         } catch (e: Exception) {
             if (BuildConfig.DEBUG) {
@@ -57,8 +56,7 @@ class TopicPagingLiveHolder(
     override suspend fun doLoadMore(version: Int, pagingParams: Int) {
         try {
             val nextPage = pagingParams + 1
-            val result = api.getTopics(getTab().queryValue, nextPage, mdrender = true)
-            val topics = TopicWithSummary.fromList(result.data)
+            val topics = api.getTopics(getTab().queryValue, nextPage, mdrender = true).data
             loadMoreSuccess(version, topics, nextPage, topics.isEmpty())
         } catch (e: Exception) {
             if (BuildConfig.DEBUG) {

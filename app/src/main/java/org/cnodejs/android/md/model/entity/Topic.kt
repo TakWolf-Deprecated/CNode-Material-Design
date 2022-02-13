@@ -1,21 +1,28 @@
 package org.cnodejs.android.md.model.entity
 
+import com.squareup.moshi.FromJson
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import com.squareup.moshi.ToJson
 import org.cnodejs.android.md.util.FormatUtils
 import java.time.OffsetDateTime
-import java.util.stream.Collectors
 
 interface ITopic {
     val id: String
+    val author: Author
+    val title: String
+}
+
+interface ITopicSimple : ITopic {
+    val lastReplyAt: OffsetDateTime
 }
 
 @JsonClass(generateAdapter = true)
 data class Topic(
     override val id: String,
     @Json(name = "author_id") val authorId: String,
-    val author: Author,
-    val title: String,
+    override val author: Author,
+    override val title: String,
     val tab: Tab = Tab.UNKNOWN,
     @Json(name = "good") val isGood: Boolean,
     @Json(name = "top") val isTop: Boolean,
@@ -23,29 +30,34 @@ data class Topic(
     @Json(name = "visit_count") val visitCount: Int,
     @Json(name = "reply_count") val replyCount: Int,
     @Json(name = "create_at") val createAt: OffsetDateTime,
-    @Json(name = "last_reply_at") val lastReplyAt: OffsetDateTime,
-) : ITopic
+    @Json(name = "last_reply_at") override val lastReplyAt: OffsetDateTime,
+) : ITopicSimple
 
-data class TopicWithSummary(val topic: Topic) {
-    companion object {
-        fun fromList(topics: List<Topic>): List<TopicWithSummary> {
-            return topics.stream()
-                .map { topic->
-                    TopicWithSummary(topic)
-                }
-                .collect(Collectors.toList())
-        }
+data class TopicForHome(val topic: Topic) : ITopic {
+    override val id: String get() = topic.id
+    override val author: Author get() = topic.author
+    override val title: String get() = topic.title
+    val summary = FormatUtils.getHtmlSummary(topic.content)
+}
+
+class TopicForHomeJsonAdapter {
+    @FromJson
+    fun fromJson(topic: Topic): TopicForHome {
+        return TopicForHome(topic)
     }
 
-    val summary = FormatUtils.getHtmlSummary(topic.content)
+    @ToJson
+    fun toJson(topicForHome: TopicForHome): Topic {
+        return topicForHome.topic
+    }
 }
 
 @JsonClass(generateAdapter = true)
 data class TopicWithReply(
     override val id: String,
     @Json(name = "author_id") val authorId: String,
-    val author: Author,
-    val title: String,
+    override val author: Author,
+    override val title: String,
     val tab: Tab = Tab.UNKNOWN,
     @Json(name = "good") val isGood: Boolean,
     @Json(name = "top") val isTop: Boolean,
@@ -61,14 +73,14 @@ data class TopicWithReply(
 @JsonClass(generateAdapter = true)
 data class TopicInUser(
     override val id: String,
-    val author: Author,
-    val title: String,
-    @Json(name = "last_reply_at") val lastReplyAt: OffsetDateTime,
-) : ITopic
+    override val author: Author,
+    override val title: String,
+    @Json(name = "last_reply_at") override val lastReplyAt: OffsetDateTime,
+) : ITopicSimple
 
 @JsonClass(generateAdapter = true)
 data class TopicInMessage(
-    override val id: String,
+    val id: String,
     val title: String,
     @Json(name = "last_reply_at") val lastReplyAt: OffsetDateTime,
-) : ITopic
+)

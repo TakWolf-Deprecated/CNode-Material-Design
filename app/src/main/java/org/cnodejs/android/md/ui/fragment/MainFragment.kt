@@ -18,14 +18,14 @@ import coil.load
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMainBinding
 import org.cnodejs.android.md.model.entity.Tab
-import org.cnodejs.android.md.ui.adapter.TopicListAdapter
+import org.cnodejs.android.md.ui.adapter.TopicForHomeListAdapter
 import org.cnodejs.android.md.ui.dialog.LogoutAlertDialog
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
-import org.cnodejs.android.md.ui.widget.LoadMoreFooter
 import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
 import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.listenToRecyclerView
+import org.cnodejs.android.md.ui.widget.LoadMoreFooter
 import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MainViewModel
@@ -124,7 +124,7 @@ class MainFragment : BaseFragment() {
         binding.contentLayout.refreshLayout.setColorSchemeColors(colorAccent)
         binding.contentLayout.recyclerView.layoutManager = LinearLayoutManager(context)
         val loadMoreFooter = LoadMoreFooter.create(binding.contentLayout.recyclerView)
-        val adapter = TopicListAdapter()
+        val adapter = TopicForHomeListAdapter()
         adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
         adapter.onUserClickListener = UserDetailNavigateListener(navigator)
         mainViewModel.topicsHolder.setupView(viewLifecycleOwner, adapter, binding.contentLayout.refreshLayout, loadMoreFooter)
