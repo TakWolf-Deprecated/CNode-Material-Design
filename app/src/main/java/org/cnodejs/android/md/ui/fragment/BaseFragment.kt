@@ -17,6 +17,7 @@ import java.util.*
 abstract class BaseFragment : Fragment(), NavControllerProvider {
     companion object {
         private const val KEY_UNIQUE_TAG = "uniqueTag"
+        private const val TAG_LOADING = "${LoadingDialog.TAG}@Base"
     }
 
     override val navigator: Navigator by lazy { Navigator(findNavController()) }
@@ -59,9 +60,9 @@ abstract class BaseFragment : Fragment(), NavControllerProvider {
             viewModel.loadingHolder.loadingCountData.observe(viewLifecycleOwner) {
                 it?.let { count ->
                     if (count > 0) {
-                        LoadingDialog.show(childFragmentManager, viewModel.loadingHolder.loadingDialogTag)
+                        LoadingDialog.show(childFragmentManager, TAG_LOADING)
                     } else {
-                        BaseDialog.dismiss(childFragmentManager, viewModel.loadingHolder.loadingDialogTag)
+                        BaseDialog.dismiss(childFragmentManager, TAG_LOADING)
                     }
                 }
             }

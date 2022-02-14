@@ -9,11 +9,7 @@ import java.util.*
 
 class LoadingDialog : BaseDialog() {
     companion object {
-        private const val TAG = "LoadingDialog"
-
-        fun genTag(): String {
-            return "${TAG}-${UUID.randomUUID()}"
-        }
+        const val TAG = "LoadingDialog"
 
         fun show(manager: FragmentManager, tag: String) {
             find(manager, tag) ?: run {
