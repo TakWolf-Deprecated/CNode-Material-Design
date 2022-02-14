@@ -8,8 +8,8 @@ import kotlinx.coroutines.runBlocking
 
 class SettingStore(application: Application) : DataStoreWrapper(application, "setting") {
     companion object {
-        private val KEY_IS_NIGHT_MODE = booleanPreferencesKey("is_night_mode")
-        private val KEY_IS_DISPLAY_TAB_DEB = booleanPreferencesKey("is_display_tab_dev")
+        private val KEY_IS_NIGHT_MODE = booleanPreferencesKey("isNightMode")
+        private val KEY_IS_DISPLAY_TAB_DEB = booleanPreferencesKey("isDisplayTabDev")
     }
 
     fun isNightMode(): Boolean = runBlocking {

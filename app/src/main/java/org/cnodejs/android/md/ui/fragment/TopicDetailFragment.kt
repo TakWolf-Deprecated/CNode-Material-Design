@@ -14,7 +14,7 @@ import org.cnodejs.android.md.vm.TopicDetailViewModel
 
 class TopicDetailFragment : BaseFragment() {
     companion object {
-        private const val KEY_TOPIC_ID = "topic_id"
+        private const val KEY_TOPIC_ID = "topicId"
 
         fun open(navigator: Navigator, topicId: String) {
             val args = Bundle()

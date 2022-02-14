@@ -16,8 +16,8 @@ import org.cnodejs.android.md.vm.UserDetailViewModel
 
 class UserDetailFragment : BaseFragment() {
     companion object {
-        private const val KEY_LOGIN_NAME = "login_name"
-        private const val KEY_AVATAR_URL = "avatar_url"
+        private const val KEY_LOGIN_NAME = "loginName"
+        private const val KEY_AVATAR_URL = "avatarUrl"
 
         fun open(navigator: Navigator, loginName: String) {
             val args = Bundle()

@@ -15,10 +15,10 @@ import org.greenrobot.eventbus.EventBus
 
 class AccountStore(application: Application) : DataStoreWrapper(application, "account") {
     companion object {
-        private val KEY_ACCESS_TOKEN = stringPreferencesKey("access_token")
+        private val KEY_ACCESS_TOKEN = stringPreferencesKey("accessToken")
         private val KEY_ID = stringPreferencesKey("id")
-        private val KEY_LOGIN_NAME = stringPreferencesKey("login_name")
-        private val KEY_AVATAR_URL = stringPreferencesKey("avatar_url")
+        private val KEY_LOGIN_NAME = stringPreferencesKey("loginName")
+        private val KEY_AVATAR_URL = stringPreferencesKey("avatarUrl")
         private val KEY_SCORE = intPreferencesKey("score")
     }
 
