@@ -26,7 +26,7 @@ class UserDetailFragment : BaseFragment() {
         }
 
         fun open(navigator: Navigator, user: IUser, imgAvatar: ImageView) {
-            if (user.avatarUrl == null) {
+            if (user.loginName == null) {
                 return
             }
             val args = Bundle()
