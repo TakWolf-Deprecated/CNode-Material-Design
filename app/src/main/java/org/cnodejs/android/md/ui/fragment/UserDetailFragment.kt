@@ -32,7 +32,7 @@ class UserDetailFragment : BaseFragment() {
             val args = Bundle()
             args.putString(KEY_LOGIN_NAME, user.loginName)
             args.putString(KEY_AVATAR_URL, user.avatarUrl)
-            val extras = FragmentNavigatorExtras(imgAvatar to "img_avatar")
+            val extras = FragmentNavigatorExtras(imgAvatar to "imgAvatar")
             navigator.push(R.id.fragment_user_detail, args, extras = extras)
         }
     }

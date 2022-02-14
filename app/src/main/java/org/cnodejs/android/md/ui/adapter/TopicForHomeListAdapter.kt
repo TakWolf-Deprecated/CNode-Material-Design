@@ -37,7 +37,7 @@ class TopicForHomeListAdapter : TopicListAdapter<TopicForHome, TopicForHomeListA
             binding.tvTitle.text = topic.title
             binding.tvSummary.text = topicForHome.summary
             binding.imgAuthor.loadAvatar(topic.author.avatarUrlCompat)
-            binding.imgAuthor.transitionName = "img_avatar_${bindingAdapterPosition}"
+            binding.imgAuthor.transitionName = "imgAvatar@${bindingAdapterPosition}"
             binding.tvAuthor.text = topic.author.loginName
             binding.tvCreateTime.text = resources.getString(R.string.create_at_s, topic.createAt.timeSpanStringFromNow(resources))
         }

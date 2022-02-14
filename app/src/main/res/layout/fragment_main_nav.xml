@@ -60,7 +60,7 @@
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:layout_margin="16dp"
-                    android:transitionName="img_login_avatar"
+                    android:transitionName="imgLoginAvatar"
                     app:layout_constraintTop_toBottomOf="@id/status_bar"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:src="@drawable/image_placeholder" />

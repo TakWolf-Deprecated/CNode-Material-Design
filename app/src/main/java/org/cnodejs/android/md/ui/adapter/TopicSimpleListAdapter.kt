@@ -25,6 +25,7 @@ class TopicSimpleListAdapter : TopicListAdapter<ITopicSimple, TopicSimpleListAda
     ) {
         fun bind(topic: ITopicSimple) {
             binding.imgAuthor.loadAvatar(topic.author.avatarUrlCompat)
+            binding.imgAuthor.transitionName = "imgAvatar@${bindingAdapterPosition}"
             binding.tvTitle.text = topic.title
             binding.tvAuthor.text = topic.author.loginName
             binding.tvLastReplyTime.text = topic.lastReplyAt.timeSpanStringFromNow(itemView.resources)
