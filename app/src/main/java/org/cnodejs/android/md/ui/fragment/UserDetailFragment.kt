@@ -129,7 +129,7 @@ class UserDetailFragment : BaseFragment() {
             val binding = PageUserDetailTopicsBinding.inflate(inflater, container, false)
 
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            val adapter = TopicSimpleListAdapter()
+            val adapter = TopicSimpleListAdapter(uniqueTag)
             adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
             adapter.onUserClickListener = UserDetailNavigateListener(navigator, loginName)
             binding.recyclerView.adapter = adapter

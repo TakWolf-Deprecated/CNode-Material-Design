@@ -10,16 +10,20 @@ import org.cnodejs.android.md.model.entity.TopicForHome
 import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
-class TopicForHomeListAdapter : TopicListAdapter<TopicForHome, TopicForHomeListAdapter.ViewHolder>(TopicForHomeDiffItemCallback) {
+class TopicForHomeListAdapter(private val uniqueTag: String) : TopicListAdapter<TopicForHome, TopicForHomeListAdapter.ViewHolder>(TopicForHomeDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemTopicForHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        val binding = ItemTopicForHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, uniqueTag)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ItemTopicForHomeBinding) : TopicListAdapter.ViewHolder(
+    class ViewHolder(
+        private val binding: ItemTopicForHomeBinding,
+        private val uniqueTag: String,
+    ) : TopicListAdapter.ViewHolder(
         binding.root,
         binding.layoutContent,
         binding.layoutAuthor,
@@ -37,7 +41,7 @@ class TopicForHomeListAdapter : TopicListAdapter<TopicForHome, TopicForHomeListA
             binding.tvTitle.text = topic.title
             binding.tvSummary.text = topicForHome.summary
             binding.imgAuthor.loadAvatar(topic.author.avatarUrlCompat)
-            binding.imgAuthor.transitionName = "imgAvatar@${bindingAdapterPosition}"
+            binding.imgAuthor.transitionName = "imgAvatar-${bindingAdapterPosition}@${uniqueTag}"
             binding.tvAuthor.text = topic.author.loginName
             binding.tvCreateTime.text = resources.getString(R.string.create_at_s, topic.createAt.timeSpanStringFromNow(resources))
         }
