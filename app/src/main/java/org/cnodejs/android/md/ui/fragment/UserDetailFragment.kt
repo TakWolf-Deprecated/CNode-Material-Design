@@ -20,8 +20,9 @@ class UserDetailFragment : BaseFragment() {
         private const val KEY_AVATAR_URL = "avatarUrl"
 
         fun open(navigator: Navigator, loginName: String) {
-            val args = Bundle()
-            args.putString(KEY_LOGIN_NAME, loginName)
+            val args = Bundle().apply {
+                putString(KEY_LOGIN_NAME, loginName)
+            }
             navigator.push(R.id.fragment_user_detail, args)
         }
 
@@ -29,9 +30,10 @@ class UserDetailFragment : BaseFragment() {
             if (user.loginName == null) {
                 return
             }
-            val args = Bundle()
-            args.putString(KEY_LOGIN_NAME, user.loginName)
-            args.putString(KEY_AVATAR_URL, user.avatarUrl)
+            val args = Bundle().apply {
+                putString(KEY_LOGIN_NAME, user.loginName)
+                putString(KEY_AVATAR_URL, user.avatarUrl)
+            }
             val extras = FragmentNavigatorExtras(imgAvatar to "imgAvatar")
             navigator.push(R.id.fragment_user_detail, args, extras = extras)
         }

@@ -17,8 +17,9 @@ class TopicDetailFragment : BaseFragment() {
         private const val KEY_TOPIC_ID = "topicId"
 
         fun open(navigator: Navigator, topicId: String) {
-            val args = Bundle()
-            args.putString(KEY_TOPIC_ID, topicId)
+            val args = Bundle().apply {
+                putString(KEY_TOPIC_ID, topicId)
+            }
             navigator.push(R.id.fragment_topic_detail, args, NavAnim.SLIDE)
         }
 
