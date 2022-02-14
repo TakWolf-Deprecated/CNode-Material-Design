@@ -11,12 +11,19 @@ interface OnUserClickListener {
     fun onUserClick(user: IUser, imgAvatar: ImageView)
 }
 
-class UserDetailNavigateListener(private val navigator: Navigator) : OnUserClickListener {
+class UserDetailNavigateListener(
+    private val navigator: Navigator,
+    private val currentLoginName: String? = null,
+) : OnUserClickListener {
     override fun onUserClick(loginName: String) {
-        UserDetailFragment.open(navigator, loginName)
+        if (loginName != currentLoginName) {
+            UserDetailFragment.open(navigator, loginName)
+        }
     }
 
     override fun onUserClick(user: IUser, imgAvatar: ImageView) {
-        UserDetailFragment.open(navigator, user, imgAvatar)
+        if (user.loginName != currentLoginName) {
+            UserDetailFragment.open(navigator, user, imgAvatar)
+        }
     }
 }
