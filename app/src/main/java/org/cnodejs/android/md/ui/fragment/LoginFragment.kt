@@ -17,7 +17,10 @@ import org.cnodejs.android.md.vm.LoginViewModel
 class LoginFragment : BaseFragment() {
     companion object {
         fun open(navigator: Navigator) {
-            navigator.push(R.id.fragment_login, isSingleTop = true)
+            if (navigator.current() == R.id.fragment_login) {
+                return
+            }
+            navigator.push(R.id.fragment_login)
         }
     }
 

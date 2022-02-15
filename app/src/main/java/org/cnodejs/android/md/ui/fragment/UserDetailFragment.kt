@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -38,12 +37,12 @@ class UserDetailFragment : BaseFragment() {
             if (user.loginName == null) {
                 return
             }
+            val elements = mapOf<View, String>(imgAvatar to "imgAvatar")
             val args = Bundle().apply {
                 putString(KEY_LOGIN_NAME, user.loginName)
                 putString(KEY_AVATAR_URL, user.avatarUrl)
             }
-            val extras = FragmentNavigatorExtras(imgAvatar to "imgAvatar")
-            navigator.push(R.id.fragment_user_detail, args, extras = extras)
+            navigator.pushShared(R.id.fragment_user_detail, elements, args)
         }
     }
 
@@ -70,9 +69,8 @@ class UserDetailFragment : BaseFragment() {
     ): View {
         val binding = FragmentUserDetailBinding.inflate(inflater, container, false)
 
-        binding.imgAuthor.loadAvatar(avatarUrl)
-
-        // TODO
+        binding.imgAvatar.loadAvatar(avatarUrl)
+        setTargetSharedName(binding.imgAvatar, "imgAvatar")
 
         binding.viewPager.offscreenPageLimit = 3
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
@@ -86,6 +84,12 @@ class UserDetailFragment : BaseFragment() {
         }
 
         observeViewModel(userDetailViewModel)
+
+        userDetailViewModel.userDetailData.observe(viewLifecycleOwner) {
+            it?.let { userDetail ->
+                binding.imgAvatar.loadAvatar(userDetail.user.avatarUrlCompat)
+            }
+        }
 
         return binding.root
     }

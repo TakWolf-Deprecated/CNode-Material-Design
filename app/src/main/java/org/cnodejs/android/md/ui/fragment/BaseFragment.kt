@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -37,6 +38,11 @@ abstract class BaseFragment : Fragment(), NavControllerProvider {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(KEY_UNIQUE_TAG, _uniqueTag)
+    }
+
+    protected fun setTargetSharedName(view: View, name: String) {
+        val key = navigator.sharedKey(name)
+        view.transitionName = arguments?.getString(key) ?: "${uniqueTag}:${name}"
     }
 
     protected fun showToast(message: String) {

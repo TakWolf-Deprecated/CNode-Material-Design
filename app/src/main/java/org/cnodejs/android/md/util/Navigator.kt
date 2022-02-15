@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.util
 
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.AnimRes
 import androidx.annotation.AnimatorRes
 import androidx.annotation.IdRes
@@ -8,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigator
 import org.cnodejs.android.md.R
+import java.util.*
 
 enum class NavAnim(
     @AnimRes @AnimatorRes internal val enterAnim: Int = -1,
@@ -36,45 +38,73 @@ enum class NavAnim(
 }
 
 class Navigator(private val controller: NavController) {
+    companion object {
+        private const val KEY_SHARED_ELEMENT = "sharedElement"
+    }
+
+    fun sharedKey(name: String): String {
+        return "${KEY_SHARED_ELEMENT}.${name}"
+    }
+
+    @IdRes
+    fun current(): Int? {
+        return controller.currentDestination?.id
+    }
+
     fun push(
         @IdRes destId: Int,
         args: Bundle? = null,
         anim: NavAnim = NavAnim.FADE,
-        extras: FragmentNavigator.Extras? = null,
-        isSingleTop: Boolean = false,
     ) {
-        if (isSingleTop) {
-            val currentId = controller.currentDestination?.id ?: -1
-            if (currentId == destId) {
-                return
-            }
-        }
         val options = NavOptions.Builder()
-            .apply {
-                if (extras == null) {
-                    anim.applyToOptions(this)
-                }
-            }
+            .apply { anim.applyToOptions(this) }
             .build()
-        controller.navigate(destId, args, options, extras)
+        controller.navigate(destId, args, options)
+    }
+
+    fun pushShared(
+        @IdRes destId: Int,
+        elements: Map<View, String>,
+        args: Bundle = Bundle(),
+    ) {
+        val extrasBuilder = FragmentNavigator.Extras.Builder()
+        val uniqueTag = UUID.randomUUID().toString()
+        elements.forEach { (view, name) ->
+            val targetTransitionName = "${uniqueTag}:${name}"
+            extrasBuilder.addSharedElement(view, targetTransitionName)
+            args.putString(sharedKey(name), targetTransitionName)
+        }
+        controller.navigate(destId, args, null, extrasBuilder.build())
     }
 
     fun replace(
         @IdRes destId: Int,
         args: Bundle? = null,
         anim: NavAnim = NavAnim.FADE,
-        extras: FragmentNavigator.Extras? = null,
     ) {
-        val currentId = controller.currentDestination!!.id
         val options = NavOptions.Builder()
-            .setPopUpTo(currentId, true)
-            .apply {
-                if (extras == null) {
-                    anim.applyToOptions(this)
-                }
-            }
+            .setPopUpTo(current()!!, true)
+            .apply { anim.applyToOptions(this) }
             .build()
-        controller.navigate(destId, args, options, extras)
+        controller.navigate(destId, args, options)
+    }
+
+    fun replaceShared(
+        @IdRes destId: Int,
+        elements: Map<View, String>,
+        args: Bundle = Bundle(),
+    ) {
+        val options = NavOptions.Builder()
+            .setPopUpTo(current()!!, true)
+            .build()
+        val extrasBuilder = FragmentNavigator.Extras.Builder()
+        val uniqueTag = UUID.randomUUID().toString()
+        elements.forEach { (view, name) ->
+            val targetTransitionName = "${uniqueTag}:${name}"
+            extrasBuilder.addSharedElement(view, targetTransitionName)
+            args.putString(sharedKey(name), targetTransitionName)
+        }
+        controller.navigate(destId, args, options, extrasBuilder.build())
     }
 
     fun back() {
