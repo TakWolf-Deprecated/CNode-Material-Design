@@ -27,6 +27,7 @@ import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.listenToRecyclerView
 import org.cnodejs.android.md.ui.widget.LoadMoreFooter
 import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MainViewModel
 import org.cnodejs.android.md.vm.SettingViewModel
@@ -52,6 +53,8 @@ class MainFragment : BaseFragment() {
             binding.navLayout.tabJob,
             binding.navLayout.tabDev,
         )
+
+        binding.navLayout.imgAvatar.setSharedName(uniqueTag, "navLayout.imgAvatar")
 
         val a = requireContext().obtainStyledAttributes(intArrayOf(android.R.attr.colorAccent))
         @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)

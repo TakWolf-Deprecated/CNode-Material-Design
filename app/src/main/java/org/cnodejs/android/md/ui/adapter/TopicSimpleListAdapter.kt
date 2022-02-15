@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import org.cnodejs.android.md.databinding.ItemTopicSimpleBinding
 import org.cnodejs.android.md.model.entity.ITopicSimple
 import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
 class TopicSimpleListAdapter(private val uniqueTag: String) : TopicListAdapter<ITopicSimple, TopicSimpleListAdapter.ViewHolder>(TopicSimpleDiffItemCallback) {
@@ -29,7 +30,7 @@ class TopicSimpleListAdapter(private val uniqueTag: String) : TopicListAdapter<I
     ) {
         fun bind(topic: ITopicSimple) {
             binding.imgAuthor.loadAvatar(topic.author.avatarUrlCompat)
-            binding.imgAuthor.transitionName = "imgAvatar-${bindingAdapterPosition}@${uniqueTag}"
+            binding.imgAuthor.setSharedName(uniqueTag, "imgAuthor-${bindingAdapterPosition}")
             binding.tvTitle.text = topic.title
             binding.tvAuthor.text = topic.author.loginName
             binding.tvLastReplyTime.text = topic.lastReplyAt.timeSpanStringFromNow(itemView.resources)

@@ -8,6 +8,7 @@ import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.ItemTopicForHomeBinding
 import org.cnodejs.android.md.model.entity.TopicForHome
 import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
 class TopicForHomeListAdapter(private val uniqueTag: String) : TopicListAdapter<TopicForHome, TopicForHomeListAdapter.ViewHolder>(TopicForHomeDiffItemCallback) {
@@ -41,7 +42,7 @@ class TopicForHomeListAdapter(private val uniqueTag: String) : TopicListAdapter<
             binding.tvTitle.text = topic.title
             binding.tvSummary.text = topicForHome.summary
             binding.imgAuthor.loadAvatar(topic.author.avatarUrlCompat)
-            binding.imgAuthor.transitionName = "imgAvatar-${bindingAdapterPosition}@${uniqueTag}"
+            binding.imgAuthor.setSharedName(uniqueTag, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = topic.author.loginName
             binding.tvCreateTime.text = resources.getString(R.string.create_at_s, topic.createAt.timeSpanStringFromNow(resources))
         }
