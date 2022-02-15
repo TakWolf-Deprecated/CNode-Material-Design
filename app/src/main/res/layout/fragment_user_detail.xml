@@ -37,15 +37,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/img_avatar"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                    <FrameLayout
+                        android:id="@+id/layout_avatar"
+                        android:layout_width="112dp"
+                        android:layout_height="112dp"
                         android:layout_marginTop="40dp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:src="@drawable/image_placeholder" />
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <ProgressBar
+                            android:id="@+id/loading_bar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone"
+                            tools:visibility="visible" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/img_avatar"
+                            android:layout_width="88dp"
+                            android:layout_height="88dp"
+                            android:layout_gravity="center"
+                            tools:src="@drawable/image_placeholder" />
+
+                    </FrameLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -47,7 +47,7 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
                 try {
                     val job1 = async { api.getUser(loginName) }
                     val job2 = async { api.getUserCollectTopics(loginName) }
-                    delay(500)
+                    delay(1000)
                     val userDetail = UserDetail(
                         job1.await().data,
                         job2.await().data,

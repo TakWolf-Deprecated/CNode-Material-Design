@@ -72,7 +72,10 @@ class UserDetailFragment : BaseFragment() {
         val binding = FragmentUserDetailBinding.inflate(inflater, container, false)
 
         binding.imgAvatar.loadAvatar(avatarUrl)
-        setTargetSharedName(binding.imgAvatar, "imgAvatar")
+        binding.imgAvatar.setOnClickListener {
+            userDetailViewModel.loadUserDetail()
+        }
+        setTargetSharedName(binding.layoutAvatar, "imgAvatar")
 
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
@@ -85,6 +88,12 @@ class UserDetailFragment : BaseFragment() {
         }
 
         observeViewModel(userDetailViewModel)
+
+        userDetailViewModel.isLoadingData.observe(viewLifecycleOwner) {
+            it?.let { isLoading ->
+                binding.loadingBar.isVisible = isLoading
+            }
+        }
 
         userDetailViewModel.userDetailData.observe(viewLifecycleOwner) {
             it?.let { userDetail ->
