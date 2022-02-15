@@ -111,10 +111,16 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
 
 fun <Entity> PagingLiveHolder<Entity, *>.setupView(
     owner: LifecycleOwner,
-    adapter: ListAdapter<Entity, *>,
     refreshLayout: SwipeRefreshLayout,
     loadMoreFooter: LoadMoreFooter,
+    adapter: ListAdapter<Entity, *>,
 ) {
+    refreshLayout.setOnRefreshListener {
+        refresh()
+    }
+    loadMoreFooter.setOnLoadMoreListener {
+        loadMore()
+    }
     setupView(owner, adapter)
     refreshStateData.observe(owner) {
         it?.let { isRefreshing ->
@@ -125,11 +131,5 @@ fun <Entity> PagingLiveHolder<Entity, *>.setupView(
         it?.let { state ->
             loadMoreFooter.state = state
         }
-    }
-    refreshLayout.setOnRefreshListener {
-        refresh()
-    }
-    loadMoreFooter.setOnLoadMoreListener {
-        loadMore()
     }
 }

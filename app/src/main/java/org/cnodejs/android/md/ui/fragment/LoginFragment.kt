@@ -33,19 +33,6 @@ class LoginFragment : BaseFragment() {
     ): View {
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        observeViewModel(loginViewModel)
-
-        loginViewModel.loginedEvent.observe(viewLifecycleOwner) {
-            showToast(R.string.login_success)
-            navigator.back()
-        }
-
-        loginViewModel.errorMessageEvent.observe(viewLifecycleOwner) {
-            it?.let { message ->
-                binding.edtLayoutAccessToken.error = message
-            }
-        }
-
         binding.toolbar.setNavigationOnClickListener(NavBackOnClickListener(navigator))
 
         binding.edtAccessToken.addTextChangedListener {
@@ -75,6 +62,19 @@ class LoginFragment : BaseFragment() {
 
         binding.btnLoginTip.setOnClickListener {
             HowToGetAccessTokenTipDialog.show(childFragmentManager)
+        }
+
+        observeViewModel(loginViewModel)
+
+        loginViewModel.loginedEvent.observe(viewLifecycleOwner) {
+            showToast(R.string.login_success)
+            navigator.back()
+        }
+
+        loginViewModel.errorMessageEvent.observe(viewLifecycleOwner) {
+            it?.let { message ->
+                binding.edtLayoutAccessToken.error = message
+            }
         }
 
         return binding.root

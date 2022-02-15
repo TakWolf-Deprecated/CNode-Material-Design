@@ -26,6 +26,8 @@ class CreateTopicFragment : BaseFragment() {
     ): View {
         val binding = FragmentCreateTopicBinding.inflate(inflater, container, false)
 
+        // TODO
+
         observeViewModel(createTopicViewModel)
 
         // TODO

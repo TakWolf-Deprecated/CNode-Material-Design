@@ -26,6 +26,8 @@ class MessageListFragment : BaseFragment() {
     ): View {
         val binding = FragmentMessageListBinding.inflate(inflater, container, false)
 
+        // TODO
+
         observeViewModel(messageListViewModel)
 
         // TODO

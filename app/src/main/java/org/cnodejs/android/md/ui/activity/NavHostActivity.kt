@@ -24,9 +24,9 @@ class NavHostActivity : AppCompatActivity(), NavControllerProvider {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        settingViewModel.loadNightModeConfig()
-
         EventBus.getDefault().register(this)
+
+        settingViewModel.loadNightModeConfig()
 
         setContentView(R.layout.activity_nav_host)
     }

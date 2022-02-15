@@ -45,6 +45,10 @@ class MainFragment : BaseFragment() {
     ): View {
         val binding = FragmentMainBinding.inflate(inflater, container, false)
 
+        val a = requireContext().obtainStyledAttributes(intArrayOf(android.R.attr.colorAccent))
+        @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)
+        a.recycle()
+
         val tabViews = arrayOf(
             binding.navLayout.tabAll,
             binding.navLayout.tabGood,
@@ -55,59 +59,6 @@ class MainFragment : BaseFragment() {
         )
 
         binding.navLayout.imgAvatar.setSharedName(uniqueTag, "navLayout.imgAvatar")
-
-        val a = requireContext().obtainStyledAttributes(intArrayOf(android.R.attr.colorAccent))
-        @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)
-        a.recycle()
-
-        observeViewModel(mainViewModel)
-
-        accountViewModel.accountData.observe(viewLifecycleOwner) {
-            it?.also { account ->
-                binding.navLayout.imgAvatar.loadAvatar(account.avatarUrlCompat)
-                binding.navLayout.tvLoginName.text = account.loginName
-                binding.navLayout.tvScore.text = getString(R.string.score_d, account.score)
-                binding.navLayout.btnLogout.isVisible = true
-            } ?: run {
-                binding.navLayout.imgAvatar.load(R.drawable.image_placeholder)
-                binding.navLayout.tvLoginName.setText(R.string.click_avatar_to_login)
-                binding.navLayout.tvScore.text = null
-                binding.navLayout.btnLogout.isVisible = false
-            }
-        }
-
-        accountViewModel.messageCountData.observe(viewLifecycleOwner) {
-            it?.let { count ->
-                binding.navLayout.btnMessage.setBadge(count)
-            }
-        }
-
-        settingViewModel.isNightModeData.observe(viewLifecycleOwner) {
-            it?.let { isNightMode ->
-                if (isNightMode) {
-                    binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_light_mode_24)
-                    binding.navLayout.imgNavHeaderBackground.setImageResource(R.drawable.nav_header_bg_dark)
-                } else {
-                    binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_dark_mode_24)
-                    binding.navLayout.imgNavHeaderBackground.setImageResource(R.drawable.nav_header_bg_light)
-                }
-            }
-        }
-
-        settingViewModel.isDisplayTabDevData.observe(viewLifecycleOwner) {
-            it?.let { isDisplayTabDev ->
-                binding.navLayout.tabDev.isVisible = isDisplayTabDev
-            }
-        }
-
-        mainViewModel.topicsHolder.tabData.observe(viewLifecycleOwner) {
-            it?.let { tab ->
-                binding.contentLayout.toolbar.setTitle(tab.titleId)
-                for (tabView in tabViews) {
-                    tabView.isChecked = tabView.id == tab.tabId
-                }
-            }
-        }
 
         binding.drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
             override fun onDrawerOpened(drawerView: View) {
@@ -130,7 +81,7 @@ class MainFragment : BaseFragment() {
         val adapter = TopicForHomeListAdapter(uniqueTag)
         adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
         adapter.onUserClickListener = UserDetailNavigateListener(navigator)
-        mainViewModel.topicsHolder.setupView(viewLifecycleOwner, adapter, binding.contentLayout.refreshLayout, loadMoreFooter)
+        mainViewModel.topicsHolder.setupView(viewLifecycleOwner, binding.contentLayout.refreshLayout, loadMoreFooter, adapter)
         loadMoreFooter.addToRecyclerView(binding.contentLayout.recyclerView)
         binding.contentLayout.recyclerView.adapter = adapter
 
@@ -201,6 +152,55 @@ class MainFragment : BaseFragment() {
                 }
             }
         })
+
+        accountViewModel.accountData.observe(viewLifecycleOwner) {
+            it?.also { account ->
+                binding.navLayout.imgAvatar.loadAvatar(account.avatarUrlCompat)
+                binding.navLayout.tvLoginName.text = account.loginName
+                binding.navLayout.tvScore.text = getString(R.string.score_d, account.score)
+                binding.navLayout.btnLogout.isVisible = true
+            } ?: run {
+                binding.navLayout.imgAvatar.load(R.drawable.image_placeholder)
+                binding.navLayout.tvLoginName.setText(R.string.click_avatar_to_login)
+                binding.navLayout.tvScore.text = null
+                binding.navLayout.btnLogout.isVisible = false
+            }
+        }
+
+        accountViewModel.messageCountData.observe(viewLifecycleOwner) {
+            it?.let { count ->
+                binding.navLayout.btnMessage.setBadge(count)
+            }
+        }
+
+        settingViewModel.isNightModeData.observe(viewLifecycleOwner) {
+            it?.let { isNightMode ->
+                if (isNightMode) {
+                    binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_light_mode_24)
+                    binding.navLayout.imgNavHeaderBackground.setImageResource(R.drawable.nav_header_bg_dark)
+                } else {
+                    binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_dark_mode_24)
+                    binding.navLayout.imgNavHeaderBackground.setImageResource(R.drawable.nav_header_bg_light)
+                }
+            }
+        }
+
+        settingViewModel.isDisplayTabDevData.observe(viewLifecycleOwner) {
+            it?.let { isDisplayTabDev ->
+                binding.navLayout.tabDev.isVisible = isDisplayTabDev
+            }
+        }
+
+        observeViewModel(mainViewModel)
+
+        mainViewModel.topicsHolder.tabData.observe(viewLifecycleOwner) {
+            it?.let { tab ->
+                binding.contentLayout.toolbar.setTitle(tab.titleId)
+                for (tabView in tabViews) {
+                    tabView.isChecked = tabView.id == tab.tabId
+                }
+            }
+        }
 
         return binding.root
     }

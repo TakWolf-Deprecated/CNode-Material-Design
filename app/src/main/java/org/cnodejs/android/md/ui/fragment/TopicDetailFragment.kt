@@ -37,6 +37,8 @@ class TopicDetailFragment : BaseFragment() {
     ): View {
         val binding = FragmentTopicDetailBinding.inflate(inflater, container, false)
 
+        // TODO
+
         observeViewModel(topicDetailViewModel)
 
         // TODO

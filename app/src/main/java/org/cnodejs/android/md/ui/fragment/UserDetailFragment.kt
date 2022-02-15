@@ -73,7 +73,6 @@ class UserDetailFragment : BaseFragment() {
         binding.imgAvatar.loadAvatar(avatarUrl)
         setTargetSharedName(binding.imgAvatar, "imgAvatar")
 
-        binding.viewPager.offscreenPageLimit = 3
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
                 return 3
