@@ -54,7 +54,6 @@
                         tools:ignore="ContentDescription" />
 
                     <FrameLayout
-                        android:id="@+id/layout_avatar"
                         android:layout_width="112dp"
                         android:layout_height="112dp"
                         android:layout_marginTop="16dp"
