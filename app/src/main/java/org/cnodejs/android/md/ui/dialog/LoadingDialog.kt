@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.FragmentManager
 import org.cnodejs.android.md.R
-import java.util.*
 
 class LoadingDialog : BaseDialog() {
     companion object {

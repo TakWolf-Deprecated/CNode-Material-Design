@@ -1,7 +1,6 @@
 package org.cnodejs.android.md.vm.holder
 
 import androidx.lifecycle.MutableLiveData
-import org.cnodejs.android.md.ui.dialog.LoadingDialog
 
 class LoadingLiveHolder {
     val loadingCountData = MutableLiveData(0)
