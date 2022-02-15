@@ -91,12 +91,16 @@ class UserDetailFragment : BaseFragment() {
         })
 
         binding.imgAvatar.loadAvatar(avatarUrl)
-        binding.layoutAvatar.setOnClickListener {
+        setTargetSharedName(binding.layoutAvatar, "imgAvatar")
+        binding.tvLoginName.text = loginName
+
+        val onLoadUserDetailClickListener = View.OnClickListener {
             userDetailViewModel.loadUserDetail()
         }
-        setTargetSharedName(binding.layoutAvatar, "imgAvatar")
+        binding.toolbar.setOnClickListener(onLoadUserDetailClickListener)
+        binding.layoutAvatar.setOnClickListener(onLoadUserDetailClickListener)
+        binding.tvLoginName.setOnClickListener(onLoadUserDetailClickListener)
 
-        binding.tvLoginName.text = loginName
         binding.tvGithubUsername.setOnClickListener {
             userDetailViewModel.userDetailData.value?.user?.let {
                 // TODO
