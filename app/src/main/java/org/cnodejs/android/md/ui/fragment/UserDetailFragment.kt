@@ -188,8 +188,9 @@ class UserDetailFragment : BaseFragment() {
         ): View {
             val binding = PageUserDetailTopicsBinding.inflate(inflater, container, false)
 
+            val footerInsetsBottom = layoutInflater.inflate(R.layout.footer_insets_bottom, binding.recyclerView.footerViewContainer, false)
+
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            binding.recyclerView.addFooterView(layoutInflater.inflate(R.layout.footer_insets_bottom, binding.recyclerView.footerViewContainer, false))
             val adapter = TopicSimpleListAdapter(uniqueTag)
             adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
             adapter.onUserClickListener = UserDetailNavigateListener(navigator, loginName)
@@ -204,6 +205,11 @@ class UserDetailFragment : BaseFragment() {
                         else -> error("Unknown type")
                     }
                     adapter.submitList(topics)
+                    if (topics.isEmpty()) {
+                        binding.recyclerView.removeFooterView(footerInsetsBottom)
+                    } else if (binding.recyclerView.footerViewsCount == 0) {
+                        binding.recyclerView.addFooterView(footerInsetsBottom)
+                    }
                     binding.layoutEmpty.isVisible = topics.isEmpty()
                 }
             }
