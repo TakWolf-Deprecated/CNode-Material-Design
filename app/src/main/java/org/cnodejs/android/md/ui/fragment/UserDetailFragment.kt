@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -12,6 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentUserDetailBinding
 import org.cnodejs.android.md.databinding.PageUserDetailTopicsBinding
@@ -71,12 +74,36 @@ class UserDetailFragment : BaseFragment() {
     ): View {
         val binding = FragmentUserDetailBinding.inflate(inflater, container, false)
 
+        binding.toolbar.setNavigationOnClickListener {
+            navigator.back()
+        }
+        binding.appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
+            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                val isScrimsShown = binding.collapsingToolbarLayout.height + verticalOffset < binding.collapsingToolbarLayout.scrimVisibleHeightTrigger
+                if (isScrimsShown) {
+                    binding.root.insetsColorTop = ContextCompat.getColor(requireContext(), R.color.app_primary_variant)
+                    binding.toolbar.title = loginName
+                } else {
+                    binding.root.insetsColorTop = ContextCompat.getColor(requireContext(), R.color.translucent_system_bars)
+                    binding.toolbar.title = null
+                }
+            }
+        })
+
         binding.imgAvatar.loadAvatar(avatarUrl)
-        binding.imgAvatar.setOnClickListener {
+        binding.layoutAvatar.setOnClickListener {
             userDetailViewModel.loadUserDetail()
         }
         setTargetSharedName(binding.layoutAvatar, "imgAvatar")
 
+        binding.tvLoginName.text = loginName
+        binding.tvGithubUsername.setOnClickListener {
+            userDetailViewModel.userDetailData.value?.user?.let {
+                // TODO
+            }
+        }
+
+        binding.viewPager.offscreenPageLimit = 3
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
                 return 3
@@ -86,6 +113,14 @@ class UserDetailFragment : BaseFragment() {
                 return TopicListFragment.create(loginName, position)
             }
         }
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.setText(when (position) {
+                0 -> R.string.user_detail_tab_reply
+                1 -> R.string.user_detail_tab_create
+                2 -> R.string.user_detail_tab_collect
+                else -> error("Unknown position")
+            })
+        }.attach()
 
         observeViewModel(userDetailViewModel)
 
@@ -97,7 +132,11 @@ class UserDetailFragment : BaseFragment() {
 
         userDetailViewModel.userDetailData.observe(viewLifecycleOwner) {
             it?.let { userDetail ->
-                binding.imgAvatar.loadAvatar(userDetail.user.avatarUrlCompat)
+                val user = userDetail.user
+                binding.imgAvatar.loadAvatar(user.avatarUrlCompat)
+                binding.tvGithubUsername.text = getString(R.string.github_s, user.githubUsername)
+                binding.tvCreateTime.text = getString(R.string.register_at_s, user.createAt.toLocalDate())
+                binding.tvScore.text = getString(R.string.score_d, user.score)
             }
         }
 
@@ -113,10 +152,6 @@ class UserDetailFragment : BaseFragment() {
 
     class TopicListFragment : BaseFragment() {
         companion object {
-            const val TYPE_REPLY = 0
-            const val TYPE_CREATE = 1
-            const val TYPE_COLLECT = 2
-
             private const val KEY_TYPE = "type"
 
             fun create(loginName: String, type: Int): TopicListFragment {
@@ -159,9 +194,9 @@ class UserDetailFragment : BaseFragment() {
             userDetailViewModel.userDetailData.observe(viewLifecycleOwner) {
                 it?.let { userDetail ->
                     val topics = when (type) {
-                        TYPE_REPLY -> userDetail.user.recentReplies.toList()
-                        TYPE_CREATE -> userDetail.user.recentTopics.toList()
-                        TYPE_COLLECT -> userDetail.collectTopics.toList()
+                        0 -> userDetail.user.recentReplies.toList()
+                        1 -> userDetail.user.recentTopics.toList()
+                        2 -> userDetail.collectTopics.toList()
                         else -> error("Unknown type")
                     }
                     adapter.submitList(topics)

@@ -52,4 +52,9 @@
     <string name="reply_at_s">新评论：%s</string>
     <string name="create_at_s">创建于：%s</string>
     <string name="create_topic">发布话题</string>
+    <string name="github_s">GitHub: %s</string>
+    <string name="register_at_s">注册时间：%s</string>
+    <string name="user_detail_tab_reply">最近回复</string>
+    <string name="user_detail_tab_create">最新发布</string>
+    <string name="user_detail_tab_collect">收藏话题</string>
 </resources>

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:isw_insetsType="navigationBars"
+    app:isw_insetsType="statusBars|navigationBars"
+    app:isw_insetsPaddingTop="false"
     app:isw_insetsPaddingBottom="false"
     app:isw_insetsColorBottom="@color/translucent_system_bars"
     app:isw_insetsColorLeft="@android:color/black"
@@ -13,35 +14,49 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="256dp">
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.Material3.Dark">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_scrollFlags="scroll">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/user_detail_header_bg"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    app:layout_collapseMode="parallax"
-                    tools:ignore="ContentDescription" />
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:contentScrim="@color/app_primary"
+                app:titleEnabled="false">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    app:layout_collapseMode="parallax">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/user_detail_header_bg"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        app:layout_constrainedHeight="true"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:ignore="ContentDescription" />
 
                     <FrameLayout
                         android:id="@+id/layout_avatar"
                         android:layout_width="112dp"
                         android:layout_height="112dp"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginTop="36dp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent">
@@ -62,9 +77,78 @@
 
                     </FrameLayout>
 
+                    <TextView
+                        android:id="@+id/tv_login_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintTop_toBottomOf="@id/layout_avatar"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="TakWolf" />
+
+                    <TextView
+                        android:id="@+id/tv_github_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="16sp"
+                        android:background="?attr/selectableItemBackground"
+                        app:layout_constraintTop_toBottomOf="@id/tv_login_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="GitHub: TakWolf" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_github_username"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <TextView
+                            android:id="@+id/tv_create_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|start"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            tools:text="注册时间：2022-1-1" />
+
+                        <TextView
+                            android:id="@+id/tv_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|end"
+                            android:textColor="?attr/colorAccent"
+                            android:textSize="14sp"
+                            tools:text="积分：100" />
+
+                    </FrameLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/baseline_arrow_back_24"
+                    app:titleCentered="true"
+                    tools:title="TakWolf" />
+
             </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app_primary"
+                app:tabSelectedTextColor="@android:color/white"
+                app:tabIndicatorColor="?attr/colorAccent" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
