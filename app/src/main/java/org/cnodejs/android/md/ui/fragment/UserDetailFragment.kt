@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -140,6 +141,7 @@ class UserDetailFragment : BaseFragment() {
             val binding = PageUserDetailTopicsBinding.inflate(inflater, container, false)
 
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
+            binding.recyclerView.addFooterView(layoutInflater.inflate(R.layout.footer_insets_bottom, binding.recyclerView.footerViewContainer, false))
             val adapter = TopicSimpleListAdapter(uniqueTag)
             adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
             adapter.onUserClickListener = UserDetailNavigateListener(navigator, loginName)
@@ -147,11 +149,14 @@ class UserDetailFragment : BaseFragment() {
 
             userDetailViewModel.userDetailData.observe(viewLifecycleOwner) {
                 it?.let { userDetail ->
-                    when (type) {
-                        TYPE_REPLY -> adapter.submitList(userDetail.user.recentReplies.toList())
-                        TYPE_CREATE -> adapter.submitList(userDetail.user.recentTopics.toList())
-                        TYPE_COLLECT -> adapter.submitList(userDetail.collectTopics.toList())
+                    val topics = when (type) {
+                        TYPE_REPLY -> userDetail.user.recentReplies.toList()
+                        TYPE_CREATE -> userDetail.user.recentTopics.toList()
+                        TYPE_COLLECT -> userDetail.collectTopics.toList()
+                        else -> error("Unknown type")
                     }
+                    adapter.submitList(topics)
+                    binding.layoutEmpty.isVisible = topics.isEmpty()
                 }
             }
 

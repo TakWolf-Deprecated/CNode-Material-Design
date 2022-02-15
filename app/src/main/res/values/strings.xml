@@ -22,6 +22,7 @@
     <string name="press_back_again_to_exit">再按一次退出</string>
     <string name="load_more_finished">已经到底啦</string>
     <string name="load_more_failed">加载失败，点击重试</string>
+    <string name="empty_content">没有内容</string>
 
     <string name="login">登录</string>
     <string name="logout">注销</string>

@@ -2,6 +2,7 @@ package org.cnodejs.android.md.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import org.cnodejs.android.md.databinding.ItemTopicSimpleBinding
 import org.cnodejs.android.md.model.entity.ITopicSimple
@@ -16,7 +17,7 @@ class TopicSimpleListAdapter(private val uniqueTag: String) : TopicListAdapter<I
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), position == itemCount - 1)
     }
 
     class ViewHolder(
@@ -28,12 +29,13 @@ class TopicSimpleListAdapter(private val uniqueTag: String) : TopicListAdapter<I
         binding.imgAuthor,
         binding.imgAuthor,
     ) {
-        fun bind(topic: ITopicSimple) {
+        fun bind(topic: ITopicSimple, isLast: Boolean) {
             binding.imgAuthor.loadAvatar(topic.author.avatarUrlCompat)
             binding.imgAuthor.setSharedName(uniqueTag, "imgAuthor-${bindingAdapterPosition}")
             binding.tvTitle.text = topic.title
             binding.tvAuthor.text = topic.author.loginName
             binding.tvLastReplyTime.text = topic.lastReplyAt.timeSpanStringFromNow(itemView.resources)
+            binding.divider.isVisible = !isLast
         }
     }
 }
