@@ -62,9 +62,9 @@ public class NavigationItem extends FrameLayout implements Checkable {
         a.recycle();
 
         a = context.obtainStyledAttributes(attrs, R.styleable.NavigationItem, defStyleAttr, defStyleRes);
-        setIconDrawable(a.getDrawable(R.styleable.NavigationItem_icon));
-        setTitle(a.getText(R.styleable.NavigationItem_title));
-        setBadge(a.getInt(R.styleable.NavigationItem_badge, 0));
+        setIconDrawable(a.getDrawable(R.styleable.NavigationItem_app_icon));
+        setTitle(a.getText(R.styleable.NavigationItem_app_title));
+        setBadge(a.getInt(R.styleable.NavigationItem_app_badge, 0));
         checked = a.getBoolean(R.styleable.NavigationItem_android_checked, false);
         a.recycle();
 
