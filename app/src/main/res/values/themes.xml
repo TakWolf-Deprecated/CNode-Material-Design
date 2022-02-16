@@ -9,6 +9,7 @@
         <item name="android:listDivider">@color/divider_on_light</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="actionBarSize">@dimen/toolbar_size</item>
     </style>
 
     <style name="Base.Theme.App.Dialog" parent="Theme.AppCompat.Light.Dialog">
