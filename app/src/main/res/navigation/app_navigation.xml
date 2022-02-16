@@ -9,6 +9,12 @@
         android:id="@+id/fragment_login"
         android:name="org.cnodejs.android.md.ui.fragment.LoginFragment" />
     <fragment
+        android:id="@+id/fragment_login_by_github"
+        android:name="org.cnodejs.android.md.ui.fragment.LoginByGithubFragment" />
+    <fragment
+        android:id="@+id/fragment_qr_code_scan"
+        android:name="org.cnodejs.android.md.ui.fragment.QRCodeScanFragment" />
+    <fragment
         android:id="@+id/fragment_user_detail"
         android:name="org.cnodejs.android.md.ui.fragment.UserDetailFragment" />
     <fragment

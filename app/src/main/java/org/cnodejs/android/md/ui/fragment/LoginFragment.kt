@@ -53,11 +53,11 @@ class LoginFragment : BaseFragment() {
         }
 
         binding.btnLoginByQrCode.setOnClickListener {
-            // TODO
+            QRCodeScanFragment.open(navigator)
         }
 
         binding.btnLoginByGithub.setOnClickListener {
-            // TODO
+            LoginByGithubFragment.open(navigator)
         }
 
         binding.btnLoginTip.setOnClickListener {
