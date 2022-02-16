@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentLoginBinding
@@ -26,12 +27,34 @@ class LoginFragment : BaseFragment() {
 
     private val loginViewModel: LoginViewModel by viewModels()
 
+    private var _binding: FragmentLoginBinding? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setFragmentResultListener(QRCodeScanFragment.REQUEST_KEY) { _, result ->
+            _binding?.let { binding ->
+                val accessToken = result.getString(QRCodeScanFragment.KEY_VALUE)
+                binding.edtAccessToken.setText(accessToken)
+                binding.btnLogin.callOnClick()
+            }
+        }
+        setFragmentResultListener(LoginByGithubFragment.REQUEST_KEY) { _, result ->
+            _binding?.let { binding ->
+                val accessToken = result.getString(LoginByGithubFragment.KEY_ACCESS_TOKEN)
+                binding.edtAccessToken.setText(accessToken)
+                binding.btnLogin.callOnClick()
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = binding
 
         binding.toolbar.setNavigationOnClickListener(NavBackOnClickListener(navigator))
 
@@ -78,5 +101,10 @@ class LoginFragment : BaseFragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
