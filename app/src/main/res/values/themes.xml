@@ -30,4 +30,8 @@
     </style>
 
     <style name="Theme.App.Dialog.Alert" parent="Base.Theme.App.Dialog.Alert" />
+
+    <style name="ThemeOverlay.App.Light" parent="ThemeOverlay.Material3.Light" />
+
+    <style name="ThemeOverlay.App.Dark" parent="ThemeOverlay.Material3.Dark" />
 </resources>

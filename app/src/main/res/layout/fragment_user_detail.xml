@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:translationZ="@dimen/toolbar_elevation"
             android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.Material3.Dark">
+            android:theme="@style/ThemeOverlay.App.Dark">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar_layout"

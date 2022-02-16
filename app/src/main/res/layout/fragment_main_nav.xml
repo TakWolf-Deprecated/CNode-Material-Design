@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#01000000"
-                android:theme="@style/ThemeOverlay.Material3.Dark"
+                android:theme="@style/ThemeOverlay.App.Dark"
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 app:layout_constraintTop_toTopOf="parent">

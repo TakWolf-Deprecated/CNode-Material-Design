@@ -36,7 +36,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.Material3.Dark"
+        android:theme="@style/ThemeOverlay.App.Dark"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
         app:navigationIcon="@drawable/baseline_arrow_back_24"
         app:title="@string/login"
