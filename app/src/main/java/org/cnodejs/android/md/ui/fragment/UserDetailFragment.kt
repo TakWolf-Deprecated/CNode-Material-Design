@@ -77,16 +77,14 @@ class UserDetailFragment : BaseFragment() {
         binding.toolbar.setNavigationOnClickListener {
             navigator.back()
         }
-        binding.appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
-            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
-                val isScrimsShown = binding.collapsingToolbarLayout.height + verticalOffset < binding.collapsingToolbarLayout.scrimVisibleHeightTrigger
-                if (isScrimsShown) {
-                    binding.root.insetsColorTop = ContextCompat.getColor(requireContext(), R.color.app_primary_variant)
-                    binding.toolbar.title = loginName
-                } else {
-                    binding.root.insetsColorTop = ContextCompat.getColor(requireContext(), R.color.translucent_system_bars)
-                    binding.toolbar.title = null
-                }
+        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+            val isScrimsShown = binding.collapsingToolbarLayout.height + verticalOffset < binding.collapsingToolbarLayout.scrimVisibleHeightTrigger
+            if (isScrimsShown) {
+                binding.root.insetsColorTop = ContextCompat.getColor(requireContext(), R.color.app_primary_variant)
+                binding.toolbar.title = loginName
+            } else {
+                binding.root.insetsColorTop = ContextCompat.getColor(requireContext(), R.color.translucent_system_bars)
+                binding.toolbar.title = null
             }
         })
 
