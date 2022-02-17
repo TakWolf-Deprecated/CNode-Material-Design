@@ -11,9 +11,9 @@ import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
-class TopicForHomeListAdapter(private val uniqueTag: String) : TopicListAdapter<TopicForHome, TopicForHomeListAdapter.ViewHolder>(TopicForHomeDiffItemCallback) {
+class TopicForHomeListAdapter(private val layoutInflater: LayoutInflater, private val uniqueTag: String) : TopicListAdapter<TopicForHome, TopicForHomeListAdapter.ViewHolder>(TopicForHomeDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemTopicForHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemTopicForHomeBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding, uniqueTag)
     }
 

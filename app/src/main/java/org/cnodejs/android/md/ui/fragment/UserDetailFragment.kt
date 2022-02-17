@@ -188,10 +188,10 @@ class UserDetailFragment : BaseFragment() {
         ): View {
             val binding = PageUserDetailTopicsBinding.inflate(inflater, container, false)
 
-            val footerInsetsBottom = layoutInflater.inflate(R.layout.footer_insets_bottom, binding.recyclerView.footerViewContainer, false)
+            val footerInsetsBottom = inflater.inflate(R.layout.footer_insets_bottom, binding.recyclerView.footerViewContainer, false)
 
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            val adapter = TopicSimpleListAdapter(uniqueTag)
+            val adapter = TopicSimpleListAdapter(inflater, uniqueTag)
             adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
             adapter.onUserClickListener = UserDetailNavigateListener(navigator, loginName)
             binding.recyclerView.adapter = adapter

@@ -77,8 +77,8 @@ class MainFragment : BaseFragment() {
 
         binding.contentLayout.refreshLayout.setColorSchemeColors(colorAccent)
         binding.contentLayout.recyclerView.layoutManager = LinearLayoutManager(context)
-        val loadMoreFooter = LoadMoreFooter.create(binding.contentLayout.recyclerView)
-        val adapter = TopicForHomeListAdapter(uniqueTag)
+        val loadMoreFooter = LoadMoreFooter.create(inflater, binding.contentLayout.recyclerView)
+        val adapter = TopicForHomeListAdapter(inflater, uniqueTag)
         adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
         adapter.onUserClickListener = UserDetailNavigateListener(navigator)
         mainViewModel.topicsHolder.setupView(viewLifecycleOwner, binding.contentLayout.refreshLayout, loadMoreFooter, adapter)
