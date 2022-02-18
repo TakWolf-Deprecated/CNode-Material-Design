@@ -63,7 +63,7 @@ class TopicForHomePagingLiveHolder(
                 Log.e(TAG, "doLoadMore", e)
             }
             val errorResult = ErrorResult.from(e)
-            refreshFailure(version, errorResult.message)
+            loadMoreFailure(version, errorResult.message)
         }
     }
 }
