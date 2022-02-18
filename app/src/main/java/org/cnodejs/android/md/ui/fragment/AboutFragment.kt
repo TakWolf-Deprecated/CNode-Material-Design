@@ -22,7 +22,9 @@ class AboutFragment : BaseFragment() {
     ): View {
         val binding = FragmentAboutBinding.inflate(inflater, container, false)
 
-        // TODO
+        binding.toolbar.setNavigationOnClickListener {
+            navigator.back()
+        }
 
         return binding.root
     }
