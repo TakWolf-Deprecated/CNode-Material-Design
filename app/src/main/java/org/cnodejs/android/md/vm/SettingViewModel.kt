@@ -9,26 +9,40 @@ import org.cnodejs.android.md.model.store.AppStoreHolder
 class SettingViewModel(application: Application) : AndroidViewModel(application) {
     private val settingStore = AppStoreHolder.getInstance(application).settingStore
 
-    val isNightModeData = MutableLiveData<Boolean>()
-    val isDisplayTabDevData = MutableLiveData(settingStore.isDisplayTabDev())
+    val isThemeDarkModeData = MutableLiveData<Boolean>()
+    val isTopicSaveDraftEnabledData = MutableLiveData(settingStore.isTopicSaveDraftEnabled())
+    val isTopicSignEnabledData = MutableLiveData(settingStore.isTopicSignEnabled())
+    val isTopicDisplayTabDevData = MutableLiveData(settingStore.isTopicDisplayTabDev())
 
-    fun loadNightModeConfig() {
-        isNightModeData.value = settingStore.isNightMode()
+    fun loadThemeConfig() {
+        isThemeDarkModeData.value = settingStore.isThemeDarkMode()
     }
 
-    fun toggleNightMode() {
-        val isNightMode = !settingStore.isNightMode()
-        settingStore.setNightMode(isNightMode)
-        if (isNightMode) {
+    fun toggleThemeDarkMode() {
+        val isThemeDarkMode = !settingStore.isThemeDarkMode()
+        settingStore.setThemeDarkMode(isThemeDarkMode)
+        if (isThemeDarkMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 
-    fun toggleDisplayTabDev() {
-        val isDisplayTabDev = !settingStore.isDisplayTabDev()
-        settingStore.setDisplayTabDev(isDisplayTabDev)
-        isDisplayTabDevData.value = isDisplayTabDev
+    fun toggleTopicSaveDraftEnabled() {
+        val isTopicSaveDraftEnabled = !settingStore.isTopicSaveDraftEnabled()
+        settingStore.setTopicSaveDraftEnabled(isTopicSaveDraftEnabled)
+        isTopicSaveDraftEnabledData.value = isTopicSaveDraftEnabled
+    }
+
+    fun toggleTopicSignEnabled() {
+        val isTopicSignEnabled = !settingStore.isTopicSignEnabled()
+        settingStore.setTopicSignEnabled(isTopicSignEnabled)
+        isTopicSignEnabledData.value = isTopicSignEnabled
+    }
+
+    fun toggleTopicDisplayTabDev() {
+        val isTopicDisplayTabDev = !settingStore.isTopicDisplayTabDev()
+        settingStore.setTopicDisplayTabDev(isTopicDisplayTabDev)
+        isTopicDisplayTabDevData.value = isTopicDisplayTabDev
     }
 }

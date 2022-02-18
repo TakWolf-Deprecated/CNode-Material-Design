@@ -26,7 +26,53 @@ class SettingFragment : BaseFragment() {
     ): View {
         val binding = FragmentSettingBinding.inflate(inflater, container, false)
 
-        // TODO
+        binding.toolbar.setNavigationOnClickListener {
+            navigator.back()
+        }
+
+        binding.btnToggleThemeDarkMode.setOnClickListener {
+            settingViewModel.toggleThemeDarkMode()
+        }
+
+        binding.btnToggleTopicSaveDraftEnabled.setOnClickListener {
+            settingViewModel.toggleTopicSaveDraftEnabled()
+        }
+
+        binding.btnToggleTopicSignEnabled.setOnClickListener {
+            settingViewModel.toggleTopicSignEnabled()
+        }
+
+        binding.btnTopicSignEdit.setOnClickListener {
+            // TODO
+        }
+
+        binding.btnToggleTopicDisplayTabDev.setOnClickListener {
+            settingViewModel.toggleTopicDisplayTabDev()
+        }
+
+        settingViewModel.isThemeDarkModeData.observe(viewLifecycleOwner) {
+            it?.let { isThemeDarkMode ->
+                binding.switchThemeDarkMode.isChecked = isThemeDarkMode
+            }
+        }
+
+        settingViewModel.isTopicSaveDraftEnabledData.observe(viewLifecycleOwner) {
+            it?.let { isTopicSaveDraftEnabled ->
+                binding.switchTopicSaveDraft.isChecked = isTopicSaveDraftEnabled
+            }
+        }
+
+        settingViewModel.isTopicSignEnabledData.observe(viewLifecycleOwner) {
+            it?.let { isTopicSignEnabled ->
+                binding.switchTopicSign.isChecked = isTopicSignEnabled
+            }
+        }
+
+        settingViewModel.isTopicDisplayTabDevData.observe(viewLifecycleOwner) {
+            it?.let { isTopicDisplayTabDev ->
+                binding.switchTopicDisplayTabDev.isChecked = isTopicDisplayTabDev
+            }
+        }
 
         return binding.root
     }

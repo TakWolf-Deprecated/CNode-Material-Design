@@ -26,7 +26,7 @@ class NavHostActivity : AppCompatActivity(), NavControllerProvider {
 
         EventBus.getDefault().register(this)
 
-        settingViewModel.loadNightModeConfig()
+        settingViewModel.loadThemeConfig()
 
         setContentView(R.layout.activity_nav_host)
     }

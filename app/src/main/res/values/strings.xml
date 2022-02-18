@@ -57,4 +57,14 @@
     <string name="user_detail_tab_reply">最近回复</string>
     <string name="user_detail_tab_create">最新发布</string>
     <string name="user_detail_tab_collect">收藏话题</string>
+
+    <string name="theme">主题</string>
+    <string name="theme_dark_mode">夜间模式</string>
+    <string name="topic">话题</string>
+    <string name="topic_save_draft">保存草稿</string>
+    <string name="topic_save_draft_description">没有发布的内容会被保存到本地</string>
+    <string name="topic_sign">小尾巴</string>
+    <string name="topic_sign_description">发表新内容时会自动追加到结尾</string>
+    <string name="topic_sign_edit">编辑小尾巴</string>
+    <string name="topic_display_tab_dev">展示“客户端测试”板块</string>
 </resources>

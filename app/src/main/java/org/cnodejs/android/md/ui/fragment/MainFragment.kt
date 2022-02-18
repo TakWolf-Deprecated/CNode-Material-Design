@@ -106,7 +106,7 @@ class MainFragment : BaseFragment() {
         binding.navLayout.tvScore.setOnClickListener(onNavMyInfoClickListener)
 
         binding.navLayout.btnDayNight.setOnClickListener {
-            settingViewModel.toggleNightMode()
+            settingViewModel.toggleThemeDarkMode()
         }
 
         binding.navLayout.btnLogout.setOnClickListener {
@@ -173,9 +173,9 @@ class MainFragment : BaseFragment() {
             }
         }
 
-        settingViewModel.isNightModeData.observe(viewLifecycleOwner) {
-            it?.let { isNightMode ->
-                if (isNightMode) {
+        settingViewModel.isThemeDarkModeData.observe(viewLifecycleOwner) {
+            it?.let { isThemeDarkMode ->
+                if (isThemeDarkMode) {
                     binding.navLayout.btnDayNight.setImageResource(R.drawable.baseline_light_mode_24)
                     binding.navLayout.imgNavHeaderBackground.setImageResource(R.drawable.nav_header_bg_dark)
                 } else {
@@ -185,9 +185,9 @@ class MainFragment : BaseFragment() {
             }
         }
 
-        settingViewModel.isDisplayTabDevData.observe(viewLifecycleOwner) {
-            it?.let { isDisplayTabDev ->
-                binding.navLayout.tabDev.isVisible = isDisplayTabDev
+        settingViewModel.isTopicDisplayTabDevData.observe(viewLifecycleOwner) {
+            it?.let { isTopicDisplayTabDev ->
+                binding.navLayout.tabDev.isVisible = isTopicDisplayTabDev
             }
         }
 

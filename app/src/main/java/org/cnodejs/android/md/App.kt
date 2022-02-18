@@ -9,7 +9,7 @@ class App : Application() {
         super.onCreate()
 
         val settingStore = AppStoreHolder.getInstance(this).settingStore
-        if (settingStore.isNightMode()) {
+        if (settingStore.isThemeDarkMode()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
