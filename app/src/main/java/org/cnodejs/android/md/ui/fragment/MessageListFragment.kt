@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMessageListBinding
 import org.cnodejs.android.md.util.Navigator
+import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MessageListViewModel
 
 class MessageListFragment : BaseFragment() {
@@ -17,6 +19,7 @@ class MessageListFragment : BaseFragment() {
         }
     }
 
+    private val accountViewModel: AccountViewModel by activityViewModels()
     private val messageListViewModel: MessageListViewModel by viewModels()
 
     override fun onCreateView(
@@ -26,11 +29,17 @@ class MessageListFragment : BaseFragment() {
     ): View {
         val binding = FragmentMessageListBinding.inflate(inflater, container, false)
 
-        // TODO
+        binding.toolbar.setNavigationOnClickListener {
+            navigator.back()
+        }
 
         observeViewModel(messageListViewModel)
 
-        // TODO
+        accountViewModel.accountData.observe(viewLifecycleOwner) { account ->
+            if (account == null) {
+                navigator.back()
+            }
+        }
 
         return binding.root
     }
