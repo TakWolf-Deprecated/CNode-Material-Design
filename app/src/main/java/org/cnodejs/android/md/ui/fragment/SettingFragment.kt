@@ -65,6 +65,7 @@ class SettingFragment : BaseFragment() {
         settingViewModel.isTopicSignEnabledData.observe(viewLifecycleOwner) {
             it?.let { isTopicSignEnabled ->
                 binding.switchTopicSign.isChecked = isTopicSignEnabled
+                binding.btnTopicSignEdit.isEnabled = isTopicSignEnabled
             }
         }
 
