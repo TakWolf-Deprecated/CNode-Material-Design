@@ -29,13 +29,14 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
             try {
                 val result = api.login(accessToken)
                 accountStore.login(accessToken, result)
-                delay(1000)
+                delay(500)
                 withContext(Dispatchers.Main) {
                     loadingHolder.hideLoading()
                     loginedEvent.notifyDataChanged()
                 }
             } catch (e: Exception) {
                 val errorResult = ErrorResult.from(e)
+                delay(500)
                 withContext(Dispatchers.Main) {
                     loadingHolder.hideLoading()
                     errorMessageEvent.value = errorResult.message
