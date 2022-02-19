@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.hadilq.liveevent.LiveEvent
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.cnodejs.android.md.model.api.CNodeClient
@@ -28,6 +29,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application), 
             try {
                 val result = api.login(accessToken)
                 accountStore.login(accessToken, result)
+                delay(1000)
                 withContext(Dispatchers.Main) {
                     loadingHolder.hideLoading()
                     loginedEvent.notifyDataChanged()

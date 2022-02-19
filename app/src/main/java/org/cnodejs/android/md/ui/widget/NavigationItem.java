@@ -53,7 +53,7 @@ public class NavigationItem extends FrameLayout implements Checkable {
         binding = WidgetNavigationItemBinding.inflate(LayoutInflater.from(getContext()), this, true);
 
         TypedArray a = context.obtainStyledAttributes(new int[] {
-                android.R.attr.textColorSecondary,
+                android.R.attr.textColorPrimary,
                 android.R.attr.colorAccent,
         });
         contentColorNormal = a.getColorStateList(0);

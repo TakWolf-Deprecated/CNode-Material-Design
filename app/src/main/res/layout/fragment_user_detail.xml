@@ -32,6 +32,7 @@
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:contentScrim="@color/app_primary"
+                app:scrimAnimationDuration="200"
                 app:titleEnabled="false">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,7 +82,7 @@
                         android:id="@+id/tv_login_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@id/tv_github_username"
                         app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +118,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center|start"
-                            android:textColor="@android:color/white"
+                            android:textColor="?android:attr/textColorPrimary"
                             android:textSize="14sp"
                             tools:text="注册时间：2022-1-1" />
 
@@ -150,7 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/app_primary"
-                app:tabSelectedTextColor="@android:color/white"
+                app:tabSelectedTextColor="?android:attr/textColorPrimary"
                 app:tabIndicatorColor="?attr/colorAccent" />
 
         </com.google.android.material.appbar.AppBarLayout>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Base.Theme.App" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Base.Theme.App" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/app_primary</item>
+        <item name="colorPrimaryVariant">@color/app_primary_variant</item>
+        <item name="colorPrimaryDark">@color/app_primary_variant</item>
         <item name="colorAccent">@color/app_accent</item>
-        <item name="android:colorControlActivated">@color/app_accent</item>
         <item name="android:windowBackground">@color/background_dark</item>
         <item name="colorSurface">@color/surface_dark</item>
         <item name="android:listDivider">@color/divider_on_dark</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="actionBarSize">@dimen/toolbar_size</item>
     </style>
 
     <style name="Base.Theme.App.Dialog" parent="Theme.AppCompat.Dialog">

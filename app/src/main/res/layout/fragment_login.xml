@@ -108,14 +108,12 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
+            <Button style="@style/Widget.App.Button"
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/login"
-                android:textColor="@android:color/white"
-                android:backgroundTint="?colorAccent" />
+                android:text="@string/login" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -138,11 +136,11 @@
                         android:layout_gravity="center"
                         android:drawablePadding="8dp"
                         android:text="@string/login_by_qr_code"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="14sp"
                         android:gravity="center"
                         app:drawableStartCompat="@drawable/baseline_qr_code_scanner_24"
-                        app:drawableTint="?android:attr/textColorSecondary" />
+                        app:drawableTint="?android:attr/textColorPrimary" />
 
                 </FrameLayout>
 
@@ -161,11 +159,11 @@
                         android:layout_gravity="center"
                         android:drawablePadding="8dp"
                         android:text="@string/login_by_github"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="14sp"
                         android:gravity="center"
                         app:drawableStartCompat="@drawable/ic_github_grey600_24dp"
-                        app:drawableTint="?android:attr/textColorSecondary" />
+                        app:drawableTint="?android:attr/textColorPrimary" />
 
                 </FrameLayout>
 
