@@ -45,16 +45,18 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
             isLoadingData.value = true
             viewModelScope.launch(Dispatchers.IO) {
                 try {
-                    val job1 = async { api.getUser(loginName) }
-                    val job2 = async { api.getUserCollectTopics(loginName) }
-                    delay(1000)
-                    val userDetail = UserDetail(
-                        job1.await().data,
-                        job2.await().data,
-                    )
+                    val userDetail = supervisorScope {
+                        val job1 = async { api.getUser(loginName) }
+                        val job2 = async { api.getUserCollectTopics(loginName) }
+                        UserDetail(
+                            job1.await().data,
+                            job2.await().data,
+                        )
+                    }
                     if (accountStore.getLoginName() == userDetail.user.loginName) {
                         accountStore.update(userDetail.user)
                     }
+                    delay(500)
                     withContext(Dispatchers.Main) {
                         isLoadingData.value = false
                         userDetailData.value = userDetail
@@ -64,6 +66,7 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
                         Log.e(TAG, "loadUserDetail", e)
                     }
                     val errorResult = ErrorResult.from(e)
+                    delay(500)
                     withContext(Dispatchers.Main) {
                         isLoadingData.value = false
                         toastHolder.showToast(errorResult.message)
