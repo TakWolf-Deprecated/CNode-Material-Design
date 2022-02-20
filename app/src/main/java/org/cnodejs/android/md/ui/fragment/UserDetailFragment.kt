@@ -80,17 +80,18 @@ class UserDetailFragment : BaseFragment() {
         binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
             val isScrimsShown = binding.collapsingToolbarLayout.height + verticalOffset < binding.collapsingToolbarLayout.scrimVisibleHeightTrigger
             if (isScrimsShown) {
-                binding.root.insetsColorTop = ContextCompat.getColor(requireContext(), R.color.app_primary_variant)
-                binding.toolbar.title = loginName
+                binding.statusBarTranslucent.visibility = View.INVISIBLE
+                binding.toolbarTitle.visibility = View.VISIBLE
             } else {
-                binding.root.insetsColorTop = ContextCompat.getColor(requireContext(), R.color.translucent_system_bars)
-                binding.toolbar.title = null
+                binding.statusBarTranslucent.visibility = View.VISIBLE
+                binding.toolbarTitle.visibility = View.GONE
             }
         })
 
+        binding.toolbarTitle.title = loginName
+        binding.tvLoginName.text = loginName
         binding.imgAvatar.loadAvatar(avatarUrl)
         setTargetSharedName(binding.imgAvatar, "imgAvatar")
-        binding.tvLoginName.text = loginName
 
         val onLoadUserDetailClickListener = View.OnClickListener {
             userDetailViewModel.loadUserDetail()
