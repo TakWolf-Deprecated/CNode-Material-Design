@@ -31,9 +31,9 @@
         android:elevation="@dimen/toolbar_elevation"
         android:theme="@style/ThemeOverlay.App.Dark"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
-        app:navigationIcon="@drawable/baseline_menu_24"
         app:title="@string/app_name"
-        app:titleCentered="true" />
+        app:titleCentered="true"
+        app:navigationIcon="@drawable/baseline_menu_24" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh_layout"
