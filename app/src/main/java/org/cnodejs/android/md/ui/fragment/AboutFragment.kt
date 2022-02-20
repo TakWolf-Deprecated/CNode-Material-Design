@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.cnodejs.android.md.BuildConfig
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentAboutBinding
 import org.cnodejs.android.md.util.Navigator
@@ -24,6 +25,28 @@ class AboutFragment : BaseFragment() {
 
         binding.toolbar.setNavigationOnClickListener {
             navigator.back()
+        }
+
+        binding.tvVersionName.text = BuildConfig.VERSION_NAME
+
+        binding.btnVersionName.setOnClickListener {
+            // TODO
+        }
+
+        binding.btnOpenSourceUrl.setOnClickListener {
+            // TODO
+        }
+
+        binding.btnAboutCnode.setOnClickListener {
+            // TODO
+        }
+
+        binding.btnAboutAuthor.setOnClickListener {
+            // TODO
+        }
+
+        binding.btnOpenSourceLicense.setOnClickListener {
+            // TODO
         }
 
         return binding.root

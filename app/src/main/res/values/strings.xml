@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">CNode 社区</string>
     <string name="app_domain">cnodejs.org</string>
+    <string name="app_slogan">国内最专业的 Node.js 开源技术社区</string>
 
     <string name="all">全部</string>
     <string name="top">置顶</string>
@@ -71,4 +72,14 @@
     <string name="topic_sign_description">发表新内容时会自动追加到结尾</string>
     <string name="topic_sign_edit">编辑小尾巴</string>
     <string name="topic_display_tab_dev">展示“客户端测试”板块</string>
+
+    <string name="version_name">版本号</string>
+    <string name="open_source_url">项目开源主页</string>
+    <string name="open_source_url_content">https://github.com/TakWolf/CNode-Material-Design</string>
+    <string name="about_cnode">关于 CNode 社区</string>
+    <string name="about_cnode_content">https://cnodejs.org/about</string>
+    <string name="about_author">关于作者</string>
+    <string name="about_author_content">https://github.com/TakWolf</string>
+    <string name="open_source_license">开放源代码许可</string>
+    <string name="copyright">Copyright © 2015 TakWolf</string>
 </resources>

@@ -11,6 +11,7 @@
         <item name="android:listDivider">@color/divider_on_dark</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="logoOnSurface">@drawable/logo_light</item>
     </style>
 
     <style name="Base.Theme.App.Dialog" parent="Theme.AppCompat.Dialog">

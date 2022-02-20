@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="logoOnSurface" format="reference" />
+
     <declare-styleable name="NavigationItem">
         <attr name="app_icon" format="reference" />
         <attr name="app_title" format="string" />
