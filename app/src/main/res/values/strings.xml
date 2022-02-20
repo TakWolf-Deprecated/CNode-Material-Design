@@ -40,10 +40,12 @@
     <string name="access_token_out_of_date">AccessToken 已经失效，您需要重新登录账户。</string>
     <string name="re_login">重新登录</string>
 
-    <string name="d_days_ago">%d 天前</string>
-    <string name="d_hours_ago">%d 小时前</string>
-    <string name="d_minutes_ago">%d 分钟前</string>
     <string name="just_now">刚刚</string>
+    <string name="d_minutes_ago">%d 分钟前</string>
+    <string name="d_hours_ago">%d 小时前</string>
+    <string name="d_days_ago">%d 天前</string>
+    <string name="d_weeks_ago">%d 周前</string>
+    <string name="d_months_ago">%d 个月前</string>
 
     <string name="navigation_badge_count_max">99+</string>
 
