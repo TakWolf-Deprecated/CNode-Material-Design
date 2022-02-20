@@ -5,6 +5,7 @@
         <item name="colorPrimaryVariant">@color/app_primary_variant</item>
         <item name="colorPrimaryDark">@color/app_primary_variant</item>
         <item name="colorAccent">@color/app_accent</item>
+        <item name="android:colorControlActivated">@color/app_accent</item>
         <item name="android:windowBackground">@color/background_dark</item>
         <item name="colorSurface">@color/surface_dark</item>
         <item name="android:listDivider">@color/divider_on_dark</item>

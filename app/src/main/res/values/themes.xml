@@ -5,6 +5,7 @@
         <item name="colorPrimaryVariant">@color/app_primary_variant</item>
         <item name="colorPrimaryDark">@color/app_primary_variant</item>
         <item name="colorAccent">@color/app_accent</item>
+        <item name="android:colorControlActivated">@color/app_accent</item>
         <item name="android:windowBackground">@color/background_light</item>
         <item name="colorSurface">@color/surface_light</item>
         <item name="android:listDivider">@color/divider_on_light</item>
@@ -38,7 +39,7 @@
 
     <style name="Widget.App.Button" parent="Widget.Material3.Button">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:backgroundTint">?attr/colorAccent</item>
     </style>
 </resources>
