@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <org.cnodejs.android.md.ui.widget.AppBarLayout
             android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
                 app:tabSelectedTextColor="?android:attr/textColorPrimary"
                 app:tabIndicatorColor="?attr/colorAccent" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+        </org.cnodejs.android.md.ui.widget.AppBarLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
