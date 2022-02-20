@@ -52,6 +52,12 @@ class SettingStore(application: Application) : DataStoreWrapper(application, "se
         dataStore.data.first()[KEY_TOPIC_SIGN] ?: DEFAULT_TOPIC_SIGN
     }
 
+    fun setTopicSign(value: String) = runBlocking {
+        dataStore.edit { mutablePreferences ->
+            mutablePreferences[KEY_TOPIC_SIGN] = value
+        }
+    }
+
     fun isTopicDisplayTabDev(): Boolean = runBlocking {
         dataStore.data.first()[KEY_IS_TOPIC_DISPLAY_TAB_DEB] ?: false
     }
