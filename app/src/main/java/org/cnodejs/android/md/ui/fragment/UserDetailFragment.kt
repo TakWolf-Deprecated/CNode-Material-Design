@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
@@ -74,16 +75,19 @@ class UserDetailFragment : BaseFragment() {
     ): View {
         val binding = FragmentUserDetailBinding.inflate(inflater, container, false)
 
+        @ColorInt val colorAppPrimaryVariant = ContextCompat.getColor(requireContext(), R.color.app_primary_variant)
+        @ColorInt val colorTranslucentSystemBars = ContextCompat.getColor(requireContext(), R.color.translucent_system_bars)
+
         binding.toolbar.setNavigationOnClickListener {
             navigator.back()
         }
         binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
             val isScrimsShown = binding.collapsingToolbarLayout.height + verticalOffset < binding.collapsingToolbarLayout.scrimVisibleHeightTrigger
             if (isScrimsShown) {
-                binding.statusBarTranslucent.visibility = View.INVISIBLE
+                binding.root.insetsColorTop = colorAppPrimaryVariant
                 binding.toolbarTitle.visibility = View.VISIBLE
             } else {
-                binding.statusBarTranslucent.visibility = View.VISIBLE
+                binding.root.insetsColorTop = colorTranslucentSystemBars
                 binding.toolbarTitle.visibility = View.GONE
             }
         })
