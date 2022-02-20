@@ -15,7 +15,7 @@ class SettingStore(application: Application) : DataStoreWrapper(application, "se
         private val KEY_TOPIC_SIGN = stringPreferencesKey("topicSign")
         private val KEY_IS_TOPIC_DISPLAY_TAB_DEB = booleanPreferencesKey("isTopicDisplayTabDev")
 
-        val DEFAULT_TOPIC_SIGN = "来自酷炫的 [CNodeMD](https://github.com/TakWolf/CNode-Material-Design)"
+        const val DEFAULT_TOPIC_SIGN = "来自酷炫的 [CNodeMD](https://github.com/TakWolf/CNode-Material-Design)"
     }
 
     fun isThemeDarkMode(): Boolean = runBlocking {
