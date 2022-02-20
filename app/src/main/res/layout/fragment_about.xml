@@ -40,14 +40,14 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="16dp"
                 android:orientation="vertical"
-                android:background="?attr/colorSurface"
+                android:background="?colorSurface"
                 android:elevation="@dimen/surface_elevation">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="64dp"
-                    android:src="?attr/logoOnSurface"
+                    android:src="?logoOnSurface"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     tools:ignore="ContentDescription" />
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="@string/app_domain"
-                    android:textColor="?attr/colorAccent"
+                    android:textColor="?colorAccent"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:gravity="center" />
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="@string/app_slogan"
-                    android:textColor="?android:attr/textColorPrimary"
+                    android:textColor="?android:textColorPrimary"
                     android:textSize="14sp"
                     android:gravity="center" />
 
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:orientation="vertical"
-                android:background="?attr/colorSurface"
+                android:background="?colorSurface"
                 android:elevation="@dimen/surface_elevation">
 
                 <LinearLayout
@@ -87,13 +87,13 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:background="?selectableItemBackground">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/version_name"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="16sp" />
 
                     <TextView
@@ -101,7 +101,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:textColorSecondary"
                         android:textSize="14sp"
                         tools:text="0.0.0" />
 
@@ -110,7 +110,7 @@
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:dividerColor="?android:attr/listDivider" />
+                    app:dividerColor="?android:listDivider" />
 
                 <LinearLayout
                     android:id="@+id/btn_open_source_url"
@@ -118,13 +118,13 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:background="?selectableItemBackground">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/open_source_url"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="16sp" />
 
                     <TextView
@@ -132,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="@string/open_source_url_content"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:textColorSecondary"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -140,7 +140,7 @@
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:dividerColor="?android:attr/listDivider" />
+                    app:dividerColor="?android:listDivider" />
 
                 <LinearLayout
                     android:id="@+id/btn_about_cnode"
@@ -148,13 +148,13 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:background="?selectableItemBackground">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/about_cnode"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="16sp" />
 
                     <TextView
@@ -162,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="@string/about_cnode_content"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:textColorSecondary"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -170,7 +170,7 @@
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:dividerColor="?android:attr/listDivider" />
+                    app:dividerColor="?android:listDivider" />
 
                 <LinearLayout
                     android:id="@+id/btn_about_author"
@@ -178,13 +178,13 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:orientation="vertical"
-                    android:background="?attr/selectableItemBackground">
+                    android:background="?selectableItemBackground">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/about_author"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="16sp" />
 
                     <TextView
@@ -192,7 +192,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="@string/about_author_content"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:textColorSecondary"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -204,7 +204,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:orientation="vertical"
-                android:background="?attr/colorSurface"
+                android:background="?colorSurface"
                 android:elevation="@dimen/surface_elevation">
 
                 <TextView
@@ -213,9 +213,9 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:text="@string/open_source_license"
-                    android:textColor="?android:attr/textColorPrimary"
+                    android:textColor="?android:textColorPrimary"
                     android:textSize="16sp"
-                    android:background="?attr/selectableItemBackground" />
+                    android:background="?selectableItemBackground" />
 
             </LinearLayout>
 
@@ -224,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="@string/copyright"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="?android:textColorSecondary"
                 android:textSize="12sp"
                 android:gravity="center" />
 

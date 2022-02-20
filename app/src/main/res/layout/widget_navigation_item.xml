@@ -14,7 +14,7 @@
         android:scaleType="center"
         android:adjustViewBounds="true"
         tools:src="@drawable/baseline_settings_24"
-        tools:tint="?android:attr/textColorPrimary"
+        tools:tint="?android:textColorPrimary"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -27,7 +27,7 @@
         android:maxLines="1"
         android:ellipsize="end"
         tools:text="标题"
-        tools:textColor="?android:attr/textColorPrimary" />
+        tools:textColor="?android:textColorPrimary" />
 
     <TextView
         android:id="@+id/tv_badge"
@@ -37,6 +37,6 @@
         android:textSize="14sp"
         android:textStyle="bold"
         tools:text="99+"
-        tools:textColor="?android:attr/textColorPrimary" />
+        tools:textColor="?android:textColorPrimary" />
 
 </LinearLayout>

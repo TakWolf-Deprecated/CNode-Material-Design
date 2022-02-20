@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:text="@string/empty_content"
-        android:textColor="?android:attr/textColorTertiary"
+        android:textColor="?android:textColorTertiary"
         android:textSize="20sp"
         android:gravity="center"
         android:visibility="gone"

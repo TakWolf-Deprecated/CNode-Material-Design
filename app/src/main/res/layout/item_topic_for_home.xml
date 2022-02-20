@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
     android:orientation="vertical"
-    android:background="?attr/colorSurface"
+    android:background="?colorSurface"
     android:elevation="@dimen/surface_elevation">
 
     <ImageView
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:background="?attr/selectableItemBackground"
+        android:background="?selectableItemBackground"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="?android:textColorPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
             android:maxLines="2"
@@ -113,7 +113,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_content"
         app:dividerInsetStart="16dp"
         app:dividerInsetEnd="16dp"
-        app:dividerColor="?android:attr/listDivider" />
+        app:dividerColor="?android:listDivider" />
 
     <LinearLayout
         android:id="@+id/layout_author"
@@ -122,7 +122,7 @@
         android:padding="16dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="?attr/selectableItemBackground"
+        android:background="?selectableItemBackground"
         app:layout_constraintTop_toBottomOf="@id/divider">
 
         <de.hdodenhof.circleimageview.CircleImageView

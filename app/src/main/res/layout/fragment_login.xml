@@ -80,7 +80,7 @@
         app:contentPadding="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="@dimen/surface_elevation"
-        app:cardBackgroundColor="?attr/colorSurface">
+        app:cardBackgroundColor="?colorSurface">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,12 +102,12 @@
                 app:boxCornerRadiusTopEnd="4dp"
                 app:boxCornerRadiusBottomStart="4dp"
                 app:boxCornerRadiusBottomEnd="4dp"
-                app:hintTextColor="?attr/colorAccent"
+                app:hintTextColor="?colorAccent"
                 app:endIconMode="clear_text"
-                app:endIconTint="?android:attr/textColorPrimary"
+                app:endIconTint="?android:textColorPrimary"
                 app:counterEnabled="true"
                 app:counterMaxLength="36"
-                app:counterTextColor="?android:attr/textColorPrimary"
+                app:counterTextColor="?android:textColorPrimary"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -139,7 +139,7 @@
                     android:layout_weight="1"
                     android:layout_margin="8dp"
                     android:paddingVertical="8dp"
-                    android:foreground="?attr/selectableItemBackground">
+                    android:foreground="?selectableItemBackground">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -147,11 +147,11 @@
                         android:layout_gravity="center"
                         android:drawablePadding="8dp"
                         android:text="@string/login_by_qr_code"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="14sp"
                         android:gravity="center"
                         app:drawableStartCompat="@drawable/baseline_qr_code_scanner_24"
-                        app:drawableTint="?android:attr/textColorPrimary" />
+                        app:drawableTint="?android:textColorPrimary" />
 
                 </FrameLayout>
 
@@ -162,7 +162,7 @@
                     android:layout_weight="1"
                     android:layout_margin="8dp"
                     android:paddingVertical="8dp"
-                    android:foreground="?attr/selectableItemBackground">
+                    android:foreground="?selectableItemBackground">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -170,11 +170,11 @@
                         android:layout_gravity="center"
                         android:drawablePadding="8dp"
                         android:text="@string/login_by_github"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="14sp"
                         android:gravity="center"
                         app:drawableStartCompat="@drawable/ic_github_grey600_24dp"
-                        app:drawableTint="?android:attr/textColorPrimary" />
+                        app:drawableTint="?android:textColorPrimary" />
 
                 </FrameLayout>
 
@@ -192,9 +192,9 @@
         android:paddingVertical="8dp"
         android:paddingHorizontal="16dp"
         android:text="@string/_how_to_get_access_token_"
-        android:textColor="?attr/colorAccent"
+        android:textColor="?colorAccent"
         android:textSize="14sp"
-        android:background="?attr/selectableItemBackground"
+        android:background="?selectableItemBackground"
         app:layout_constraintTop_toBottomOf="@id/layout_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

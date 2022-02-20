@@ -41,6 +41,6 @@
     <style name="Widget.App.Button" parent="Widget.Material3.Button">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:backgroundTint">?attr/colorAccent</item>
+        <item name="android:backgroundTint">?colorAccent</item>
     </style>
 </resources>

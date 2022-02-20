@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorSurface"
+    android:background="?colorSurface"
     android:elevation="@dimen/surface_elevation">
 
     <LinearLayout
@@ -15,7 +15,7 @@
         android:padding="8dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="?attr/selectableItemBackground"
+        android:background="?selectableItemBackground"
         app:layout_constraintTop_toTopOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -35,7 +35,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="?android:textColorPrimary"
                 android:textSize="16sp"
                 android:maxLines="1"
                 android:ellipsize="end"
@@ -52,7 +52,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="?android:textColorSecondary"
                     android:textSize="14sp"
                     tools:text="TakWolf" />
 
@@ -60,7 +60,7 @@
                     android:id="@+id/tv_last_reply_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="?android:textColorSecondary"
                     android:textSize="14sp"
                     tools:text="1 天前" />
 
@@ -75,6 +75,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/btn_item"
-        app:dividerColor="?android:attr/listDivider" />
+        app:dividerColor="?android:listDivider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

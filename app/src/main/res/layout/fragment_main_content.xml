@@ -61,6 +61,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/baseline_create_24"
         app:tint="@android:color/white"
-        app:backgroundTint="?attr/colorAccent" />
+        app:backgroundTint="?colorAccent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,10 +20,10 @@
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="?android:textColorSecondary"
         android:textSize="14sp"
         android:gravity="center"
-        android:background="?attr/selectableItemBackground"
+        android:background="?selectableItemBackground"
         android:visibility="invisible"
         tools:text="@string/load_more_finished"
         tools:visibility="visible" />
