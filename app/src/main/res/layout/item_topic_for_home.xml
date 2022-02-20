@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="?android:textColorPrimary"
             android:textSize="14sp"
             android:maxLines="4"
             android:ellipsize="end"
