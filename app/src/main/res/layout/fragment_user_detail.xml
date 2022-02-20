@@ -141,7 +141,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:navigationIcon="@drawable/baseline_arrow_back_24" />
+                    app:navigationIcon="@drawable/baseline_arrow_back_24"
+                    app:menu="@menu/user_detail" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

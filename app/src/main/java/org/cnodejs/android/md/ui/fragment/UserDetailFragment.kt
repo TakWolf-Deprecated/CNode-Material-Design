@@ -81,6 +81,16 @@ class UserDetailFragment : BaseFragment() {
         binding.toolbar.setNavigationOnClickListener {
             navigator.back()
         }
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.btn_share -> {
+                    // TODO
+                    true
+                }
+                else -> false
+            }
+        }
+
         binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
             val isScrimsShown = binding.collapsingToolbarLayout.height + verticalOffset < binding.collapsingToolbarLayout.scrimVisibleHeightTrigger
             if (isScrimsShown) {
