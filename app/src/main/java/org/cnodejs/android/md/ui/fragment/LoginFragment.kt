@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentLoginBinding
 import org.cnodejs.android.md.ui.dialog.HowToGetAccessTokenTipDialog
-import org.cnodejs.android.md.ui.listener.NavBackOnClickListener
 import org.cnodejs.android.md.util.FormatUtils
 import org.cnodejs.android.md.util.Navigator
 import org.cnodejs.android.md.vm.LoginViewModel
@@ -56,7 +55,9 @@ class LoginFragment : BaseFragment() {
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
         _binding = binding
 
-        binding.toolbar.setNavigationOnClickListener(NavBackOnClickListener(navigator))
+        binding.toolbar.setNavigationOnClickListener {
+            navigator.back()
+        }
 
         binding.edtAccessToken.addTextChangedListener {
             binding.edtLayoutAccessToken.error = null
