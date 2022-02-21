@@ -53,4 +53,43 @@
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@id/navigation_bar" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layout_permission_rationale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
+        android:theme="@style/ThemeOverlay.App.Light"
+        app:layout_constraintTop_toBottomOf="@id/status_bar"
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar"
+        app:contentPadding="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="@dimen/surface_elevation"
+        app:cardBackgroundColor="?colorSurface">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="24dp"
+                android:text="@string/qr_code_permission_rationale"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp" />
+
+            <Button style="@style/Widget.App.Button"
+                android:id="@+id/btn_request_permission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/request_permission" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </com.takwolf.android.insetswidget.constraintlayout.InsetsConstraintLayout>

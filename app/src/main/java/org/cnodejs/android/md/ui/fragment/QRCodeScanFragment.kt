@@ -16,6 +16,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -49,7 +50,7 @@ class QRCodeScanFragment : BaseFragment() {
             if (isGranted) {
                 startCamera()
             } else {
-                showRequestPermissionRationale()
+                showToast(R.string.permission_denied)
             }
         }
     }
@@ -71,16 +72,14 @@ class QRCodeScanFragment : BaseFragment() {
             navigator.back()
         }
 
-        when {
-            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED -> {
-                startCamera()
-            }
-            shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {
-                showRequestPermissionRationale()
-            }
-            else -> {
-                requestPermissionLauncher.launch(Manifest.permission.CAMERA)
-            }
+        binding.btnRequestPermission.setOnClickListener {
+            requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            startCamera()
+        } else {
+            binding.btnRequestPermission.callOnClick()
         }
 
         return binding.root
@@ -91,12 +90,9 @@ class QRCodeScanFragment : BaseFragment() {
         _binding = null
     }
 
-    private fun showRequestPermissionRationale() {
-        // TODO
-    }
-
     private fun startCamera() {
         _binding?.let { binding ->
+            binding.layoutPermissionRationale.isVisible = false
             val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
             cameraProviderFuture.addListener({
                 val cameraProvider = cameraProviderFuture.get().apply {
