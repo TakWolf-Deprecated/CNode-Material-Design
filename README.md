@@ -23,6 +23,7 @@
 - [InsetsWidget](https://github.com/TakWolf/Android-InsetsWidget)
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
 - [Live Event](https://github.com/hadilq/LiveEvent)
+- [Scan Barcodes with ML Kit on Android](https://developers.google.com/ml-kit/vision/barcode-scanning/android)
 
 ## Resources
 

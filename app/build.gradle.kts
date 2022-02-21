@@ -66,6 +66,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
     implementation("androidx.datastore:datastore:1.0.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.camera:camera-camera2:1.1.0-beta01")
+    implementation("androidx.camera:camera-lifecycle:1.1.0-beta01")
+    implementation("androidx.camera:camera-view:1.1.0-beta01")
     implementation("com.google.android.material:material:1.5.0")
     implementation("com.squareup.moshi:moshi:1.13.0")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
@@ -84,4 +87,5 @@ dependencies {
     implementation("com.github.TakWolf.Android-InsetsWidget:constraintlayout:0.0.1")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.github.hadilq:live-event:1.3.0")
+    implementation("com.google.mlkit:barcode-scanning:17.0.2")
 }
