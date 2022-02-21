@@ -17,8 +17,8 @@ data class Reply(
 
 @JsonClass(generateAdapter = true)
 data class ReplyInMessage(
-    val id: String,
-    val content: String,
-    val ups: List<String>,
-    @Json(name = "create_at") val createAt: OffsetDateTime,
+    val id: String?,
+    val content: String?,
+    val ups: List<String>?,
+    @Json(name = "create_at") val createAt: OffsetDateTime?,
 )
