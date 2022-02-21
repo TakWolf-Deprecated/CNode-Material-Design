@@ -4,6 +4,7 @@ import com.squareup.moshi.FromJson
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.ToJson
+import java.time.OffsetDateTime
 
 @JsonClass(generateAdapter = false)
 enum class MessageType {
@@ -19,6 +20,7 @@ data class Message(
     val author: Author,
     val topic: TopicInMessage,
     val reply: ReplyInMessage,
+    @Json(name = "create_at") val createAt: OffsetDateTime,
 )
 
 @JsonClass(generateAdapter = true)
