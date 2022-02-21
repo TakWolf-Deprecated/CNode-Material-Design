@@ -9,10 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -41,6 +38,7 @@ class QRCodeScanFragment : BaseFragment() {
 
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
 
+    private var camera: Camera? = null
     private val cameraExecutor = Executors.newSingleThreadExecutor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +72,20 @@ class QRCodeScanFragment : BaseFragment() {
 
         binding.btnRequestPermission.setOnClickListener {
             requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
+
+        binding.btnTorch.setOnClickListener {
+            camera?.let { camera ->
+                if (camera.cameraInfo.hasFlashUnit()) {
+                    if (camera.cameraInfo.torchState.value == TorchState.OFF) {
+                        camera.cameraControl.enableTorch(true)
+                        binding.btnTorch.setImageResource(R.drawable.baseline_flashlight_on_24)
+                    } else {
+                        camera.cameraControl.enableTorch(false)
+                        binding.btnTorch.setImageResource(R.drawable.baseline_flashlight_off_24)
+                    }
+                }
+            }
         }
 
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -115,7 +127,7 @@ class QRCodeScanFragment : BaseFragment() {
                         })
                     }
                 try {
-                    cameraProvider.bindToLifecycle(viewLifecycleOwner, CameraSelector.DEFAULT_BACK_CAMERA, preview, imageAnalysis)
+                    camera = cameraProvider.bindToLifecycle(viewLifecycleOwner, CameraSelector.DEFAULT_BACK_CAMERA, preview, imageAnalysis)
                 } catch (e: Exception) {
                     showToast(R.string.camera_bind_failed)
                 }

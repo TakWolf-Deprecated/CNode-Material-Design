@@ -2,6 +2,7 @@
 <com.takwolf.android.insetswidget.constraintlayout.InsetsConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/ThemeOverlay.App.Dark"
@@ -42,16 +43,37 @@
         app:titleCentered="true"
         app:navigationIcon="@drawable/baseline_arrow_back_24" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:padding="16dp"
-        android:text="@string/qr_code_scan_tip"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="14sp"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@id/navigation_bar" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="#01000000"
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar">
+
+        <ImageView
+            android:id="@+id/btn_torch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="32dp"
+            android:padding="16dp"
+            android:src="@drawable/baseline_flashlight_off_24"
+            android:scaleType="center"
+            android:adjustViewBounds="true"
+            android:background="?selectableItemBackgroundBorderless"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:padding="16dp"
+            android:text="@string/qr_code_scan_tip"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:gravity="center" />
+
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/layout_permission_rationale"
