@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="@id/space_header_bottom"
         tools:ignore="ContentDescription" />
 
-    <com.takwolf.android.insetswidget.InsetsView
+    <com.takwolf.android.insetswidget.InsetsSpace
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
