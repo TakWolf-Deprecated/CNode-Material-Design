@@ -45,7 +45,7 @@
                 android:text="@string/top"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
-                android:background="@color/topic_top" />
+                android:background="@color/badge" />
 
             <TextView
                 android:id="@+id/tv_tab"
