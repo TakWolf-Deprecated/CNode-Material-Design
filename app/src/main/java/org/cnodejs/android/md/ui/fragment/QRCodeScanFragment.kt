@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
+import org.cnodejs.android.md.BuildConfig
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentQrCodeScanBinding
 import org.cnodejs.android.md.util.Navigator
@@ -142,6 +144,10 @@ class QRCodeScanFragment : BaseFragment() {
     }
 
     private class QRCodeAnalyzer(private val onResultListener: (value: String) -> Unit) : ImageAnalysis.Analyzer {
+        companion object {
+            private const val TAG = "QRCodeAnalyzer"
+        }
+
         private val scanner = BarcodeScanning.getClient(BarcodeScannerOptions.Builder()
             .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
             .build())
@@ -157,9 +163,14 @@ class QRCodeScanFragment : BaseFragment() {
                             return@addOnSuccessListener
                         }
                     }
+                }.addOnFailureListener { e ->
+                    if (BuildConfig.DEBUG) {
+                        Log.e(TAG, "process", e)
+                    }
+                }.addOnCompleteListener {
+                    imageProxy.close()
                 }
             }
-            imageProxy.close()
         }
     }
 }
