@@ -55,7 +55,7 @@
             android:id="@+id/btn_torch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="32dp"
+            android:layout_marginVertical="24dp"
             android:padding="16dp"
             android:src="@drawable/baseline_flashlight_off_24"
             android:scaleType="center"
