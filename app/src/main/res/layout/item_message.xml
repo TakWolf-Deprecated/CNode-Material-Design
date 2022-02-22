@@ -94,17 +94,25 @@
             android:lineSpacingMultiplier="1.2"
             tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
 
-        <TextView
-            android:id="@+id/tv_topic_title"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:padding="16dp"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="14sp"
-            android:lineSpacingMultiplier="1.2"
-            android:background="?android:windowBackground"
-            tools:text="话题：这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
+            app:contentPadding="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="?android:windowBackground"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tv_topic_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                android:lineSpacingMultiplier="1.2"
+                tools:text="话题：这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
+
+        </androidx.cardview.widget.CardView>
 
         <com.takwolf.android.insetswidget.InsetsSpace
             android:id="@+id/navigation_bar"

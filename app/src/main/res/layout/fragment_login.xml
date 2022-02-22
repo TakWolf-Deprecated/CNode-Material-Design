@@ -79,8 +79,8 @@
         app:layout_constraintTop_toBottomOf="@id/space_header_bottom"
         app:contentPadding="8dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="@dimen/surface_elevation"
-        app:cardBackgroundColor="?colorSurface">
+        app:cardBackgroundColor="?colorSurface"
+        app:cardElevation="@dimen/surface_elevation">
 
         <LinearLayout
             android:layout_width="match_parent"
