@@ -109,10 +109,10 @@
                 android:id="@+id/tv_topic_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?android:textColorPrimary"
+                android:textColor="?android:textColorSecondary"
                 android:textSize="14sp"
                 android:lineSpacingMultiplier="1.2"
-                tools:text="话题：这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
+                tools:text="这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
 
         </androidx.cardview.widget.CardView>
 

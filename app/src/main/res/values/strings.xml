@@ -70,7 +70,6 @@
     <string name="user_detail_tab_create">最新发布</string>
     <string name="user_detail_tab_collect">收藏话题</string>
 
-    <string name="topic_s">话题：%s</string>
     <string name="at_me_in_topic">在话题中@了我</string>
     <string name="at_me_in_reply">在回复中@了我</string>
     <string name="reply_my_topic">回复了我的话题</string>

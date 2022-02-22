@@ -61,7 +61,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
             binding.tvAuthor.text = message.author.loginName
             binding.tvCreateTime.text = message.createAt.timeSpanStringFromNow(resources)
             binding.dot.isVisible = !message.hasRead
-            binding.tvTopicTitle.text = resources.getString(R.string.topic_s, message.topic.title)
+            binding.tvTopicTitle.text = message.topic.title
             binding.navigationBar.isVisible = isLast
             binding.divider.isVisible = !isLast
 
