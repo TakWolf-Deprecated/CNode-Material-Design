@@ -103,13 +103,13 @@ interface CNodeApi {
 
     @POST("message/mark_all")
     @FormUrlEncoded
-    fun markAllMessageRead(
+    suspend fun markAllMessagesRead(
         @Field("accesstoken") accessToken: String,
     ): MessagesMarkedAllResult
 
     @POST("message/mark_one/{messageId}")
     @FormUrlEncoded
-    fun markMessageRead(
+    suspend fun markMessageRead(
         @Path("messageId") messageId: String,
         @Field("accesstoken") accessToken: String,
     ): MessageMarkedResult
