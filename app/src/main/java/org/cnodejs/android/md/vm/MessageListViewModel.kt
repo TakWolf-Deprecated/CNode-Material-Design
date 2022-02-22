@@ -29,6 +29,10 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
     val messagesHolder = ListLiveHolder<Message>()
     var isLoadingData = MutableLiveData(false)
 
+    init {
+        loadMessages()
+    }
+
     fun loadMessages() {
         if (isLoadingData.value == true) {
             return

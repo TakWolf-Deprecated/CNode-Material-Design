@@ -70,6 +70,11 @@
     <string name="user_detail_tab_create">最新发布</string>
     <string name="user_detail_tab_collect">收藏话题</string>
 
+    <string name="topic_s">话题：%s</string>
+    <string name="at_you_in_topic">在话题中@了您</string>
+    <string name="at_you_in_reply">在回复中@了您</string>
+    <string name="reply_your_topic">回复了您的话题</string>
+
     <string name="theme">主题</string>
     <string name="theme_dark_mode">夜间模式</string>
     <string name="topic">话题</string>

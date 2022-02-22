@@ -1,16 +1,24 @@
 package org.cnodejs.android.md.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMessageListBinding
+import org.cnodejs.android.md.ui.adapter.MessageListAdapter
+import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
+import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
+import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
 import org.cnodejs.android.md.util.Navigator
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MessageListViewModel
+import org.cnodejs.android.md.vm.holder.setupView
 
 class MessageListFragment : BaseFragment() {
     companion object {
@@ -29,9 +37,29 @@ class MessageListFragment : BaseFragment() {
     ): View {
         val binding = FragmentMessageListBinding.inflate(inflater, container, false)
 
+        val a = requireContext().obtainStyledAttributes(intArrayOf(android.R.attr.colorAccent))
+        @ColorInt val colorAccent = a.getColor(0, Color.TRANSPARENT)
+        a.recycle()
+
         binding.toolbar.setNavigationOnClickListener {
             navigator.back()
         }
+        binding.toolbar.setOnClickListener(object : OnDoubleClickListener() {
+            override fun onDoubleClick(v: View) {
+                binding.recyclerView.scrollToPosition(0)
+            }
+        })
+
+        binding.refreshLayout.setColorSchemeColors(colorAccent)
+        binding.refreshLayout.setOnRefreshListener {
+            messageListViewModel.loadMessages()
+        }
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        val adapter = MessageListAdapter(inflater, uniqueTag)
+        adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
+        adapter.onUserClickListener = UserDetailNavigateListener(navigator)
+        binding.recyclerView.adapter = adapter
 
         observeViewModel(messageListViewModel)
 
@@ -40,6 +68,14 @@ class MessageListFragment : BaseFragment() {
                 navigator.back()
             }
         }
+
+        messageListViewModel.isLoadingData.observe(viewLifecycleOwner) {
+            it?.let { isLoading ->
+                binding.refreshLayout.isRefreshing = isLoading
+            }
+        }
+
+        messageListViewModel.messagesHolder.setupView(viewLifecycleOwner, adapter)
 
         return binding.root
     }
