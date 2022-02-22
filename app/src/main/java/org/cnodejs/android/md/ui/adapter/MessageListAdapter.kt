@@ -13,6 +13,7 @@ import org.cnodejs.android.md.model.entity.MessageType
 import org.cnodejs.android.md.ui.listener.OnTopicClickListener
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
 import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.util.setMarkdown
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
@@ -55,12 +56,12 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
                 } else {
                     binding.tvAction.setText(R.string.at_you_in_reply)
                     binding.tvReplyContent.isVisible = true
-                    binding.tvReplyContent.text = message.reply.content // TODO
+                    binding.tvReplyContent.setMarkdown(message.reply.content)
                 }
             } else {
                 binding.tvAction.setText(R.string.reply_your_topic)
                 binding.tvReplyContent.isVisible = true
-                binding.tvReplyContent.text = message.reply.content // TODO
+                binding.tvReplyContent.setMarkdown(message.reply.content)
             }
         }
     }

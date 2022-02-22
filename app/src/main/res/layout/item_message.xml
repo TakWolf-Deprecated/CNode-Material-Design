@@ -84,6 +84,7 @@
         android:paddingHorizontal="16dp"
         android:textColor="?android:textColorPrimary"
         android:textSize="14sp"
+        android:lineSpacingMultiplier="1.2"
         tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
 
     <TextView
@@ -94,6 +95,7 @@
         android:padding="16dp"
         android:textColor="?android:textColorPrimary"
         android:textSize="14sp"
+        android:lineSpacingMultiplier="1.2"
         android:background="?android:windowBackground"
         tools:text="话题：这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
 
