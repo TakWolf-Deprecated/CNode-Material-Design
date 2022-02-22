@@ -50,6 +50,15 @@ class MessageListFragment : BaseFragment() {
                 binding.recyclerView.scrollToPosition(0)
             }
         })
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.btn_mark_all_read -> {
+                    messageListViewModel.markAllMessagesRead()
+                    true
+                }
+                else -> false
+            }
+        }
 
         binding.refreshLayout.setColorSchemeColors(colorAccent)
         binding.refreshLayout.setOnRefreshListener {
@@ -58,6 +67,9 @@ class MessageListFragment : BaseFragment() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         val adapter = MessageListAdapter(inflater, uniqueTag).apply {
+            onMessageReadListener = { messageId ->
+                messageListViewModel.markMessageRead(messageId)
+            }
             onTopicClickListener = TopicDetailNavigateListener(navigator)
             onUserClickListener = UserDetailNavigateListener(navigator)
         }

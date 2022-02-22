@@ -22,14 +22,15 @@
         android:theme="@style/ThemeOverlay.App.Dark"
         app:title="@string/message"
         app:titleCentered="true"
-        app:navigationIcon="@drawable/baseline_arrow_back_24" />
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:menu="@menu/message_list" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

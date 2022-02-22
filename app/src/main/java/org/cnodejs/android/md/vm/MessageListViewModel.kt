@@ -63,4 +63,65 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
             }
         }
     }
+
+    fun markAllMessagesRead() {
+        accountStore.getAccessToken()?.let { accessToken ->
+            viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    val messageIds = api.markAllMessagesRead(accessToken).markedMessages.map { idData -> idData.id }.toSet()
+                    withContext(Dispatchers.Main) {
+                        messagesHolder.entitiesData.value?.let { messages ->
+                            messagesHolder.entitiesData.value = messages.map { message ->
+                                if (messageIds.contains(message.message.id)) {
+                                    MessageWithSummary(message.message.copy(hasRead = true))
+                                } else {
+                                    message
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    if (BuildConfig.DEBUG) {
+                        Log.e(TAG, "markAllMessagesRead", e)
+                    }
+                    val errorResult = ErrorResult.from(e)
+                    withContext(Dispatchers.Main) {
+                        toastHolder.showToast(errorResult.message)
+                    }
+                }
+            }
+        }
+    }
+
+    fun markMessageRead(messageId: String) {
+        accountStore.getAccessToken()?.let { accessToken ->
+            viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    val markedMessageId = api.markMessageRead(messageId, accessToken).markedMessageId
+                    if (messageId != markedMessageId && BuildConfig.DEBUG) {
+                        Log.w(TAG, "markMessageRead - messageId: $messageId not equals markedMessageId: $markedMessageId")
+                    }
+                    withContext(Dispatchers.Main) {
+                        messagesHolder.entitiesData.value?.let { messages ->
+                            messagesHolder.entitiesData.value = messages.map { message ->
+                                if (message.message.id == markedMessageId) {
+                                    MessageWithSummary(message.message.copy(hasRead = true))
+                                } else {
+                                    message
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    if (BuildConfig.DEBUG) {
+                        Log.e(TAG, "markMessageRead", e)
+                    }
+                    val errorResult = ErrorResult.from(e)
+                    withContext(Dispatchers.Main) {
+                        toastHolder.showToast(errorResult.message)
+                    }
+                }
+            }
+        }
+    }
 }

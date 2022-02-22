@@ -17,6 +17,7 @@ import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
 class MessageListAdapter(private val layoutInflater: LayoutInflater, private val uniqueTag: String) : ListAdapter<MessageWithSummary, MessageListAdapter.ViewHolder>(MessageWithSummaryDiffItemCallback) {
+    var onMessageReadListener: ((messageId: String) -> Unit)? = null
     var onTopicClickListener: OnTopicClickListener? = null
     var onUserClickListener: OnUserClickListener? = null
 
@@ -36,10 +37,11 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
         init {
             binding.btnItem.setOnClickListener {
                 (bindingAdapter as? MessageListAdapter)?.let { adapter ->
-                    adapter.onTopicClickListener?.let { listener ->
-                        val message = adapter.getItem(bindingAdapterPosition).message
-                        listener.onTopicClick(message.topic.id, message.reply.id)
+                    val message = adapter.getItem(bindingAdapterPosition).message
+                    if (!message.hasRead) {
+                        adapter.onMessageReadListener?.invoke(message.id)
                     }
+                    adapter.onTopicClickListener?.onTopicClick(message.topic.id, message.reply.id)
                 }
             }
 
