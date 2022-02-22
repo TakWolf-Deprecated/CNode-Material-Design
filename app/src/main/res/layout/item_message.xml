@@ -8,107 +8,116 @@
     android:background="?colorSurface">
 
     <LinearLayout
+        android:id="@+id/btn_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:paddingHorizontal="16dp"
-        android:orientation="horizontal">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_author"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            tools:src="@drawable/image_placeholder" />
+        android:orientation="vertical"
+        android:background="?selectableItemBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:orientation="vertical">
+            android:paddingTop="16dp"
+            android:paddingHorizontal="16dp"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_author"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                tools:src="@drawable/image_placeholder" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_author"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="?android:textColorPrimary"
-                    android:textSize="14sp"
-                    tools:text="TakWolf" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_create_time"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_author"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="14sp"
+                        tools:text="TakWolf" />
+
+                    <TextView
+                        android:id="@+id/tv_create_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="14sp"
+                        tools:text="1 天前" />
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:textColorSecondary"
-                    android:textSize="14sp"
-                    tools:text="1 天前" />
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_action"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="14sp"
+                        tools:text="@string/reply_your_topic" />
+
+                    <View
+                        android:id="@+id/dot"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center|end"
+                        android:background="@drawable/badge_dot" />
+
+                </FrameLayout>
 
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp">
-
-                <TextView
-                    android:id="@+id/tv_action"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:textColorSecondary"
-                    android:textSize="14sp"
-                    tools:text="@string/reply_your_topic" />
-
-                <View
-                    android:id="@+id/dot"
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:layout_gravity="center|end"
-                    android:background="@drawable/badge_dot" />
-
-            </FrameLayout>
-
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_reply_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingHorizontal="16dp"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.2"
+            tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
+
+        <TextView
+            android:id="@+id/tv_topic_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="16dp"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.2"
+            android:background="?android:windowBackground"
+            tools:text="话题：这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
+
+        <com.takwolf.android.insetswidget.InsetsSpace
+            android:id="@+id/navigation_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isw_insetsType="navigationBars" />
+
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_reply_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:paddingHorizontal="16dp"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="14sp"
-        android:lineSpacingMultiplier="1.2"
-        tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
-
-    <TextView
-        android:id="@+id/tv_topic_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="14sp"
-        android:lineSpacingMultiplier="1.2"
-        android:background="?android:windowBackground"
-        tools:text="话题：这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:dividerColor="?android:listDivider" />
-
-    <com.takwolf.android.insetswidget.InsetsSpace
-        android:id="@+id/navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:isw_insetsType="navigationBars" />
 
 </LinearLayout>

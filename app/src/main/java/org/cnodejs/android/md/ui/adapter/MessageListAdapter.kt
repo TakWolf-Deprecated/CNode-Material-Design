@@ -35,7 +35,23 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
         private val uniqueTag: String,
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
-            // TODO
+            binding.btnItem.setOnClickListener {
+                (bindingAdapter as? MessageListAdapter)?.let { adapter ->
+                    adapter.onTopicClickListener?.let { listener ->
+                        val message = adapter.getItem(bindingAdapterPosition)
+                        listener.onTopicClick(message.topic.id, message.reply.id)
+                    }
+                }
+            }
+
+            binding.imgAuthor.setOnClickListener {
+                (bindingAdapter as? MessageListAdapter)?.let { adapter ->
+                    adapter.onUserClickListener?.let { listener ->
+                        val author = adapter.getItem(bindingAdapterPosition).author
+                        listener.onUserClick(author, binding.imgAuthor)
+                    }
+                }
+            }
         }
 
         fun bind(message: Message, isLast: Boolean) {
@@ -46,8 +62,8 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
             binding.tvCreateTime.text = message.createAt.timeSpanStringFromNow(resources)
             binding.dot.isVisible = !message.hasRead
             binding.tvTopicTitle.text = resources.getString(R.string.topic_s, message.topic.title)
-            binding.divider.isVisible = !isLast
             binding.navigationBar.isVisible = isLast
+            binding.divider.isVisible = !isLast
 
             if (message.type == MessageType.AT) {
                 if (message.reply.id == null) {

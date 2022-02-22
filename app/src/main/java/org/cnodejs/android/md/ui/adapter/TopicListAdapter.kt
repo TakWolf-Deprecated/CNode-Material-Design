@@ -24,7 +24,7 @@ abstract class TopicListAdapter<Topic : ITopic, VH : TopicListAdapter.ViewHolder
                 (bindingAdapter as? TopicListAdapter<*, *>)?.let { adapter ->
                     adapter.onTopicClickListener?.let { listener ->
                         val topic = adapter.getItem(bindingAdapterPosition)
-                        listener.onTopicClick(topic)
+                        listener.onTopicClick(topic.id)
                     }
                 }
             }
