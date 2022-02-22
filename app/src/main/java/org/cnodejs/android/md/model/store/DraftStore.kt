@@ -1,7 +1,7 @@
 package org.cnodejs.android.md.model.store
 
-import android.app.Application
+import android.content.Context
 
-class DraftStore(application: Application) : DataStoreWrapper(application, "draft") {
+class DraftStore(context: Context) : DataStoreWrapper(context, "draft") {
     // TODO
 }

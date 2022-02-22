@@ -1,6 +1,5 @@
 package org.cnodejs.android.md.model.store
 
-import android.app.Application
 import android.content.Context
 import androidx.datastore.core.DataMigration
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
@@ -12,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 
 abstract class DataStoreWrapper protected constructor(
-    application: Application,
+    context: Context,
     name: String,
     corruptionHandler: ReplaceFileCorruptionHandler<Preferences>? = null,
     produceMigrations: (Context) -> List<DataMigration<Preferences>> = { listOf() },
@@ -20,9 +19,9 @@ abstract class DataStoreWrapper protected constructor(
 ) {
     protected val dataStore = PreferenceDataStoreFactory.create(
         corruptionHandler = corruptionHandler,
-        migrations = produceMigrations(application),
+        migrations = produceMigrations(context),
         scope = scope,
     ) {
-        application.preferencesDataStoreFile(name)
+        context.preferencesDataStoreFile(name)
     }
 }

@@ -1,6 +1,6 @@
 package org.cnodejs.android.md.model.store
 
-import android.app.Application
+import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -13,7 +13,7 @@ import org.cnodejs.android.md.model.entity.LoginResult
 import org.cnodejs.android.md.model.entity.User
 import org.greenrobot.eventbus.EventBus
 
-class AccountStore(application: Application) : DataStoreWrapper(application, "account") {
+class AccountStore(context: Context) : DataStoreWrapper(context, "account") {
     companion object {
         private val KEY_ACCESS_TOKEN = stringPreferencesKey("accessToken")
         private val KEY_ID = stringPreferencesKey("id")

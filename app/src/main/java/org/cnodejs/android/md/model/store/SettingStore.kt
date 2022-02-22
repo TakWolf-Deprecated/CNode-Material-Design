@@ -1,13 +1,13 @@
 package org.cnodejs.android.md.model.store
 
-import android.app.Application
+import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
-class SettingStore(application: Application) : DataStoreWrapper(application, "setting") {
+class SettingStore(context: Context) : DataStoreWrapper(context, "setting") {
     companion object {
         private val KEY_IS_THEME_DARK_MODE = booleanPreferencesKey("isThemeDarkMode")
         private val KEY_IS_TOPIC_SAVE_DRAFT_ENABLED = booleanPreferencesKey("isTopicSaveDraftEnabled")

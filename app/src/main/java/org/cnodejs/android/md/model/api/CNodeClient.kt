@@ -1,6 +1,6 @@
 package org.cnodejs.android.md.model.api
 
-import android.app.Application
+import android.content.Context
 import androidx.annotation.GuardedBy
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +13,7 @@ import org.greenrobot.eventbus.EventBus
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class CNodeClient private constructor(application: Application) {
+class CNodeClient private constructor(context: Context) {
     companion object {
         private val lock = Any()
 
@@ -21,12 +21,12 @@ class CNodeClient private constructor(application: Application) {
         @Volatile
         private var instance: CNodeClient? = null
 
-        fun getInstance(application: Application) = instance ?: synchronized(lock) {
-            instance ?: CNodeClient(application).also { instance = it }
+        fun getInstance(context: Context) = instance ?: synchronized(lock) {
+            instance ?: CNodeClient(context.applicationContext).also { instance = it }
         }
     }
 
-    private val accountStore = AppStoreHolder.getInstance(application).accountStore
+    private val accountStore = AppStoreHolder.getInstance(context).accountStore
 
     val api: CNodeApi
 

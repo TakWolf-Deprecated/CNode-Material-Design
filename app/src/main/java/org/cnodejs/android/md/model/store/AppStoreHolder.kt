@@ -1,9 +1,9 @@
 package org.cnodejs.android.md.model.store
 
-import android.app.Application
+import android.content.Context
 import androidx.annotation.GuardedBy
 
-class AppStoreHolder private constructor(application: Application) {
+class AppStoreHolder private constructor(context: Context) {
     companion object {
         private val lock = Any()
 
@@ -11,12 +11,12 @@ class AppStoreHolder private constructor(application: Application) {
         @Volatile
         private var instance: AppStoreHolder? = null
 
-        fun getInstance(application: Application) = instance ?: synchronized(lock) {
-            instance ?: AppStoreHolder(application).also { instance = it }
+        fun getInstance(context: Context) = instance ?: synchronized(lock) {
+            instance ?: AppStoreHolder(context.applicationContext).also { instance = it }
         }
     }
 
-    val accountStore = AccountStore(application)
-    val settingStore = SettingStore(application)
-    val draftStore = DraftStore(application)
+    val accountStore = AccountStore(context)
+    val settingStore = SettingStore(context)
+    val draftStore = DraftStore(context)
 }
