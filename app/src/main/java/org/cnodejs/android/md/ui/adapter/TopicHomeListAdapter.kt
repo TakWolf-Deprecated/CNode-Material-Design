@@ -5,15 +5,15 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import org.cnodejs.android.md.R
-import org.cnodejs.android.md.databinding.ItemTopicForHomeBinding
-import org.cnodejs.android.md.model.entity.TopicForHome
+import org.cnodejs.android.md.databinding.ItemTopicHomeBinding
+import org.cnodejs.android.md.model.entity.TopicWithSummary
 import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
-class TopicForHomeListAdapter(private val layoutInflater: LayoutInflater, private val uniqueTag: String) : TopicListAdapter<TopicForHome, TopicForHomeListAdapter.ViewHolder>(TopicForHomeDiffItemCallback) {
+class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private val uniqueTag: String) : TopicListAdapter<TopicWithSummary, TopicHomeListAdapter.ViewHolder>(TopicWithSummaryDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemTopicForHomeBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemTopicHomeBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding, uniqueTag)
     }
 
@@ -22,7 +22,7 @@ class TopicForHomeListAdapter(private val layoutInflater: LayoutInflater, privat
     }
 
     class ViewHolder(
-        private val binding: ItemTopicForHomeBinding,
+        private val binding: ItemTopicHomeBinding,
         private val uniqueTag: String,
     ) : TopicListAdapter.ViewHolder(
         binding.root,
@@ -30,8 +30,8 @@ class TopicForHomeListAdapter(private val layoutInflater: LayoutInflater, privat
         binding.layoutAuthor,
         binding.imgAuthor,
     ) {
-        fun bind(topicForHome: TopicForHome) {
-            val topic = topicForHome.topic
+        fun bind(topicWithSummary: TopicWithSummary) {
+            val topic = topicWithSummary.topic
             val resources = itemView.resources
             binding.imgGood.isVisible = topic.isGood
             binding.tvTop.isVisible = topic.isTop
@@ -40,7 +40,7 @@ class TopicForHomeListAdapter(private val layoutInflater: LayoutInflater, privat
             binding.tvReplyAndVisitCount.text = resources.getString(R.string.d_reply_d_visit, topic.replyCount, topic.visitCount)
             binding.tvReplyTime.text = resources.getString(R.string.reply_at_s, topic.lastReplyAt.timeSpanStringFromNow(resources))
             binding.tvTitle.text = topic.title
-            binding.tvSummary.text = topicForHome.summary
+            binding.tvSummary.text = topicWithSummary.summary
             binding.imgAuthor.loadAvatar(topic.author.avatarUrlCompat)
             binding.imgAuthor.setSharedName(uniqueTag, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = topic.author.loginName
@@ -49,12 +49,12 @@ class TopicForHomeListAdapter(private val layoutInflater: LayoutInflater, privat
     }
 }
 
-private object TopicForHomeDiffItemCallback : DiffUtil.ItemCallback<TopicForHome>() {
-    override fun areItemsTheSame(oldItem: TopicForHome, newItem: TopicForHome): Boolean {
+private object TopicWithSummaryDiffItemCallback : DiffUtil.ItemCallback<TopicWithSummary>() {
+    override fun areItemsTheSame(oldItem: TopicWithSummary, newItem: TopicWithSummary): Boolean {
         return oldItem.topic.id == newItem.topic.id
     }
 
-    override fun areContentsTheSame(oldItem: TopicForHome, newItem: TopicForHome): Boolean {
+    override fun areContentsTheSame(oldItem: TopicWithSummary, newItem: TopicWithSummary): Boolean {
         return oldItem.topic == newItem.topic
     }
 }

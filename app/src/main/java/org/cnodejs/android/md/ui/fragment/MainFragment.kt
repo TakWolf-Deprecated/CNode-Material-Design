@@ -18,7 +18,7 @@ import coil.load
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMainBinding
 import org.cnodejs.android.md.model.entity.Tab
-import org.cnodejs.android.md.ui.adapter.TopicForHomeListAdapter
+import org.cnodejs.android.md.ui.adapter.TopicHomeListAdapter
 import org.cnodejs.android.md.ui.dialog.LogoutAlertDialog
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
 import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
@@ -78,7 +78,7 @@ class MainFragment : BaseFragment() {
         binding.contentLayout.refreshLayout.setColorSchemeColors(colorAccent)
         binding.contentLayout.recyclerView.layoutManager = LinearLayoutManager(context)
         val loadMoreFooter = LoadMoreFooter.create(inflater, binding.contentLayout.recyclerView)
-        val adapter = TopicForHomeListAdapter(inflater, uniqueTag)
+        val adapter = TopicHomeListAdapter(inflater, uniqueTag)
         adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
         adapter.onUserClickListener = UserDetailNavigateListener(navigator)
         mainViewModel.topicsHolder.setupView(viewLifecycleOwner, binding.contentLayout.refreshLayout, loadMoreFooter, adapter)

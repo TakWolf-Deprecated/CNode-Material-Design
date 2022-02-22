@@ -16,14 +16,14 @@ interface CNodeApi {
         @Query("page") page: Int = PAGE_FIRST,
         @Query("limit") limit: Int = PAGE_LIMIT,
         @Query("mdrender") mdrender: Boolean = MD_RENDER,
-    ): DataResult<List<TopicForHome>>
+    ): DataResult<List<TopicWithSummary>>
 
     @GET("topic/{topicId}")
     suspend fun getTopic(
         @Path("topicId") topicId: String,
         @Query("accesstoken") accessToken: String? = null,
         @Query("mdrender") mdrender: Boolean = MD_RENDER,
-    ): DataResult<TopicWithReply>
+    ): DataResult<TopicDetail>
 
     @POST("topics")
     @FormUrlEncoded

@@ -33,27 +33,27 @@ data class Topic(
     @Json(name = "last_reply_at") override val lastReplyAt: OffsetDateTime,
 ) : ITopicSimple
 
-data class TopicForHome(val topic: Topic) : ITopic {
+data class TopicWithSummary(val topic: Topic) : ITopic {
     override val id: String get() = topic.id
     override val author: Author get() = topic.author
     override val title: String get() = topic.title
     val summary = FormatUtils.getHtmlSummary(topic.content)
 }
 
-class TopicForHomeJsonAdapter {
+class TopicWithSummaryJsonAdapter {
     @FromJson
-    fun fromJson(topic: Topic): TopicForHome {
-        return TopicForHome(topic)
+    fun fromJson(topic: Topic): TopicWithSummary {
+        return TopicWithSummary(topic)
     }
 
     @ToJson
-    fun toJson(topicForHome: TopicForHome): Topic {
-        return topicForHome.topic
+    fun toJson(topicWithSummary: TopicWithSummary): Topic {
+        return topicWithSummary.topic
     }
 }
 
 @JsonClass(generateAdapter = true)
-data class TopicWithReply(
+data class TopicDetail(
     override val id: String,
     @Json(name = "author_id") val authorId: String,
     override val author: Author,

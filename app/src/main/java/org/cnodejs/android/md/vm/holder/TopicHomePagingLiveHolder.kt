@@ -7,12 +7,12 @@ import org.cnodejs.android.md.BuildConfig
 import org.cnodejs.android.md.model.api.CNodeClient
 import org.cnodejs.android.md.model.entity.ErrorResult
 import org.cnodejs.android.md.model.entity.Tab
-import org.cnodejs.android.md.model.entity.TopicForHome
+import org.cnodejs.android.md.model.entity.TopicWithSummary
 
-class TopicForHomePagingLiveHolder(
+class TopicHomePagingLiveHolder(
     viewModel: AndroidViewModel,
     toastHolder: ToastLiveHolder,
-) : PagingLiveHolder<TopicForHome, Int>(
+) : PagingLiveHolder<TopicWithSummary, Int>(
     viewModel,
     toastHolder,
 ) {
