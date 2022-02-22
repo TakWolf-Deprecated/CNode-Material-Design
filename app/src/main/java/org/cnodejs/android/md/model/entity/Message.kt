@@ -12,6 +12,18 @@ enum class MessageType {
     AT,
 }
 
+class MessageTypeJsonAdapter {
+    @FromJson
+    fun fromJson(string: String): MessageType {
+        return MessageType.valueOf(string.uppercase())
+    }
+
+    @ToJson
+    fun toJson(type: MessageType): String {
+        return type.name.lowercase()
+    }
+}
+
 @JsonClass(generateAdapter = true)
 data class Message(
     val id: String,
@@ -28,15 +40,3 @@ data class MessageData(
     @Json(name = "has_read_messages") val hasReadMessages: List<Message>,
     @Json(name = "hasnot_read_messages") val hasNotReadMessages: List<Message>,
 )
-
-class MessageTypeJsonAdapter {
-    @FromJson
-    fun fromJson(string: String): MessageType {
-        return MessageType.valueOf(string.uppercase())
-    }
-
-    @ToJson
-    fun toJson(type: MessageType): String {
-        return type.name.lowercase()
-    }
-}
