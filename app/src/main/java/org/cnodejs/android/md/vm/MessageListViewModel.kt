@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 import org.cnodejs.android.md.BuildConfig
 import org.cnodejs.android.md.model.api.CNodeClient
 import org.cnodejs.android.md.model.entity.ErrorResult
-import org.cnodejs.android.md.model.entity.Message
+import org.cnodejs.android.md.model.entity.MessageWithSummary
 import org.cnodejs.android.md.model.store.AppStoreHolder
 import org.cnodejs.android.md.vm.holder.IToastViewModel
 import org.cnodejs.android.md.vm.holder.ListLiveHolder
@@ -26,7 +26,7 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
     private val api = CNodeClient.getInstance(application).api
 
     override val toastHolder = ToastLiveHolder()
-    val messagesHolder = ListLiveHolder<Message>()
+    val messagesHolder = ListLiveHolder<MessageWithSummary>()
     var isLoadingData = MutableLiveData(false)
 
     init {
@@ -41,10 +41,11 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
             isLoadingData.value = true
             viewModelScope.launch(Dispatchers.IO) {
                 try {
-                    val result = api.getMessages(accessToken)
-                    val messages = mutableListOf<Message>()
-                    messages.addAll(result.data.hasNotReadMessages)
-                    messages.addAll(result.data.hasReadMessages)
+                    val result = api.getMessages(accessToken, true)
+                    val messages = mutableListOf<MessageWithSummary>().apply {
+                        addAll(result.data.hasNotReadMessages)
+                        addAll(result.data.hasReadMessages)
+                    }
                     withContext(Dispatchers.Main) {
                         isLoadingData.value = false
                         messagesHolder.setList(messages)

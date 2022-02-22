@@ -8,16 +8,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.ItemMessageBinding
-import org.cnodejs.android.md.model.entity.Message
 import org.cnodejs.android.md.model.entity.MessageType
+import org.cnodejs.android.md.model.entity.MessageWithSummary
 import org.cnodejs.android.md.ui.listener.OnTopicClickListener
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
 import org.cnodejs.android.md.util.loadAvatar
-import org.cnodejs.android.md.util.setMarkdown
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
-class MessageListAdapter(private val layoutInflater: LayoutInflater, private val uniqueTag: String) : ListAdapter<Message, MessageListAdapter.ViewHolder>(MessageDiffItemCallback) {
+class MessageListAdapter(private val layoutInflater: LayoutInflater, private val uniqueTag: String) : ListAdapter<MessageWithSummary, MessageListAdapter.ViewHolder>(MessageWithSummaryDiffItemCallback) {
     var onTopicClickListener: OnTopicClickListener? = null
     var onUserClickListener: OnUserClickListener? = null
 
@@ -38,7 +37,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
             binding.btnItem.setOnClickListener {
                 (bindingAdapter as? MessageListAdapter)?.let { adapter ->
                     adapter.onTopicClickListener?.let { listener ->
-                        val message = adapter.getItem(bindingAdapterPosition)
+                        val message = adapter.getItem(bindingAdapterPosition).message
                         listener.onTopicClick(message.topic.id, message.reply.id)
                     }
                 }
@@ -47,14 +46,15 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
             binding.imgAuthor.setOnClickListener {
                 (bindingAdapter as? MessageListAdapter)?.let { adapter ->
                     adapter.onUserClickListener?.let { listener ->
-                        val author = adapter.getItem(bindingAdapterPosition).author
+                        val author = adapter.getItem(bindingAdapterPosition).message.author
                         listener.onUserClick(author, binding.imgAuthor)
                     }
                 }
             }
         }
 
-        fun bind(message: Message, isLast: Boolean) {
+        fun bind(messageWithSummary: MessageWithSummary, isLast: Boolean) {
+            val message = messageWithSummary.message
             val resources = itemView.resources
             binding.imgAuthor.loadAvatar(message.author.avatarUrlCompat)
             binding.imgAuthor.setSharedName(uniqueTag, "imgAuthor-${bindingAdapterPosition}")
@@ -72,23 +72,23 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
                 } else {
                     binding.tvAction.setText(R.string.at_me_in_reply)
                     binding.tvReplyContent.isVisible = true
-                    binding.tvReplyContent.setMarkdown(message.reply.content)
+                    binding.tvReplyContent.text = messageWithSummary.replySummary
                 }
             } else {
                 binding.tvAction.setText(R.string.reply_my_topic)
                 binding.tvReplyContent.isVisible = true
-                binding.tvReplyContent.setMarkdown(message.reply.content)
+                binding.tvReplyContent.text = messageWithSummary.replySummary
             }
         }
     }
 }
 
-private object MessageDiffItemCallback : DiffUtil.ItemCallback<Message>() {
-    override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
-        return oldItem.id == newItem.id
+private object MessageWithSummaryDiffItemCallback : DiffUtil.ItemCallback<MessageWithSummary>() {
+    override fun areItemsTheSame(oldItem: MessageWithSummary, newItem: MessageWithSummary): Boolean {
+        return oldItem.message.id == newItem.message.id
     }
 
-    override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(oldItem: MessageWithSummary, newItem: MessageWithSummary): Boolean {
+        return oldItem.message == newItem.message
     }
 }
