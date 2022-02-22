@@ -78,9 +78,10 @@ class MainFragment : BaseFragment() {
         binding.contentLayout.refreshLayout.setColorSchemeColors(colorAccent)
         binding.contentLayout.recyclerView.layoutManager = LinearLayoutManager(context)
         val loadMoreFooter = LoadMoreFooter.create(inflater, binding.contentLayout.recyclerView)
-        val adapter = TopicHomeListAdapter(inflater, uniqueTag)
-        adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
-        adapter.onUserClickListener = UserDetailNavigateListener(navigator)
+        val adapter = TopicHomeListAdapter(inflater, uniqueTag).apply {
+            onTopicClickListener = TopicDetailNavigateListener(navigator)
+            onUserClickListener = UserDetailNavigateListener(navigator)
+        }
         mainViewModel.topicsHolder.setupView(viewLifecycleOwner, binding.contentLayout.refreshLayout, loadMoreFooter, adapter)
         loadMoreFooter.addToRecyclerView(binding.contentLayout.recyclerView)
         binding.contentLayout.recyclerView.adapter = adapter
@@ -94,16 +95,17 @@ class MainFragment : BaseFragment() {
         }
         binding.contentLayout.btnCreateTopic.listenToRecyclerView(binding.contentLayout.recyclerView)
 
-        val onNavMyInfoClickListener = View.OnClickListener {
+        View.OnClickListener {
             accountViewModel.accountData.value?.also { account ->
                 UserDetailFragment.open(navigator, account, binding.navLayout.imgAvatar)
             } ?: run {
                 LoginFragment.open(navigator)
             }
+        }.apply {
+            binding.navLayout.imgAvatar.setOnClickListener(this)
+            binding.navLayout.tvLoginName.setOnClickListener(this)
+            binding.navLayout.tvScore.setOnClickListener(this)
         }
-        binding.navLayout.imgAvatar.setOnClickListener(onNavMyInfoClickListener)
-        binding.navLayout.tvLoginName.setOnClickListener(onNavMyInfoClickListener)
-        binding.navLayout.tvScore.setOnClickListener(onNavMyInfoClickListener)
 
         binding.navLayout.btnDayNight.setOnClickListener {
             settingViewModel.toggleThemeDarkMode()
@@ -113,12 +115,13 @@ class MainFragment : BaseFragment() {
             LogoutAlertDialog.show(childFragmentManager)
         }
 
-        val onNavTabClickListener = View.OnClickListener { v: View ->
+        View.OnClickListener { v: View ->
             mainViewModel.topicsHolder.switchTab(Tab.fromTabId(v.id))
             binding.drawerLayout.closeDrawer(GravityCompat.START)
-        }
-        for (tabView in tabViews) {
-            tabView.setOnClickListener(onNavTabClickListener)
+        }.apply {
+            for (tabView in tabViews) {
+                tabView.setOnClickListener(this)
+            }
         }
 
         binding.navLayout.btnMessage.setOnClickListener {

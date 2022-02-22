@@ -57,9 +57,10 @@ class MessageListFragment : BaseFragment() {
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        val adapter = MessageListAdapter(inflater, uniqueTag)
-        adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
-        adapter.onUserClickListener = UserDetailNavigateListener(navigator)
+        val adapter = MessageListAdapter(inflater, uniqueTag).apply {
+            onTopicClickListener = TopicDetailNavigateListener(navigator)
+            onUserClickListener = UserDetailNavigateListener(navigator)
+        }
         binding.recyclerView.adapter = adapter
 
         observeViewModel(messageListViewModel)

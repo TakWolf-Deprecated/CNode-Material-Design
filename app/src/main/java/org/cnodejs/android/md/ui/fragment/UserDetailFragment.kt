@@ -107,12 +107,13 @@ class UserDetailFragment : BaseFragment() {
         binding.imgAvatar.loadAvatar(avatarUrl)
         setTargetSharedName(binding.imgAvatar, "imgAvatar")
 
-        val onLoadUserDetailClickListener = View.OnClickListener {
+        View.OnClickListener {
             userDetailViewModel.loadUserDetail()
+        }.apply {
+            binding.toolbar.setOnClickListener(this)
+            binding.imgAvatar.setOnClickListener(this)
+            binding.tvLoginName.setOnClickListener(this)
         }
-        binding.toolbar.setOnClickListener(onLoadUserDetailClickListener)
-        binding.imgAvatar.setOnClickListener(onLoadUserDetailClickListener)
-        binding.tvLoginName.setOnClickListener(onLoadUserDetailClickListener)
 
         binding.tvGithubUsername.setOnClickListener {
             userDetailViewModel.userDetailData.value?.user?.let {
@@ -203,9 +204,10 @@ class UserDetailFragment : BaseFragment() {
 
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
             binding.recyclerView.addFooterView(inflater, R.layout.footer_insets_bottom)
-            val adapter = TopicSimpleListAdapter(inflater, uniqueTag)
-            adapter.onTopicClickListener = TopicDetailNavigateListener(navigator)
-            adapter.onUserClickListener = UserDetailNavigateListener(navigator, loginName)
+            val adapter = TopicSimpleListAdapter(inflater, uniqueTag).apply {
+                onTopicClickListener = TopicDetailNavigateListener(navigator)
+                onUserClickListener = UserDetailNavigateListener(navigator, loginName)
+            }
             binding.recyclerView.adapter = adapter
 
             userDetailViewModel.userDetailData.observe(viewLifecycleOwner) {
