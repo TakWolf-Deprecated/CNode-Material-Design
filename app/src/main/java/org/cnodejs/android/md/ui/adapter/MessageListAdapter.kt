@@ -67,15 +67,15 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
 
             if (message.type == MessageType.AT) {
                 if (message.reply.id == null) {
-                    binding.tvAction.setText(R.string.at_you_in_topic)
+                    binding.tvAction.setText(R.string.at_me_in_topic)
                     binding.tvReplyContent.isVisible = false
                 } else {
-                    binding.tvAction.setText(R.string.at_you_in_reply)
+                    binding.tvAction.setText(R.string.at_me_in_reply)
                     binding.tvReplyContent.isVisible = true
                     binding.tvReplyContent.setMarkdown(message.reply.content)
                 }
             } else {
-                binding.tvAction.setText(R.string.reply_your_topic)
+                binding.tvAction.setText(R.string.reply_my_topic)
                 binding.tvReplyContent.isVisible = true
                 binding.tvReplyContent.setMarkdown(message.reply.content)
             }

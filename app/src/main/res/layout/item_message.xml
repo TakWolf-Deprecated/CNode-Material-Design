@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="14sp"
-                        tools:text="@string/reply_your_topic" />
+                        tools:text="@string/reply_my_topic" />
 
                     <View
                         android:id="@+id/dot"
