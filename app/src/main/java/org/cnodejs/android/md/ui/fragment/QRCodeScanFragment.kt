@@ -159,13 +159,16 @@ class QRCodeScanFragment : BaseFragment() {
                 scanner.process(inputImage).addOnSuccessListener { barcodes ->
                     for (barcode in barcodes) {
                         barcode.displayValue?.let { value ->
+                            if (BuildConfig.DEBUG) {
+                                Log.d(TAG, "onSuccess: $value")
+                            }
                             onResultListener(value)
                             return@addOnSuccessListener
                         }
                     }
                 }.addOnFailureListener { e ->
                     if (BuildConfig.DEBUG) {
-                        Log.e(TAG, "process", e)
+                        Log.e(TAG, "onFailure", e)
                     }
                 }.addOnCompleteListener {
                     imageProxy.close()
