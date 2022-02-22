@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.cnodejs.android.md.BuildConfig
 import org.cnodejs.android.md.bus.AccountChangedEvent
+import org.cnodejs.android.md.bus.AccountInfoNeedRefreshEvent
 import org.cnodejs.android.md.bus.AccountUpdatedEvent
 import org.cnodejs.android.md.model.api.CNodeClient
 import org.cnodejs.android.md.model.entity.Account
@@ -32,7 +33,7 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
     init {
         EventBus.getDefault().register(this)
         loadUser()
-        loadMessageCount()
+        loadMessagesCount()
     }
 
     override fun onCleared() {
@@ -44,13 +45,23 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
         accountData.value = event.account
         messageCountData.value = 0
         loadUser()
-        loadMessageCount()
+        loadMessagesCount()
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onAccountUpdated(event: AccountUpdatedEvent) {
         if (accountData.value != null) {
             accountData.value = event.account
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onAccountInfoNeedRefresh(event: AccountInfoNeedRefreshEvent) {
+        if (event.user) {
+            loadUser()
+        }
+        if (event.messagesCount) {
+            loadMessagesCount()
         }
     }
 
@@ -75,7 +86,7 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun loadMessageCount() {
+    fun loadMessagesCount() {
         accountData.value?.let { account ->
             viewModelScope.launch(Dispatchers.IO) {
                 try {
@@ -87,7 +98,7 @@ class AccountViewModel(application: Application) : AndroidViewModel(application)
                     }
                 } catch (e: Exception) {
                     if (BuildConfig.DEBUG) {
-                        Log.e(TAG, "loadMessageCount", e)
+                        Log.e(TAG, "loadMessagesCount", e)
                     }
                 }
             }

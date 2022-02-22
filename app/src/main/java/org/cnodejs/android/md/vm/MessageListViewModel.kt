@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.cnodejs.android.md.BuildConfig
+import org.cnodejs.android.md.bus.AccountInfoNeedRefreshEvent
 import org.cnodejs.android.md.model.api.CNodeClient
 import org.cnodejs.android.md.model.entity.ErrorResult
 import org.cnodejs.android.md.model.entity.MessageWithSummary
@@ -16,6 +17,7 @@ import org.cnodejs.android.md.model.store.AppStoreHolder
 import org.cnodejs.android.md.vm.holder.IToastViewModel
 import org.cnodejs.android.md.vm.holder.ListLiveHolder
 import org.cnodejs.android.md.vm.holder.ToastLiveHolder
+import org.greenrobot.eventbus.EventBus
 
 class MessageListViewModel(application: Application) : AndroidViewModel(application), IToastViewModel {
     companion object {
@@ -70,6 +72,7 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
                 try {
                     val messageIds = api.markAllMessagesRead(accessToken).markedMessages.map { idData -> idData.id }.toSet()
                     withContext(Dispatchers.Main) {
+                        EventBus.getDefault().post(AccountInfoNeedRefreshEvent(messagesCount = true))
                         messagesHolder.entitiesData.value?.let { messages ->
                             messagesHolder.entitiesData.value = messages.map { message ->
                                 if (messageIds.contains(message.message.id)) {
@@ -102,6 +105,7 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
                         Log.w(TAG, "markMessageRead - messageId: $messageId not equals markedMessageId: $markedMessageId")
                     }
                     withContext(Dispatchers.Main) {
+                        EventBus.getDefault().post(AccountInfoNeedRefreshEvent(messagesCount = true))
                         messagesHolder.entitiesData.value?.let { messages ->
                             messagesHolder.entitiesData.value = messages.map { message ->
                                 if (message.message.id == markedMessageId) {
