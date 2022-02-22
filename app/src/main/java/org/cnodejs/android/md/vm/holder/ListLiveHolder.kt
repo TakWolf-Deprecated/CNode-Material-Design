@@ -5,20 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 
 open class ListLiveHolder<Entity>(entities: List<Entity>? = null) {
-    val entitiesData: MutableLiveData<MutableList<Entity>?> = MutableLiveData(entities?.toMutableList())
+    val entitiesData: MutableLiveData<List<Entity>?> = MutableLiveData(entities?.toList())
 
     fun getList(): List<Entity> {
         return entitiesData.value?.toList() ?: listOf()
     }
 
     fun setList(entities: List<Entity>) {
-        entitiesData.value = entities.toMutableList()
+        entitiesData.value = entities.toList()
     }
 
     fun appendList(addedEntities: List<Entity>) {
-        val entities = entitiesData.value ?: mutableListOf()
-        entities.addAll(addedEntities)
-        entitiesData.value = entities
+        entitiesData.value = (entitiesData.value?.toMutableList() ?: mutableListOf()).apply {
+            addAll(addedEntities)
+        }
     }
 
     fun clearList() {
