@@ -4,125 +4,132 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="?colorSurface">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/btn_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="?selectableItemBackground">
+        android:foreground="?selectableItemBackground"
+        android:background="?colorSurface">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingHorizontal="16dp"
-            android:orientation="horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_author"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                tools:src="@drawable/image_placeholder" />
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical">
+                android:paddingTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_author"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    tools:src="@drawable/image_placeholder" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_author"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="?android:textColorPrimary"
-                        android:textSize="14sp"
-                        tools:text="TakWolf" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_create_time"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/tv_author"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="14sp"
+                            tools:text="TakWolf" />
+
+                        <TextView
+                            android:id="@+id/tv_create_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="14sp"
+                            tools:text="1 天前" />
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="14sp"
-                        tools:text="1 天前" />
+                        android:layout_marginTop="4dp">
+
+                        <TextView
+                            android:id="@+id/tv_action"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="14sp"
+                            tools:text="@string/reply_my_topic" />
+
+                        <View
+                            android:id="@+id/dot"
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:layout_gravity="center|end"
+                            android:background="@drawable/badge_dot" />
+
+                    </FrameLayout>
 
                 </LinearLayout>
 
-                <FrameLayout
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_reply_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                android:lineSpacingMultiplier="1.2"
+                android:maxLines="6"
+                android:ellipsize="end"
+                tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:contentPadding="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardBackgroundColor="?android:windowBackground"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/tv_topic_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp">
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.2"
+                    tools:text="这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
 
-                    <TextView
-                        android:id="@+id/tv_action"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="14sp"
-                        tools:text="@string/reply_my_topic" />
+            </androidx.cardview.widget.CardView>
 
-                    <View
-                        android:id="@+id/dot"
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:layout_gravity="center|end"
-                        android:background="@drawable/badge_dot" />
-
-                </FrameLayout>
-
-            </LinearLayout>
+            <com.takwolf.android.insetswidget.InsetsSpace
+                android:id="@+id/navigation_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:isw_insetsType="navigationBars" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_reply_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingHorizontal="16dp"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="14sp"
-            android:lineSpacingMultiplier="1.2"
-            android:maxLines="6"
-            android:ellipsize="end"
-            tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:contentPadding="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardBackgroundColor="?android:windowBackground"
-            app:cardElevation="0dp">
-
-            <TextView
-                android:id="@+id/tv_topic_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="14sp"
-                android:lineSpacingMultiplier="1.2"
-                tools:text="这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
-
-        </androidx.cardview.widget.CardView>
-
-        <com.takwolf.android.insetswidget.InsetsSpace
-            android:id="@+id/navigation_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:isw_insetsType="navigationBars" />
-
-    </LinearLayout>
+    </FrameLayout>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
