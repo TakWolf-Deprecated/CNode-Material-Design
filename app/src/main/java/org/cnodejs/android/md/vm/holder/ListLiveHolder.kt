@@ -8,7 +8,7 @@ open class ListLiveHolder<Entity>(entities: List<Entity>? = null) {
     val entitiesData: MutableLiveData<List<Entity>?> = MutableLiveData(entities?.toList())
 
     fun getList(): List<Entity> {
-        return entitiesData.value?.toList() ?: listOf()
+        return entitiesData.value?.toList() ?: emptyList()
     }
 
     fun setList(entities: List<Entity>) {

@@ -14,7 +14,7 @@ abstract class DataStoreWrapper protected constructor(
     context: Context,
     name: String,
     corruptionHandler: ReplaceFileCorruptionHandler<Preferences>? = null,
-    produceMigrations: (Context) -> List<DataMigration<Preferences>> = { listOf() },
+    produceMigrations: (Context) -> List<DataMigration<Preferences>> = { emptyList() },
     scope: CoroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
 ) {
     protected val dataStore = PreferenceDataStoreFactory.create(
