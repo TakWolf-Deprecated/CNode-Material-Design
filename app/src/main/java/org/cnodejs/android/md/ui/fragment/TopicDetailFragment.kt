@@ -15,12 +15,12 @@ import org.cnodejs.android.md.vm.TopicDetailViewModel
 class TopicDetailFragment : BaseFragment() {
     companion object {
         private const val KEY_TOPIC_ID = "topicId"
-        private const val KEY_REPLY_ID = "replyId"
+        private const val KEY_JUMP_TO_REPLY_ID = "jumpToReplyId"
 
-        fun open(navigator: Navigator, topicId: String, replyId: String? = null) {
+        fun open(navigator: Navigator, topicId: String, jumpToReplyId: String? = null) {
             val args = Bundle().apply {
                 putString(KEY_TOPIC_ID, topicId)
-                putString(KEY_REPLY_ID, replyId)
+                putString(KEY_JUMP_TO_REPLY_ID, jumpToReplyId)
             }
             navigator.push(R.id.fragment_topic_detail, args, NavAnim.SLIDE)
         }
