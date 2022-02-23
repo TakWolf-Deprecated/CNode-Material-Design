@@ -4,7 +4,6 @@ import com.squareup.moshi.FromJson
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.ToJson
-import org.cnodejs.android.md.util.FormatUtils
 import java.time.OffsetDateTime
 
 interface ITopic {
@@ -37,7 +36,7 @@ data class TopicWithSummary(val topic: Topic) : ITopic {
     override val id: String get() = topic.id
     override val author: Author get() = topic.author
     override val title: String get() = topic.title
-    val summary = FormatUtils.getHtmlSummary(topic.content)
+    val summary = Summary.from(topic.content)
 }
 
 class TopicWithSummaryJsonAdapter {

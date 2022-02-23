@@ -37,7 +37,7 @@ data class Message(
 )
 
 data class MessageWithSummary(val message: Message) {
-    val replySummary = message.reply.content?.let { FormatUtils.getHtmlSummary(it) }
+    val replySummary = message.reply.content?.let { html -> Summary.from(html) } ?: Summary.EMPTY
 }
 
 class MessageWithSummaryJsonAdapter {
