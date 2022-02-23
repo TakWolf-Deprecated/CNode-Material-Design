@@ -17,20 +17,19 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
     val refreshStateData = MutableLiveData(false)
     val loadMoreStateData = MutableLiveData(LoadMoreFooter.STATE_DISABLED)
 
+    private var dataVersion = 0
     private var isRefreshDoing = false
     private var isLoadMoreDoing = false
-    private var refreshVersion = 0
-    private var loadMoreVersion = 0
     private var pagingParams: PagingParams? = null
     private var isFinished = false
 
     fun refresh() {
         if (!isRefreshDoing) {
-            refreshVersion += 1
+            val version = dataVersion
             refreshStateData.value = true
             isRefreshDoing = true
             viewModel.viewModelScope.launch(Dispatchers.IO) {
-                doRefresh(refreshVersion)
+                doRefresh(version)
             }
         }
     }
@@ -38,9 +37,9 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
     protected abstract suspend fun doRefresh(version: Int)
 
     protected fun refreshSuccess(version: Int, entities: List<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
-        if (refreshVersion == version) {
-            viewModel.viewModelScope.launch(Dispatchers.Main) {
-                loadMoreVersion += 1
+        viewModel.viewModelScope.launch(Dispatchers.Main) {
+            if (dataVersion == version) {
+                dataVersion += 1
                 setList(entities)
                 this@PagingLiveHolder.pagingParams = pagingParams
                 this@PagingLiveHolder.isFinished = isFinished
@@ -53,8 +52,8 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
     }
 
     protected fun refreshFailure(version: Int, message: String) {
-        if (refreshVersion == version) {
-            viewModel.viewModelScope.launch(Dispatchers.Main) {
+        viewModel.viewModelScope.launch(Dispatchers.Main) {
+            if (dataVersion == version) {
                 isRefreshDoing = false
                 refreshStateData.value = false
                 toastHolder.showToast(message)
@@ -64,10 +63,11 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
 
     fun loadMore() {
         if (!isLoadMoreDoing && !isFinished) {
+            val version = dataVersion
             loadMoreStateData.value = LoadMoreFooter.STATE_LOADING
             isLoadMoreDoing = true
             viewModel.viewModelScope.launch(Dispatchers.IO) {
-                doLoadMore(loadMoreVersion, pagingParams!!)
+                doLoadMore(version, pagingParams!!)
             }
         }
     }
@@ -75,8 +75,8 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
     protected abstract suspend fun doLoadMore(version: Int, pagingParams: PagingParams)
 
     protected fun loadMoreSuccess(version: Int, addedEntities: List<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
-        if (loadMoreVersion == version) {
-            viewModel.viewModelScope.launch(Dispatchers.Main) {
+        viewModel.viewModelScope.launch(Dispatchers.Main) {
+            if (dataVersion == version) {
                 appendList(addedEntities)
                 this@PagingLiveHolder.pagingParams = pagingParams
                 this@PagingLiveHolder.isFinished = isFinished
@@ -87,8 +87,8 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
     }
 
     protected fun loadMoreFailure(version: Int, message: String) {
-        if (loadMoreVersion == version) {
-            viewModel.viewModelScope.launch(Dispatchers.Main) {
+        viewModel.viewModelScope.launch(Dispatchers.Main) {
+            if (dataVersion == version) {
                 isLoadMoreDoing = false
                 loadMoreStateData.value = LoadMoreFooter.STATE_FAILED
                 toastHolder.showToast(message)
@@ -97,8 +97,7 @@ abstract class PagingLiveHolder<Entity, PagingParams>(
     }
 
     fun resetPaging() {
-        refreshVersion += 1
-        loadMoreVersion += 1
+        dataVersion += 1
         isRefreshDoing = false
         isLoadMoreDoing = false
         pagingParams = null
