@@ -16,14 +16,14 @@ import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
-class MessageListAdapter(private val layoutInflater: LayoutInflater, private val uniqueTag: String) : ListAdapter<MessageWithSummary, MessageListAdapter.ViewHolder>(MessageWithSummaryDiffItemCallback) {
+class MessageListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : ListAdapter<MessageWithSummary, MessageListAdapter.ViewHolder>(MessageWithSummaryDiffItemCallback) {
     var onMessageReadListener: ((messageId: String) -> Unit)? = null
     var onTopicClickListener: OnTopicClickListener? = null
     var onUserClickListener: OnUserClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemMessageBinding.inflate(layoutInflater, parent, false)
-        return ViewHolder(binding, uniqueTag)
+        return ViewHolder(binding, who)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,7 +32,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
 
     class ViewHolder(
         private val binding: ItemMessageBinding,
-        private val uniqueTag: String,
+        private val who: String,
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.btnItem.setOnClickListener {
@@ -59,7 +59,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
             val message = messageWithSummary.message
             val resources = itemView.resources
             binding.imgAuthor.loadAvatar(message.author.avatarUrlCompat)
-            binding.imgAuthor.setSharedName(uniqueTag, "imgAuthor-${bindingAdapterPosition}")
+            binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = message.author.loginName
             binding.tvCreateTime.text = message.createAt.timeSpanStringFromNow(resources)
             binding.dot.isVisible = !message.hasRead

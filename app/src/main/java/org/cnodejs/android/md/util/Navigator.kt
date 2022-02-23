@@ -68,9 +68,9 @@ class Navigator(private val controller: NavController) {
         args: Bundle = Bundle(),
     ) {
         val extrasBuilder = FragmentNavigator.Extras.Builder()
-        val uniqueTag = UUID.randomUUID().toString()
+        val uniqueId = UUID.randomUUID().toString()
         elements.forEach { (view, name) ->
-            val targetTransitionName = "${uniqueTag}:${name}"
+            val targetTransitionName = "${uniqueId}:${name}"
             extrasBuilder.addSharedElement(view, targetTransitionName)
             args.putString(sharedKey(name), targetTransitionName)
         }
@@ -98,9 +98,9 @@ class Navigator(private val controller: NavController) {
             .setPopUpTo(current()!!, true)
             .build()
         val extrasBuilder = FragmentNavigator.Extras.Builder()
-        val uniqueTag = UUID.randomUUID().toString()
+        val uniqueId = UUID.randomUUID().toString()
         elements.forEach { (view, name) ->
-            val targetTransitionName = "${uniqueTag}:${name}"
+            val targetTransitionName = "${uniqueId}:${name}"
             extrasBuilder.addSharedElement(view, targetTransitionName)
             args.putString(sharedKey(name), targetTransitionName)
         }

@@ -11,10 +11,10 @@ import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
-class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private val uniqueTag: String) : TopicListAdapter<TopicWithSummary, TopicHomeListAdapter.ViewHolder>(TopicWithSummaryDiffItemCallback) {
+class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : TopicListAdapter<TopicWithSummary, TopicHomeListAdapter.ViewHolder>(TopicWithSummaryDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemTopicHomeBinding.inflate(layoutInflater, parent, false)
-        return ViewHolder(binding, uniqueTag)
+        return ViewHolder(binding, who)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -23,7 +23,7 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
 
     class ViewHolder(
         private val binding: ItemTopicHomeBinding,
-        private val uniqueTag: String,
+        private val who: String,
     ) : TopicListAdapter.ViewHolder(
         binding.root,
         binding.layoutContent,
@@ -42,7 +42,7 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
             binding.tvTitle.text = topic.title
             binding.tvSummary.text = topicWithSummary.summary
             binding.imgAuthor.loadAvatar(topic.author.avatarUrlCompat)
-            binding.imgAuthor.setSharedName(uniqueTag, "imgAuthor-${bindingAdapterPosition}")
+            binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = topic.author.loginName
             binding.tvCreateTime.text = resources.getString(R.string.create_at_s, topic.createAt.timeSpanStringFromNow(resources))
         }

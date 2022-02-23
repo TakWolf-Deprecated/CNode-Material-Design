@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.fragment.app.who
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import org.cnodejs.android.md.R
@@ -58,7 +59,7 @@ class MainFragment : BaseFragment() {
             binding.navLayout.tabDev,
         )
 
-        binding.navLayout.imgAvatar.setSharedName(uniqueTag, "navLayout.imgAvatar")
+        binding.navLayout.imgAvatar.setSharedName(who, "navLayout.imgAvatar")
 
         binding.drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
             override fun onDrawerOpened(drawerView: View) {
@@ -78,7 +79,7 @@ class MainFragment : BaseFragment() {
         binding.contentLayout.refreshLayout.setColorSchemeColors(colorAccent)
         binding.contentLayout.recyclerView.layoutManager = LinearLayoutManager(context)
         val loadMoreFooter = LoadMoreFooter.create(inflater, binding.contentLayout.recyclerView)
-        val adapter = TopicHomeListAdapter(inflater, uniqueTag).apply {
+        val adapter = TopicHomeListAdapter(inflater, who).apply {
             onTopicClickListener = TopicDetailNavigateListener(navigator)
             onUserClickListener = UserDetailNavigateListener(navigator)
         }

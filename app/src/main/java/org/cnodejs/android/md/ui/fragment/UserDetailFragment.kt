@@ -11,6 +11,7 @@ import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.fragment.app.who
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -204,7 +205,7 @@ class UserDetailFragment : BaseFragment() {
 
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
             binding.recyclerView.addFooterView(inflater, R.layout.footer_insets_bottom)
-            val adapter = TopicSimpleListAdapter(inflater, uniqueTag).apply {
+            val adapter = TopicSimpleListAdapter(inflater, who).apply {
                 onTopicClickListener = TopicDetailNavigateListener(navigator)
                 onUserClickListener = UserDetailNavigateListener(navigator, loginName)
             }

@@ -9,6 +9,7 @@ import androidx.annotation.ColorInt
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.fragment.app.who
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMessageListBinding
@@ -66,7 +67,7 @@ class MessageListFragment : BaseFragment() {
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        val adapter = MessageListAdapter(inflater, uniqueTag).apply {
+        val adapter = MessageListAdapter(inflater, who).apply {
             onMessageReadListener = { messageId ->
                 messageListViewModel.markMessageRead(messageId)
             }
