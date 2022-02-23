@@ -27,6 +27,7 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
     val userDetailData = MutableLiveData<UserDetail>()
 
     lateinit var loginName: String
+
     private var isFirstLoadDone = false
 
     fun onViewStart() {
