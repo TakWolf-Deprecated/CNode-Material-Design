@@ -22,91 +22,176 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ContentDescription" />
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/layout_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical"
-        android:background="?selectableItemBackground"
+        android:foreground="?selectableItemBackground"
+        android:background="?colorSurface"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="4dp"
+                    android:text="@string/top"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:background="@color/badge" />
+
+                <TextView
+                    android:id="@+id/tv_tab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="4dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:background="?colorAccent"
+                    tools:text="分享" />
+
+                <TextView
+                    android:id="@+id/tv_reply_and_visit_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="12sp"
+                    tools:text="18 评论 / 205 阅读" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_reply_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="12sp"
+                    tools:text="新评论：2 分钟前" />
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_top"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="4dp"
-                android:text="@string/top"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
-                android:background="@color/badge" />
+                android:layout_marginTop="8dp"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:lineSpacingMultiplier="1.2"
+                android:maxLines="2"
+                android:ellipsize="end"
+                tools:text="这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
 
             <TextView
-                android:id="@+id/tv_tab"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_summary"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="4dp"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
-                android:background="?colorAccent"
-                tools:text="分享" />
+                android:layout_marginTop="8dp"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                android:lineSpacingMultiplier="1.2"
+                android:maxLines="4"
+                android:ellipsize="end"
+                tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
 
-            <TextView
-                android:id="@+id/tv_reply_and_visit_count"
-                android:layout_width="wrap_content"
+            <com.takwolf.android.aspectratiolayout.AspectRatioLayout
+                android:id="@+id/layout_thumb_1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="12sp"
-                tools:text="18 评论 / 205 阅读" />
+                android:layout_marginTop="16dp"
+                app:arl_widthRatio="5"
+                app:arl_heightRatio="2">
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                <ImageView
+                    android:id="@+id/img_thumb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    tools:src="@drawable/image_placeholder"
+                    tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/tv_reply_time"
-                android:layout_width="wrap_content"
+            </com.takwolf.android.aspectratiolayout.AspectRatioLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_thumb_2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="12sp"
-                tools:text="新评论：2 分钟前" />
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <com.takwolf.android.aspectratiolayout.AspectRatioLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/img_thumb_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        tools:src="@drawable/image_placeholder"
+                        tools:ignore="ContentDescription" />
+
+                </com.takwolf.android.aspectratiolayout.AspectRatioLayout>
+
+                <com.takwolf.android.aspectratiolayout.AspectRatioLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="8dp">
+
+                    <ImageView
+                        android:id="@+id/img_thumb_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        tools:src="@drawable/image_placeholder"
+                        tools:ignore="ContentDescription" />
+
+                </com.takwolf.android.aspectratiolayout.AspectRatioLayout>
+
+                <com.takwolf.android.aspectratiolayout.AspectRatioLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/img_thumb_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        tools:src="@drawable/image_placeholder"
+                        tools:ignore="ContentDescription" />
+
+                </com.takwolf.android.aspectratiolayout.AspectRatioLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:lineSpacingMultiplier="1.2"
-            android:maxLines="2"
-            android:ellipsize="end"
-            tools:text="这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
-
-        <TextView
-            android:id="@+id/tv_summary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="14sp"
-            android:lineSpacingMultiplier="1.2"
-            android:maxLines="4"
-            android:ellipsize="end"
-            tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
-
-    </LinearLayout>
+    </FrameLayout>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"

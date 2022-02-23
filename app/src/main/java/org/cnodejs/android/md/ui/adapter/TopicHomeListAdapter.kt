@@ -30,8 +30,11 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
         binding.layoutAuthor,
         binding.imgAuthor,
     ) {
+        private val imgThumbs = listOf(binding.imgThumb1, binding.imgThumb2, binding.imgThumb3)
+
         fun bind(topicWithSummary: TopicWithSummary) {
             val topic = topicWithSummary.topic
+            val summary = topicWithSummary.summary
             val resources = itemView.resources
             binding.imgGood.isVisible = topic.isGood
             binding.tvTop.isVisible = topic.isTop
@@ -40,7 +43,32 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
             binding.tvReplyAndVisitCount.text = resources.getString(R.string.d_reply_d_visit, topic.replyCount, topic.visitCount)
             binding.tvReplyTime.text = resources.getString(R.string.reply_at_s, topic.lastReplyAt.timeSpanStringFromNow(resources))
             binding.tvTitle.text = topic.title
-            binding.tvSummary.text = topicWithSummary.summary
+            binding.tvSummary.text = summary.text
+            binding.tvSummary.isVisible = summary.text.isNotBlank()
+            when {
+                summary.images.isEmpty() -> {
+                    binding.layoutThumb1.isVisible = false
+                    binding.layoutThumb2.isVisible = false
+                }
+                summary.images.size == 1 -> {
+                    binding.layoutThumb1.isVisible = true
+                    binding.layoutThumb2.isVisible = false
+                    binding.imgThumb.loadGracefully(summary.images[0])
+                }
+                else -> {
+                    binding.layoutThumb1.isVisible = false
+                    binding.layoutThumb2.isVisible = true
+                    for (i in imgThumbs.indices) {
+                        val imgThumb = imgThumbs[i]
+                        if (i < summary.images.size) {
+                            imgThumb.isVisible = true
+                            imgThumb.loadGracefully(summary.images[i])
+                        } else {
+                            imgThumb.isVisible = false
+                        }
+                    }
+                }
+            }
             binding.imgAuthor.loadGracefully(topic.author.avatarUrl)
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = topic.author.loginName

@@ -101,6 +101,66 @@
                 android:ellipsize="end"
                 tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
 
+            <LinearLayout
+                android:id="@+id/layout_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <com.takwolf.android.aspectratiolayout.AspectRatioLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/img_thumb_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        tools:src="@drawable/image_placeholder"
+                        tools:ignore="ContentDescription" />
+
+                </com.takwolf.android.aspectratiolayout.AspectRatioLayout>
+
+                <com.takwolf.android.aspectratiolayout.AspectRatioLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="8dp">
+
+                    <ImageView
+                        android:id="@+id/img_thumb_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        tools:src="@drawable/image_placeholder"
+                        tools:ignore="ContentDescription" />
+
+                </com.takwolf.android.aspectratiolayout.AspectRatioLayout>
+
+                <com.takwolf.android.aspectratiolayout.AspectRatioLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/img_thumb_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
+                        tools:src="@drawable/image_placeholder"
+                        tools:ignore="ContentDescription" />
+
+                </com.takwolf.android.aspectratiolayout.AspectRatioLayout>
+
+            </LinearLayout>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

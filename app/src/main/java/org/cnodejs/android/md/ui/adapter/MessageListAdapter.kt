@@ -34,6 +34,8 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
         private val binding: ItemMessageBinding,
         private val who: String,
     ) : RecyclerView.ViewHolder(binding.root) {
+        private val imgThumbs = listOf(binding.imgThumb1, binding.imgThumb2, binding.imgThumb3)
+
         init {
             binding.btnItem.setOnClickListener {
                 (bindingAdapter as? MessageListAdapter)?.let { adapter ->
@@ -57,6 +59,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
 
         fun bind(messageWithSummary: MessageWithSummary, isLast: Boolean) {
             val message = messageWithSummary.message
+            val replySummary = messageWithSummary.replySummary
             val resources = itemView.resources
             binding.imgAuthor.loadGracefully(message.author.avatarUrl)
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
@@ -74,12 +77,29 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
                 } else {
                     binding.tvAction.setText(R.string.at_me_in_reply)
                     binding.tvReplyContent.isVisible = true
-                    binding.tvReplyContent.text = messageWithSummary.replySummary
+                    binding.tvReplyContent.text = replySummary.text
+                    binding.tvReplyContent.isVisible = replySummary.text.isNotBlank()
                 }
             } else {
                 binding.tvAction.setText(R.string.reply_my_topic)
                 binding.tvReplyContent.isVisible = true
-                binding.tvReplyContent.text = messageWithSummary.replySummary
+                binding.tvReplyContent.text = replySummary.text
+                binding.tvReplyContent.isVisible = replySummary.text.isNotBlank()
+            }
+
+            if (replySummary.images.isEmpty()) {
+                binding.layoutThumb.isVisible = false
+            } else {
+                binding.layoutThumb.isVisible = true
+                for (i in imgThumbs.indices) {
+                    val imgThumb = imgThumbs[i]
+                    if (i < replySummary.images.size) {
+                        imgThumb.isVisible = true
+                        imgThumb.loadGracefully(replySummary.images[i])
+                    } else {
+                        imgThumb.isVisible = false
+                    }
+                }
             }
         }
     }
