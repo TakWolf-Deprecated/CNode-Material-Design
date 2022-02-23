@@ -23,8 +23,8 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
     private val api = CNodeClient.getInstance(application).api
 
     override val toastHolder = ToastLiveHolder()
+    val loadingStateData = MutableLiveData(false)
     val userDetailData = MutableLiveData<UserDetail>()
-    var isLoadingData = MutableLiveData(false)
 
     var loginName: String? = null
     set(value) {
@@ -38,11 +38,11 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun loadUserDetail() {
-        if (isLoadingData.value == true) {
+        if (loadingStateData.value == true) {
             return
         }
         loginName?.also { loginName ->
-            isLoadingData.value = true
+            loadingStateData.value = true
             viewModelScope.launch(Dispatchers.IO) {
                 try {
                     val userDetail = supervisorScope {
@@ -58,7 +58,7 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
                     }
                     delay(500)
                     withContext(Dispatchers.Main) {
-                        isLoadingData.value = false
+                        loadingStateData.value = false
                         userDetailData.value = userDetail
                     }
                 } catch (e: Exception) {
@@ -68,7 +68,7 @@ class UserDetailViewModel(application: Application) : AndroidViewModel(applicati
                     val errorResult = ErrorResult.from(e)
                     delay(500)
                     withContext(Dispatchers.Main) {
-                        isLoadingData.value = false
+                        loadingStateData.value = false
                         toastHolder.showToast(errorResult.message)
                     }
                 }

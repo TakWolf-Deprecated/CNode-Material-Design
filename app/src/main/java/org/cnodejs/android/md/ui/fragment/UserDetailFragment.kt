@@ -143,7 +143,7 @@ class UserDetailFragment : BaseFragment() {
 
         observeViewModel(userDetailViewModel)
 
-        userDetailViewModel.isLoadingData.observe(viewLifecycleOwner) {
+        userDetailViewModel.loadingStateData.observe(viewLifecycleOwner) {
             it?.let { isLoading ->
                 binding.loadingBar.isVisible = isLoading
             }
