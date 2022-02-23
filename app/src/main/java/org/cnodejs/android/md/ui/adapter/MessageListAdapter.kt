@@ -12,9 +12,7 @@ import org.cnodejs.android.md.model.entity.MessageType
 import org.cnodejs.android.md.model.entity.MessageWithSummary
 import org.cnodejs.android.md.ui.listener.OnTopicClickListener
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
-import org.cnodejs.android.md.util.loadGracefully
-import org.cnodejs.android.md.util.setSharedName
-import org.cnodejs.android.md.util.timeSpanStringFromNow
+import org.cnodejs.android.md.util.*
 
 class MessageListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : ListAdapter<MessageWithSummary, MessageListAdapter.ViewHolder>(MessageWithSummaryDiffItemCallback) {
     var onMessageReadListener: ((messageId: String) -> Unit)? = null
@@ -61,7 +59,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
             val message = messageWithSummary.message
             val replySummary = messageWithSummary.replySummary
             val resources = itemView.resources
-            binding.imgAuthor.loadGracefully(message.author.avatarUrl)
+            binding.imgAuthor.loadAvatar(message.author.avatarUrl)
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = message.author.loginName
             binding.tvCreateTime.text = message.createAt.timeSpanStringFromNow(resources)
@@ -95,7 +93,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
                     val imgThumb = imgThumbs[i]
                     if (i < replySummary.images.size) {
                         imgThumb.isVisible = true
-                        imgThumb.loadGracefully(replySummary.images[i])
+                        imgThumb.load(replySummary.images[i])
                     } else {
                         imgThumb.isVisible = false
                     }

@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.ItemTopicHomeBinding
 import org.cnodejs.android.md.model.entity.TopicWithSummary
-import org.cnodejs.android.md.util.loadGracefully
-import org.cnodejs.android.md.util.setSharedName
-import org.cnodejs.android.md.util.timeSpanStringFromNow
+import org.cnodejs.android.md.util.*
 
 class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : TopicListAdapter<TopicWithSummary, TopicHomeListAdapter.ViewHolder>(TopicWithSummaryDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -53,7 +51,7 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
                 summary.images.size == 1 -> {
                     binding.layoutThumb1.isVisible = true
                     binding.layoutThumb2.isVisible = false
-                    binding.imgThumb.loadGracefully(summary.images[0])
+                    binding.imgThumb.load(summary.images[0])
                 }
                 else -> {
                     binding.layoutThumb1.isVisible = false
@@ -62,14 +60,14 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
                         val imgThumb = imgThumbs[i]
                         if (i < summary.images.size) {
                             imgThumb.isVisible = true
-                            imgThumb.loadGracefully(summary.images[i])
+                            imgThumb.load(summary.images[i])
                         } else {
                             imgThumb.isVisible = false
                         }
                     }
                 }
             }
-            binding.imgAuthor.loadGracefully(topic.author.avatarUrl)
+            binding.imgAuthor.loadAvatar(topic.author.avatarUrl)
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = topic.author.loginName
             binding.tvCreateTime.text = resources.getString(R.string.create_at_s, topic.createAt.timeSpanStringFromNow(resources))

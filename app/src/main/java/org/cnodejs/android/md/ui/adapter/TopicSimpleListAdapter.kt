@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import org.cnodejs.android.md.databinding.ItemTopicSimpleBinding
 import org.cnodejs.android.md.model.entity.ITopicSimple
-import org.cnodejs.android.md.util.loadGracefully
+import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
@@ -30,7 +30,7 @@ class TopicSimpleListAdapter(private val layoutInflater: LayoutInflater, private
         binding.imgAuthor,
     ) {
         fun bind(topic: ITopicSimple, isLast: Boolean) {
-            binding.imgAuthor.loadGracefully(topic.author.avatarUrl)
+            binding.imgAuthor.loadAvatar(topic.author.avatarUrl)
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvTitle.text = topic.title
             binding.tvAuthor.text = topic.author.loginName
