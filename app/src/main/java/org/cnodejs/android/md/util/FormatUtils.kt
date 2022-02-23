@@ -13,16 +13,6 @@ object FormatUtils {
         return doc.body().text().trim()
     }
 
-    fun getCompatAvatarUrl(url: String?): String? {
-        return url?.let {
-            if (it.startsWith("//gravatar.com/avatar/")) {
-                "https:${it}"
-            } else {
-                it
-            }
-        }
-    }
-
     fun isAccessToken(accessToken: String): Boolean {
         return try {
             UUID.fromString(accessToken)

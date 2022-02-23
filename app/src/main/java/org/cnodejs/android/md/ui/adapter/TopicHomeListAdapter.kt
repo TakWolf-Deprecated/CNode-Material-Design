@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.ItemTopicHomeBinding
 import org.cnodejs.android.md.model.entity.TopicWithSummary
-import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.util.loadGracefully
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
@@ -41,7 +41,7 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
             binding.tvReplyTime.text = resources.getString(R.string.reply_at_s, topic.lastReplyAt.timeSpanStringFromNow(resources))
             binding.tvTitle.text = topic.title
             binding.tvSummary.text = topicWithSummary.summary
-            binding.imgAuthor.loadAvatar(topic.author.avatarUrlCompat)
+            binding.imgAuthor.loadGracefully(topic.author.avatarUrl)
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = topic.author.loginName
             binding.tvCreateTime.text = resources.getString(R.string.create_at_s, topic.createAt.timeSpanStringFromNow(resources))

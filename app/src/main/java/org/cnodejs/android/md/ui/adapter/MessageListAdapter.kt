@@ -12,7 +12,7 @@ import org.cnodejs.android.md.model.entity.MessageType
 import org.cnodejs.android.md.model.entity.MessageWithSummary
 import org.cnodejs.android.md.ui.listener.OnTopicClickListener
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
-import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.util.loadGracefully
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
@@ -58,7 +58,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
         fun bind(messageWithSummary: MessageWithSummary, isLast: Boolean) {
             val message = messageWithSummary.message
             val resources = itemView.resources
-            binding.imgAuthor.loadAvatar(message.author.avatarUrlCompat)
+            binding.imgAuthor.loadGracefully(message.author.avatarUrl)
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = message.author.loginName
             binding.tvCreateTime.text = message.createAt.timeSpanStringFromNow(resources)

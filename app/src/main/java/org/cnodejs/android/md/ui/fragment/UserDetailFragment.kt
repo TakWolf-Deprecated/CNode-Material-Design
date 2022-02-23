@@ -25,7 +25,7 @@ import org.cnodejs.android.md.ui.adapter.TopicSimpleListAdapter
 import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
 import org.cnodejs.android.md.util.Navigator
-import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.util.loadGracefully
 import org.cnodejs.android.md.vm.UserDetailViewModel
 
 class UserDetailFragment : BaseFragment() {
@@ -105,7 +105,7 @@ class UserDetailFragment : BaseFragment() {
 
         binding.toolbarTitle.title = loginName
         binding.tvLoginName.text = loginName
-        binding.imgAvatar.loadAvatar(avatarUrl)
+        binding.imgAvatar.loadGracefully(avatarUrl)
         setTargetSharedName(binding.imgAvatar, "imgAvatar")
 
         View.OnClickListener {
@@ -152,7 +152,7 @@ class UserDetailFragment : BaseFragment() {
         userDetailViewModel.userDetailData.observe(viewLifecycleOwner) {
             it?.let { userDetail ->
                 val user = userDetail.user
-                binding.imgAvatar.loadAvatar(user.avatarUrlCompat)
+                binding.imgAvatar.loadGracefully(user.avatarUrl)
                 binding.tvGithubUsername.text = getString(R.string.github_s, user.githubUsername)
                 binding.tvCreateTime.text = getString(R.string.register_at_s, user.createAt.toLocalDate())
                 binding.tvScore.text = getString(R.string.score_d, user.score)

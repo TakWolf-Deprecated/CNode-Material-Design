@@ -8,7 +8,6 @@ import java.time.OffsetDateTime
 interface IUser {
     val loginName: String?
     val avatarUrl: String?
-    val avatarUrlCompat: String? get() = FormatUtils.getCompatAvatarUrl(avatarUrl)
 }
 
 @JsonClass(generateAdapter = true)
