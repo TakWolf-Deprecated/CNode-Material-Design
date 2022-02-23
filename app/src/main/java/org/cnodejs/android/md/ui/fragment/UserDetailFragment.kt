@@ -159,6 +159,8 @@ class UserDetailFragment : BaseFragment() {
             }
         }
 
+        userDetailViewModel.onViewStart()
+
         return binding.root
     }
 
