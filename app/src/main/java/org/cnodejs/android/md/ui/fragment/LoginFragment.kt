@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentLoginBinding
 import org.cnodejs.android.md.ui.dialog.HowToGetAccessTokenTipDialog
-import org.cnodejs.android.md.util.FormatUtils
 import org.cnodejs.android.md.util.Navigator
+import org.cnodejs.android.md.util.isAccessToken
 import org.cnodejs.android.md.vm.LoginViewModel
 
 class LoginFragment : BaseFragment() {
@@ -69,7 +69,7 @@ class LoginFragment : BaseFragment() {
                 binding.edtLayoutAccessToken.error = getString(R.string.please_input_access_token)
                 return@setOnClickListener
             }
-            if (!FormatUtils.isAccessToken(accessToken)) {
+            if (!accessToken.isAccessToken()) {
                 binding.edtLayoutAccessToken.error = getString(R.string.access_token_format_error)
                 return@setOnClickListener
             }

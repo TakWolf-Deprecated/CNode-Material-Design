@@ -4,7 +4,6 @@ import com.squareup.moshi.FromJson
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.ToJson
-import org.cnodejs.android.md.util.FormatUtils
 import java.time.OffsetDateTime
 
 @JsonClass(generateAdapter = false)

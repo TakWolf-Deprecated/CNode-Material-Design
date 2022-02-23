@@ -2,7 +2,6 @@ package org.cnodejs.android.md.model.entity
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import org.cnodejs.android.md.util.FormatUtils
 import java.time.OffsetDateTime
 
 interface IUser {
