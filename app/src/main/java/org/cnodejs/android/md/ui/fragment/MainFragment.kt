@@ -79,13 +79,13 @@ class MainFragment : BaseFragment() {
         binding.contentLayout.refreshLayout.setColorSchemeColors(colorAccent)
         binding.contentLayout.recyclerView.layoutManager = LinearLayoutManager(context)
         val loadMoreFooter = LoadMoreFooter.create(inflater, binding.contentLayout.recyclerView)
+        loadMoreFooter.addToRecyclerView(binding.contentLayout.recyclerView)
         val adapter = TopicHomeListAdapter(inflater, who).apply {
             onTopicClickListener = TopicDetailNavigateListener(navigator)
             onUserClickListener = UserDetailNavigateListener(navigator)
         }
-        mainViewModel.topicsHolder.setupView(viewLifecycleOwner, binding.contentLayout.refreshLayout, loadMoreFooter, adapter)
-        loadMoreFooter.addToRecyclerView(binding.contentLayout.recyclerView)
         binding.contentLayout.recyclerView.adapter = adapter
+        mainViewModel.topicsHolder.setupView(viewLifecycleOwner, binding.contentLayout.refreshLayout, loadMoreFooter, adapter)
 
         binding.contentLayout.btnCreateTopic.setOnClickListener {
             if (accountViewModel.isLogined()) {
