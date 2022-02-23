@@ -40,10 +40,10 @@ enum class NavAnim(
 class Navigator(private val controller: NavController) {
     companion object {
         private const val KEY_SHARED_ELEMENT = "sharedElement"
-    }
 
-    fun sharedKey(name: String): String {
-        return "${KEY_SHARED_ELEMENT}.${name}"
+        fun sharedKey(name: String): String {
+            return "${KEY_SHARED_ELEMENT}.${name}"
+        }
     }
 
     @IdRes

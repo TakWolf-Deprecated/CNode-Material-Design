@@ -41,7 +41,7 @@ abstract class BaseFragment : Fragment(), NavControllerProvider {
     }
 
     protected fun setTargetSharedName(view: View, name: String) {
-        val key = navigator.sharedKey(name)
+        val key = Navigator.sharedKey(name)
         view.transitionName = arguments?.getString(key) ?: "${uniqueTag}:${name}"
     }
 
