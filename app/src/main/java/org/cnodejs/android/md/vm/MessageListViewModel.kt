@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.cnodejs.android.md.BuildConfig
+import org.cnodejs.android.md.bus.AccountChangedEvent
 import org.cnodejs.android.md.bus.AccountInfoNeedRefreshEvent
 import org.cnodejs.android.md.model.api.CNodeClient
 import org.cnodejs.android.md.model.entity.ErrorResult
@@ -18,6 +19,8 @@ import org.cnodejs.android.md.vm.holder.IToastViewModel
 import org.cnodejs.android.md.vm.holder.ListLiveHolder
 import org.cnodejs.android.md.vm.holder.ToastLiveHolder
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class MessageListViewModel(application: Application) : AndroidViewModel(application), IToastViewModel {
     companion object {
@@ -28,19 +31,45 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
     private val api = CNodeClient.getInstance(application).api
 
     override val toastHolder = ToastLiveHolder()
+    val loadingStateData = MutableLiveData(false)
     val messagesHolder = ListLiveHolder<MessageWithSummary>()
-    var isLoadingData = MutableLiveData(false)
+
+    private var dataVersion = 0
+    private var isFirstLoadDone = false
 
     init {
-        loadMessages()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onCleared() {
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onAccountChanged(event: AccountChangedEvent) {
+        dataVersion += 1
+        isFirstLoadDone = false
+        loadingStateData.value = false
+        messagesHolder.clearList()
+        if (event.account != null && messagesHolder.entitiesData.hasActiveObservers()) {
+            onViewStart()
+        }
+    }
+
+    fun onViewStart() {
+        if (!isFirstLoadDone) {
+            isFirstLoadDone = true
+            loadMessages()
+        }
     }
 
     fun loadMessages() {
-        if (isLoadingData.value == true) {
+        if (loadingStateData.value == true) {
             return
         }
         accountStore.getAccessToken()?.let { accessToken ->
-            isLoadingData.value = true
+            val version = dataVersion
+            loadingStateData.value = true
             viewModelScope.launch(Dispatchers.IO) {
                 try {
                     val result = api.getMessages(accessToken, true)
@@ -49,8 +78,11 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
                         addAll(result.data.hasReadMessages)
                     }
                     withContext(Dispatchers.Main) {
-                        isLoadingData.value = false
-                        messagesHolder.setList(messages)
+                        if (dataVersion == version) {
+                            dataVersion += 1
+                            loadingStateData.value = false
+                            messagesHolder.setList(messages)
+                        }
                     }
                 } catch (e: Exception) {
                     if (BuildConfig.DEBUG) {
@@ -58,8 +90,10 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
                     }
                     val errorResult = ErrorResult.from(e)
                     withContext(Dispatchers.Main) {
-                        isLoadingData.value = false
-                        toastHolder.showToast(errorResult.message)
+                        if (dataVersion == version) {
+                            loadingStateData.value = false
+                            toastHolder.showToast(errorResult.message)
+                        }
                     }
                 }
             }
@@ -68,17 +102,20 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
 
     fun markAllMessagesRead() {
         accountStore.getAccessToken()?.let { accessToken ->
+            val version = dataVersion
             viewModelScope.launch(Dispatchers.IO) {
                 try {
                     val messageIds = api.markAllMessagesRead(accessToken).markedMessages.map { idData -> idData.id }.toSet()
                     withContext(Dispatchers.Main) {
-                        EventBus.getDefault().post(AccountInfoNeedRefreshEvent(messagesCount = true))
-                        messagesHolder.entitiesData.value?.let { messages ->
-                            messagesHolder.entitiesData.value = messages.map { message ->
-                                if (messageIds.contains(message.message.id)) {
-                                    MessageWithSummary(message.message.copy(hasRead = true))
-                                } else {
-                                    message
+                        if (dataVersion == version) {
+                            EventBus.getDefault().post(AccountInfoNeedRefreshEvent(messagesCount = true))
+                            messagesHolder.entitiesData.value?.let { messages ->
+                                messagesHolder.entitiesData.value = messages.map { message ->
+                                    if (messageIds.contains(message.message.id)) {
+                                        MessageWithSummary(message.message.copy(hasRead = true))
+                                    } else {
+                                        message
+                                    }
                                 }
                             }
                         }
@@ -89,7 +126,9 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
                     }
                     val errorResult = ErrorResult.from(e)
                     withContext(Dispatchers.Main) {
-                        toastHolder.showToast(errorResult.message)
+                        if (dataVersion == version) {
+                            toastHolder.showToast(errorResult.message)
+                        }
                     }
                 }
             }
@@ -98,6 +137,7 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
 
     fun markMessageRead(messageId: String) {
         accountStore.getAccessToken()?.let { accessToken ->
+            val version = dataVersion
             viewModelScope.launch(Dispatchers.IO) {
                 try {
                     val markedMessageId = api.markMessageRead(messageId, accessToken).markedMessageId
@@ -105,13 +145,15 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
                         Log.w(TAG, "markMessageRead - messageId: $messageId not equals markedMessageId: $markedMessageId")
                     }
                     withContext(Dispatchers.Main) {
-                        EventBus.getDefault().post(AccountInfoNeedRefreshEvent(messagesCount = true))
-                        messagesHolder.entitiesData.value?.let { messages ->
-                            messagesHolder.entitiesData.value = messages.map { message ->
-                                if (message.message.id == markedMessageId) {
-                                    MessageWithSummary(message.message.copy(hasRead = true))
-                                } else {
-                                    message
+                        if (dataVersion == version) {
+                            EventBus.getDefault().post(AccountInfoNeedRefreshEvent(messagesCount = true))
+                            messagesHolder.entitiesData.value?.let { messages ->
+                                messagesHolder.entitiesData.value = messages.map { message ->
+                                    if (message.message.id == markedMessageId) {
+                                        MessageWithSummary(message.message.copy(hasRead = true))
+                                    } else {
+                                        message
+                                    }
                                 }
                             }
                         }
@@ -122,7 +164,9 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
                     }
                     val errorResult = ErrorResult.from(e)
                     withContext(Dispatchers.Main) {
-                        toastHolder.showToast(errorResult.message)
+                        if (dataVersion == version) {
+                            toastHolder.showToast(errorResult.message)
+                        }
                     }
                 }
             }

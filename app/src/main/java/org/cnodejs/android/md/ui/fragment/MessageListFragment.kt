@@ -83,13 +83,15 @@ class MessageListFragment : BaseFragment() {
             }
         }
 
-        messageListViewModel.isLoadingData.observe(viewLifecycleOwner) {
+        messageListViewModel.loadingStateData.observe(viewLifecycleOwner) {
             it?.let { isLoading ->
                 binding.refreshLayout.isRefreshing = isLoading
             }
         }
 
         messageListViewModel.messagesHolder.setupView(viewLifecycleOwner, adapter)
+
+        messageListViewModel.onViewStart()
 
         return binding.root
     }
