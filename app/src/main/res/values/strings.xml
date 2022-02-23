@@ -75,6 +75,9 @@
     <string name="at_me_in_reply">在回复中@了我</string>
     <string name="reply_my_topic">回复了我的话题</string>
 
+    <string name="no_reply">暂无评论</string>
+    <string name="reply_d">评论 %d</string>
+
     <string name="theme">主题</string>
     <string name="theme_dark_mode">夜间模式</string>
     <string name="topic">话题</string>

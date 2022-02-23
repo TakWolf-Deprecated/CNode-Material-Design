@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?colorSurface"
+    android:elevation="@dimen/surface_elevation">
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="14sp"
+        android:lineSpacingMultiplier="1.2"
+        tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_content"
+        app:dividerColor="?android:listDivider" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
