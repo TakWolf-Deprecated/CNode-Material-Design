@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
@@ -59,6 +60,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
             val message = messageWithSummary.message
             val replySummary = messageWithSummary.replySummary
             val resources = itemView.resources
+
             binding.imgAuthor.loadAvatar(message.author.avatarUrl)
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = message.author.loginName
@@ -89,13 +91,20 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
                 binding.layoutThumb.isVisible = false
             } else {
                 binding.layoutThumb.isVisible = true
-                for (i in imgThumbs.indices) {
-                    val imgThumb = imgThumbs[i]
-                    if (i < replySummary.images.size) {
-                        imgThumb.isVisible = true
-                        imgThumb.load(replySummary.images[i])
-                    } else {
-                        imgThumb.isVisible = false
+                if (replySummary.images.size == 1) {
+                    binding.imgThumb0.isVisible = true
+                    binding.imgThumb0.load(replySummary.images[0])
+                    imgThumbs.forEach { it.isVisible = false }
+                } else {
+                    binding.imgThumb0.isVisible = false
+                    for (i in imgThumbs.indices) {
+                        val imgThumb = imgThumbs[i]
+                        if (i < replySummary.images.size) {
+                            imgThumb.visibility = View.VISIBLE
+                            imgThumb.load(replySummary.images[i])
+                        } else {
+                            imgThumb.visibility = View.INVISIBLE
+                        }
                     }
                 }
             }

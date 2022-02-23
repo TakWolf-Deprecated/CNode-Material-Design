@@ -1,6 +1,7 @@
 package org.cnodejs.android.md.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
@@ -34,6 +35,7 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
             val topic = topicWithSummary.topic
             val summary = topicWithSummary.summary
             val resources = itemView.resources
+
             binding.imgGood.isVisible = topic.isGood
             binding.tvTop.isVisible = topic.isTop
             binding.tvTab.isVisible = !topic.isTop
@@ -43,34 +45,32 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
             binding.tvTitle.text = topic.title
             binding.tvSummary.text = summary.text
             binding.tvSummary.isVisible = summary.text.isNotBlank()
-            when {
-                summary.images.isEmpty() -> {
-                    binding.layoutThumb1.isVisible = false
-                    binding.layoutThumb2.isVisible = false
-                }
-                summary.images.size == 1 -> {
-                    binding.layoutThumb1.isVisible = true
-                    binding.layoutThumb2.isVisible = false
-                    binding.imgThumb.load(summary.images[0])
-                }
-                else -> {
-                    binding.layoutThumb1.isVisible = false
-                    binding.layoutThumb2.isVisible = true
-                    for (i in imgThumbs.indices) {
-                        val imgThumb = imgThumbs[i]
-                        if (i < summary.images.size) {
-                            imgThumb.isVisible = true
-                            imgThumb.load(summary.images[i])
-                        } else {
-                            imgThumb.isVisible = false
-                        }
-                    }
-                }
-            }
             binding.imgAuthor.loadAvatar(topic.author.avatarUrl)
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = topic.author.loginName
             binding.tvCreateTime.text = resources.getString(R.string.create_at_s, topic.createAt.timeSpanStringFromNow(resources))
+
+            if (summary.images.isEmpty()) {
+                binding.layoutThumb.isVisible = false
+            } else {
+                binding.layoutThumb.isVisible = true
+                if (summary.images.size == 1) {
+                    binding.imgThumb0.isVisible = true
+                    binding.imgThumb0.load(summary.images[0])
+                    imgThumbs.forEach { it.isVisible = false }
+                } else {
+                    binding.imgThumb0.isVisible = false
+                    for (i in imgThumbs.indices) {
+                        val imgThumb = imgThumbs[i]
+                        if (i < summary.images.size) {
+                            imgThumb.visibility = View.VISIBLE
+                            imgThumb.load(summary.images[i])
+                        } else {
+                            imgThumb.visibility = View.INVISIBLE
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -70,11 +70,14 @@
                             android:visibility="gone"
                             tools:visibility="visible" />
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/img_avatar"
                             android:layout_width="88dp"
                             android:layout_height="88dp"
                             android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:adjustViewBounds="true"
+                            app:shapeAppearance="@style/ShapeAppearance.App.Circle"
                             tools:src="@drawable/image_placeholder" />
 
                     </FrameLayout>

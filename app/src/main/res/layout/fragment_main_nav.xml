@@ -55,13 +55,16 @@
                     app:isw_insetsType="statusBars"
                     tools:layout_height="24dp" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/img_avatar"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:layout_margin="16dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
                     app:layout_constraintTop_toBottomOf="@id/status_bar"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:shapeAppearance="@style/ShapeAppearance.App.Circle"
                     tools:src="@drawable/image_placeholder" />
 
                 <TextView

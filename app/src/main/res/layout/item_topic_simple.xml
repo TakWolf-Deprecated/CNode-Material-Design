@@ -17,11 +17,14 @@
         android:gravity="center_vertical"
         android:background="?selectableItemBackground">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_author"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="8dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            app:shapeAppearance="@style/ShapeAppearance.App.Circle"
             tools:src="@drawable/image_placeholder" />
 
         <LinearLayout

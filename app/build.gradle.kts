@@ -83,12 +83,10 @@ dependencies {
     implementation("org.greenrobot:eventbus:3.3.1")
     implementation("org.jsoup:jsoup:1.14.3")
     implementation("io.noties.markwon:core:4.6.2")
-    implementation("com.github.TakWolf:Android-AspectRatioLayout:0.0.1")
     implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.3")
     implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:loadmorefooter:0.0.3")
     implementation("com.github.TakWolf.Android-InsetsWidget:insetswidget:0.0.1")
     implementation("com.github.TakWolf.Android-InsetsWidget:constraintlayout:0.0.1")
-    implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.github.hadilq:live-event:1.3.0")
     implementation("com.google.mlkit:barcode-scanning:17.0.2")
 }
