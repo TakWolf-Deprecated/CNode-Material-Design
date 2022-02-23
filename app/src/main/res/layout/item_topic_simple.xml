@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="?colorSurface"
     android:elevation="@dimen/surface_elevation">
 
@@ -15,8 +15,7 @@
         android:padding="8dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="?selectableItemBackground"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="?selectableItemBackground">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_author"
@@ -74,7 +73,6 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btn_item"
         app:dividerColor="?android:listDivider" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
