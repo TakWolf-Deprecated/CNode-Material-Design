@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.takwolf.android.insetswidget.InsetsLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:windowBackground">
+    android:orientation="vertical"
+    android:background="?android:windowBackground"
+    app:isw_insetsType="statusBars|navigationBars"
+    app:isw_insetsPaddingBottom="false"
+    app:isw_insetsColorTop="@color/app_primary_variant"
+    app:isw_insetsColorBottom="@color/translucent_system_bars"
+    app:isw_insetsColorLeft="@android:color/black"
+    app:isw_insetsColorRight="@android:color/black">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_primary"
+        android:elevation="@dimen/toolbar_elevation"
+        android:theme="@style/ThemeOverlay.App.Dark"
+        app:title="@string/topic"
+        app:titleCentered="true"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:menu="@menu/topic_detail" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</com.takwolf.android.insetswidget.InsetsLinearLayout>
