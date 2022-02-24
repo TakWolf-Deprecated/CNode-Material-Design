@@ -206,7 +206,7 @@ class UserDetailFragment : BaseFragment() {
             val binding = PageUserDetailTopicsBinding.inflate(inflater, container, false)
 
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            binding.recyclerView.addFooterView(inflater, R.layout.footer_insets_bottom)
+            binding.recyclerView.addFooterView(inflater, R.layout.footer_topic_simple)
             val adapter = TopicSimpleListAdapter(inflater, who).apply {
                 onTopicClickListener = TopicDetailNavigateListener(navigator)
                 onUserClickListener = UserDetailNavigateListener(navigator, loginName)
