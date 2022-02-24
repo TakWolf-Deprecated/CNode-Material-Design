@@ -119,3 +119,7 @@ class Navigator(private val controller: NavController) {
 interface NavControllerProvider {
     val navigator: Navigator
 }
+
+fun View.setSharedName(who: String, name: String) {
+    transitionName = "${who}:${name}"
+}
