@@ -141,16 +141,6 @@ class TopicDetailFragment : BaseFragment() {
             it?.let { topicDetail ->
                 header.updateViews(topicDetail)
                 adapter.submitList(topicDetail.replies.toList())
-                jumpToReplyId?.let { jumpToReplyId ->
-                    this.jumpToReplyId = null
-                    for (i in topicDetail.replies.indices) {
-                        if (topicDetail.replies[i].id == jumpToReplyId) {
-                            val layoutPosition = i + 1 // TODO
-                            binding.recyclerView.scrollToPosition(layoutPosition)
-                            break
-                        }
-                    }
-                }
             }
         }
 
