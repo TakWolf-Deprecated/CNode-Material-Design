@@ -14,7 +14,7 @@ import coil.request.ImageRequest
 import coil.util.CoilUtils
 import org.cnodejs.android.md.R
 
-private class AppCoil private constructor(context: Context) {
+internal class AppCoil private constructor(context: Context) {
     companion object {
         private val lock = Any()
 
@@ -39,7 +39,7 @@ private class AppCoil private constructor(context: Context) {
         .build()
 }
 
-private fun getCompatUri(uri: String?): String {
+internal fun getCompatUri(uri: String?): String {
     var repaired = uri ?: ""
     if (repaired.startsWith("//")) {
         repaired = "https:${repaired}"

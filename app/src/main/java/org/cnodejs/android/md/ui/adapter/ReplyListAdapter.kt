@@ -10,6 +10,7 @@ import org.cnodejs.android.md.databinding.ItemReplyBinding
 import org.cnodejs.android.md.model.entity.Reply
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
 import org.cnodejs.android.md.util.fixTextIsSelectable
+import org.cnodejs.android.md.util.setMarkdown
 
 class ReplyListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : ListAdapter<Reply, ReplyListAdapter.ViewHolder>(ReplyDiffItemCallback) {
     var myId: String? = null
@@ -44,7 +45,7 @@ class ReplyListAdapter(private val layoutInflater: LayoutInflater, private val w
         fun bind(reply: Reply, myId: String?, isLast: Boolean) {
             // TODO
 
-            binding.tvContent.text = reply.content // TODO
+            binding.tvContent.setMarkdown(reply.content) // TODO
             binding.tvContent.fixTextIsSelectable()
             binding.divider.isVisible = !isLast
         }

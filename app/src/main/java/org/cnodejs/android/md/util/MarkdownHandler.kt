@@ -3,9 +3,13 @@ package org.cnodejs.android.md.util
 import android.content.Context
 import android.widget.TextView
 import androidx.annotation.GuardedBy
+import coil.request.Disposable
+import coil.request.ImageRequest
 import io.noties.markwon.Markwon
+import io.noties.markwon.image.AsyncDrawable
+import io.noties.markwon.image.coil.CoilImagesPlugin
 
-class MarkdownHandler private constructor(context: Context) {
+private class MarkdownHandler private constructor(context: Context) {
     companion object {
         private val lock = Any()
 
@@ -18,11 +22,23 @@ class MarkdownHandler private constructor(context: Context) {
         }
     }
 
-    internal val markwon = Markwon.create(context)
+    val markwon = Markwon.builder(context)
+        .usePlugin(CoilImagesPlugin.create(object : CoilImagesPlugin.CoilStore {
+            override fun load(drawable: AsyncDrawable): ImageRequest {
+                return ImageRequest.Builder(context)
+                    .data(getCompatUri(drawable.destination))
+                    .build()
+            }
+
+            override fun cancel(disposable: Disposable) {
+                disposable.dispose()
+            }
+        }, AppCoil.getInstance(context).imageLoader))
+        .build()
 }
 
-val Context.markdownHandler: MarkdownHandler get() = MarkdownHandler.getInstance(this)
+private val Context.markwon: Markwon get() = MarkdownHandler.getInstance(this).markwon
 
 fun TextView.setMarkdown(markdown: String?) {
-    context.markdownHandler.markwon.setMarkdown(this, markdown ?: "")
+    context.markwon.setMarkdown(this, markdown ?: "")
 }
