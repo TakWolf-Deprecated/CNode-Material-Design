@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import io.noties.markwon.utils.NoCopySpannableFactory
 import org.cnodejs.android.md.databinding.ItemReplyBinding
 import org.cnodejs.android.md.model.entity.Reply
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
@@ -40,6 +41,8 @@ class ReplyListAdapter(private val layoutInflater: LayoutInflater, private val w
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             // TODO
+
+            binding.tvContent.setSpannableFactory(NoCopySpannableFactory.getInstance())
         }
 
         fun bind(reply: Reply, myId: String?, isLast: Boolean) {
