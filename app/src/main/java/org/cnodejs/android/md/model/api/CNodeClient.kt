@@ -2,7 +2,6 @@ package org.cnodejs.android.md.model.api
 
 import android.content.Context
 import androidx.annotation.GuardedBy
-import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.cnodejs.android.md.BuildConfig
@@ -13,7 +12,6 @@ import org.cnodejs.android.md.util.JsonUtils
 import org.greenrobot.eventbus.EventBus
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.io.File
 
 class CNodeClient private constructor(context: Context) {
     companion object {
