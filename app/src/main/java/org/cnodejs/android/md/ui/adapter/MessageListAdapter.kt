@@ -13,7 +13,10 @@ import org.cnodejs.android.md.model.entity.MessageType
 import org.cnodejs.android.md.model.entity.MessageWithSummary
 import org.cnodejs.android.md.ui.listener.OnTopicClickListener
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
-import org.cnodejs.android.md.util.*
+import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.util.loadThumb
+import org.cnodejs.android.md.util.setSharedName
+import org.cnodejs.android.md.util.timeSpanStringFromNow
 
 class MessageListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : ListAdapter<MessageWithSummary, MessageListAdapter.ViewHolder>(MessageWithSummaryDiffItemCallback) {
     var onMessageReadListener: ((messageId: String) -> Unit)? = null
@@ -93,7 +96,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
                 binding.layoutThumb.isVisible = true
                 if (replySummary.images.size == 1) {
                     binding.imgThumb0.isVisible = true
-                    binding.imgThumb0.load(replySummary.images[0])
+                    binding.imgThumb0.loadThumb(replySummary.images[0])
                     imgThumbs.forEach { it.isVisible = false }
                 } else {
                     binding.imgThumb0.isVisible = false
@@ -101,7 +104,7 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
                         val imgThumb = imgThumbs[i]
                         if (i < replySummary.images.size) {
                             imgThumb.visibility = View.VISIBLE
-                            imgThumb.load(replySummary.images[i])
+                            imgThumb.loadThumb(replySummary.images[i])
                         } else {
                             imgThumb.visibility = View.INVISIBLE
                         }

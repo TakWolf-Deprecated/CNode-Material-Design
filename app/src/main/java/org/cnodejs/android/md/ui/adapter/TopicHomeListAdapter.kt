@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.DiffUtil
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.ItemTopicHomeBinding
 import org.cnodejs.android.md.model.entity.TopicWithSummary
-import org.cnodejs.android.md.util.*
+import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.util.loadThumb
+import org.cnodejs.android.md.util.setSharedName
+import org.cnodejs.android.md.util.timeSpanStringFromNow
 
 class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : TopicListAdapter<TopicWithSummary, TopicHomeListAdapter.ViewHolder>(TopicWithSummaryDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -56,7 +59,7 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
                 binding.layoutThumb.isVisible = true
                 if (summary.images.size == 1) {
                     binding.imgThumb0.isVisible = true
-                    binding.imgThumb0.load(summary.images[0])
+                    binding.imgThumb0.loadThumb(summary.images[0])
                     imgThumbs.forEach { it.isVisible = false }
                 } else {
                     binding.imgThumb0.isVisible = false
@@ -64,7 +67,7 @@ class TopicHomeListAdapter(private val layoutInflater: LayoutInflater, private v
                         val imgThumb = imgThumbs[i]
                         if (i < summary.images.size) {
                             imgThumb.visibility = View.VISIBLE
-                            imgThumb.load(summary.images[i])
+                            imgThumb.loadThumb(summary.images[i])
                         } else {
                             imgThumb.visibility = View.INVISIBLE
                         }

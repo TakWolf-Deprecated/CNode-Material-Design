@@ -59,14 +59,23 @@ private fun ImageView.loadAny(
     return AppCoil.getInstance(context).imageLoader.enqueue(request)
 }
 
-fun ImageView.load(uri: String?): Disposable = loadAny(getCompatUri(uri))
-
-fun ImageView.loadAvatar(@DrawableRes drawableResId: Int): Disposable = loadAny(drawableResId)
+fun ImageView.loadAvatar(@DrawableRes drawableResId: Int): Disposable {
+    return loadAny(drawableResId) {
+        crossfade(true)
+    }
+}
 
 fun ImageView.loadAvatar(uri: String?): Disposable {
     return loadAny(getCompatUri(uri)) {
         placeholder(R.drawable.image_placeholder)
         error(R.drawable.image_placeholder)
+        crossfade(true)
+    }
+}
+
+fun ImageView.loadThumb(uri: String?): Disposable {
+    return loadAny(getCompatUri(uri)) {
+        crossfade(true)
     }
 }
 
