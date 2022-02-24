@@ -2,6 +2,7 @@ package org.cnodejs.android.md.model.api
 
 import android.content.Context
 import androidx.annotation.GuardedBy
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.cnodejs.android.md.BuildConfig
@@ -12,9 +13,12 @@ import org.cnodejs.android.md.util.JsonUtils
 import org.greenrobot.eventbus.EventBus
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.io.File
 
 class CNodeClient private constructor(context: Context) {
     companion object {
+        private const val CACHE_DIR_NAME = "cnode_api"
+
         private val lock = Any()
 
         @GuardedBy("lock")
@@ -51,6 +55,7 @@ class CNodeClient private constructor(context: Context) {
                         })
                     }
                 }
+                .cache(HttpUtils.createCache(context, CACHE_DIR_NAME))
                 .build())
             .addConverterFactory(MoshiConverterFactory.create(JsonUtils.moshi))
             .build()
