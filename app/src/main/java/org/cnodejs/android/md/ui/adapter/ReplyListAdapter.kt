@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.cnodejs.android.md.databinding.ItemReplyBinding
 import org.cnodejs.android.md.model.entity.Reply
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
+import org.cnodejs.android.md.util.fixTextIsSelectable
 
 class ReplyListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : ListAdapter<Reply, ReplyListAdapter.ViewHolder>(ReplyDiffItemCallback) {
     var myId: String? = null
@@ -44,6 +45,7 @@ class ReplyListAdapter(private val layoutInflater: LayoutInflater, private val w
             // TODO
 
             binding.tvContent.text = reply.content // TODO
+            binding.tvContent.fixTextIsSelectable()
             binding.divider.isVisible = !isLast
         }
     }
