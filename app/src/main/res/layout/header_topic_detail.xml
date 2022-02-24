@@ -6,16 +6,41 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_topic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:orientation="vertical"
         android:background="?colorSurface"
         android:elevation="@dimen/surface_elevation"
         android:visibility="invisible"
         tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/img_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_topic_good"
+            android:scaleType="center"
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:lineSpacingMultiplier="1.2"
+            android:textIsSelectable="true"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
+
 
         <TextView
             android:id="@+id/tv_content"
@@ -25,14 +50,17 @@
             android:textColor="?android:textColorPrimary"
             android:textSize="14sp"
             android:lineSpacingMultiplier="1.2"
+            android:textIsSelectable="true"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
             tools:text="这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。这里是正文，有很长很长的一段话。" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/layout_no_reply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:paddingVertical="24dp"
         android:text="@string/no_reply"
         android:textColor="?android:textColorTertiary"

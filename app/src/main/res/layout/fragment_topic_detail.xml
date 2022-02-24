@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.takwolf.android.insetswidget.InsetsLinearLayout
+<com.takwolf.android.insetswidget.constraintlayout.InsetsConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="?android:windowBackground"
     app:isw_insetsType="statusBars|navigationBars"
     app:isw_insetsPaddingBottom="false"
@@ -13,6 +12,13 @@
     app:isw_insetsColorLeft="@android:color/black"
     app:isw_insetsColorRight="@android:color/black">
 
+    <com.takwolf.android.insetswidget.InsetsSpace
+        android:id="@+id/navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:isw_insetsType="navigationBars" />
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -20,6 +26,7 @@
         android:background="@color/app_primary"
         android:elevation="@dimen/toolbar_elevation"
         android:theme="@style/ThemeOverlay.App.Dark"
+        app:layout_constraintTop_toTopOf="parent"
         app:title="@string/topic"
         app:titleCentered="true"
         app:navigationIcon="@drawable/baseline_arrow_back_24"
@@ -28,14 +35,30 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:descendantFocusability="blocksDescendants" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</com.takwolf.android.insetswidget.InsetsLinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_create_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/create_reply"
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_reply_24"
+        app:tint="@android:color/white"
+        app:backgroundTint="?colorAccent" />
+
+</com.takwolf.android.insetswidget.constraintlayout.InsetsConstraintLayout>

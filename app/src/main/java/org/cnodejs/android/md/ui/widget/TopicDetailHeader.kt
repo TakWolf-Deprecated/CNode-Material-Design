@@ -23,8 +23,12 @@ class TopicDetailHeader(
 
     fun updateViews(topicDetail: TopicDetail) {
         val resources = binding.root.resources
+
         binding.layoutTopic.isVisible = true
+        binding.imgGood.isVisible = topicDetail.isGood
+        binding.tvTitle.text = topicDetail.title
         binding.tvContent.text = topicDetail.content // TODO
+
         if (topicDetail.replies.isEmpty()) {
             binding.layoutNoReply.isVisible = true
             binding.layoutReplyBar.isVisible = false

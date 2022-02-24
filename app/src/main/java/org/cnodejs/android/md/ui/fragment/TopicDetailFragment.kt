@@ -14,8 +14,10 @@ import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentTopicDetailBinding
 import org.cnodejs.android.md.model.entity.ITopic
 import org.cnodejs.android.md.ui.adapter.ReplyListAdapter
+import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
 import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
+import org.cnodejs.android.md.ui.listener.listenToRecyclerView
 import org.cnodejs.android.md.ui.widget.TopicDetailHeader
 import org.cnodejs.android.md.util.NavAnim
 import org.cnodejs.android.md.util.Navigator
@@ -98,6 +100,7 @@ class TopicDetailFragment : BaseFragment() {
         val header = TopicDetailHeader(inflater, binding.recyclerView, topicDetailViewModel).apply {
             myId = accountViewModel.accountData.value?.id
         }
+        binding.recyclerView.addFooterView(inflater, R.layout.footer_topic_detail)
         val adapter = ReplyListAdapter(inflater, who).apply {
             myId = accountViewModel.accountData.value?.id
             onBtnUpClickListener = { reply ->
@@ -109,6 +112,15 @@ class TopicDetailFragment : BaseFragment() {
             onUserClickListener = UserDetailNavigateListener(navigator)
         }
         binding.recyclerView.adapter = adapter
+
+        binding.btnCreateReply.setOnClickListener {
+            if (accountViewModel.isLogined()) {
+                // TODO
+            } else {
+                NeedLoginAlertDialog.show(childFragmentManager)
+            }
+        }
+        binding.btnCreateReply.listenToRecyclerView(binding.recyclerView, true)
 
         observeViewModel(topicDetailViewModel)
 

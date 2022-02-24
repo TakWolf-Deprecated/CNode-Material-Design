@@ -63,7 +63,6 @@
     <string name="d_reply_d_visit">%1$d 评论 / %2$d 阅读</string>
     <string name="reply_at_s">新评论：%s</string>
     <string name="create_at_s">创建于：%s</string>
-    <string name="create_topic">发布话题</string>
     <string name="github_s">GitHub: %s</string>
     <string name="register_at_s">注册时间：%s</string>
     <string name="user_detail_tab_reply">最近回复</string>
@@ -75,6 +74,8 @@
     <string name="at_me_in_reply">在回复中@了我</string>
     <string name="reply_my_topic">回复了我的话题</string>
 
+    <string name="create_topic">发布话题</string>
+    <string name="create_reply">发表评论</string>
     <string name="no_reply">暂无评论</string>
     <string name="reply_d">评论 %d</string>
 
