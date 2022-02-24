@@ -128,7 +128,9 @@
                     app:layout_constrainedHeight="true"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintDimensionRatio="5:2"
-                    app:shapeAppearance="@style/ShapeAppearance.App.Thumb" />
+                    app:shapeAppearance="@style/ShapeAppearance.App.Thumb"
+                    app:strokeColor="?android:listDivider"
+                    app:strokeWidth="1dp" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/img_thumb_1"
@@ -142,7 +144,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:shapeAppearance="@style/ShapeAppearance.App.Thumb" />
+                    app:shapeAppearance="@style/ShapeAppearance.App.Thumb"
+                    app:strokeColor="?android:listDivider"
+                    app:strokeWidth="1dp" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/img_thumb_2"
@@ -158,7 +162,9 @@
                     app:layout_constraintStart_toEndOf="@id/img_thumb_1"
                     app:layout_constraintEnd_toStartOf="@id/img_thumb_3"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:shapeAppearance="@style/ShapeAppearance.App.Thumb" />
+                    app:shapeAppearance="@style/ShapeAppearance.App.Thumb"
+                    app:strokeColor="?android:listDivider"
+                    app:strokeWidth="1dp" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/img_thumb_3"
@@ -172,7 +178,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:shapeAppearance="@style/ShapeAppearance.App.Thumb" />
+                    app:shapeAppearance="@style/ShapeAppearance.App.Thumb"
+                    app:strokeColor="?android:listDivider"
+                    app:strokeWidth="1dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
