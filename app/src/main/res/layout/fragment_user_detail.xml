@@ -143,6 +143,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
+                    android:theme="@style/ThemeOverlay.App.ActionBar"
                     app:layout_collapseMode="pin"
                     app:navigationIcon="@drawable/baseline_arrow_back_24"
                     app:menu="@menu/user_detail" />
@@ -178,7 +179,7 @@
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.App.Dark"
+        android:theme="@style/ThemeOverlay.App.ActionBar"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
         app:layout_constraintStart_toStartOf="parent"

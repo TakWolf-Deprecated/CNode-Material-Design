@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:background="@color/app_primary"
         android:elevation="@dimen/toolbar_elevation"
-        android:theme="@style/ThemeOverlay.App.Dark"
+        android:theme="@style/ThemeOverlay.App.ActionBar"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
         app:title="@string/app_name"
         app:titleCentered="true"

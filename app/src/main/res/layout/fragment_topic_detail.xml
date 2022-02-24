@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:background="@color/app_primary"
         android:elevation="@dimen/toolbar_elevation"
-        android:theme="@style/ThemeOverlay.App.Dark"
+        android:theme="@style/ThemeOverlay.App.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/topic"
         app:titleCentered="true"
