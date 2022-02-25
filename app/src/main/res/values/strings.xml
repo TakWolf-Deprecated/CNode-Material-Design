@@ -49,6 +49,7 @@
     <string name="camera_bind_failed">相机启动失败，请关闭页面后重试</string>
 
     <string name="share">分享</string>
+    <string name="no_browser_installed">系统未安装浏览器</string>
 
     <string name="just_now">刚刚</string>
     <string name="d_minutes_ago">%d 分钟前</string>
