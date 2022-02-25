@@ -41,7 +41,7 @@ class AboutFragment : BaseFragment() {
             // TODO
         }
 
-        binding.btnAboutAuthor.setOnClickListener {
+        binding.btnAboutDeveloper.setOnClickListener {
             // TODO
         }
 

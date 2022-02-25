@@ -94,8 +94,8 @@
     <string name="open_source_url_content">https://github.com/TakWolf/CNode-Material-Design</string>
     <string name="about_cnode">关于 CNode 社区</string>
     <string name="about_cnode_content">https://cnodejs.org/about</string>
-    <string name="about_author">关于作者</string>
-    <string name="about_author_content">https://github.com/TakWolf</string>
+    <string name="about_developer">关于开发者</string>
+    <string name="about_developer_content">https://github.com/TakWolf</string>
     <string name="open_source_license">开放源代码许可</string>
     <string name="copyright">Copyright © 2015 TakWolf</string>
 </resources>

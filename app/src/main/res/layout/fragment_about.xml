@@ -173,7 +173,7 @@
                     app:dividerColor="?android:listDivider" />
 
                 <LinearLayout
-                    android:id="@+id/btn_about_author"
+                    android:id="@+id/btn_about_developer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
@@ -183,7 +183,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/about_author"
+                        android:text="@string/about_developer"
                         android:textColor="?android:textColorPrimary"
                         android:textSize="16sp" />
 
@@ -191,7 +191,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/about_author_content"
+                        android:text="@string/about_developer_content"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="14sp" />
 
