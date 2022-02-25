@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.ui.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import org.cnodejs.android.md.BuildConfig
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentAboutBinding
 import org.cnodejs.android.md.util.Navigator
+import org.cnodejs.android.md.util.openInBrowser
 
 class AboutFragment : BaseFragment() {
     companion object {
@@ -34,15 +36,15 @@ class AboutFragment : BaseFragment() {
         }
 
         binding.btnOpenSourceUrl.setOnClickListener {
-            // TODO
+            requireContext().openInBrowser(Uri.parse(getString(R.string.open_source_url_content)))
         }
 
         binding.btnAboutCnode.setOnClickListener {
-            // TODO
+            requireContext().openInBrowser(Uri.parse(getString(R.string.about_cnode_content)))
         }
 
         binding.btnAboutDeveloper.setOnClickListener {
-            // TODO
+            requireContext().openInBrowser(Uri.parse(getString(R.string.about_developer_content)))
         }
 
         binding.btnOpenSourceLicense.setOnClickListener {

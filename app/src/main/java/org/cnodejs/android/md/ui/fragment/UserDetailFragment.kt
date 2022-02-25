@@ -1,5 +1,6 @@
 package org.cnodejs.android.md.ui.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,12 +21,15 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentUserDetailBinding
 import org.cnodejs.android.md.databinding.PageUserDetailTopicsBinding
+import org.cnodejs.android.md.model.api.CNodeDefine
 import org.cnodejs.android.md.model.entity.IUser
 import org.cnodejs.android.md.ui.adapter.TopicSimpleListAdapter
 import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
 import org.cnodejs.android.md.util.Navigator
 import org.cnodejs.android.md.util.loadAvatar
+import org.cnodejs.android.md.util.openInBrowser
+import org.cnodejs.android.md.util.openShare
 import org.cnodejs.android.md.vm.UserDetailViewModel
 
 class UserDetailFragment : BaseFragment() {
@@ -85,7 +89,9 @@ class UserDetailFragment : BaseFragment() {
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.btn_share -> {
-                    // TODO
+                    val title = getString(R.string.share)
+                    val text = "$loginName 在 CNode 社区\n${CNodeDefine.USER_LINK_PREFIX}${loginName}"
+                    requireContext().openShare(title, text)
                     true
                 }
                 else -> false
@@ -117,8 +123,11 @@ class UserDetailFragment : BaseFragment() {
         }
 
         binding.tvGithubUsername.setOnClickListener {
-            userDetailViewModel.userDetailData.value?.user?.let {
-                // TODO
+            userDetailViewModel.userDetailData.value?.user?.let { user ->
+                user.githubUsername?.let { githubUsername ->
+                    val uri = Uri.parse("https://github.com/${githubUsername}")
+                    requireContext().openInBrowser(uri)
+                }
             }
         }
 

@@ -12,6 +12,7 @@ import androidx.fragment.app.who
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentTopicDetailBinding
+import org.cnodejs.android.md.model.api.CNodeDefine
 import org.cnodejs.android.md.model.entity.ITopic
 import org.cnodejs.android.md.ui.adapter.ReplyListAdapter
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
@@ -21,8 +22,11 @@ import org.cnodejs.android.md.ui.listener.listenToRecyclerView
 import org.cnodejs.android.md.ui.widget.TopicDetailHeader
 import org.cnodejs.android.md.util.NavAnim
 import org.cnodejs.android.md.util.Navigator
+import org.cnodejs.android.md.util.openShare
+import org.cnodejs.android.md.util.showToast
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.TopicDetailViewModel
+import java.util.*
 
 class TopicDetailFragment : BaseFragment() {
     companion object {
@@ -85,7 +89,11 @@ class TopicDetailFragment : BaseFragment() {
         binding.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.btn_share -> {
-                    // TODO
+                    topicDetailViewModel.topicDetailData.value?.let { topicDetail ->
+                        val title = getString(R.string.share)
+                        val text = "《${topicDetail.title}》\n${CNodeDefine.TOPIC_LINK_PREFIX}${topicDetail.id}\n—— 来自 CNode 社区"
+                        requireContext().openShare(title, text)
+                    }
                     true
                 }
                 else -> false
