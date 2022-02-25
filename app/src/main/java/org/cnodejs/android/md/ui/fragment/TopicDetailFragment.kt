@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.fragment.app.who
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentTopicDetailBinding
@@ -23,10 +22,8 @@ import org.cnodejs.android.md.ui.widget.TopicDetailHeader
 import org.cnodejs.android.md.util.NavAnim
 import org.cnodejs.android.md.util.Navigator
 import org.cnodejs.android.md.util.openShare
-import org.cnodejs.android.md.util.showToast
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.TopicDetailViewModel
-import java.util.*
 
 class TopicDetailFragment : BaseFragment() {
     companion object {

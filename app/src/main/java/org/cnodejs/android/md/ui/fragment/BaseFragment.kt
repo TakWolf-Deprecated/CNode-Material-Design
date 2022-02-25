@@ -1,8 +1,8 @@
 package org.cnodejs.android.md.ui.fragment
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.who
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import org.cnodejs.android.md.ui.dialog.BaseDialog
@@ -13,9 +13,30 @@ import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.showToast
 import org.cnodejs.android.md.vm.holder.ILoadingViewModel
 import org.cnodejs.android.md.vm.holder.IToastViewModel
+import java.util.*
 
 abstract class BaseFragment : Fragment(), NavControllerProvider {
+    companion object {
+        private const val EXTRA_UNIQUE_ID = "uniqueId"
+    }
+
     override val navigator: Navigator by lazy { Navigator(findNavController()) }
+
+    private lateinit var uniqueId: String
+    val who get() = uniqueId
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        uniqueId = savedInstanceState?.let { state ->
+            state.getString(EXTRA_UNIQUE_ID)!!
+        } ?: UUID.randomUUID().toString()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(EXTRA_UNIQUE_ID, uniqueId)
+    }
 
     protected fun setTargetSharedName(view: View, name: String) {
         arguments?.getString(Navigator.sharedKey(name))?.let { transitionName ->

@@ -9,7 +9,6 @@ import androidx.annotation.ColorInt
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.fragment.app.who
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMessageListBinding
