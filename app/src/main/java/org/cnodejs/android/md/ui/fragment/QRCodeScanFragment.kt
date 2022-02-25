@@ -28,8 +28,8 @@ import java.util.concurrent.Executors
 
 class QRCodeScanFragment : BaseFragment() {
     companion object {
-        const val REQUEST_KEY = "requestKey.QRCodeScanFragment"
-        const val KEY_VALUE = "value"
+        const val REQUEST_KEY = "requestKey.QRCodeScan"
+        const val EXTRA_VALUE = "value"
 
         fun open(navigator: Navigator) {
             navigator.push(R.id.fragment_qr_code_scan)
@@ -138,7 +138,7 @@ class QRCodeScanFragment : BaseFragment() {
     }
 
     private fun handleBarcodeResult(value: String) {
-        val result = bundleOf(KEY_VALUE to value)
+        val result = bundleOf(EXTRA_VALUE to value)
         setFragmentResult(REQUEST_KEY, result)
         navigator.back()
     }

@@ -30,12 +30,12 @@ import org.cnodejs.android.md.vm.UserDetailViewModel
 
 class UserDetailFragment : BaseFragment() {
     companion object {
-        private const val KEY_LOGIN_NAME = "loginName"
-        private const val KEY_AVATAR_URL = "avatarUrl"
+        private const val EXTRA_LOGIN_NAME = "loginName"
+        private const val EXTRA_AVATAR_URL = "avatarUrl"
 
         fun open(navigator: Navigator, loginName: String) {
             val args = Bundle().apply {
-                putString(KEY_LOGIN_NAME, loginName)
+                putString(EXTRA_LOGIN_NAME, loginName)
             }
             navigator.push(R.id.fragment_user_detail, args)
         }
@@ -46,8 +46,8 @@ class UserDetailFragment : BaseFragment() {
             }
             val elements = mapOf<View, String>(imgAvatar to "imgAvatar")
             val args = Bundle().apply {
-                putString(KEY_LOGIN_NAME, user.loginName)
-                putString(KEY_AVATAR_URL, user.avatarUrl)
+                putString(EXTRA_LOGIN_NAME, user.loginName)
+                putString(EXTRA_AVATAR_URL, user.avatarUrl)
             }
             navigator.pushShared(R.id.fragment_user_detail, elements, args)
         }
@@ -63,8 +63,8 @@ class UserDetailFragment : BaseFragment() {
         sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
 
         val args = requireArguments()
-        loginName = args.getString(KEY_LOGIN_NAME)!!
-        avatarUrl = args.getString(KEY_AVATAR_URL)
+        loginName = args.getString(EXTRA_LOGIN_NAME)!!
+        avatarUrl = args.getString(EXTRA_AVATAR_URL)
 
         userDetailViewModel.loginName = loginName
     }
@@ -173,13 +173,13 @@ class UserDetailFragment : BaseFragment() {
 
     class TopicListFragment : BaseFragment() {
         companion object {
-            private const val KEY_TYPE = "type"
+            private const val EXTRA_TYPE = "type"
 
             fun create(loginName: String, type: Int): TopicListFragment {
                 val fragment = TopicListFragment()
                 fragment.arguments = Bundle().apply {
-                    putString(KEY_LOGIN_NAME, loginName)
-                    putInt(KEY_TYPE, type)
+                    putString(EXTRA_LOGIN_NAME, loginName)
+                    putInt(EXTRA_TYPE, type)
                 }
                 return fragment
             }
@@ -194,8 +194,8 @@ class UserDetailFragment : BaseFragment() {
             super.onCreate(savedInstanceState)
 
             val args = requireArguments()
-            loginName = args.getString(KEY_LOGIN_NAME)!!
-            type = args.getInt(KEY_TYPE, -1)
+            loginName = args.getString(EXTRA_LOGIN_NAME)!!
+            type = args.getInt(EXTRA_TYPE, -1)
         }
 
         override fun onCreateView(

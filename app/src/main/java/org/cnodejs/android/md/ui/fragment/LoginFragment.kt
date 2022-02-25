@@ -33,14 +33,14 @@ class LoginFragment : BaseFragment() {
 
         setFragmentResultListener(QRCodeScanFragment.REQUEST_KEY) { _, result ->
             _binding?.let { binding ->
-                val accessToken = result.getString(QRCodeScanFragment.KEY_VALUE)
+                val accessToken = result.getString(QRCodeScanFragment.EXTRA_VALUE)
                 binding.edtAccessToken.setText(accessToken)
                 binding.btnLogin.callOnClick()
             }
         }
         setFragmentResultListener(LoginByGithubFragment.REQUEST_KEY) { _, result ->
             _binding?.let { binding ->
-                val accessToken = result.getString(LoginByGithubFragment.KEY_ACCESS_TOKEN)
+                val accessToken = result.getString(LoginByGithubFragment.EXTRA_ACCESS_TOKEN)
                 binding.edtAccessToken.setText(accessToken)
                 binding.btnLogin.callOnClick()
             }

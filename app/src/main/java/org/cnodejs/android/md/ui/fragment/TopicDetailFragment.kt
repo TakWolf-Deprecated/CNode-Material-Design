@@ -26,13 +26,13 @@ import org.cnodejs.android.md.vm.TopicDetailViewModel
 
 class TopicDetailFragment : BaseFragment() {
     companion object {
-        private const val KEY_TOPIC_ID = "topicId"
-        private const val KEY_JUMP_TO_REPLY_ID = "jumpToReplyId"
+        private const val EXTRA_TOPIC_ID = "topicId"
+        private const val EXTRA_JUMP_TO_REPLY_ID = "jumpToReplyId"
 
         fun open(navigator: Navigator, topicId: String, jumpToReplyId: String? = null) {
             val args = Bundle().apply {
-                putString(KEY_TOPIC_ID, topicId)
-                putString(KEY_JUMP_TO_REPLY_ID, jumpToReplyId)
+                putString(EXTRA_TOPIC_ID, topicId)
+                putString(EXTRA_JUMP_TO_REPLY_ID, jumpToReplyId)
             }
             navigator.push(R.id.fragment_topic_detail, args, NavAnim.SLIDE)
         }
@@ -52,15 +52,15 @@ class TopicDetailFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         val args = requireArguments()
-        topicId = args.getString(KEY_TOPIC_ID)!!
-        jumpToReplyId = (savedInstanceState ?: args).getString(KEY_JUMP_TO_REPLY_ID)
+        topicId = args.getString(EXTRA_TOPIC_ID)!!
+        jumpToReplyId = (savedInstanceState ?: args).getString(EXTRA_JUMP_TO_REPLY_ID)
 
         topicDetailViewModel.topicId = topicId
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(KEY_JUMP_TO_REPLY_ID, jumpToReplyId)
+        outState.putString(EXTRA_JUMP_TO_REPLY_ID, jumpToReplyId)
     }
 
     override fun onCreateView(

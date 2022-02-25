@@ -15,8 +15,8 @@ import java.util.*
 
 class LoginByGithubFragment : BaseFragment() {
     companion object {
-        const val REQUEST_KEY = "requestKey.LoginByGithubFragment"
-        const val KEY_ACCESS_TOKEN = "accessToken"
+        const val REQUEST_KEY = "requestKey.LoginByGithub"
+        const val EXTRA_ACCESS_TOKEN = "accessToken"
 
         fun open(navigator: Navigator) {
             navigator.push(R.id.fragment_login_by_github)
@@ -35,7 +35,7 @@ class LoginByGithubFragment : BaseFragment() {
         // TODO
 
         binding.btn.setOnClickListener {
-            val result = bundleOf(KEY_ACCESS_TOKEN to UUID.randomUUID().toString())
+            val result = bundleOf(EXTRA_ACCESS_TOKEN to UUID.randomUUID().toString())
             setFragmentResult(REQUEST_KEY, result)
             navigator.back()
         }

@@ -39,10 +39,10 @@ enum class NavAnim(
 
 class Navigator(private val controller: NavController) {
     companion object {
-        private const val KEY_SHARED_ELEMENT = "sharedElement"
+        private const val EXTRA_SHARED_ELEMENT = "sharedElement"
 
         fun sharedKey(name: String): String {
-            return "${KEY_SHARED_ELEMENT}.${name}"
+            return "${EXTRA_SHARED_ELEMENT}.${name}"
         }
     }
 
