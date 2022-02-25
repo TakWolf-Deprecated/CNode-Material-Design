@@ -24,6 +24,7 @@ import org.cnodejs.android.md.BuildConfig
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentQrCodeScanBinding
 import org.cnodejs.android.md.util.Navigator
+import org.cnodejs.android.md.util.showToast
 import java.util.concurrent.Executors
 
 class QRCodeScanFragment : BaseFragment() {

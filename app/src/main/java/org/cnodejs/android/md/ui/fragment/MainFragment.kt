@@ -28,6 +28,7 @@ import org.cnodejs.android.md.ui.listener.listenToRecyclerView
 import org.cnodejs.android.md.ui.widget.LoadMoreFooter
 import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.util.setSharedName
+import org.cnodejs.android.md.util.showToast
 import org.cnodejs.android.md.vm.AccountViewModel
 import org.cnodejs.android.md.vm.MainViewModel
 import org.cnodejs.android.md.vm.SettingViewModel

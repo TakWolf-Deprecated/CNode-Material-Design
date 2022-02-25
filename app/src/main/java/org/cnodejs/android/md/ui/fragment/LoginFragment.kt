@@ -12,6 +12,7 @@ import org.cnodejs.android.md.databinding.FragmentLoginBinding
 import org.cnodejs.android.md.ui.dialog.HowToGetAccessTokenTipDialog
 import org.cnodejs.android.md.util.Navigator
 import org.cnodejs.android.md.util.isAccessToken
+import org.cnodejs.android.md.util.showToast
 import org.cnodejs.android.md.vm.LoginViewModel
 
 class LoginFragment : BaseFragment() {
