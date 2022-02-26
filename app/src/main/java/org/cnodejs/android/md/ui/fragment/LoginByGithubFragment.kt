@@ -1,6 +1,5 @@
 package org.cnodejs.android.md.ui.fragment
 
-import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
@@ -56,7 +55,6 @@ class LoginByGithubFragment : BaseFragment() {
         }
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -69,8 +67,6 @@ class LoginByGithubFragment : BaseFragment() {
             navigator.back()
         }
 
-        binding.web.settings.javaScriptEnabled = true
-        binding.web.settings.domStorageEnabled = true
         binding.web.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
                 if (BuildConfig.DEBUG) {
