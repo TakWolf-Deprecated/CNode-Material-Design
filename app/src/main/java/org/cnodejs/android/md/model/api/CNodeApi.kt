@@ -16,7 +16,7 @@ interface CNodeApi {
         @Query("page") page: Int = PAGE_FIRST,
         @Query("limit") limit: Int = PAGE_LIMIT,
         @Query("mdrender") mdrender: Boolean = MD_RENDER,
-    ): DataResult<List<TopicWithSummary>>
+    ): DataResult<List<Topic>>
 
     @GET("topic/{topicId}")
     suspend fun getTopic(

@@ -6,7 +6,6 @@ import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.HeaderTopicDetailBinding
 import org.cnodejs.android.md.model.entity.TopicDetail
-import org.cnodejs.android.md.util.setMarkdown
 import org.cnodejs.android.md.vm.TopicDetailViewModel
 
 class TopicDetailHeader(
@@ -28,7 +27,7 @@ class TopicDetailHeader(
         binding.layoutTopic.isVisible = true
         binding.imgGood.isVisible = topicDetail.isGood
         binding.tvTitle.text = topicDetail.title
-        binding.tvContent.setMarkdown(topicDetail.content) // TODO
+        binding.tvContent.text = topicDetail.content.html // TODO
 
         if (topicDetail.replies.isEmpty()) {
             binding.layoutNoReply.isVisible = true

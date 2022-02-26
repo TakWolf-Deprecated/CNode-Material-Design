@@ -8,7 +8,7 @@ import java.time.OffsetDateTime
 data class Reply(
     val id: String,
     val author: Author,
-    val content: String,
+    val content: Content,
     @Json(name = "reply_id") val replyId: String?,
     @Json(name = "is_uped") val isUped: Boolean,
     val ups: List<String>,
@@ -18,7 +18,7 @@ data class Reply(
 @JsonClass(generateAdapter = true)
 data class ReplyInMessage(
     val id: String?,
-    val content: String?,
+    val content: Content?,
     val ups: List<String>?,
     @Json(name = "create_at") val createAt: OffsetDateTime?,
 )

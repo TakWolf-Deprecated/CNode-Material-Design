@@ -92,7 +92,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_reply_content"
+                android:id="@+id/tv_reply_summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"

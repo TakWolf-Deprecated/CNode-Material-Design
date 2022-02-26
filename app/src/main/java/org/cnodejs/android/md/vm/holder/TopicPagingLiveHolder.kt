@@ -7,12 +7,12 @@ import org.cnodejs.android.md.BuildConfig
 import org.cnodejs.android.md.model.api.CNodeClient
 import org.cnodejs.android.md.model.entity.ErrorResult
 import org.cnodejs.android.md.model.entity.Tab
-import org.cnodejs.android.md.model.entity.TopicWithSummary
+import org.cnodejs.android.md.model.entity.Topic
 
-class TopicHomePagingLiveHolder(
+class TopicPagingLiveHolder(
     viewModel: AndroidViewModel,
     toastHolder: ToastLiveHolder,
-) : PagingLiveHolder<TopicWithSummary, Int>(
+) : PagingLiveHolder<Topic, Int>(
     viewModel,
     toastHolder,
 ) {
@@ -42,7 +42,7 @@ class TopicHomePagingLiveHolder(
 
     override suspend fun doRefresh(version: Int) {
         try {
-            val topics = api.getTopics(getTab().queryValue, mdrender = true).data
+            val topics = api.getTopics(getTab().queryValue).data
             refreshSuccess(version, topics, 1, topics.isEmpty())
         } catch (e: Exception) {
             if (BuildConfig.DEBUG) {
@@ -56,7 +56,7 @@ class TopicHomePagingLiveHolder(
     override suspend fun doLoadMore(version: Int, pagingParams: Int) {
         try {
             val nextPage = pagingParams + 1
-            val topics = api.getTopics(getTab().queryValue, nextPage, mdrender = true).data
+            val topics = api.getTopics(getTab().queryValue, nextPage).data
             loadMoreSuccess(version, topics, nextPage, topics.isEmpty())
         } catch (e: Exception) {
             if (BuildConfig.DEBUG) {

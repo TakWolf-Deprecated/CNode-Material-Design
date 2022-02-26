@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.ItemMessageBinding
+import org.cnodejs.android.md.model.entity.Message
 import org.cnodejs.android.md.model.entity.MessageType
-import org.cnodejs.android.md.model.entity.MessageWithSummary
 import org.cnodejs.android.md.ui.listener.OnTopicClickListener
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
 import org.cnodejs.android.md.util.loadAvatar
@@ -18,7 +18,10 @@ import org.cnodejs.android.md.util.loadThumb
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
-class MessageListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : ListAdapter<MessageWithSummary, MessageListAdapter.ViewHolder>(MessageWithSummaryDiffItemCallback) {
+class MessageListAdapter(
+    private val layoutInflater: LayoutInflater,
+    private val who: String,
+) : ListAdapter<Message, MessageListAdapter.ViewHolder>(MessageDiffItemCallback) {
     var onMessageReadListener: ((messageId: String) -> Unit)? = null
     var onTopicClickListener: OnTopicClickListener? = null
     var onUserClickListener: OnUserClickListener? = null
@@ -36,12 +39,13 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
         private val binding: ItemMessageBinding,
         private val who: String,
     ) : RecyclerView.ViewHolder(binding.root) {
+        private val resources = itemView.resources
         private val imgThumbs = listOf(binding.imgThumb1, binding.imgThumb2, binding.imgThumb3)
 
         init {
             binding.btnItem.setOnClickListener {
                 (bindingAdapter as? MessageListAdapter)?.let { adapter ->
-                    val message = adapter.getItem(bindingAdapterPosition).message
+                    val message = adapter.getItem(bindingAdapterPosition)
                     if (!message.hasRead) {
                         adapter.onMessageReadListener?.invoke(message.id)
                     }
@@ -52,18 +56,14 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
             binding.imgAuthor.setOnClickListener {
                 (bindingAdapter as? MessageListAdapter)?.let { adapter ->
                     adapter.onUserClickListener?.let { listener ->
-                        val author = adapter.getItem(bindingAdapterPosition).message.author
+                        val author = adapter.getItem(bindingAdapterPosition).author
                         listener.onUserClick(author, binding.imgAuthor)
                     }
                 }
             }
         }
 
-        fun bind(messageWithSummary: MessageWithSummary, isLast: Boolean) {
-            val message = messageWithSummary.message
-            val replySummary = messageWithSummary.replySummary
-            val resources = itemView.resources
-
+        fun bind(message: Message, isLast: Boolean) {
             binding.imgAuthor.loadAvatar(message.author.avatarUrl)
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = message.author.loginName
@@ -76,35 +76,34 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
             if (message.type == MessageType.AT) {
                 if (message.reply.id == null) {
                     binding.tvAction.setText(R.string.at_me_in_topic)
-                    binding.tvReplyContent.isVisible = false
+                    binding.tvReplySummary.isVisible = false
                 } else {
                     binding.tvAction.setText(R.string.at_me_in_reply)
-                    binding.tvReplyContent.isVisible = true
-                    binding.tvReplyContent.text = replySummary.text
-                    binding.tvReplyContent.isVisible = replySummary.text.isNotBlank()
+                    binding.tvReplySummary.isVisible = message.reply.content != null
+                    binding.tvReplySummary.text = message.reply.content?.summary
                 }
             } else {
                 binding.tvAction.setText(R.string.reply_my_topic)
-                binding.tvReplyContent.isVisible = true
-                binding.tvReplyContent.text = replySummary.text
-                binding.tvReplyContent.isVisible = replySummary.text.isNotBlank()
+                binding.tvReplySummary.isVisible = message.reply.content != null
+                binding.tvReplySummary.text = message.reply.content?.summary
             }
 
-            if (replySummary.images.isEmpty()) {
+            val images = message.reply.content?.images ?: emptyList()
+            if (images.isEmpty()) {
                 binding.layoutThumb.isVisible = false
             } else {
                 binding.layoutThumb.isVisible = true
-                if (replySummary.images.size == 1) {
+                if (images.size == 1) {
                     binding.imgThumb0.isVisible = true
-                    binding.imgThumb0.loadThumb(replySummary.images[0])
+                    binding.imgThumb0.loadThumb(images[0])
                     imgThumbs.forEach { it.isVisible = false }
                 } else {
                     binding.imgThumb0.isVisible = false
                     for (i in imgThumbs.indices) {
                         val imgThumb = imgThumbs[i]
-                        if (i < replySummary.images.size) {
+                        if (i < images.size) {
                             imgThumb.visibility = View.VISIBLE
-                            imgThumb.loadThumb(replySummary.images[i])
+                            imgThumb.loadThumb(images[i])
                         } else {
                             imgThumb.visibility = View.INVISIBLE
                         }
@@ -115,12 +114,12 @@ class MessageListAdapter(private val layoutInflater: LayoutInflater, private val
     }
 }
 
-private object MessageWithSummaryDiffItemCallback : DiffUtil.ItemCallback<MessageWithSummary>() {
-    override fun areItemsTheSame(oldItem: MessageWithSummary, newItem: MessageWithSummary): Boolean {
-        return oldItem.message.id == newItem.message.id
+private object MessageDiffItemCallback : DiffUtil.ItemCallback<Message>() {
+    override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: MessageWithSummary, newItem: MessageWithSummary): Boolean {
-        return oldItem.message == newItem.message
+    override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
+        return oldItem == newItem
     }
 }

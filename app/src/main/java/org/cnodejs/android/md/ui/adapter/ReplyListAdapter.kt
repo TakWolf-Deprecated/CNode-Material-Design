@@ -6,14 +6,15 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import io.noties.markwon.utils.NoCopySpannableFactory
 import org.cnodejs.android.md.databinding.ItemReplyBinding
 import org.cnodejs.android.md.model.entity.Reply
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
 import org.cnodejs.android.md.util.fixTextIsSelectable
-import org.cnodejs.android.md.util.setMarkdown
 
-class ReplyListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : ListAdapter<Reply, ReplyListAdapter.ViewHolder>(ReplyDiffItemCallback) {
+class ReplyListAdapter(
+    private val layoutInflater: LayoutInflater,
+    private val who: String,
+) : ListAdapter<Reply, ReplyListAdapter.ViewHolder>(ReplyDiffItemCallback) {
     var myId: String? = null
     set(value) {
         if (field != value) {
@@ -41,14 +42,12 @@ class ReplyListAdapter(private val layoutInflater: LayoutInflater, private val w
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             // TODO
-
-            binding.tvContent.setSpannableFactory(NoCopySpannableFactory.getInstance())
         }
 
         fun bind(reply: Reply, myId: String?, isLast: Boolean) {
             // TODO
 
-            binding.tvContent.setMarkdown(reply.content) // TODO
+            binding.tvContent.text = reply.content.html // TODO
             binding.tvContent.fixTextIsSelectable()
             binding.divider.isVisible = !isLast
         }

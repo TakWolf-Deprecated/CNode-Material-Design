@@ -35,24 +35,15 @@ data class Message(
     @Json(name = "create_at") val createAt: OffsetDateTime,
 )
 
-data class MessageWithSummary(val message: Message) {
-    val replySummary = message.reply.content?.let { html -> Summary.from(html) } ?: Summary.EMPTY
-}
-
-class MessageWithSummaryJsonAdapter {
-    @FromJson
-    fun fromJson(message: Message): MessageWithSummary {
-        return MessageWithSummary(message)
-    }
-
-    @ToJson
-    fun toJson(messageWithSummary: MessageWithSummary): Message {
-        return messageWithSummary.message
-    }
-}
-
 @JsonClass(generateAdapter = true)
 data class MessageData(
-    @Json(name = "has_read_messages") val hasReadMessages: List<MessageWithSummary>,
-    @Json(name = "hasnot_read_messages") val hasNotReadMessages: List<MessageWithSummary>,
-)
+    @Json(name = "has_read_messages") val hasReadMessages: List<Message>,
+    @Json(name = "hasnot_read_messages") val hasNotReadMessages: List<Message>,
+) {
+    fun toList(): List<Message> {
+        return mutableListOf<Message>().apply {
+            addAll(hasNotReadMessages)
+            addAll(hasReadMessages)
+        }
+    }
+}

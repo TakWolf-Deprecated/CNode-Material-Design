@@ -13,7 +13,7 @@ import org.cnodejs.android.md.bus.AccountChangedEvent
 import org.cnodejs.android.md.bus.AccountInfoNeedRefreshEvent
 import org.cnodejs.android.md.model.api.CNodeClient
 import org.cnodejs.android.md.model.entity.ErrorResult
-import org.cnodejs.android.md.model.entity.MessageWithSummary
+import org.cnodejs.android.md.model.entity.Message
 import org.cnodejs.android.md.model.store.AppStoreHolder
 import org.cnodejs.android.md.vm.holder.IToastViewModel
 import org.cnodejs.android.md.vm.holder.ListLiveHolder
@@ -32,7 +32,7 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
 
     override val toastHolder = ToastLiveHolder()
     val loadingStateData = MutableLiveData(false)
-    val messagesHolder = ListLiveHolder<MessageWithSummary>()
+    val messagesHolder = ListLiveHolder<Message>()
 
     private var dataVersion = 0
     private var isFirstLoadDone = false
@@ -72,11 +72,7 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
             loadingStateData.value = true
             viewModelScope.launch(Dispatchers.IO) {
                 try {
-                    val result = api.getMessages(accessToken, true)
-                    val messages = mutableListOf<MessageWithSummary>().apply {
-                        addAll(result.data.hasNotReadMessages)
-                        addAll(result.data.hasReadMessages)
-                    }
+                    val messages = api.getMessages(accessToken).data.toList()
                     withContext(Dispatchers.Main) {
                         if (dataVersion == version) {
                             dataVersion += 1
@@ -111,8 +107,8 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
                             EventBus.getDefault().post(AccountInfoNeedRefreshEvent(messagesCount = true))
                             messagesHolder.entitiesData.value?.let { messages ->
                                 messagesHolder.entitiesData.value = messages.map { message ->
-                                    if (messageIds.contains(message.message.id)) {
-                                        MessageWithSummary(message.message.copy(hasRead = true))
+                                    if (messageIds.contains(message.id)) {
+                                        message.copy(hasRead = true)
                                     } else {
                                         message
                                     }
@@ -149,8 +145,8 @@ class MessageListViewModel(application: Application) : AndroidViewModel(applicat
                             EventBus.getDefault().post(AccountInfoNeedRefreshEvent(messagesCount = true))
                             messagesHolder.entitiesData.value?.let { messages ->
                                 messagesHolder.entitiesData.value = messages.map { message ->
-                                    if (message.message.id == markedMessageId) {
-                                        MessageWithSummary(message.message.copy(hasRead = true))
+                                    if (message.id == markedMessageId) {
+                                        message.copy(hasRead = true)
                                     } else {
                                         message
                                     }

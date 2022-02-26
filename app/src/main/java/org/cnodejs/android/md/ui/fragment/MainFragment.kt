@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMainBinding
 import org.cnodejs.android.md.model.entity.Tab
-import org.cnodejs.android.md.ui.adapter.TopicHomeListAdapter
+import org.cnodejs.android.md.ui.adapter.TopicListAdapter
 import org.cnodejs.android.md.ui.dialog.LogoutAlertDialog
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
 import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
@@ -79,7 +79,7 @@ class MainFragment : BaseFragment() {
         binding.contentLayout.recyclerView.layoutManager = LinearLayoutManager(context)
         val loadMoreFooter = LoadMoreFooter.create(inflater, binding.contentLayout.recyclerView)
         loadMoreFooter.addToRecyclerView(binding.contentLayout.recyclerView)
-        val adapter = TopicHomeListAdapter(inflater, who).apply {
+        val adapter = TopicListAdapter(inflater, who).apply {
             onTopicClickListener = TopicDetailNavigateListener(navigator)
             onUserClickListener = UserDetailNavigateListener(navigator)
         }

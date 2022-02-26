@@ -10,7 +10,10 @@ import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.util.setSharedName
 import org.cnodejs.android.md.util.timeSpanStringFromNow
 
-class TopicSimpleListAdapter(private val layoutInflater: LayoutInflater, private val who: String) : TopicListAdapter<ITopicSimple, TopicSimpleListAdapter.ViewHolder>(TopicSimpleDiffItemCallback) {
+class TopicSimpleListAdapter(
+    private val layoutInflater: LayoutInflater,
+    private val who: String,
+) : ITopicListAdapter<ITopicSimple, TopicSimpleListAdapter.ViewHolder>(TopicSimpleDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemTopicSimpleBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding, who)
@@ -23,7 +26,7 @@ class TopicSimpleListAdapter(private val layoutInflater: LayoutInflater, private
     class ViewHolder(
         private val binding: ItemTopicSimpleBinding,
         private val who: String,
-    ) : TopicListAdapter.ViewHolder(
+    ) : ITopicListAdapter.ViewHolder(
         binding.root,
         binding.btnItem,
         binding.imgAuthor,
