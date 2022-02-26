@@ -30,6 +30,7 @@ import java.util.concurrent.Executors
 class QRCodeScanFragment : BaseFragment() {
     companion object {
         const val REQUEST_KEY = "requestKey.QRCodeScan"
+
         const val EXTRA_VALUE = "value"
 
         fun open(navigator: Navigator) {
