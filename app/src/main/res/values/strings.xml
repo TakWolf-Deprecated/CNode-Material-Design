@@ -40,6 +40,7 @@
     <string name="logout_tip">确定要注销吗？</string>
     <string name="access_token_out_of_date">AccessToken 已经失效，您需要重新登录账户。</string>
     <string name="re_login">重新登录</string>
+    <string name="access_token_fetch_error">AccessToken 获取失败，请重试</string>
 
     <string name="qr_code_scan">二维码扫描</string>
     <string name="qr_code_scan_tip">请将二维码置于取景器内</string>
