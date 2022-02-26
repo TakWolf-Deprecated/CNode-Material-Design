@@ -3,10 +3,6 @@
     <translate
         android:interpolator="@android:interpolator/accelerate_quad"
         android:fromXDelta="0.0"
-        android:toXDelta="50%p"
-        android:duration="@integer/page_anim_time" />
-    <alpha
-        android:fromAlpha="1.0"
-        android:toAlpha="0.0"
+        android:toXDelta="100%"
         android:duration="@integer/page_anim_time" />
 </set>

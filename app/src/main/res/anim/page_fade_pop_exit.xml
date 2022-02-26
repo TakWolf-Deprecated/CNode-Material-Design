@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
-    <scale
-        android:interpolator="@android:interpolator/accelerate_quad"
-        android:fromXScale="1.0"
-        android:toXScale="0.9"
-        android:pivotX="50%"
-        android:fromYScale="1.0"
-        android:toYScale="0.9"
-        android:pivotY="50%"
+    <translate
+        android:interpolator="@android:interpolator/decelerate_quad"
+        android:fromYDelta="0.0"
+        android:toYDelta="10%"
         android:duration="@integer/page_anim_time" />
     <alpha
         android:fromAlpha="1.0"
