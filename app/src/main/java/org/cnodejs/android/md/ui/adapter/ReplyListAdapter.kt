@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import org.cnodejs.android.md.databinding.ItemReplyBinding
 import org.cnodejs.android.md.model.entity.Reply
 import org.cnodejs.android.md.ui.listener.OnUserClickListener
-import org.cnodejs.android.md.util.fixTextIsSelectable
 
 class ReplyListAdapter(
     private val layoutInflater: LayoutInflater,
@@ -36,6 +35,10 @@ class ReplyListAdapter(
         holder.bind(getItem(position), myId, position == itemCount - 1)
     }
 
+    override fun onViewAttachedToWindow(holder: ViewHolder) {
+        holder.fixIsSelectable()
+    }
+
     class ViewHolder(
         private val binding: ItemReplyBinding,
         private val who: String,
@@ -48,8 +51,16 @@ class ReplyListAdapter(
             // TODO
 
             binding.tvContent.text = reply.content.html // TODO
-            binding.tvContent.fixTextIsSelectable()
             binding.divider.isVisible = !isLast
+        }
+
+        /**
+         * https://issuetracker.google.com/issues/37095917
+         * https://stackoverflow.com/questions/37566303/edittext-giving-error-textview-does-not-support-text-selection-selection-canc
+         */
+        fun fixIsSelectable() {
+            binding.tvContent.isEnabled = false
+            binding.tvContent.isEnabled = true
         }
     }
 }

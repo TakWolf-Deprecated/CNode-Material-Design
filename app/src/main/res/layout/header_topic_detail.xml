@@ -41,7 +41,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
 
-
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
