@@ -89,6 +89,8 @@ class LoginByGithubFragment : BaseFragment() {
             }
 
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
+                currentUrl = url
+                currentHtml = null
                 if (url == CNodeDefine.HOST_BASE_URL || url == "${CNodeDefine.HOST_BASE_URL}/") {
                     cookieManager.getCookie(url)?.let { cookie ->
                         loginByGithubViewModel.fetchAccessToken(cookie)
@@ -97,9 +99,7 @@ class LoginByGithubFragment : BaseFragment() {
             }
 
             override fun onPageFinished(view: WebView, url: String) {
-                currentUrl = url
-                val script = "(function() { return '<html>' + document.getElementsByTagName('html')[0].innerHTML + '</html>'; })();"
-                view.evaluateJavascript(script) { json ->
+                view.evaluateJavascript("(function() { return '<html>' + document.getElementsByTagName('html')[0].innerHTML + '</html>'; })();") { json ->
                     currentHtml = JsonUtils.moshi.adapter(String::class.java).fromJson(json)
                 }
             }
