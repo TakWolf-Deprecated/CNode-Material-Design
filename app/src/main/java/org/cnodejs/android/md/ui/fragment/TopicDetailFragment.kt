@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentTopicDetailBinding
 import org.cnodejs.android.md.model.api.CNodeDefine
@@ -18,6 +17,7 @@ import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
 import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.listenToRecyclerView
+import org.cnodejs.android.md.ui.widget.PreventFocusAutoScrollLinearLayoutManager
 import org.cnodejs.android.md.ui.widget.TopicDetailHeader
 import org.cnodejs.android.md.util.NavAnim
 import org.cnodejs.android.md.util.Navigator
@@ -101,7 +101,7 @@ class TopicDetailFragment : BaseFragment() {
         binding.refreshLayout.setOnRefreshListener {
             topicDetailViewModel.loadTopicDetail()
         }
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.layoutManager = PreventFocusAutoScrollLinearLayoutManager(requireContext())
         val header = TopicDetailHeader(inflater, binding.recyclerView, topicDetailViewModel).apply {
             myId = accountViewModel.accountData.value?.id
         }
