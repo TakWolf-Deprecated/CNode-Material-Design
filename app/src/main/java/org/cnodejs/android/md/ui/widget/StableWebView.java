@@ -17,26 +17,18 @@ import androidx.annotation.StyleRes;
 public class StableWebView extends WebView {
     public StableWebView(@NonNull Context context) {
         super(context);
-        init(context);
     }
 
     public StableWebView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context);
     }
 
     public StableWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
     }
 
     public StableWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context);
-    }
-
-    private void init(@NonNull Context context) {
-        // TODO
     }
 
     @Nullable
