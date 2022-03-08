@@ -12,13 +12,9 @@ import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentTopicDetailBinding
 import org.cnodejs.android.md.model.api.CNodeDefine
 import org.cnodejs.android.md.model.entity.ITopic
-import org.cnodejs.android.md.ui.adapter.ReplyListAdapter
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
 import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
-import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
-import org.cnodejs.android.md.ui.listener.listenToRecyclerView
-import org.cnodejs.android.md.ui.widget.PreventFocusAutoScrollLinearLayoutManager
-import org.cnodejs.android.md.ui.widget.TopicDetailHeader
+import org.cnodejs.android.md.ui.listener.listenToWebView
 import org.cnodejs.android.md.util.NavAnim
 import org.cnodejs.android.md.util.Navigator
 import org.cnodejs.android.md.util.openShare
@@ -80,7 +76,7 @@ class TopicDetailFragment : BaseFragment() {
         }
         binding.toolbar.setOnClickListener(object : OnDoubleClickListener() {
             override fun onDoubleClick(v: View) {
-                binding.recyclerView.scrollToPosition(0)
+                binding.web.scrollTo(0, 0)
             }
         })
         binding.toolbar.setOnMenuItemClickListener { item ->
@@ -101,22 +97,6 @@ class TopicDetailFragment : BaseFragment() {
         binding.refreshLayout.setOnRefreshListener {
             topicDetailViewModel.loadTopicDetail()
         }
-        binding.recyclerView.layoutManager = PreventFocusAutoScrollLinearLayoutManager(requireContext())
-        val header = TopicDetailHeader(inflater, binding.recyclerView, topicDetailViewModel).apply {
-            myId = accountViewModel.accountData.value?.id
-        }
-        binding.recyclerView.addFooterView(inflater, R.layout.footer_topic_detail)
-        val adapter = ReplyListAdapter(inflater, who).apply {
-            myId = accountViewModel.accountData.value?.id
-            onBtnUpClickListener = { reply ->
-                // TODO
-            }
-            onBtnAtClickListener = { reply ->
-                // TODO
-            }
-            onUserClickListener = UserDetailNavigateListener(navigator)
-        }
-        binding.recyclerView.adapter = adapter
 
         binding.btnCreateReply.setOnClickListener {
             if (accountViewModel.isLogined()) {
@@ -125,15 +105,12 @@ class TopicDetailFragment : BaseFragment() {
                 NeedLoginAlertDialog.show(childFragmentManager)
             }
         }
-        binding.btnCreateReply.listenToRecyclerView(binding.recyclerView, true)
+        binding.btnCreateReply.listenToWebView(binding.web, true)
 
         observeViewModel(topicDetailViewModel)
 
         accountViewModel.accountData.observe(viewLifecycleOwner) { account ->
-            account?.id.apply {
-                header.myId = this
-                adapter.myId = this
-            }
+            binding.web.updateAccountId(account?.id)
         }
 
         topicDetailViewModel.loadingStateData.observe(viewLifecycleOwner) {
@@ -144,8 +121,7 @@ class TopicDetailFragment : BaseFragment() {
 
         topicDetailViewModel.topicDetailData.observe(viewLifecycleOwner) {
             it?.let { topicDetail ->
-                header.updateViews(topicDetail)
-                adapter.submitList(topicDetail.replies.toList())
+                binding.web.updateTopicDetail(topicDetail)
             }
         }
 

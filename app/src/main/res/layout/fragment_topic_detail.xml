@@ -40,11 +40,10 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
-            android:id="@+id/recycler_view"
+        <org.cnodejs.android.md.ui.widget.TopicDetailWebView
+            android:id="@+id/web"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+            android:layout_height="match_parent" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
