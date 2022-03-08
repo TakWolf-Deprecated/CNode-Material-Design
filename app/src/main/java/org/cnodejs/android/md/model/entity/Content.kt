@@ -1,11 +1,12 @@
 package org.cnodejs.android.md.model.entity
 
 import com.squareup.moshi.FromJson
-import com.squareup.moshi.ToJson
+import com.squareup.moshi.JsonClass
 import org.cnodejs.android.md.model.api.CNodeDefine
 import org.cnodejs.android.md.util.MarkdownUtils
 import org.jsoup.Jsoup
 
+@JsonClass(generateAdapter = true)
 data class Content(
     val markdown: String,
     val html: String,
@@ -24,14 +25,9 @@ data class Content(
     }
 }
 
-class ContentJsonAdapter {
+class ContentCompatJsonAdapter {
     @FromJson
     fun fromJson(markdown: String): Content {
         return Content.fromMarkdown(markdown)
-    }
-
-    @ToJson
-    fun toJson(content: Content): String {
-        return content.markdown
     }
 }
