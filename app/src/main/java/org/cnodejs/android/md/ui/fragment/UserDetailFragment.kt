@@ -35,6 +35,7 @@ class UserDetailFragment : BaseFragment() {
     companion object {
         private const val EXTRA_LOGIN_NAME = "loginName"
         private const val EXTRA_AVATAR_URL = "avatarUrl"
+        private const val EXTRA_IS_SCRIMS_SHOWN = "isScrimsShown"
 
         fun open(navigator: Navigator, loginName: String) {
             val args = Bundle().apply {
@@ -61,6 +62,8 @@ class UserDetailFragment : BaseFragment() {
     private lateinit var loginName: String
     private var avatarUrl: String? = null
 
+    private var isScrimsShown = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
@@ -69,7 +72,14 @@ class UserDetailFragment : BaseFragment() {
         loginName = args.getString(EXTRA_LOGIN_NAME)!!
         avatarUrl = args.getString(EXTRA_AVATAR_URL)
 
+        isScrimsShown = savedInstanceState?.getBoolean(EXTRA_IS_SCRIMS_SHOWN) ?: false
+
         userDetailViewModel.loginName = loginName
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(EXTRA_IS_SCRIMS_SHOWN, isScrimsShown)
     }
 
     override fun onCreateView(
@@ -97,8 +107,7 @@ class UserDetailFragment : BaseFragment() {
             }
         }
 
-        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-            val isScrimsShown = binding.collapsingToolbarLayout.height + verticalOffset < binding.collapsingToolbarLayout.scrimVisibleHeightTrigger
+        val updateAppBarViews = {
             if (isScrimsShown) {
                 binding.root.insetsColorTop = colorAppPrimaryVariant
                 binding.toolbarTitle.visibility = View.VISIBLE
@@ -106,6 +115,11 @@ class UserDetailFragment : BaseFragment() {
                 binding.root.insetsColorTop = colorTranslucentSystemBars
                 binding.toolbarTitle.visibility = View.GONE
             }
+        }
+        updateAppBarViews()
+        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+            isScrimsShown = binding.collapsingToolbarLayout.height + verticalOffset < binding.collapsingToolbarLayout.scrimVisibleHeightTrigger
+            updateAppBarViews()
         })
 
         binding.toolbarTitle.title = loginName
