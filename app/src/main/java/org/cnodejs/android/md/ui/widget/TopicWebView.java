@@ -11,7 +11,7 @@ import androidx.annotation.StyleRes;
 import org.cnodejs.android.md.model.entity.TopicDetail;
 import org.jetbrains.annotations.NotNull;
 
-public class TopicWebView extends ContentWebView {
+public class TopicWebView extends CNodeWebView {
     public TopicWebView(@NonNull Context context) {
         super(context);
         init(context);

@@ -35,7 +35,7 @@
             android:id="@+id/web_mask"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?android:windowBackground" />
+            android:background="?colorSurface" />
 
     </FrameLayout>
 

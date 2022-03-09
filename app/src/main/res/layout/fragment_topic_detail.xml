@@ -39,24 +39,21 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <FrameLayout
+        <org.cnodejs.android.md.ui.widget.TopicWebView
+            android:id="@+id/web"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <org.cnodejs.android.md.ui.widget.TopicWebView
-                android:id="@+id/web"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <View
-                android:id="@+id/web_mask"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?android:windowBackground" />
-
-        </FrameLayout>
+            android:layout_height="match_parent" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <View
+        android:id="@+id/web_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:windowBackground"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_create_reply"
