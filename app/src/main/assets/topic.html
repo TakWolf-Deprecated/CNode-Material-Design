@@ -27,13 +27,16 @@
 <div id="app">
     <template v-if="topic">
         <div class="topic surface">
+            <div class="title">{{topic.title}}</div>
             <div class="content markdown-body" v-html="topic.content.html"></div>
         </div>
         <div class="empty surface" v-if="!topic.replies || topic.replies.length === 0">
             暂无评论
         </div>
         <div class="surface" v-else>
-            <div class="replies-count">评论 {{topic.replies.length}}</div>
+            <div class="replies-info">
+                <div class="count">评论 {{topic.replies.length}}</div>
+            </div>
             <template v-for="(reply, index) in topic.replies">
                 <div class="divider"></div>
                 <div class="reply">

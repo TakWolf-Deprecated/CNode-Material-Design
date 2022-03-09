@@ -22,6 +22,16 @@ body {
     background-color: rgba(255, 255, 255, 0.12);
 }
 
+.topic .title {
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
 .topic .content {
     padding: 16px;
 }
@@ -33,10 +43,14 @@ body {
     line-height: 96px;
 }
 
-.replies-count {
+.replies-info {
     padding: 16px;
+}
+
+.replies-info .count {
     color: #80BD01;
     font-size: 16px;
+    line-height: 16px;
 }
 
 .reply .content {
