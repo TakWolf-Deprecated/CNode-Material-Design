@@ -12,12 +12,34 @@ body {
 }
 
 .surface {
+    margin-bottom: 16px;
     background-color: #222222;
     box-shadow: 0 2px 2px #161616;
 }
 
+.divider {
+    height: 1px;
+    background-color: #ffffff1f;
+}
+
 .topic .content {
-    margin-bottom: 16px;
+    padding: 16px;
+}
+
+.empty {
+    color: #ffffffb3;
+    font-size: 20px;
+    text-align: center;
+    line-height: 96px;
+}
+
+.replies-count {
+    padding: 16px;
+    color: #80BD01;
+    font-size: 16px;
+}
+
+.reply .content {
     padding: 16px;
 }
 
