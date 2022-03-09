@@ -19,7 +19,7 @@ body {
 
 .divider {
     height: 1px;
-    background-color: #0000001f;
+    background-color: rgba(0, 0, 0, 0.12);
 }
 
 .topic .content {
@@ -27,7 +27,7 @@ body {
 }
 
 .empty {
-    color: #0000008a;
+    color: rgba(0, 0, 0, 0.54);
     font-size: 18px;
     text-align: center;
     line-height: 96px;
