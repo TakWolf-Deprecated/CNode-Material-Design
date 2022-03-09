@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>话题</title>
-    <script src="js/js-bridge.js"></script>
     <script>
         (function () {
             function applyStyle(path) {
@@ -30,7 +29,7 @@
         <div class="content markdown-body" v-html="topic.content.html"></div>
     </div>
 </div>
-<script src="js/vue.global.js"></script>
+<script src="js/vue.global.prod.js"></script>
 <script>
     var app = Vue.createApp({
         data: function () {
@@ -52,6 +51,5 @@
         app.topic = topic
     }
 </script>
-<script src="js/topic-test.js"></script>
 </body>
 </html>

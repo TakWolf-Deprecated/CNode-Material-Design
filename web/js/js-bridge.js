@@ -1,6 +1,6 @@
 
 window.appBridge = {
-    isThemeDark: function () {
+    isThemeDarkMode: function () {
         return false
     }
 }

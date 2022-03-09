@@ -12,8 +12,8 @@ import org.commonmark.parser.Parser
 import org.commonmark.renderer.html.HtmlRenderer
 
 object MarkdownUtils {
-    val parser: Parser
-    val htmlRenderer: HtmlRenderer
+    private val parser: Parser
+    private val htmlRenderer: HtmlRenderer
 
     init {
         val extensions = listOf(
@@ -32,5 +32,9 @@ object MarkdownUtils {
         htmlRenderer = HtmlRenderer.builder()
             .extensions(extensions)
             .build()
+    }
+
+    fun renderHtml(markdown: String): String {
+        return htmlRenderer.render(parser.parse(markdown))
     }
 }

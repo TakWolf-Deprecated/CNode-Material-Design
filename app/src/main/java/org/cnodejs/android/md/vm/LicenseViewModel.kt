@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.cnodejs.android.md.R
+import org.cnodejs.android.md.util.MarkdownUtils
 
 class LicenseViewModel(application: Application) : AndroidViewModel(application) {
     private val resources = application.resources
@@ -15,8 +16,9 @@ class LicenseViewModel(application: Application) : AndroidViewModel(application)
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val content = resources.openRawResource(R.raw.license).bufferedReader().use { it.readText() }
-            contentData.postValue(content)
+            val markdown = resources.openRawResource(R.raw.license).bufferedReader().use { it.readText() }
+            val html = MarkdownUtils.renderHtml(markdown)
+            contentData.postValue(html)
         }
     }
 }

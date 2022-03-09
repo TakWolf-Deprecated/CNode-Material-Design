@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
@@ -96,6 +97,10 @@ class TopicDetailFragment : BaseFragment() {
         binding.refreshLayout.setColorSchemeColors(colorAccent)
         binding.refreshLayout.setOnRefreshListener {
             topicDetailViewModel.loadTopicDetail()
+        }
+
+        binding.web.setOnHideMaskListener {
+            binding.webMask.isVisible = false
         }
 
         binding.btnCreateReply.setOnClickListener {

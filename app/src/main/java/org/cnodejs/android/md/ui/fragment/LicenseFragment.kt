@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentLicenseBinding
@@ -31,9 +32,13 @@ class LicenseFragment : BaseFragment() {
             navigator.back()
         }
 
+        binding.web.setOnHideMaskListener {
+            binding.webMask.isVisible = false
+        }
+
         licenseViewModel.contentData.observe(viewLifecycleOwner) {
             it?.let { content ->
-                binding.web.updateMarkdown(content)
+                binding.web.updateContent(content)
             }
         }
 

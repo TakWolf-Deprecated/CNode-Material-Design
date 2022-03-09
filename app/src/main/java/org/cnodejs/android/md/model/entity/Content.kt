@@ -15,11 +15,10 @@ data class Content(
 ) {
     companion object {
         fun fromMarkdown(markdown: String): Content {
-            val mdDoc = MarkdownUtils.parser.parse(markdown)
-            val html = MarkdownUtils.htmlRenderer.render(mdDoc)
-            val htmlDoc = Jsoup.parseBodyFragment(html, CNodeDefine.HOST_BASE_URL)
-            val summary = htmlDoc.body().text().trim()
-            val images = htmlDoc.getElementsByTag("img").map { imgNode -> imgNode.attr("src") }
+            val html = MarkdownUtils.renderHtml(markdown)
+            val doc = Jsoup.parseBodyFragment(html, CNodeDefine.HOST_BASE_URL)
+            val summary = doc.body().text().trim()
+            val images = doc.getElementsByTag("img").map { imgNode -> imgNode.attr("src") }
             return Content(markdown, html, summary, images)
         }
     }
