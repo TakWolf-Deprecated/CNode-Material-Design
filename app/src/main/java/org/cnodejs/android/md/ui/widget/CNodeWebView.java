@@ -2,6 +2,9 @@ package org.cnodejs.android.md.ui.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.webkit.WebView;
@@ -10,6 +13,7 @@ import android.webkit.WebViewClient;
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.StyleRes;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -26,6 +30,7 @@ public class CNodeWebView extends WebView {
 
     private boolean javascriptReady = false;
 
+    @Nullable private SavedState savedState;
     @Nullable private Insets insets;
 
     public CNodeWebView(@NonNull Context context) {
@@ -59,6 +64,10 @@ public class CNodeWebView extends WebView {
             public void onPageFinished(WebView view, String url) {
                 if (!javascriptReady) {
                     javascriptReady = true;
+                    if (savedState != null) {
+                        scrollTo(savedState.scrollX, savedState.scrollY);
+                        savedState = null;
+                    }
                     if (insets != null) {
                         callJsUpdateWebViewInsets(insets);
                         insets = null;
@@ -101,6 +110,10 @@ public class CNodeWebView extends WebView {
         this.onHideMaskListener = onHideMaskListener;
     }
 
+    public interface OnHideMaskListener {
+        void OnHideMask();
+    }
+
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
@@ -121,7 +134,80 @@ public class CNodeWebView extends WebView {
         void onScrollChanged(int l, int t, int oldl, int oldt);
     }
 
-    public interface OnHideMaskListener {
-        void OnHideMask();
+    @Nullable
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        SavedState savedState = new SavedState(super.onSaveInstanceState());
+        savedState.scrollX = getScrollX();
+        savedState.scrollY = getScrollY();
+        return savedState;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+        SavedState savedState = (SavedState) state;
+        if (javascriptReady) {
+            scrollTo(savedState.scrollX, savedState.scrollY);
+        } else {
+            this.savedState = savedState;
+        }
+        super.onRestoreInstanceState(savedState.getSuperState());
+    }
+
+    private static class SavedState extends BaseSavedState {
+        int scrollX;
+        int scrollY;
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        public SavedState(Parcel source) {
+            super(source);
+            readValues(source, null);
+        }
+
+        @RequiresApi(Build.VERSION_CODES.N)
+        public SavedState(Parcel source, ClassLoader loader) {
+            super(source, loader);
+            readValues(source, loader);
+        }
+
+        private void readValues(@NonNull Parcel source, @Nullable ClassLoader loader) {
+            scrollX = source.readInt();
+            scrollY = source.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeInt(scrollX);
+            out.writeInt(scrollY);
+        }
+
+        public static final Creator<SavedState> CREATOR = new ClassLoaderCreator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel source, ClassLoader loader) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    return new SavedState(source, loader);
+                } else {
+                    return new SavedState(source);
+                }
+            }
+
+            @Override
+            public SavedState createFromParcel(Parcel source) {
+                return createFromParcel(source, null);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }
