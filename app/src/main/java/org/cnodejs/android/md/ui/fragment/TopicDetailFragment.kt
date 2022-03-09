@@ -126,7 +126,7 @@ class TopicDetailFragment : BaseFragment() {
 
         topicDetailViewModel.topicDetailData.observe(viewLifecycleOwner) {
             it?.let { topicDetail ->
-                binding.web.updateTopicDetail(topicDetail)
+                binding.web.updateTopic(topicDetail)
             }
         }
 
