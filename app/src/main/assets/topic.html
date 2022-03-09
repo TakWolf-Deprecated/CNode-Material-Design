@@ -44,19 +44,18 @@
         <div class="bottom-space"></div>
     </template>
 </div>
-<script src="js/vue.global.prod.js"></script>
+<script src="js/vue.min.js"></script>
 <script>
-    var app = Vue.createApp({
-        data: function () {
-            return {
-                accountId: null,
-                topic: null
-            }
+    var app = new Vue({
+        el: '#app',
+        data: {
+            accountId: null,
+            topic: null
         },
         methods: {
             // TODO
         }
-    }).mount('#app')
+    })
 
     function updateAccountId(accountId) {
         app.accountId = accountId

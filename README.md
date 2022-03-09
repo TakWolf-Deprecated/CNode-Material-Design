@@ -23,7 +23,7 @@
 - [InsetsWidget](https://github.com/TakWolf/Android-InsetsWidget)
 - [Live Event](https://github.com/hadilq/LiveEvent)
 - [Scan Barcodes with ML Kit on Android](https://developers.google.com/ml-kit/vision/barcode-scanning/android)
-- [Vue.js](https://github.com/vuejs/core)
+- [Vue 2](https://github.com/vuejs/vue)
 - [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
 
 ## Resources

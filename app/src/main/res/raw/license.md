@@ -94,9 +94,9 @@ Apache License 2.0
 
 https://developers.google.com/ml-kit/vision/barcode-scanning/android
 
-### · Vue.js
+### · Vue 2
 
-https://github.com/vuejs/core
+https://github.com/vuejs/vue
 
 MIT License
 
