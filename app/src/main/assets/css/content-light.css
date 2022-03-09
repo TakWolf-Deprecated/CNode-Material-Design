@@ -4,10 +4,13 @@
 }
 
 body {
-    padding: 16px;
     background-color: white;
 }
 
 .markdown-body {
     background-color: transparent;
+}
+
+#content {
+    padding: 16px;
 }
