@@ -48,7 +48,7 @@ class AboutFragment : BaseFragment() {
         }
 
         binding.btnOpenSourceLicense.setOnClickListener {
-            // TODO
+            LicenseFragment.open(navigator)
         }
 
         return binding.root

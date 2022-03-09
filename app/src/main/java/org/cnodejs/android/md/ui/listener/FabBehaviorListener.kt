@@ -2,7 +2,7 @@ package org.cnodejs.android.md.ui.listener
 
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.cnodejs.android.md.ui.widget.CNodeWebView
+import org.cnodejs.android.md.ui.widget.WebView
 
 private const val SCROLL_THRESHOLD = 4
 
@@ -24,7 +24,7 @@ fun FloatingActionButton.listenToRecyclerView(recyclerView: RecyclerView, isShow
     })
 }
 
-fun FloatingActionButton.listenToWebView(webView: CNodeWebView, isShowOnBottom: Boolean = false) {
+fun FloatingActionButton.listenToWebView(webView: WebView, isShowOnBottom: Boolean = false) {
     webView.addOnScrollChangedListener { _, t, _, oldt ->
         if (isShowOnBottom && !webView.canScrollVertically(1)) {
             show()

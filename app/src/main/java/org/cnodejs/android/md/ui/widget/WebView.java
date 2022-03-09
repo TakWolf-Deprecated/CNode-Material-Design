@@ -2,7 +2,6 @@ package org.cnodejs.android.md.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.webkit.WebView;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
@@ -12,22 +11,22 @@ import androidx.annotation.StyleRes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CNodeWebView extends WebView {
+public class WebView extends android.webkit.WebView {
     private final List<OnScrollChangedListener> onScrollChangedListeners = new ArrayList<>();
 
-    public CNodeWebView(@NonNull Context context) {
+    public WebView(@NonNull Context context) {
         super(context);
     }
 
-    public CNodeWebView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public WebView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CNodeWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public WebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public CNodeWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
+    public WebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

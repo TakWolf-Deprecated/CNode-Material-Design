@@ -32,4 +32,7 @@
     <fragment
         android:id="@+id/fragment_about"
         android:name="org.cnodejs.android.md.ui.fragment.AboutFragment" />
+    <fragment
+        android:id="@+id/fragment_license"
+        android:name="org.cnodejs.android.md.ui.fragment.LicenseFragment" />
 </navigation>

@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <org.cnodejs.android.md.ui.widget.TopicDetailWebView
+        <org.cnodejs.android.md.ui.widget.TopicWebView
             android:id="@+id/web"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
