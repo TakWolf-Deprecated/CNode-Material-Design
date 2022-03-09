@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f6f6f6;
+}
+
+.markdown-body {
+    background-color: transparent;
+}
+
+.surface {
+    background-color: white;
+    box-shadow: 0 2px 4px #aaaaaa;
+}
+
+.topic .content {
+    margin-bottom: 16px;
+    padding: 16px;
+}

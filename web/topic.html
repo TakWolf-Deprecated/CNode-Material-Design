@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>话题</title>
+    <script src="js/js-bridge.js"></script>
+    <script>
+        (function () {
+            function applyStyle(path) {
+                var link = document.createElement('link')
+                link.rel = 'stylesheet'
+                link.href = path
+                document.head.appendChild(link)
+            }
+
+            if (window.appBridge.isThemeDark()) {
+                applyStyle('css/github-markdown-dark.css')
+                applyStyle('css/topic-dark.css')
+            } else {
+                applyStyle('css/github-markdown-light.css')
+                applyStyle('css/topic-light.css')
+            }
+        })()
+    </script>
+</head>
+<body>
+<div id="app">
+    <div class="topic surface" v-if="topic">
+        <div class="content markdown-body" v-html="topic.content.html"></div>
+    </div>
+</div>
+<script src="js/vue-3.2.31/vue.global.js"></script>
+<script>
+    var app = Vue.createApp({
+        data: function () {
+            return {
+                accountId: null,
+                topic: null
+            }
+        },
+        methods: {
+            // TODO
+        }
+    }).mount('#app')
+
+    function updateAccountId(accountId) {
+        app.accountId = accountId
+    }
+
+    function updateTopic(topic) {
+        app.topic = topic
+    }
+</script>
+<script src="js/topic-test.js"></script>
+</body>
+</html>

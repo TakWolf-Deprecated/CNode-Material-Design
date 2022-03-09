@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>预览</title>
+    <script src="js/js-bridge.js"></script>
+    <script>
+        (function () {
+            function applyStyle(path) {
+                var link = document.createElement('link')
+                link.rel = 'stylesheet'
+                link.href = path
+                document.head.appendChild(link)
+            }
+
+            if (window.appBridge.isThemeDark()) {
+                applyStyle('css/github-markdown-dark.css')
+                applyStyle('css/content-dark.css')
+            } else {
+                applyStyle('css/github-markdown-light.css')
+                applyStyle('css/content-light.css')
+            }
+        })()
+    </script>
+</head>
+<body>
+<div id="content" class="markdown-body"></div>
+<script>
+    var content = document.getElementById('content')
+
+    function updateContent(html) {
+        content.innerHTML = html
+    }
+</script>
+<script src="js/content-test.js"></script>
+</body>
+</html>

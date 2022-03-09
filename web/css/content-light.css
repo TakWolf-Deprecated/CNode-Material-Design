@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 16px;
+    background-color: white;
+}
+
+.markdown-body {
+    background-color: transparent;
+}
