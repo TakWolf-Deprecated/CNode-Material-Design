@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -35,26 +34,26 @@ public class CNodeWebView extends WebView {
 
     public CNodeWebView(@NonNull Context context) {
         super(context);
-        init(context);
+        init();
     }
 
     public CNodeWebView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init();
     }
 
     public CNodeWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        init();
     }
 
     public CNodeWebView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context);
+        init();
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private void init(@NonNull Context context) {
+    private void init() {
         getSettings().setJavaScriptEnabled(true);
 
         addJavascriptInterface(new AppJavascriptInterface(), AppJavascriptInterface.NAME);
@@ -80,17 +79,14 @@ public class CNodeWebView extends WebView {
             }
         });
 
-        ViewCompat.setOnApplyWindowInsetsListener(this, new androidx.core.view.OnApplyWindowInsetsListener() {
-            @Override
-            public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat windowInsets) {
-                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars());
-                if (javascriptReady) {
-                    callJsUpdateWebViewInsets(insets);
-                } else {
-                    CNodeWebView.this.insets = insets;
-                }
-                return windowInsets;
+        ViewCompat.setOnApplyWindowInsetsListener(this, (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars());
+            if (javascriptReady) {
+                callJsUpdateWebViewInsets(insets);
+            } else {
+                CNodeWebView.this.insets = insets;
             }
+            return windowInsets;
         });
     }
 
