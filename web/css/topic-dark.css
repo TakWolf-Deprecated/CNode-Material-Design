@@ -20,3 +20,7 @@ body {
     margin-bottom: 16px;
     padding: 16px;
 }
+
+.bottom-space {
+    height: 72px;
+}
