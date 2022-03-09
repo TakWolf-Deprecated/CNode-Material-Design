@@ -32,4 +32,8 @@ public class MarkdownWebView extends WebView {
     private void init(@NonNull Context context) {
         // TODO
     }
+
+    public void updateMarkdown(@NonNull String content) {
+        // TODO
+    }
 }
