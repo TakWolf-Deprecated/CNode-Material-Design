@@ -13,7 +13,7 @@ body {
 
 .surface {
     background-color: #222222;
-    box-shadow: 0 2px 4px #161616;
+    box-shadow: 0 2px 2px #161616;
 }
 
 .topic .content {
