@@ -8,12 +8,15 @@ import org.commonmark.ext.heading.anchor.HeadingAnchorExtension
 import org.commonmark.ext.image.attributes.ImageAttributesExtension
 import org.commonmark.ext.ins.InsExtension
 import org.commonmark.ext.task.list.items.TaskListItemsExtension
+import org.commonmark.node.AbstractVisitor
+import org.commonmark.node.Image
 import org.commonmark.parser.Parser
 import org.commonmark.renderer.html.HtmlRenderer
 
 object MarkdownUtils {
     private val parser: Parser
     private val htmlRenderer: HtmlRenderer
+    private val handleVisitor: AbstractVisitor
 
     init {
         val extensions = listOf(
@@ -32,9 +35,16 @@ object MarkdownUtils {
         htmlRenderer = HtmlRenderer.builder()
             .extensions(extensions)
             .build()
+        handleVisitor = object : AbstractVisitor() {
+            override fun visit(image: Image) {
+                image.destination = getCompatUri(image.destination)
+            }
+        }
     }
 
     fun renderHtml(markdown: String): String {
-        return htmlRenderer.render(parser.parse(markdown))
+        val doc = parser.parse(markdown)
+        doc.accept(handleVisitor)
+        return htmlRenderer.render(doc)
     }
 }

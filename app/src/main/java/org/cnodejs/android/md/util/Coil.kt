@@ -39,7 +39,7 @@ private class AppCoil private constructor(context: Context) {
         .build()
 }
 
-private fun getCompatUri(uri: String?): String {
+internal fun getCompatUri(uri: String?): String {
     var repaired = uri ?: ""
     if (repaired.startsWith("//")) {
         repaired = "https:${repaired}"
