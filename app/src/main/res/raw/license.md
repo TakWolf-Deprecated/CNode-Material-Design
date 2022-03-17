@@ -24,12 +24,6 @@ https://github.com/Kotlin/kotlinx.coroutines
 
 Apache License 2.0
 
-### · Kotlin Symbol Processing API
-
-https://github.com/google/ksp
-
-Apache License 2.0
-
 ### · Moshi
 
 https://github.com/square/moshi

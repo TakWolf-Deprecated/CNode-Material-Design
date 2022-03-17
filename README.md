@@ -11,7 +11,6 @@
 - [Material Components for Android](https://github.com/material-components/material-components-android)
 - [Java 8+ API desugaring support](https://developer.android.com/studio/write/java8-support#library-desugaring)
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)
-- [Kotlin Symbol Processing API](https://github.com/google/ksp)
 - [Moshi](https://github.com/square/moshi)
 - [OkHttp](https://github.com/square/okhttp)
 - [Retrofit](https://github.com/square/retrofit)
@@ -29,6 +28,11 @@
 ## Resources
 
 - [Material design icons](https://github.com/google/material-design-icons)
+
+## Tools
+
+- [Kotlin Symbol Processing API](https://github.com/google/ksp)
+- [Sass](https://github.com/sass/sass)
 
 ## License
 
