@@ -1,0 +1,25 @@
+$app_primary: #333333;
+$app_primary_variant: #222222;
+$app_accent: #80bd01;
+$badge: #ff5722;
+
+$background_light: #f6f6f6;
+$surface_light: white;
+$divider_on_light: rgba(0, 0, 0, 0.12);
+$text_primary_on_light: rgba(0, 0, 0, 0.87);
+$text_secondary_on_light: rgba(0, 0, 0, 0.54);
+
+$background_dark: #111111;
+$surface_dark: #222222;
+$divider_on_dark: rgba(255, 255, 255, 0.12);
+$text_primary_on_dark: #white;
+$text_secondary_on_dark: rgba(255, 255, 255, 0.7);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.markdown-body {
+    background-color: transparent;
+}

@@ -29,13 +29,31 @@
     <template v-if="topic">
         <div class="topic surface">
             <div class="title">{{topic.title}}</div>
+            <div class="info">
+                <div class="left">
+                    <img class="avatar" :src="topic.author.avatar_url" :alt="topic.author.loginname">
+                </div>
+                <div class="center">
+                    <div class="line">
+                        <span class="tag-top" v-if="topic.top">置顶</span>
+                        <span class="tag-tab" v-else>{{topic.tab}}</span>
+                        <span class="login-name">{{topic.author.loginname}}</span>
+                    </div>
+                    <div class="line">
+                        <span class="create-time-and-visit_count">{{topic.create_at}} · {{topic.visit_count}} 阅读</span>
+                    </div>
+                </div>
+                <div class="right">
+
+                </div>
+            </div>
             <div class="content markdown-body" v-html="topic.content.html"></div>
         </div>
         <div class="empty surface" v-if="!topic.replies || topic.replies.length === 0">
             暂无评论
         </div>
-        <div class="surface" v-else>
-            <div class="replies-info">
+        <div class="replies surface" v-else>
+            <div class="info">
                 <div class="count">评论 {{topic.replies.length}}</div>
             </div>
             <template v-for="(reply, index) in topic.replies">
@@ -69,6 +87,7 @@
         app.topic = topic
     }
 </script>
+<script src="js/token.js"></script>
 <script src="js/topic-test.js"></script>
 </body>
 </html>

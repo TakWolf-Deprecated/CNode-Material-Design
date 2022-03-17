@@ -1,6 +1,4 @@
 
-var accessToken = 'your-access-token'
-
 function login() {
     fetch('https://cnodejs.org/api/v1/accesstoken', {
         method: 'POST',
@@ -27,7 +25,7 @@ function login() {
 }
 
 function loadTopic() {
-    fetch('https://cnodejs.org/api/v1/topic/58eee565a92d341e48cfe7fc?accesstoken=' + accessToken + '&mdrender=true')
+    fetch('https://cnodejs.org/api/v1/topic/61f69e4aa08b39f75309c2a8?accesstoken=' + accessToken + '&mdrender=true')
         .then(function (response) {
             return response.json()
         })

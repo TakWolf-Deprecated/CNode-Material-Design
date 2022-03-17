@@ -1,0 +1,9 @@
+@use "app";
+
+body {
+    background-color: app.$surface_dark;
+}
+
+#content {
+    padding: 16px;
+}

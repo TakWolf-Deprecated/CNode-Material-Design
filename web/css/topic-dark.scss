@@ -1,0 +1,129 @@
+@use "app";
+
+body {
+    background-color: app.$background_dark;
+}
+
+.surface {
+    margin-bottom: 16px;
+    background-color: app.$surface_dark;
+    box-shadow: 0 2px 2px #161616;
+}
+
+.divider {
+    height: 1px;
+    background-color: app.$divider_on_dark;
+}
+
+.tag-top {
+    padding-left: 4px;
+    padding-right: 4px;
+    color: white;
+    background-color: app.$badge;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.tag-tab {
+    padding-left: 4px;
+    padding-right: 4px;
+    color: white;
+    background-color: app.$app_accent;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.topic {
+    .title {
+        padding-top: 16px;
+        padding-left: 16px;
+        padding-right: 16px;
+        color: app.$text_primary_on_dark;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 24px;
+    }
+
+    .info {
+        padding-top: 16px;
+        padding-left: 16px;
+        padding-right: 16px;
+        display: flex;
+        flex-direction: row;
+
+        .left {
+            .avatar {
+                width: 36px;
+                height: 36px;
+                display: block;
+                border-radius: 50%;
+                background-color: app.$background_dark;
+            }
+        }
+
+        .center {
+            margin-left: 16px;
+            margin-right: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .line {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                .login-name {
+                    margin-left: 8px;
+                    color: app.$text_primary_on_dark;
+                    font-size: 14px;
+                    line-height: 14px;
+                }
+
+                .create-time-and-visit_count {
+                    color: app.$text_secondary_on_dark;
+                    font-size: 12px;
+                    line-height: 14px;
+                }
+            }
+        }
+
+        .right {
+            // TODO
+        }
+    }
+
+    .content {
+        padding: 16px;
+    }
+}
+
+.empty {
+    color: app.$text_secondary_on_dark;
+    font-size: 18px;
+    text-align: center;
+    line-height: 96px;
+}
+
+.replies {
+    .info {
+        padding: 16px;
+
+        .count {
+            color: app.$app_accent;
+            font-size: 16px;
+            line-height: 16px;
+        }
+    }
+
+    .reply {
+        .content {
+            padding: 16px;
+        }
+    }
+}
+
+.bottom-space {
+    height: 72px;
+}
