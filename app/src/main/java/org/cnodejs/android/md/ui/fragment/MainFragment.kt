@@ -20,10 +20,7 @@ import org.cnodejs.android.md.model.entity.Tab
 import org.cnodejs.android.md.ui.adapter.TopicListAdapter
 import org.cnodejs.android.md.ui.dialog.LogoutAlertDialog
 import org.cnodejs.android.md.ui.dialog.NeedLoginAlertDialog
-import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
-import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
-import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
-import org.cnodejs.android.md.ui.listener.listenToRecyclerView
+import org.cnodejs.android.md.ui.listener.*
 import org.cnodejs.android.md.ui.widget.LoadMoreFooter
 import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.util.setSharedName
@@ -82,6 +79,7 @@ class MainFragment : BaseFragment() {
         val adapter = TopicListAdapter(inflater, who).apply {
             onTopicClickListener = TopicDetailNavigateListener(navigator)
             onUserClickListener = UserDetailNavigateListener(navigator)
+            onImageClickListener = ImagePreviewNavigateListener(navigator)
         }
         binding.contentLayout.recyclerView.adapter = adapter
         mainViewModel.topicsHolder.setupView(viewLifecycleOwner, binding.contentLayout.refreshLayout, loadMoreFooter, adapter)

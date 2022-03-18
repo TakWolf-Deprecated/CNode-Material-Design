@@ -28,7 +28,6 @@ abstract class ITopicListAdapter<Topic : ITopic, VH : ITopicListAdapter.ViewHold
                     }
                 }
             }
-
             btnAuthor.setOnClickListener {
                 (bindingAdapter as? ITopicListAdapter<*, *>)?.let { adapter ->
                     adapter.onUserClickListener?.let { listener ->

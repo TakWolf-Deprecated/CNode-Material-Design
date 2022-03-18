@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.ItemTopicBinding
 import org.cnodejs.android.md.model.entity.Topic
+import org.cnodejs.android.md.ui.listener.OnImageClickListener
+import org.cnodejs.android.md.ui.listener.OnTopicClickListener
 import org.cnodejs.android.md.util.loadAvatar
 import org.cnodejs.android.md.util.loadThumb
 import org.cnodejs.android.md.util.setSharedName
@@ -17,6 +19,8 @@ class TopicListAdapter(
     private val layoutInflater: LayoutInflater,
     private val who: String,
 ) : ITopicListAdapter<Topic, TopicListAdapter.ViewHolder>(TopicDiffItemCallback) {
+    var onImageClickListener: OnImageClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemTopicBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding, who)
@@ -38,6 +42,30 @@ class TopicListAdapter(
         private val resources = itemView.resources
         private val imgThumbs = listOf(binding.imgThumb1, binding.imgThumb2, binding.imgThumb3)
 
+        init {
+            binding.imgThumb0.setOnClickListener {
+                (bindingAdapter as? TopicListAdapter)?.let { adapter ->
+                    adapter.onImageClickListener?.let { listener ->
+                        val topic = adapter.getItem(bindingAdapterPosition)
+                        listener.onImageClick(topic.content.images, 0, listOf(binding.imgThumb0))
+                    }
+                }
+            }
+            View.OnClickListener { view ->
+                (bindingAdapter as? TopicListAdapter)?.let { adapter ->
+                    adapter.onImageClickListener?.let { listener ->
+                        val topic = adapter.getItem(bindingAdapterPosition)
+                        val index = imgThumbs.indexOf(view)
+                        listener.onImageClick(topic.content.images, index, imgThumbs)
+                    }
+                }
+            }.apply {
+                for (imgThumb in imgThumbs) {
+                    imgThumb.setOnClickListener(this)
+                }
+            }
+        }
+
         fun bind(topic: Topic) {
             binding.imgGood.isVisible = topic.isGood
             binding.tvTop.isVisible = topic.isTop
@@ -52,6 +80,10 @@ class TopicListAdapter(
             binding.imgAuthor.setSharedName(who, "imgAuthor-${bindingAdapterPosition}")
             binding.tvAuthor.text = topic.author.loginName
             binding.tvCreateTime.text = resources.getString(R.string.create_at_s, topic.createAt.timeSpanStringFromNow(resources))
+
+            for (index in imgThumbs.indices) {
+                imgThumbs[index].setSharedName(who, "imgThumb-${bindingAdapterPosition}-${index}")
+            }
 
             val images = topic.content.images
             if (images.isEmpty()) {

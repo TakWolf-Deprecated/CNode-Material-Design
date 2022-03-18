@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.cnodejs.android.md.R
 import org.cnodejs.android.md.databinding.FragmentMessageListBinding
 import org.cnodejs.android.md.ui.adapter.MessageListAdapter
+import org.cnodejs.android.md.ui.listener.ImagePreviewNavigateListener
 import org.cnodejs.android.md.ui.listener.OnDoubleClickListener
 import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
@@ -71,6 +72,7 @@ class MessageListFragment : BaseFragment() {
             }
             onTopicClickListener = TopicDetailNavigateListener(navigator)
             onUserClickListener = UserDetailNavigateListener(navigator)
+            onImageClickListener = ImagePreviewNavigateListener(navigator)
         }
         binding.recyclerView.adapter = adapter
 
