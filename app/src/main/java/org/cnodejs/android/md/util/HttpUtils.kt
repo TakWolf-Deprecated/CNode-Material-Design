@@ -23,4 +23,12 @@ object HttpUtils {
         }
         return Cache(cacheDir, cacheSize)
     }
+
+    fun getCompatUrl(raw: String): String {
+        var url = raw
+        if (url.startsWith("//")) {
+            url = "https:${url}"
+        }
+        return url
+    }
 }

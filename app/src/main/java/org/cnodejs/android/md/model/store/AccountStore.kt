@@ -10,6 +10,7 @@ import org.cnodejs.android.md.bus.AccountChangedEvent
 import org.cnodejs.android.md.bus.AccountUpdatedEvent
 import org.cnodejs.android.md.model.entity.Account
 import org.cnodejs.android.md.model.entity.LoginResult
+import org.cnodejs.android.md.model.entity.UrlString
 import org.cnodejs.android.md.model.entity.User
 import org.greenrobot.eventbus.EventBus
 
@@ -27,7 +28,7 @@ class AccountStore(context: Context) : DataStoreWrapper(context, "account") {
             mutablePreferences[KEY_ACCESS_TOKEN] = accessToken
             mutablePreferences[KEY_ID] = loginResult.id
             mutablePreferences[KEY_LOGIN_NAME] = loginResult.loginName
-            mutablePreferences[KEY_AVATAR_URL] = loginResult.avatarUrl
+            mutablePreferences[KEY_AVATAR_URL] = loginResult.avatarUrl.value
             mutablePreferences[KEY_SCORE] = 0
         }
         val account = Account(
@@ -46,7 +47,7 @@ class AccountStore(context: Context) : DataStoreWrapper(context, "account") {
             if (mutablePreferences[KEY_ACCESS_TOKEN] == null || mutablePreferences[KEY_LOGIN_NAME] != user.loginName) {
                 return@edit
             }
-            mutablePreferences[KEY_AVATAR_URL] = user.avatarUrl
+            mutablePreferences[KEY_AVATAR_URL] = user.avatarUrl.value
             mutablePreferences[KEY_SCORE] = user.score
 
             val account = Account(
@@ -69,7 +70,7 @@ class AccountStore(context: Context) : DataStoreWrapper(context, "account") {
                 preferences[KEY_ACCESS_TOKEN]!!,
                 preferences[KEY_ID]!!,
                 preferences[KEY_LOGIN_NAME] ?: "",
-                preferences[KEY_AVATAR_URL],
+                preferences[KEY_AVATAR_URL]?.let { UrlString(it) },
                 preferences[KEY_SCORE] ?: 0,
             )
         }

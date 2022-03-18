@@ -88,7 +88,7 @@ data class LoginResult(
     @Json(name = "success") val isSuccessful: Boolean,
     val id: String,
     @Json(name = "loginname") val loginName: String,
-    @Json(name = "avatar_url") val avatarUrl: String,
+    @Json(name = "avatar_url") val avatarUrl: UrlString,
 )
 
 @JsonClass(generateAdapter = true)

@@ -37,7 +37,7 @@ object MarkdownUtils {
             .build()
         handleVisitor = object : AbstractVisitor() {
             override fun visit(image: Image) {
-                image.destination = getCompatUri(image.destination)
+                image.destination = HttpUtils.getCompatUrl(image.destination)
             }
         }
     }

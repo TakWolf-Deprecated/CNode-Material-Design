@@ -13,6 +13,7 @@ import coil.request.Disposable
 import coil.request.ImageRequest
 import coil.util.CoilUtils
 import org.cnodejs.android.md.R
+import org.cnodejs.android.md.model.entity.UrlString
 
 private class AppCoil private constructor(context: Context) {
     companion object {
@@ -39,14 +40,6 @@ private class AppCoil private constructor(context: Context) {
         .build()
 }
 
-internal fun getCompatUri(uri: String?): String {
-    var repaired = uri ?: ""
-    if (repaired.startsWith("//")) {
-        repaired = "https:${repaired}"
-    }
-    return repaired
-}
-
 private fun ImageView.loadAny(
     data: Any?,
     builder: ImageRequest.Builder.() -> Unit = {},
@@ -65,16 +58,16 @@ fun ImageView.loadAvatar(@DrawableRes drawableResId: Int): Disposable {
     }
 }
 
-fun ImageView.loadAvatar(uri: String?): Disposable {
-    return loadAny(getCompatUri(uri)) {
+fun ImageView.loadAvatar(url: UrlString?): Disposable {
+    return loadAny(url?.value) {
         placeholder(R.drawable.image_placeholder)
         error(R.drawable.image_placeholder)
         crossfade(true)
     }
 }
 
-fun ImageView.loadThumb(uri: String?): Disposable {
-    return loadAny(getCompatUri(uri)) {
+fun ImageView.loadThumb(url: UrlString?): Disposable {
+    return loadAny(url?.value) {
         crossfade(true)
     }
 }

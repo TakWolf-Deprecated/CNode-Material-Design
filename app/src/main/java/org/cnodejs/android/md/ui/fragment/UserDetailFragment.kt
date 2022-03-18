@@ -22,6 +22,7 @@ import org.cnodejs.android.md.databinding.FragmentUserDetailBinding
 import org.cnodejs.android.md.databinding.PageUserDetailTopicsBinding
 import org.cnodejs.android.md.model.api.CNodeDefine
 import org.cnodejs.android.md.model.entity.IUser
+import org.cnodejs.android.md.model.entity.UrlString
 import org.cnodejs.android.md.ui.adapter.TopicSimpleListAdapter
 import org.cnodejs.android.md.ui.listener.TopicDetailNavigateListener
 import org.cnodejs.android.md.ui.listener.UserDetailNavigateListener
@@ -51,7 +52,7 @@ class UserDetailFragment : BaseFragment() {
             val elements = mapOf<View, String>(imgAvatar to "imgAvatar")
             val args = Bundle().apply {
                 putString(EXTRA_LOGIN_NAME, user.loginName)
-                putString(EXTRA_AVATAR_URL, user.avatarUrl)
+                putString(EXTRA_AVATAR_URL, user.avatarUrl?.value)
             }
             navigator.pushShared(R.id.fragment_user_detail, elements, args)
         }
@@ -60,7 +61,7 @@ class UserDetailFragment : BaseFragment() {
     private val userDetailViewModel: UserDetailViewModel by viewModels()
 
     private lateinit var loginName: String
-    private var avatarUrl: String? = null
+    private var avatarUrl: UrlString? = null
 
     private var isScrimsShown = false
 
@@ -70,7 +71,7 @@ class UserDetailFragment : BaseFragment() {
 
         val args = requireArguments()
         loginName = args.getString(EXTRA_LOGIN_NAME)!!
-        avatarUrl = args.getString(EXTRA_AVATAR_URL)
+        avatarUrl = args.getString(EXTRA_AVATAR_URL)?.let { UrlString(it) }
 
         isScrimsShown = savedInstanceState?.getBoolean(EXTRA_IS_SCRIMS_SHOWN) ?: false
 
