@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="app_primary">#FF333333</color>
-    <color name="app_primary_variant">#FF222222</color>
-    <color name="app_accent">#FF80BD01</color>
+    <color name="app_primary">#333333</color>
+    <color name="app_primary_variant">#222222</color>
+    <color name="app_accent">#80BD01</color>
     <color name="translucent_system_bars">#60000000</color>
-    <color name="badge">#FFFF5722</color>
+    <color name="badge">#FF5722</color>
 
-    <color name="background_light">#FFF6F6F6</color>
+    <color name="background_light">#F6F6F6</color>
     <color name="surface_light">@android:color/white</color>
     <color name="divider_on_light">#1F000000</color>
 
-    <color name="background_dark">#FF111111</color>
-    <color name="surface_dark">#FF222222</color>
+    <color name="background_dark">#111111</color>
+    <color name="surface_dark">#222222</color>
     <color name="divider_on_dark">#1FFFFFFF</color>
 </resources>
