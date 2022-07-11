@@ -12,7 +12,7 @@ enum class MessageType {
     AT,
 }
 
-class MessageTypeJsonAdapter {
+object MessageTypeJsonAdapter {
     @FromJson
     fun fromJson(string: String): MessageType {
         return MessageType.valueOf(string.uppercase())

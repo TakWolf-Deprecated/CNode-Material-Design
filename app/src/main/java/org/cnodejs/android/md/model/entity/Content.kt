@@ -26,7 +26,7 @@ data class Content(
     }
 }
 
-class ContentCompatJsonAdapter {
+object ContentCompatJsonAdapter {
     @FromJson
     fun fromJson(markdown: String): Content {
         return Content.fromMarkdown(markdown)
@@ -56,7 +56,7 @@ class UrlString(raw: String) {
     }
 }
 
-class UrlStringJsonAdapter {
+object UrlStringJsonAdapter {
     @FromJson
     fun fromJson(string: String): UrlString {
         return UrlString(string)

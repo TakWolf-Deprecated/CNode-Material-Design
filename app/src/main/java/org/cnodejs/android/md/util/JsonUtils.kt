@@ -8,16 +8,16 @@ import java.time.OffsetDateTime
 
 object JsonUtils {
     val moshi: Moshi = Moshi.Builder()
-        .add(OffsetDateTimeJsonAdapter())
-        .add(UrlStringJsonAdapter())
-        .add(ContentCompatJsonAdapter())
-        .add(TabJsonAdapter())
-        .add(UpActionJsonAdapter())
-        .add(MessageTypeJsonAdapter())
+        .add(OffsetDateTimeJsonAdapter)
+        .add(UrlStringJsonAdapter)
+        .add(ContentCompatJsonAdapter)
+        .add(TabJsonAdapter)
+        .add(UpActionJsonAdapter)
+        .add(MessageTypeJsonAdapter)
         .build()
 }
 
-private class OffsetDateTimeJsonAdapter {
+private object OffsetDateTimeJsonAdapter {
     @FromJson
     fun fromJson(iso8601: String): OffsetDateTime {
         return OffsetDateTime.parse(iso8601)

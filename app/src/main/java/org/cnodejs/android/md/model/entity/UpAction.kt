@@ -10,7 +10,7 @@ enum class UpAction {
     DOWN,
 }
 
-class UpActionJsonAdapter {
+object UpActionJsonAdapter {
     @FromJson
     fun fromJson(string: String): UpAction {
         return UpAction.valueOf(string.uppercase())

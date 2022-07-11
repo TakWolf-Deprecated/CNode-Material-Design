@@ -37,7 +37,7 @@ enum class Tab(@StringRes val titleId: Int, @IdRes val tabId: Int) {
     }
 }
 
-class TabJsonAdapter {
+object TabJsonAdapter {
     @FromJson
     fun fromJson(tabString: String): Tab {
         return Tab.valueOf(tabString.uppercase())
