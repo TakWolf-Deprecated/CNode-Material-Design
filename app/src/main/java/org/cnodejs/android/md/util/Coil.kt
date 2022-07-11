@@ -29,13 +29,13 @@ private class AppCoil private constructor(context: Context) {
     }
 
     val imageLoader = ImageLoader.Builder(context)
-        .componentRegistry {
+        .components {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                add(ImageDecoderDecoder(context))
+                add(ImageDecoderDecoder.Factory())
             } else {
-                add(GifDecoder())
+                add(GifDecoder.Factory())
             }
-            add(SvgDecoder(context))
+            add(SvgDecoder.Factory())
         }
         .build()
 }
@@ -72,6 +72,6 @@ fun ImageView.loadThumb(url: UrlString?): Disposable {
     }
 }
 
-fun ImageView.clear() {
-    CoilUtils.clear(this)
+fun ImageView.dispose() {
+    CoilUtils.dispose(this)
 }
