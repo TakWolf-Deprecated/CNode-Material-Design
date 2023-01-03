@@ -5,12 +5,13 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    namespace = "org.cnodejs.android.md"
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "org.cnodejs.android.md"
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "2.0.0"
 
@@ -51,27 +52,27 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.4.2")
-    implementation("androidx.activity:activity-ktx:1.4.0")
-    implementation("androidx.fragment:fragment-ktx:1.4.1")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
+    implementation("androidx.activity:activity-ktx:1.5.0")
+    implementation("androidx.fragment:fragment-ktx:1.5.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.0")
     implementation("androidx.datastore:datastore:1.0.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
-    implementation("androidx.camera:camera-camera2:1.1.0-rc02")
-    implementation("androidx.camera:camera-lifecycle:1.1.0-rc02")
-    implementation("androidx.camera:camera-view:1.1.0-rc02")
+    implementation("androidx.camera:camera-camera2:1.2.0-alpha03")
+    implementation("androidx.camera:camera-lifecycle:1.2.0-alpha03")
+    implementation("androidx.camera:camera-view:1.2.0-alpha03")
     implementation("com.google.android.material:material:1.6.1")
-    implementation("com.squareup.moshi:moshi:1.13.0")
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.13.0")
+    implementation("com.squareup.moshi:moshi:1.14.0")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.3"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
